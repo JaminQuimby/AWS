@@ -1,0 +1,25 @@
+/* CSS Document */
+#j_username{
+	padding-left:50px;
+	background-position: 10px 0px !important;
+	background: url("../img/sprite-login.png") no-repeat 0 0;
+	-webkit-transition: all;
+	-moz-transition: all;
+	-ms-transition: all;
+	-o-transition: all;
+	transition: all;
+
+	}		
+
+#j_password{
+	padding-left:50px;
+	background-position: 10px -34px !important;
+	background: url("../img/sprite-login.png") no-repeat 0 0;
+	-webkit-transition: all;
+	-moz-transition: all;
+	-ms-transition: all;
+	-o-transition: all;
+	transition: all;
+
+}
+
