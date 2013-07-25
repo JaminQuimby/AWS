@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="Application.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130169206549500044" remote="130169206580000000" Dst="2" />
+<file name="Application.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192495846338626" remote="130192629390000000" Dst="2" />
+<file name="MMHTTPDB.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192495846338626" remote="130169206700000000" Dst="2" />
+<file name="MMSERVERINFO.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192495846348627" remote="130169206610000000" Dst="2" />
+<file name="SQLServer7.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192495846348627" remote="130169206700000000" Dst="2" />
 </dwsync>

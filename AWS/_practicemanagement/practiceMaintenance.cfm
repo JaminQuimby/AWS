@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="../assets/module/fileUpload/assets/css/demo.css">
 <link rel="stylesheet" type="text/css" href="../assets/module/jtable/themes/metro/blue/jtable.min.css">
 <link rel="stylesheet" type="text/css" href="../assets/css/aws.css">
-<link rel="stylesheet" type="text/css" href="maintenance.css">
+<link rel="stylesheet" type="text/css" href="practiceMaintenance.css">
 
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -27,7 +27,7 @@
 <script type="text/javascript" src="../assets/module/fileUpload/assets/require/require.js" data-main="../assets/module/fileUpload/assets/main.js"></script>
 <script type="text/javascript" src="../assets/module/jtable/jquery.jtable.min.js"></script>
 <script type="text/javascript" src="../assets/js/aws.js"></script>
-<script type="text/javascript" src="maintenance.js"></script>
+<script type="text/javascript" src="practiceMaintenance.js"></script>
 
 </head>
 <!--- TO DO LIST

@@ -32,11 +32,8 @@ try{if(options['query'].DATA!=""){
 							$(this).attr('selected', true);
 	}}}).trigger("liszt:updated");}break;
 				case undefined:/*Detection for undefined objects such as <LABEL>*/
-				$("#"+list[i]).html(options['query'].DATA[0][i]);
-				alert('true')
-				break;
-				default:
-				$("#"+list[i]).val(options['query'].DATA[0][i]);
+				$("#"+list[i]).html(options['query'].DATA[0][i]);break;
+				default:$("#"+list[i]).val(options['query'].DATA[0][i]);
 				}
 				
 		if(document.getElementById(list[i]).getAttribute("onblur")!=null){document.getElementById(list[i]).onblur();

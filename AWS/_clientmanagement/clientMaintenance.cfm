@@ -4,6 +4,7 @@
 <!---cfajaxproxy cfc="clientMaintenance" jsclassname="cm"/--->
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
+<cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_month">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
@@ -26,7 +27,7 @@
 <!--- THINGS TO DO
 
 Related Clients
-Label State Info Loading
+DOCUMENTS
 
 --->
 <!DOCTYPE html> 
@@ -83,7 +84,7 @@ Label State Info Loading
 <input type="hidden" id="m_pt_id" value="0" /><!--- Current Payroll taxes loaded --->
 <input type="hidden" id="m_tsl_id" value="0" /><!--- Current Taxes Status Listing loaded --->
 <input type="hidden" id="m_of_id" value="0" /><!--- Current Other Filings loaded --->
-<input type="hidden" id="s_id" value="0" /><!--- State Information Loaded --->
+<input type="hidden" id="si_id" value="0" /><!--- State Information Loaded --->
 
 <!--- VERTICAL MENUS --->
 <div class="menus">
@@ -115,7 +116,7 @@ Label State Info Loading
 
 <h3>Clients Search</h3>
 <div>
-<div><label for="cl_filter">Filter</label><input name="cl_filter" id="cl_filter" onBlur="loadGridClient(0);"/></div>
+<div><label for="cl_filter">Filter</label><input name="cl_filter" id="cl_filter" onBlur="_gridClients();"/></div>
 <!--- Client Grid --->
 <div class="tblGrid" id="gridClients1"></div>
 <div class="buttonbox">
@@ -317,7 +318,7 @@ Label State Info Loading
 <div id="state" style="display:none;"class="gf-checkbox">
 <h3>Saved State Information</h3>
 <div id="loadStateInformation">
-<div><label for="co_filter">Filter</label><input name="co_filter" id="co_filter" onBlur="loadGridContacts(0);"/></div>
+<div><label for="s_filter">Filter</label><input name="s_filter" id="s_filter" onBlur="loadGridContacts(0);"/></div>
 <!--- SET GRID CONTACTS --->
 <div id="gridStateInformation1" class="tblGrid"></div>
 <div class="buttonbox">
@@ -327,7 +328,7 @@ Label State Info Loading
 
 <h4 onclick="$('#s_isLoaded').val(1);">State Information</h4>
 <div>
-<div><label for="s_state">Info Received</label><input name="s_state" id="s_state" /></div>
+<div><label for="s_state">State</label><select name="s_state" id="s_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input type="checkbox" name="s_revenue" id="s_revenue" /><label for="s_revenue">Revenue</label></div>
 <div><input type="checkbox" name="s_employees" id="s_employees" /><label for="s_employees">Employees</label></div>
 <div><input type="checkbox" name="s_property" id="s_property"/><label for="s_property">Property</label></div>
@@ -348,8 +349,22 @@ Label State Info Loading
 </div>
 <!--- RELATED CLIENTS TAB --->
 <div id="rclients" style="display:none;"class="gf-checkbox">
-<h3>Related Clients</h3>
-<div></div>
+<h3>Related Client Details</h3>
+<div id="loadRelatedClients">
+<div><label for="rc_filter">Filter</label><input name="rc_filter" id="rc_filter" onBlur="loadRelatedClients(0);"/></div>
+<!--- SET GRID CONTACTS --->
+<div id="gridRelatedClients1" class="tblGrid"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onclick="">Add</a>
+</div>
+</div>
+
+<h4>Related Clients</h4>
+<div>
+<div><label for="gc_group">Groups</label><select name="gc_group" id="gc_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+</div>
+
+
 </div>
 <!--- UPLOAD FILES TAB --->
 <div id="upload" style="display:none;"class="gf-checkbox">
@@ -362,16 +377,8 @@ Label State Info Loading
 
 </div>
 </div>
-<footer>
-<div class="buttonbox">
-<cfoutput>
-<a href="##" onclick="saveData();" class="button">Save</a> | <a href="##" onClick='jqMessage({message: "Warning: Do you wish to quit without saving? ",type: "warning",autoClose: true,duration: 5});'>Cancel</a>
-</cfoutput>
-</div>
 
-<div><div id="progressbar"></div></div>
-</footer>
-
-
+<!---Start of footer--->
+<cfinclude template="../assets/inc/footer.cfm" />
 </body>
 </html>
