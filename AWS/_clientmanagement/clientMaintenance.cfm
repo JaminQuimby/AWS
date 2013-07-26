@@ -1,7 +1,10 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<!---cfajaxproxy cfc="clientMaintenance" jsclassname="cm"/--->
+<!--- PAGE ARGUMENTS --->
+<cfset session.module="_clientmanagement">
+<cfset session.location="clientmaintenance">
+<cfset session.title="Client Management">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>
@@ -21,42 +24,17 @@
 <cfquery dbtype="query" name="global_consultingcategory">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_consultingcategory'</cfquery>
 <cfquery dbtype="query" name="global_clientgroup">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_clientgroup'</cfquery>
 <!--- Load Labels --->
-
-
 <!---Page Start--->
 <!--- THINGS TO DO
 
-Related Clients
 DOCUMENTS
+ACTIVITY (CLIENT DATA)
 
 --->
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <!---Head & Supporting Documents--->
-<head>
-<meta "charset=utf-8" />
-<title>Client Maintenance</title>
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
-<link rel="stylesheet" type="text/css" href="../assets/module/menu/menu.css"/>
-<link rel="stylesheet" type="text/css" href="../assets/module/fileUpload/assets/css/demo.css"/>
-<link rel="stylesheet" type="text/css" href="../assets/module/jtable/themes/metro/green/jtable.min.css">
-<link rel="stylesheet" type="text/css" href="../assets/module/chosen/chosen.css">
-<link rel="stylesheet" type="text/css" href="../assets/module/jqMessage/jqmessage.css">
-<link rel="stylesheet" type="text/css" href="../assets/css/aws.css"/>
-<link rel="stylesheet" type="text/css" href="clientMaintenance.css">
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script type="text/javascript" src="../assets/module/jtable/jquery.jtable.min.js"></script>
-<script type="text/javascript" src="../assets/module/chosen/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="../assets/module/jqMessage/jqmessage.jquery.js"></script>
-<script type="text/javascript" src="../assets/module/jqValid/jqValid.jquery.js"></script>
-<!---script type="text/javascript" src="../assets/module/fileUpload/assets/require/require.js" data-main="../assets/module/fileUpload/assets/main.js"></script--->
-<script type="text/javascript" src="../assets/js/aws.js"></script>
-<script type="text/javascript" src="clientMaintenance.js"></script>
-</head>
+<cfinclude template="../assets/inc/header.cfm">
 
 <!---Body Start --->
 <body onLoad=" ">
@@ -78,9 +56,6 @@ DOCUMENTS
 <input type="hidden" id="cl_id" value="0"/><!--- Current CLIENT LOADED 0 is none--->
 <input type="hidden" id="cl_fieldid" value="0"  /><!---  Current Custom Field Loaded --->
 <input type="hidden" id="co_id" value="0" /><!--- Current Contact Loaded --->
-
-
-
 <!--- NOT USED YET--->
 <input type="hidden" id="m_fs_id" value="0" /><!--- Current Finincial Statement Loaded --->
 <input type="hidden" id="m_mct_id" value="0" /><!--- Current Accounting and Consulting --->
@@ -89,35 +64,32 @@ DOCUMENTS
 <input type="hidden" id="m_tsl_id" value="0" /><!--- Current Taxes Status Listing loaded --->
 <input type="hidden" id="m_of_id" value="0" /><!--- Current Other Filings loaded --->
 <input type="hidden" id="si_id" value="0" /><!--- State Information Loaded --->
-
 <!--- VERTICAL MENUS --->
 <div class="menus">
 <!--- SMALL MENU --->
 <nav id="smallMenu" style="display:inherit;">
-<h1 class="clientManagement">&nbsp;</h1>
-
+<h1 class="_clientmanagement">&nbsp;</h1>
 </nav>
 <!--- LARGE MENU --->
 <nav id="largeMenu" style="display:none;">
-<h1 class="clientManagement">Client Maintenance</h1>
+<h1 class="_clientmanagement">Client Maintenance</h1>
 <ul id="menuLeft"><li><a onclick="_toggle('client');_hide('entrance,services,contacts,maintenance,state,rclients,upload');_highlight(this);" class="_highlight">Client</a></li>
 <li><a onclick="_toggle('services');_hide('entrance,client,contacts,maintenance,state,rclients,upload');_highlight(this);">Services</a></li>
 <li><a onclick="_toggle('contacts');_hide('entrance,client,services,maintenance,state,rclients,upload');_highlight(this);_gridContacts();">Contacts</a></li>
 <li><a onclick="_toggle('maintenance');_hide('entrance,client,contacts,services,state,rclients,upload');_highlight(this);">Maintenance</a></li>
+<li><a onclick="">Activity</a></li>
 <li><a onclick="_toggle('state');_hide('entrance,client,contacts,services,maintenance,rclients,upload');_highlight(this);_gridStateInformation();">State Information</a></li>
 <li><a onclick="_toggle('rclients');_hide('entrance,client,contacts,services,maintenance,state,upload');_highlight(this);_gridClientRelations();">Related Clients</a></li>
 <li><a onclick="_toggle('upload');_hide('entrance,client,contacts,services,maintenance,state,rclients');_highlight(this);">Documents</a></li>
 </ul>
 </nav>
 </div>
-
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall">
 <!--- HORIZONTAL MENUS --->
 <nav id="topMenu"><cfinclude template="../assets/module/menu/menu.cfm"></nav>
 <!--- CLIENT DETAIL GRID --->
 <div id="entrance">
-
 <h3>Clients Search</h3>
 <div>
 <div><label for="cl_filter">Filter</label><input name="cl_filter" id="cl_filter" onBlur="_gridClients();"/></div>
@@ -127,12 +99,9 @@ DOCUMENTS
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
 </div>
 </div>
-
 </div>
-
 <!--- CLIENT TAB --->
 <div  id="client" style="display:none;" class="gf-checkbox">
-
 <h3>Client</h3>
 <div>
 <div><label for="cl_name">Client Name</label><input name="cl_name" id="cl_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
@@ -147,7 +116,6 @@ DOCUMENTS
 <div><input name="cl_credit_hold" id="cl_credit_hold"  type="checkbox" /><label for="cl_credit_hold">Credit Hold</label></div>
 <div><label for="cl_notes">Notes</label><textarea name="cl_notes" id="cl_notes" cols="4" rows="4" ></textarea></div>
 </div>
-
 <h4 onClick="_gridCustomfields();">Saved Custom Fields</h4>
 <div>
 <div><label for="cf_filter">Filter</label><input name="cf_filter" id="cf_filter" type="text" onBlur="loadGridCustomFields(0);"/></div>
@@ -156,21 +124,16 @@ DOCUMENTS
 <a href="#" class="button optional" onclick="">Add</a>
 </div>
 </div>
-
 <h4 onClick="$('#cf_isLoaded').val(1)">Custom Fields</h4>
 <div>
 <div><label for="cl_fieldname">Field Name</label><input name="cl_fieldname" id="cl_fieldname" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="cl_fieldvalue">Field Value</label><input name="cl_fieldvalue" id="cl_fieldvalue" type="text" /></div>
 </div>
-
 <h4>Groups</h4>
 <div>
 <div><label for="cl_group">Groups</label><select name="cl_group" id="cl_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="global_clientgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>
-
-
-
 <!--- SERVICES TAB --->
 <div id="services" style="display:none;"class="gf-checkbox">
 <h3>Services</h3><div></div>
@@ -183,7 +146,6 @@ DOCUMENTS
 <div><input type="checkbox" name="t_disregardedentity" id="t_disregardedentity" /><label for="t_disregardedentity">Disregarded Entity</label></div>
 <div><input type="checkbox" name="t_personalproperty" id="t_personalproperty" /><label for="t_personalproperty">Personal Property</label></div>
 </div>
-
 <h4 onClick="_loadData({'id':'cl_id','group':'payroll'});$('#p_isLoaded').val(1)">Payroll</h4>
 <div>
 <div><input type="checkbox" name="p_payrollpreparation" id="p_payrollpreparation" /><label for="p_payrollpreparation">Payroll Preparation</label></div>
@@ -195,7 +157,6 @@ DOCUMENTS
 <div><label for="p_pin">PIN</label><input name="p_pin" id="p_pin" type="text"/></div>
 <div><label for="p_password">Password</label><input name="p_password" id="p_password" type="text"/></div>
 </div>
-
 <h4 onClick="_loadData({'id':'cl_id','group':'accounting'});$('#a_isLoaded').val(1)">Accounting</h4>
 <div>
 <div><input type="checkbox" name="a_accountingServices" id="a_accountingServices" /><label for="a_accountingServices">Accounting Services</label></div>
@@ -211,10 +172,8 @@ DOCUMENTS
 <div><label for="a_accountingpassword">Password</label><input name="a_accountingpassword" id="a_accountingpassword" type="text"/></div>
 </div>
 </div>
-
 <!--- CONTACTS TAB --->
 <div id="contacts" style="display:none;"class="gf-checkbox">
-
 <h3>Saved Contacts</h3>
 <div id="loadContacts">
 <div><label for="co_filter">Filter</label><input name="co_filter" id="co_filter" onBlur="loadGridContacts(0);"/></div>
@@ -224,7 +183,6 @@ DOCUMENTS
 <a href="#" class="button optional" onclick="">Add</a>
 </div>
 </div>
-
 <h4 onClick="$('#co_isLoaded').val(1)">Contacts</h4>
 <div id="dataContacts">
 <div><label for="co_type">Type</label><select id="co_type"><cfoutput query="q_a_coType"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -248,7 +206,6 @@ DOCUMENTS
 <div><input type="checkbox" name="co_customvalue" id="co_customvalue" /><label for="co_customvalue"><input type="text" name="co_customlabel" id="co_customlabel" class="customlabel"/></label></div>
 </div>
 </div>
-
 <!--- MAINTANCE TAB --->
 <div id="maintenance" style="display:none;"class="gf-checkbox">
 <h3>Maintenance</h3><div></div>
@@ -258,13 +215,9 @@ DOCUMENTS
 <div><label for="m_fs_year">Year</label><input name="m_fs_year" id="m_fs_year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="m_fs_periodend">Period End</label><input name="m_fs_periodend" id="m_fs_periodend" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="m_fs_month">Month</label><select name="m_fs_month" id="m_fs_month" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-
-<!--- GROUP ??? --->
-
 <div><label for="m_fs_subtaskgroup">SubTask Group</label><select name="m_fs_subtaskgroup" id="m_fs_subtaskgroup" data-placeholder="Select a Subtask Group" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
 <div><label for="m_fs_historicalfs">Historical Financial Statements</label><select name="m_fs_historicalfs" id="m_fs_historicalfs" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
 </div>
-
 <!--- Accounting &amp; Consulting Tasks --->
 <h4 onclick="$('#m_mct_isLoaded').val(1);">Accounting &amp; Consulting Tasks</h4>
 <div>
@@ -273,7 +226,6 @@ DOCUMENTS
 <div><label for="m_mct_category">Category</label><select name="m_mct_category" id="m_mct_category"data-placeholder="Select a Category." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_mct_duedate">Due Date</label><input name="m_mct_duedate" id="m_mct_duedate" type="text"onchange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});" onblur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 </div>
-
 <!--- ADD TO PAYROLL CHECKS --->
 <h4 onclick="$('#m_pc_isLoaded').val(1);">Payroll Checks</h4>
 <div>
@@ -284,7 +236,6 @@ DOCUMENTS
 <div><label for="m_pc_inforeceived">Info Received</label><input name="m_pc_inforeceived" id="m_pc_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><input type="checkbox" name="m_pc_missinginfo" id="m_pc_missinginfo" /><label for="m_pc_missinginfo">Missing Info</label></div>
 </div>
-
 <!--- ADD TO PAYROLL TAXES --->
 <h4 onclick="$('#m_pt_isLoaded').val(1);">Payroll Taxes</h4>
 <div>
@@ -296,7 +247,6 @@ DOCUMENTS
 <div><label for="m_pt_inforeceived">Info Received</label><input name="m_pt_inforeceived" id="m_pt_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><input type="checkbox" name="m_pt_missinginfo" id="m_pt_missinginfo" /><label for="m_pt_missinginfo">Missing Info</label></div>
 </div>
-
 <!--- ADD TO TAX STATUS LISTING --->
 <h4 onclick="$('#m_tsl_isLoaded').val(1);">Tax Status Listing</h4>
 <div>
@@ -305,7 +255,6 @@ DOCUMENTS
 <div><label for="m_tsl_inforeceived">Info Received</label><input name="m_tsl_inforeceived" id="m_tsl_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><input type="checkbox" name="m_tsl_missinginfo" id="m_tsl_missinginfo" /><label for="m_tsl_missinginfo">Missing Info</label></div>
 </div>
-
 <!--- OTHER FILINGS --->
 <h4 onclick="$('#m_of_isLoaded').val(1);">Other Filings</h4>
 <div>
@@ -316,7 +265,6 @@ DOCUMENTS
 <div><label for="m_of_task">Task</label><select name="m_of_task" id="m_of_task" data-placeholder="Select a Task." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="q_m_of_task"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_of_form">Form</label><select name="m_of_form" id="m_of_form" data-placeholder="Select a Form." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
 </div>
-
 </div>
 <!--- STATE INFORMATION --->
 <div id="state" style="display:none;"class="gf-checkbox">
@@ -329,7 +277,6 @@ DOCUMENTS
 <a href="#" class="button optional" onclick="">Add</a>
 </div>
 </div>
-
 <h4 onclick="$('#s_isLoaded').val(1);">State Information</h4>
 <div>
 <div><label for="s_state">State</label><select name="s_state" id="s_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -362,13 +309,10 @@ DOCUMENTS
 <a href="#" class="button optional" onclick="">Add</a>
 </div>
 </div>
-
 <h4 onclick="$('#rc_isLoaded').val(1);_loadData({'id':'cl_id','group':'clientrelations'});">Related Clients</h4>
 <div>
 <div><label for="rc_group">Groups</label><select name="rc_group" id="rc_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
-
-
 </div>
 <!--- UPLOAD FILES TAB --->
 <div id="upload" style="display:none;"class="gf-checkbox">
@@ -377,11 +321,8 @@ DOCUMENTS
 <cfinclude template="../assets/module/fileUpload/upload.cfm">
 </div>
 </div>
-
-
 </div>
 </div>
-
 <!---Start of footer--->
 <cfinclude template="../assets/inc/footer.cfm" />
 </body>

@@ -1,88 +1,42 @@
 /*
-Javascript for Client Maintenance Module
+Javascript for FinancialStatements
 Developers:Jamin Quimby
-7/26/2013 Finished ~ Jamin Quimby
+7/26/2013 - Started
 */
 
 
 /*Define Grid Instances*/   
-_gridClients=function(){_jGrid({
-	"grid":"gridClients1",
-	"url":"clientMaintenance.cfc",
-	"title":"Clients",
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_SALUTATION:{title:'Salutation'},CLIENT_TYPETEXT:{title:'Type'},CLIENT_SINCE:{title:'Since'}},
+_grid1=function(){_jGrid({
+	"grid":"grid1",
+	"url":"financialstatements.cfc",
+	"title":"Financial Statements",
+	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year'},FDS_PERIODEND:{title:'Period End'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#cl_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"client"}',
-	"functions":'$("#cl_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("client,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
-	});}
-
-_gridContacts=function(){_jGrid({
-	"grid":"gridContacts1",
-	"url":"clientMaintenance.cfc",
-	"title":"Client Contacts",
-	"fields":{contact_id:{key:true,list:false,edit:false},contact_name:{title:'Contact Name'},contact_phone1:{title:'Phone 1'},contact_email1:{title:'Email 1'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#co_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"contact","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"contact"});$("#contacts").accordion({active:1});'
+	"arguments":'{"search":"'+$("#fss_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"financialdatastatus"}',
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val=(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
 	});}
 	
-_gridCustomfields=function(){_jGrid({
-	"grid":"gridCustomFields1",
-	"url":"clientMaintenance.cfc",
-	"title":"Custom Fields",
-	"fields":{field_id:{key:true,list:false,edit:false},field_name:{title:'Name'},field_value:{title:'Value'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#cf_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"customfields","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#cl_fieldid").val(record.field_id);_loadData({"id":"cl_fieldid","group":"customfields"});$("#client").accordion({active:2});'
-	});}
-	
-_gridStateInformation=function(){_jGrid({
-	"grid":"gridStateInformation1",
-	"url":"clientMaintenance.cfc",
-	"title":"State Information",
-	"fields":{si_id:{key:true,list:false,edit:false},si_state:{title:'State'},si_revenue:{title:'Revenue',type:"checkbox",values:{'0':'No','1':'Yes'}},si_employees:{title:'Employees',type:"checkbox",values:{'0':'No','1':'Yes'}},si_property:{title:'Property',type:"checkbox",values:{'0':'No','1':'Yes'}},si_nexus:{title:'Nexus',type:"checkbox",values:{'0':'No','1':'Yes'}},si_reason:{title:'Reason'},si_registered:{title:'Registered',type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc1:{title:$('#sl_label1').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc2:{title:$('#sl_label2').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc3:{title:$('#sl_label3').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc4:{title:$('#sl_label4').val(),type:"checkbox",values:{'0':'No','1':'Yes'}}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#s_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"stateinformation","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"stateinformation"});$("#state").accordion({active:1});'
-	});}
-
-_gridClientRelations=function(){_jGrid({
-	"grid":"gridRelatedClients1",
-	"url":"clientMaintenance.cfc",
-	"title":"Client Relations",
-	"fields":{client_id:{key:true,list:false,edit:false},client_name:{title:'Client Name'},client_active:{title:'Active',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }},client_since:{title:'Client Since'},client_typeTEXT:{title:'Client Type'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#rc_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#rc_group").val()+'","loadType":"clientrelations","clientid":'+$("#cl_id").val()+'}',
-	"functions":'_loadData({"id":"client_id","group":"clientrelations"});$("#rclients").accordion({active:1});'
-	});}
-	
-	
-
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
-_gridClients();// Load Initial Client Grid	
+_grid1();// Load Initial Client Grid	
 
-
+$('.gf-checkbox').hide()
 //Load Select Boxes
 
 
 //Bind Label Elements
-$("#sl_label1").change(function(){$("label[for='s_value1']").html($(this).val());})
-$("#sl_label2").change(function(){$("label[for='s_value2']").html($(this).val());})
-$("#sl_label3").change(function(){$("label[for='s_value3']").html($(this).val());})
-$("#sl_label4").change(function(){$("label[for='s_value4']").html($(this).val());})
+
 
 //Load Custom Labels
-_loadData({'id':'cl_id','group':'statelabels'});
+
+
 //Load Accordians
+
 $("#entrance").accordion({heightStyle:"content"});
-$("#client").accordion({heightStyle:"content", active:false});
-$("#services").accordion({heightStyle:"content"});
-$("#maintenance").accordion({heightStyle:"content"});
-$("#contacts").accordion({heightStyle:"content", active:false});
-$("#state").accordion({heightStyle:"content"});
-$("#rclients").accordion({heightStyle:"content"});
-$("#upload").accordion({heightStyle:"content"});
+$("#group1").accordion({heightStyle:"content"});
+$("#group2").accordion({heightStyle:"content"});
+$("#group3").accordion({heightStyle:"content"});
+
 //Set Date Picker Defaults	
 $.datepicker.setDefaults({
 showOn:"both",
@@ -91,43 +45,11 @@ buttonImage:"../assets/img/datepicker.gif",
 constrainInput:true
 });
 //Load Date Pickers
-$("#cl_since").datepicker();
-$("#co_effectivedate").datepicker();
-$("#m_mct_duedate").datepicker();
-$("#m_pc_inforeceived").datepicker();
-$("#m_pc_paydate").datepicker();
-$("#m_pc_payenddate").datepicker();
-$("#m_pc_duedate").datepicker();
-$("#m_pt_duedate").datepicker();
-$("#m_pt_inforeceived").datepicker();
-$("#m_ts_inforeceived").datepicker();
-$("#m_tsl_inforeceived").datepicker();
-$("#m_fs_periodend").datepicker();
-$("#m_pt_lastpaydate").datepicker();
-$("#m_of_duedate").datepicker();
+//$("#cl_since").datepicker();
+
 //Load Select Boxes
-$("#cl_type").chosen();
-$("#t_formtype").chosen();
-$("#p_paycheckfrequency").chosen();
-$("#p_prtaxdepositschedule").chosen();
-$("#a_financialstatementfreq").chosen();
-$("#a_software").chosen();
-$("#m_fs_month").chosen();
-$("#m_fs_subtaskgroup").chosen();
-$("#m_mct_group").chosen();
-$("#m_mct_category").chosen();
-$("#m_pt_month").chosen();
-$("#m_pt_returntype").chosen();
-$("#m_tsl_taxform").chosen();
-$("#m_of_period").chosen();
-$("#m_of_state").chosen();
-$("#m_of_task").chosen();
-$("#m_of_form").chosen();
-$("#co_type").chosen();
-$("#cl_group").chosen();
-$("#s_state").chosen();
-$("#m_fs_historicalfs").chosen();
-$("#rc_group").chosen();
+//$("#cl_type").chosen();
+
 });
 
 

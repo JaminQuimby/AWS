@@ -1,36 +1,35 @@
-  <!--- 3/18/2012 Predefined Application Basics ~ Jamin Quimby---> 
-    <cfcomponent
-    displayname="AWS_REGISTER"
-    output="true"
-    hint="Component for AWS Registration">
-     
+  <!--- 3/18/2012 Predefined Application Basics ~ Jamin Quimby --->
+  <!--- 7/26/2013 Added Base Path ~ Jamin Quimby --->
+    <cfcomponent displayname="AWS_REGISTER" output="true" hint="Component for AWS Registration">   
      
     <!--- Set up the application. --->
+    <cfset this.applicationtimeout = CreateTimeSpan( 0, 0, 30, 0 ) />	
+	<cfset this.sessiontimeout = createTimeSpan( 0, 0, 29, 59 ) />
     <cfset this.name = "AWS" />
-    <cfset this.ApplicationTimeout = CreateTimeSpan( 0, 0, 30, 0 ) />
-    <cfset this.SessionManagement = true />
-	<cfset this.sessionTimeout = createTimeSpan( 0, 0, 29, 59 ) />
-
+    <cfset this.sessionmanagement = true />
+<!---
+	<cfset Application.path = "/AWS/" />
+--->
+  <cfset Application.path =  getDirectoryFromPath( getCurrentTemplatePath() )> 
+  <cfset Application.url="https://"&CGI.SERVER_NAME>
+    <cfset Application.uploadsDirectory = (Application.path  & "\bin\uploads\")>
 
      
     <!--- Define the page request properties. --->
     <cfsetting
     requesttimeout="20"
     showdebugoutput="true"
+	 />
 
-    />
-     
-     
+    
     <cffunction
     name="OnApplicationStart"
     access="public"
     returntype="boolean"
     output="false"
     hint="Fires when the application is first created.">
-     	// Get the root directory of the application.
-    <cfset rootDirectory =  getDirectoryFromPath( getCurrentTemplatePath() )> 
-     	// Set up the uploads directory -THIS SHOULD BE OVERWRITEN BY COMPANY SESSION
-	<cfset application.uploadsDirectory = (rootDirectory & "AWS\bin\uploads\")>
+
+	
 
     <!--- Return out. --->
     <cfreturn true />
