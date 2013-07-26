@@ -1,10 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
+<cfset ARGUMENTS.clientid="0">
+<cfset ARGUMENTS.id="0">
+<cfset ARGUMENTS.search="%">
+<cfset ARGUMENTS.orderBy=0>
 
-<body>
-</body>
-</html>
+
+<cfquery datasource="AWS" name="data">
+SELECT[client_listing].[CLIENT_ID]
+,[client_listing].[CLIENT_NAME]
+,[client_listing].[CLIENT_SALUTATION]
+,CONVERT(VARCHAR(10),[client_listing].[CLIENT_SINCE], 101)AS[CLIENT_SINCE]
+,[ctrl_selectoptions].[optionName]AS[CLIENT_TYPETEXT]
+FROM[client_listing]
+LEFT OUTER JOIN[ctrl_selectoptions]
+ON[client_listing].[client_type]=[ctrl_selectoptions].[optionValue_id]
+
+</cfquery>
+<cfdump var="#data#">

@@ -9,7 +9,7 @@ _gridClients=function(){_jGrid({
 	"grid":"gridClients1",
 	"url":"clientMaintenance.cfc",
 	"title":"Clients",
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_SALUTATION:{title:'Salutation'},CLIENT_TYPE:{title:'Type'},CLIENT_SINCE:{title:'Since'}},
+	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_SALUTATION:{title:'Salutation'},CLIENT_TYPETEXT:{title:'Type'},CLIENT_SINCE:{title:'Since'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#cl_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"client"}',
 	"functions":'$("#cl_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("client,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
@@ -35,17 +35,28 @@ _gridCustomfields=function(){_jGrid({
 	"functions":'$("#cl_fieldid").val(record.field_id);_loadData({"id":"cl_fieldid","group":"customfields"});$("#client").accordion({active:2});'
 	});}
 	
-_gridStateinformation=function(){_jGrid({
+_gridStateInformation=function(){_jGrid({
 	"grid":"gridStateInformation1",
 	"url":"clientMaintenance.cfc",
 	"title":"State Information",
-	"fields":{si_id:{key:true,list:false,edit:false},si_state:{title:'State'},si_revenue:{title:'Revenue'},si_employees:{title:'si_employees'},si_property:{title:'si_property'},si_nexus:{title:'si_nexus'},si_reason:{title:'si_reason'},si_registered:{title:'si_registered'},si_misc1:{title:'si_misc1'},si_misc2:{title:'si_misc2'},si_misc3:{title:'si_misc3'},si_misc4:{title:'si_misc4'}},
+	"fields":{si_id:{key:true,list:false,edit:false},si_state:{title:'State'},si_revenue:{title:'Revenue',type:"checkbox",values:{'0':'No','1':'Yes'}},si_employees:{title:'Employees',type:"checkbox",values:{'0':'No','1':'Yes'}},si_property:{title:'Property',type:"checkbox",values:{'0':'No','1':'Yes'}},si_nexus:{title:'Nexus',type:"checkbox",values:{'0':'No','1':'Yes'}},si_reason:{title:'Reason'},si_registered:{title:'Registered',type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc1:{title:$('#sl_label1').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc2:{title:$('#sl_label2').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc3:{title:$('#sl_label3').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc4:{title:$('#sl_label4').val(),type:"checkbox",values:{'0':'No','1':'Yes'}}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#s_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"stateinformation","clientid":'+$("#cl_id").val()+'}',
 	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"stateinformation"});$("#state").accordion({active:1});'
 	});}
 
+_gridClientRelations=function(){_jGrid({
+	"grid":"gridRelatedClients1",
+	"url":"clientMaintenance.cfc",
+	"title":"Client Relations",
+	"fields":{client_id:{key:true,list:false,edit:false},client_name:{title:'Client Name'},client_active:{title:'Active',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }},client_since:{title:'Client Since'},client_typeTEXT:{title:'Client Type'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#rc_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#rc_group").val()+'","loadType":"clientrelations","clientid":'+$("#cl_id").val()+'}',
+	"functions":'_loadData({"id":"client_id","group":"clientrelations"});$("#rclients").accordion({active:1});'
+	});}
 	
+	
+
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 _gridClients();// Load Initial Client Grid	
@@ -115,7 +126,7 @@ $("#co_type").chosen();
 $("#cl_group").chosen();
 $("#s_state").chosen();
 $("#m_fs_historicalfs").chosen();
-$("#gc_group").chosen();
+$("#rc_group").chosen();
 });
 
 
@@ -175,7 +186,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Client Group*/case "CLIENT_ACTIVE":var list='cl_active,cl_credit_hold,cl_dms_reference,cl_group,cl_name,cl_notes,cl_referred_by,cl_salutation,cl_since,cl_spouse,cl_trade_name,cl_type,s_label1,s_label2,s_label3,s_label4';_loadit({"query":query,"list":list});break;
+/*Client Group*/case "CLIENT_ACTIVE":var list='cl_active,cl_credit_hold,cl_dms_reference,cl_group,cl_name,cl_notes,cl_referred_by,cl_salutation,cl_since,cl_spouse,cl_trade_name,cl_type,s_label1,s_label2,s_label3,s_label4,rc_group';_loadit({"query":query,"list":list});break;
 /*Taxes*/case "CLIENT_TAX_SERVICES":var list='t_taxservices,t_formtype,t_businessc,t_rentalpropertye,t_disregardedentity,t_personalproperty';_loadit({"query":query,"list":list});break;
 /*Payroll*/case "CLIENT_PAYROLL_PREP":var list='p_payrollpreparation,p_paycheckfrequency,p_payrolltaxservices,p_prtaxdepositschedule,p_1099preparation,p_ein,p_pin,p_password';_loadit({"query":query,"list":list});break;
 /*Accounting*/case "CLIENT_ACCOUNTING_SERVICES":var list='a_accountingServices,a_bookkeeping,a_compilation,a_review,a_audit,a_financialstatementfreq,a_fiscalyearend,a_software,a_version,a_username,a_accountingpassword';_loadit({"query":query,"list":list});break;
@@ -189,10 +200,7 @@ switch(query.COLUMNS[0]){
 /*Other Filings*/case "OF_ID":var list="m_of_id,m_of_year,m_of_duedate,m_of_period,m_of_state,m_of_task,m_of_form";_loadit({"query":query,"list":list});break;
 /*State Labels*/case"CLIENT_STATELABEL1":var list="sl_label1,sl_label2,sl_label3,sl_label4";_loadit({"query":query,"list":list});break;
 /*State Information*/case "SI_ID":var list="si_id,s_state,s_revenue,s_employees,s_property,s_nexus,s_reason,s_registered,s_value1,s_value2,s_value3,s_value4";_loadit({"query":query,"list":list});break;
-
-/*
-get Elements for Related Clients
-*/
+/*Related Clients*/case"CLIENT_RELATIONS":var list="rc_group";_loadit({"query":query,"list":list});break;
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 };
@@ -223,6 +231,7 @@ var options={
 	"group":"",//Switch Group
 	"result":""//Call Back Response
 	}
+try{	
 $.extend(true, options, params);//turn options into array
 
 /*TO DO ?*/
@@ -231,7 +240,6 @@ var e58=document.getElementById("m_fs_subtaskgroup").value
 /*
 Build arguments for Related Clients UNDER CONSTRUCTION
 */
-
 switch(options["group"]){
 /*Save Client*/
 case'client':var json='{"DATA":[["'+
@@ -483,18 +491,33 @@ $("#s_value4").is(':checked')+
 '"]]}';
 if(options["group"]!=""&&$("#s_isLoaded").val()==1){
 _saveData({"group":options["group"],"payload":$.parseJSON(json)});
-}else{_saveDataCB({"id":$("#cl_id").val(),"group":"saved"});}
+}else{_saveDataCB({"id":$("#cl_id").val(),"group":"clientrelations"});}
+break;
+/*Save Client Relations*/
+case'clientrelations':
+var json='{"DATA":[["'+options["id"]+'","'+
+$("#rc_group").val()+
+'"]]}';
+
+alert($("#rc_group").val() +" ? "+options["id"])
+if(options["group"]!=""&&$("#rc_isLoaded").val()==1){	
+_saveData({"group":options["group"],"payload":$.parseJSON(json)})
+}else{
+_saveDataCB({"id":$("#cl_id").val(),"group":"saved"})
+}
 break;
 
+
+
+
+/*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'none':break;
 case'next':_saveData();break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
-
-
-
-}};
+}
+}catch(err){alert(err)}};
 
 
 /*Error Handelers*/

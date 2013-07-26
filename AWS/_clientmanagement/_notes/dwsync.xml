@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="clientMaintenance.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130192623936178018" remote="130192623990000000" Dst="2" />
-<file name="clientMaintenance.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192654947803719" remote="130192655010000000" Dst="2" />
-<file name="clientMaintenance.css" server="https://ftp.awensa.com/MS/MS0213/" local="130191899530000000" remote="130191899530000000" Dst="2" />
-<file name="clientMaintenance.js" server="https://ftp.awensa.com/MS/MS0213/" local="130192651707828403" remote="130192651730000000" Dst="2" />
+<file name="clientMaintenance.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130192947097489920" remote="130192947230000000" />
+<file name="clientMaintenance.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192883448389400" remote="130192914390000000" />
+<file name="clientMaintenance.css" server="https://ftp.awensa.com/MS/MS0213/" local="130192860707628703" remote="130192860810000000" />
+<file name="clientMaintenance.js" server="https://ftp.awensa.com/MS/MS0213/" local="130192946958131950" remote="130192947090000000" />
+<file name="clientReporting.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192946681666137" remote="130192946770000000" />
 </dwsync>

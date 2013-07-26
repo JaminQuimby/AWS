@@ -74,9 +74,13 @@ DOCUMENTS
 <input type="hidden" id="m_of_isLoaded" value="0"/><!--- Maintance Other Filings --->
 <input type="hidden" id="s_isLoaded" value="0"/><!--- State Information --->
 <input type="hidden" id="sl_isLoaded" value="0"/><!---State Labels--->
+<input type="hidden" id="rc_isLoaded" value="0" /><!--- Current Contact Loaded --->
 <input type="hidden" id="cl_id" value="0"/><!--- Current CLIENT LOADED 0 is none--->
 <input type="hidden" id="cl_fieldid" value="0"  /><!---  Current Custom Field Loaded --->
-<input type="hidden" name="co_id" id="co_id" value="0" /><!--- Current Contact Loaded --->
+<input type="hidden" id="co_id" value="0" /><!--- Current Contact Loaded --->
+
+
+
 <!--- NOT USED YET--->
 <input type="hidden" id="m_fs_id" value="0" /><!--- Current Finincial Statement Loaded --->
 <input type="hidden" id="m_mct_id" value="0" /><!--- Current Accounting and Consulting --->
@@ -100,8 +104,8 @@ DOCUMENTS
 <li><a onclick="_toggle('services');_hide('entrance,client,contacts,maintenance,state,rclients,upload');_highlight(this);">Services</a></li>
 <li><a onclick="_toggle('contacts');_hide('entrance,client,services,maintenance,state,rclients,upload');_highlight(this);_gridContacts();">Contacts</a></li>
 <li><a onclick="_toggle('maintenance');_hide('entrance,client,contacts,services,state,rclients,upload');_highlight(this);">Maintenance</a></li>
-<li><a onclick="_toggle('state');_hide('entrance,client,contacts,services,maintenance,rclients,upload');_highlight(this);_gridStateinformation();">State Information</a></li>
-<li><a onclick="_toggle('rclients');_hide('entrance,client,contacts,services,maintenance,state,upload');_highlight(this);">Related Clients</a></li>
+<li><a onclick="_toggle('state');_hide('entrance,client,contacts,services,maintenance,rclients,upload');_highlight(this);_gridStateInformation();">State Information</a></li>
+<li><a onclick="_toggle('rclients');_hide('entrance,client,contacts,services,maintenance,state,upload');_highlight(this);_gridClientRelations();">Related Clients</a></li>
 <li><a onclick="_toggle('upload');_hide('entrance,client,contacts,services,maintenance,state,rclients');_highlight(this);">Documents</a></li>
 </ul>
 </nav>
@@ -340,7 +344,7 @@ DOCUMENTS
 <div><input type="checkbox" name="s_value3" id="s_value3" /><label for="s_value3" id="s_label3"></label></div>
 <div><input type="checkbox" name="s_value4" id="s_value4" /><label for="s_value4" id="s_label4"></label></div>
 </div>
-<h4 onclick="$('#sl_isLoaded').val(1);_loadData({'id':'cl_id','group':'statelabels'});$('#p_isLoaded').val(1);">State Labels</h4><div>
+<h4 onclick="$('#sl_isLoaded').val(1);_loadData({'id':'cl_id','group':'statelabels'});">State Labels</h4><div>
 <div><label for="sl_label1">Label 1</label><input type="text" name="sl_label1" id="sl_label1"/></div>
 <div><label for="sl_label2">Label 2</label><input type="text" name="sl_label2" id="sl_label2"/></div>
 <div><label for="sl_label3">Label 3</label><input type="text" name="sl_label3" id="sl_label3"/></div>
@@ -359,9 +363,9 @@ DOCUMENTS
 </div>
 </div>
 
-<h4>Related Clients</h4>
+<h4 onclick="$('#rc_isLoaded').val(1);_loadData({'id':'cl_id','group':'clientrelations'});">Related Clients</h4>
 <div>
-<div><label for="gc_group">Groups</label><select name="gc_group" id="gc_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="rc_group">Groups</label><select name="rc_group" id="rc_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 
 
