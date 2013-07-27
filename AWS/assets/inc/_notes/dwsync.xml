@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="footer.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192656177214037" remote="130192656200000000" Dst="2" />
-<file name="require.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130193458335657883" remote="130193458380000000" Dst="2" />
-<file name="header.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130193479186800500" remote="130193479270000000" Dst="2" />
-<file name="pagemenu.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130193491726957756" remote="130193491810000000" Dst="2" />
+<file name="footer.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130192726482271452" remote="130193696740000000" />
+<file name="require.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130193667874466454" remote="130193696730000000" />
+<file name="header.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130193670422762209" remote="130193696740000000" />
+<file name="pagemenu.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130193519095731616" remote="130193696740000000" />
 </dwsync>

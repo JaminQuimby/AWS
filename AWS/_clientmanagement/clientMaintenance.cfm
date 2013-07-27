@@ -3,8 +3,8 @@
 <cfheader name="Expires" value="0"/>
 <!--- PAGE ARGUMENTS --->
 <cfset session.module="_clientmanagement">
-<cfset session.location="clientmaintenance">
-<cfset session.title="Client Management">
+<cfset page.location="clientmaintenance">
+<cfset page.title="Client Management">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>
@@ -89,7 +89,7 @@ ACTIVITY (CLIENT DATA)
 <!--- HORIZONTAL MENUS --->
 <nav id="topMenu"><cfinclude template="../assets/module/menu/menu.cfm"></nav>
 <!--- CLIENT DETAIL GRID --->
-<div id="entrance">
+<div id="entrance" >
 <h3>Clients Search</h3>
 <div>
 <div><label for="cl_filter">Filter</label><input name="cl_filter" id="cl_filter" onBlur="_gridClients();"/></div>
@@ -137,7 +137,7 @@ ACTIVITY (CLIENT DATA)
 <!--- SERVICES TAB --->
 <div id="services" style="display:none;"class="gf-checkbox">
 <h3>Services</h3><div></div>
-<h4 onClick="_loadData({'id':'cl_id','group':'taxes'});$('#t_isLoaded').val(1)">Taxes</h4>
+<h4 onClick="_loadData({'id':'cl_id','group':'taxes','page':'clientmaintenance'});$('#t_isLoaded').val(1)">Taxes</h4>
 <div>
 <div><input type="checkbox" name="t_taxservices" id="t_taxservices" /><label for="t_taxservices">Tax Services</label></div>
 <div><label for="t_formtype">Form Type</label><select name="t_formtype" id="t_formtype" data-placeholder="Select a Company Type."><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -146,7 +146,7 @@ ACTIVITY (CLIENT DATA)
 <div><input type="checkbox" name="t_disregardedentity" id="t_disregardedentity" /><label for="t_disregardedentity">Disregarded Entity</label></div>
 <div><input type="checkbox" name="t_personalproperty" id="t_personalproperty" /><label for="t_personalproperty">Personal Property</label></div>
 </div>
-<h4 onClick="_loadData({'id':'cl_id','group':'payroll'});$('#p_isLoaded').val(1)">Payroll</h4>
+<h4 onClick="_loadData({'id':'cl_id','group':'payroll','page':'clientmaintenance'});$('#p_isLoaded').val(1)">Payroll</h4>
 <div>
 <div><input type="checkbox" name="p_payrollpreparation" id="p_payrollpreparation" /><label for="p_payrollpreparation">Payroll Preparation</label></div>
 <div><label for="p_paycheckfrequency">Paycheck Frequency</label><select name="p_paycheckfrequency" id="p_paycheckfrequency" data-placeholder="Select a Paycheck Frequency."><option value="0">&nbsp;</option><cfoutput query="q_p_paycheckfrequency"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -157,7 +157,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="p_pin">PIN</label><input name="p_pin" id="p_pin" type="text"/></div>
 <div><label for="p_password">Password</label><input name="p_password" id="p_password" type="text"/></div>
 </div>
-<h4 onClick="_loadData({'id':'cl_id','group':'accounting'});$('#a_isLoaded').val(1)">Accounting</h4>
+<h4 onClick="_loadData({'id':'cl_id','group':'accounting','page':'clientmaintenance'});$('#a_isLoaded').val(1)">Accounting</h4>
 <div>
 <div><input type="checkbox" name="a_accountingServices" id="a_accountingServices" /><label for="a_accountingServices">Accounting Services</label></div>
 <div><input type="checkbox" name="a_bookkeeping" id="a_bookkeeping" /><label for="a_bookkeeping">Bookkeeping</label></div>
@@ -291,7 +291,7 @@ ACTIVITY (CLIENT DATA)
 <div><input type="checkbox" name="s_value3" id="s_value3" /><label for="s_value3" id="s_label3"></label></div>
 <div><input type="checkbox" name="s_value4" id="s_value4" /><label for="s_value4" id="s_label4"></label></div>
 </div>
-<h4 onclick="$('#sl_isLoaded').val(1);_loadData({'id':'cl_id','group':'statelabels'});">State Labels</h4><div>
+<h4 onclick="$('#sl_isLoaded').val(1);_loadData({'id':'cl_id','group':'statelabels','page':'clientmaintenance'});">State Labels</h4><div>
 <div><label for="sl_label1">Label 1</label><input type="text" name="sl_label1" id="sl_label1"/></div>
 <div><label for="sl_label2">Label 2</label><input type="text" name="sl_label2" id="sl_label2"/></div>
 <div><label for="sl_label3">Label 3</label><input type="text" name="sl_label3" id="sl_label3"/></div>
@@ -309,7 +309,7 @@ ACTIVITY (CLIENT DATA)
 <a href="#" class="button optional" onclick="">Add</a>
 </div>
 </div>
-<h4 onclick="$('#rc_isLoaded').val(1);_loadData({'id':'cl_id','group':'clientrelations'});">Related Clients</h4>
+<h4 onclick="$('#rc_isLoaded').val(1);_loadData({'id':'cl_id','group':'clientrelations','page':'clientmaintenance'});">Related Clients</h4>
 <div>
 <div><label for="rc_group">Groups</label><select name="rc_group" id="rc_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>

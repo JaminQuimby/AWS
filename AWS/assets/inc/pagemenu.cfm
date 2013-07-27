@@ -12,7 +12,7 @@
 <cfoutput>
 <cfloop list="#page.menuLeft#" index="name">
 <cfset i=i+1>
-<li><a href="##" onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);">#name#</a></li>
+<li><a href="##" onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li>
 </cfloop>
 </cfoutput>
 </ul>

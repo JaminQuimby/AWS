@@ -51,7 +51,7 @@
 <li><h2>Accounting Services</h2></li>
 <li><a href="#">Reporting</a></li>
 <li><a href="#">Business Formation</a></li>
-<li><a href="_accountingservices/acctConsultingTasks.cfm">Accounting &amp; Consulting Tasks</a></li>
+<li><a href="_accountingservices/acctconsultingtasks.cfm">Accounting &amp; Consulting Tasks</a></li>
 <li><a href="#">Financial Statements</a></li>
 </ul>
 </li><li>
@@ -70,7 +70,7 @@
 <li><h2>Client Management</h2></li>
 <li><a href="#">Reporting</a></li>
 <li><a href="#">Administrative Tasks</a></li>
-<li><a href="_clientmanagement/clientMaintenance.cfm">Client Maintenance</a></li>
+<li><a href="_clientmanagement/clientmaintenance.cfm">Client Maintenance</a></li>
 <li><a href="#">Communications</a></li>
 <li><a href="#">Document Tracking Log</a></li>
 </ul>

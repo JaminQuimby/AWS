@@ -40,8 +40,8 @@
 </div>
 </div>
 
-<!--- Financial Statement Status --->
-<!--- General tab --->
+<!--- FIELD DATA --->
+
 <div  id="group1" class="gf-checkbox">
 	<h3>General</h3>
 	<div>
@@ -164,8 +164,9 @@
 </div>
 </div>
 
-</div>
+<!--- END FIELD DATA --->
 <!--- END CONTENTS --->
+</div>
 </div>
 </div>
 <!---Start of footer--->

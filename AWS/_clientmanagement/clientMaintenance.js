@@ -13,7 +13,7 @@ _gridClients=function(){_jGrid({
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_SALUTATION:{title:'Salutation'},CLIENT_TYPETEXT:{title:'Type'},CLIENT_SINCE:{title:'Since'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#cl_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"client"}',
-	"functions":'$("#cl_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("client,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
+	"functions":'$("#cl_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("client,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client","page":"clientmaintenance"});'
 	});}
 
 _gridContacts=function(){_jGrid({
@@ -23,7 +23,7 @@ _gridContacts=function(){_jGrid({
 	"fields":{contact_id:{key:true,list:false,edit:false},contact_name:{title:'Contact Name'},contact_phone1:{title:'Phone 1'},contact_email1:{title:'Email 1'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#co_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"contact","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"contact"});$("#contacts").accordion({active:1});'
+	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"contact","page":"clientmaintenance"});$("#contacts").accordion({active:1});'
 	});}
 	
 _gridCustomfields=function(){_jGrid({
@@ -33,7 +33,7 @@ _gridCustomfields=function(){_jGrid({
 	"fields":{field_id:{key:true,list:false,edit:false},field_name:{title:'Name'},field_value:{title:'Value'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#cf_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"customfields","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#cl_fieldid").val(record.field_id);_loadData({"id":"cl_fieldid","group":"customfields"});$("#client").accordion({active:2});'
+	"functions":'$("#cl_fieldid").val(record.field_id);_loadData({"id":"cl_fieldid","group":"customfields","page":"clientmaintenance"});$("#client").accordion({active:2});'
 	});}
 	
 _gridStateInformation=function(){_jGrid({
@@ -43,7 +43,7 @@ _gridStateInformation=function(){_jGrid({
 	"fields":{si_id:{key:true,list:false,edit:false},si_state:{title:'State'},si_revenue:{title:'Revenue',type:"checkbox",values:{'0':'No','1':'Yes'}},si_employees:{title:'Employees',type:"checkbox",values:{'0':'No','1':'Yes'}},si_property:{title:'Property',type:"checkbox",values:{'0':'No','1':'Yes'}},si_nexus:{title:'Nexus',type:"checkbox",values:{'0':'No','1':'Yes'}},si_reason:{title:'Reason'},si_registered:{title:'Registered',type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc1:{title:$('#sl_label1').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc2:{title:$('#sl_label2').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc3:{title:$('#sl_label3').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc4:{title:$('#sl_label4').val(),type:"checkbox",values:{'0':'No','1':'Yes'}}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#s_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"stateinformation","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"stateinformation"});$("#state").accordion({active:1});'
+	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"stateinformation","page":"clientmaintenance"});$("#state").accordion({active:1});'
 	});}
 
 _gridClientRelations=function(){_jGrid({
@@ -53,7 +53,7 @@ _gridClientRelations=function(){_jGrid({
 	"fields":{client_id:{key:true,list:false,edit:false},client_name:{title:'Client Name'},client_active:{title:'Active',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }},client_since:{title:'Client Since'},client_typeTEXT:{title:'Client Type'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#rc_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#rc_group").val()+'","loadType":"clientrelations","clientid":'+$("#cl_id").val()+'}',
-	"functions":'_loadData({"id":"client_id","group":"clientrelations"});$("#rclients").accordion({active:1});'
+	"functions":'_loadData({"id":"client_id","group":"clientrelations","page":"clientmaintenance"});$("#rclients").accordion({active:1});'
 	});}
 	
 	
@@ -73,16 +73,11 @@ $("#sl_label3").change(function(){$("label[for='s_value3']").html($(this).val())
 $("#sl_label4").change(function(){$("label[for='s_value4']").html($(this).val());})
 
 //Load Custom Labels
-_loadData({'id':'cl_id','group':'statelabels'});
+_loadData({"id":"cl_id","group":"statelabels","page":"clientmaintenance"});
 //Load Accordians
-$("#entrance").accordion({heightStyle:"content"});
-$("#client").accordion({heightStyle:"content", active:false});
-$("#services").accordion({heightStyle:"content"});
-$("#maintenance").accordion({heightStyle:"content"});
-$("#contacts").accordion({heightStyle:"content", active:false});
-$("#state").accordion({heightStyle:"content"});
-$("#rclients").accordion({heightStyle:"content"});
-$("#upload").accordion({heightStyle:"content"});
+$('.gf-checkbox').accordion({heightStyle:"content", active:false});
+
+
 //Set Date Picker Defaults	
 $.datepicker.setDefaults({
 showOn:"both",
@@ -106,78 +101,8 @@ $("#m_fs_periodend").datepicker();
 $("#m_pt_lastpaydate").datepicker();
 $("#m_of_duedate").datepicker();
 //Load Select Boxes
-$("#cl_type").chosen();
-$("#t_formtype").chosen();
-$("#p_paycheckfrequency").chosen();
-$("#p_prtaxdepositschedule").chosen();
-$("#a_financialstatementfreq").chosen();
-$("#a_software").chosen();
-$("#m_fs_month").chosen();
-$("#m_fs_subtaskgroup").chosen();
-$("#m_mct_group").chosen();
-$("#m_mct_category").chosen();
-$("#m_pt_month").chosen();
-$("#m_pt_returntype").chosen();
-$("#m_tsl_taxform").chosen();
-$("#m_of_period").chosen();
-$("#m_of_state").chosen();
-$("#m_of_task").chosen();
-$("#m_of_form").chosen();
-$("#co_type").chosen();
-$("#cl_group").chosen();
-$("#s_state").chosen();
-$("#m_fs_historicalfs").chosen();
-$("#rc_group").chosen();
+$('select').chosen();
 });
-
-
-/*jtable Helper Object*/
-_jGrid=function(params){
-	var options={
-		"grid":"", // jtable grid id
-		"title":"",
-		"fields":"",
-		"arguments":"", //ajax json arguments
-		"functions":"", //on click function
-		"url":"",//&argumentCollection=
-		"method":""//&method=
-	}
-	$.extend(true, options, params);
-	var grid=$("#"+options['grid']);
-$(grid).jtable({ajaxSettings:{ type:'GET', cache:false }});
-$(grid).jtable('destroy');
-$(grid).jtable({
-	ajaxSettings:{ type:'GET', cache:false },
-	title:options['title'],
-	selecting:true,
-	actions:{
-	listAction:options['url']+"?returnFormat=json&method="+options['method']+"&argumentCollection="+options['arguments'],
-	},
-	fields:options['fields'],
-		selectionChanged:function(){
-			var $selectedRows=$(grid).jtable('selectedRows');//Get all selected rows
-				$('#SelectedRowList').empty();
-                if($selectedRows.length > 0){//Show selected rows
-                   $selectedRows.each(function(){
-					var record=$(this).data('record');
-						eval(options['functions']);//Functions for onclick
-					});
-                }else{
-                    //No rows selected
-                 $('#SelectedRowList').append('No row selected! Select rows to see here...');
-				 }}});
-$(grid).jtable('load');
-};
-
-
-//Load Data
-_loadData=function(params){
-var options={"id":"","group":""}
-try{$.extend(true, options, params);
-$.ajax({type:'GET',url:'clientMaintenance.cfc?method=f_loadData',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"id":$('#'+options["id"]).val(),"loadType":options["group"]})}
-,success:function(json){_loadDataCB($.parseJSON(json))}
-,error:function(data){errorHandle($.parseJSON(data))}})}
-catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 	
 	
 //Load Data call Back
@@ -206,25 +131,7 @@ default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "err
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 };
 
-//Save Data
-_saveData=function(params){
-var options={
-	"group":"",
-	"payload":""
-	}
-try{	
-$.extend(true, options, params);//turn options into array
-if(options["payload"]!=""||options["payload"]=="undefined"){
-$.ajax({
-  type: 'GET',
-  url: 'clientMaintenance.cfc?method=f_saveData',
-  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"payload":JSON.stringify(options["payload"])})
-  },
-  success:function(json){_saveDataCB($.parseJSON(json));},   // successful request; do something with the data
-  error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
-});}else{_saveDataCB({"id":$("#cl_id").val(),"group":"client"});}}
-catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
-}
+
 /*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
 var options={
@@ -259,7 +166,7 @@ $("#cl_trade_name").val()+'","'+
 $("#cl_type").val()+
 '"]]}'
 if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
 }
@@ -273,7 +180,7 @@ $("#cl_fieldname").val()+'","'+
 $("#cl_fieldvalue").val()+
 '"]]}';
 if(options["group"]!=""&&$('#cf_isLoaded').val()==1&&$("#cl_fieldname").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 }
 else{
 	_saveDataCB({"id":$("#cl_id").val(),"group":"taxes"});}
@@ -289,7 +196,7 @@ $("#t_disregardedentity").is(':checked')+'","'+
 $("#t_personalproperty").is(':checked')+
 '"]]}';
 if(options["group"]!=""&&$("#t_isLoaded").val()==1){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"payroll"});}
 break;
@@ -306,7 +213,7 @@ $("#p_pin").val()+'","'+
 $("#p_password").val()+
 '"]]}';
 if(options["group"]!=""&&$("#p_isLoaded").val()==1){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"accounting"});}
 break;
@@ -326,7 +233,7 @@ $("#a_username").val()+'","'+
 $("#a_accountingpassword").val()+
 '"]]}';
 if(options["group"]!=""&&$("#a_isLoaded").val()==1){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"contact"});}
 break;
@@ -357,7 +264,7 @@ $("#co_customvalue").is(':checked')+
 '"]]}';
 if(options["group"]!=""&&$("#co_isLoaded").val()==1&&$("#co_name").val()!=""){
 
-_saveData({"group":options["group"],"payload":$.parseJSON(json)}); 
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)}); 
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"financialstatements"});}
 break;
@@ -371,7 +278,7 @@ $("#m_fs_periodend").val()+'","'+
 $("#m_fs_year").val()+
 '"]]}';
 if(options["group"]!=""&&$("#m_fs_isLoaded").val()==1&&$("#m_fs_month").val()!="0"&&$("#m_fs_periodend").val()!==""&&$("#m_fs_year").val()!==""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","page":"clientmaintenance","payload":$.parseJSON(json)});
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"managementconsulting"});}
 break;
@@ -384,7 +291,7 @@ $("#m_mct_category").val()+'","'+
 $("#m_mct_duedate").val()+
 '"]]}';
 if(options["group"]!=""&&$("#m_mct_isLoaded").val()==1&&$("#m_mct_category").val()!="0"&&$("#m_mct_duedate").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"payrollchecks"});}
 break;
@@ -401,7 +308,7 @@ $("#m_pc_year").val()+
 '"]]}';
 
 if(options["group"]!=""&&$("#m_pc_isLoaded").val()==1&&$("#m_pc_duedate").val()!=""&&$("#m_pc_inforeceived").val()!=""&&$("#m_pc_paydate").val()!=""&&$("#m_pc_payenddate").val()!=""&&$("#m_pc_year").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"payrolltaxes"});}
 break;
@@ -425,7 +332,7 @@ if(options["group"]!=""
 &&$("#m_pt_month").val()!="0"
 &&$("#m_pt_returntype").val()!="0"
 &&$("#m_pt_year").val()!=""){
-	_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+	_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 	}
 
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"taxstatuslisting"});}
@@ -440,7 +347,7 @@ $("#m_tsl_taxform").val()+'","'+
 $("#m_tsl_taxyear").val()+
 '"]]}';
 if(options["group"]!=""&&$("#m_tsl_isLoaded").val()==1&&$("#m_tsl_id").val()!=""&&$("#m_tsl_inforeceived").val()!=""&&$("#m_tsl_taxform").val()!=""&&$("#m_tsl_taxyear").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)}); 
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)}); 
 	}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"otherfilings"});}
 break;
@@ -459,7 +366,7 @@ $("#m_of_task").val()+'","'+
 $("#m_of_taxyear").val()+
 '"]]}';
 if(options["group"]!=""&&$("#m_of_isLoaded").val()==1&&$("#m_of_duedate").val()!=""&&$("#m_of_form").val()!=""&&$("#m_of_period").val()!=""&&$("#m_of_state").val()!=""&&$("#m_of_task").val()!=""&&$("#m_of_taxyear").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});}
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"statelabels"});}
 break;
 /*Save State Labels*/
@@ -470,7 +377,7 @@ $("#sl_label3").val()+'","'+
 $("#sl_label4").val()+
 '"]]}';
 if(options["group"]!=""&&$("#sl_label1").val()!=""&&$("#sl_label2").val()!=""&&$("#sl_label3").val()!=""&&$("#sl_label4").val()!=""){	
-_saveData({"group":options["group"],"payload":$.parseJSON(json)})}
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)})}
 else{_saveDataCB({"id":$("#cl_id").val(),"group":"stateinformation"})}
 break;
 
@@ -491,7 +398,7 @@ $("#s_value3").is(':checked')+'","'+
 $("#s_value4").is(':checked')+
 '"]]}';
 if(options["group"]!=""&&$("#s_isLoaded").val()==1){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
 }else{_saveDataCB({"id":$("#cl_id").val(),"group":"clientrelations"});}
 break;
 /*Save Client Relations*/
@@ -502,7 +409,7 @@ $("#rc_group").val()+
 
 alert($("#rc_group").val() +" ? "+options["id"])
 if(options["group"]!=""&&$("#rc_isLoaded").val()==1){	
-_saveData({"group":options["group"],"payload":$.parseJSON(json)})
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)})
 }else{
 _saveDataCB({"id":$("#cl_id").val(),"group":"saved"})
 }

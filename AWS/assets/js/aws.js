@@ -6,7 +6,73 @@ highlight = light up current selected vertical tab; varibales on
 isit = regexp validation of a string
 updateh3 = updates <h3> elements with a msg contined in brakets. Example <h3>Client</h3> when you run updateh3("Qutera") it will become <h3>Client [Qutera]</h3>  
 */
+/*jtable Helper Object*/
+_jGrid=function(params){
+	var options={
+		"grid":"", // jtable grid id
+		"title":"",
+		"fields":"",
+		"arguments":"", //ajax json arguments
+		"functions":"", //on click function
+		"url":"",//&argumentCollection=
+		"method":""//&method=
+	}
+	$.extend(true, options, params);
+	var grid=$("#"+options['grid']);
+$(grid).jtable({ajaxSettings:{ type:'GET', cache:false }});
+$(grid).jtable('destroy');
+$(grid).jtable({
+	ajaxSettings:{ type:'GET', cache:false },
+	title:options['title'],
+	selecting:true,
+	actions:{
+	listAction:options['url']+"?returnFormat=json&method="+options['method']+"&argumentCollection="+options['arguments'],
+	},
+	fields:options['fields'],
+		selectionChanged:function(){
+			var $selectedRows=$(grid).jtable('selectedRows');//Get all selected rows
+				$('#SelectedRowList').empty();
+                if($selectedRows.length > 0){//Show selected rows
+                   $selectedRows.each(function(){
+					var record=$(this).data('record');
+						eval(options['functions']);//Functions for onclick
+					});
+                }else{
+                    //No rows selected
+                 $('#SelectedRowList').append('No row selected! Select rows to see here...');
+				 }}});
+$(grid).jtable('load')};
 
+
+//Load Data
+_loadData=function(params){
+var options={"id":"","group":"","page":""}
+try{$.extend(true, options, params);
+$.ajax({type:'GET',url:options["page"]+'.cfc?method=f_loadData',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"id":$('#'+options["id"]).val(),"loadType":options["group"]})}
+,success:function(json){_loadDataCB($.parseJSON(json))}
+,error:function(data){errorHandle($.parseJSON(data))}})}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
+//Save Data
+_saveData=function(params){
+var options={
+	"group":"",
+	"payload":"",
+	"page":""
+	}
+try{	
+$.extend(true, options, params);//turn options into array
+if(options["payload"]!=""||options["payload"]=="undefined"){
+$.ajax({
+  type: 'GET',
+  url: options["payload"]+'.cfc?method=f_saveData',
+  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"payload":JSON.stringify(options["payload"])})
+  },
+  success:function(json){_saveDataCB($.parseJSON(json));},   // successful request; do something with the data
+  error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
+});}else{_saveDataCB({"id":$("#cl_id").val(),"group":options["group"]});}}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
+}
+//Load It
 _loadit=function(params){
 	var options = {
 	"query":"",//Returned Ajax Query
