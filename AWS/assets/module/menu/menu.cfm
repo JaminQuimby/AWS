@@ -13,7 +13,7 @@
   <!---Accounting Services --->
   <li><a class="arrow">Accounting Services</a>
     <ul class="_accountingservices">
-      <li><a href="#Application.url#/AWS/_accountingservices/Reporting.cfm">Reporting</a></li>
+      <li><a href="#Application.url#/AWS/_accountingservices/financialreporting.cfm">Reporting</a></li>
       <li><a href="#Application.url#/AWS/_accountingservices/businessFormation.cfm">Business Formation</a></li>
       <li><a href="#Application.url#/AWS/_accountingservices/acctConsultingTasks.cfm">Accounting &amp; Consulting Tasks</a></li>
       <li><a href="#Application.url#/AWS/_accountingservices/financialStatements.cfm">Financial Statements</a></li>
@@ -22,11 +22,11 @@
   <!---Taxation --->
   <li><a class="arrow">Taxation</a>
     <ul class="_taxation">
-      <li><a href="#Application.url#/AWS/_taxsation/taxationReporting.cfm">Reporting</a></li>
-      <li><a href="#Application.url#/AWS/_taxsation/taxationFinancialTaxPlanning.cfm">Financial &amp; Tax Planning</a></li>
-      <li><a href="#Application.url#/AWS/_taxsation/taxationNotices.cfm">Notices</a></li>
-      <li><a href="#Application.url#/AWS/_taxsation/taxationPowerofAttorney.cfm">Power of Attorney</a></li>
-      <li><a href="#Application.url#/AWS/_taxsation/taxationTaxReturns.cfm">Tax Returns</a></li>
+      <li><a href="#Application.url#/AWS/_taxation/taxationreporting.cfm">Reporting</a></li>
+      <li><a href="#Application.url#/AWS/_taxation/taxationFinancialTaxPlanning.cfm">Financial &amp; Tax Planning</a></li>
+      <li><a href="#Application.url#/AWS/_taxation/taxationNotices.cfm">Notices</a></li>
+      <li><a href="#Application.url#/AWS/_taxation/taxationPowerofAttorney.cfm">Power of Attorney</a></li>
+      <li><a href="#Application.url#/AWS/_taxation/taxationTaxReturns.cfm">Tax Returns</a></li>
     </ul>
   </li>
   <!---Client Management --->
@@ -44,7 +44,7 @@
     <ul class="_practicemanagement dropToLeft">
       <li><a href="#Application.url#/AWS/_PracticeManagement/practiceWorkInProgress.cfm">Work in Progress</a></li>
       <li><a href="#Application.url#/AWS/_PracticeManagement/practiceEmployeeDashboard.cfm">Employee Dashboard</a></li>
-      <li><a href="#Application.url#/AWS/_PracticeManagement/practiceEmployeeContactInformation.cfm">Employee Contact Information</a></li>
+      <li><a href="#Application.url#/AWS/_PracticeManagement/practiceEmployeeContactInfo.cfm">Employee Contact Information</a></li>
       <li><a href="#Application.url#/AWS/_PracticeManagement/practiceMaintenance.cfm">AWS Maintenance</a></li>
       <li><a href="#Application.url#/AWS/_PracticeManagement/practiceTimeBilling.cfm">Time &amp; Billing</a></li>
     </ul>
