@@ -107,7 +107,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="cl_name">Client Name</label><input name="cl_name" id="cl_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="cl_spouse">Spouse</label><input name="cl_spouse" id="cl_spouse" type="text"/></div>
 <div><label for="cl_salutation">Salutation</label><input name="cl_salutation" id="cl_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="cl_type">Type</label><select name="cl_type" id="cl_type" type="text"  data-placeholder="Choose type of client..."><option value="0">&nbsp;</option><cfoutput query="q_cl_type"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="cl_type">Type</label><select name="cl_type" id="cl_type" type="text"  data-placeholder="Choose type of client..."onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="q_cl_type"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="cl_since">Client Since</label><input name="cl_since" id="cl_since" type="text" class="valid_off" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="cl_trade_name">Trade Name</label><input name="cl_trade_name" id="cl_trade_name" type="text" /></div>
 <div><label for="cl_referred_by">Referred By</label><input name="cl_referred_by" id="cl_referred_by"  type="text"/></div>

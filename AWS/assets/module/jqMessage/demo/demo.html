@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jqMessage Demo</title>
+
+<script type="text/jscript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/jscript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script type="text/jscript" src="../jqMessage.jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../jqMessage.css"/>
+</head>
+<body >
+<div style="margin-top:300px;">
+<input type="button" onclick='jqMessage({message: "General error in from database: Dynamic Info here!", "type":"error", autoClose: false})' value="Error /w Close on Click" />
+
+<input type="button" onclick='jqMessage({message: "You just received a new message: Dynamic Info here!", "type":"information", autoClose: true})' value="Information /w AutoClose" />
+
+<input type="button" onclick='jqMessage({message: "Warning you are about to: Dynamic Info here!", "type":"warning", autoClose: false})' value="Warning /w Close on Click" />
+
+<input type="button" onclick='jqMessage({message: "Your mail was sent: Dynamic Info here!", "type":"success", autoClose: true})' value="Sucess /w Auto Close" />
+
+<input type="button" onclick='jqMessage({message: "Your document is saving: Dynamic Info here!", "type":"save", autoClose: true})' value="Save /w Auto Close" />
+</div>
+</body>
+</html>

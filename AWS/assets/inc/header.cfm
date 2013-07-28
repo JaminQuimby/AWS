@@ -25,7 +25,8 @@
 </cfdefaultcase>
 </cfswitch>
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/chosen/chosen.css">
-<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jqMessage/jqmessage.css">
+<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jqmessage/jqmessage.css">
+<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jqvalid/jqvalid.css">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/css/aws.css"/>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
