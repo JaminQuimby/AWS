@@ -35,14 +35,34 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Client--->
 
-<cfcase value="financialDataStatus">
+<cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[fds_id],[client_id],[client_name],[fds_month],[fds_periodend],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
-WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+
+SELECT [mc_id]
+      ,[client_id]
+      ,[si_id]
+      ,[mc_category]
+      ,[mc_comments]
+      ,[mc_description]
+      ,[mc_duedate]
+      ,[mc_estimatedtime]
+      ,[mc_fees]
+      ,[mc_hot]
+      ,[mc_paid]
+      ,[mc_priority]
+      ,[mc_projectcompleted]
+      ,[mc_requestforservice]
+      ,[mc_status]
+      ,[mc_source]
+      ,[mc_workinitiated]
+  FROM[managementconsulting]
+WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
 </cfcase>
+
+<cfcase value="group3"></cfcase>
+<cfcase value="group2"></cfcase>
 
 
 </cfswitch>
@@ -67,31 +87,45 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
-<cfcase value="financialdatastatus">
+
+
+<cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
-SELECT[fds_id],[client_id],[client_name],CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend],[fds_month],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
+SELECT[mc_id]
+    ,[si_id]
+    ,[client_id]
+    ,[client_name]
+   	,[mc_categoryTEXT]
+    ,[mc_description]
+    ,[mc_status]
+    ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+     
+  FROM[v_managementconsulting]
+
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
+
+
+</cfcase>
+</cfswitch>
+
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_PERIODEND":"'&FDS_PERIODEND&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","mc_id":"'&mc_id&'","si_id":"'&si_id&'","CLIENT_NAME":"'&CLIENT_NAME&'","mc_categoryTEXT":"'&mc_categoryTEXT&'","mc_description":"'&mc_description&'","mc_status":"'&mc_status&'","mc_duedate":"'&mc_duedate&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-</cfcase>
-</cfswitch>
+
+
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
-
-
 </cftry>
 </cffunction>
 
@@ -104,6 +138,8 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <cfcase value="none">
 </cfcase>
+
+<!---
 <!--- Client --->
 <cfcase value="client">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
@@ -151,6 +187,9 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfif>
 
 </cfcase>
+
+--->
+
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->

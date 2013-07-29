@@ -1,146 +1,100 @@
 /*
-Javascript for Client Acct Consulting Tasks
-Developers: Jamin Quimby
+Javascript for Client Maintenance Module
+Developers:Jamin Quimby
+
+Grid1 = Entrance
 */
 
+$(document).ready(function(){
+//Load Grids
+_grid1();
 
-/*LOAD jQUERY UI*/
-$(function(){
-
-$("#entrance").accordion({heightStyle:"content"});
-$("#group1").accordion({heightStyle:"content"});
-$("#group2").accordion({heightStyle:"content"});
-$("#group3").accordion({heightStyle:"content"});
-$("#group4").accordion({heightStyle:"content"});
-$.datepicker.setDefaults({
-showOn: "both",
-buttonImageOnly: true,
-buttonImage: "../assets/img/datepicker.gif",
-constrainInput: true
-});
-$("#g1_duedate").datepicker();
-$("#g1_requestforservices").datepicker();
-$("#g1_workinitiated").datepicker();
-$("#g1_duedate").datepicker();
-$("#g1_projectcompleted").datepicker();
-$("#g2_duedate").datepicker();
-$("#g2_completed").datepicker();
 
 });
 
-/*Javascript Functions
-getDataFunction = returns a function for buildGrid in aws.js
-resetDocument = Reset form to default
-*/
-getDataFunction=function(id,tbl,name){var e=document.getElementById('cl_id');
-switch(tbl){
+/*Define Grid Instances*/   
+_grid1=function(){_jGrid({
+	"grid":"grid1",
+	"url":"acctconsultingtasks.cfc",
+	"title":"Accounting &amp; Consulting Tasks",
+	"fields":
+	{
+	 CLIENT_ID:{key:true,list:false,edit:false}
+	,MC_ID:{key:false,list:false,edit:false}
+	,SI_ID:{key:false,list:false,edit:false}
+	,CLIENT_NAME:{title:'Client Name'}
+	,mc_categoryTEXT:{title:'Consulting Categories'}
+	,mc_description:{title:'Task Description'}
+	,mc_status:{title:'Status'}
+	,mc_duedate:{title:'Due Date'}
+	},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#grid1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
+	"functions":
+		'$(".trackers #client_id").val(record.CLIENT_ID);'
+	+	'$(".trackers #mc_id").val(record.MC_ID);'
+	+	'$(".trackers #si_id").val(record.SI_ID);'
+	+	'_updateh3(record.CLIENT_NAME);'
+	+	'_toggle("group1,largeMenu");'
+	+	'$(".gf-checkbox").hide();$("div#group1").show();'
+	+	'$("div#content").removeClass();'
+	+	'$("div#content").addClass("contentbig");'
+	+	'_loadData({"id":"mc_id","group":"group1","page":"acctconsultingtasks"});'
+	});}
+
+
 	
-//case'gridClients': return function(){e.value=id;updateh3(name);loadData(id,"client");lookupData('',e.value,'contact');toggle('client,largeMenu');lookupData('',e.value,'customfields');hide('entrance,services,contacts,maintenance,state,smallMenu');document.getElementById('content').className='contentbig';};break;
-//case'gridContacts': return function(){loadData(id,"contact");};break;
+	
+//Load Data call Back
+_loadDataCB=function(query){if(query!=null){switch(query.COLUMNS[0]){
+/*START LOAD DATA */
+/*Group1*/case "MC_ID":var list='mc_id,client_id,si_id,mc_category,mc_comments,mc_description,mc_duedate,mc_estimatedtime,mc_fees,mc_hot,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_source,mc_workinitiated';_loadit({"query":query,"list":list});break;
+
+/*END LOAD DATA */
+default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}};
 
 
-default:return function(){alert('Error - Missing Table')}
+/*SAVE DATA CALL BACK*/
+_saveDataCB=function(params){
+var options={
+	"id":"",//ID
+	"group":"",//Switch Group
+	"result":""//Call Back Response
+	}
+
+$.extend(true, options, params);//turn options into array
+
+switch(options["group"]){
+/*Save Client*/
+case'client':var json='{"DATA":[["'+
+$("#cl_id").val()+'","'+
+$("#cl_active").is(':checked')+'","'+
+$("#cl_credit_hold").is(':checked')+'","'+
+$("#cl_dms_reference").val()+'","'+
+$("#cl_group").val()+'","'+
+$("#cl_name").val()+'","'+
+$("#cl_notes").val()+'","'+
+$("#cl_referred_by").val()+'","'+
+$("#cl_salutation").val()+'","'+
+$("#cl_since").val()+'","'+
+$("#cl_spouse").val()+'","'+
+$("#cl_trade_name").val()+'","'+
+$("#cl_type").val()+
+'"]]}'
+if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
+_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
+
+jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
+}
+else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false});}	
+	break;
+
+/*Other Events*/
+case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
+case'none':break;
+case'next':_saveData();break;
+case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
+default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }};
 
-
-resetDocument=function(){
-	resetFields(null,'');
-	lookupData('','','client');
-	document.getElementById('content').className='contentsmall';
-	toggle('entrance,smallMenu');hide('group1,group2,group3,group4,largeMenu');
-	highlight(document.getElementById('menuLeft').firstChild.firstChild);};
-
-
-/*Ajax Functions
-saveData = Ajax send data to clientManagement.cfc
-getData = Ajax 
-loadData = Ajax return data populate the dom elements
-lookupData = Ajax lookup data in a query
-*/
-
-
-lookupData=function(id,clid,group){
-	var e=new cm();e.setCallbackHandler(lookupDataCB);e.setErrorHandler(errorHandle);
-	switch(group){
-	
-//case'client':e.f_lookupData(id,'0','0','0','client');break;
-//case'contact':e.f_lookupData(id,'0','0',clid,'contact');break;
-
-	}};
-	
-lookupDataCB=function(query){
-switch(query.COLUMNS[0]){
-	
-/*Load Grid Clients*/
-//case'CLIENT_ID':buildGrid(query,'gridClients');break;
-
-	}};
-	
-	
-loadData=function(id,group){var e=new cm();e.setCallbackHandler(loadDataCB);e.setErrorHandler(errorHandle);
-switch(group){
-
-//case'client':e.f_loadData(id,group,'client');break;
-//case'contact':e.f_loadData(id,group,'contact');break;
-
-	}};
-
-loadDataCB=function(query){
-/*TRIGGER CALLS IN SUSESSION WHEN NEEDED*/
-var e=new cm(),cl_id=document.getElementById("cl_id").value;e.setCallbackHandler(loadDataCB);e.setErrorHandler(errorHandle);
-/*LOAD DATA BASED ON QUERY RETURN*/
-switch(query.COLUMNS[0]){
-	
-	
-//case "CLIENT_NAME":var list='cl_name,cl_salutation,cl_type,cl_since,cl_trade_name,cl_referred_by,cl_spouse,cl_dms_reference,cl_active,cl_credit_hold,cl_notes';loadit(query,list);e.f_loadData(cl_id,"taxes");break;
-/*get Elements for Taxes*/
-//case "CLIENT_TAX_SERVICES":var list='t_taxservices,t_formtype,t_businessc,t_rentalpropertye,t_disregardedentity,t_personalproperty';loadit(query,list);e.f_loadData(cl_id,"payroll");break;
-
-
-default: alert("QUERY EMPTY");}};
-
-
-saveData=function(){
-
-/*
-var e0=document.getElementById("cl_id").value,
-e1=document.getElementById("cl_name").value,
-e2=document.getElementById("cl_salutation").value,
-e3=document.getElementById("cl_type").value,
-e4=document.getElementById("cl_since").value,
-e5=document.getElementById("cl_trade_name").value,
-e6=document.getElementById("cl_referred_by").value,
-e7=document.getElementById("cl_spouse").value,
-e8=document.getElementById("cl_dms_reference").value,
-e9=document.getElementById("cl_active").checked,
-e10=document.getElementById("cl_credit_hold").checked,
-e11=document.getElementById("cl_notes").value,
-json='{"DATA":[["'+e0+'","'+e1+'","'+e2+'","'+e3+'","'+e4+'","'+e5+'","'+e6+'","'+e7+'","'+e8+'","'+e9+'","'+e10+'","'+e11+'"]]}',e=new cm();
-e.setCallbackHandler(saveDataCB);e.setErrorHandler(errorHandle); 
-if(e0==0){e.f_saveData('insert','client',json);}else{e.f_saveData('update','client',json);}
-*/
-};
-
-saveDataCB=function(e0){
-	
-/*Build arguments for Taxes
-var e1=document.getElementById("t_taxservices").checked
-,e2=document.getElementById("t_formtype").value
-,e3=document.getElementById("t_businessc").checked
-,e4=document.getElementById("t_rentalpropertye").checked
-,e5=document.getElementById("t_disregardedentity").checked
-,e6=document.getElementById("t_personalproperty").checked;
-*/
-var e=new cm();e.setCallbackHandler(saveDataCB);e.setErrorHandler(errorHandle); 
-switch(e0.NEXT){
-//case'taxes':var json='{"DATA":[["'+e0.ID+'","'+e1+'","'+e2+'","'+e3+'","'+e4+'","'+e5+'","'+e6+'"]]}';e.f_saveData('update','taxes',json);document.getElementById('cl_id').value=e0.ID;break;
-
-case'error':var err="ErrorID:"& e0.ID +"Details:"+ e0.ERROR; notice(err,'error'); break;
-case'none': resetDocument(); alert(e0.ID); break;
-case'saved':alert('Your document has been saved.');break;
-default:alert(e0.ID);
-}};
-
-
-/*Error Handelers*/
-errorHandle=function(code,msg){alert(code+":"+msg);};

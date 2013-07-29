@@ -1,3 +1,5 @@
+<cfparam name="page.trackers" default="">
+<cfparam name="page.menuLeft" default="">
 <!--- VERTICAL MENUS --->
 <div class="menus">
 <!--- SMALL MENU --->
@@ -10,11 +12,11 @@
 <ul id="menuLeft">
 <cfset i="0">
 <cfoutput>
-<cfloop list="#page.menuLeft#" index="name">
-<cfset i=i+1>
-<li><a href="##" onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li>
-</cfloop>
+<cfloop list="#page.menuLeft#" index="name"><cfset i=i+1><li><a href="##" onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li></cfloop>
 </cfoutput>
 </ul>
 </nav>
 </div>
+<span class="trackers">
+<cfoutput><cfloop list="#page.trackers#" index="name"><cfset i=i+1><input type="hidden" id="#name#" value="0" /></cfloop></cfoutput>
+</span>

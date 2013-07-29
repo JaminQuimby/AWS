@@ -89,7 +89,7 @@ ACTIVITY (CLIENT DATA)
 <!--- HORIZONTAL MENUS --->
 <nav id="topMenu"><cfinclude template="../assets/module/menu/menu.cfm"></nav>
 <!--- CLIENT DETAIL GRID --->
-<div id="entrance" >
+<div id="entrance" class=".gf-checkbox">
 <h3>Clients Search</h3>
 <div>
 <div><label for="cl_filter">Filter</label><input name="cl_filter" id="cl_filter" onBlur="_gridClients();"/></div>
@@ -108,7 +108,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="cl_spouse">Spouse</label><input name="cl_spouse" id="cl_spouse" type="text"/></div>
 <div><label for="cl_salutation">Salutation</label><input name="cl_salutation" id="cl_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="cl_type">Type</label><select name="cl_type" id="cl_type" type="text"  data-placeholder="Choose type of client..."onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="q_cl_type"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="cl_since">Client Since</label><input name="cl_since" id="cl_since" type="text" class="valid_off" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="cl_since">Client Since</label><input name="cl_since" id="cl_since" type="text" class="valid_off date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="cl_trade_name">Trade Name</label><input name="cl_trade_name" id="cl_trade_name" type="text" /></div>
 <div><label for="cl_referred_by">Referred By</label><input name="cl_referred_by" id="cl_referred_by"  type="text"/></div>
 <div><label for="cl_dms_reference">DMS Reference</label><input name="cl_dms_reference" id="cl_dms_reference" type="text"/></div>
@@ -200,7 +200,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="co_email1">Email 1</label><input  name="co_email1" id="co_email1" type="email"/></div>
 <div><label for="co_email2">Email 2</label><input  name="co_email2" id="co_email2" type="email"/></div>
 <div><label for="co_website">Website</label><input type="url" name="co_website" id="co_website" /></div>
-<div><label for="co_effectivedate">Effective Date</label><input type="text" name="co_effectivedate" id="co_effectivedate"/></div>
+<div><label for="co_effectivedate">Effective Date</label><input type="text" name="co_effectivedate" id="co_effectivedate" class="date"/></div>
 <div><input type="checkbox" name="co_acctsoftwareupdate" id="co_acctsoftwareupdate" /><label for="co_acctsoftwareupdate">updated in accounting software</label></div>
 <div><input type="checkbox" name="co_taxupdate" id="co_taxupdate" /><label for="co_taxupdate">update In tax software</label></div>
 <div><input type="checkbox" name="co_customvalue" id="co_customvalue" /><label for="co_customvalue"><input type="text" name="co_customlabel" id="co_customlabel" class="customlabel"/></label></div>
@@ -213,7 +213,7 @@ ACTIVITY (CLIENT DATA)
 <h4 onclick="$('#m_fs_isLoaded').val(1);">Financial Statements</h4>
 <div>
 <div><label for="m_fs_year">Year</label><input name="m_fs_year" id="m_fs_year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="m_fs_periodend">Period End</label><input name="m_fs_periodend" id="m_fs_periodend" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_fs_periodend">Period End</label><input name="m_fs_periodend" id="m_fs_periodend"  class="date"onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="m_fs_month">Month</label><select name="m_fs_month" id="m_fs_month" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_fs_subtaskgroup">SubTask Group</label><select name="m_fs_subtaskgroup" id="m_fs_subtaskgroup" data-placeholder="Select a Subtask Group" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
 <div><label for="m_fs_historicalfs">Historical Financial Statements</label><select name="m_fs_historicalfs" id="m_fs_historicalfs" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
@@ -224,16 +224,16 @@ ACTIVITY (CLIENT DATA)
 <div><!---This does not save anyware it is only for the button to function---><label for="m_mct_group">Group</label><select name="m_mct_group" id="m_mct_group"onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="m_mct_group"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div class="buttonbox"><a onClick="" class="button optional">Duplicate Group</a></div>
 <div><label for="m_mct_category">Category</label><select name="m_mct_category" id="m_mct_category"data-placeholder="Select a Category." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="m_mct_duedate">Due Date</label><input name="m_mct_duedate" id="m_mct_duedate" type="text"onchange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});" onblur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_mct_duedate">Due Date</label><input name="m_mct_duedate" id="m_mct_duedate"  class="date" type="text"onchange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});" onblur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 </div>
 <!--- ADD TO PAYROLL CHECKS --->
 <h4 onclick="$('#m_pc_isLoaded').val(1);">Payroll Checks</h4>
 <div>
 <div><label for="m_pc_year">Year</label><input name="m_pc_year" id="m_pc_year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="m_pc_payenddate">Pay End Date</label><input name="m_pc_payenddate" id="m_pc_payenddate" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="m_pc_paydate">Pay Date</label><input name="m_pc_paydate" id="m_pc_paydate" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="m_pc_duedate">Due Date</label><input name="m_pc_duedate" id="m_pc_duedate" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="m_pc_inforeceived">Info Received</label><input name="m_pc_inforeceived" id="m_pc_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_pc_paydate">Pay Date</label><input name="m_pc_paydate" id="m_pc_paydate"  class="date"onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_pc_duedate">Due Date</label><input name="m_pc_duedate" id="m_pc_duedate" class="date"onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_pc_inforeceived">Info Received</label><input name="m_pc_inforeceived" id="m_pc_inforeceived" class="date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><input type="checkbox" name="m_pc_missinginfo" id="m_pc_missinginfo" /><label for="m_pc_missinginfo">Missing Info</label></div>
 </div>
 <!--- ADD TO PAYROLL TAXES --->
@@ -242,9 +242,9 @@ ACTIVITY (CLIENT DATA)
 <div><label for="m_pt_year">Year</label><input name="m_pt_year" id="m_pt_year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="m_pt_month">Month</label><select name="m_pt_month" id="m_pt_month"onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_pt_returntype">Return Type</label><select name="m_pt_returntype" id="m_pt_returntype" data-placeholder="Select a Return Type." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_returntypes"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="m_pt_lastpaydate">Last Pay Date</label><input name="m_pt_lastpaydate" id="m_pt_lastpaydate" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="m_pt_duedate">Due Date</label><input name="m_pt_duedate" id="m_pt_duedate" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="m_pt_inforeceived">Info Received</label><input name="m_pt_inforeceived" id="m_pt_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_pt_lastpaydate">Last Pay Date</label><input name="m_pt_lastpaydate" id="m_pt_lastpaydate" class="date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_pt_duedate">Due Date</label><input name="m_pt_duedate" id="m_pt_duedate" class="date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_pt_inforeceived">Info Received</label><input name="m_pt_inforeceived" class="date"id="m_pt_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><input type="checkbox" name="m_pt_missinginfo" id="m_pt_missinginfo" /><label for="m_pt_missinginfo">Missing Info</label></div>
 </div>
 <!--- ADD TO TAX STATUS LISTING --->
@@ -252,14 +252,14 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div><label for="m_tsl_taxyear">Tax Year</label><input name="m_tsl_taxyear" id="m_tsl_taxyear" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="m_tsl_taxform">Tax Form</label><select name="m_tsl_taxform" id="m_tsl_taxform" data-placeholder="Select a Tax Form." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="m_tsl_inforeceived">Info Received</label><input name="m_tsl_inforeceived" id="m_tsl_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_tsl_inforeceived">Info Received</label><input name="m_tsl_inforeceived" class="date" id="m_tsl_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><input type="checkbox" name="m_tsl_missinginfo" id="m_tsl_missinginfo" /><label for="m_tsl_missinginfo">Missing Info</label></div>
 </div>
 <!--- OTHER FILINGS --->
 <h4 onclick="$('#m_of_isLoaded').val(1);">Other Filings</h4>
 <div>
 <div><label for="m_of_taxyear">Tax Year</label><input name="m_of_taxyear" id="m_of_taxyear" data-placeholder="Select a Tax Year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="m_of_duedate">Due Date</label><input name="m_of_duedate" id="m_of_duedate" data-placeholder="Select a Due Date." onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="m_of_duedate">Due Date</label><input name="m_of_duedate" id="m_of_duedate"  class="date"data-placeholder="Select a Due Date." onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="m_of_period">Period</label><select name="m_of_period" id="m_of_period" data-placeholder="Select aPeriod." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_of_state">State</label><select name="m_of_state" id="m_of_state" data-placeholder="Select a State." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_of_task">Task</label><select name="m_of_task" id="m_of_task" data-placeholder="Select a Task." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="q_m_of_task"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

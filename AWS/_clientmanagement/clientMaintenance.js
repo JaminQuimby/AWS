@@ -74,34 +74,7 @@ $("#sl_label4").change(function(){$("label[for='s_value4']").html($(this).val())
 
 //Load Custom Labels
 _loadData({"id":"cl_id","group":"statelabels","page":"clientmaintenance"});
-//Load Accordians
-$('.gf-checkbox').accordion({heightStyle:"content", active:false});
 
-
-//Set Date Picker Defaults	
-$.datepicker.setDefaults({
-showOn:"both",
-buttonImageOnly:true,
-buttonImage:"../assets/img/datepicker.gif",
-constrainInput:true
-});
-//Load Date Pickers
-$("#cl_since").datepicker();
-$("#co_effectivedate").datepicker();
-$("#m_mct_duedate").datepicker();
-$("#m_pc_inforeceived").datepicker();
-$("#m_pc_paydate").datepicker();
-$("#m_pc_payenddate").datepicker();
-$("#m_pc_duedate").datepicker();
-$("#m_pt_duedate").datepicker();
-$("#m_pt_inforeceived").datepicker();
-$("#m_ts_inforeceived").datepicker();
-$("#m_tsl_inforeceived").datepicker();
-$("#m_fs_periodend").datepicker();
-$("#m_pt_lastpaydate").datepicker();
-$("#m_of_duedate").datepicker();
-//Load Select Boxes
-$('select').chosen();
 });
 	
 	
@@ -427,6 +400,3 @@ default:jqMessage({message: "A exception coccured in "+options["group"]+" json: 
 }
 }catch(err){alert(err)}};
 
-
-/*Error Handelers*/
-errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};

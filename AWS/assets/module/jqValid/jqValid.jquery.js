@@ -1,6 +1,5 @@
 /*
-Copy Right Jamin Quimby all rights reserverd. 
-Heavy Modification needed!
+Copywrite Jamin Quimby all rights reserverd. 
 */
 jqValid=function(params){
 
@@ -16,12 +15,27 @@ if(typeof options["object"]=="object"){var obj=$(options["object"])}else{var obj
 if(_isIt(options['type'],obj.val())){
 
 //Add green light, remove helper message
-if(obj.parent().children('.chzn-container').length>-1){obj.parent().children('.chzn-container').children(':first-child').removeClass("jqHelp_off").addClass("jqHelp_on")}//plugin for chosen
+if(obj.parent().children('.chzn-container').length>-1){
+	
+	obj.parent().children('.chzn-container').children(':first-child').removeClass("jqHelp_off").addClass("jqHelp_on");
+	obj.parent().children('.chzn-container').children(':first-child').css({"border-left":"5px solid #32CD32","border-right":"1px solid #AAAAAA","width":"400px"})
+}//plugin for chosen
+
 obj.removeClass("jqHelp_off").addClass("jqHelp_on").parent().children('.jqHelp').remove()}
+
+
+
+//{"borderLeft":"5px solid #32CD32","border":"1px solid #343434","width":"395px"}
+//	.css("borderLeft: 5px solid #EA1717;borderRight:5px solid #006;border: 1px solid #343434;width: 395px;")
+//{"borderLeft":" 5px solid #EA1717","borderRight":"5px solid #006","border":"1px solid #343434","width":"395px"}
 
 else{
 //Add red light, add helper object	
-if(obj.parent().children('.chzn-container').length>-1){obj.parent().children('.chzn-container').children(':first-child').removeClass("jqHelp_on").addClass("jqHelp_off")}//plugin for chosen
+if(obj.parent().children('.chzn-container').length>-1){
+	obj.parent().children('.chzn-container').children(':first-child').removeClass("jqHelp_on").addClass("jqHelp_off");
+	obj.parent().children('.chzn-container').children(':first-child').css({"border-left":" 5px solid #EA1717","border-right":"5px solid #006","width":"400px"})
+	}//plugin for chosen
+
 	obj.removeClass("jqHelp_on").addClass("jqHelp_off");
 var container = '<span class="jqHelp">'+options['message']+'<span>';
 

@@ -150,12 +150,34 @@ $.ajax({
   data: {"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName']})
   },
  success:function(json){
- var j=$.parseJSON(json)
- var items = '';
+ var j=$.parseJSON(json),items = '';
       for (var i=0;i<j.Records.length;i++){
         items+='<option value="'+ j.Records[i].optionvalue_id+'">'+j.Records[i].optionname+'</option>';
       }$("select#"+options['selectObject']).html(items);
   },   // successful request; do something with the data
   error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
+})};
+
+
+$(document).ready(function(){
+$.ajaxSetup({cache:false});//Stop ajax cacheing
+
+//Load Accordians
+$('.gf-checkbox').accordion({heightStyle:"content", active:false});
+
+//Set Date Picker Defaults	
+$.datepicker.setDefaults({
+showOn:"both",
+buttonImageOnly:true,
+buttonImage:"../assets/img/datepicker.gif",
+constrainInput:true
 });
-};
+//Load Date Pickers
+$(".date").datepicker();
+
+//Load Select Boxes
+$('select').chosen();
+
+});
+/*Error Handelers*/
+errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};

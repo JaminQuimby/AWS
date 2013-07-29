@@ -19,8 +19,9 @@ border-bottom:1px solid #999;}
 .ui-accordion .ui-accordion-content { overflow:inherit;}
 /* CSS BROWSER RESET TO A STANDARD*/
 *{margin:0;padding:0;border:none;border-collapse :collapse;font-family:"Lucida Sans Unicode","Lucida Grande","tahoma",Verdana,sans-serif; font-size:12px;}
-
-
+/*Chosen Mod*/
+.chzn-container a{-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box; height:36px}
+.chzn-container-single .chzn-single{height:36px}
 /* CSS GROUP MOD*/
 html,body{position:relative;height:auto;min-height:100%;}
 h1,h2,h3,h4,h5,h6{font-size:16px;}
@@ -34,7 +35,7 @@ header{height:34px;background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;widt
 h1{font-weight:normal;}
 h3{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-bottom:35px;color:#666;}
 h4{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-top:35px;color:#666;}
-input{border: 1px solid #AAAAAA;    border-radius: 5px 5px 5px 5px;    box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);width:400px;height:30px; !important;}
+input{border: 1px solid #AAAAAA;    border-radius: 5px 5px 5px 5px;    box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);width:400px;height:36px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;!important;}
 input:focus{color:#0088CE;	box-shadow:0 0 0 2px rgba(0, 136,206,0.5);	}
 input[type="button"]{background:#FF0;width:165px;}
 input[type="submit"]{background:#FF0;width:165px;-moz-border-bottom-colors:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background:-moz-linear-gradient(center top , #fcff00, #dddf42) repeat scroll 0 0 transparent;border-image:none;border-style:solid;border-width:1px;color:#000 !important;text-shadow:0 -1px 0 #dddf42}
@@ -44,10 +45,9 @@ legend{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;fo
 nav{background-color:#F8F8F8;border-bottom:1px solid #E1E1DC;border-right:1px solid #E1E1DC;}
 select {border-radius:2px 2px 2px 2px;min-height:30px;width:400px;border:solid 1px #666;}
 td{vertical-align:top;}
-textarea{border: 1px solid #AAAAAA;    border-radius: 5px 5px 5px 5px;    box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);min-width:400px;font-size:1em;}
+textarea{border: 1px solid #AAAAAA;border-radius: 5px 5px 5px 5px;box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);min-width:400px;font-size:1em;}
 
 tr{vertical-align:top;}
-
 
 /* CSS CLASS MOD*/
 .bordered{border:1px solid #CCCCCC;border-radius:6px 6px 6px 6px;box-shadow:0 1px 1px #CCCCCC;margin-top:25px;}
