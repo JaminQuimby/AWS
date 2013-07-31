@@ -9,43 +9,20 @@ Developers:Jamin Quimby
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
-	"url":"financialstatements.cfc",
-	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year'},FDS_PERIODEND:{title:'Period End'}},
+	"url":"businessformation.cfc",
+	"title":"Business Formation",
+	"fields":{BF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},BF_OWNERS:{title:'Owners'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#fss_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"financialdatastatus"}',
-	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val=(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
+	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#bf_id").val=(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"bf_id","group":"group1"});'
 	});}
 	
+
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 // Load Initial Client Grid	
 _grid1();
-$('.gf-checkbox').hide()
-//Load Select Boxes
-
-//Bind Label Elements
-
-
-//Load Custom Labels
-
-
-//Load Accordians
-$('.gf-checkbox').accordion({heightStyle:"content", active:false});
-$('#entrance').accordion({heightStyle:"content", active:false});
-
-//Set Date Picker Defaults	
-$.datepicker.setDefaults({
-showOn:"both",
-buttonImageOnly:true,
-buttonImage:"../assets/img/datepicker.gif",
-constrainInput:true
-});
-//Load Date Pickers
-//$("#cl_since").datepicker();
-
-//Load Select Boxes
-$('select').chosen();
+$('#entrance').show()
 
 });
 
@@ -53,7 +30,7 @@ $('select').chosen();
 
 _group1=function(){}
 _group2=function(){}
-_group3=function(){}
+
 	
 //Load Data call Back
 _loadDataCB=function(query){
@@ -78,43 +55,62 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
-
-/*TO DO ?*/
-var e58=document.getElementById("m_fs_subtaskgroup").value
-,e59=document.getElementById("m_fs_historicalfs").value;
-/*
-Build arguments for Related Clients UNDER CONSTRUCTION
-*/
+alert(options["group"]);
 switch(options["group"]){
+/*First Group to Save*/
+case'':_saveDataCB({'group':'group1'});break;
 /*Save Client*/
-case'client':var json='{"DATA":[["'+
-$("#cl_id").val()+'","'+
-$("#cl_active").is(':checked')+'","'+
-$("#cl_credit_hold").is(':checked')+'","'+
-$("#cl_dms_reference").val()+'","'+
-$("#cl_group").val()+'","'+
-$("#cl_name").val()+'","'+
-$("#cl_notes").val()+'","'+
-$("#cl_referred_by").val()+'","'+
-$("#cl_salutation").val()+'","'+
-$("#cl_since").val()+'","'+
-$("#cl_spouse").val()+'","'+
-$("#cl_trade_name").val()+'","'+
-$("#cl_type").val()+
+case'group1':var json='{"DATA":[["'+
+$("#bf_id").val()+'","'+
+$("#client_id").val()+'","'+
+$("#g1_status").val()+'","'+
+$("#g1_assignedto").val()+'","'+
+$("#g1_owners").val()+'","'+
+$("#g1_priority").val()+'","'+
+$("#g1_dateinitiated").val()+'","'+
+$("#g1_articlessubmitted").val()+'","'+
+$("#g1_articlesapproved").val()+'","'+
+$("#g1_tradenamesubmitted").val()+'","'+
+$("#g1_tradenamereceived").val()+'","'+
+$("#g1_minutesbylawsdraft").val()+'","'+
+$("#g1_minutesbylawsfinal").val()+'","'+
+$("#g1_tinss4submitted").val()+'","'+
+$("#g1_tinreceived").val()+'","'+
+$("#g1_poa2848signed").val()+'","'+
+$("#g1_statecrasubmitted").val()+'","'+
+$("#g1_statecrareceived").val()+'","'+
+$("#g1_scorp2553submitted").val()+'","'+
+$("#g1_scorp2553received").val()+'","'+
+$("#g1_corp8832submitted").val()+'","'+
+$("#g1_corp8832received").val()+'","'+
+$("#g1_501c3submitted").val()+'","'+
+$("#g1_501creceived").val()+'","'+
+$("#g1_minutescompleted").val()+'","'+
+$("#g1_dissolutionrequested").val()+'","'+
+$("#g1_dissolutionsubmitted").val()+'","'+
+$("#g1_disolutioncompleted").val()+'","'+
+$("#g1_otheractivity").val()+'","'+
+$("#g1_otherstarted").val()+'","'+
+$("#g1_othercompleted").val()+'","'+
+$("#g1_recoardbookordered").val()+'","'+
+$("#g1_estimatedtime").val()+'","'+
+$("#g1_duedate").val()+'","'+
+$("#g1_fees").val()+'","'+
+$("#g1_paid").val()+'","'+
 '"]]}'
-if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
 
+
+_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
-}
-else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false});}	
+
 	break;
 
+case'group2':alert('group2');break;
 
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'none':break;
-case'next':_saveData();break;
+
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }

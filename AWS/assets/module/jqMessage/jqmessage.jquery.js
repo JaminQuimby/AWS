@@ -17,6 +17,7 @@ $('#jqMessage').remove();
 	}; 
     // Extending array from params
     $.extend(true, options, params);  
+	var msgclass ="error";
 	switch(options['type']){
 	case"error":msgclass = 'error jqMessage';break;
 	case"information":msgclass = 'info jqMessage';break;

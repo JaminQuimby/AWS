@@ -35,11 +35,11 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Client--->
 
-<cfcase value="financialDataStatus">
+<cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[fds_id],[client_id],[client_name],[fds_month],[fds_periodend],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
-WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+SELECT[bf_id],[client_id],[client_name],[bf_owners]
+FROM[v_businessformation]
+WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
 </cfcase>
@@ -67,19 +67,19 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
-<cfcase value="financialdatastatus">
+<cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
-SELECT[fds_id],[client_id],[client_name],CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend],[fds_month],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
+SELECT[bf_id],[client_id],[client_name],[bf_owners]
+FROM[v_businessformation]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_PERIODEND":"'&FDS_PERIODEND&'"}'>
+<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","BF_OWNERS":"'&BF_OWNERS&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -105,49 +105,126 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcase value="none">
 </cfcase>
 <!--- Client --->
-<cfcase value="client">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
+<cfcase value="group1">
+
 
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[CLIENT_LISTING](
-[client_active],
-[client_credit_hold],
-[client_dms_refrence],
-[client_group],
-[client_name],
-[client_notes],
-[client_referred_by],
-[client_salutation],
-[client_since],
-[client_spouse],
-[client_trade_name],
-[client_type]
+INSERT INTO[BUSINESSFORMATION](
+[client_id]
+,[bf_status]
+,[bf_assignedto]
+,[bf_owners]
+,[bf_priority]
+,[bf_dateinitiated]
+,[bf_articlessubmitted]
+,[bf_articlesapproved]
+,[bf_tradenamesubmitted]
+,[bf_tradenamereceived]
+,[bf_minutesbylawsdraft]
+,[bf_minutesbylawsfinal]
+,[bf_tinss4submitted]
+,[bf_tinreceived]
+,[bf_poa2848signed]
+,[bf_statecrasubmitted]
+,[bf_statecrareceived]
+,[bf_scorp2553submitted]
+,[bf_scorp2553received]
+,[bf_corp8832submitted]
+,[bf_corp8832received]
+,[bf_501c3submitted]
+,[bf_501creceived]
+,[bf_minutescompleted]
+,[bf_dissolutionrequested]
+,[bf_dissolutionsubmitted]
+,[bf_disolutioncompleted]
+,[bf_otheractivity]
+,[bf_otherstarted]
+,[bf_othercompleted]
+,[bf_recoardbookordered]
+,[bf_estimatedtime]
+,[bf_duedate]
+,[bf_fees]
+,[bf_paid]
 )
-VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>,<cfqueryparam value="#j.DATA[1][3]#"/>,<cfqueryparam value="#j.DATA[1][4]#"/>,<cfqueryparam value="#j.DATA[1][5]#"/>,<cfqueryparam value="#j.DATA[1][6]#"/>,<cfqueryparam value="#j.DATA[1][7]#"/>,<cfqueryparam value="#j.DATA[1][8]#"/>,<cfqueryparam value="#j.DATA[1][9]#"/>,<cfqueryparam value="#j.DATA[1][10]#"/>,<cfqueryparam value="#j.DATA[1][11]#"/>,<cfqueryparam value="#j.DATA[1][12]#"/>,<cfqueryparam value="#j.DATA[1][13]#"/>)
-SELECT SCOPE_IDENTITY()AS[clientId]
+VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][8]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#"/>
+,<cfqueryparam value="#j.DATA[1][10]#"/>
+,<cfqueryparam value="#j.DATA[1][11]#"/>
+,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][13]#"/>
+,<cfqueryparam value="#j.DATA[1][14]#"/>
+,<cfqueryparam value="#j.DATA[1][15]#"/>
+,<cfqueryparam value="#j.DATA[1][16]#"/>
+,<cfqueryparam value="#j.DATA[1][17]#"/>
+,<cfqueryparam value="#j.DATA[1][18]#"/>
+,<cfqueryparam value="#j.DATA[1][19]#"/>
+,<cfqueryparam value="#j.DATA[1][20]#"/>
+,<cfqueryparam value="#j.DATA[1][21]#"/>
+,<cfqueryparam value="#j.DATA[1][22]#"/>
+,<cfqueryparam value="#j.DATA[1][23]#"/>
+,<cfqueryparam value="#j.DATA[1][24]#"/>
+,<cfqueryparam value="#j.DATA[1][25]#"/>
+,<cfqueryparam value="#j.DATA[1][26]#"/>
+,<cfqueryparam value="#j.DATA[1][27]#"/>
+,<cfqueryparam value="#j.DATA[1][28]#"/>
+,<cfqueryparam value="#j.DATA[1][29]#"/>
+,<cfqueryparam value="#j.DATA[1][30]#"/>
+,<cfqueryparam value="#j.DATA[1][31]#"/>
+,<cfqueryparam value="#j.DATA[1][32]#"/>
+,<cfqueryparam value="#j.DATA[1][33]#"/>
+,<cfqueryparam value="#j.DATA[1][34]#"/>
+)
+SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfquery>
-<cfreturn '{"id":#fquery.clientId#,"group":"customfield","result":"ok"}'>
+<cfreturn '{"id":#fquery.clientId#,"group":"group2","result":"ok"}'>
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[CLIENT_LISTING]
-SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[client_credit_hold]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[client_dms_refrence]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[client_group]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[client_name]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[client_notes]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[client_referred_by]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[client_salutation]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[client_since]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[client_spouse]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[client_trade_name]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[client_type]=<cfqueryparam value="#j.DATA[1][13]#"/>
-WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"customfields","result":"ok"}'>
+UPDATE[BUSINESSFORMATION]
+SET[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[bf_owners]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[bf_priority]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[bf_dateinitiated]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[bf_articlessubmitted]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[bf_articlesapproved]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[bf_tradenamesubmitted]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[bf_tradenamereceived]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[bf_minutesbylawsdraft]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[bf_minutesbylawsfinal]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[bf_tinss4submitted]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[bf_tinreceived]=<cfqueryparam value="#j.DATA[1][15]#"/>
+,[bf_poa2848signed]=<cfqueryparam value="#j.DATA[1][16]#"/>
+,[bf_statecrasubmitted]=<cfqueryparam value="#j.DATA[1][17]#"/>
+,[bf_statecrareceived]=<cfqueryparam value="#j.DATA[1][18]#"/>
+,[bf_scorp2553submitted]=<cfqueryparam value="#j.DATA[1][19]#"/>
+,[bf_scorp2553received]=<cfqueryparam value="#j.DATA[1][20]#"/>
+,[bf_corp8832submitted]=<cfqueryparam value="#j.DATA[1][21]#"/>
+,[bf_corp8832received]=<cfqueryparam value="#j.DATA[1][22]#"/>
+,[bf_501c3submitted]=<cfqueryparam value="#j.DATA[1][23]#"/>
+,[bf_501creceived]=<cfqueryparam value="#j.DATA[1][24]#"/>
+,[bf_minutescompleted]=<cfqueryparam value="#j.DATA[1][25]#"/>
+,[bf_dissolutionrequested]=<cfqueryparam value="#j.DATA[1][26]#"/>
+,[bf_dissolutionsubmitted]=<cfqueryparam value="#j.DATA[1][27]#"/>
+,[bf_disolutioncompleted]=<cfqueryparam value="#j.DATA[1][28]#"/>
+,[bf_otheractivity]=<cfqueryparam value="#j.DATA[1][29]#"/>
+,[bf_otherstarted]=<cfqueryparam value="#j.DATA[1][30]#"/>
+,[bf_othercompleted]=<cfqueryparam value="#j.DATA[1][31]#"/>
+,[bf_recoardbookordered]=<cfqueryparam value="#j.DATA[1][32]#"/>
+,[bf_estimatedtime]=<cfqueryparam value="#j.DATA[1][33]#"/>
+,[bf_duedate]=<cfqueryparam value="#j.DATA[1][33]#"/>
+,[bf_fees]=<cfqueryparam value="#j.DATA[1][34]#"/>
+,[bf_paid]=<cfqueryparam value="#j.DATA[1][35]#"/>
+WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 </cfif>
 
 </cfcase>

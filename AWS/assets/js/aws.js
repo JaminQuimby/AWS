@@ -57,19 +57,20 @@ _saveData=function(params){
 var options={
 	"group":"",
 	"payload":"",
-	"page":""
+	"page":"",
+	"id":""
 	}
 try{	
 $.extend(true, options, params);//turn options into array
 if(options["payload"]!=""||options["payload"]=="undefined"){
 $.ajax({
   type: 'GET',
-  url: options["payload"]+'.cfc?method=f_saveData',
+  url: options["page"]+'.cfc?method=f_saveData',
   data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"payload":JSON.stringify(options["payload"])})
   },
   success:function(json){_saveDataCB($.parseJSON(json));},   // successful request; do something with the data
   error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
-});}else{_saveDataCB({"id":$("#cl_id").val(),"group":options["group"]});}}
+});}else{_saveDataCB({"id":options["id"],"group":options["group"]});}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 }
 //Load It
@@ -177,7 +178,8 @@ $(".date").datepicker();
 
 //Load Select Boxes
 $('select').chosen();
-
+//Hide Groups 
+$('.gf-checkbox').hide()
 });
 /*Error Handelers*/
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};
