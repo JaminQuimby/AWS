@@ -57,7 +57,9 @@ try{
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
 /*First Group to Save*/
-case'':_saveDataCB({'group':'group1'});break;
+case'':_saveDataCB({'group':'group1'});
+jqMessage({message: "Save sucessfull. ",type: "save",autoClose: true});
+break;
 /*Save Client*/
 case'group1':var json='{"DATA":[["'+
 $("#bf_id").val()+'","'+
@@ -97,16 +99,20 @@ $("#g1_duedate").val()+'","'+
 $("#g1_fees").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_activity").val()+'","'+
-
 '"]]}'
+_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});break;
 
-jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
-_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
+case'group2':var json='{"DATA":[["'+
+$("#g2_commentdate").val()+'","'+
+$("#g2_commentemployee").val()+'","'+
+$("#g2_commentnotes").val()+'","'+
+'"]]}'
+_saveData({group:"group2",payload:$.parseJSON(json),page:"businessformation"});
+break;
 
-
-	break;
-
-case'group2':jqMessage({message: "Document is saving. ",type: "success",autoClose: true});break;
+case'group3':
+jqMessage({message: "Document is saving. ",type: "success",autoClose: true});
+break;
 
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;

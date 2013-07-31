@@ -34,7 +34,7 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Client--->
-
+-/*Need to Convert Data ,CONVERT(VARCHAR(10),[contact_effectivedate], 101)AS[contact_effectivedate]*/
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[bf_id],[client_id]
@@ -42,37 +42,37 @@ SELECT[bf_id],[client_id]
 ,[bf_assignedto]
 ,[bf_owners]
 ,[bf_priority]
-,[bf_dateinitiated]
-,[bf_articlessubmitted]
-,[bf_articlesapproved]
-,[bf_tradenamesubmitted]
-,[bf_tradenamereceived]
-,[bf_minutesbylawsdraft]
-,[bf_minutesbylawsfinal]
-,[bf_tinss4submitted]
-,[bf_tinreceived]
-,[bf_poa2848signed]
-,[bf_statecrasubmitted]
-,[bf_statecrareceived]
-,[bf_scorp2553submitted]
-,[bf_scorp2553received]
-,[bf_corp8832submitted]
-,[bf_corp8832received]
-,[bf_501c3submitted]
-,[bf_501creceived]
-,[bf_minutescompleted]
-,[bf_dissolutionrequested]
-,[bf_dissolutionsubmitted]
-,[bf_disolutioncompleted]
-,[bf_otheractivity]
-,[bf_otherstarted]
-,[bf_othercompleted]
-,[bf_recoardbookordered]
-,[bf_estimatedtime]
-,[bf_duedate]
+,CONVERT(VARCHAR(10),[bf_dateinitiated], 101)AS[bf_dateinitiated]
+,CONVERT(VARCHAR(10),[bf_articlessubmitted], 101)AS[bf_articlessubmitted]
+,CONVERT(VARCHAR(10),[bf_articlesapproved], 101)AS[bf_articlesapproved]
+,CONVERT(VARCHAR(10),[bf_tradenamesubmitted], 101)AS[bf_tradenamesubmitted]
+,CONVERT(VARCHAR(10),[bf_tradenamereceived], 101)AS[bf_tradenamereceived]
+,CONVERT(VARCHAR(10),[bf_minutesbylawsdraft], 101)AS[bf_minutesbylawsdraft]
+,CONVERT(VARCHAR(10),[bf_minutesbylawsfinal], 101)AS[bf_minutesbylawsfinal]
+,CONVERT(VARCHAR(10),[bf_tinss4submitted], 101)AS[bf_tinss4submitted]
+,CONVERT(VARCHAR(10),[bf_tinreceived], 101)AS[bf_tinreceived]
+,CONVERT(VARCHAR(10),[bf_poa2848signed], 101)AS[bf_poa2848signed]
+,CONVERT(VARCHAR(10),[bf_statecrasubmitted], 101)AS[bf_statecrasubmitted]
+,CONVERT(VARCHAR(10),[bf_statecrareceived], 101)AS[bf_statecrareceived]
+,CONVERT(VARCHAR(10),[bf_scorp2553submitted], 101)AS[bf_scorp2553submitted]
+,CONVERT(VARCHAR(10),[bf_scorp2553received], 101)AS[bf_scorp2553received]
+,CONVERT(VARCHAR(10),[bf_corp8832submitted], 101)AS[bf_corp8832submitted]
+,CONVERT(VARCHAR(10),[bf_corp8832received], 101)AS[bf_corp8832received]
+,CONVERT(VARCHAR(10),[bf_501c3submitted], 101)AS[bf_501c3submitted]
+,CONVERT(VARCHAR(10),[bf_501creceived], 101)AS[bf_501creceived]
+,CONVERT(VARCHAR(10),[bf_minutescompleted], 101)AS[bf_minutescompleted]
+,CONVERT(VARCHAR(10),[bf_dissolutionrequested], 101)AS[bf_dissolutionrequested]
+,CONVERT(VARCHAR(10),[bf_dissolutionsubmitted], 101)AS[bf_dissolutionsubmitted]
+,CONVERT(VARCHAR(10),[bf_disolutioncompleted], 101)AS[bf_disolutioncompleted]
+,CONVERT(VARCHAR(10),[bf_otheractivity], 101)AS[bf_otheractivity]
+,CONVERT(VARCHAR(10),[bf_otherstarted], 101)AS[bf_otherstarted]
+,CONVERT(VARCHAR(10),[bf_othercompleted], 101)AS[bf_othercompleted]
+,CONVERT(VARCHAR(10),[bf_recoardbookordered], 101)AS[bf_recoardbookordered]
+,CONVERT(VARCHAR(10),[bf_estimatedtime], 101)AS[bf_estimatedtime]
+,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 ,[bf_fees]
 ,[bf_paid]
-,[bf_activity]
+	,[bf_activity]
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -230,7 +230,6 @@ SELECT SCOPE_IDENTITY()AS[bf_id]
 <cfset j.DATA[1][35] =0>
 </cfif> 
 <cfquery name="fquery" datasource="AWS">
-/*Need to Convert Data ,CONVERT(VARCHAR(10),[contact_effectivedate], 101)AS[contact_effectivedate]*/
 UPDATE[BUSINESSFORMATION]
 SET[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#"/>
