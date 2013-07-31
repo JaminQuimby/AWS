@@ -5,7 +5,7 @@
 <cfset page.location="businessformation">
 <cfset page.title="Business Formation">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="bf_id,client_id">
+<cfset page.trackers="bf_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='#page.title#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1 ORDER BY[client_name]</cfquery>
@@ -13,6 +13,7 @@
 
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
+<cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
@@ -78,7 +79,7 @@
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime" class="date"/></div>
 <div><label for="g1_duedate" >Due Date</label><input type="text" id="g1_duedate" class="date"/></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"/></div>
-<div><label for="g1_paid">Paid</label><input type="text" id="g1_paid"/></div>
+<div><label for="g1_paid">Paid</label><select id="g1_paid" data-placeholder="Paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 
 </div>
 </div>

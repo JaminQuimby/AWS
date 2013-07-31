@@ -30,7 +30,7 @@ $('#entrance').show()
 
 _group1=function(){}
 _group2=function(){}
-
+_group3=function(){}
 	
 //Load Data call Back
 _loadDataCB=function(query){
@@ -62,7 +62,7 @@ case'':_saveDataCB({'group':'group1'});break;
 /*Save Client*/
 case'group1':var json='{"DATA":[["'+
 $("#bf_id").val()+'","'+
-$("#client_id").val()+'","'+
+$("#g1_clientname").val()+'","'+
 $("#g1_status").val()+'","'+
 $("#g1_assignedto").val()+'","'+
 $("#g1_owners").val()+'","'+
@@ -99,13 +99,13 @@ $("#g1_fees").val()+'","'+
 $("#g1_paid").val()+'","'+
 '"]]}'
 
-
-_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
+_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
+
 
 	break;
 
-case'group2':alert('group2');break;
+case'group2':jqMessage({message: "Document is saving. ",type: "success",autoClose: true});break;
 
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;

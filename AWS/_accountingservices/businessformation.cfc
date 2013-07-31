@@ -71,7 +71,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[bf_id],[client_id],[client_name],[bf_owners]
 FROM[v_businessformation]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 </cfquery>
 <cfset myResult="">
@@ -180,13 +180,18 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][32]#"/>
 ,<cfqueryparam value="#j.DATA[1][33]#"/>
 ,<cfqueryparam value="#j.DATA[1][34]#"/>
+,<cfqueryparam value="#j.DATA[1][35]#"/>
+,<cfqueryparam value="#j.DATA[1][36]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfquery>
-<cfreturn '{"id":#fquery.clientId#,"group":"group2","result":"ok"}'>
+<cfreturn '{"id":#fquery.bf_id#,"group":"group2","result":"ok"}'>
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
+<cfif not isNumeric(j.DATA[1][34]) or j.DATA[1][34] lt -1> 
+<cfset j.DATA[1][34] =0>
+</cfif> 
 <cfquery name="fquery" datasource="AWS">
 UPDATE[BUSINESSFORMATION]
 SET[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
@@ -221,7 +226,7 @@ SET[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[bf_recoardbookordered]=<cfqueryparam value="#j.DATA[1][32]#"/>
 ,[bf_estimatedtime]=<cfqueryparam value="#j.DATA[1][33]#"/>
 ,[bf_duedate]=<cfqueryparam value="#j.DATA[1][33]#"/>
-,[bf_fees]=<cfqueryparam value="#j.DATA[1][34]#"/>
+,[bf_fees]=<cfqueryparam value="#j.DATA[1][34]#" />
 ,[bf_paid]=<cfqueryparam value="#j.DATA[1][35]#"/>
 WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>

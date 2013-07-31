@@ -3,7 +3,7 @@ Writen by Jamin Quimby - All rights reserved
 
 */
 jqMessage=function(params){
-$('#jqMessage').remove();
+if($('#jqMessage').length){$('#jqMessage').remove()};
     // options array
     var options = { 
         'showAfter': 0, // number of sec to wait after page loads
@@ -12,7 +12,7 @@ $('#jqMessage').remove();
         'type' : 'success', // type of info message error/success/info/warning
         'message': '', // message to dispaly
         'description' :{"message":"Hello World This is the details about my error message","link":"google.com","linkname":"Learn More"}, //Details {"Description":"Hello World This is the details about my error message","Link":"google.com"}
-		'buttons':[{"name":"Save","function":"alert('Saved')"},{"name":"Exit","function":"alert('Exit')"}] // Pass it a json array for buttons [{"name":"Save","function":"alert('Saved')"},{"name":"Exit","function":"alert('Exit')"}]
+		'buttons':[] // Pass it a json array for buttons [{"name":"Save","function":"alert('Saved')"},{"name":"Exit","function":"alert('Exit')"}]
 
 	}; 
     // Extending array from params

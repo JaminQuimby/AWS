@@ -14,7 +14,7 @@ Developer: Jamin Quimby
 		 border: 1px solid;
 		 color: #fff;
 		 padding: 15px;
-		 position: absolute;
+		 position: fixed;
 		 top:0;
 		 _position: absolute;
 		 text-shadow: 0 1px 0 rgba(0,0,0,.5);
