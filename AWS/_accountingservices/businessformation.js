@@ -14,7 +14,7 @@ _grid1=function(){_jGrid({
 	"fields":{BF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},BF_OWNERS:{title:'Owners'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
-	"functions":'$("#client_id").val(record.CLIENT_ID);$("#bf_id").val=(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"bf_id","group":"group1"});'
+	"functions":'$("#bf_id").val(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"bf_id","group":"group1","page":"businessformation"});'
 	});}
 	
 
@@ -39,7 +39,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Client Group*/case "CLIENT_ACTIVE":var list='cl_active,cl_credit_hold,cl_dms_reference,cl_group,cl_name,cl_notes,cl_referred_by,cl_salutation,cl_since,cl_spouse,cl_trade_name,cl_type,s_label1,s_label2,s_label3,s_label4,rc_group';_loadit({"query":query,"list":list});break;
+/*Business Financial Group*/case "BF_ID":var list='bf_id,g1_clientname,g1_status,g1_assignedto,g1_owners,g1_priority,g1_dateinitiated,g1_articlessubmitted,g1_articlesapproved,g1_tradenamesubmitted,g1_tradenamereceived,g1_minutesbylawsdraft,g1_minutesbylawsfinal,g1_tinss4submitted,g1_tinreceived,g1_poa2848signed,g1_statecrasubmitted,g1_statecrareceived,g1_scorp2553submitted,g1_scorp2553received,g1_corp8832submitted,g1_corp8832received,g1_501c3submitted,g1_501creceived,g1_minutescompleted,g1_dissolutionrequested,g1_dissolutionsubmitted,g1_disolutioncompleted,g1_otheractivity,g1_otherstarted,g1_othercompleted,g1_recoardbookordered,g1_estimatedtime,g1_duedate,g1_fees,g1_paid,g1_activity';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
@@ -55,7 +55,6 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 switch(options["group"]){
 /*First Group to Save*/
 case'':_saveDataCB({'group':'group1'});break;
@@ -97,6 +96,8 @@ $("#g1_estimatedtime").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_fees").val()+'","'+
 $("#g1_paid").val()+'","'+
+$("#g1_activity").val()+'","'+
+
 '"]]}'
 
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});

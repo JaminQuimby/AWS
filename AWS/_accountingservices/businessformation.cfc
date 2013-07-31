@@ -37,8 +37,43 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[bf_id],[client_id],[client_name],[bf_owners]
-FROM[v_businessformation]
+SELECT[bf_id],[client_id]
+,[bf_status]
+,[bf_assignedto]
+,[bf_owners]
+,[bf_priority]
+,[bf_dateinitiated]
+,[bf_articlessubmitted]
+,[bf_articlesapproved]
+,[bf_tradenamesubmitted]
+,[bf_tradenamereceived]
+,[bf_minutesbylawsdraft]
+,[bf_minutesbylawsfinal]
+,[bf_tinss4submitted]
+,[bf_tinreceived]
+,[bf_poa2848signed]
+,[bf_statecrasubmitted]
+,[bf_statecrareceived]
+,[bf_scorp2553submitted]
+,[bf_scorp2553received]
+,[bf_corp8832submitted]
+,[bf_corp8832received]
+,[bf_501c3submitted]
+,[bf_501creceived]
+,[bf_minutescompleted]
+,[bf_dissolutionrequested]
+,[bf_dissolutionsubmitted]
+,[bf_disolutioncompleted]
+,[bf_otheractivity]
+,[bf_otherstarted]
+,[bf_othercompleted]
+,[bf_recoardbookordered]
+,[bf_estimatedtime]
+,[bf_duedate]
+,[bf_fees]
+,[bf_paid]
+,[bf_activity]
+FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
@@ -146,6 +181,7 @@ INSERT INTO[BUSINESSFORMATION](
 ,[bf_duedate]
 ,[bf_fees]
 ,[bf_paid]
+,[bf_activity]
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
@@ -182,6 +218,7 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][34]#"/>
 ,<cfqueryparam value="#j.DATA[1][35]#"/>
 ,<cfqueryparam value="#j.DATA[1][36]#"/>
+,<cfqueryparam value="#j.DATA[1][37]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfquery>
@@ -189,10 +226,11 @@ SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
-<cfif not isNumeric(j.DATA[1][34]) or j.DATA[1][34] lt -1> 
-<cfset j.DATA[1][34] =0>
+<cfif not isNumeric(j.DATA[1][35]) or j.DATA[1][35] lt -1> 
+<cfset j.DATA[1][35] =0>
 </cfif> 
 <cfquery name="fquery" datasource="AWS">
+/*Need to Convert Data ,CONVERT(VARCHAR(10),[contact_effectivedate], 101)AS[contact_effectivedate]*/
 UPDATE[BUSINESSFORMATION]
 SET[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#"/>
@@ -225,9 +263,10 @@ SET[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[bf_othercompleted]=<cfqueryparam value="#j.DATA[1][31]#"/>
 ,[bf_recoardbookordered]=<cfqueryparam value="#j.DATA[1][32]#"/>
 ,[bf_estimatedtime]=<cfqueryparam value="#j.DATA[1][33]#"/>
-,[bf_duedate]=<cfqueryparam value="#j.DATA[1][33]#"/>
-,[bf_fees]=<cfqueryparam value="#j.DATA[1][34]#" />
-,[bf_paid]=<cfqueryparam value="#j.DATA[1][35]#"/>
+,[bf_duedate]=<cfqueryparam value="#j.DATA[1][34]#"/>
+,[bf_fees]=<cfqueryparam value="#j.DATA[1][35]#" />
+,[bf_paid]=<cfqueryparam value="#j.DATA[1][36]#"/>
+,[bf_activity]=<cfqueryparam value="#j.DATA[1][37]#"/>
 WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 </cfif>

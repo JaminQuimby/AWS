@@ -143,11 +143,11 @@ default:return false;
 
 	
 _loadSelect=function(params){
-var options={"selectName":"","selectObject":""}
+var options={"selectName":"","selectObject":"","page":""}
 $.extend(true, options, params);//turn options into array
 $.ajax({
   type: 'GET',
-  url: 'clientMaintenance.cfc?method=f_loadSelect',
+  url: options['page']+'.cfc?method=f_loadSelect',
   data: {"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName']})
   },
  success:function(json){
