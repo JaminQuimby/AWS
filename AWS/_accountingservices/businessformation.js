@@ -3,9 +3,6 @@ Javascript for FinancialStatements
 Developers:Jamin Quimby
 7/26/2013 - Started
 */
-
-
-
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -26,7 +23,6 @@ _grid2=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
 	"functions":'_loadData({"id":"comment_id","group":"group2","page":"businessformation"});'
 	});}
-	
 
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
@@ -34,27 +30,22 @@ $.ajaxSetup({cache:false});//Stop ajax cacheing
 _grid1();
 // Show Entrace Window
 $('#entrance').show()
-
 });
 
-
-
 _group1=function(){}
-_group2=function(){_grid2();}
+_group2=function(){_grid2()}
 _group3=function(){}
-	
+
 //Load Data call Back
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
 try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
-{
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
+else{
 switch(query.COLUMNS[0]){
 /*Business Financial Group*/case "BF_ID":var list='bf_id,g1_clientname,g1_status,g1_assignedto,g1_owners,g1_priority,g1_dateinitiated,g1_articlessubmitted,g1_articlesapproved,g1_tradenamesubmitted,g1_tradenamereceived,g1_minutesbylawsdraft,g1_minutesbylawsfinal,g1_tinss4submitted,g1_tinreceived,g1_poa2848signed,g1_statecrasubmitted,g1_statecrareceived,g1_scorp2553submitted,g1_scorp2553received,g1_corp8832submitted,g1_corp8832received,g1_501c3submitted,g1_501creceived,g1_minutescompleted,g1_dissolutionrequested,g1_dissolutionsubmitted,g1_disolutioncompleted,g1_otheractivity,g1_otherstarted,g1_othercompleted,g1_recoardbookordered,g1_estimatedtime,g1_duedate,g1_fees,g1_paid,g1_activity';_loadit({"query":query,"list":list,"page":"businessformation"});break;
-
-default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
-}catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
-};
+default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
 
 /*SAVE DATA CALL BACK*/
@@ -123,7 +114,6 @@ $("#g2_commenttext").val()+'","'+
 '"]]}'
 _saveData({group:"group2",payload:$.parseJSON(json),page:"businessformation"});
 break;
-
 case'group3':
 jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
 break;
@@ -131,12 +121,8 @@ break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'none':break;
-
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
-}
-}catch(err){alert(err)}};
-
-
+default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
+catch(err){alert(err)}};
 /*Error Handelers*/
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};// JavaScript Document// JavaScript Document

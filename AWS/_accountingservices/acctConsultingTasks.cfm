@@ -3,9 +3,11 @@
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_accountingservices">
 <cfset page.location="acctconsultingtasks">
+<cfset page.formid=3>
 <cfset page.title="Accounting and Consulting Tasks">
 <cfset page.menuLeft="General,SubTasks,Comment">
 <cfset page.trackers="mc_id,si_id,client_id">
+
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Accounting Consulting Tasks'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -46,7 +48,7 @@
 <div>
 <!---Developer Note:[Table Management Consulting Tasks]--->
 <div><label for="g1_client">Clients</label><select id="g1_client"  onBlur="valid('rationalNumbers',this,'You must select an option.');"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse"></div>
+<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" readonly="readonly"></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_consultingcategory">Consulting Category</label><select id="g1_consultingcategory"  onBlur="valid('rationalNumbers',this,'You must select an option.');"><option value="0">&nbsp;</option><cfoutput query="global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taskdescription">Task Description</label><textarea  id="g1_taskdescription" cols="4" rows="4" onBlur="valid('empty',this,'Cannot be empty.');" ></textarea></div>
@@ -80,9 +82,20 @@
 </div>
 </div>
 <!--- Comments --->
-<div id="group3" style="display:none;" class="gf-checkbox">
+<div id="group3" class="gf-checkbox">
 <h3>Comments</h3>
-<div></div>
+<div>
+<div><label for="g3_filter">Filter</label><input id="g2_filter" onBlur="_grid3();"/></div>
+<div class="tblGrid" id="grid2"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group3").accordion({active:1})'>Add</a>
+</div>
+</div>
+<h4>Add Comment</h4>
+<div>
+<div><label for="g3_commentdate">Date</label><input type="text" class="date" id="g3_commentdate"/></div>
+<div><label for="g3_commenttext">Comment</label><textarea type="text" id="g3_commenttext"></textarea></div>
+</div>
 </div>
 <!--- END FIELD DATA --->
 

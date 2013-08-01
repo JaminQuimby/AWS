@@ -20,8 +20,5 @@
 </nav>
 </div>
 <span class="trackers">
-<cfoutput><cfloop list="#page.trackers#" index="name"><cfset i=i+1><input type="hidden" id="#name#" value="0" /></cfloop>
-<cfif page.formid neq 0><input type="hidden" id="form_id" value="#page.formid#" /></cfif>
-<input type="hidden" id="user_id" value="#session.user.id#" />
-</cfoutput>
+<cfoutput><cfloop list="#page.trackers#" index="name"><cfset i=i+1><input type="hidden" id="#name#" value="0" /></cfloop><cfif page.formid neq 0><input type="hidden" id="form_id" value="#page.formid#" /></cfif><input type="hidden" id="user_id" value="#session.user.id#" /></cfoutput>
 </span>
