@@ -34,7 +34,6 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Client--->
--/*Need to Convert Data ,CONVERT(VARCHAR(10),[contact_effectivedate], 101)AS[contact_effectivedate]*/
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[bf_id],[client_id]
@@ -72,11 +71,16 @@ SELECT[bf_id],[client_id]
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 ,[bf_fees]
 ,[bf_paid]
-	,[bf_activity]
+,[bf_activity]
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
-
+</cfcase>
+<!--- Comments --->
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fQuery">
+<!--- NOTES ARE PERMINANTE --->
+</cfquery>
 </cfcase>
 
 
@@ -101,13 +105,12 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- LOOKUP Financial Statements --->
+<!--- LOOKUP Business Formation --->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
 SELECT[bf_id],[client_id],[client_name],[bf_owners]
 FROM[v_businessformation]
 WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -120,12 +123,32 @@ WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
+
+<!--- LOOKUP FOR COMMENTS --->
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fquery">
+SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
+FROM[v_comments]
+WHERE[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"COMMENT_ID":"'&COMMENT_ID&'","C_DATE":"'&C_DATE&'","U_NAME":"'&U_NAME&'","U_EMAIL":"'&U_EMAIL&'","C_NOTES":"'&C_NOTES&'"}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cfcase>
+
+
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
-
 
 </cftry>
 </cffunction>
@@ -141,8 +164,6 @@ WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]
 </cfcase>
 <!--- Client --->
 <cfcase value="group1">
-
-
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[BUSINESSFORMATION](
@@ -231,7 +252,8 @@ SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfif> 
 <cfquery name="fquery" datasource="AWS">
 UPDATE[BUSINESSFORMATION]
-SET[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
+SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[bf_status]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#"/>
 ,[bf_owners]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[bf_priority]=<cfqueryparam value="#j.DATA[1][6]#"/>
@@ -271,6 +293,30 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfif>
 
 </cfcase>
+
+
+
+<cfcase value="group2">
+<cfif j.DATA[1][1] eq "0">
+<cfquery name="fquery" datasource="AWS">
+INSERT INTO[comments](
+[form_id]
+,[user_id]
+,[c_date]
+,[c_notes]
+)
+VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+
+)
+SELECT SCOPE_IDENTITY()AS[comment_id]
+</cfquery>
+<cfreturn '{"id":#fquery.comment_id#,"group":"group3","result":"ok"}'>
+</cfif>
+</cfcase>
+
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->

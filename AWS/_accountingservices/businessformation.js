@@ -16,12 +16,23 @@ _grid1=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#bf_id").val(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"bf_id","group":"group1","page":"businessformation"});'
 	});}
+
+_grid2=function(){_jGrid({
+	"grid":"grid2",
+	"url":"businessformation.cfc",
+	"title":"Comments",
+	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
+	"functions":'_loadData({"id":"comment_id","group":"group2","page":"businessformation"});'
+	});}
 	
 
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 // Load Initial Client Grid	
 _grid1();
+// Show Entrace Window
 $('#entrance').show()
 
 });
@@ -29,7 +40,7 @@ $('#entrance').show()
 
 
 _group1=function(){}
-_group2=function(){}
+_group2=function(){_grid2();}
 _group3=function(){}
 	
 //Load Data call Back
@@ -58,7 +69,7 @@ $.extend(true, options, params);//turn options into array
 switch(options["group"]){
 /*First Group to Save*/
 case'':_saveDataCB({'group':'group1'});
-jqMessage({message: "Save sucessfull. ",type: "save",autoClose: true});
+jqMessage({message: "Save your data. ",type: "save",autoClose: true});
 break;
 /*Save Client*/
 case'group1':var json='{"DATA":[["'+
@@ -100,18 +111,21 @@ $("#g1_fees").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_activity").val()+'","'+
 '"]]}'
-_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});break;
+_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
+break;
 
 case'group2':var json='{"DATA":[["'+
+$("#comment_id").val()+'","'+
+$("#form_id").val()+'","'+
+$("#user_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
-$("#g2_commentemployee").val()+'","'+
-$("#g2_commentnotes").val()+'","'+
+$("#g2_commenttext").val()+'","'+
 '"]]}'
 _saveData({group:"group2",payload:$.parseJSON(json),page:"businessformation"});
 break;
 
 case'group3':
-jqMessage({message: "Document is saving. ",type: "success",autoClose: true});
+jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
 break;
 
 /*Other Events*/

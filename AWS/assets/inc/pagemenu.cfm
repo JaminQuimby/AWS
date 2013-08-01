@@ -1,5 +1,7 @@
 <cfparam name="page.trackers" default="">
 <cfparam name="page.menuLeft" default="">
+<cfparam name="page.formid" default="0">
+
 <!--- VERTICAL MENUS --->
 <div class="menus">
 <!--- SMALL MENU --->
@@ -18,5 +20,8 @@
 </nav>
 </div>
 <span class="trackers">
-<cfoutput><cfloop list="#page.trackers#" index="name"><cfset i=i+1><input type="hidden" id="#name#" value="0" /></cfloop></cfoutput>
+<cfoutput><cfloop list="#page.trackers#" index="name"><cfset i=i+1><input type="hidden" id="#name#" value="0" /></cfloop>
+<cfif page.formid neq 0><input type="hidden" id="form_id" value="#page.formid#" /></cfif>
+<input type="hidden" id="user_id" value="#session.user.id#" />
+</cfoutput>
 </span>

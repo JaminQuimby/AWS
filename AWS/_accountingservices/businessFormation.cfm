@@ -3,14 +3,14 @@
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_accountingservices">
 <cfset page.location="businessformation">
+<cfset page.formid=3>
 <cfset page.title="Business Formation">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="bf_id">
+<cfset page.trackers="bf_id,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='#page.title#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1 ORDER BY[client_name]</cfquery>
-<cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
-
+-<cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
@@ -28,8 +28,7 @@
 
 <!--- ENTRANCE --->
 <div id="entrance"class="gf-checkbox">
-<cfoutput><h3>#page.title# Search</h3></cfoutput>
-<div>
+<cfoutput><h3>#page.title# Search #session.user.id#</h3></cfoutput><div>
 <div><label for="g1_filter">Filter</label><input id="g1_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
@@ -84,12 +83,19 @@
 </div>
 </div>
 
-<div id="group1" class="gf-checkbox">
+<div id="group2" class="gf-checkbox">
 <h3>Comments</h3>
 <div>
-<div><label for="comment_date">Date</label><input type="text" id="comment_date"/></div>
-<div><label for="comment_employee">By</label><input type="text" id="comment_employee" class="date"/></div>
-<div><label for="comment_text">Comment</label><textarea type="text" id="comment_text"></textarea></div>
+<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
+<div class="tblGrid" id="grid2"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group2").accordion({active:1})'>Add</a>
+</div>
+</div>
+<h4>Add Comment</h4>
+<div>
+<div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
+<div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
 <!--- END FIELD DATA --->
