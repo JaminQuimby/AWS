@@ -9,14 +9,24 @@ Developers:Jamin Quimby
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
-	"url":"financialstatements.cfc",
-	"title":"Financial Statements",
+	"url":"clientadministrativetasks.cfc",
+	"title":"Client Administrative Tasks",
 	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year'},FDS_PERIODEND:{title:'Period End'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#fss_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"financialdatastatus"}',
-	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val=(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
+	"arguments":'{"search":"'+$("#e1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"clientadministrativetasks"}',
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val=(record.CAS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
 	});}
-	
+
+_grid2=function(){_jGrid({
+	"grid":"grid2",
+	"url":"clientadministrativetasks.cfc",
+	"title":"Comments",
+	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
+	"functions":'_loadData({"id":"comment_id","group":"group3","page":"clientadministrativetasks"});'
+	});}
+
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 // Load Initial Client Grid	
@@ -52,7 +62,7 @@ $('select').chosen();
 
 
 _group1=function(){}
-_group2=function(){}
+_group2=function(){_grid2()}
 _group3=function(){}
 	
 //Load Data call Back

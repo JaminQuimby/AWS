@@ -35,7 +35,7 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Client--->
 
-<cfcase value="financialDataStatus">
+<cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[fds_id],[client_id],[client_name],[fds_month],[fds_periodend],[fds_year],[fds_monthTEXT]
 FROM[v_financialDataStatus]
@@ -67,11 +67,25 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
-<cfcase value="financialdatastatus">
+<cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
-SELECT[fds_id],[client_id],[client_name],CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend],[fds_month],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+
+<!-----------------STOPPED WORK HERE ------------>
+SELECT [cas_id]
+      ,[client_id]
+      ,[cas_assignto]
+      ,[cas_category]
+      ,[cas_completed]
+      ,[cas_datereqested]
+      ,[cas_datestarted]
+      ,[cas_duedate]
+      ,[cas_estimatedtime]
+      ,[cas_instructions]
+      ,[cas_priority]
+      ,[cas_reqestby]
+      ,[cas_status]
+      ,[cas_taskdesc]
+  FROM [AWS].[dbo].[clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -104,8 +118,8 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <cfcase value="none">
 </cfcase>
-<!--- Client --->
-<cfcase value="client">
+<!--- Group1 --->
+<cfcase value="group1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
 
