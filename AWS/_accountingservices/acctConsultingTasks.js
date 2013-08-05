@@ -39,7 +39,6 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"acctconsultingtasks.cfc",
 	"title":"Subtasks",
-	"fields":{mcs_id:{key:true,list:false,edit:false},client_id:{list:false,edit:false},mcs_sequence:{title:'Sequence'},mcs_category:{title:'Category'},mcs_status:{title:'Status'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
 	"functions":'_loadData({"id":"comment_id","group":"group2","page":"acctconsultingtasks"});'
@@ -51,7 +50,7 @@ _grid3=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#form_id").val()+'","loadType":"group3"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
 	"functions":'_loadData({"id":"comment_id","group":"group3","page":"acctconsultingtasks"});'
 	});}
 
@@ -116,6 +115,7 @@ $("#g1_workinitiated").val()+'","'+
 $("#g1_credithold").is(":checked")+'","'+
 '"]]}'
 if($("#g1_client").val()!=0){
+
 _saveData({group:"group1",payload:$.parseJSON(json),page:"acctconsultingtasks"});
 }else{
 _saveDataCB({'group':'group2'});

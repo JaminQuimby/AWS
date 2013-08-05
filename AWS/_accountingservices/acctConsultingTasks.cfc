@@ -4,9 +4,7 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-
-
-<!--- LOAD DATA --->
+!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
@@ -19,7 +17,7 @@
 <cfquery datasource="AWS" name="fQuery">
 SELECT[mc_id]
 ,[client_id]
-,[mc_credithold]
+      ,[si_id]
 ,[mc_category]
 ,[mc_description]
 ,[mc_priority]
@@ -58,7 +56,6 @@ FROM[managementconsulting_subtask]
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 </cfcase>
 <!--- Load Group3 --->
-<cfcase value="group3"><cfquery datasource="AWS" name="fQuery"></cfquery></cfcase>
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
@@ -86,12 +83,12 @@ WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 <cfquery datasource="AWS" name="fquery">
 SELECT[MC_ID]
 ,[MC_ASSIGNEDTO]
-,[CLIENT_ID]
-,[CLIENT_NAME]
-,[MC_CATEGORYTEXT]
-,[MC_DESCRIPTION]
-,[MC_STATUS]
-,CONVERT(VARCHAR(10),[MC_DUEDATE], 101)AS[MC_DUEDATE]
+    ,[client_id]
+    ,[client_name]
+   	,[mc_categoryTEXT]
+    ,[mc_description]
+    ,[mc_status]
+    ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
 WHERE[CLIENT_NAME]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
@@ -134,14 +131,19 @@ SELECT
 ,[mcs_status]
 
 FROM[managementconsulting_subtask]
-WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_category]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>
+ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]
+<cfelse>
+ORDER BY[client_name]</cfif>
+
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"mcs_id":"'&mcs_id&'","client_id":"'&client_id&'","mcs_sequence":"'&mcs_sequence&'","mcs_category":"'&mcs_category&'","mcs_status":"'&mcs_status&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","mc_id":"'&mc_id&'","si_id":"'&si_id&'","CLIENT_NAME":"'&CLIENT_NAME&'","mc_categoryTEXT":"'&mc_categoryTEXT&'","mc_description":"'&mc_description&'","mc_status":"'&mc_status&'","mc_duedate":"'&mc_duedate&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -149,6 +151,8 @@ WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_category]LIKE <cfqu
 
 
 </cfcase>
+<!--- LOOKUP Group2 --->
+<cfcase value="group2"></cfcase>
 <!--- LOOKUP Group3 --->
 <cfcase value="group3">
 <cfquery datasource="AWS" name="fquery">
