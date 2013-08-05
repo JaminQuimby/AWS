@@ -1,5 +1,5 @@
 /*
-Javascript for Client Maintenance Module
+Javascript for Client Accounting and Consulting Tasks
 Developers:Jamin Quimby
 
 Grid1 = Entrance
@@ -12,7 +12,7 @@ _grid1();
 $('#entrance').show();
 
 _group1=function(){}
-_group2=function(){}
+_group2=function(){_grid2()}
 _group3=function(){_grid3()}
 
 });
@@ -29,13 +29,23 @@ _grid1=function(){_jGrid({
 	"functions":'$(".trackers #client_id").val(record.CLIENT_ID);'+'$(".trackers #mc_id").val(record.MC_ID);'+'$(".trackers #si_id").val(record.SI_ID);'+'_updateh3(record.CLIENT_NAME);'+'_toggle("group1,largeMenu");'+'$(".gf-checkbox").hide();$("div#group1").show();'+'$("div#content").removeClass();'+'$("div#content").addClass("contentbig");'+'_loadData({"id":"mc_id","group":"group1","page":"acctconsultingtasks"});'
 	})}
 
-_grid3=function(){_jGrid({
+_grid2=function(){_jGrid({
 	"grid":"grid2",
-	"url":"businessformation.cfc",
+	"url":"acctconsultingtasks.cfc",
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
+	"functions":'_loadData({"id":"comment_id","group":"group2","page":"acctconsultingtasks"});'
+	});}
+
+_grid3=function(){_jGrid({
+	"grid":"grid3",
+	"url":"acctconsultingtasks.cfc",
+	"title":"Comments",
+	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("form_id").val()+'","loadType":"group3"}',
 	"functions":'_loadData({"id":"comment_id","group":"group3","page":"acctconsultingtasks"});'
 	});}
 
@@ -77,9 +87,6 @@ var $g1_projectcompleted=$("#g1_projectcompleted");
 /*Convert to numbers*/
 if( $.type($g1_estimatedtime.val())==="number"){$g1_estimatedtime.val()}else{$g1_estimatedtime.val(0)}
 if( $.type($g1_fees.val())==="number"){$g1_fees.val()}else{$g1_fees.val(0)}
-if( $.type($g1_duedate.val())==="date"){$g1_duedate.val()}else{$g1_duedate.val(null)}
-if( $.type($g1_requestforservices.val())==="date"){$g1_requestforservices.val()}else{$g1_requestforservices.val(null)}
-if( $.type($g1_projectcompleted.val())==="date"){$g1_projectcompleted.val()}else{$g1_projectcompleted.val(null)}
 
 var json='{"DATA":[["'+
 $("#mc_id").val()+'","'+
@@ -96,9 +103,10 @@ $g1_projectcompleted.val()+'","'+
 $g1_requestforservices.val()+'","'+
 $("#g1_status").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
-$("#g1_spouse").val()+'","'+
 $("#g1_credithold").is(":checked")+'","'+
 '"]]}'
+
+
 _saveData({group:"group1",page:"acctconsultingtasks",payload:$.parseJSON(json)});
 jqMessage({message: "Saved!. ",type: "save",autoClose: false})
 break;
@@ -114,7 +122,7 @@ $("#user_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'
-_saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"});
+_saveData({group:"group3",payload:$.parseJSON(json),page:"acctconsultingtasks"});
 break;
 /*Save Group4*/
 case'group4':
