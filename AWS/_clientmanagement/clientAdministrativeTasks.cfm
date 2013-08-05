@@ -1,12 +1,12 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset session.module="_accountingservices">
+<cfset session.module="_clientmanagement">
 <cfset page.location="clientadministrativetasks">
 <cfset page.formid=4>
 <cfset page.title="Client Administrative Tasks">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="cas_id">
+<cfset page.trackers="cas_id,client_id">
 
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[form_id]='#page.formid#'</cfquery>
@@ -36,7 +36,7 @@
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,group2');">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <!--- Group 1 --->
@@ -47,14 +47,14 @@
 <div><label for="g1_category">Category</label><select id="g1_category" data-placeholder="Select a Category."><option value="0">&nbsp;</option><cfoutput query="global_admintaskprogress"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taskdescription">Task Description</label><textarea id="g1_taskdescription"></textarea></div>
 <div><label for="g1_requestedby">Requested By</label><select id="g1_requestedby" data-placeholder="Requested By."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To." multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"  multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" /></div>
-<div><label for="g1_daterequested">Date Requested</label><input type="text" id="g1_daterequested" /></div>
-<div><label for="g1_datestarted">Date Started</label><input type="text" id="g1_datestarted" /></div>
-<div><label for="g1_duedate">Due Date</label><input type="text" id="g1_duedate" /></div>
+<div><label for="g1_daterequested">Date Requested</label><input type="text" class="date" id="g1_daterequested" /></div>
+<div><label for="g1_datestarted">Date Started</label><input type="text" class="date"id="g1_datestarted" /></div>
+<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" /></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime" /></div>
-<div><label for="g1_completed">Completed</label><input type="text" id="g1_completed" /></div>
+<div><label for="g1_completed">Completed</label><input type="text" class="date" id="g1_completed" /></div>
 <div><label for="g1_instructions">Instructions</label><textarea id="g1_instructions"></textarea></div>
 </div>
 </div>

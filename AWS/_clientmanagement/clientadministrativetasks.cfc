@@ -33,13 +33,25 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 <cftry>
 
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Load Client--->
+<!--- Load GROUP1--->
 
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[fds_id],[client_id],[client_name],[fds_month],[fds_periodend],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
-WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+SELECT[cas_id],[client_id]
+,[cas_category]
+,[cas_taskdesc]
+,[cas_reqestby]
+,[cas_assignto]
+,[cas_status]
+,[cas_priority]
+,[cas_datereqested]
+,[cas_datestarted]
+,[cas_duedate]
+,[cas_estimatedtime]
+,[cas_completed]
+,[cas_instructions]
+FROM[clientadministrativetasks]
+WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
 </cfcase>
@@ -66,26 +78,27 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- LOOKUP Financial Statements --->
+<!--- LOOKUP GROUP1 --->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
 
 <!-----------------STOPPED WORK HERE ------------>
 SELECT [cas_id]
-      ,[client_id]
-      ,[cas_assignto]
-      ,[cas_category]
-      ,[cas_completed]
-      ,[cas_datereqested]
-      ,[cas_datestarted]
-      ,[cas_duedate]
-      ,[cas_estimatedtime]
-      ,[cas_instructions]
-      ,[cas_priority]
-      ,[cas_reqestby]
-      ,[cas_status]
-      ,[cas_taskdesc]
-  FROM [AWS].[dbo].[clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+,[client_id]
+,[client_name]
+,[cas_category]
+,[cas_taskdesc]
+,[cas_reqestby]
+,[cas_assignto]
+,[cas_status]
+,[cas_priority]
+,[cas_datereqested]
+,[cas_datestarted]
+,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
+,[cas_estimatedtime]
+,[cas_completed]
+,[cas_instructions]
+FROM[v_clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -93,7 +106,7 @@ SELECT [cas_id]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_PERIODEND":"'&FDS_PERIODEND&'"}'>
+<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CAS_DUEDATE":"'&CAS_DUEDATE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -120,55 +133,91 @@ SELECT [cas_id]
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
 
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[CLIENT_LISTING](
-[client_active],
-[client_credit_hold],
-[client_dms_refrence],
-[client_group],
-[client_name],
-[client_notes],
-[client_referred_by],
-[client_salutation],
-[client_since],
-[client_spouse],
-[client_trade_name],
-[client_type]
+INSERT INTO[clientadministrativetasks](
+[client_id]
+,[cas_category]
+,[cas_taskdesc]
+,[cas_reqestby]
+,[cas_assignto]
+,[cas_status]
+,[cas_priority]
+,[cas_datereqested]
+,[cas_datestarted]
+,[cas_duedate]
+,[cas_estimatedtime]
+,[cas_completed]
+,[cas_instructions]
 )
-VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>,<cfqueryparam value="#j.DATA[1][3]#"/>,<cfqueryparam value="#j.DATA[1][4]#"/>,<cfqueryparam value="#j.DATA[1][5]#"/>,<cfqueryparam value="#j.DATA[1][6]#"/>,<cfqueryparam value="#j.DATA[1][7]#"/>,<cfqueryparam value="#j.DATA[1][8]#"/>,<cfqueryparam value="#j.DATA[1][9]#"/>,<cfqueryparam value="#j.DATA[1][10]#"/>,<cfqueryparam value="#j.DATA[1][11]#"/>,<cfqueryparam value="#j.DATA[1][12]#"/>,<cfqueryparam value="#j.DATA[1][13]#"/>)
-SELECT SCOPE_IDENTITY()AS[clientId]
+VALUES(
+<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][8]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#"/>
+,<cfqueryparam value="#j.DATA[1][10]#"/>
+,<cfqueryparam value="#j.DATA[1][11]#"/>
+,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][13]#"/>
+,<cfqueryparam value="#j.DATA[1][14]#"/>
+)
+SELECT SCOPE_IDENTITY()AS[cas_id]
 </cfquery>
-<cfreturn '{"id":#fquery.clientId#,"group":"customfield","result":"ok"}'>
+<cfreturn '{"id":#fquery.cas_id#,"group":"group2","result":"ok"}'>
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[CLIENT_LISTING]
-SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[client_credit_hold]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[client_dms_refrence]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[client_group]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[client_name]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[client_notes]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[client_referred_by]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[client_salutation]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[client_since]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[client_spouse]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[client_trade_name]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[client_type]=<cfqueryparam value="#j.DATA[1][13]#"/>
-WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"customfields","result":"ok"}'>
+UPDATE[clientadministrativetasks]
+SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[cas_category]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[cas_taskdesc]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[cas_reqestby]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[cas_assignto]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[cas_status]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[cas_priority]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[cas_datereqested]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[cas_datestarted]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[cas_duedate]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[cas_estimatedtime]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[cas_completed]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[cas_instructions]=<cfqueryparam value="#j.DATA[1][14]#"/>
+WHERE[cas_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 </cfif>
 
+</cfcase>
+
+
+<!--- Group2 --->
+<cfcase value="group2">
+<cfif j.DATA[1][1] eq "0">
+<cfquery name="fquery" datasource="AWS">
+INSERT INTO[comments](
+[form_id]
+,[user_id]
+,[c_date]
+,[c_notes]
+)
+VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+)
+SELECT SCOPE_IDENTITY()AS[comment_id]
+</cfquery>
+<cfreturn '{"id":#fquery.comment_id#,"group":"group4","result":"ok"}'>
+</cfif>
 </cfcase>
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":""#cfcatch.message#","#arguments.cas_id#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cffunction>
