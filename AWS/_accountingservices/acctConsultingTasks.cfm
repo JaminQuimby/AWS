@@ -47,18 +47,18 @@
 <h3>General</h3>
 <div>
 <!---Developer Note:[Table Management Consulting Tasks]--->
-<div><label for="g1_client">Clients</label><select id="g1_client"  onBlur="valid('rationalNumbers',this,'You must select an option.');"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" readonly="readonly"></div>
+<div><label for="g1_client">Clients</label><select id="g1_client"  onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" readonly></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
-<div><label for="g1_consultingcategory">Consulting Category</label><select id="g1_consultingcategory"  onBlur="valid('rationalNumbers',this,'You must select an option.');"><option value="0">&nbsp;</option><cfoutput query="global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_taskdescription">Task Description</label><textarea  id="g1_taskdescription" cols="4" rows="4" onBlur="valid('empty',this,'Cannot be empty.');" ></textarea></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority"  onBlur="valid('empty',this,'Cannot be empty.');"></div>
-<div><label for="g1_assignedto">Assigned To</label><select  id="g1_assignedto"  onBlur="valid('rationalNumbers',this,'You must select an option.');"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_status">Status</label><select id="g1_status" onBlur="valid('rationalNumbers',this,'You must select an option.');"><option value="0" >&nbsp;</option><cfoutput query="q_global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_requestforservices">Request for Services</label><input type="text" id="g1_requestforservices" ></div>
-<div><label for="g1_workinitiated">Work Initiated</label><input type="text" id="g1_workinitiated" ></div>
-<div><label for="g1_duedate">Due Date</label><input type="text" id="g1_duedate" ></div>
-<div><label for="g1_projectcompleted">Project Completed</label><input type="text" id="g1_projectcompleted" ></div>
+<div><label for="g1_consultingcategory">Consulting Category</label><select id="g1_consultingcategory"  onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taskdescription">Task Description</label><textarea  id="g1_taskdescription" cols="4" rows="4"onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" ></textarea></div>
+<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"></div>
+<div><label for="g1_assignedto">Assigned To</label><select  id="g1_assignedto"  onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_status">Status</label><select id="g1_status" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0" >&nbsp;</option><cfoutput query="q_global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_requestforservices">Request for Services</label><input class="date" type="text" id="g1_requestforservices" ></div>
+<div><label for="g1_workinitiated">Work Initiated</label><input type="text" class="date" id="g1_workinitiated" ></div>
+<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" ></div>
+<div><label for="g1_projectcompleted">Project Completed</label><input type="text" class="date" id="g1_projectcompleted" ></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" ></div>
 <div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="q_global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

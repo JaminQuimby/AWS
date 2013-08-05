@@ -67,19 +67,33 @@ case'':_saveDataCB({'group':'group1'});
 jqMessage({message: "Saveing.",type: "save",autoClose: true});
 break;
 /*Save Group1*/
-case'group1':var json='{"DATA":[["'+
+
+case'group1':
+var $g1_estimatedtime=$("#g1_estimatedtime");
+var $g1_fees=$("#g1_fees");
+var $g1_duedate=$("#g1_duedate");
+var $g1_requestforservices=$("#g1_requestforservices");
+var $g1_projectcompleted=$("#g1_projectcompleted");
+/*Convert to numbers*/
+if( $.type($g1_estimatedtime.val())==="number"){$g1_estimatedtime.val()}else{$g1_estimatedtime.val(0)}
+if( $.type($g1_fees.val())==="number"){$g1_fees.val()}else{$g1_fees.val(0)}
+if( $.type($g1_duedate.val())==="date"){$g1_duedate.val()}else{$g1_duedate.val(null)}
+if( $.type($g1_requestforservices.val())==="date"){$g1_requestforservices.val()}else{$g1_requestforservices.val(null)}
+if( $.type($g1_projectcompleted.val())==="date"){$g1_projectcompleted.val()}else{$g1_projectcompleted.val(null)}
+
+var json='{"DATA":[["'+
 $("#mc_id").val()+'","'+
 $("#g1_client").val()+'","'+
 $("#g1_assignedto").val()+'","'+
 $("#g1_consultingcategory").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
-$("#g1_duedate").val()+'","'+
-$("#g1_estimatedtime").val()+'","'+
+$g1_duedate.val()+'","'+
+$g1_estimatedtime.val()+'","'+
 $("#g1_fees").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_priority").val()+'","'+
-$("#g1_projectcompleted").val()+'","'+
-$("#g1_requestforservices").val()+'","'+
+$g1_projectcompleted.val()+'","'+
+$g1_requestforservices.val()+'","'+
 $("#g1_status").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
 $("#g1_spouse").val()+'","'+
