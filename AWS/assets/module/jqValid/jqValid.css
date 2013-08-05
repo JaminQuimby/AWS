@@ -1,0 +1,23 @@
+/* CSS Document */
+
+.jqHelp{
+    display: inline-block;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.jqHelp_on{
+    border-left: 5px solid #32CD32;!important
+    width: 395px;
+
+
+	
+}
+
+
+.jqHelp_off{
+    border-left: 5px solid #EA1717; !important
+    width: 395px;
+	border-right:5px solid #006; !important
+}
