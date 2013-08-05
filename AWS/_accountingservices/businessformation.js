@@ -33,9 +33,15 @@ $('#entrance').show()
 });
 
 _group1=function(){}
+<<<<<<< HEAD
 _group2=function(){_grid2();}
 _group3=function(){}
 	
+=======
+_group2=function(){_grid2()}
+_group3=function(){}
+
+>>>>>>> 595621e4f7a1df5e5a1d94801cf3c290ee6c1188
 //Load Data call Back
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/

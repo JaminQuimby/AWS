@@ -10,8 +10,13 @@
 .jqHelp_on{
     border-left: 5px solid #32CD32;!important
     width: 395px;
+<<<<<<< HEAD
 
 
+=======
+	/*for chosen plugin*/
+	 border: 1px solid #343434 !important;
+>>>>>>> 595621e4f7a1df5e5a1d94801cf3c290ee6c1188
 	
 }
 
@@ -20,4 +25,9 @@
     border-left: 5px solid #EA1717; !important
     width: 395px;
 	border-right:5px solid #006; !important
+<<<<<<< HEAD
+=======
+	/*for chosen plugin*/
+	 border: 1px solid #343434 !important;
+>>>>>>> 595621e4f7a1df5e5a1d94801cf3c290ee6c1188
 }

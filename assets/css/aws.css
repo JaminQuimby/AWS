@@ -1,0 +1,23 @@
+/* CSS Document */
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {list-style-type: none;  width: 200px; float:left; margin:2px;}
+ul li{text-align: center; padding:14px; -moz-border-radius: 15px; margin-bottom:1px; border-radius: 10px;}
+ul li:first-child{font-weight:bold; }
+
+/*Payroll & Taxes*/
+ul[class*="payrollTaxes"] li:not(:first-child){background-color: #990000; border: medium solid; color:#fff;  border: 2px solid #600;}
+
+/*Accounting Services*/
+ul[class*="accountingServices"] li:not(:first-child){background-color: #039; border: medium solid; color:#fff; border: 2px solid #003;}
+
+/*Taxation*/
+ul[class*="taxation"] li:not(:first-child){background-color: #FC0; border: medium solid; color:#fff; border: 2px solid #960;}
+
+/*Client Management*/
+ul[class*="clientManagement"] li:not(:first-child){background-color:#060; border: medium solid; color:#fff; border: 2px solid #030;}
+
+/*Practice Management*/
+ul[class*="practiceManagement"] li:not(:first-child){background-color:#999; border: medium solid; color:#fff; border: 2px solid #666;}

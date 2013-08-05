@@ -309,7 +309,10 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#"/>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 595621e4f7a1df5e5a1d94801cf3c290ee6c1188
 )
 SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfquery>
