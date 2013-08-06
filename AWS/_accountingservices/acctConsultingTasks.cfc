@@ -17,31 +17,48 @@
 
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-
-SELECT [mc_id]
-      ,[client_id]
-      ,[mc_assignedto]
-      ,[mc_category]
-      ,[mc_description]
-      ,[mc_duedate]
-      ,[mc_estimatedtime]
-      ,[mc_fees]
-      ,[mc_paid]
-      ,[mc_priority]
-      ,[mc_projectcompleted]
-      ,[mc_requestforservice]
-      ,[mc_status]
-      ,[mc_source]
-      ,[mc_workinitiated]
-  FROM[managementconsulting]
+SELECT[mc_id]
+,[client_id]
+,[mc_credithold]
+,[mc_category]
+,[mc_description]
+,[mc_priority]
+,[mc_assignedto]
+,[mc_status]
+,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
+,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
+,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
+,[mc_estimatedtime]
+,[mc_fees]
+,[mc_paid]
+FROM[managementconsulting]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
+
 </cfcase>
 <!--- Load Group2 --->
-<cfcase value="group2"></cfcase>
+<cfcase value="group2"><cfquery datasource="AWS" name="fQuery">
+SELECT[mcs_id]
+,[client_id]
+,[mc_id]
+,[mcs_actualtime]
+,[mcs_assignedto]
+,[mcs_category]
+,[mcs_completed]
+,[mcs_dependencies]
+,[mcs_duedate]
+,[mcs_estimatedtime]
+,[mcs_group]
+,[mcs_notes]
+,[mcs_sequence]
+,[mcs_status]
+FROM[managementconsulting_subtask]
+WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
+</cfcase>
 <!--- Load Group3 --->
-<cfcase value="group3"></cfcase>
+<cfcase value="group3"><cfquery datasource="AWS" name="fQuery"></cfquery></cfcase>
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
@@ -67,16 +84,16 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP Group1 --->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
-SELECT[mc_id]
-,[mc_assignedto]
-,[client_id]
-,[client_name]
-,[mc_categoryTEXT]
-,[mc_description]
-,[mc_status]
-,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+SELECT[MC_ID]
+,[MC_ASSIGNEDTO]
+,[CLIENT_ID]
+,[CLIENT_NAME]
+,[MC_CATEGORYTEXT]
+,[MC_DESCRIPTION]
+,[MC_STATUS]
+,CONVERT(VARCHAR(10),[MC_DUEDATE], 101)AS[MC_DUEDATE]
 FROM[v_managementconsulting]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[CLIENT_NAME]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>
 ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]
@@ -89,14 +106,49 @@ ORDER BY[client_name]</cfif>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","mc_id":"'&mc_id&'","mc_assignedto":"'&mc_assignedto&'","CLIENT_NAME":"'&CLIENT_NAME&'","mc_categoryTEXT":"'&mc_categoryTEXT&'","mc_description":"'&mc_description&'","mc_status":"'&mc_status&'","mc_duedate":"'&mc_duedate&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","MC_ID":"'&MC_ID&'","MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUS":"'&MC_STATUS&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
 <!--- LOOKUP Group2 --->
-<cfcase value="group2"></cfcase>
+<cfcase value="group2">
+
+
+<cfquery datasource="AWS" name="fquery">
+SELECT
+[mcs_id]
+,[client_id]
+,[mc_id]
+,[mcs_actualtime]
+,[mcs_assignedto]
+,[mcs_category]
+,[mcs_completed]
+,[mcs_dependencies]
+,[mcs_duedate]
+,[mcs_estimatedtime]
+,[mcs_group]
+,[mcs_notes]
+,[mcs_sequence]
+,[mcs_status]
+
+FROM[managementconsulting_subtask]
+WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_category]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"mcs_id":"'&mcs_id&'","client_id":"'&client_id&'","mcs_sequence":"'&mcs_sequence&'","mcs_category":"'&mcs_category&'","mcs_status":"'&mcs_status&'"}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+
+
+</cfcase>
 <!--- LOOKUP Group3 --->
 <cfcase value="group3">
 <cfquery datasource="AWS" name="fquery">
@@ -139,7 +191,7 @@ WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[c_notes]LIKE <cfqueryp
 </cfcase>
 
 
-<!--- Group1 --->
+<!---Save Group1 --->
 <cfcase value="group1">
 
 <cfif j.DATA[1][1] eq "0">
@@ -205,7 +257,20 @@ WHERE[mc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 
 <!--- Group2 --->
 <cfcase value="group2">
-<cfreturn '{"id":#fquery.comment_id#,"group":"group3","result":"ok"}'>
+<!---
+$("#g2_sequence").val()+'","'+
+$("#g2_subtask").val()+'","'+
+$("#g2_status").val()+'","'+
+$("#g2_assignedto").val()+'","'+
+$("#g2_duedate").val()+'","'+
+$("#g2_completed").val()+'","'+
+$("#g2_dependancy").val()+'","'+
+$("#g2_estimatedtime").val()+'","'+
+$("#g2_actualtime").val()+'","'+
+$("#g2_note").val()+'","'+
+--->
+
+<cfreturn '{"id":0,"group":"group3","result":"ok"}'>
 </cfcase>
 <!--- Group3 --->
 <cfcase value="group3">
