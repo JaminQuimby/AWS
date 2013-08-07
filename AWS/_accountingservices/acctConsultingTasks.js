@@ -59,8 +59,9 @@ _grid3=function(){_jGrid({
 //Load Data call Back
 _loadDataCB=function(query){if(query!=null){switch(query.COLUMNS[0]){
 /*START LOAD DATA */
-/*Group1*/case "MC_ID":var list='mc_id,g1_client,g1_credithold,g1_consultingcategory,g1_taskdescription,g1_priority,g1_assignedto,g1_status,g1_requestforservices,g1_workinitiated,g1_duedate,g1_projectcompleted,g1_estimatedtime,g1_fees,g1_paid';_loadit({"query":query,"list":list});break;
-
+/*Group1*/case "MC_ID":var list='mc_id,g1_client,g1_spouse,g1_credithold,g1_consultingcategory,g1_taskdescription,g1_priority,g1_assignedto,g1_status,g1_requestforservices,g1_workinitiated,g1_duedate,g1_projectcompleted,g1_estimatedtime,g1_fees,g1_paid';_loadit({"query":query,"list":list});break;
+/*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
+/*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
 
 /*END LOAD DATA */
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}
@@ -124,16 +125,17 @@ break;
 /*Save Group2*/
 case'group2':
 var json='{"DATA":[["'+
-$("#g2_sequence").val()+'","'+
-$("#g2_subtask").val()+'","'+
-$("#g2_status").val()+'","'+
+$("#mcs_id").val()+'","'+
+$("#mc_id").val()+'","'+
+$("#g2_actualtime").val()+'","'+
 $("#g2_assignedto").val()+'","'+
-$("#g2_duedate").val()+'","'+
 $("#g2_completed").val()+'","'+
 $("#g2_dependancy").val()+'","'+
+$("#g2_duedate").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
-$("#g2_actualtime").val()+'","'+
 $("#g2_note").val()+'","'+
+$("#g2_status").val()+'","'+
+$("#g2_subtask").val()+'","'+
 '"]]}'
 
 if($("subtask_isLoaded").val()!=0){
