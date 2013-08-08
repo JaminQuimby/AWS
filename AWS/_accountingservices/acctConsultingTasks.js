@@ -39,9 +39,10 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"acctconsultingtasks.cfc",
 	"title":"Subtasks",
+	"fields":{MCS_ID:{key:true,list:false,edit:false},MCS_SEQUENCE:{title:'Sequence'},MCS_NOTES:{title:'Notes'},MCS_STATUS:{title:'Status'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
-	"functions":'_loadData({"id":"comment_id","group":"group2","page":"acctconsultingtasks"});'
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#mc_id").val()+'","loadType":"group2"}',
+	"functions":'$(".trackers #mcs_id").val(record.MCS_ID);_loadData({"id":"mcs_id","group":"group2","page":"acctconsultingtasks"});$("#group2").accordion({active:1});;'
 	});}
 
 _grid3=function(){_jGrid({
@@ -50,16 +51,17 @@ _grid3=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
-	"functions":'_loadData({"id":"comment_id","group":"group3","page":"acctconsultingtasks"});'
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"2","ClientID":"'+$("#g1_client").val()+'","loadType":"group3"}',
+	"functions":''
 	});}
 
-	
-	
+
+
 //Load Data call Back
 _loadDataCB=function(query){if(query!=null){switch(query.COLUMNS[0]){
 /*START LOAD DATA */
 /*Group1*/case "MC_ID":var list='mc_id,g1_client,g1_spouse,g1_credithold,g1_consultingcategory,g1_taskdescription,g1_priority,g1_assignedto,g1_status,g1_requestforservices,g1_workinitiated,g1_duedate,g1_projectcompleted,g1_estimatedtime,g1_fees,g1_paid';_loadit({"query":query,"list":list});break;
+/*Group2*/case "MCS_ID":var list='mcs_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
 
@@ -77,7 +79,7 @@ var options={
 	}
 
 $.extend(true, options, params);//turn options into array
-
+var $g1_client=$("#g1_client");
 switch(options["group"]){
 //Starting with Save Message
 case'':
@@ -88,7 +90,6 @@ jqMessage({message: "Saveing.",type: "save",autoClose: true});
 
 break;
 /*Save Group1*/
-
 case'group1':
 var $g1_estimatedtime=$("#g1_estimatedtime");
 var $g1_fees=$("#g1_fees");
@@ -100,7 +101,7 @@ if( $.type($g1_estimatedtime.val())==="number"){$g1_estimatedtime.val()}else{$g1
 if( $.type($g1_fees.val())==="number"){$g1_fees.val()}else{$g1_fees.val(0)}
 var json='{"DATA":[["'+
 $("#mc_id").val()+'","'+
-$("#g1_client").val()+'","'+
+$g1_client.val()+'","'+
 $("#g1_assignedto").val()+'","'+
 $("#g1_consultingcategory").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
@@ -113,10 +114,9 @@ $g1_projectcompleted.val()+'","'+
 $g1_requestforservices.val()+'","'+
 $("#g1_status").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
-$("#g1_credithold").is(":checked")+'","'+
+$("#g1_credithold").is(":checked")+
 '"]]}'
-if($("#g1_client").val()!=0){
-
+if($g1_client.val()!=0 ){
 _saveData({group:"group1",payload:$.parseJSON(json),page:"acctconsultingtasks"});
 }else{
 _saveDataCB({'group':'group2'});
@@ -134,11 +134,13 @@ $("#g2_dependancy").val()+'","'+
 $("#g2_duedate").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
 $("#g2_note").val()+'","'+
+$("#g2_sequence").val()+'","'+
 $("#g2_status").val()+'","'+
-$("#g2_subtask").val()+'","'+
+$("#g2_subtask").val()+
 '"]]}'
 
-if($("subtask_isLoaded").val()!=0){
+
+if($("subtask_isLoaded").val()!=0 && $("#g2_subtask").val() !=0){
 _saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"});
 }else{_saveDataCB({'group':'group3'});}
 
@@ -149,10 +151,11 @@ case'group3':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
+$g1_client.val()+'","'+
 $("#g3_commentdate").val()+'","'+
-$("#g3_commenttext").val()+'","'+
+$("#g3_commenttext").val()+
 '"]]}'
-if($("comment_isLoaded").val()!=0){
+if($("comment_isLoaded").val()!=0 && $("#g3_commenttext").val()!=""){
 _saveData({group:"group3",payload:$.parseJSON(json),page:"acctconsultingtasks"});
 }else{_saveDataCB({'group':'group4'});}
 break;

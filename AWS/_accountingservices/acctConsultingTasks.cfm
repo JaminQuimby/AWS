@@ -51,7 +51,7 @@
 <div>
 <!---Developer Note:[Table Management Consulting Tasks]--->
 <div><label for="g1_client">Clients</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_client','group':'assetSpouse','page':'acctconsultingtasks'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" readonly="readonly" class="readonly"></div>
+<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" readonly class="readonly"></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_consultingcategory">Consulting Category</label><select id="g1_consultingcategory" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_consultingcategory','group':'assetCategory','page':'acctconsultingtasks'});"><option value="0">&nbsp;</option><cfoutput query="q_global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taskdescription">Task Description</label><textarea  id="g1_taskdescription" cols="4" rows="4" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" ></textarea></div>
@@ -79,14 +79,6 @@
 </div>
 <h4>Add Subtask</h4>
 <div>
-<div><br>management consulting id = [SELECT [Management Consulting Tasks].[Management Consulting ID] FROM [Management Consulting Tasks]; ]</div>
-<div class="tblGrid" id="grid2"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#subtask_isLoaded").val(1);'>Add</a>
-</div>
-</div>
-<h4>Add Subtask</h4>
-<div>
 <div><label for="g2_sequence">Sequence</label><input type="text" id="g2_sequence" ></div>
 <div><label for="g2_subtask">Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="q_global_subtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_status">Status</label><select  id="g2_status"><option value="0">&nbsp;</option><cfoutput query="q_global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -96,7 +88,7 @@
 <div><label for="g2_dependancy">Subtask</label><select  id="g2_dependancy" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="q_global_subtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_estimatedtime">Estimated Time</label><input type="text" id="g2_estimatedtime" ></div>
 <div><label for="g2_actualtime">Actual Time</label><input type="text" id="g2_actualtime"></div>
-<div><label for="g2_note">Notes</label><textarea  id="g3_note" cols="4" rows="4"></textarea></div>
+<div><label for="g2_note">Notes</label><textarea  id="g2_note" cols="4" rows="4"></textarea></div>
 </div>
 </div>
 <!--- Comments --->

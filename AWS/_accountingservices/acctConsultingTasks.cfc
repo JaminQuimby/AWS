@@ -4,7 +4,9 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-!--- LOAD DATA --->
+
+
+<!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
@@ -39,21 +41,20 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 --->
 <cfcase value="group2"><cfquery datasource="AWS" name="fQuery">
 SELECT[mcs_id]
-,[mc_id]
 ,[mcs_actualtime]
 ,[mcs_assignedto]
-,[mcs_completed]
+,CONVERT(VARCHAR(10),[mcs_completed], 101)AS[mcs_completed]
 ,[mcs_dependencies]
-,[mcs_duedate]
+,CONVERT(VARCHAR(10),[mcs_duedate], 101)AS[mcs_duedate]
 ,[mcs_estimatedtime]
 ,[mcs_notes]
 ,[mcs_sequence]
 ,[mcs_status]
+,[mcs_subtask] 
 FROM[managementconsulting_subtask]
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 </cfcase>
 <!--- Load Group3 --->
-
 <cfcase value="group3"><cfquery datasource="AWS" name="fQuery"></cfquery></cfcase>
 
 <cfcase value="assetSpouse">
@@ -71,7 +72,6 @@ WHERE[selectName]='global_consultingcategory'
 AND[optionValue_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
-
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
@@ -99,12 +99,12 @@ AND[optionValue_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[MC_ID]
 ,[MC_ASSIGNEDTO]
-    ,[client_id]
-    ,[client_name]
-   	,[mc_categoryTEXT]
-    ,[mc_description]
-    ,[mc_status]
-    ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+,[CLIENT_ID]
+,[CLIENT_NAME]
+,[MC_CATEGORYTEXT]
+,[MC_DESCRIPTION]
+,[MC_STATUS]
+,CONVERT(VARCHAR(10),[MC_DUEDATE], 101)AS[MC_DUEDATE]
 FROM[v_managementconsulting]
 WHERE[CLIENT_NAME]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
@@ -127,8 +127,6 @@ ORDER BY[client_name]</cfif>
 </cfcase>
 <!--- LOOKUP Group2 --->
 <cfcase value="group2">
-
-
 <cfquery datasource="AWS" name="fquery">
 SELECT
 [mc_id]
@@ -144,31 +142,25 @@ SELECT
 ,[mcs_status]
 
 FROM[managementconsulting_subtask]
-
-WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-
+WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"mcs_id":"'&mcs_id&'","mcs_sequence":"'&mcs_sequence&'","mcs_status":"'&mcs_status&'"}'>
+<cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'","MCS_SEQUENCE":"'&MCS_SEQUENCE&'","MCS_NOTES":"'&MCS_NOTES&'","MCS_STATUS":"'&MCS_STATUS&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-
-
 </cfcase>
-<!--- LOOKUP Group2 --->
-<cfcase value="group2"></cfcase>
 <!--- LOOKUP Group3 --->
 <cfcase value="group3">
 <cfquery datasource="AWS" name="fquery">
 SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
 FROM[v_comments]
-WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -271,8 +263,7 @@ WHERE[mc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 
 <!--- Group2 --->
 <cfcase value="group2">
- 
-  <cfif j.DATA[1][1] eq "0">
+<cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[managementconsulting_subtask](
 [mc_id]
@@ -332,6 +323,7 @@ WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 INSERT INTO[comments](
 [form_id]
 ,[user_id]
+,[client_id]
 ,[c_date]
 ,[c_notes]
 )
@@ -339,6 +331,7 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfquery>
