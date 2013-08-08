@@ -20,8 +20,8 @@ _grid2=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
-	"functions":'_loadData({"id":"comment_id","group":"group2","page":"businessformation"});'
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"2","ClientID":"'+$("#g1_clientname").val()+'","loadType":"group2"}',
+	"functions":''
 	});}
 
 $(document).ready(function(){
@@ -33,15 +33,10 @@ $('#entrance').show()
 });
 
 _group1=function(){}
-<<<<<<< HEAD
-_group2=function(){_grid2();}
-_group3=function(){}
-	
-=======
 _group2=function(){_grid2()}
 _group3=function(){}
 
->>>>>>> 595621e4f7a1df5e5a1d94801cf3c290ee6c1188
+
 //Load Data call Back
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
@@ -115,6 +110,7 @@ case'group2':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
+$("#client_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'

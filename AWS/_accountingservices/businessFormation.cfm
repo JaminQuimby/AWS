@@ -42,7 +42,7 @@
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_owners">Owners</label><input type="text" id="g1_owners" /></div>
 <div><label for="g1_activity">Activity</label><input type="text" id="g1_activity" /></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" /></div>
+<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
 
 <div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
 <div><label for="g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_articlessubmitted" class="date"/></div>

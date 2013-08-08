@@ -5,6 +5,18 @@ Developers:Jamin Quimby
 */
 
 
+$(document).ready(function(){
+// Load Initial Client Grid	
+_grid1();
+// Show Entrace Window
+$('#entrance').show();
+
+_group1=function(){}
+_group2=function(){_grid2()}
+_group3=function(){}
+
+});
+
 
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
@@ -17,44 +29,7 @@ _grid1=function(){_jGrid({
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val=(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
 	});}
 	
-$(document).ready(function(){
-$.ajaxSetup({cache:false});//Stop ajax cacheing
-// Load Initial Client Grid	
-_grid1();
-$('.gf-checkbox').hide()
-//Load Select Boxes
 
-//Bind Label Elements
-
-
-//Load Custom Labels
-
-
-//Load Accordians
-$('.gf-checkbox').accordion({heightStyle:"content", active:false});
-$('#entrance').accordion({heightStyle:"content", active:false});
-
-//Set Date Picker Defaults	
-$.datepicker.setDefaults({
-showOn:"both",
-buttonImageOnly:true,
-buttonImage:"../assets/img/datepicker.gif",
-constrainInput:true
-});
-//Load Date Pickers
-//$("#cl_since").datepicker();
-
-//Load Select Boxes
-$('select').chosen();
-
-});
-
-
-
-_group1=function(){}
-_group2=function(){}
-_group3=function(){}
-	
 //Load Data call Back
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
@@ -79,12 +54,7 @@ var options={
 try{	
 $.extend(true, options, params);//turn options into array
 
-/*TO DO ?*/
-var e58=document.getElementById("m_fs_subtaskgroup").value
-,e59=document.getElementById("m_fs_historicalfs").value;
-/*
-Build arguments for Related Clients UNDER CONSTRUCTION
-*/
+
 switch(options["group"]){
 /*Save Client*/
 case'client':var json='{"DATA":[["'+

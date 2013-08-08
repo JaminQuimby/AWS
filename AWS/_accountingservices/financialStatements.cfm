@@ -3,8 +3,11 @@
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_accountingservices">
 <cfset page.location="financialstatements">
+<cfset page.formid=5>
 <cfset page.title="Financial Statements">
 <cfset page.menuLeft="General,SubTasks,Comment">
+<cfset page.trackers="cf_isLoaded,client_id,fds_id">
+
 
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
@@ -22,11 +25,6 @@
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
 
 
-
-<!---TRACKERS--->
-<input type="hidden" id="cf_isLoaded" value="0"/><!--- Custom Fields --->
-<input type="hidden" id="client_id" value="0"/><!--- Client ID --->
-<input type="hidden" id="fds_id" value="0"/><!--- Financial Statements --->
 <!--- ENTRANCE --->
 <div id="entrance">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>

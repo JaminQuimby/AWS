@@ -129,7 +129,7 @@ WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]
 <cfquery datasource="AWS" name="fquery">
 SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
 FROM[v_comments]
-WHERE[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -302,6 +302,7 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 INSERT INTO[comments](
 [form_id]
 ,[user_id]
+,[client_id]
 ,[c_date]
 ,[c_notes]
 )
@@ -309,10 +310,7 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#"/>
-<<<<<<< HEAD
-
-=======
->>>>>>> 595621e4f7a1df5e5a1d94801cf3c290ee6c1188
+,<cfqueryparam value="#j.DATA[1][6]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfquery>
