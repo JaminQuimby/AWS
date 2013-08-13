@@ -64,7 +64,7 @@
 <div><label for="g1_projectcompleted">Project Completed</label><input type="text" class="date" id="g1_projectcompleted" ></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" ></div>
-<div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="q_global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_paid">Payment Status</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="q_global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>
 <!--- Subtask --->
