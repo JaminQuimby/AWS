@@ -34,6 +34,63 @@
 </div></div></div>
 <!--- FIELD DATA --->
 
+<div id="group1"  class="gf-checkbox">
+
+<h3>Tax Returns</h3>
+<div>
+<div><label for="g1_client">Clients</label><input type="text" id="g1_client" readonly class="readonly"></div>
+<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" readonly class="readonly"></div>
+<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
+
+<div><label for="g1_taxyear">Tax Year</label><input type="text" id="g1_taxyear" readonly class="readonly"></div>
+
+<div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" readonly class="readonly"></div>
+<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" id="g1_Extension Requested" readonly class="readonly"></div>
+<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" readonly class="readonly"></div>
+<div><label for="g1_taxform">Tax Form</label><select  id="g1_taxform"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
+<div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" readonly class="readonly"></div>
+<div><label for="g1_extensiondone">Extension Done</label><input type="date" id="g1_extensiondone" readonly class="readonly"></div>
+<div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime" readonly class="readonly"></div>
+<div><input id="g1_notrequired" type="checkbox"><label for="g1_notrequired">Not Required</label></div>
+<div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" readonly class="readonly"></div>
+<div><label for="g1_pptresttime">PPTR Est Time</label><input type="text" id="g1_pptresttime" readonly class="readonly"></div>
+
+</div>
+</div>
+
+<!--- Subtask --->
+<div id="group2" class="gf-checkbox">
+<h3 onClick="_grid2">General</h3>
+<div>
+<h4>PREPARATION</h4>
+<div><label for="g2_informationrecieved">Information Recieved</label><input type="date" id="g2_informationreceived" readonly class="readonly"></div>
+<div><label for="g2_filingdeadline">Filing Deadline</label><input type="date" id="g2_filingdeadline" readonly class="readonly"></div>
+<div><label for="g2_duedate"></label>Due Date<input type="date" id="g2_duedate" readonly class="readonly"></div>
+<div><label for="g2_appointment"><b><ul>Appointment</ul></b></label><input type="text" id="g2_appointment" readonly class="readonly"></div>
+<div><input id="g2_missinginformation" type="checkbox"><label for="g2_missinginformation">Missing Information</label></div>
+<div><label for="g2_missinginforeceived"></label>Missing Info Recieved<input type="text" id="g2_missinginforeceived" readonly class="readonly"></div>
+<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_preparedby">Prepared By</label><select id="g2_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_readyforreview">Ready for Review</label><input type="date" id="g2_readyforreview" readonly class="readonly"></div>
+<div><label for="g2_reviewassignedto">Review Assigned To</label><select id="g2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_reviewed">Reviewed</label><input type="date" id="g2_reviewed" readonly class="readonly"></div>
+<div><label for="g2_reviewedby">Reviewed By</label><select id="g2_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_reviewedwithnotes">Reviewed With Notes</label><input type="date" id="g2_reviewedwithnotes" readonly class="readonly"></div>
+<div><label for="g2_completed">Completed</label><input type="date" id="g2_completed" readonly class="readonly"></div>
+
+</div>
+<div>
+<h4>ASSEMBLY & DELIVERY</h4>
+<div><label for="g2_assemblereturn">Assembly Return</label><input type="text" id="g2_assemblereturn" readonly class="readonly"></div>
+<div><label for="g2_contacted">Contacted</label><input type="date" id="g2_contacted" readonly class="readonly"></div>
+<div><input id="g2_messageleft" type="checkbox"><label for="g2_messageleft">Message Left</label></div>
+<div><input id="g2_emailed" type="checkbox"><label for="g2_emailed">Emailed</label></div>
+<div><input id="g2_missingSignatures" type="checkbox"><label for="g2_missingsignatures">Missing Signatures</label></div>
+<div><label for="g2_delivered">Delivered</label><input type="date" id="g2_delivered" readonly class="readonly"></div>
+
+
+</div>
+</div>
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
