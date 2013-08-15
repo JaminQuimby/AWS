@@ -50,30 +50,37 @@ var options={
 	"group":"",//Switch Group
 	"result":""//Call Back Response
 	}
-try{	
-$.extend(true, options, params);//turn options into array
 
-/*
-Build arguments for Related Clients UNDER CONSTRUCTION
-*/
+$.extend(true, options, params);//turn options into array
+try{
 switch(options["group"]){
-/*Save Client*/
-case'client':var json='{"DATA":[["'+
-$("#cl_id").val()+'","'+
-$("#cl_active").is(':checked')+'","'+
-$("#cl_credit_hold").is(':checked')+'","'+
-$("#cl_dms_reference").val()+'","'+
-$("#cl_group").val()+'","'+
-$("#cl_name").val()+'","'+
-$("#cl_notes").val()+'","'+
-$("#cl_referred_by").val()+'","'+
-$("#cl_salutation").val()+'","'+
-$("#cl_since").val()+'","'+
-$("#cl_spouse").val()+'","'+
-$("#cl_trade_name").val()+'","'+
-$("#cl_type").val()+
+//Starting with Save Message
+case'':
+if($("#g1_client").val()!=0){
+_saveDataCB({'group':'group1'});
+jqMessage({message: "Saveing.",type: "save",autoClose: true});
+}else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+
+break;
+/*Save Group1*/
+
+case'group1':var json='{"DATA":[["'+
+$("#g1_client").val()+'","'+
+$("#g1_spouse").val()+'","'+
+$("#g1_credithold").val()+'","'+
+$("#g1_taxyear").val()+'","'+
+$("#g1_currentfees").val()+'","'+
+$("#g1_extensionrequested").val()+'","'+
+$("#g1_priority").val()+'","'+
+$("#g1_taxform").val()+'","'+
+$("#g1_priorfees").val()+'","'+
+$("#g1_extensiondone").val()+'","'+
+$("#g1_esttime").val()+'","'+
+$("#g1_notrequired").val()+'","'+
+$("#g1_reason").val()+'","'+
+$("#g1_pptresttime").val()+
 '"]]}'
-if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
+if($("#g1_client").val()!=""){
 _saveData({"group":options["group"],"payload":$.parseJSON(json)});
 
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
