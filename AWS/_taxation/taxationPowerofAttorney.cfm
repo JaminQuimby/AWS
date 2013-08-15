@@ -33,7 +33,39 @@
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
+<div id="group1" class="gf-checkbox">
 
+<h3>Add A New Power Of Attorney</h3>
+<div>
+<div><label for="g1_client">Clients</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
+<div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
+<div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
+<div><label for="g1_preparers">Preparers</label><select  id="g1_preparers"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
+<div><label for="g1_datesignedbyclient">Date Signed By Client</label><input type="text" class="date" id="g1_datesignedbyclient"></div>
+<div><label for="g1_datesenttoirs">Date Sent to IRS</label><input type="text" class="date" id="g1_datesenttoirs" ></div>
+<div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_dateofrevocation">Date of Revocation</label><input type="text" class="date" id="g1_dateofrevocation" ></div>
+</div>
+</div>
+
+<!--- Comments --->
+<div id="group2" class="gf-checkbox">
+<h3>Comments</h3>
+<div>
+<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
+<div class="tblGrid" id="grid2"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
+</div>
+</div>
+<h4>Add Comment</h4>
+<div>
+<div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
+<div><label for="g2_commentdate">Employee</label><input type="text" id="g2_commentdate"/></div>
+<div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
+</div>
+</div>
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
