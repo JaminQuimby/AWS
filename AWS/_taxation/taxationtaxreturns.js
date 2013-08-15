@@ -1,59 +1,33 @@
 /*
-Javascript for FinancialStatements
+Javascript for Client Accounting and Consulting Tasks
 Developers:Jamin Quimby
-7/26/2013 - Started
+
+Grid1 = Entrance
 */
 
+$(document).ready(function(){
+// Load Initial Client Grid	
+_grid1();
+// Show Entrace Window
+$('#entrance').show();
 
+_group1=function(){}
+_group2=function(){_grid2()}
+_group3=function(){_grid3()}
+
+});
 
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
-	"url":"financialstatements.cfc",
-	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year'},FDS_PERIODEND:{title:'Period End'}},
+	"url":"taxationtaxreturns.cfc",
+	"title":"Tax Returns",
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#fss_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"financialdatastatus"}',
-	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val=(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client"});'
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#tr_id").val=(record.TR_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"tr_id","group":"client"});'
 	});}
-	
-$(document).ready(function(){
-$.ajaxSetup({cache:false});//Stop ajax cacheing
-// Load Initial Client Grid	
-_grid1();
-$('.gf-checkbox').hide()
-//Load Select Boxes
 
-//Bind Label Elements
-
-
-//Load Custom Labels
-
-
-//Load Accordians
-$('.gf-checkbox').accordion({heightStyle:"content", active:false});
-$('#entrance').accordion({heightStyle:"content", active:false});
-
-//Set Date Picker Defaults	
-$.datepicker.setDefaults({
-showOn:"both",
-buttonImageOnly:true,
-buttonImage:"../assets/img/datepicker.gif",
-constrainInput:true
-});
-//Load Date Pickers
-//$("#cl_since").datepicker();
-
-//Load Select Boxes
-$('select').chosen();
-
-});
-
-
-
-_group1=function(){}
-_group2=function(){}
-_group3=function(){}
 	
 //Load Data call Back
 _loadDataCB=function(query){

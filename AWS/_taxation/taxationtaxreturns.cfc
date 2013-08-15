@@ -5,27 +5,51 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
-<!--- LOAD SELECT BOXES --->
-<cffunction name="f_loadSelect" access="remote" output="false">
-<cfargument name="selectName" type="string" required="yes">
-<cfquery name="fquery" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">
-SELECT[optionvalue_id],[optionname]
-FROM[v_selectOptions]
-WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="data">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
-<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cffunction>
+<!--- 
 
+[taxreturns_id]
+      ,[client_id]
+      ,[tr_taxyear]
+      ,[tr_taxform]
+      ,[tr_currentfees]
+      ,[tr_priorfees]
+      ,[tr_notrequired]
+      ,[tr_credithold]
+      ,[tr_priority]
+      ,[tr_esttime]
+      ,[tr_pptresttime]
+      ,[tr_g2_informationreceived]
+      ,[tr_g2_filingdeadline]
+      ,[tr_g2_missinginfo]
+      ,[tr_g2_missinginforeceived]
+      ,[tr_g2_assignedto]
+      ,[tr_g2_preparedby]
+      ,[tr_g2_readyforreview]
+      ,[tr_g2_reviewassignedto]
+      ,[tr_g2_reviewd]
+      ,[tr_g2_reviewedby]
+      ,[tr_g2_reviewedwithnotes]
+      ,[tr_g2_completed]
+      ,[tr_g3_assemblereturn]
+      ,[tr_g3_contacted]
+      ,[tr_g3_messageleft]
+      ,[tr_g3_emailed]
+      ,[tr_g3_missingsignatures]
+      ,[tr_g3_delivered]
+      ,[tr_g3_deliverymethod]
+      ,[tr_g3_paymentstatus]
+      ,[tr_g3_multistatereturn]
+      ,[tr_g4_pptrrequired]
+      ,[tr_g4_pptrassignedto]
+      ,[tr_g4_extended]
+      ,[tr_g4_rfr]
+      ,[tr_g4_completed]
+      ,[tr_g4_delivered]
+      ,[tr_g4_paymentstatus]
+      ,[tr_g4_pptrcurrentfees]
+      ,[tr_g4_pptrpriorfees]
 
+--->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -33,13 +57,15 @@ WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
 <cftry>
 
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Load Client--->
+<!--- Load Group1--->
 
-<cfcase value="financialDataStatus">
+<cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[fds_id],[client_id],[client_name],[fds_month],[fds_periodend],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
-WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+SELECT[tr_id]
+,[tr_taxyear]
+
+FROM[v_taxreturns]
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
 </cfcase>
@@ -67,10 +93,11 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
-<cfcase value="financialdatastatus">
+<cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
-SELECT[fds_id],[client_id],[client_name],CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend],[fds_month],[fds_year],[fds_monthTEXT]
-FROM[v_financialDataStatus]
+SELECT[tr_id]
+,[tr_taxyear]
+FROM[v_taxreturns]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -79,7 +106,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_PERIODEND":"'&FDS_PERIODEND&'"}'>
+<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","TR_TAXYEAR":"'&TR_TAXYEAR&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
