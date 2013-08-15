@@ -7,6 +7,8 @@
 <cfset page.menuLeft="General,SubTasks,Comment">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
+<cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
+
 <!--- Load Select Options for each dropdown--->
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,7 +38,7 @@
 
 <div id="group1" class="gf-checkbox">
 
-<h3>Tax Returns</h3>
+<h3>General</h3>
 <div>
 <div><label for="g1_client">Clients</label><input type="text" id="g1_client" ></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
@@ -56,15 +58,16 @@
 <div><label for="g1_pptresttime">PPTR Est Time</label><input type="text" id="g1_pptresttime" ></div>
 </div>
 
-<h3>General</h3>
+
+
 <div>
 <h4>PREPARATION</h4>
 <div><label for="g1_informationrecieved">Information Recieved</label><input type="text" class="date" id="g1_informationreceived" ></div>
-<div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline" ></div>
-<div><label for="g1_duedate"></label>Due Date<input type="text" class="date" id="g1_duedate" ></div>
-<div><label for="g1_appointment"><b><u>Appointment</u></b></label><input type="text" id="g1_appointment" ></div>
+<div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline"></div>
+<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
+<div><label for="g1_appointment">Appointment</label><input type="text" id="g1_appointment" ></div>
 <div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
-<div><label for="g1_missinginforeceived"></label>Missing Info Recieved<input type="text" id="g1_missinginforeceived" ></div>
+<div><label for="g1_missinginforeceived">Missing Info Recieved</label><input type="text" id="g1_missinginforeceived" ></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_preparedby">Prepared By</label><select id="g1_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_readyforreview">Ready for Review</label><input type="text" class="date" id="g1_readyforreview" ></div>

@@ -7,6 +7,8 @@
 <cfset page.menuLeft="General,SubTasks,Comment">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
+<cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
+
 <!--- Load Select Options for each dropdown--->
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,9 +35,12 @@
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
+
+
 <div id="group1" class="gf-checkbox">
 
 <h3>Add A New Power Of Attorney</h3>
+
 <div>
 <div><label for="g1_client">Clients</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
@@ -47,6 +52,8 @@
 <div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_dateofrevocation">Date of Revocation</label><input type="text" class="date" id="g1_dateofrevocation" ></div>
 </div>
+
+
 </div>
 
 <!--- Comments --->
