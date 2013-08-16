@@ -60,11 +60,11 @@
 <!--- GROUP1 SUBGROUP1 --->
 <h4>Preparation</h4>
 <div>
-<div><label for="g1_g1_informationrecieved">Information Recieved</label><input type="text" class="date" id="g1_g1_informationreceived" ></div>
+<div><label for="g1_g1_informationreceived">Information Received</label><input type="text" class="date" id="g1_g1_informationreceived" ></div>
 <div><label for="g1_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_g1_filingdeadline"></div>
 <div><label for="g1_g1_duedate">Due Date</label><input type="text" class="date" id="g1_g1_duedate"></div>
 <div><input id="g1_g1_missinginformation" type="checkbox"><label for="g1_g1_missinginformation">Missing Information</label></div>
-<div><label for="g1_g1_missinginforeceived">Missing Info Recieved</label><input type="text" id="g1_g1_missinginforeceived" ></div>
+<div><label for="g1_g1_missinginforeceived">Missing Info Received</label><input type="text" id="g1_g1_missinginforeceived" ></div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_preparedby">Prepared By</label><select id="g1_g1_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_readyforreview">Ready for Review</label><input type="text" class="date" id="g1_g1_readyforreview" ></div>
