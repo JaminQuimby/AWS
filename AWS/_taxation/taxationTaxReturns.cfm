@@ -42,7 +42,7 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="g1_client">Clients</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_client','group':'assetSpouse','page':'acctconsultingtasks'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_client','group':'assetSpouse','page':'acctconsultingtasks'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_taxyear">Tax Year</label><input type="text" id="g1_taxyear" ></div>
@@ -64,7 +64,7 @@
 <div><label for="g1_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_g1_filingdeadline"></div>
 <div><label for="g1_g1_duedate">Due Date</label><input type="text" class="date" id="g1_g1_duedate"></div>
 <div><input id="g1_g1_missinginformation" type="checkbox"><label for="g1_g1_missinginformation">Missing Information</label></div>
-<div><label for="g1_g1_missinginforeceived">Missing Info Received</label><input type="text" id="g1_g1_missinginforeceived" ></div>
+<div><label for="g1_g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_g1_missinginforeceived" ></div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_preparedby">Prepared By</label><select id="g1_g1_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_readyforreview">Ready for Review</label><input type="text" class="date" id="g1_g1_readyforreview" ></div>
@@ -103,7 +103,17 @@
 <!--- GROUP1 SUBGROUP4 --->
 <h4>Appointment</h4>
 <div>
-<!---  ##########REMOVE THIS LINE 9 APPOINTMENT FIELDS GO HERE... NOT YELLING USING ALL-CAP FOR COMMENTS ###############--->
+<div><label for="g1_g4_dropoffappointment">Drop Off Appointment</label><input type="text" class="date" id="g1_g4_dropoffappointment" ></div>
+<div><label for="g1_g4_dropoffappointmenttime">Appointment Time</label><input type="text" id="g1_g4_dropoffappointmenttime" ></div>
+<div><label for="g1_g4_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g4_dropoffappointmentlength" ></div>
+<div><label for="g1_g4_dropoffappointmentwith">Appointment With</label><select id="g1_g4_dropoffappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><input id="g1_g4_whileyouwaitappt" type="checkbox"><label for="g1_g4_whileyouwaitappt">While You Wait Appt</label></div>
+
+<div><label for="g1_g4_pickupappointment">Pick Up Appointment</label><input type="text" class="date" id="g1_g4_pickupappointment" ></div>
+<div><label for="g1_g4_pickupappointmenttime">Appointment Time</label><input type="text" id="g1_g4_pickupappointmenttime" ></div>
+<div><label for="g1_g4_pickupappointmentlength">Appointment Length</label><input type="text" id="g1_g4_pickupappointmentlength" ></div>
+<div><label for="g1_g4_pickupappointmentwith">Appointment With</label><select id="g1_g4_pickupappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+
 </div>
 </div>
 
@@ -141,6 +151,7 @@
 <h4>Add Comment</h4>
 <div>
 <div><label for="g4_commentdate">Date</label><input type="text" class="date" id="g4_commentdate"/></div>
+<div><label for="g2_commentemployee">Employee</label><input type="text" id="g2_commentemployee"/></div>
 <div><label for="g4_commenttext">Comment</label><textarea type="text" id="g4_commenttext"></textarea></div>
 </div>
 </div>

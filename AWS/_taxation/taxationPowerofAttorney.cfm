@@ -42,7 +42,7 @@
 <h3>Add A New Power Of Attorney</h3>
 
 <div>
-<div><label for="g1_client">Clients</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
 <div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
 <div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
@@ -69,7 +69,7 @@
 <h4>Add Comment</h4>
 <div>
 <div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
-<div><label for="g2_commentdate">Employee</label><input type="text" id="g2_commentdate"/></div>
+<div><label for="g2_commentemployee">Employee</label><input type="text" id="g2_commentemployee"/></div>
 <div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
