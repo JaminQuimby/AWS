@@ -66,7 +66,6 @@
 <div><label for="g1_responsesubmitted">Response Submitted</label><input type="text" class="date" id="g1_responsesubmitted"></div>
 <div><label for="g1_irsstateresponserecieved">IRS/State Response Recieved</label><input type="text" class="date" id="g1_irsstateresponsereceived"></div>
 <div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
-<!--- Named missinginforeceived instead of missingreceived for the sake of consistancey with prior forms--->
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" id="g1_missinginforeceived" ></div>
 </div>
 </div>

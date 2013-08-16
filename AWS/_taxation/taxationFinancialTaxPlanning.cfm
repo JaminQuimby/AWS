@@ -74,7 +74,6 @@
 <h4>Add Comment</h4>
 <div>
 <div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
-<div><label for="g2_commentemployee">Employee</label><input type="text" id="g2_commentemployee"/></div>
 <div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>

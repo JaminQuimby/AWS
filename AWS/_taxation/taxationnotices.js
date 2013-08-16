@@ -1,7 +1,8 @@
 /*
 Javascript for FinancialStatements
-Developers:Jamin Quimby
+Developers:Jamin Quimby, Raymond Smith
 7/26/2013 - Started
+8/16/2013
 */
 
 
@@ -87,28 +88,68 @@ Build arguments for Related Clients UNDER CONSTRUCTION
 */
 switch(options["group"]){
 /*Save Client*/
-case'client':var json='{"DATA":[["'+
-$("#cl_id").val()+'","'+
-$("#cl_active").is(':checked')+'","'+
-$("#cl_credit_hold").is(':checked')+'","'+
-$("#cl_dms_reference").val()+'","'+
-$("#cl_group").val()+'","'+
-$("#cl_name").val()+'","'+
-$("#cl_notes").val()+'","'+
-$("#cl_referred_by").val()+'","'+
-$("#cl_salutation").val()+'","'+
-$("#cl_since").val()+'","'+
-$("#cl_spouse").val()+'","'+
-$("#cl_trade_name").val()+'","'+
-$("#cl_type").val()+
+case'':
+if($("#g1_client").val()!=0){
+_saveDataCB({'group':'group1'});
+jqMessage({message: "Saveing.",type: "save",autoClose: true});
+}else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+
+break;
+
+/*Save Group1*/
+case'group1':var json='{"DATA":[["'+
+$("#g1_client").val()+'","'+
+$("#g1_matte").val()+'","'+
+$("#g1_assignedto").val()+'","'+
+$("#g1_noticestatus").val()+'","'+
+$("#g1_priority").val()+'","'+
+$("#g1_estimatedtime").val()+'","'+
+$("#g1_noticenumber").val()+'","'+
+$("#g1_noticedate").val()+'","'+
+$("#g1_taxform").val()+'","'+
+$("#g1_taxyear").val()+'","'+
+$("#g1_methodreceived").val()+'","'+
+$("#g1_fees").val()+'","'+
+$("#g1_paid").val()+'","'+
+$("#g1_datenoticereceived").val()+'","'+
+$("#g1_duedateforresponse").val()+'","'+
+$("#g1_responsecompleted").val()+'","'+
+$("#g1_responsecompletedby").val()+'","'+
+$("#g1_reviewrequired").is(':checked')+'","'+
+$("#g1_reviewassignedto").val()+'","'+
+$("#g1_reviewcompleted").val()+'","'+
+$("#g1_responsesubmitted").val()+'","'+
+$("#g1_irsstateresponserecieved").val()+'","'+
+$("#g1_missinginformation").is(':checked')+'","'+
+$("#g1_missinginforeceived").val()+'","'+
 '"]]}'
-if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
+break;
+
+/*Save Group2*/
+case'group2':var json='{"DATA":[["'+
+$("#comment_id").val()+'","'+
+$("#form_id").val()+'","'+
+$("#user_id").val()+'","'+
+$g1_client.val()+'","'+
+$("#g2_commentdate").val()+'","'+
+$("#g2_commenttext").val()+
+'"]]}'
+if($("comment_isLoaded").val()!=0 && $("#g2_commenttext").val()!=""){
+_saveData({group:"group3",payload:$.parseJSON(json),page:"taxationnotices"});
+}else{_saveDataCB({'group':'group3'});}
+break;
+/*Save Group3*/
+case'group3':
+jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
+break;
+
+if($("#g1_client").val()!=""){
 _saveData({"group":options["group"],"payload":$.parseJSON(json)});
 
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
 }
 else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false});}	
-	break;
+break;
 
 
 /*Other Events*/

@@ -1,7 +1,8 @@
 /*
 Javascript for FinancialStatements
-Developers:Jamin Quimby
+Developers:Jamin Quimby, Raymond Smith
 7/26/2013 - Started
+8/16/2013 - Started
 */
 
 
@@ -87,28 +88,103 @@ Build arguments for Related Clients UNDER CONSTRUCTION
 */
 switch(options["group"]){
 /*Save Client*/
-case'client':var json='{"DATA":[["'+
-$("#cl_id").val()+'","'+
-$("#cl_active").is(':checked')+'","'+
-$("#cl_credit_hold").is(':checked')+'","'+
-$("#cl_dms_reference").val()+'","'+
-$("#cl_group").val()+'","'+
-$("#cl_name").val()+'","'+
-$("#cl_notes").val()+'","'+
-$("#cl_referred_by").val()+'","'+
-$("#cl_salutation").val()+'","'+
-$("#cl_since").val()+'","'+
-$("#cl_spouse").val()+'","'+
-$("#cl_trade_name").val()+'","'+
-$("#cl_type").val()+
-'"]]}'
-if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+case'':
+if($("#g1_client").val()!=0){
+_saveDataCB({'group':'group1'});
+jqMessage({message: "Saveing.",type: "save",autoClose: true});
+}else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
 
-jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
-}
-else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false});}	
-	break;
+break;
+
+/*Save Group1*/
+case'group1':var json='{"DATA":[["'+
+$("#g1_client").val()+'","'+
+$("#g1_year").val()+'","'+
+$("#g1_period").val()+'","'+
+$("#g1_state").val()+'","'+
+$("#g1_type").val()+'","'+
+$("#g1_form").val()+'","'+
+$("#g1_duedate").val()+'","'+
+$("#g1_filingdeadline").val()+'","'+
+$("#g1_extensiondeadline").val()+'","'+
+$("#g1_extensioncompleted").val()+'","'+
+$("#g1_nstatus").val()+'","'+
+$("#g1_priority").val()+'","'+
+$("#g1_estimatedtime").val()+'","'+
+$("#g1_missinginformation").is(':checked')+'","'+
+$("#g1_missinginforeceived").val()+'","'+
+$("#g1_fees").val()+'","'+
+$("#g1_paymentstatus").val()+'","'+
+$("#g1_deliverymethod").val()+'","'+
+'"]]}'
+if($g1_client.val()!=0 ){
+_saveData({group:"group1",payload:$.parseJSON(json),page:"payrollotherfilingrequirements"});
+}else{
+_saveDataCB({'group':'group2'});
+	}
+break;
+/*Subgroup 1*/
+case'group2':var json='{"DATA":[["'+
+$("#g1_g1_assignedto").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
+$("#g1_g1_completedby").val()+'","'+
+$("#g1_g1_estimatedtime").val()+'","'+
+'"]]}'
+break;
+
+/*Subgroup 2*/
+case'group3':var json='{"DATA":[["'+
+$("#g1_g1_assignedto").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
+$("#g1_g1_completedby").val()+'","'+
+$("#g1_g1_estimatedtime").val()+'","'+
+'"]]}'
+break;
+
+/*Subgroup 3*/
+case'group4':var json='{"DATA":[["'+
+$("#g1_g1_assignedto").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
+$("#g1_g1_completedby").val()+'","'+
+$("#g1_g1_estimatedtime").val()+'","'+
+'"]]}'
+break;
+
+/*Subgroup 4*/
+case'group5':var json='{"DATA":[["'+
+$("#g1_g1_assignedto").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
+$("#g1_g1_completedby").val()+'","'+
+$("#g1_g1_estimatedtime").val()+'","'+
+'"]]}'
+break;
+
+/*Subgroup 5*/
+case'group6':var json='{"DATA":[["'+
+$("#g1_g1_assignedto").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
+$("#g1_g1_completedby").val()+'","'+
+$("#g1_g1_estimatedtime").val()+'","'+
+'"]]}'
+break;
+
+/*Save Group7*/
+case'group7':var json='{"DATA":[["'+
+$("#comment_id").val()+'","'+
+$("#form_id").val()+'","'+
+$("#user_id").val()+'","'+
+$g1_client.val()+'","'+
+$("#g2_commentdate").val()+'","'+
+$("#g2_commenttext").val()+
+'"]]}'
+if($("comment_isLoaded").val()!=0 && $("#g2_commenttext").val()!=""){
+_saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"});
+}else{_saveDataCB({'group':'group8'});}
+break;
+/*Save Group3*/
+case'group8':
+jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
+break;
 
 
 /*Other Events*/
