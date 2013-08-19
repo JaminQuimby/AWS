@@ -1,7 +1,8 @@
 /*
 Javascript for FinancialStatements
-Developers:Jamin Quimby
+Developers:Jamin Quimby, Raymond Smith
 7/26/2013 - Started
+8/19/2013 - Started
 */
 
 
@@ -87,28 +88,121 @@ Build arguments for Related Clients UNDER CONSTRUCTION
 */
 switch(options["group"]){
 /*Save Client*/
-case'client':var json='{"DATA":[["'+
-$("#cl_id").val()+'","'+
-$("#cl_active").is(':checked')+'","'+
-$("#cl_credit_hold").is(':checked')+'","'+
-$("#cl_dms_reference").val()+'","'+
-$("#cl_group").val()+'","'+
-$("#cl_name").val()+'","'+
-$("#cl_notes").val()+'","'+
-$("#cl_referred_by").val()+'","'+
-$("#cl_salutation").val()+'","'+
-$("#cl_since").val()+'","'+
-$("#cl_spouse").val()+'","'+
-$("#cl_trade_name").val()+'","'+
-$("#cl_type").val()+
-'"]]}'
-if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+/*Save Group1*/
 
-jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
-}
-else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false});}	
-	break;
+case'group1':var json='{"DATA":[["'+
+/* Group 1 Subgroup 1 */
+$("#g1_g1_softwarename").val()+'","'+
+/* Group 1 Subgroup 2 */
+$("#g1_g2_category").val()+'","'+
+$("#g1_g2_description").val()+'","'+
+/* Group 1 Subgroup 3 */
+$("#g1_g3_groupname").val()+'","'+
+/* Group 1 Subgroup 4 */
+$("#g1_g4_pfpcategory").val()+'","'+
+$("#g1_g4_description").val()+'","'+
+/* Group 1 Subgroup 5 */
+$("#g1_g5_subtaskgroup").val()+'","'+
+/* Group 1 Subgroup 6 */
+$("#g1_g6_task").val()+'","'+
+$("#g1_g6_sequence").val()+'","'+
+$("#g1_g6_subtaskgroup").val()+'","'+
+$("#g1_g6_dependency").val()+'","'+
+/* Group 1 Subgroup 7 */
+$("#g1_g7_consultingcategory").val()+'","'+
+$("#g1_g7_description").val()+'","'+
+$("#g1_g7_priority").val()+'","'+
+$("#g1_g7_estimatedtime").val()+'","'+
+/* Group 1 Subgroup 8 */
+$("#g1_g8_consultinggroup").val()+'","'+
+/* Group 1 Subgroup 9 */
+$("#g1_g9_task").val()+'","'+
+$("#g1_g9_sequence").val()+'","'+
+$("#g1_g9_group").val()+'","'+
+$("#g1_g9_dependency").val()+'","'+
+/* Group 1 Subgroup 10 */
+$("#g1_g10_noticenumbers").val()+'","'+
+$("#g1_g10_description").val()+'","'+
+$("#g1_g10_instructions").val()+'","'+
+/* Group 1 Subgroup 11 */
+$("#g1_g11_state").val()+'","'+
+$("#g1_g11_form").val()+'","'+
+$("#g1_g11_filingdeadline").val()+'","'+
+$("#g1_g11_extensiondeadline").val()+'","'+
+$("#g1_g11_description").val()+'","'+
+/* Group 1 Subgroup 12 */
+$("#g1_g12_type").val()+'","'+
+$("#g1_g12_description").val()+'","'+
+/* Group 1 Subgroup 13 */
+$("#g1_g13_paryrollfrequencies").val()+'","'+
+/* Group 1 Subgroup 14 */
+$("#g1_g14_returntype").val()+'","'+
+$("#g1_g14_id").val()+'","'+
+/* Group 1 Subgroup 15 */
+$("#g1_g15_taxmatters").val()+'","'+
+/* Group 1 Subgroup 16 */
+$("#g1_g16_state").val()+'","'+
+$("#g1_g16_abbreviations").val()+'","'+
+/* Group 1 Subgroup 17 */
+$("#g1_g17_state").val()+'","'+
+$("#g1_g17_form").val()+'","'+
+$("#g1_g17_filingdeadline").val()+'","'+
+$("#g1_g17_extensiondeadline").val()+'","'+
+$("#g1_g17_description").val()+'","'+
+/* Group 1 Subgroup 18 */
+$("#g1_g18_taxform").val()+'","'+
+$("#g1_g18_schedule").val()+'","'+
+$("#g1_g18_description").val()+'","'+
+/* Group 1 Subgroup 19 */
+$("#g1_g19_formnumber").val()+'","'+
+$("#g1_g19_formdescription").val()+'","'+
+$("#g1_g19_filingdeadline").val()+'","'+
+/* Group 1 Subgroup 20 */
+$("#g1_g20_taxservicefield1").val()+'","'+
+$("#g1_g20_taxservicefield2").val()+'","'+
+$("#g1_g20_taxservicefield3").val()+'","'+
+$("#g1_g20_taxservicefield4").val()+'","'+
+
+'"]]}'
+break;
+
+
+/*Save Group2*/
+case'group2':var json='{"DATA":[["'+
+
+'"]]}'
+break;
+
+
+/*Save Group3*/
+case'group3':var json='{"DATA":[["'+
+$("#g3_name").val()+'","'+
+$("#g3_spouse").val()+'","'+
+$("#g3_active").is(':checked')+'","'+
+$("#g3_initials").val()+'","'+
+$("#g3_birthday").val()+'","'+
+$("#g3_address").val()+'","'+
+$("#g3_city").val()+'","'+
+$("#g3_state").val()+'","'+
+$("#g3_homephone").val()+'","'+
+$("#g3_mobilephone").val()+'","'+
+$("#g3_workphone").val()+'","'+
+$("#g3_ext").val()+'","'+
+$("#g3_email1").val()+'","'+
+$("#g3_email2").val()+'","'+
+$("#g3_website").val()+'","'+
+$("#g3_childsname1").val()+'","'+
+$("#g3_childsname2").val()+'","'+
+$("#g3_childsname3").val()+'","'+
+$("#g3_cafnumber").val()+'","'+
+$("#g3_ptin").val()+'","'+
+$("#g3_emgcontact").val()+'","'+
+$("#g3_relationship").val()+'","'+
+$("#g3_emgphone").val()+'","'+
+
+'"]]}'
+break;
+
 
 
 /*Other Events*/

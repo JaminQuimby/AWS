@@ -8,6 +8,7 @@
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
+<cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 
 <!--- Load Select Options for each dropdown--->
 <!DOCTYPE html> 
@@ -43,10 +44,10 @@
 
 <div>
 <div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
-<div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
-<div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
-<div><label for="g1_preparers">Preparers</label><select  id="g1_preparers"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
+<div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"> </select></div>
+<div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"> </select></div>
+<div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"> </select></div>
+<div><label for="g1_preparers">Preparers</label><select  id="g1_preparers"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_datesignedbyclient">Date Signed By Client</label><input type="text" class="date" id="g1_datesignedbyclient"></div>
 <div><label for="g1_datesenttoirs">Date Sent to IRS</label><input type="text" class="date" id="g1_datesenttoirs" ></div>
 <div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option></select></div>

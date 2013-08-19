@@ -79,6 +79,57 @@ $("#g1_esttime").val()+'","'+
 $("#g1_notrequired").val()+'","'+
 $("#g1_reason").val()+'","'+
 $("#g1_pptresttime").val()+
+
+//group 1 subgroup 1
+$("#g1_g1_informationreceived").val()+'","'+
+$("#g1_g1_filingdeadline").val()+'","'+
+$("#g1_g1_duedate").val()+'","'+
+$("#g1_g1_missinginformation").is(':checked')+'","'+
+$("#g1_g1_missinginforeceived").val()+'","'+
+$("#g1_g1_assignedto").val()+'","'+
+$("#g1_g1_preparedby").val()+'","'+
+$("#g1_g1_readyforreview").val()+'","'+
+$("#g1_g1_reviewassignedto").val()+'","'+
+$("#g1_g1_reviewed").val()+'","'+
+$("#g1_g1_reviewedby").val()+'","'+
+$("#g1_g1_reviewedwithnotes").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
+
+
+//group 1 subgroup 2
+$("#g1_g2_assemblereturn").val()+'","'+
+$("#g1_g2_contacted").val()+'","'+
+$("#g1_g2_messageleft").is(':checked')+'","'+
+$("#g1_g2_emailed").is(':checked')+'","'+
+$("#g1_g2_missingSignatures").is(':checked')+'","'+
+$("#g1_g2_delivered").val()+'","'+
+$("#g1_g2_deliverymethod").val()+'","'+
+$("#g1_g2_paymentstatus").val()+'","'+
+$("#g1_g2_multistatereturn").is(':checked')+'","'+
+
+
+
+//group 1 subgroup 3
+$("#g1_g3_pptrrequired").is(':checked')+'","'+
+$("#g1_g3_pptrassignedto").val()+'","'+
+$("#g1_g3_pptrextended").val()+'","'+
+$("#g1_g3_pptrrfr").val()+'","'+
+$("#g1_g3_completed").val()+'","'+
+$("#g1_g3_delivered").val()+'","'+
+$("#g1_g3_paymentstatus").val()+'","'+
+$("#g1_g3_currentfees").val()+'","'+
+$("#g1_g3_priorfees").val()+'","'+
+
+//group 1 subgroup 3
+$("#g1_g4_dropoffappointment").val()+'","'+
+$("#g1_g4_dropoffappointmenttime").val()+'","'+
+$("#g1_g4_dropoffappointmentlength").val()+'","'+
+$("#g1_g4_dropoffappointmentwith").val()+'","'+
+$("#g1_g4_whileyouwaitappt").is(':checked')+'","'+
+$("#g1_g4_pickupappointment").val()+'","'+
+$("#g1_g4_pickupappointmenttime").val()+'","'+
+$("#g1_g4_pickupappointmentlength").val()+'","'+
+$("#g1_g4_pickupappointmentwith").val()+'","'+
 '"]]}'
 if($("#g1_client").val()!=""){
 _saveData({"group":options["group"],"payload":$.parseJSON(json)});

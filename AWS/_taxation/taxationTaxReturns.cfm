@@ -42,6 +42,7 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
+<!---
 <div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_client','group':'assetSpouse','page':'acctconsultingtasks'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
@@ -56,6 +57,7 @@
 <div><input id="g1_notrequired" type="checkbox"><label for="g1_notrequired">Not Required</label></div>
 <div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
 <div><label for="g1_pptresttime">PPTR Est Time</label><input type="text" id="g1_pptresttime" ></div>
+--->
 </div>
 <!--- GROUP1 SUBGROUP1 --->
 <h4>Preparation</h4>
@@ -108,7 +110,6 @@
 <div><label for="g1_g4_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g4_dropoffappointmentlength" ></div>
 <div><label for="g1_g4_dropoffappointmentwith">Appointment With</label><select id="g1_g4_dropoffappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g1_g4_whileyouwaitappt" type="checkbox"><label for="g1_g4_whileyouwaitappt">While You Wait Appt</label></div>
-
 <div><label for="g1_g4_pickupappointment">Pick Up Appointment</label><input type="text" class="date" id="g1_g4_pickupappointment" ></div>
 <div><label for="g1_g4_pickupappointmenttime">Appointment Time</label><input type="text" id="g1_g4_pickupappointmenttime" ></div>
 <div><label for="g1_g4_pickupappointmentlength">Appointment Length</label><input type="text" id="g1_g4_pickupappointmentlength" ></div>
