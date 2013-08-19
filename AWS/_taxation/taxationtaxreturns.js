@@ -67,7 +67,7 @@ break;
 case'group1':var json='{"DATA":[["'+
 $("#g1_client").val()+'","'+
 $("#g1_spouse").val()+'","'+
-$("#g1_credithold").val()+'","'+
+$("#g1_credithold").is(':checked')+'","'+
 $("#g1_taxyear").val()+'","'+
 $("#g1_currentfees").val()+'","'+
 $("#g1_extensionrequested").val()+'","'+
@@ -76,7 +76,7 @@ $("#g1_taxform").val()+'","'+
 $("#g1_priorfees").val()+'","'+
 $("#g1_extensiondone").val()+'","'+
 $("#g1_esttime").val()+'","'+
-$("#g1_notrequired").val()+'","'+
+$("#g1_notrequired").is(':checked')+'","'+
 $("#g1_reason").val()+'","'+
 $("#g1_pptresttime").val()+
 
@@ -132,7 +132,7 @@ $("#g1_g4_pickupappointmentlength").val()+'","'+
 $("#g1_g4_pickupappointmentwith").val()+'","'+
 '"]]}'
 if($("#g1_client").val()!=""){
-_saveData({"group":options["group"],"payload":$.parseJSON(json)});
+_saveData({"group":group1,"payload":$.parseJSON(json),page:"taxationtaxreturns"});
 
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
 }

@@ -42,7 +42,7 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<!---
+
 <div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_client','group':'assetSpouse','page':'acctconsultingtasks'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
@@ -57,7 +57,7 @@
 <div><input id="g1_notrequired" type="checkbox"><label for="g1_notrequired">Not Required</label></div>
 <div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
 <div><label for="g1_pptresttime">PPTR Est Time</label><input type="text" id="g1_pptresttime" ></div>
---->
+
 </div>
 <!--- GROUP1 SUBGROUP1 --->
 <h4>Preparation</h4>
