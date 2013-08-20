@@ -330,7 +330,7 @@ WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group3">
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[TAXRETURNS_STATE]([tr_id]
+INSERT INTO[TAXRETURNS_SCHEDULE]([tr_id]
 ,[trsc_assignedto]
 ,[trsc_reviewassignedto]
 ,[trsc_schedule]
