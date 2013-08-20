@@ -162,10 +162,8 @@ $.ajax({
 
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
-
 //Load Accordians
 $('.gf-checkbox').accordion({heightStyle:"content", active:false});
-
 //Set Date Picker Defaults	
 $.datepicker.setDefaults({
 showOn:"both",
@@ -175,11 +173,12 @@ constrainInput:true
 });
 //Load Date Pickers
 $(".date").datepicker();
-
 //Load Select Boxes
 $('select').chosen();
 //Hide Groups 
 $('.gf-checkbox').hide()
+//Load Entrace
+$('#entrance').show();
 });
 /*Error Handelers*/
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};

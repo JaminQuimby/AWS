@@ -6,7 +6,7 @@
 <cfset page.formid=6>
 <cfset page.title="Tax Returns">
 <cfset page.menuLeft="General,States,Schedule,Comment">
-<cfset page.trackers="tr_id,client_id,comment_isLoaded">
+<cfset page.trackers="tr_id,trst_id,trsc_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3,isLoaded_group4">
 
 
 <!--- Load ALL Select Options for this page--->
@@ -56,7 +56,7 @@
 <div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime" ></div>
 <div><input id="g1_notrequired" type="checkbox"><label for="g1_notrequired">Not Required</label></div>
 <div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
-<div><label for="g1_pptresttime">PPTR Est Time</label><input type="text" id="g1_pptresttime" ></div>
+<div><label for="g1_esttime">PPTR Est Time</label><input type="text" id="g1_esttime" ></div>
 
 </div>
 <!--- GROUP1 SUBGROUP1 --->
@@ -83,7 +83,7 @@
 <div><label for="g1_g2_contacted">Contacted</label><input type="text" class="date" id="g1_g2_contacted" ></div>
 <div><input id="g1_g2_messageleft" type="checkbox"><label for="g1_g2_messageleft">Message Left</label></div>
 <div><input id="g1_g2_emailed" type="checkbox"><label for="g1_g2_emailed">Emailed</label></div>
-<div><input id="g1_g2_missingSignatures" type="checkbox"><label for="g1_g2_missingsignatures">Missing Signatures</label></div>
+<div><input id="g1_g2_missingsignatures" type="checkbox"><label for="g1_g2_missingsignatures">Missing Signatures</label></div>
 <div><label for="g1_g2_delivered">Delivered</label><input type="text" class="date" id="g1_g2_delivered" ></div>
 <div><label for="g1_g2_deliverymethod">Delivery Method</label><select id="g1_g2_deliverymethod"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_g2_paymentstatus">Payment Status</label><select id="g1_g2_paymentstatus"><option value="0">&nbsp;</option></select></div>
@@ -92,10 +92,10 @@
 <!--- GROUP1 SUBGROUP3 --->
 <h4>Personal Property Tax</h4>
 <div>
-<div><input id="g1_g3_pptrrequired" type="checkbox"><label for="g1_g3_pptrrequired">PPTR Required</label></div>
-<div><label for="g1_g3_pptrassignedto">PPTR Assigned To</label><select id="g1_g3_pptrassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g3_pptrextended">PPTR Extended</label><input type="text" class="date" id="g1_g3_pptrextended" ></div>
-<div><label for="g1_g3_pptrrfr">PPTR RFR</label><input type="text" id="g1_g3_pptrrfr" ></div>
+<div><input id="g1_g3_required" type="checkbox"><label for="g1_g3_required">PPTR Required</label></div>
+<div><label for="g1_g3_assignedto">PPTR Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_g3_extended">PPTR Extended</label><input type="text" class="date" id="g1_g3_extended" ></div>
+<div><label for="g1_g3_rfr">PPTR RFR</label><input type="text" id="g1_g3_rfr" ></div>
 <div><label for="g1_g3_completed">PPTR Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
 <div><label for="g1_g3_delivered">PPTR Delivered</label><input type="text" class="date" id="g1_g3_delivered" ></div>
 <div><label for="g1_g3_paymentstatus">Payment Status</label><select id="g1_g3_paymentstatus"><option value="0">&nbsp;</option></select></div>
@@ -122,8 +122,17 @@
 <div id="group2" class="gf-checkbox">
 <h3>States</h3>
 <div>
+<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
+<div class="tblGrid" id="grid2"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
+</div>
+</div>
+<h3 onClick='$("#isLoaded_group2").val(1);'>Add States</h3>
+<div>
 <div><label for="g2_state">State</label><select id="g2_state"><option value="0">&nbsp;</option></select></div>
 <div><input id="g2_primary" type="checkbox"><label for="g2_primary">Primary</label></div>
+<div><label for="g2_status">Status</label><select id="g2_status"><option value="0">&nbsp;</option></select></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_reviewassignedto">Review Assigned To</label><select id="g2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_completed">Completed</label><input type="text" class="date" id="g2_completed" ></div>
@@ -132,6 +141,14 @@
 <!--- Group3 --->
 <div id="group3" class="gf-checkbox">
 <h3>Schedule</h3>
+<div>
+<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();"/></div>
+<div class="tblGrid" id="grid3"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a>
+</div>
+</div>
+<h4 onClick='$("#isLoaded_group3").val(1);'>Add Schedule</h4>
 <div>
 <div><label for="g3_schedule">Schedule</label><select id="g3_schedule"><option value="0">&nbsp;</option></select></div>
 <div><label for="g3_status">Status</label><select id="g3_status"><option value="0">&nbsp;</option></select></div>
@@ -144,7 +161,7 @@
 <h3>Comments</h3>
 <div>
 <div><label for="g4_filter">Filter</label><input id="g4_filter" onBlur="_grid4();"/></div>
-<div class="tblGrid" id="grid2"></div>
+<div class="tblGrid" id="grid4"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='$("#group4").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
 </div>
