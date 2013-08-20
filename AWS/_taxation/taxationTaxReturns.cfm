@@ -43,14 +43,14 @@
 <h3>General</h3>
 <div>
 
-<div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_client','group':'assetSpouse','page':'acctconsultingtasks'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_taxyear">Tax Year</label><input type="text" id="g1_taxyear" ></div>
 <div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" ></div>
-<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_Extension Requested" ></div>
+<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
 <div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" ></div>
-<div><label for="g1_taxform">Tax Form</label><select  id="g1_taxform"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"></select></div>
+<div><label for="g1_taxform">Tax Form</label><select  id="g1_taxform"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" ></div>
 <div><label for="g1_extensiondone">Extension Done</label><input type="text" class="date" id="g1_extensiondone" ></div>
 <div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime" ></div>
@@ -60,7 +60,7 @@
 
 </div>
 <!--- GROUP1 SUBGROUP1 --->
-<h4>Preparation</h4>
+<h4 onClick='$("#isLoaded_group1_1").val(1)'>Preparation</h4>
 <div>
 <div><label for="g1_g1_informationreceived">Information Received</label><input type="text" class="date" id="g1_g1_informationreceived" ></div>
 <div><label for="g1_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_g1_filingdeadline"></div>
@@ -77,7 +77,7 @@
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
 </div>
 <!--- GROUP1 SUBGROUP2 --->
-<h4>Assembly &amp; Delivery</h4>
+<h4 onClick='$("#isLoaded_group1_2").val(1)'>Assembly &amp; Delivery</h4>
 <div>
 <div><label for="g1_g2_assemblereturn">Assemble Return</label><input type="text" id="g1_g2_assemblereturn" ></div>
 <div><label for="g1_g2_contacted">Contacted</label><input type="text" class="date" id="g1_g2_contacted" ></div>
@@ -90,7 +90,7 @@
 <div><input id="g1_g2_multistatereturn" type="checkbox"><label for="g1_g2_multistatereturn">Multistate Return</label></div>
 </div>
 <!--- GROUP1 SUBGROUP3 --->
-<h4>Personal Property Tax</h4>
+<h4 onClick='$("#isLoaded_group1_3").val(1)'>Personal Property Tax</h4>
 <div>
 <div><input id="g1_g3_required" type="checkbox"><label for="g1_g3_required">PPTR Required</label></div>
 <div><label for="g1_g3_assignedto">PPTR Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -103,7 +103,7 @@
 <div><label for="g1_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g3_priorfees" ></div>
 </div>
 <!--- GROUP1 SUBGROUP4 --->
-<h4>Appointment</h4>
+<h4 onClick='$("#isLoaded_group1_4").val(1)'>Appointment</h4>
 <div>
 <div><label for="g1_g4_dropoffappointment">Drop Off Appointment</label><input type="text" class="date" id="g1_g4_dropoffappointment" ></div>
 <div><label for="g1_g4_dropoffappointmenttime">Appointment Time</label><input type="text" id="g1_g4_dropoffappointmenttime" ></div>
@@ -181,3 +181,4 @@
 <cfinclude template="../assets/inc/footer.cfm" />
 </body>
 </html>
+
