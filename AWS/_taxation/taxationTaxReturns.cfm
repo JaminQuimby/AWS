@@ -113,12 +113,12 @@ global_taxservices
 <h4 onClick='$("#isLoaded_group1_4").val(1)'>Appointment</h4>
 <div>
 <div><label for="g1_g4_dropoffappointment">Drop Off Appointment</label><input type="text" class="date" id="g1_g4_dropoffappointment" ></div>
-<div><label for="g1_g4_dropoffappointmenttime">Appointment Time</label><input type="text" id="g1_g4_dropoffappointmenttime" ></div>
+<div><label for="g1_g4_dropoffappointmenttime">Appointment Time</label><input type="text" id="g1_g4_dropoffappointmenttime" class="time"></div>
 <div><label for="g1_g4_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g4_dropoffappointmentlength" ></div>
 <div><label for="g1_g4_dropoffappointmentwith">Appointment With</label><select id="g1_g4_dropoffappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g1_g4_whileyouwaitappt" type="checkbox"><label for="g1_g4_whileyouwaitappt">While You Wait Appt</label></div>
 <div><label for="g1_g4_pickupappointment">Pick Up Appointment</label><input type="text" class="date" id="g1_g4_pickupappointment" ></div>
-<div><label for="g1_g4_pickupappointmenttime">Appointment Time</label><input type="text" id="g1_g4_pickupappointmenttime" ></div>
+<div><label for="g1_g4_pickupappointmenttime">Appointment Time</label><input type="text" id="g1_g4_pickupappointmenttime" class="time"></div>
 <div><label for="g1_g4_pickupappointmentlength">Appointment Length</label><input type="text" id="g1_g4_pickupappointmentlength" ></div>
 <div><label for="g1_g4_pickupappointmentwith">Appointment With</label><select id="g1_g4_pickupappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 

@@ -165,11 +165,20 @@ $.ajaxSetup({cache:false});//Stop ajax cacheing
 //Load Accordians
 $('.gf-checkbox').accordion({heightStyle:"content", active:false});
 //Set Date Picker Defaults	
+
+
 $.datepicker.setDefaults({
 showOn:"both",
 buttonImageOnly:true,
 buttonImage:"../assets/img/datepicker.gif",
 constrainInput:true
+});
+
+//Load Time Pickers
+$(".time").timepicker({
+	hourGrid: 4
+	,minuteGrid: 10
+	,timeFormat: 'hh:mm tt'
 });
 //Load Date Pickers
 $(".date").datepicker();
