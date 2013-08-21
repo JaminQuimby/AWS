@@ -6,15 +6,19 @@
 <cfset page.formid=6>
 <cfset page.title="Tax Returns">
 <cfset page.menuLeft="General,States,Schedule,Comment">
-<cfset page.trackers="tr_id,trst_id,trsc_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3,isLoaded_group4">
-
-
+<cfset page.trackers="tr_id,trst_id,trsc_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3,isLoaded_group4,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
-
 <!--- Load Select Options for each dropdown--->
+<cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
+<cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
+<cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+<cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
+<!--- Load Labels --->
+
+global_taxservices
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
@@ -43,14 +47,14 @@
 <h3>General</h3>
 <div>
 
-<div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_taxyear">Tax Year</label><input type="text" id="g1_taxyear" ></div>
 <div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" ></div>
 <div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
 <div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" ></div>
-<div><label for="g1_taxform">Tax Form</label><select  id="g1_taxform"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_taxform">Tax Form</label><select  id="g1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" ></div>
 <div><label for="g1_extensiondone">Extension Done</label><input type="text" class="date" id="g1_extensiondone" ></div>
 <div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime" ></div>
@@ -85,8 +89,8 @@
 <div><input id="g1_g2_emailed" type="checkbox"><label for="g1_g2_emailed">Emailed</label></div>
 <div><input id="g1_g2_missingsignatures" type="checkbox"><label for="g1_g2_missingsignatures">Missing Signatures</label></div>
 <div><label for="g1_g2_delivered">Delivered</label><input type="text" class="date" id="g1_g2_delivered" ></div>
-<div><label for="g1_g2_deliverymethod">Delivery Method</label><select id="g1_g2_deliverymethod"><option value="0">&nbsp;</option></select></div>
-<div><label for="g1_g2_paymentstatus">Payment Status</label><select id="g1_g2_paymentstatus"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_g2_deliverymethod">Delivery Method</label><select id="g1_g2_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_g2_paymentstatus">Payment Status</label><select id="g1_g2_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g1_g2_multistatereturn" type="checkbox"><label for="g1_g2_multistatereturn">Multistate Return</label></div>
 </div>
 <!--- GROUP1 SUBGROUP3 --->
@@ -98,7 +102,7 @@
 <div><label for="g1_g3_rfr">PPTR RFR</label><input type="text" id="g1_g3_rfr" ></div>
 <div><label for="g1_g3_completed">PPTR Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
 <div><label for="g1_g3_delivered">PPTR Delivered</label><input type="text" class="date" id="g1_g3_delivered" ></div>
-<div><label for="g1_g3_paymentstatus">Payment Status</label><select id="g1_g3_paymentstatus"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_g3_paymentstatus">Payment Status</label><select id="g1_g3_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_currentfees">PPTR Current Fees</label><input type="text" id="g1_g3_currentfees" ></div>
 <div><label for="g1_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g3_priorfees" ></div>
 </div>
@@ -130,9 +134,9 @@
 </div>
 <h3 onClick='$("#isLoaded_group2").val(1);'>Add States</h3>
 <div>
-<div><label for="g2_state">State</label><select id="g2_state"><option value="0">&nbsp;</option></select></div>
+<div><label for="g2_state">State</label><select id="g2_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g2_primary" type="checkbox"><label for="g2_primary">Primary</label></div>
-<div><label for="g2_status">Status</label><select id="g2_status"><option value="0">&nbsp;</option></select></div>
+<div><label for="g2_status">Status</label><select id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_reviewassignedto">Review Assigned To</label><select id="g2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_completed">Completed</label><input type="text" class="date" id="g2_completed" ></div>
@@ -151,7 +155,7 @@
 <h4 onClick='$("#isLoaded_group3").val(1);'>Add Schedule</h4>
 <div>
 <div><label for="g3_schedule">Schedule</label><select id="g3_schedule"><option value="0">&nbsp;</option></select></div>
-<div><label for="g3_status">Status</label><select id="g3_status"><option value="0">&nbsp;</option></select></div>
+<div><label for="g3_status">Status</label><select id="g3_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_assignedto">Assigned To</label><select id="g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_reviewassignedto">Review Assigned To</label><select id="g3_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
@@ -163,13 +167,12 @@
 <div><label for="g4_filter">Filter</label><input id="g4_filter" onBlur="_grid4();"/></div>
 <div class="tblGrid" id="grid4"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group4").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='$("#group4").accordion({active:1});$("#isLoaded_group4").val(1);'>Add</a>
 </div>
 </div>
 <h4>Add Comment</h4>
 <div>
 <div><label for="g4_commentdate">Date</label><input type="text" class="date" id="g4_commentdate"/></div>
-<div><label for="g2_commentemployee">Employee</label><input type="text" id="g2_commentemployee"/></div>
 <div><label for="g4_commenttext">Comment</label><textarea type="text" id="g4_commenttext"></textarea></div>
 </div>
 </div>

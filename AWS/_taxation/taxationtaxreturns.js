@@ -21,7 +21,7 @@ _grid1=function(){_jGrid({
 	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#g1_client").val(record.CLIENT_ID);$("#tr_id").val=(record.TR_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"tr_id","group":"client"});'
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#tr_id").val=(record.TR_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"tr_id","group":"client"});'
 	})}
 	
 _grid2=function(){_jGrid({
@@ -50,7 +50,7 @@ _grid4=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"2","ClientID":"'+$("#g1_client").val()+'","loadType":"group4"}',
+	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"6","ClientID":"'+$("#client_id").val()+'","loadType":"group4"}',
 	"functions":''
 	})}
 
@@ -77,21 +77,21 @@ var options={
 	}
 //turn options into array
 $.extend(true, options, params);
-var $g1_client=$("#g1_client");
+var $client_id=$("#client_id");
 alert(options["group"])
 //start switch
 switch(options["group"]){
 //Starting with Save Message
 
 case'':
-if($("#g1_client").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
+if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
 break;
 
 /*Save Group1*/
 case'group1':var json='{"DATA":[["'+
 $("#tr_id").val()+'","'+
-$("#g1_client").val()+'",'+
+$("#client_id").val()+'",'+
 $("#g1_credithold").is(':checked')+',"'+
 $("#g1_currentfees").val()+'","'+
 $("#g1_esttime").val()+'","'+
@@ -105,7 +105,7 @@ $("#g1_reason").val()+'","'+
 $("#g1_taxform").val()+'","'+
 $("#g1_taxyear").val()+'","'+
 '"]]}'
-if($("#g1_client").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationtaxreturns"});
+if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationtaxreturns"});
 }else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false})}	
 break;
 /*----------Save Group 1 Subgroup 1-------------*/
@@ -126,7 +126,7 @@ $("#g1_g1_reviewed").val()+'","'+
 $("#g1_g1_reviewedby").val()+'","'+
 $("#g1_g1_reviewedwithnotes").val()+'","'+
 '"]]}'
-if(isLoaded_group1_1!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group1_2'})}
 break;
 /*----------Save Group 1 Subgroup 2-------------*/
@@ -143,7 +143,7 @@ $("#g1_g2_missingsignatures").is(':checked')+','+
 $("#g1_g2_multistatereturn").is(':checked')+',"'+
 $("#g1_g2_paymentstatus").val()+'","'+
 '"]]}'
-if(isLoaded_group1_2!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group1_3'})}
 break;
 /*----------Save Group 1 Subgroup 3-------------*/
@@ -160,7 +160,7 @@ $("#g1_g3_priorfees").val()+'",'+
 $("#g1_g3_required").is(':checked')+',"'+
 $("#g1_g3_rfr").val()+'","'+
 '"]]}'
-if(isLoaded_group1_3!=0){_saveData({group:"group1_3",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("isLoaded_group1_3").val()!=0){_saveData({group:"group1_3",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group1_4'})}
 break;
 /*----------Save Group 1 Subgroup 4-------------*/
@@ -177,11 +177,12 @@ $("#g1_g4_pickupappointmenttime").val()+'","'+
 $("#g1_g4_pickupappointmentwith").val()+'",'+
 $("#g1_g4_whileyouwaitappt").is(':checked')+',"'+
 '"]]}'
-if(isLoaded_group1_4!=0){_saveData({group:"group1_4",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("isLoaded_group1_4").val()!=0){_saveData({group:"group1_4",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group2'})}
 break;
 /*----------SAVE GROUP 2----------*/
 case'group2':var json='{"DATA":[["'+
+$("#trst_id").val()+'","'+
 $("#tr_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'",'+
@@ -197,13 +198,14 @@ else{_saveDataCB({'group':'group3'})}
 break;
 /*----------SAVE GROUP 3----------*/
 case'group3':var json='{"DATA":[["'+
+$("#trsc_id").val()+'","'+
 $("#tr_id").val()+'","'+
 $("#g3_assignedto").val()+'","'+
 $("#g3_reviewassignedto").val()+'","'+
 $("#g3_schedule").val()+'","'+
 $("#g3_status").val()+'","'+
 '"]]}'
-if(isLoaded_group3!=0){
+if($("isLoaded_group3").val()!=0){
 _saveData({group:"group3",payload:$.parseJSON(json),page:"taxationtaxreturns"});
 	}
 else{_saveDataCB({'group':'group4'})}
@@ -214,10 +216,10 @@ $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
 $("#client_id").val()+'","'+
-$("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+'","'+
+$("#g4_commentdate").val()+'","'+
+$("#g4_commenttext").val()+'","'+
 '"]]}'
-if(isLoaded_group4!=0){
+if($("isLoaded_group4").val()!=0){
 _saveData({group:"group4",payload:$.parseJSON(json),page:"taxationtaxreturns"});
 }else{}
 break;
@@ -234,5 +236,3 @@ case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
 /*Error Handelers*/
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};
-
-
