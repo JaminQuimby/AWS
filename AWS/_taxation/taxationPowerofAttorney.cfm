@@ -3,14 +3,19 @@
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_taxation">
 <cfset page.location="taxationpowerofattorney">
+<cfset page.formid=7>
 <cfset page.title="Power of Attorney">
-<cfset page.menuLeft="General,SubTasks,Comment">
+<cfset page.menuLeft="General,Comment">
+<cfset page.trackers="pa_id,isLoaded_group2,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 
 <!--- Load Select Options for each dropdown--->
+<cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
+<cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
+
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
@@ -44,13 +49,13 @@
 
 <div>
 <div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"> </select></div>
-<div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"> </select></div>
-<div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"> </select></div>
-<div><label for="g1_preparers">Preparers</label><select  id="g1_preparers"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears" multiple="multiple"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_preparers">Preparers</label><select  id="g1_preparers" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_datesignedbyclient">Date Signed By Client</label><input type="text" class="date" id="g1_datesignedbyclient"></div>
 <div><label for="g1_datesenttoirs">Date Sent to IRS</label><input type="text" class="date" id="g1_datesenttoirs" ></div>
-<div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></select></div>
 <div><label for="g1_dateofrevocation">Date of Revocation</label><input type="text" class="date" id="g1_dateofrevocation" ></div>
 </div>
 
@@ -64,7 +69,7 @@
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
 </div>
 </div>
 <h4>Add Comment</h4>

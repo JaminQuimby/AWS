@@ -3,8 +3,10 @@
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_taxation">
 <cfset page.location="taxationnotices">
+<cfset page.formid=8>
 <cfset page.title="Notices">
-<cfset page.menuLeft="General,SubTasks,Comment">
+<cfset page.menuLeft="General,Comment">
+<cfset page.trackers="n_id,isLoaded_group2,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -13,6 +15,9 @@
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="q_global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="q_global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+<cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
+
+
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
@@ -42,7 +47,7 @@
 
 <h3>General</h3>
 <div>
-<div><label for="g1_client">Client</label><select id="g1_client"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_client">Client</label><select id="g1_client" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_matter">Matter</label><select id="g1_matter"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_noticestatus">Notice Status</label><select id="g1_noticestatus"><option value="0">&nbsp;</option><cfoutput query="q_global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -51,7 +56,7 @@
 
 <div><label for="g1_noticenumber">Notice Number</label><select id="g1_noticenumber"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_noticedate">Notice Date</label><input type="text" class="date" id="g1_noticedate"></div>
-<div><label for="g1_taxform">Tax Form</label><select id="g1_taxform"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_taxform">Tax Form</label><select id="g1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taxyear">Tax Year</label><select id="g1_taxyear"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_methodreceived">Method Recieved</label><select id="g1_methodreceived"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"></div>
@@ -66,7 +71,7 @@
 <div><label for="g1_responsesubmitted">Response Submitted</label><input type="text" class="date" id="g1_responsesubmitted"></div>
 <div><label for="g1_irsstateresponserecieved">IRS/State Response Recieved</label><input type="text" class="date" id="g1_irsstateresponsereceived"></div>
 <div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
-<div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" id="g1_missinginforeceived" ></div>
+<div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 </div>
 </div>
 

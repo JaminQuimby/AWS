@@ -13,6 +13,7 @@ _group3=function(){_grid3()}
 _group4=function(){_grid4()}
 });
 
+
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -78,7 +79,7 @@ var options={
 //turn options into array
 $.extend(true, options, params);
 var $client_id=$("#client_id");
-alert(options["group"])
+//alert(options["group"])
 //start switch
 switch(options["group"]){
 //Starting with Save Message
@@ -126,7 +127,7 @@ $("#g1_g1_reviewed").val()+'","'+
 $("#g1_g1_reviewedby").val()+'","'+
 $("#g1_g1_reviewedwithnotes").val()+'","'+
 '"]]}'
-if($("isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group1_2'})}
 break;
 /*----------Save Group 1 Subgroup 2-------------*/
@@ -143,7 +144,7 @@ $("#g1_g2_missingsignatures").is(':checked')+','+
 $("#g1_g2_multistatereturn").is(':checked')+',"'+
 $("#g1_g2_paymentstatus").val()+'","'+
 '"]]}'
-if($("isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group1_3'})}
 break;
 /*----------Save Group 1 Subgroup 3-------------*/
@@ -160,7 +161,7 @@ $("#g1_g3_priorfees").val()+'",'+
 $("#g1_g3_required").is(':checked')+',"'+
 $("#g1_g3_rfr").val()+'","'+
 '"]]}'
-if($("isLoaded_group1_3").val()!=0){_saveData({group:"group1_3",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group1_4'})}
 break;
 /*----------Save Group 1 Subgroup 4-------------*/
@@ -177,7 +178,7 @@ $("#g1_g4_pickupappointmenttime").val()+'","'+
 $("#g1_g4_pickupappointmentwith").val()+'",'+
 $("#g1_g4_whileyouwaitappt").is(':checked')+',"'+
 '"]]}'
-if($("isLoaded_group1_4").val()!=0){_saveData({group:"group1_4",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
+if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4",payload:$.parseJSON(json),page:"taxationtaxreturns"})}
 else{_saveDataCB({'group':'group2'})}
 break;
 /*----------SAVE GROUP 2----------*/
@@ -191,8 +192,10 @@ $("#g2_reviewassignedto").val()+'","'+
 $("#g2_state").val()+'","'+
 $("#g2_status").val()+'","'+
 '"]]}'
-if(isLoaded_group2!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"taxationtaxreturns"});
+
+if($("#isLoaded_group2").val()!=0){
+	if($("#g2_state").val()==0){jqMessage({message: "You must choose a state.",type: "info",autoClose: true})}
+	else{_saveData({group:"group2",payload:$.parseJSON(json),page:"taxationtaxreturns"});}
 	}
 else{_saveDataCB({'group':'group3'})}
 break;
@@ -205,8 +208,9 @@ $("#g3_reviewassignedto").val()+'","'+
 $("#g3_schedule").val()+'","'+
 $("#g3_status").val()+'","'+
 '"]]}'
-if($("isLoaded_group3").val()!=0){
-_saveData({group:"group3",payload:$.parseJSON(json),page:"taxationtaxreturns"});
+if($("#isLoaded_group3").val()!=0){
+	if($("#g3_schedule").val()==0){jqMessage({message: "You must choose a schedule.",type: "info",autoClose: true})}
+	else{_saveData({group:"group3",payload:$.parseJSON(json),page:"taxationtaxreturns"});}
 	}
 else{_saveDataCB({'group':'group4'})}
 break;
@@ -219,9 +223,9 @@ $("#client_id").val()+'","'+
 $("#g4_commentdate").val()+'","'+
 $("#g4_commenttext").val()+'","'+
 '"]]}'
-if($("isLoaded_group4").val()!=0){
+if($("#isLoaded_group4").val()!=0){
 _saveData({group:"group4",payload:$.parseJSON(json),page:"taxationtaxreturns"});
-}else{}
+}else{_saveDataCB({'group':'group5'})}
 break;
 /*This group does not exist in the cfm, this trigger instance is to update the posted message for the client.*/
 case'group5':

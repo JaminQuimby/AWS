@@ -16,6 +16,9 @@
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
+<cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
+<cfquery dbtype="query" name="q_p_prtaxdepositschedule">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='p_prtaxdepositschedule'</cfquery>
+
 <!--- Load Labels --->
 
 global_taxservices
@@ -90,7 +93,7 @@ global_taxservices
 <div><input id="g1_g2_missingsignatures" type="checkbox"><label for="g1_g2_missingsignatures">Missing Signatures</label></div>
 <div><label for="g1_g2_delivered">Delivered</label><input type="text" class="date" id="g1_g2_delivered" ></div>
 <div><label for="g1_g2_deliverymethod">Delivery Method</label><select id="g1_g2_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g2_paymentstatus">Payment Status</label><select id="g1_g2_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_g2_paymentstatus">Payment Status</label><select id="g1_g2_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g1_g2_multistatereturn" type="checkbox"><label for="g1_g2_multistatereturn">Multistate Return</label></div>
 </div>
 <!--- GROUP1 SUBGROUP3 --->
@@ -134,7 +137,7 @@ global_taxservices
 </div>
 <h3 onClick='$("#isLoaded_group2").val(1);'>Add States</h3>
 <div>
-<div><label for="g2_state">State</label><select id="g2_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_state">State</label><select id="g2_state" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g2_primary" type="checkbox"><label for="g2_primary">Primary</label></div>
 <div><label for="g2_status">Status</label><select id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -154,7 +157,7 @@ global_taxservices
 </div>
 <h4 onClick='$("#isLoaded_group3").val(1);'>Add Schedule</h4>
 <div>
-<div><label for="g3_schedule">Schedule</label><select id="g3_schedule"><option value="0">&nbsp;</option></select></div>
+<div><label for="g3_schedule">Schedule</label><select id="g3_schedule" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="q_p_prtaxdepositschedule"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_status">Status</label><select id="g3_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_assignedto">Assigned To</label><select id="g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_reviewassignedto">Review Assigned To</label><select id="g3_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

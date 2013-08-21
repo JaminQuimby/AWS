@@ -159,8 +159,6 @@ WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfquerypara
 
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
-<cftry>
-
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[TAXRETURNS](
 [client_id]
@@ -193,11 +191,6 @@ SELECT SCOPE_IDENTITY()AS[id]
 
 <!--- RETURN TR_ID--->
 <cfreturn '{"id":#fquery.id#,"group":"group1_1","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
@@ -221,9 +214,6 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-
-<cftry>
-
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
 SET[tr_g1_1_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -243,12 +233,6 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
-
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfcase>
 <!---Group1 Subgroup2 --->
 <cfcase value="group1_2">
@@ -256,9 +240,6 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][7])><cfset j.DATA[1][7]=1><cfelse><cfset j.DATA[1][7]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
-
-
-<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
 SET[tr_g1_2_assemblereturn]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -274,17 +255,10 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_3","result":"ok"}'>
-
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfcase>
 <!---Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
-<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
 SET[tr_g1_3_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -300,17 +274,10 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_4","result":"ok"}'>
-
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfcase>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
-<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
 SET[tr_g1_4_dropoffappointment]=<cfqueryparam value="#j.DATA[1][2]#"  null="#LEN(j.DATA[1][2]) eq 0#"/>
@@ -326,18 +293,11 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
-
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfcase>
 <!---Group2--->
 <cfcase value="group2">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
 <cfif j.DATA[1][1] eq "0">
-<cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[TAXRETURNS_STATE]([tr_id]
 ,[trst_assignedto]
@@ -360,11 +320,6 @@ VALUES(
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
 <cfreturn '{"id":#fquery.id#,"group":"group3","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
@@ -414,7 +369,6 @@ WHERE[TRSC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
 </cfif>
-
 </cfcase>
 <!---Group4--->
 <cfcase value="group4">
