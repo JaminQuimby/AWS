@@ -10,27 +10,129 @@
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
 <cftry>
-
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
-
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[tr_id]
+SELECT[TR_ID]
+,[client_id]
+,[tr_credithold]
+,[tr_currentfees]
+,[tr_esttime]
+,CONVERT(VARCHAR(10),[tr_extensiondone], 101)AS[tr_extensiondone]
+,CONVERT(VARCHAR(10),[tr_extensionrequested], 101)AS[tr_extensionrequested]
+,[tr_notrequired]
+,[tr_pptresttime]
+,[tr_priorfees]
+,[tr_priority]
+,[tr_reason]
+,[tr_taxform]
 ,[tr_taxyear]
-
-FROM[v_taxreturns]
+FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
-
 </cfcase>
-
-
+<!--- Load Group1 Subgroup1 --->
+<cfcase value="group1_1">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[tr_g1_1_assignedto]
+,CONVERT(VARCHAR(10),[tr_g1_1_completed], 101)AS[tr_g1_1_completed]
+,CONVERT(VARCHAR(10),[tr_g1_1_duedate], 101)AS[tr_g1_1_duedate]
+,CONVERT(VARCHAR(10),[tr_g1_1_filingdeadline], 101)AS[tr_g1_1_filingdeadline]
+,CONVERT(VARCHAR(10),[tr_g1_1_informationreceived], 101)AS[tr_g1_1_informationreceived]
+,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
+,[tr_g1_1_missinginfo]
+,[tr_g1_1_preparedby]
+,CONVERT(VARCHAR(10),[tr_g1_1_readyforreview], 101)AS[tr_g1_1_readyforreview]
+,[tr_g1_1_reviewassignedto]
+,CONVERT(VARCHAR(10),[tr_g1_1_reviewd], 101)AS[tr_g1_1_reviewd]
+,[tr_g1_1_reviewedby]
+,CONVERT(VARCHAR(10),[tr_g1_1_reviewedwithnotes], 101)AS[tr_g1_1_reviewedwithnotes]
+FROM[taxreturns]
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+<!--- Load Group1 Subgroup2 --->
+<cfcase value="group1_2">
+<cfquery datasource="AWS" name="fQuery">
+SELECT
+CONVERT(VARCHAR(10),[tr_g1_2_assemblereturn], 101)AS[tr_g1_2_assemblereturn]
+,CONVERT(VARCHAR(10),[tr_g1_2_contacted], 101)AS[tr_g1_2_contacted]
+,CONVERT(VARCHAR(10),[tr_g1_2_delivered], 101)AS[tr_g1_2_delivered]
+,[tr_g1_2_deliverymethod]
+,[tr_g1_2_emailed]
+,[tr_g1_2_messageleft]
+,[tr_g1_2_missingsignatures]
+,[tr_g1_2_multistatereturn]
+,[tr_g1_2_paymentstatus]
+FROM[taxreturns]
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+<!--- Load Group1 Subgroup3 --->
+<cfcase value="group1_3">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[tr_g1_3_assignedto]
+,CONVERT(VARCHAR(10),[tr_g1_3_completed], 101)AS[tr_g1_3_completed]
+,[tr_g1_3_currentfees]
+,CONVERT(VARCHAR(10),[tr_g1_3_delivered], 101)AS[tr_g1_3_delivered]
+,CONVERT(VARCHAR(10),[tr_g1_3_extended], 101)AS[tr_g1_3_extended]
+,[tr_g1_3_paymentstatus]
+,[tr_g1_3_priorfees]
+,[tr_g1_3_required]
+,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
+FROM[taxreturns]
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+<!--- Load Group1 Subgroup4 --->
+<cfcase value="group1_4">
+<cfquery datasource="AWS" name="fQuery">
+SELECT
+CONVERT(VARCHAR(10),[tr_g1_4_dropoffappointment], 101)AS[tr_g1_4_dropoffappointment]
+,[tr_g1_4_dropoffappointmentlength]
+,CONVERT(varchar(15),CAST(tr_g1_4_dropoffappointmenttime AS TIME),100)AS[tr_g1_4_dropoffappointmenttime]
+,[tr_g1_4_dropoffappointmentwith]
+,CONVERT(VARCHAR(10),[tr_g1_4_pickupappointment], 101)AS[tr_g1_4_pickupappointment]
+,[tr_g1_4_pickupappointmentlength]
+,CONVERT(varchar(15),CAST(tr_g1_4_pickupappointmenttime AS TIME),100)AS[tr_g1_4_pickupappointmenttime]
+,[tr_g1_4_pickupappointmentwith]
+,CONVERT(VARCHAR(10),[tr_g1_4_whileyouwaitappt], 101)AS[tr_g1_4_whileyouwaitappt]
+FROM[taxreturns]
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+<!--- Load Group 2--->
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[trst_id]
+,[trst_assignedto]
+,CONVERT(VARCHAR(10),[trst_completed], 101)AS[trst_completed]
+,[trst_primary]
+,[trst_reviewassignedto]
+,[trst_state]
+,[trst_status]
+FROM[TAXRETURNS_STATE]
+WHERE[TRST_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+<!--- Load Group 3--->
+<cfcase value="group3">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[trsc_id]
+,[trsc_assignedto]
+,[trsc_reviewassignedto]
+,[trsc_schedule]
+,[trsc_status]
+FROM[TAXRETURNS_SCHEDULE]
+WHERE[TRSC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
 <!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
 </cffunction>
@@ -44,6 +146,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="otherid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -53,8 +156,12 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
+,[client_name]
+,[CLIENT_ID]
 FROM[v_taxreturns]
+<cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -73,12 +180,13 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[trst_id]
       ,[trst_assignedto]
+      ,[trst_assignedtoTEXT]
       ,[trst_completed]
       ,[trst_primary]
       ,[trst_reviewassignedto]
       ,[trst_state]
       ,[trst_status]
-FROM[TAXRETURNS_STATE]
+FROM[v_TAXRETURNS_STATE]
 WHERE[trst_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trst_status]</cfif>
 </cfquery>
@@ -87,7 +195,7 @@ WHERE[trst_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'","TRST_ASSIGNEDTO":"'&TRST_ASSIGNEDTO&'"}'>
+<cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'","TRST_ASSIGNEDTOTEXT":"'&TRST_ASSIGNEDTOTEXT&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -98,10 +206,11 @@ WHERE[trst_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[trsc_id]
       ,[trsc_assignedto]
+      ,[trsc_assignedtoTEXT]
       ,[trsc_reviewassignedto]
       ,[trsc_schedule]
       ,[trsc_status]
-FROM[TAXRETURNS_SCHEDULE]
+FROM[v_TAXRETURNS_SCHEDULE]
 WHERE[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trsc_status]</cfif>
 </cfquery>
@@ -110,7 +219,7 @@ WHERE[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"TRSC_ID":"'&TRSC_ID&'","TRSC_ASSIGNEDTO":"'&TRSC_ASSIGNEDTO&'"}'>
+<cfset queryResult=queryResult&'{"TRSC_ID":"'&TRSC_ID&'","TRSC_ASSIGNEDTOTEXT":"'&TRSC_ASSIGNEDTOTEXT&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -121,7 +230,9 @@ WHERE[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
 FROM[v_comments]
-WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[other_id]=<cfqueryparam value="#ARGUMENTS.otherid#"/> 
+
+AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -155,8 +266,6 @@ WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfquerypara
 <cfcase value="group1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-
-
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
@@ -168,8 +277,10 @@ INSERT INTO[TAXRETURNS](
 ,[tr_extensiondone]
 ,[tr_extensionrequested]
 ,[tr_notrequired]
+,[tr_pptresttime]
 ,[tr_priorfees]
 ,[tr_priority]
+,[tr_reason]
 ,[tr_taxform]
 ,[tr_taxyear]
 )
@@ -185,10 +296,11 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][10]#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][13]#"/>
+,<cfqueryparam value="#j.DATA[1][14]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-
 <!--- RETURN TR_ID--->
 <cfreturn '{"id":#fquery.id#,"group":"group1_1","result":"ok"}'>
 </cfif>
@@ -202,11 +314,13 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_esttime]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[tr_extensiondone]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[tr_extensionrequested]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[tr_notrequired]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[tr_priorfees]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[tr_priority]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[tr_taxform]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][12]#"/>
+	,[tr_notrequired]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[tr_pptresttime]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tr_priorfees]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[tr_priority]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[tr_reason]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[tr_taxform]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][14]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
@@ -367,7 +481,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trsc_status]=<cfqueryparam value="#j.DATA[1][6]#"/>
 WHERE[TRSC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group4","result":"ok"}'>
 </cfif>
 </cfcase>
 <!---Group4--->
@@ -378,6 +492,7 @@ INSERT INTO[comments](
 [form_id]
 ,[user_id]
 ,[client_id]
+,[other_id]
 ,[c_date]
 ,[c_notes]
 )
@@ -386,6 +501,7 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfquery>
