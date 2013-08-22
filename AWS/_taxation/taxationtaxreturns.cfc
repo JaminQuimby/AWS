@@ -90,17 +90,10 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group1_4">
 <cfquery datasource="AWS" name="fQuery">
 SELECT
-<<<<<<< HEAD
 CONVERT(CHAR(10),[tr_g1_4_dropoffappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_g1_4_dropoffappointment, 100),7)AS[tr_g1_4_dropoffappointment]
 ,[tr_g1_4_dropoffappointmentlength]
 ,[tr_g1_4_dropoffappointmentwith]
 ,CONVERT(CHAR(10),[tr_g1_4_pickupappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_g1_4_pickupappointment, 100),7)AS[tr_g1_4_pickupappointment]
-=======
-CONVERT(CHAR(8),[tr_g1_4_dropoffappointment], 101)+' '+CONVERT(CHAR(8),[tr_g1_4_dropoffappointment],108)AS[tr_g1_4_dropoffappointment]
-,[tr_g1_4_dropoffappointmentlength]
-,[tr_g1_4_dropoffappointmentwith]
-,CONVERT(CHAR(8),[tr_g1_4_dropoffappointment], 101)+' '+CONVERT(CHAR(8),tr_g1_4_dropoffappointment,108)AS[tr_g1_4_dropoffappointment]
->>>>>>> 4c3e78667111d52807e5a1265ba09b91c441995b
 ,[tr_g1_4_pickupappointmentlength]
 ,[tr_g1_4_pickupappointmentwith]
 ,[tr_g1_4_whileyouwaitappt]
