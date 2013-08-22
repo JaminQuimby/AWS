@@ -3,8 +3,11 @@
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_taxation">
 <cfset page.location="taxationfinancialtaxplanning">
+<cfset page.formid=9>
 <cfset page.title="Finanical Tax Planning">
-<cfset page.menuLeft="General,SubTasks,Comment">
+<cfset page.menuLeft="General,Comment">
+<cfset page.trackers="ftp_id,isLoaded_group2,comment_id">
+
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -31,7 +34,7 @@
 <div id="entrance">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="fss_filter">Filter</label><input id="fss_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
@@ -41,7 +44,7 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_category">Category</label><select id="g1_category"> </select></div>
 <div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="q_global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -63,7 +66,7 @@
 
 <!--- Comments --->
 <div id="group2" class="gf-checkbox">
-<h3>Comments</h3>
+<h3 onClick="_grid2();">Comments</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
 <div class="tblGrid" id="grid2"></div>

@@ -17,9 +17,28 @@
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[n_id]
-,[g1_reviewassignedto]
-
-FROM[v_notices]
+[client_id]
+ ,[g1_assignedto]
+ ,[g1_datenoticereceived]
+ ,[g1_duedateforresponse]
+ ,[g1_estimatedtime]
+ ,[g1_fees]
+ ,[g1_matter]
+ ,[g1_methodreceived]
+ ,[g1_missinginforeceived]
+ ,[g1_missinginformation]
+ ,[g1_noticenumber]
+ ,[g1_noticestatus]
+ ,[g1_paid]
+ ,[g1_priority]
+ ,[g1_responsecompleted]
+ ,[g1_reviewassignedto]
+ ,[g1_reviewcompleted]
+ ,[g1_reviewrequired]
+ ,[g1_responsesubmitted]
+ ,[g1_taxform]
+ ,[g1_taxyear]
+FROM[notices]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
@@ -44,6 +63,7 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="otherid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -52,9 +72,13 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[n_id]
-,[g1_reviewassignedto]
+,[n_taxyear]
+,[client_name]
+,[CLIENT_ID]
 FROM[v_notices]
+<cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -62,7 +86,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PA_TAXYEAR":"'&PA_TAXYEAR&'"}'>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","N_TAXYEAR":"'&N_TAXYEAR&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -115,9 +139,9 @@ WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfquerypara
 <cftry>
 
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[POWEROFATTORNEY](
-[g1_assignedto]
- ,[g1_client]
+INSERT INTO[NOTICES](
+[client_id]
+ ,[g1_assignedto]
  ,[g1_datenoticereceived]
  ,[g1_duedateforresponse]
  ,[g1_estimatedtime]
@@ -174,9 +198,9 @@ SELECT SCOPE_IDENTITY()AS[id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[POWEROFATTORNEY]
-SET[g1_assignedto]
- ,[g1_client]
+UPDATE[NOTICES]
+SET[client_id]
+ ,[g1_assignedto]
  ,[g1_datenoticereceived]
  ,[g1_duedateforresponse]
  ,[g1_estimatedtime]
@@ -208,16 +232,17 @@ INSERT INTO[comments](
 [form_id]
 ,[user_id]
 ,[client_id]
+,[other_id]
 ,[c_date]
 ,[c_notes]
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
 )
-SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfquery>
 <cfreturn '{"id":#fquery.comment_id#,"group":"group3","result":"ok"}'>
 </cfif>

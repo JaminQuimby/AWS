@@ -89,15 +89,13 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group1_4">
 <cfquery datasource="AWS" name="fQuery">
 SELECT
-CONVERT(VARCHAR(10),[tr_g1_4_dropoffappointment], 101)AS[tr_g1_4_dropoffappointment]
+CONVERT(CHAR(8),[tr_g1_4_dropoffappointment], 101)+' '+CONVERT(CHAR(8),[tr_g1_4_dropoffappointment],108)AS[tr_g1_4_dropoffappointment]
 ,[tr_g1_4_dropoffappointmentlength]
-,CONVERT(varchar(15),CAST(tr_g1_4_dropoffappointmenttime AS TIME),100)AS[tr_g1_4_dropoffappointmenttime]
 ,[tr_g1_4_dropoffappointmentwith]
-,CONVERT(VARCHAR(10),[tr_g1_4_pickupappointment], 101)AS[tr_g1_4_pickupappointment]
+,CONVERT(CHAR(8),[tr_g1_4_dropoffappointment], 101)+' '+CONVERT(CHAR(8),tr_g1_4_dropoffappointment,108)AS[tr_g1_4_dropoffappointment]
 ,[tr_g1_4_pickupappointmentlength]
-,CONVERT(varchar(15),CAST(tr_g1_4_pickupappointmenttime AS TIME),100)AS[tr_g1_4_pickupappointmenttime]
 ,[tr_g1_4_pickupappointmentwith]
-,CONVERT(VARCHAR(10),[tr_g1_4_whileyouwaitappt], 101)AS[tr_g1_4_whileyouwaitappt]
+,[tr_g1_4_whileyouwaitappt]
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -391,22 +389,24 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfcase>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
+
+
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
-SET[tr_g1_4_dropoffappointment]=<cfqueryparam value="#j.DATA[1][2]#"  null="#LEN(j.DATA[1][2]) eq 0#"/>
+SET[tr_g1_4_dropoffappointment]=<cfqueryparam value="dateFormat(j.DATA[1][2],'YYYY-MM-DD')+' '+timeFormat(j.DATA[1][2],'HH:MM:SS')"  null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[tr_g1_4_dropoffappointmentlength]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[tr_g1_4_dropoffappointmenttime]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[tr_g1_4_dropoffappointmentwith]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[tr_g1_4_pickupappointment]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[tr_g1_4_pickupappointmentlength]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[tr_g1_4_pickupappointmenttime]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[tr_g1_4_pickupappointmentwith]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[tr_g1_4_whileyouwaitappt]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[tr_g1_4_dropoffappointmentwith]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[tr_g1_4_pickupappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][5],'YYYY-MM-DD')+' '+timeFormat(j.DATA[1][5],'HH:MM:SS')#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[tr_g1_4_pickupappointmentlength]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[tr_g1_4_pickupappointmentwith]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tr_g1_4_whileyouwaitappt]=<cfqueryparam value="#j.DATA[1][8]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
+
+
 </cfcase>
 <!---Group2--->
 <cfcase value="group2">
@@ -511,7 +511,7 @@ SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cffunction>

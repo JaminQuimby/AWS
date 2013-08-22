@@ -89,19 +89,18 @@ Build arguments for Related Clients UNDER CONSTRUCTION
 switch(options["group"]){
 /*Save Client*/
 case'group1':var json='{"DATA":[["'+
-
-$("#g1_client").val()+'","'+
-$("#g1_year").val()+'","'+
-$("#g1_payenddate").val()+'","'+
-$("#g1_paydate").val()+'","'+
+$("#client_id").val()+'","'+
+$("#g1_altfrequency").is(':checked')+'","'+
+$("#g1_deliverymethod").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_altfrequency").is(':checked')+'","'+
-$("#g1_missinginformation").is(':checked')+'","'+
-$("#g1_missinginforeceived").val()+'","'+
 $("#g1_fees").val()+'","'+
+$("#g1_missinginforeceived").val()+'","'+
+$("#g1_missinginformation").is(':checked')+'","'+
+$("#g1_paydate").val()+'","'+
+$("#g1_payenddate").val()+'","'+
 $("#g1_paymentstatus").val()+'","'+
-$("#g1_deliverymethod").val()+'","'+
+$("#g1_year").val()+'","'+
 '"]]}'
 if($g1_client.val()!=0 ){
 _saveData({group:"group1",payload:$.parseJSON(json),page:"taxationpowerofattorney"});
@@ -110,7 +109,7 @@ _saveDataCB({'group':'group2'});
 	}
 break;
 /*Subgroup 1*/
-case'group2':var json='{"DATA":[["'+
+case'group1_1':var json='{"DATA":[["'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completed").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
@@ -118,7 +117,7 @@ $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
 
 /*Subgroup 2*/
-case'group3':var json='{"DATA":[["'+
+case'group1_2':var json='{"DATA":[["'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completed").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
@@ -126,7 +125,7 @@ $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
 
 /*Subgroup 3*/
-case'group4':var json='{"DATA":[["'+
+case'group1_3':var json='{"DATA":[["'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completed").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
@@ -134,7 +133,7 @@ $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
 
 /*Subgroup 4*/
-case'group5':var json='{"DATA":[["'+
+case'group1_4':var json='{"DATA":[["'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completed").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
@@ -142,27 +141,28 @@ $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
 
 /*Subgroup 5*/
-case'group6':var json='{"DATA":[["'+
+case'group1_5':var json='{"DATA":[["'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completed").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
 $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
-/*Save Group7*/
-case'group7':var json='{"DATA":[["'+
+/*----------SAVE GROUP 2----------*/
+case'group2':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
-$g1_client.val()+'","'+
+$("#client_id").val()+'","'+
+$("#pa_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+
+$("#g2_commenttext").val()+'","'+
 '"]]}'
-if($("comment_isLoaded").val()!=0 && $("#g2_commenttext").val()!=""){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"});
-}else{_saveDataCB({'group':'group8'});}
+if($("#isLoaded_group2").val()!=0){
+_saveData({group:"group2",payload:$.parseJSON(json),page:"taxationpowerofattorney"});
+}else{_saveDataCB({'group':'group3'})}
 break;
-/*Save Group3*/
-case'group8':
+/*This group does not exist in the cfm, this trigger instance is to update the posted message for the client.*/
+case'group3':
 jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
 break;
 

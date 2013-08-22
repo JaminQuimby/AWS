@@ -60,7 +60,7 @@ switch(query.COLUMNS[0]){
 /*Group1_1*/case "TR_G1_1_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completed,g1_g1_duedate,g1_g1_filingdeadline,g1_g1_informationreceived,g1_g1_missinginforeceived,g1_g1_missinginformation,g1_g1_preparedby,g1_g1_readyforreview,g1_g1_reviewassignedto,g1_g1_reviewed,g1_g1_reviewedby,g1_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "TR_G1_2_ASSEMBLERETURN":var list='g1_g2_assemblereturn,g1_g2_contacted,g1_g2_delivered,g1_g2_deliverymethod,g1_g2_emailed,g1_g2_messageleft,g1_g2_missingsignatures,g1_g2_multistatereturn,g1_g2_paymentstatus';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "TR_G1_3_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completed,g1_g3_currentfees,g1_g3_delivered,g1_g3_extended,g1_g3_paymentstatus,g1_g3_priorfees,g1_g3_required,g1_g3_rfr';_loadit({"query":query,"list":list});break;
-/*Group1_4*/case "TR_G1_4_DROPOFFAPPOINTMENT":var list='g1_g4_dropoffappointment,g1_g4_dropoffappointmentlength,g1_g4_dropoffappointmenttime,g1_g4_dropoffappointmentwith,g1_g4_pickupappointment,g1_g4_pickupappointmentlength,g1_g4_pickupappointmenttime,g1_g4_pickupappointmentwith,g1_g4_whileyouwaitappt';_loadit({"query":query,"list":list});break;
+/*Group1_4*/case "TR_G1_4_DROPOFFAPPOINTMENT":var list='g1_g4_dropoffappointment,g1_g4_dropoffappointmentlength,g1_g4_dropoffappointmentwith,g1_g4_pickupappointment,g1_g4_pickupappointmentlength,g1_g4_pickupappointmentwith,g1_g4_whileyouwaitappt';_loadit({"query":query,"list":list});break;
 /*Group2*/case "TRST_ID":var list='trst_id,g2_assignedto,g2_completed,g2_primary,g2_reviewassignedto,g2_state,g2_status';_loadit({"query":query,"list":list});break;
 /*Group3*/case "TRSC_ID":var list='trsc_id,g3_assignedto,g3_reviewassignedto,g3_schedule,g3_status';_loadit({"query":query,"list":list});break;
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
@@ -158,11 +158,9 @@ case'group1_4':var json='{"DATA":[["'+
 $("#tr_id").val()+'","'+
 $("#g1_g4_dropoffappointment").val()+'","'+
 $("#g1_g4_dropoffappointmentlength").val()+'","'+
-$("#g1_g4_dropoffappointmenttime").val()+'","'+
 $("#g1_g4_dropoffappointmentwith").val()+'","'+
 $("#g1_g4_pickupappointment").val()+'","'+
 $("#g1_g4_pickupappointmentlength").val()+'","'+
-$("#g1_g4_pickupappointmenttime").val()+'","'+
 $("#g1_g4_pickupappointmentwith").val()+'",'+
 $("#g1_g4_whileyouwaitappt").is(':checked')+',"'+
 '"]]}'

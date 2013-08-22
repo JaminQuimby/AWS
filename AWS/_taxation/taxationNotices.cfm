@@ -11,7 +11,6 @@
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
-
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="q_global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="q_global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
@@ -36,7 +35,7 @@
 <div id="entrance">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="fss_filter">Filter</label><input id="fss_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
@@ -47,7 +46,7 @@
 
 <h3>General</h3>
 <div>
-<div><label for="g1_client">Client</label><select id="g1_client" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id">Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_matter">Matter</label><select id="g1_matter"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_noticestatus">Notice Status</label><select id="g1_noticestatus"><option value="0">&nbsp;</option><cfoutput query="q_global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -77,7 +76,7 @@
 
 <!--- Comments --->
 <div id="group2" class="gf-checkbox">
-<h3>Comments</h3>
+<h3 onClick="_grid2();">Comments</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
 <div class="tblGrid" id="grid2"></div>

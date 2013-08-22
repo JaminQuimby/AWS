@@ -29,7 +29,7 @@
 <div id="entrance">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="fss_filter">Filter</label><input id="fss_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
@@ -52,7 +52,7 @@
 </div>
 <!--- Comments --->
 <div id="group2" class="gf-checkbox">
-<h3>Comments</h3>
+<h3 onClick="_grid2();">Comments</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
 <div class="tblGrid" id="grid2"></div>
