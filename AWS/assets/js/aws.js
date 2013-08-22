@@ -91,8 +91,9 @@ try{if(options['query'].DATA!=""){
 						$(this).attr('selected', true);
 	}}).trigger("liszt:updated");break;
 				case"select-multiple":
-				var str=options['query'].DATA[0][i];
-				if(str!=null){var sstr=str.split(',');
+				var str=options['query'].DATA[0][i]+",";
+				if(str!=null){
+				var sstr=str.split(',');
 				$("#"+list[i]+' option').each(function(index){
 					for(var i=0;i<sstr.length;i++){
 						if(sstr[i]==$(this).val()){
@@ -175,10 +176,8 @@ constrainInput:true
 });
 
 //Load Time Pickers
-$(".time").timepicker({
-	hourGrid: 4
-	,minuteGrid: 10
-	,timeFormat: 'hh:mm tt'
+$(".time").datetimepicker({
+	timeFormat: 'hh:mmtt'
 });
 //Load Date Pickers
 $(".date").datepicker();

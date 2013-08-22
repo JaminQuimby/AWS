@@ -48,21 +48,20 @@ _grid4=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"6","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#tr_id").val()+'","loadType":"group4"}',
 	"functions":''
 	})}
-
 /*LOAD DATA BASED ON QUERY RETURN*/
 _loadDataCB=function(query){
-
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Group1*/case "TR_ID":var list='tr_id,client_id,g1_credithold,g1_currentfees,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_notrequired,g1_pptresttime,g1_priorfees,g1_priority,g1_reason,g1_taxform,g1_taxyear';_loadit({"query":query,"list":list});break;
+/*Group1*/case "TR_ID":var list='tr_id,client_id,g1_credithold,g1_currentfees,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_notrequired,g1_priorfees,g1_priority,g1_reason,g1_taxform,g1_taxyear,g1_spouse';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "TR_G1_1_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completed,g1_g1_duedate,g1_g1_filingdeadline,g1_g1_informationreceived,g1_g1_missinginforeceived,g1_g1_missinginformation,g1_g1_preparedby,g1_g1_readyforreview,g1_g1_reviewassignedto,g1_g1_reviewed,g1_g1_reviewedby,g1_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "TR_G1_2_ASSEMBLERETURN":var list='g1_g2_assemblereturn,g1_g2_contacted,g1_g2_delivered,g1_g2_deliverymethod,g1_g2_emailed,g1_g2_messageleft,g1_g2_missingsignatures,g1_g2_multistatereturn,g1_g2_paymentstatus';_loadit({"query":query,"list":list});break;
-/*Group1_3*/case "TR_G1_3_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completed,g1_g3_currentfees,g1_g3_delivered,g1_g3_extended,g1_g3_paymentstatus,g1_g3_priorfees,g1_g3_required,g1_g3_rfr';_loadit({"query":query,"list":list});break;
-/*Group1_4*/case "TR_G1_4_DROPOFFAPPOINTMENT":var list='g1_g4_dropoffappointment,g1_g4_dropoffappointmentlength,g1_g4_dropoffappointmenttime,g1_g4_dropoffappointmentwith,g1_g4_pickupappointment,g1_g4_pickupappointmentlength,g1_g4_pickupappointmenttime,g1_g4_pickupappointmentwith,g1_g4_whileyouwaitappt';_loadit({"query":query,"list":list});break;
+/*Group1_3*/case "TR_G1_3_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completed,g1_g3_currentfees,g1_g3_delivered,g1_g3_extended,g1_g3_paymentstatus,g1_g3_pptresttime,g1_g3_priorfees,g1_g3_required,g1_g3_rfr';_loadit({"query":query,"list":list});break;
+/*Group1_4*/case "TR_G1_4_DROPOFFAPPOINTMENT":var list='g1_g4_dropoffappointment,g1_g4_dropoffappointmentlength,g1_g4_dropoffappointmentwith,g1_g4_pickupappointment,g1_g4_pickupappointmentlength,g1_g4_pickupappointmentwith,g1_g4_whileyouwaitappt';_loadit({"query":query,"list":list});break;
 /*Group2*/case "TRST_ID":var list='trst_id,g2_assignedto,g2_completed,g2_primary,g2_reviewassignedto,g2_state,g2_status';_loadit({"query":query,"list":list});break;
 /*Group3*/case "TRSC_ID":var list='trsc_id,g3_assignedto,g3_reviewassignedto,g3_schedule,g3_status';_loadit({"query":query,"list":list});break;
+/*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 };
@@ -87,7 +86,6 @@ $("#g1_esttime").val()+'","'+
 $("#g1_extensiondone").val()+'","'+
 $("#g1_extensionrequested").val()+'",'+
 $("#g1_notrequired").is(':checked')+',"'+
-$("#g1_pptresttime").val()+'","'+
 $("#g1_priorfees").val()+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_reason").val()+'","'+
@@ -145,6 +143,7 @@ $("#g1_g3_currentfees").val()+'","'+
 $("#g1_g3_delivered").val()+'","'+
 $("#g1_g3_extended").val()+'","'+
 $("#g1_g3_paymentstatus").val()+'","'+
+$("#g1_g3_pptresttime").val()+'","'+
 $("#g1_g3_priorfees").val()+'",'+
 $("#g1_g3_required").is(':checked')+',"'+
 $("#g1_g3_rfr").val()+'","'+
@@ -158,11 +157,9 @@ case'group1_4':var json='{"DATA":[["'+
 $("#tr_id").val()+'","'+
 $("#g1_g4_dropoffappointment").val()+'","'+
 $("#g1_g4_dropoffappointmentlength").val()+'","'+
-$("#g1_g4_dropoffappointmenttime").val()+'","'+
 $("#g1_g4_dropoffappointmentwith").val()+'","'+
 $("#g1_g4_pickupappointment").val()+'","'+
 $("#g1_g4_pickupappointmentlength").val()+'","'+
-$("#g1_g4_pickupappointmenttime").val()+'","'+
 $("#g1_g4_pickupappointmentwith").val()+'",'+
 $("#g1_g4_whileyouwaitappt").is(':checked')+',"'+
 '"]]}'

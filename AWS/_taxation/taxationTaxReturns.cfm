@@ -18,6 +18,7 @@
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="q_p_prtaxdepositschedule">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='p_prtaxdepositschedule'</cfquery>
+<cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
 <!--- Load Labels --->
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,10 +44,10 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
+<div><label for="client_id">Client</label><select id="client_id" onchange="_loadData({'id':'client_id','group':'assetSpouse','page':'taxationtaxreturns'});jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_spouse">Spouse</label><input type="text" class="readonly" id="g1_spouse" readonly ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
-<div><label for="g1_taxyear">Tax Year</label><input type="text" id="g1_taxyear" ></div>
+<div><label for="g1_taxyear">Tax Year</label><select  id="g1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" ></div>
 <div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
 <div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" ></div>
@@ -56,7 +57,6 @@
 <div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime" ></div>
 <div><input id="g1_notrequired" type="checkbox"><label for="g1_notrequired">Not Required</label></div>
 <div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
-<div><label for="g1_pptresttime">PPTR Est Time</label><input type="text" id="g1_pptresttime" ></div>
 </div>
 <!--- GROUP1 SUBGROUP1 --->
 <h4 onClick='_loadData({"id":"tr_id","group":"group1_1","page":"taxationtaxreturns"});$("#isLoaded_group1_1").val(1);'>Preparation</h4>
@@ -98,19 +98,18 @@
 <div><label for="g1_g3_completed">PPTR Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
 <div><label for="g1_g3_delivered">PPTR Delivered</label><input type="text" class="date" id="g1_g3_delivered" ></div>
 <div><label for="g1_g3_paymentstatus">Payment Status</label><select id="g1_g3_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_g3_pptresttime">PPTR Est Time</label><input type="text" id="g1_g3_pptresttime" ></div>
 <div><label for="g1_g3_currentfees">PPTR Current Fees</label><input type="text" id="g1_g3_currentfees" ></div>
 <div><label for="g1_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g3_priorfees" ></div>
 </div>
 <!--- GROUP1 SUBGROUP4 --->
 <h4 onClick='_loadData({"id":"tr_id","group":"group1_4","page":"taxationtaxreturns"});$("#isLoaded_group1_4").val(1)'>Appointment</h4>
 <div>
-<div><label for="g1_g4_dropoffappointment">Drop Off Appointment</label><input type="text" class="date" id="g1_g4_dropoffappointment" ></div>
-<div><label for="g1_g4_dropoffappointmenttime">Appointment Time</label><input type="text" id="g1_g4_dropoffappointmenttime" class="time"></div>
+<div><label for="g1_g4_dropoffappointment">Drop Off Appointment</label><input type="text" class="time" id="g1_g4_dropoffappointment" ></div>
 <div><label for="g1_g4_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g4_dropoffappointmentlength" ></div>
 <div><label for="g1_g4_dropoffappointmentwith">Appointment With</label><select id="g1_g4_dropoffappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g1_g4_whileyouwaitappt" type="checkbox"><label for="g1_g4_whileyouwaitappt">While You Wait Appt</label></div>
-<div><label for="g1_g4_pickupappointment">Pick Up Appointment</label><input type="text" class="date" id="g1_g4_pickupappointment" ></div>
-<div><label for="g1_g4_pickupappointmenttime">Appointment Time</label><input type="text" id="g1_g4_pickupappointmenttime" class="time"></div>
+<div><label for="g1_g4_pickupappointment">Pick Up Appointment</label><input type="text" class="time" id="g1_g4_pickupappointment" ></div>
 <div><label for="g1_g4_pickupappointmentlength">Appointment Length</label><input type="text" id="g1_g4_pickupappointmentlength" ></div>
 <div><label for="g1_g4_pickupappointmentwith">Appointment With</label><select id="g1_g4_pickupappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
@@ -163,7 +162,7 @@
 <a href="#" class="button optional" onClick='$("#group4").accordion({active:1});$("#isLoaded_group4").val(1);'>Add</a>
 </div>
 </div>
-<h4>Add Comment</h4>
+<h4 onClick="$('#isLoaded_group4').val(1);">Add Comment</h4>
 <div>
 <div><label for="g4_commentdate">Date</label><input type="text" class="date" id="g4_commentdate"/></div>
 <div><label for="g4_commenttext">Comment</label><textarea type="text" id="g4_commenttext"></textarea></div>
