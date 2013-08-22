@@ -113,7 +113,7 @@ WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfquerypara
 
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[POWEROFATTORNEY](
-[pa_client]
+[client_id]
  ,[pa_dateofrevocation]
  ,[pa_datesenttoirs]
  ,[pa_datesignedbyclient]
@@ -149,7 +149,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[POWEROFATTORNEY]
-SET[pa_client]=<cfqueryparam value="#j.DATA[1][2]#"/>
+SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pa_dateofrevocation]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[pa_datesenttoirs]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[pa_datesignedbyclient]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][6]) eq 0#"/>

@@ -72,7 +72,7 @@ Build arguments for Related Clients UNDER CONSTRUCTION
 switch(options["group"]){
 	/*Save Client*/
 case'':
-if($("#g1_client").val()!=0){
+if($("#client_id").val()!=0){
 _saveDataCB({'group':'group1'});
 jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
@@ -83,7 +83,7 @@ break;
 case'group1':var json='{"DATA":[["'+
 $("#pa_id").val()+'","'+
 $("#g1_assignedto").val()+'","'+
-$("#g1_client").val()+'","'+
+$("#client_id").val()+'","'+
 $("#g1_dateofrevocation").val()+'","'+
 $("#g1_datesenttoirs").val()+'","'+
 $("#g1_datesignedbyclient").val()+'","'+
@@ -93,7 +93,7 @@ $("#g1_taxforms").val()+'","'+
 $("#g1_taxmatters").val()+'","'+
 $("#g1_taxyears").val()+'","'+
 '"]]}'
-if($g1_client.val()!=0 ){
+if($client_id.val()!=0 ){
 _saveData({group:"group1",payload:$.parseJSON(json),page:"taxationpowerofattorney"});
 }else{
 _saveDataCB({'group':'group2'});

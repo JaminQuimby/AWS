@@ -21,7 +21,9 @@ border-bottom:1px solid #999;}
 *{margin:0;padding:0;border:none;border-collapse :collapse;font-family:"Lucida Sans Unicode","Lucida Grande","tahoma",Verdana,sans-serif; font-size:12px;}
 /*Chosen Mod*/
 .chzn-container a{-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box; height:36px}
+.chzn-container-multi ul{ border: 1px solid #AAAAAA;  border-radius: 5px 5px 5px 5px;  box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);}
 .chzn-container-single .chzn-single{height:36px}
+.chzn-container-multi .chzn-choices li.search-field .default{min-height: 36px !important;}
 /* CSS GROUP MOD*/
 html,body{position:relative;height:auto;min-height:100%;}
 h1,h2,h3,h4,h5,h6{font-size:16px;}
