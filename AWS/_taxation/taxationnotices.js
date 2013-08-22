@@ -14,15 +14,15 @@ _group2=function(){_grid2()}
 
 
 /*Define Grid Instances*/   
-_grid1=function(){_jGrid({
+	_grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"taxationnotices.cfc",
 	"title":"Notices",
-	"fields":{N_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},N_TAXYEARS:{title:'Tax Years'}},
+	"fields":{N_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},N_TAXYEARS:{title:'Tax Years'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#client_id").val(record.CLIENT_ID);$("#n_id").val=(record.N_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"n_id","group":"client"});'
-	})}
+	"functions":'$("#n_id").val(record.N_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"n_id","group":"group1","page":"taxationnotices"});'
+	}); }
 	
 	_grid2=function(){_jGrid({
 	"grid":"grid2",
@@ -42,7 +42,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Client Group*/case "CLIENT_ACTIVE":var list='cl_active,cl_credit_hold,cl_dms_reference,cl_group,cl_name,cl_notes,cl_referred_by,cl_salutation,cl_since,cl_spouse,cl_trade_name,cl_type,s_label1,s_label2,s_label3,s_label4,rc_group';_loadit({"query":query,"list":list});break;
+/*Group1*/case "N_ID":var list='n_id,client_id,g1_assignedto,g1_datenoticereceived,g1_duedateforresponse,g1_estimatedtime,g1_fees,g1_irsstateresponserecieved,g1_matter,g1_methodreceived,g1_missinginforeceived,g1_missinginformation,g1_noticedate,g1_noticenumber,g1_noticestatus,g1_paid,g1_priority,g1_responsecompleted,g1_responsecompletedby,g1_reviewassignedto,g1_reviewcompleted,g1_reviewrequired,g1_responsecompletedby,g1_responsesubmitted,g1_taxform,g1_taxyear';_loadit({"query":query,"list":list});break;
 
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
@@ -62,18 +62,15 @@ $.extend(true, options, params);//turn options into array
 switch(options["group"]){
 	/*Save Client*/
 case'':
-if($("#g1_client").val()!=0){
-_saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true});
+if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
-
 break;
 
 /*Save Group1*/
 case'group1':var json='{"DATA":[["'+
 $("#n_id").val()+'","'+
+$("#client_id").val()+'","'+
 $("#g1_assignedto").val()+'","'+
-$("#g1_client").val()+'","'+
 $("#g1_datenoticereceived").val()+'","'+
 $("#g1_duedateforresponse").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
@@ -97,7 +94,7 @@ $("#g1_responsesubmitted").val()+'","'+
 $("#g1_taxform").val()+'","'+
 $("#g1_taxyear").val()+'","'+
 '"]]}'
-if($g1_client.val()!=0 ){
+if($client_id.val()!=0 ){
 _saveData({group:"group1",payload:$.parseJSON(json),page:"taxationnotices"});
 }else{
 _saveDataCB({'group':'group2'});
@@ -110,6 +107,7 @@ $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
 $("#client_id").val()+'","'+
+$("#pa_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'
