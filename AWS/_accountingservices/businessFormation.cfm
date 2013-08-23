@@ -7,6 +7,10 @@
 <cfset page.title="Business Formation">
 <cfset page.menuLeft="General,Comment">
 <cfset page.trackers="bf_id,comment_id">
+<!--- TO DO --->
+Add Subtasks: 
+	Remove Other Subtask 5 and distribute into Subtask, based on corporate type 
+    
 
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='#page.title#'</cfquery>
