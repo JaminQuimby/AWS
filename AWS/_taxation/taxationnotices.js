@@ -6,21 +6,32 @@ Developers:Jamin Quimby, Raymond Smith
 */
 
 $(document).ready(function(){
-	//Load Grid
-_grid1();
-_group1=function(){}
+//Load Grid
+_grid0();
+_group1=function(){_grid1()}
 _group2=function(){_grid2()}
 });
 
 
-/*Define Grid Instances*/   
+/*Define Grid Instances*/
+
+	_grid0=function(){_jGrid({
+	"grid":"grid0",
+	"url":"taxationnotices.cfc",
+	"title":"Notice Matter",
+	"fields":{N_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},N_TAXYEARS:{title:'Tax Years'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
+	"functions":'$("#n_id").val(record.N_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"n_id","group":"group1","page":"taxationnotices"});'
+	}); }
+	
 	_grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"taxationnotices.cfc",
 	"title":"Notices",
 	"fields":{N_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},N_TAXYEARS:{title:'Tax Years'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
+	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#n_id").val(record.N_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"n_id","group":"group1","page":"taxationnotices"});'
 	}); }
 	

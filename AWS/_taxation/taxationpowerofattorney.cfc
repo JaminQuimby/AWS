@@ -4,7 +4,6 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -27,10 +26,7 @@ SELECT[PA_ID]
 FROM[powerofattorney]
 WHERE[pa_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
-
 </cfcase>
-
-
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
@@ -39,8 +35,6 @@ WHERE[pa_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcatch>
 </cftry>
 </cffunction>
-
-
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -50,8 +44,6 @@ WHERE[pa_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
 <cfargument name="otherid" type="string" required="no">
-
-
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
@@ -102,11 +94,8 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfquery>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
-
-
 </cftry>
 </cffunction>
-
 <!--- [SAVE FUNCTIONs] --->
 <cffunction name="f_saveData" access="remote" output="false" returntype="any">
 <cfargument name="group" type="string" required="true">
@@ -121,7 +110,6 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfquery>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[POWEROFATTORNEY](
 [client_id]
@@ -147,7 +135,6 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-
 <!--- RETURN PA_ID--->
 <cfreturn '{"id":#fquery.id#,"group":"group2","result":"ok"}'>
 <cfcatch>

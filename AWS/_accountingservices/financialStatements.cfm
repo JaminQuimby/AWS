@@ -26,7 +26,7 @@
 
 
 <!--- ENTRANCE --->
-<div id="entrance">
+<div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
 <div><label for="fss_filter">Filter</label><input id="fss_filter" onBlur="_grid1();"/></div>

@@ -5,6 +5,47 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
+<!--- 
+
+
+GROUP1 LEVEL1
+SELECT[nm_id]
+      ,[client_id]
+      ,[nm_name]
+      ,[nm_status]
+FROM [noticematter]
+  
+
+
+GROUP2 LEVEL2  
+SELECT[n_id]
+      ,[m_id]
+      ,[m_assignedto]
+      ,[m_noticestatus]
+      ,[m_priority]
+      ,[m_esttime]
+      ,[m_1_noticenumber]
+      ,[m_1_noticedate]
+      ,[m_1_taxform]
+      ,[m_1_taxyear]
+      ,[m_1_methodreceived]
+      ,[m_1_fees]
+      ,[m_1_paid]
+      ,[m_2_datenoticerec]
+      ,[m_2_resduedate]
+      ,[m_2_rescompleted]
+      ,[m_2_rescompletedby]
+      ,[m_2_revrequired]
+      ,[m_2_revassignedto]
+      ,[m_2_revcompleted]
+      ,[m_2_ressubmited]
+      ,[m_2_irsstateresponse]
+      ,[m_3_missinginfo]
+      ,[m_3_missingrec]
+  FROM[notice]
+  
+--->
+
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -64,18 +105,19 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
 <cfargument name="otherid" type="string" required="no">
-
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
-SELECT[n_id]
-,[n_taxyear]
+SELECT
+[nm_id]
+,[client_id]
+,[nm_name]
+,[nm_status]
 ,[client_name]
-,[CLIENT_ID]
-FROM[v_notices]
+FROM[v_noticematter]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
@@ -87,6 +129,30 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","N_TAXYEAR":"'&N_TAXYEAR&'"}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cfcase>
+<!------>
+<!--- Grid 0 Entrance --->
+<cfcase value="group1">
+<cfquery datasource="AWS" name="fquery">
+SELECT[n_id]
+,[m_1_taxyear]
+,[client_name]
+FROM[v_notice]
+<cfif ARGUMENTS.search neq "">
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","M_1_TAXYEAR":"'&M_1_TAXYEAR&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

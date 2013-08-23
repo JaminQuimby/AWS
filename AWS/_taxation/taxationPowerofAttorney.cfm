@@ -8,13 +8,14 @@
 <cfset page.menuLeft="General,Comment">
 <cfset page.trackers="pa_id,isLoaded_group2,comment_id">
 <!--- Load ALL Select Options for this page--->
-<cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
+<cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[form_id]='#page.formid#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
+<cfquery dbtype="query" name="global_taxmatters">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxmatters'</cfquery>
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
@@ -26,7 +27,7 @@
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
 <!--- ENTRANCE --->
-<div id="entrance">
+<div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
 <div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
@@ -41,9 +42,9 @@
 <div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taxyears">Tax Years</label><select  id="g1_taxyears" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters"><option value="0">&nbsp;</option></select></div>
-<div><label for="g1_preparers">Preparers</label><select  id="g1_preparers" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taxforms">Tax Forms</label><select  id="g1_taxforms" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taxmatters">Tax Matters</label><select  id="g1_taxmatters" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_taxmatters"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_preparers">Preparers</label><select  id="g1_preparers" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_datesignedbyclient">Date Signed By Client</label><input type="text" class="date" id="g1_datesignedbyclient"></div>
 <div><label for="g1_datesenttoirs">Date Sent to IRS</label><input type="text" class="date" id="g1_datesenttoirs" ></div>
 <div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></select></div>

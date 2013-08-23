@@ -10,8 +10,6 @@ _grid1();
 _group1=function(){}
 _group2=function(){_grid2()}
 });
-
-
 /*Define Grid Instances*/   
 	_grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -32,7 +30,6 @@ _group2=function(){_grid2()}
 	"functions":''
 	})}
 	
-	
 //Load Data call Back
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
@@ -44,8 +41,6 @@ switch(query.COLUMNS[0]){
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 };
-
-
 /*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
 var options={
@@ -56,20 +51,12 @@ var options={
 try{	
 $.extend(true, options, params);//turn options into array
 var $client_id=$("#client_id");
-alert(options["group"])
-/*TO DO ?*/
-//var e58=document.getElementById("m_fs_subtaskgroup").value
-//,e59=document.getElementById("m_fs_historicalfs").value;
-/*
-Build arguments for Related Clients UNDER CONSTRUCTION
-*/
 switch(options["group"]){
 	/*Save Client*/
 case'':
 if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
 break;
-
 /*Save Group1*/
 case'group1':var json='{"DATA":[["'+
 $("#pa_id").val()+'","'+
@@ -88,7 +75,6 @@ if($client_id.val()!="" ){_saveData({group:"group1",payload:$.parseJSON(json),pa
 _saveDataCB({'group':'group2'});
 	}
 break;
-
 /*----------SAVE GROUP 2----------*/
 case'group2':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
@@ -107,8 +93,6 @@ break;
 case'group3':
 jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
 break;
-
-
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'none':break;
@@ -117,7 +101,5 @@ case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }
 }catch(err){alert(err)}};
-
-
 /*Error Handelers*/
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};
