@@ -6,13 +6,16 @@
 <cfset page.formid=10>
 <cfset page.title="Payroll Checks">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="pc_id,isLoaded_group2,comment_id">
+<cfset page.trackers="prc_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group2,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 
 <!--- Load Select Options for each dropdown--->
+<cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+<cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
+
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
@@ -31,7 +34,7 @@
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="fss_filter">Filter</label><input id="fss_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
@@ -51,12 +54,12 @@
 <div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" ></div>
-<div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"><option value="0">&nbsp;</option></select></div>
-<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"><option value="0">&nbsp;</option><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 
 </div>
 <!---Subgroup 1--->
-<h4>Obtain Info</h4>
+<h4 onClick='_loadData({"id":"prc_id","group":"group1_1","page":"payrollpayrollchecks"});$("#isLoaded_group1_1").val(1);'>Obtain Info</h4>
 <div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
@@ -65,7 +68,7 @@
 </div>
 
 <!---Subgroup 2--->
-<h4>Preparation</h4>
+<h4 onClick='_loadData({"id":"prc_id","group":"group1_2","page":"payrollpayrollchecks"});$("#isLoaded_group1_2").val(1);'>Preparation</h4>
 <div>
 <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
@@ -74,7 +77,7 @@
 </div>
 
 <!---Subgroup 3--->
-<h4>Review</h4>
+<h4 onClick='_loadData({"id":"prc_id","group":"group1_3","page":"payrollpayrollchecks"});$("#isLoaded_group1_3").val(1);'>Review</h4>
 <div>
 <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_completed">Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
@@ -83,7 +86,7 @@
 </div>
 
 <!---Subgroup 4--->
-<h4>Assembly</h4>
+<h4 onClick='_loadData({"id":"prc_id","group":"group1_4","page":"payrollpayrollchecks"});$("#isLoaded_group1_4").val(1);'>Assembly</h4>
 <div>
 <div><label for="g1_g4_assignedto">Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g4_completed">Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
@@ -92,18 +95,13 @@
 </div>
 
 <!---Subgroup 5--->
-<h4>Delivery</h4>
+<h4 onClick='_loadData({"id":"prc_id","group":"group1_5","page":"payrollpayrollchecks"});$("#isLoaded_group1_5").val(1);'>Delivery</h4>
 <div>
 <div><label for="g1_g5_assignedto">Assigned To</label><select id="g1_g5_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>
 <div><label for="g1_g5_completedby">Response Completed By</label><select id="g1_g5_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" id="g1_g5_estimatedtime" ></div>
 </div>
-
-
-
-
-
 </div>
 
 

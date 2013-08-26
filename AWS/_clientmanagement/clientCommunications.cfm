@@ -3,8 +3,11 @@
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_clientmanagement">
 <cfset page.location="clientcommunications">
+<cfset page.formid=12>
 <cfset page.title="Client Communications">
 <cfset page.menuLeft="General,SubTasks,Comment">
+<cfset page.trackers="c_id,isLoaded_group2,comment_id">
+
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -45,7 +48,7 @@
 <div><label for="g1_starttime">Start Time</label><input type="text" id="g1_starttime" ></div>
 <div><label for="g1_takenby">Taken By</label><select id="g1_takenby"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_for">For</label><select id="g1_for"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_client">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id">Client</label><select id="g1_client"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_caller">Caller</label><input type="text" id="g1_caller" ></div>
@@ -53,7 +56,7 @@
 <div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone"></div>
 <div><label for="g1_ext">Ext</label><input type="text" id="g1_ext"></div>
 <div><label for="g1_faxnumber">Fax Number</label><input type="text" id="g1_faxnumber"></div>
-<div><label for="g1_email">Email</label><input type="text" id="g1_email"></div>
+<div><label for="g1_emailaddress">Email</label><input type="text" id="g1_emailaddress"></div>
 <div><input id="g1_voicemail" type="checkbox"><label for="g1_voicemail">Voice Mail</label></div>
 <div><input id="g1_personalcontact" type="checkbox"><label for="g1_personalcontact">Personal Contact</label></div>
 <div><input id="g1_textmessage" type="checkbox"><label for="g1_textmessage">Text Message</label></div>

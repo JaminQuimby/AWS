@@ -188,7 +188,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","M_1_TAXYEAR":"'&M_1_TAXYEAR&'"}'>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -287,7 +287,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#fquery.id#,"group":"group2_1","result":"ok"}'>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">

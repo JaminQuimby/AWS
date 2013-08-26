@@ -46,7 +46,7 @@ _grid3=function(){_jGrid({
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
 try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
 /*Group1*/case "NM_ID":var list='nm_id,client_id,g1_mattername,g1_matterstatus';_loadit({"query":query,"list":list});break;
