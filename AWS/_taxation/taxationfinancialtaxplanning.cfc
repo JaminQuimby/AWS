@@ -4,7 +4,29 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
+<!---
 
+SELECT[ftp_id]
+      ,[client_id]
+      ,[ftp_category]
+      ,[ftp_status]
+      ,[ftp_assignedto]
+      ,[ftp_priority]
+      ,[ftp_requestservice]
+      ,[ftp_duedate]
+      ,[ftp_inforequested]
+      ,[ftp_inforeceived]
+      ,[ftp_infocompiled]
+      ,[ftp_missinginfo]
+      ,[ftp_missinginforec]
+      ,[ftp_reportcompleted]
+      ,[ftp_finalclientmeeting]
+      ,[ftp_esttime]
+      ,[ftp_fees]
+      ,[ftp_paid]
+  FROM [financialtaxplanning]
+
+ --->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">

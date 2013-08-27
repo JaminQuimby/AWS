@@ -1,4 +1,28 @@
-
+<!---
+SELECT TOP 1000 [c_id]
+      ,[client_id]
+      ,[c_date]
+      ,[c_takenby]
+      ,[c_for]
+      ,[c_caller]
+      ,[c_telephone]
+      ,[c_ext]
+      ,[c_faxnumber]
+      ,[c_emailaddress]
+      ,[c_voicemail]
+      ,[c_personalcontact]
+      ,[c_textmessage]
+      ,[c_email]
+      ,[c_mail]
+      ,[c_fax]
+      ,[c_briefmessage]
+      ,[c_responsenotneeded]
+      ,[c_returncall]
+      ,[c_completed]
+      ,[c_fees]
+      ,[c_paid]
+  FROM [AWS].[dbo].[communications]
+  --->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">

@@ -4,7 +4,48 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-
+<!---
+SELECT TOP 1000 [of_id]
+      ,[client_id]
+      ,[of_taxyear]
+      ,[of_period]
+      ,[of_state]
+      ,[of_task]
+      ,[of_form]
+      ,[of_duedate]
+      ,[of_filingdeadline]
+      ,[of_extensiondeadline]
+      ,[of_extensioncomplted]
+      ,[of_status]
+      ,[of_priority]
+      ,[of_esttime]
+      ,[of_missinginfo]
+      ,[of_mireceived]
+      ,[of_fees]
+      ,[of_paymentstatus]
+      ,[of_deliverymethod]
+      ,[of_obtaininfo_assignedto]
+      ,[of_obtaininfo_datecompleted]
+      ,[of_obtaininfo_completedby]
+      ,[of_obtaininfo_estimatedtime]
+      ,[of_preparation_assignedto]
+      ,[of_preparation_datecompleted]
+      ,[of_preparation_completedby]
+      ,[of_preparation_estimatedtime]
+      ,[of_review_assignedto]
+      ,[of_review_datecompleted]
+      ,[of_review_completedby]
+      ,[of_review_estimatedtime]
+      ,[of_assembly_assignedto]
+      ,[of_assembly_datecomplted]
+      ,[of_assembly_compltedby]
+      ,[of_assembly_estimatedtime]
+      ,[of_delivery_assignedto]
+      ,[of_delivery_datecomplted]
+      ,[of_delivery_compltedby]
+      ,[of_delivery_esttime]
+  FROM [otherfilings]
+  --->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">

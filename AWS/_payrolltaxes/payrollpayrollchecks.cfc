@@ -4,7 +4,43 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-
+<!--- 
+[pc_id]
+      ,[client_id]
+      ,[pc_year]
+      ,[pc_payenddate]
+      ,[pc_paydate]
+      ,[pc_datedue]
+      ,[pc_esttime]
+      ,[pt_altfreq]
+      ,[pc_missingInfo]
+      ,[pc_missingreceived]
+      ,[pc_infoReceived]
+      ,[pc_fees]
+      ,[pc_paymentstatus]
+      ,[pc_deliverymethod]
+      ,[pc_obtaininfo_assignedto]
+      ,[pc_obtaininfo_datecompleted]
+      ,[pc_obtaininfo_completedby]
+      ,[pc_obtaininfo_esttime]
+      ,[pc_preparation_assignedto]
+      ,[pc_preparation_datecompleted]
+      ,[pc_preparation_completedby]
+      ,[pc_preparation_esttime]
+      ,[pc_review_assignedto]
+      ,[pc_review_datecompleted]
+      ,[pc_review_completedby]
+      ,[pc_review_esttime]
+      ,[pc_assembly_assignedto]
+      ,[pc_assembly_datecompleted]
+      ,[pc_assembly_completedby]
+      ,[pc_assembly_esttime]
+      ,[pc_delivery_assignedto]
+      ,[pc_delivery_datecompleted]
+      ,[pc_delivery_completedby]
+      ,[pc_delivery_esttime]
+  FROM [payrollcheckstatus]
+--->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">

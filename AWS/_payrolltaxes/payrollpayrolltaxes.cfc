@@ -4,7 +4,48 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
+<!--- 
 
+[pt_int]
+      ,[client_name]
+      ,[pt_year]
+      ,[pt_month]
+      ,[pt_duedate]
+      ,[pt_type]
+      ,[pt_lastpay]
+      ,[pt_priority]
+      ,[pt_esttime]
+      ,[pt_missinginfo]
+      ,[pt_missingreceived]
+      ,[pt_fees]
+      ,[pt_paymentstatus]
+      ,[pt_deliverymethod]
+      ,[pt_obtaininfo_assignedto]
+      ,[pt_obtaininfo_datecomplted]
+      ,[pt_obtaininfo_completedby]
+      ,[pt_obtaininfo_esttime]
+      ,[pt_entry_assignedto]
+      ,[pt_entry_datecompleted]
+      ,[pt_entry_completedby]
+      ,[pt_entry_esttime]
+      ,[pt_rec_assignedto]
+      ,[pt_rec_datecompleted]
+      ,[pt_rec_completedby]
+      ,[pt_rec_esttime]
+      ,[pt_review_assignedto]
+      ,[pt_review_datecompleted]
+      ,[pt_review_completedby]
+      ,[pt_review_esttime]
+      ,[pt_assembly_assignedto]
+      ,[pt_assembly_datecompleted]
+      ,[pt_assembly_completedby]
+      ,[pt_assembly_esttime]
+      ,[pt_delivery_assignedto]
+      ,[pt_delivery_datecompleted]
+      ,[pt_delivery_completedby]
+      ,[pt_delivery_esttime]
+	  
+	  --->
 <!--- LOAD SELECT BOXES --->
 <cffunction name="f_loadSelect" access="remote" output="false">
 <cfargument name="selectName" type="string" required="yes">
