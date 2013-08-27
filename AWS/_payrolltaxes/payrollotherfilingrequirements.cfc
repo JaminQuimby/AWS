@@ -59,80 +59,92 @@ SELECT[OF_ID]
 ,[client_id]
 ,[of_deliverymethod]
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
-,[of_estimatedtime]
+,[of_esttime]
 ,CONVERT(VARCHAR(10),[of_extensioncompleted], 101)AS[of_extensioncompleted]
 ,CONVERT(VARCHAR(10),[of_extensiondeadline], 101)AS[of_extensiondeadline]
 ,[of_fees]
-,[of_filingdeadline]
+,CONVERT(VARCHAR(10),[of_filingdeadline], 101)AS[of_filingdeadline]
 ,[of_form]
-,CONVERT(VARCHAR(10),[of_missinginforeceived], 101)AS[of_missinginforeceived]
-,[of_missinginformation]
+,CONVERT(VARCHAR(10),[of_mireceived], 101)AS[of_mireceived]
+,[of_missinginfo]
 ,[of_paymentstatus]
 ,[of_period]
 ,[of_priority]
 ,[of_state]
 ,[of_status]
-,[of_type]
-,[of_year]
-FROM[v_payrollotherfilingrequirements]
+,[of_task]
+,[of_taxyear]
+FROM[v_otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 <!--- Load Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[of_1_assignedto]
-,CONVERT(VARCHAR(10),[of_1_completed], 101)AS[of_1_completed]
-,[of_1_completedby]
-,[of_1_estimatedtime]
-FROM[payrollotherfilingrequirements]
+SELECT[of_obtaininfo_assignedto]
+,CONVERT(VARCHAR(10),[of_obtaininfo_completed], 101)AS[of_obtaininfo_completed]
+,[of_obtaininfo_completedby]
+,[of_obtaininfo_estimatedtime]
+FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 <!--- Load Group1 Subgroup2 --->
 <cfcase value="group1_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[of_2_assignedto]
-,CONVERT(VARCHAR(10),[of_2_completed], 101)AS[of_2_completed]
-,[of_2_completedby]
-,[of_2_estimatedtime]
-FROM[payrollotherfilingrequirements]
+SELECT[of_preparation_assignedto]
+,CONVERT(VARCHAR(10),[of_preparation_completed], 101)AS[of_preparation_completed]
+,[of_preparation_completedby]
+,[of_preparation_estimatedtime]
+FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 <!--- Load Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[of_3_assignedto]
-,CONVERT(VARCHAR(10),[of_3_completed], 101)AS[of_3_completed]
-,[of_3_completedby]
-,[of_3_estimatedtime]
-FROM[payrollotherfilingrequirements]
+SELECT[of_review_assignedto]
+,CONVERT(VARCHAR(10),[of_review_completed], 101)AS[of_review_completed]
+,[of_review_completedby]
+,[of_review_estimatedtime]
+FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 <!--- Load Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[of_4_assignedto]
-,CONVERT(VARCHAR(10),[of_4_completed], 101)AS[of_4_completed]
-,[of_4_completedby]
-,[of_4_estimatedtime]
-FROM[payrollotherfilingrequirements]
+SELECT[of_assembly_assignedto]
+,CONVERT(VARCHAR(10),[of_assembly_completed], 101)AS[of_assembly_completed]
+,[of_assembly_completedby]
+,[of_assembly_estimatedtime]
+FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 <!--- Load Group1 Subgroup5 --->
 <cfcase value="group1_5">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[of_5_assignedto]
-,CONVERT(VARCHAR(10),[of_5_completed], 101)AS[of_5_completed]
-,[of_5_completedby]
-,[of_5_estimatedtime]
-FROM[payrollotherfilingrequirements]
+SELECT[of_delivery_assignedto]
+,CONVERT(VARCHAR(10),[of_delivery_completed], 101)AS[of_delivery_completed]
+,[of_delivery_completedby]
+,[of_delivery_estimatedtime]
+FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+</cfswitch>
+<cfreturn SerializeJSON(fQuery)>
+<cfcatch>
+<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+
+
+
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
@@ -152,10 +164,10 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[of_id]
-,[of_year]
+,[of_taxyear]
 ,[client_name]
 ,[CLIENT_ID]
-FROM[v_payrollotherfilingrequirements]
+FROM[v_otherfilings]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
@@ -166,7 +178,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","OF_YEAR":"'&OF_YEAR&'"}'>
+<cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","OF_TAXYEAR":"'&OF_TAXYEAR&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -215,26 +227,27 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][11])><cfset j.DATA[1][11]=1><cfelse><cfset j.DATA[1][11]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[PAYROLLOTHERFILINGREQUIREMENTS](
+INSERT INTO[OTHERFILINGS](
 [client_id]
-[of_deliverymethod]
-[of_duedate]
-[of_estimatedtime]
-[of_extensioncompleted]
-[of_extensiondeadline]
-[of_fees]
-[of_filingdeadline]
-[of_form]
-[of_missinginforeceived]
-[of_missinginformation]
-[of_paymentstatus]
-[of_period]
-[of_priority]
-[of_state]
-[of_status]
-[of_type]
-[of_year]
+,[of_deliverymethod]
+,[of_duedate]
+,[of_esttime]
+,[of_extensioncompleted]
+,[of_extensiondeadline]
+,[of_fees]
+,[of_filingdeadline]
+,[of_form]
+,[of_mireceived]
+,[of_missinginfo]
+,[of_paymentstatus]
+,[of_period]
+,[of_priority]
+,[of_state]
+,[of_status]
+,[of_task]
+,[of_taxyear]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -260,29 +273,35 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
 <!--- RETURN OF_ID--->
 <cfreturn '{"id":#fquery.id#,"group":"group1_1","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLOTHERFILINGREQUIREMENTS]
+UPDATE[OTHERFILINGS]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_deliverymethod]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_duedate]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[of_estimatedtime]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[of_esttime]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[of_extensioncompleted]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[of_extensiondeadline]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[of_fees]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[of_filingdeadline]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[of_form]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[of_missinginforeceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[of_missinginformation]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[of_mireceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[of_missinginfo]=<cfqueryparam value="#j.DATA[1][12]#"/>
 ,[of_paymentstatus]=<cfqueryparam value="#j.DATA[1][13]#"/>
 ,[of_period]=<cfqueryparam value="#j.DATA[1][14]#"/>
 ,[of_priority]=<cfqueryparam value="#j.DATA[1][15]#"/>
 ,[of_state]=<cfqueryparam value="#j.DATA[1][16]#"/>
 ,[of_status]=<cfqueryparam value="#j.DATA[1][17]#"/>
-,[of_type]=<cfqueryparam value="#j.DATA[1][18]#"/>
-,[of_year]=<cfqueryparam value="#j.DATA[1][19]#"/>
+,[of_task]=<cfqueryparam value="#j.DATA[1][18]#"/>
+,[of_taxyear]=<cfqueryparam value="#j.DATA[1][19]#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
@@ -290,11 +309,11 @@ WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLOTHERFILINGREQUIREMENTS]
-SET[of_1_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[of_1_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[of_1_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[of_1_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
+UPDATE[OTHERFILINGS]
+SET[of_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[of_obtaininfo_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[of_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[of_obtaininfo_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -303,11 +322,11 @@ WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup2 --->
 <cfcase value="group1_2">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLOTHERFILINGREQUIREMENTS]
-SET[of_2_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[of_2_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[of_2_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[of_2_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
+UPDATE[OTHERFILINGS]
+SET[of_preparation_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[of_preparation_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[of_preparation_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[of_preparation_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -316,11 +335,11 @@ WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLOTHERFILINGREQUIREMENTS]
-SET[of_3_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[of_3_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[of_3_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[of_3_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
+UPDATE[OTHERFILINGS]
+SET[of_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[of_review_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[of_review_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[of_review_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -329,22 +348,22 @@ WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLOTHERFILINGREQUIREMENTS]
-SET[of_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[of_4_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[of_4_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[of_4_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
+UPDATE[OTHERFILINGS]
+SET[of_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[of_assembly_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[of_assembly_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[of_assembly_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_5","result":"ok"}'>
 </cfcase>
 <cfcase value="group1_5"><cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLOTHERFILINGREQUIREMENTS]
-SET[of_5_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[of_5_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[of_5_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[of_5_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
+UPDATE[OTHERFILINGS]
+SET[of_delivery_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[of_delivery_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[of_delivery_completedby]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[of_delivery_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

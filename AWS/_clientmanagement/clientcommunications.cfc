@@ -1,3 +1,4 @@
+<cfcomponent output="true">
 <!---
 SELECT TOP 1000 [c_id]
       ,[client_id]
@@ -19,7 +20,7 @@ SELECT TOP 1000 [c_id]
       ,[c_responsenotneeded]
       ,[c_returncall]
       ,[c_completed]
-      ,[c_fees]
+      ,[c_fees]                        duedate, credithold,spouse, starttime
       ,[c_paid]
   FROM [AWS].[dbo].[communications]
   --->
@@ -51,7 +52,7 @@ SELECT[C_ID]
 ,[c_paid]
 ,[c_personalcontact]
 ,[c_responsenotneeded]
-,[c_returnedcall]
+,[c_returncall]
 ,[c_spouse]
 ,[c_starttime]
 ,[c_takenby]
@@ -62,7 +63,14 @@ FROM[v_communications]
 WHERE[c_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
-
+</cfswitch>
+<cfreturn SerializeJSON(fQuery)>
+<cfcatch>
+<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cffunction>
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
@@ -176,7 +184,7 @@ INSERT INTO[COMMUNICATIONS](
 ,[c_paid]
 ,[c_personalcontact]
 ,[c_responsenotneeded]
-,[c_returnedcall]
+,[c_returncall]
 ,[c_spouse]
 ,[c_starttime]
 ,[c_takenby]
@@ -225,7 +233,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[c_paid]=<cfqueryparam value="#j.DATA[1][17]#"/>
 ,[c_personalcontact]=<cfqueryparam value="#j.DATA[1][18]#"/>
 ,[c_responsenotneeded]=<cfqueryparam value="#j.DATA[1][19]#"/>
-,[c_returnedcall]=<cfqueryparam value="#j.DATA[1][20]#"/>
+,[c_returncall]=<cfqueryparam value="#j.DATA[1][20]#"/>
 ,[c_spouse]=<cfqueryparam value="#j.DATA[1][21]#"/>
 ,[c_starttime]=<cfqueryparam value="#j.DATA[1][22]#"/>
 ,[c_takenby]=<cfqueryparam value="#j.DATA[1][23]#"/>
@@ -269,3 +277,4 @@ SELECT SCOPE_IDENTITY()AS[comment_id]
 </cftry>
 </cffunction>
 </cfcomponent>
+

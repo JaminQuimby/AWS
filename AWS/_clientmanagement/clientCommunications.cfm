@@ -5,7 +5,7 @@
 <cfset page.location="clientcommunications">
 <cfset page.formid=12>
 <cfset page.title="Client Communications">
-<cfset page.menuLeft="General,SubTasks,Comment">
+<cfset page.menuLeft="General,Comment">
 <cfset page.trackers="c_id,isLoaded_group2,comment_id">
 
 <!--- Load ALL Select Options for this page--->
@@ -26,18 +26,16 @@
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
 
-<!---TRACKERS--->
-<input type="hidden" id="client_id" value="0"/><!--- Client ID --->
 
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="fss_filter">Filter</label><input id="fss_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">

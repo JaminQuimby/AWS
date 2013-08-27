@@ -59,13 +59,9 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
+var $client_id=$("#client_id");
 
-/*TO DO ?*/
-var e58=document.getElementById("m_fs_subtaskgroup").value
-,e59=document.getElementById("m_fs_historicalfs").value;
-/*
-Build arguments for Related Clients UNDER CONSTRUCTION
-*/
+
 switch(options["group"]){
 /*Save Client*/
 case'':
@@ -78,6 +74,7 @@ break;
 /*Save Group1*/
 
 case'group1':var json='{"DATA":[["'+
+$("#c_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_briefmessage").val()+'","'+
 $("#g1_caller").val()+'",'+

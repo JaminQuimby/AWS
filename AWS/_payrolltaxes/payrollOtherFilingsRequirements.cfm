@@ -31,7 +31,7 @@
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
 
 <!---TRACKERS--->
-<input type="hidden" id="client_id" value="0"/><!--- Client ID --->
+
 
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
@@ -41,17 +41,17 @@
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_year">Year</label><input type="text" id="g1_year"></div>
+<div><label for="g1_taxyear">Year</label><input type="text" id="g1_taxyear"></div>
 <div><label for="g1_period">Period</label><select id="g1_period"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_state">State</label><select id="g1_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_type">Type</label><select id="g1_type"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_task">Type</label><select id="g1_task"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_form">Form</label><select id="g1_form"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 <div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline"></div>

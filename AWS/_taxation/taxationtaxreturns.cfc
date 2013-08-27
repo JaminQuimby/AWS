@@ -275,6 +275,7 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[TAXRETURNS](
 [client_id]
@@ -308,6 +309,12 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
 <!--- RETURN TR_ID--->
 <cfreturn '{"id":#fquery.id#,"group":"group1_1","result":"ok"}'>
+
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
