@@ -32,7 +32,6 @@
 
 <!---TRACKERS--->
 
-
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
@@ -41,14 +40,13 @@
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');">Add</a>
-</div></div></div>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_taxyear">Year</label><input type="text" id="g1_taxyear"></div>
+<div><label for="g1_taxyear">Tax Year</label><input type="text" id="g1_taxyear"></div>
 <div><label for="g1_period">Period</label><select id="g1_period"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_state">State</label><select id="g1_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_task">Type</label><select id="g1_task"><option value="0">&nbsp;</option></select></div>
@@ -116,7 +114,7 @@
 
 <!--- Comments --->
 <div id="group2" class="gf-checkbox">
-<h3>Comments</h3>
+<h3 onClick="_grid2();">Comments</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
 <div class="tblGrid" id="grid2"></div>

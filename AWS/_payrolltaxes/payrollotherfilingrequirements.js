@@ -16,7 +16,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"payrollotherfilingrequirements.cfc",
 	"title":"Other Filings",
-	"fields":{OF_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},OF_TYPE:{title:'Type'}},
+	"fields":{OF_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},OF_TAXYEAR:{title:'Tax Year'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#of_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"of_id","group":"group1","page":"payrollotherfilingrequirements"});'
@@ -40,11 +40,12 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Group1*/case "OF_ID":var list='of_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_taxyear,g1_type';_loadit({"query":query,"list":list});break;
-/*Group1_2*/case "OF_2_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completed,g1_g2_completedby,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_3*/case "OF_3_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completed,g1_g3_completedby,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_4*/case "OF_4_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completed,g1_g4_completedby,g1_g4_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_5*/case "OF_5_ASSIGNEDTO":var list='g1_g5_assignedto,g1_g5_completed,g1_g5_completedby,g1_g5_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1*/case "OF_ID":var list='of_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_task,g1_taxyear';_loadit({"query":query,"list":list});break;
+/*Group1_1*/case "OF_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_2*/case "OF_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_3*/case "OF_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_4*/case "OF_ASSEMBLY_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completedby,g1_g4_completed,g1_g4_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_5*/case "OF_DELIVERY_ASSIGNEDTO":var list='g1_g5_assignedto,g1_g5_completedby,g1_g5_completed,g1_g5_estimatedtime';_loadit({"query":query,"list":list});break;
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 };
@@ -59,14 +60,14 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
-var $client_id=$("#client_id");
-alert(options["group"])
+alert(options["group"]);
+
 switch(options["group"]){
-/*Save Client*/
 case'':
-if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
+if($("#client_id").val()!=0){
+_saveDataCB({'group':'group1'});
+jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
-break;
 
 case'group1':var json='{"DATA":[["'+
 $("#of_id").val()+'","'+
@@ -89,17 +90,15 @@ $("#g1_status").val()+'","'+
 $("#g1_task").val()+'","'+
 $("#g1_taxyear").val()+'","'+
 '"]]}'
-if($client_id.val()!="" ){_saveData({group:"group1",payload:$.parseJSON(json),page:"payrollotherfilingrequirements"});
-}else{
-_saveDataCB({'group':'group2'});
-	}
+if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"});
+}else{_saveDataCB({'group':'group1_1'})}
 break;
 
 case'group1_1':var json='{"DATA":[["'+
 $("#of_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
-$("#g1_g1_completed").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
 $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
@@ -110,8 +109,8 @@ break;
 case'group1_2':var json='{"DATA":[["'+
 $("#of_id").val()+'","'+
 $("#g1_g2_assignedto").val()+'","'+
-$("#g1_g2_completed").val()+'","'+
 $("#g1_g2_completedby").val()+'","'+
+$("#g1_g2_completed").val()+'","'+
 $("#g1_g2_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
@@ -122,8 +121,8 @@ break;
 case'group1_3':var json='{"DATA":[["'+
 $("#of_id").val()+'","'+
 $("#g1_g3_assignedto").val()+'","'+
-$("#g1_g3_completed").val()+'","'+
 $("#g1_g3_completedby").val()+'","'+
+$("#g1_g3_completed").val()+'","'+
 $("#g1_g3_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
@@ -134,8 +133,8 @@ break;
 case'group1_4':var json='{"DATA":[["'+
 $("#of_id").val()+'","'+
 $("#g1_g4_assignedto").val()+'","'+
-$("#g1_g4_completed").val()+'","'+
 $("#g1_g4_completedby").val()+'","'+
+$("#g1_g4_completed").val()+'","'+
 $("#g1_g4_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
@@ -146,8 +145,8 @@ break;
 case'group1_5':var json='{"DATA":[["'+
 $("#of_id").val()+'","'+
 $("#g1_g5_assignedto").val()+'","'+
-$("#g1_g5_completed").val()+'","'+
 $("#g1_g5_completedby").val()+'","'+
+$("#g1_g5_completed").val()+'","'+
 $("#g1_g5_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}

@@ -44,11 +44,11 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request 
 {
 switch(query.COLUMNS[0]){
 /*Group1*/case "PC_ID":var list='pc_id,client_id,g1_altfrequency,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginforeceived,g1_missinginformation,g1_paydate,g1_payenddate,g1_paymentstatus,g1_year';_loadit({"query":query,"list":list});break;
-/*Group1_1*/case "PC_1_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completed,g1_g1_completedby,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_2*/case "PC_2_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completed,g1_g2_completedby,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_3*/case "PC_3_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completed,g1_g3_completedby,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_4*/case "PC_4_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completed,g1_g4_completedby,g1_g4_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_5*/case "PC_5_ASSIGNEDTO":var list='g1_g5_assignedto,g1_g5_completed,g1_g5_completedby,g1_g5_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_1*/case "PC_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_2*/case "PC_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_3*/case "PC_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_4*/case "PC_ASSEMBLY_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completedby,g1_g4_completed,g1_g4_estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_5*/case "PC_DELIVERY_ASSIGNEDTO":var list='g1_g5_assignedto,g1_g5_completedby,g1_g5_completed,g1_g5_estimatedtime';_loadit({"query":query,"list":list});break;
 
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
@@ -68,35 +68,35 @@ alert(options["group"]);
 
 switch(options["group"]){
 case'':
-if($("#g1_client").val()!=0){
+if($("#client_id").val()!=0){
 _saveDataCB({'group':'group1'});
 jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
 
-/*Save Client*/
 case'group1':var json='{"DATA":[["'+
 $("#pc_id").val()+'","'+
 $("#client_id").val()+'",'+
 $("#g1_altfrequency").is(':checked')+',"'+
-$("#g1_deliverymethod").val()+'","'+
 $("#g1_duedate").val()+'","'+
+$("#g1_deliverymethod").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_fees").val()+'","'+
-$("#g1_missinginforeceived").val()+'",'+
+$("#g1_fees").val()+'",'+
 $("#g1_missinginformation").is(':checked')+',"'+
+$("#g1_missinginforeceived").val()+'","'+
 $("#g1_paydate").val()+'","'+
 $("#g1_payenddate").val()+'","'+
 $("#g1_paymentstatus").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
 if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollpayrollchecks"});
-}else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false})}	
+}else{_saveDataCB({'group':'group1_1'})}
 break;
 /*----------Save Group 1 Subgroup 1-------------*/
 case'group1_1':var json='{"DATA":[["'+
+$("#pc_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
-$("#g1_g1_completed").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
+$("#g1_g1_completed").val()+'","'+
 $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"payrollpayrollchecks"})}
@@ -105,9 +105,10 @@ break;
 
 /*Subgroup 2*/
 case'group1_2':var json='{"DATA":[["'+
+$("#pc_id").val()+'","'+
 $("#g1_g2_assignedto").val()+'","'+
-$("#g1_g2_completed").val()+'","'+
 $("#g1_g2_completedby").val()+'","'+
+$("#g1_g2_completed").val()+'","'+
 $("#g1_g2_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"payrollpayrollchecks"})}
@@ -116,9 +117,10 @@ break;
 
 /*Subgroup 3*/
 case'group1_3':var json='{"DATA":[["'+
+$("#pc_id").val()+'","'+
 $("#g1_g3_assignedto").val()+'","'+
-$("#g1_g3_completed").val()+'","'+
 $("#g1_g3_completedby").val()+'","'+
+$("#g1_g3_completed").val()+'","'+
 $("#g1_g3_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.parseJSON(json),page:"payrollpayrollchecks"})}
@@ -127,9 +129,10 @@ break;
 
 /*Subgroup 4*/
 case'group1_4':var json='{"DATA":[["'+
+$("#pc_id").val()+'","'+
 $("#g1_g4_assignedto").val()+'","'+
-$("#g1_g4_completed").val()+'","'+
 $("#g1_g4_completedby").val()+'","'+
+$("#g1_g4_completed").val()+'","'+
 $("#g1_g4_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.parseJSON(json),page:"payrollpayrollchecks"})}
@@ -138,9 +141,10 @@ break;
 
 /*Subgroup 5*/
 case'group1_5':var json='{"DATA":[["'+
+$("#pc_id").val()+'","'+
 $("#g1_g5_assignedto").val()+'","'+
-$("#g1_g5_completed").val()+'","'+
 $("#g1_g5_completedby").val()+'","'+
+$("#g1_g5_completed").val()+'","'+
 $("#g1_g5_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"payrollpayrollchecks"})}

@@ -47,7 +47,7 @@
 <div><label for="g1_payenddate">Pay End Date</label><input type="text" class="date" id="g1_payenddate"></div>
 <div><label for="g1_paydate">Pay Date</label><input type="text" class="date" id="g1_paydate"></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
-<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" class="time" id="g1_estimatedtime" ></div>
+<div><label for="g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_estimatedtime" ></div>
 <div><input id="g1_altfrequency" type="checkbox"><label for="g1_altfrequency">altfrequency</label></div>
 <div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
@@ -62,7 +62,7 @@
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
 <div><label for="g1_g1_completedby">Response Completed By</label><select id="g1_g1_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text" class="time" id="g1_g1_estimatedtime" ></div>
+<div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_g1_estimatedtime" ></div>
 </div>
 
 <!---Subgroup 2--->
@@ -71,7 +71,7 @@
 <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
 <div><label for="g1_g2_completedby">Response Completed By</label><select id="g1_g2_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g2_estimatedtime">Estimated Time</label><input type="text" class="time" id="g1_g2_estimatedtime" ></div>
+<div><label for="g1_g2_estimatedtime">Estimated Time</label><input type="text"  id="g1_g2_estimatedtime" ></div>
 </div>
 
 <!---Subgroup 3--->
@@ -80,7 +80,7 @@
 <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_completed">Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
 <div><label for="g1_g3_completedby">Response Completed By</label><select id="g1_g3_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g3_estimatedtime">Estimated Time</label><input type="text" class="time" id="g1_g3_estimatedtime" ></div>
+<div><label for="g1_g3_estimatedtime">Estimated Time</label><input type="text"  id="g1_g3_estimatedtime" ></div>
 </div>
 
 <!---Subgroup 4--->
@@ -89,7 +89,7 @@
 <div><label for="g1_g4_assignedto">Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g4_completed">Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
 <div><label for="g1_g4_completedby">Response Completed By</label><select id="g1_g4_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g4_estimatedtime">Estimated Time</label><input type="text" class="time" id="g1_g4_estimatedtime" ></div>
+<div><label for="g1_g4_estimatedtime">Estimated Time</label><input type="text"  id="g1_g4_estimatedtime" ></div>
 </div>
 
 <!---Subgroup 5--->
@@ -98,7 +98,7 @@
 <div><label for="g1_g5_assignedto">Assigned To</label><select id="g1_g5_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>
 <div><label for="g1_g5_completedby">Response Completed By</label><select id="g1_g5_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" class="time" id="g1_g5_estimatedtime" ></div>
+<div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text"  id="g1_g5_estimatedtime" ></div>
 </div>
 </div>
 
