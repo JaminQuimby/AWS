@@ -40,8 +40,7 @@ _grid3=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"8","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#nm_id").val()+'","loadType":"group3"}',
 	"functions":''
 	})}
-	
-	
+
 //Load Data call Back
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
@@ -50,10 +49,10 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request w
 {
 switch(query.COLUMNS[0]){
 /*Group1*/case "NM_ID":var list='nm_id,client_id,g1_mattername,g1_matterstatus';_loadit({"query":query,"list":list});break;
-/*Group2*/case "N_ID":var list='n_id,g2_assignedto,g2_estimatedtime,g2_matter,g2_noticestatus,g2_priority';_loadit({"query":query,"list":list});break;
-/*Group2_1*/case "N_G2_1_FEES":var list='g2_1_fees,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_paid,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
-/*Group2_2*/case "N_G2_2_DATENOTICERECEIVED":var list='g2_2_datenoticereceived,g2_2_duedateforresponse,g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
-/*Group2_3*/case "N_G2_3_MISSINGINFORECEIVED":var list='g2_3_missinginforeceived,g2_3_missinginformation';_loadit({"query":query,"list":list});break;
+/*Group2*/case "N_ID":var list='n_id,g2_assignedto,g2_estimatedtime,g2_noticestatus,g2_priority';_loadit({"query":query,"list":list});break;
+/*Group2_1*/case "N_1_FEES":var list='g2_1_fees,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_paid,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
+/*Group2_2*/case "N_2_DATENOTICERECEIVED":var list='g2_2_datenoticereceived,g2_2_duedateforresponse,g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
+/*Group2_3*/case "N_3_MISSINGINFORECEIVED":var list='g2_3_missinginforeceived,g2_3_missinginformation';_loadit({"query":query,"list":list});break;
 
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
@@ -83,6 +82,7 @@ if($client_id.val()!="" ){_saveData({group:"group1","payload":$.parseJSON(json),
 break;
 /*----------Save Group 2-------------*/
 case'group2':var json='{"DATA":[["'+
+$("#n_id").val()+'","'+
 $("#nm_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+

@@ -8,13 +8,14 @@
 <cfset page.menuLeft="General,Notice,Comment">
 <cfset page.trackers="nm_id,n_id,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,comment_id">
 <!--- Load ALL Select Options for this page--->
-<cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
+<cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[form_id]='#page.formid#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
+<cfquery dbtype="query" name="global_noticenumber">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_noticenumber'</cfquery>
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
@@ -33,7 +34,7 @@
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3');">Add Notice Matter</a>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3');">Add</a>
 </div></div></div>
 <!--- Group 1--->
 <div id="group1" class="gf-checkbox">
@@ -57,7 +58,6 @@
 </div>
 <h4>Add Notice</h4>
 <div>
-<!--- THIS WILL BE REMOVED AND SET STATIC ---><div><label for="client_id">Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_matter">Matter</label><select id="g2_matter"><option value="0">&nbsp;</option></select></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_noticestatus">Notice Status</label><select id="g2_noticestatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -67,12 +67,12 @@
 <!--- GROUP 2_1 --->
 <h4 onClick='_loadData({"id":"n_id","group":"group2_1","page":"taxationnotices"});$("#isLoaded_group2_1").val(1);'>Details</h4>
 <div>
-<div><label for="g2_1_noticenumber">Notice Number</label><select id="g2_noticenumber"><option value="0">&nbsp;</option></select></div>
-<div><label for="g2_1_noticedate">Notice Date</label><input type="text" class="date" id="g2_noticedate"></div>
+<div><label for="g2_1_noticenumber">Notice Number</label><select id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_noticedate">Notice Date</label><input type="text" class="date" id="g2_1_noticedate"></div>
 <div><label for="g2_1_taxform">Tax Form</label><select id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_taxyear">Tax Year</label><select id="g2_1_taxyear"><option value="0">&nbsp;</option></select></div>
 <div><label for="g2_1_methodreceived">Method Recieved</label><select id="g2_1_methodreceived"><option value="0">&nbsp;</option></select></div>
-<div><label for="g2_1_fees">Fees</label><input type="text" id="g2_fees"></div>
+<div><label for="g2_1_fees">Fees</label><input type="text" id="g2_1_fees"></div>
 <div><label for="g2_1_paid">Paid</label><select id="g2_1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!--- GROUP 2_2 --->

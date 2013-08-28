@@ -59,9 +59,9 @@ SELECT[n_id]
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[nm_id]
-	[client_id]
-      ,[nm_name]
-      ,[nm_status]
+,[client_id]
+,[nm_name]
+,[nm_status]
 FROM[noticematter]
 WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -71,8 +71,7 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fQuery">
 SELECT[n_id]
       ,[n_assignedto]
-      ,[n_estimatedtime]
-      ,[n_matter]
+      ,[n_esttime]
       ,[n_noticestatus]
       ,[n_priority]
 FROM[notice]
@@ -82,8 +81,7 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub1 --->
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[n_id]
-      ,[n_1_fees]
+SELECT[n_1_fees]
       ,[n_1_methodreceived]
       ,[n_1_noticedate]
       ,[n_1_noticenumber]
@@ -97,8 +95,7 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub2 --->
 <cfcase value="group2_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[n_id]
-      ,[n_2_datenoticereceived]
+SELECT[n_2_datenoticereceived]
       ,[n_2_duedateforresponse]
       ,[n_2_irsstateresponserecieved]
       ,[n_2_responsecompleted]
@@ -114,8 +111,7 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group3 sub3 --->
 <cfcase value="group2_3">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[n_id]
-      ,[n_3_missinginforeceived]
+SELECT[n_3_missinginforeceived]
       ,[n_3_missinginformation]
 FROM[notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -145,7 +141,7 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
-<!--- Grid 0 Entrance --->
+<!--- Grid 0  --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[nm_id]
@@ -171,12 +167,13 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 
 
-<!--- Grid 2 Entrance --->
+<!--- Grid 2  --->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
 SELECT[n_id]
+,[n_assignedtoTEXT]
 ,[n_1_taxyear]
-,[client_name]
+
 FROM[v_notice]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -188,7 +185,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'"}'>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'","N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -240,9 +237,9 @@ WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfquerypara
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[NOTICEMATTER](
-      [client_id]
- ,[nm_name]
- ,[nm_status]
+[client_id]
+,[nm_name]
+,[nm_status]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -258,7 +255,8 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICEMATTER]
-SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+SET
+[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[nm_name]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[nm_status]=<cfqueryparam value="#j.DATA[1][4]#"/>
 WHERE[NM_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -272,7 +270,7 @@ WHERE[NM_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[NOTICE](
-   [nm_id]
+[nm_id]
 ,[n_assignedto]
 ,[n_esttime]
 ,[n_noticestatus]
@@ -343,7 +341,7 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
  <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
 SET[n_3_missinginfo]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[n_3_missingrec]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[n_3_missingrec]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
