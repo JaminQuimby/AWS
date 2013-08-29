@@ -4,9 +4,6 @@ Developers:Jamin Quimby, Raymond Smith
 7/26/2013 - Started
 8/16/2013
 */
-
-
-	
 $(document).ready(function(){
 /*Define Grid Instances*/   
 _grid1();
@@ -43,7 +40,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Group1*/case "PC_ID":var list='pc_id,client_id,g1_altfrequency,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginforeceived,g1_missinginformation,g1_paydate,g1_payenddate,g1_paymentstatus,g1_year';_loadit({"query":query,"list":list});break;
+/*Group1*/case "PC_ID":var list='pc_id,client_id,g1_altfrequency,g1_duedate,g1_deliverymethod,g1_estimatedtime,g1_fees,g1_missinginformation,g1_missinginforeceived,g1_paydate,g1_payenddate,g1_paymentstatus,g1_year';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "PC_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "PC_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "PC_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -64,7 +61,6 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 
 switch(options["group"]){
 case'':
@@ -72,6 +68,7 @@ if($("#client_id").val()!=0){
 _saveDataCB({'group':'group1'});
 jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+break;
 
 case'group1':var json='{"DATA":[["'+
 $("#pc_id").val()+'","'+
@@ -160,7 +157,7 @@ $("#pc_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'
-if($("#isLoaded_group2").val()!=0){
+if($("#comment_isLoaded").val()!=0){
 _saveData({group:"group2",payload:$.parseJSON(json),page:"payrollpayrollchecks"});
 }else{_saveDataCB({'group':'group3'})}
 break;

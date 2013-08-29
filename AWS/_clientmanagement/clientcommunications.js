@@ -20,7 +20,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"clientcommunications.cfc",
 	"title":"Communications",
-	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_FOR:{title:'For'}},
+	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_FORTEXT:{title:'For'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#co_id").val(record.CO_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"co_id","group":"group1","page":"clientcommunications"});'
@@ -60,7 +60,6 @@ var options={
 try{	
 $.extend(true, options, params);//turn options into array
 var $client_id=$("#client_id");
-alert(options["group"]);
 switch(options["group"]){
 /*Save Client*/
 case'':
@@ -108,14 +107,14 @@ $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
 $("#client_id").val()+'","'+
+$("#co_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+
+$("#g2_commenttext").val()+'","'+
 '"]]}'
 if($("comment_isLoaded").val()!=0 && $("#g2_commenttext").val()!=""){
-_saveData({group:"group3",payload:$.parseJSON(json),page:"clientcommunications"});
+_saveData({group:"group2",payload:$.parseJSON(json),page:"clientcommunications"});
 }else{_saveDataCB({'group':'group3'});}
 break;
-/*Save Group3*/
 case'group3':
 jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
 break;
@@ -129,7 +128,5 @@ case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }
 }catch(err){alert(err)}};
-
-
 /*Error Handelers*/
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};// JavaScript Document// JavaScript Document

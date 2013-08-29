@@ -40,7 +40,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Group1*/case "FTP_ID":var list='ftp_id,client_id,g1_assignedto,g1_category,g1_duedate,g1_estimatedtime,g1_fees,g1_finalclientmeeting,g1_informationcompiled,g1_informationreceived,g1_informationrequested,g1_missinginforeceived,g1_missinginformation,g1_paid,g1_priority,g1_reportcompleted,g1_requestforservices,g1_status';_loadit({"query":query,"list":list});break;
+/*Group1*/case "FTP_ID":var list='ftp_id,client_id,g1_assignedto,g1_category,g1_duedate,g1_estimatedtime,g1_fees,g1_finalclientmeeting,g1_informationcompiled,g1_informationreceived,g1_informationrequested,g1_missinginformation,g1_missinginforeceived,g1_paid,g1_priority,g1_reportcompleted,g1_requestforservices,g1_status';_loadit({"query":query,"list":list});break;
 
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
@@ -56,22 +56,18 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
-
-/*TO DO ?*/
-var e58=document.getElementById("m_fs_subtaskgroup").value
-,e59=document.getElementById("m_fs_historicalfs").value;
-/*
-Build arguments for Related Clients UNDER CONSTRUCTION
-*/
 switch(options["group"]){
 /*Save Client*/
 case'':
-if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
+if($("#client_id").val()!=0){
+_saveDataCB({'group':'group1'});
+jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
 break;
 
 /*Save Group1*/
 case'group1':var json='{"DATA":[["'+
+$("#ftp_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_assignedto").val()+'","'+
 $("#g1_category").val()+'","'+
@@ -81,22 +77,20 @@ $("#g1_fees").val()+'","'+
 $("#g1_finalclientmeeting").val()+'","'+
 $("#g1_informationcompiled").val()+'","'+
 $("#g1_informationreceived").val()+'","'+
-$("#g1_informationrequested").val()+'","'+
-$("#g1_missinginforeceived").val()+'",'+
+$("#g1_informationrequested").val()+'",'+
 $("#g1_missinginformation").is(':checked')+',"'+
+$("#g1_missinginforeceived").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_reportcompleted").val()+'","'+
 $("#g1_requestforservices").val()+'","'+
 $("#g1_status").val()+'","'+
 '"]]}'
-if($client_id.val()!="" ){_saveData({group:"group1",payload:$.parseJSON(json),page:"taxationfinancialtaxplanning"});
-}else{
-_saveDataCB({'group':'group2'});
-	}
+if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationfinancialtaxplanning"});
+}else{_saveDataCB({'group':'group2'});}	
 break;
 
-/*----------SAVE GROUP 2----------*/
+/*Save Group2*/
 case'group2':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
@@ -106,9 +100,9 @@ $("#ftp_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'
-if($("#isLoaded_group2").val()!=0){
+if($("comment_isLoaded").val()!=0 && $("#g2_commenttext").val()!=""){
 _saveData({group:"group2",payload:$.parseJSON(json),page:"taxationfinancialtaxplanning"});
-}else{_saveDataCB({'group':'group3'})}
+}else{_saveDataCB({'group':'group3'});}
 break;
 /*This group does not exist in the cfm, this trigger instance is to update the posted message for the client.*/
 case'group3':

@@ -56,13 +56,13 @@ SELECT[PC_ID]
 ,[pc_deliverymethod]
 ,[pc_esttime]
 ,[pc_fees]
-,[pc_missingInfo]
+,[pc_missinginfo]
 ,CONVERT(VARCHAR(10),[pc_missingreceived], 101)AS[pc_missingreceived]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,[pc_paymentstatus]
 ,[pc_year]
-FROM[v_payrollcheckstatus]
+FROM[payrollcheckstatus]
 WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -220,7 +220,7 @@ INSERT INTO[payrollcheckstatus](
 ,[pc_deliverymethod]
 ,[pc_esttime]
 ,[pc_fees]
-,[pc_missingInfo]
+,[pc_missinginfo]
 ,[pc_missingreceived]
 ,[pc_paydate]
 ,[pc_payenddate]
@@ -260,13 +260,13 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_datedue]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[pc_deliverymethod]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[pc_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[pc_fees]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[pc_missingInfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[pc_fees]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[pc_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[pc_missingreceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[pc_paydate]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[pc_payenddate]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[pc_paymentstatus]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[pc_year]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[pc_year]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

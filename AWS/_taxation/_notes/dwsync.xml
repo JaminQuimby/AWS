@@ -11,4 +11,8 @@
 <file name="taxationnotices.js" server="https://ftp.awensa.com/MS/MS0213/" local="130221426292755184" remote="130221426540000000" />
 <file name="taxationNotices.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130221426962143471" remote="130221427190000000" />
 <file name="taxationnotices.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130221431688483802" remote="130221431920000000" />
+<file name="taxationfinancialtaxplanning.css" server="https://ftp.awensa.com/MS/MS0213/" local="130222769438400075" remote="130222769490000000" />
+<file name="taxationFinancialTaxPlanning.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130222788858159981" remote="130222788910000000" />
+<file name="taxationfinancialtaxplanning.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130222803143653467" remote="130222803180000000" />
+<file name="taxationfinancialtaxplanning.js" server="https://ftp.awensa.com/MS/MS0213/" local="130222814040628279" remote="130222814080000000" />
 </dwsync>

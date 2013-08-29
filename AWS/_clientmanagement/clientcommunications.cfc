@@ -89,7 +89,7 @@ WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[co_id]
-,[co_for]
+,[co_forTEXT]
 ,[client_name]
 ,[CLIENT_ID]
 FROM[v_communications]
@@ -103,7 +103,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CO_FOR":"'&CO_FOR&'"}'>
+<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CO_FORTEXT":"'&CO_FORTEXT&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -113,11 +113,11 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- Grid 2  --->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
-SELECT[comment_id],CONVERT(VARCHAR(10),[co_date], 101)AS[co_date],[u_name],[u_email],[co_notes]
+SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
 FROM[v_comments]
 WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[other_id]=<cfqueryparam value="#ARGUMENTS.otherid#"/> 
 
-AND[co_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

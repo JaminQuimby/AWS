@@ -60,7 +60,6 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 
 switch(options["group"]){
 case'':
@@ -68,6 +67,7 @@ if($("#client_id").val()!=0){
 _saveDataCB({'group':'group1'});
 jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+break;
 
 case'group1':var json='{"DATA":[["'+
 $("#of_id").val()+'","'+
@@ -162,8 +162,8 @@ $("#of_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'
-if($("#isLoaded_group2").val()!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"payrollpayrollotherfilingrequirements"});
+if($("#comment_isLoaded").val()!=0){
+_saveData({group:"group2",payload:$.parseJSON(json),page:"payrollotherfilingrequirements"});
 }else{_saveDataCB({'group':'group3'})}
 break;
 /*This group does not exist in the cfm, this trigger instance is to update the posted message for the client.*/
