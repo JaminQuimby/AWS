@@ -23,7 +23,7 @@ _grid1=function(){_jGrid({
 	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_FORTEXT:{title:'For'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#co_id").val(record.CO_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"co_id","group":"group1","page":"clientcommunications"});'
+	"functions":'$("#co_id").val(record.CO_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"co_id","group":"group1","page":"clientcommunications"});_loadData({"id":"client_id","group":"assetSpouse","page":"clientcommunications"});'
 	}); }
 
 _grid2=function(){_jGrid({
@@ -44,6 +44,7 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request 
 {
 switch(query.COLUMNS[0]){
 /*Group1*/case "CO_ID":var list='co_id,client_id,g1_briefmessage,g1_caller,g1_completed,g1_credithold,g1_date,g1_duedate,g1_email,g1_emailaddress,g1_ext,g1_fax,g1_faxnumber,g1_fees,g1_for,g1_mail,g1_paid,g1_personalcontact,g1_responsenotneeded,g1_returnedcall,g1_takenby,g1_telephone,g1_textmessage,g1_voicemail';_loadit({"query":query,"list":list});break;
+/*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}

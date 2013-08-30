@@ -13,7 +13,7 @@
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
 <cfquery dbtype="query" name="global_returntypes">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_returntypes'</cfquery>
-<cfquery dbtype="query" name="q_m_of_task">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='m_of_task'</cfquery>
+<cfquery dbtype="query" name="global_otherfilingtype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_otherfilingtype'</cfquery>
 <cfquery dbtype="query" name="q_cl_type">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='cl_type'</cfquery>
 <cfquery dbtype="query" name="q_p_paycheckfrequency">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='p_paycheckfrequency'</cfquery>
 <cfquery dbtype="query" name="q_p_prtaxdepositschedule">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='p_prtaxdepositschedule'</cfquery>
@@ -262,7 +262,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="m_of_duedate">Due Date</label><input name="m_of_duedate" id="m_of_duedate"  class="date"data-placeholder="Select a Due Date." onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="m_of_period">Period</label><select name="m_of_period" id="m_of_period" data-placeholder="Select aPeriod." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_of_state">State</label><select name="m_of_state" id="m_of_state" data-placeholder="Select a State." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="m_of_task">Task</label><select name="m_of_task" id="m_of_task" data-placeholder="Select a Task." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="q_m_of_task"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="m_of_task">Task</label><select name="m_of_task" id="m_of_task" data-placeholder="Select a Task." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_otherfilingtype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="m_of_form">Form</label><select name="m_of_form" id="m_of_form" data-placeholder="Select a Form." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
 </div>
 </div>

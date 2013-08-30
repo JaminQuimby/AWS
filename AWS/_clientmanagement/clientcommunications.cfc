@@ -1,35 +1,18 @@
 <cfcomponent output="true">
-<!---
-SELECT TOP 1000 [co_id]
-      ,[client_id]
-      ,[co_date]
-      ,[co_takenby]
-      ,[co_for]
-      ,[co_caller]
-      ,[co_telephone]
-      ,[co_ext]
-      ,[co_faxnumber]
-      ,[co_emailaddress]
-      ,[co_voicemail]
-      ,[co_personalcontact]
-      ,[co_textmessage]
-      ,[co_email]
-      ,[co_mail]
-      ,[co_fax]
-      ,[co_briefmessage]
-      ,[co_responsenotneeded]
-      ,[co_returncall]
-      ,[co_completed]
-      ,[co_fees]                        duedate, credithold,spouse, starttime
-      ,[co_paid]
-  FROM [AWS].[dbo].[communications]
-  --->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
+<!--- Load Assets --->
+<cfcase value="assetSpouse">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[client_spouse]
+FROM[client_listing]
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
 <!--- Load Group1--->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
