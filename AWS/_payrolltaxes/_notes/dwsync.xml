@@ -4,11 +4,12 @@
 <file name="payrollpayrollchecks.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130222744148927414" remote="130222744190000000" />
 <file name="payrollPayrollChecks.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130222727410000000" remote="130222737080000000" />
 <file name="payrollotherfilingrequirements.js" server="https://ftp.awensa.com/MS/MS0213/" local="130222763929117078" remote="130222763960000000" />
-<file name="payrollOtherFilingsRequirements.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130223045570494159" remote="130223045880000000" />
+<file name="payrollOtherFilingsRequirements.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130222762862967567" remote="130222763040000000" />
 <file name="payrollotherfilingrequirements.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130222743996600783" remote="130222755130000000" />
 <file name="payrollpayrollchecks.css" server="https://ftp.awensa.com/MS/MS0213/" local="130222715219031728" remote="130222715260000000" />
 <file name="payrollotherfilingrequirements.css" server="https://ftp.awensa.com/MS/MS0213/" local="130222744854355615" remote="130222744890000000" />
-<file name="payrollPayrollTaxes.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130222825396749384" remote="130222834970000000" />
-<file name="payrollpayrolltaxes.css" server="https://ftp.awensa.com/MS/MS0213/" local="130222817133764345" remote="130222817210000000" />
-<file name="payrollpayrolltaxes.js" server="https://ftp.awensa.com/MS/MS0213/" local="130222833849790850" remote="130222834880000000" />
+<file name="payrollPayrollTaxes.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130223556816127601" remote="130223566430000000" />
+<file name="payrollpayrolltaxes.css" server="https://ftp.awensa.com/MS/MS0213/" local="130222817133764345" remote="130223525290000000" />
+<file name="payrollpayrolltaxes.js" server="https://ftp.awensa.com/MS/MS0213/" local="130223609662588728" remote="130223609720000000" />
+<file name="payrollpayrolltaxes.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130223621008676180" remote="130223621120000000" />
 </dwsync>

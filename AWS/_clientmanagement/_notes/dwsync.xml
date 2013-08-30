@@ -3,8 +3,9 @@
 <file name="clientadministrativetasks.js" server="https://ftp.awensa.com/MS/MS0213/" local="130216833098185039" remote="130216833210000000" />
 <file name="clientAdministrativeTasks.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130216833623065061" remote="130216833730000000" />
 <file name="clientadministrativetasks.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130216832483869902" remote="130216832610000000" />
-<file name="clientcommunications.js" server="https://ftp.awensa.com/MS/MS0213/" local="130222989945532593" remote="130222990160000000" />
-<file name="clientcommunications.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130222986639983527" remote="130222988980000000" />
-<file name="clientCommunications.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130222987022705417" remote="130222987260000000" />
-<file name="clientMaintenance.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130223040699305543" remote="130223040950000000" />
+<file name="clientcommunications.js" server="https://ftp.awensa.com/MS/MS0213/" local="130222698732698402" remote="130222698790000000" />
+<file name="clientcommunications.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130222683290072565" remote="130222690900000000" />
+<file name="clientCommunications.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130222688630125895" remote="130222690830000000" />
+<file name="clientMaintenance.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130223695416411565" remote="130223695540000000" />
+<file name="clientMaintenance.js" server="https://ftp.awensa.com/MS/MS0213/" local="130223695440288879" remote="130223695470000000" />
 </dwsync>

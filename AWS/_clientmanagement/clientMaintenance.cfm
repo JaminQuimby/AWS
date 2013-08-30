@@ -1,10 +1,12 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<!--- PAGE ARGUMENTS --->
 <cfset session.module="_clientmanagement">
 <cfset page.location="clientmaintenance">
+<cfset page.formid=1>
 <cfset page.title="Client Management">
+<cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,StateInformation,RelatedClients,Documents">
+<cfset page.trackers="cl_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>
@@ -31,90 +33,46 @@ DOCUMENTS
 ACTIVITY (CLIENT DATA)
 
 --->
+
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
 <cfinclude template="../assets/inc/header.cfm">
-
-<!---Body Start --->
 <body onLoad=" ">
-<!---Group Trackers for Changes--->
-<input type="hidden" id="cf_isLoaded" value="0"/><!---Custom Fields --->
-<input type="hidden" id="t_isLoaded" value="0"/><!--- Services Taxes --->
-<input type="hidden" id="p_isLoaded" value="0"/><!--- Services Payroll --->
-<input type="hidden" id="a_isLoaded" value="0"/><!--- Services Accounting --->
-<input type="hidden" id="co_isLoaded" value="0"/><!---Contacts --->
-<input type="hidden" id="m_pt_isLoaded" value="0"/><!---Maintance Payroll Taxes--->
-<input type="hidden" id="m_pc_isLoaded" value="0"/><!---Maintance Payroll Checks--->
-<input type="hidden" id="m_mct_isLoaded" value="0"/><!---Maintance Accounting and Consulting Tasks --->
-<input type="hidden" id="m_tsl_isLoaded" value="0"/><!---Maintance Tax Status Listing --->
-<input type="hidden" id="m_fs_isLoaded" value="0"/><!--- Maintance Fiancial Statements--->
-<input type="hidden" id="m_of_isLoaded" value="0"/><!--- Maintance Other Filings --->
-<input type="hidden" id="s_isLoaded" value="0"/><!--- State Information --->
-<input type="hidden" id="sl_isLoaded" value="0"/><!---State Labels--->
-<input type="hidden" id="rc_isLoaded" value="0" /><!--- Current Contact Loaded --->
-<input type="hidden" id="cl_id" value="0"/><!--- Current CLIENT LOADED 0 is none--->
-<input type="hidden" id="cl_fieldid" value="0"  /><!---  Current Custom Field Loaded --->
-<input type="hidden" id="co_id" value="0" /><!--- Current Contact Loaded --->
-<!--- NOT USED YET--->
-<input type="hidden" id="m_fs_id" value="0" /><!--- Current Finincial Statement Loaded --->
-<input type="hidden" id="m_mct_id" value="0" /><!--- Current Accounting and Consulting --->
-<input type="hidden" id="m_pc_id" value="0" /><!--- Current Payroll Checks loaded --->
-<input type="hidden" id="m_pt_id" value="0" /><!--- Current Payroll taxes loaded --->
-<input type="hidden" id="m_tsl_id" value="0" /><!--- Current Taxes Status Listing loaded --->
-<input type="hidden" id="m_of_id" value="0" /><!--- Current Other Filings loaded --->
-<input type="hidden" id="si_id" value="0" /><!--- State Information Loaded --->
-<!--- VERTICAL MENUS --->
-<div class="menus">
-<!--- SMALL MENU --->
-<nav id="smallMenu" style="display:inherit;">
-<h1 class="_clientmanagement">&nbsp;</h1>
-</nav>
-<!--- LARGE MENU --->
-<nav id="largeMenu" style="display:none;">
-<h1 class="_clientmanagement">Client Maintenance</h1>
-<ul id="menuLeft"><li><a onclick="_toggle('client');_hide('entrance,services,contacts,maintenance,state,rclients,upload');_highlight(this);" class="_highlight">Client</a></li>
-<li><a onclick="_toggle('services');_hide('entrance,client,contacts,maintenance,state,rclients,upload');_highlight(this);">Services</a></li>
-<li><a onclick="_toggle('contacts');_hide('entrance,client,services,maintenance,state,rclients,upload');_highlight(this);_gridContacts();">Contacts</a></li>
-<li><a onclick="_toggle('maintenance');_hide('entrance,client,contacts,services,state,rclients,upload');_highlight(this);">Maintenance</a></li>
-<li><a onclick="">Activity</a></li>
-<li><a onclick="_toggle('state');_hide('entrance,client,contacts,services,maintenance,rclients,upload');_highlight(this);_gridStateInformation();">State Information</a></li>
-<li><a onclick="_toggle('rclients');_hide('entrance,client,contacts,services,maintenance,state,upload');_highlight(this);_gridClientRelations();">Related Clients</a></li>
-<li><a onclick="_toggle('upload');_hide('entrance,client,contacts,services,maintenance,state,rclients');_highlight(this);">Documents</a></li>
-</ul>
-</nav>
-</div>
+<!--- Load Left Menus --->
+<cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
-<div id="content" class="contentsmall">
-<!--- HORIZONTAL MENUS --->
-<nav id="topMenu"><cfinclude template="../assets/module/menu/menu.cfm"></nav>
-<!--- CLIENT DETAIL GRID --->
-<div id="entrance" class=".gf-checkbox">
-<h3>Clients Search</h3>
+<div id="content" class="contentsmall"><nav id="topMenu">
+<cfinclude template="../assets/module/menu/menu.cfm"></nav>
+
+
+<!--- ENTRANCE --->
+<div id="entrance" class="gf-checkbox">
+<cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="cl_filter">Filter</label><input name="cl_filter" id="cl_filter" onBlur="_gridClients();"/></div>
-<!--- Client Grid --->
-<div class="tblGrid" id="gridClients1"></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
+<!--- Entrace Grid --->
+<div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
-</div>
-</div>
-</div>
+</div></div></div>
 <!--- CLIENT TAB --->
-<div  id="client" style="display:none;" class="gf-checkbox">
+<!---Group 1 --->
+
+<div id="group1" class="gf-checkbox">
 <h3>Client</h3>
 <div>
-<div><label for="cl_name">Client Name</label><input name="cl_name" id="cl_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="cl_spouse">Spouse</label><input name="cl_spouse" id="cl_spouse" type="text"/></div>
-<div><label for="cl_salutation">Salutation</label><input name="cl_salutation" id="cl_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="cl_type">Type</label><select name="cl_type" id="cl_type" type="text"  data-placeholder="Choose type of client..."onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="q_cl_type"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="cl_since">Client Since</label><input name="cl_since" id="cl_since" type="text" class="valid_off date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="cl_trade_name">Trade Name</label><input name="cl_trade_name" id="cl_trade_name" type="text" /></div>
-<div><label for="cl_referred_by">Referred By</label><input name="cl_referred_by" id="cl_referred_by"  type="text"/></div>
-<div><label for="cl_dms_reference">DMS Reference</label><input name="cl_dms_reference" id="cl_dms_reference" type="text"/></div>
-<div><input name="cl_active" id="cl_active"  type="checkbox" /><label for="cl_active">Active</label></div>
-<div><input name="cl_credit_hold" id="cl_credit_hold"  type="checkbox" /><label for="cl_credit_hold">Credit Hold</label></div>
-<div><label for="cl_notes">Notes</label><textarea name="cl_notes" id="cl_notes" cols="4" rows="4" ></textarea></div>
+<div><label for="cl_name">Client Name</label><input id="cl_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
+<div><label for="cl_spouse">Spouse</label><input id="cl_spouse" type="text"/></div>
+<div><label for="cl_salutation">Salutation</label><input id="cl_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
+<div><label for="cl_type">Type</label><select id="cl_type" type="text"  data-placeholder="Choose type of client..."onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="q_cl_type"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="cl_since">Client Since</label><input id="cl_since" type="text" class="valid_off date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="cl_trade_name">Trade Name</label><input id="cl_trade_name" type="text" /></div>
+<div><label for="cl_referred_by">Referred By</label><input id="cl_referred_by"  type="text"/></div>
+<div><label for="cl_dms_reference">DMS Reference</label><input id="cl_dms_reference" type="text"/></div>
+<div><input id="cl_active"  type="checkbox" /><label for="cl_active">Active</label></div>
+<div><input id="cl_credit_hold"  type="checkbox" /><label for="cl_credit_hold">Credit Hold</label></div>
+<div><label for="cl_notes">Notes</label><textarea id="cl_notes" cols="4" rows="4" ></textarea></div>
 </div>
 <h4 onClick="_gridCustomfields();">Saved Custom Fields</h4>
 <div>
@@ -129,13 +87,17 @@ ACTIVITY (CLIENT DATA)
 <div><label for="cl_fieldname">Field Name</label><input name="cl_fieldname" id="cl_fieldname" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="cl_fieldvalue">Field Value</label><input name="cl_fieldvalue" id="cl_fieldvalue" type="text" /></div>
 </div>
+
+<!---subgroup --->
 <h4>Groups</h4>
 <div>
 <div><label for="cl_group">Groups</label><select name="cl_group" id="cl_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="global_clientgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>
+
+
 <!--- SERVICES TAB --->
-<div id="services" style="display:none;"class="gf-checkbox">
+<div id="services" class="gf-checkbox">
 <h3>Services</h3><div></div>
 <h4 onClick="_loadData({'id':'cl_id','group':'taxes','page':'clientmaintenance'});$('#t_isLoaded').val(1)">Taxes</h4>
 <div>
@@ -173,7 +135,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 <!--- CONTACTS TAB --->
-<div id="contacts" style="display:none;"class="gf-checkbox">
+<div id="contacts" class="gf-checkbox">
 <h3>Saved Contacts</h3>
 <div id="loadContacts">
 <div><label for="co_filter">Filter</label><input name="co_filter" id="co_filter" onBlur="loadGridContacts(0);"/></div>
@@ -207,7 +169,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 <!--- MAINTANCE TAB --->
-<div id="maintenance" style="display:none;"class="gf-checkbox">
+<div id="maintenance" class="gf-checkbox">
 <h3>Maintenance</h3><div></div>
 <!--- ADD TO FINANCIAL STATEMENTS --->
 <h4 onclick="$('#m_fs_isLoaded').val(1);">Financial Statements</h4>
@@ -267,7 +229,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 <!--- STATE INFORMATION --->
-<div id="state" style="display:none;"class="gf-checkbox">
+<div id="state" class="gf-checkbox">
 <h3>Saved State Information</h3>
 <div id="loadStateInformation">
 <div><label for="s_filter">Filter</label><input name="s_filter" id="s_filter" onBlur="loadGridContacts(0);"/></div>
@@ -299,7 +261,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 <!--- RELATED CLIENTS TAB --->
-<div id="rclients" style="display:none;"class="gf-checkbox">
+<div id="rclients" class="gf-checkbox">
 <h3>Related Client Details</h3>
 <div id="loadRelatedClients">
 <div><label for="rc_filter">Filter</label><input name="rc_filter" id="rc_filter" onBlur="loadRelatedClients(0);"/></div>
@@ -315,7 +277,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 <!--- UPLOAD FILES TAB --->
-<div id="upload" style="display:none;"class="gf-checkbox">
+<div id="upload" class="gf-checkbox">
 <h3>Upload Files</h3>
 <div>
 <cfinclude template="../assets/module/fileUpload/upload.cfm">

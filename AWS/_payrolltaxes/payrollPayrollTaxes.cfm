@@ -2,7 +2,8 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset session.module="_payrolltaxes">
-<cfset page.location="payrolltaxes">
+<cfset page.location="payrollpayrolltaxes">
+<cfset page.formid=13>
 <cfset page.title="Payroll Taxes">
 <cfset page.menuLeft="General,Comment">
 <cfset page.trackers="pt_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group1_6,comment_isLoaded,comment_id">
@@ -14,6 +15,10 @@
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
+<cfquery dbtype="query" name="global_month">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>
+<cfquery dbtype="query" name="global_returntypes">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_returntypes'</cfquery>
+
+
 
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,8 +30,6 @@
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
-
-<!---TRACKERS--->
 
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
@@ -43,10 +46,11 @@
 <div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_year">Year</label><input type="text" id="g1_year"></div>
-<div><label for="g1_type">Type</label><select id="g1_type"><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_month">Month</label><select id="g1_month"></option><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput><option value="0">&nbsp;</option></select></div>
+<div><label for="g1_type">Return Type</label><select id="g1_type"></option><option value="0">&nbsp;</option><cfoutput query="global_returntypes"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
-<div><label for="g1_lastpay">Pay Date</label><input type="text" class="date" id="g1_lastpay"></div>
-<div><label for="g1_priority">Estimated Time</label><input type="text"  id="g1_priority" ></div>
+<div><label for="g1_lastpay">Last Pay</label><input type="text" class="date" id="g1_lastpay"></div>
+<div><label for="g1_priority">Priority</label><input type="text"  id="g1_priority" ></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_estimatedtime" ></div>
 <div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
@@ -98,7 +102,6 @@
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>
 <div><label for="g1_g5_completedby">Response Completed By</label><select id="g1_g5_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text"  id="g1_g5_estimatedtime" ></div>
-</div>
 </div>
 
 <!---Subgroup 6--->
