@@ -2,104 +2,108 @@
 Javascript for Client Maintenance Module
 Developers:Jamin Quimby
 7/26/2013 Finished ~ Jamin Quimby
+9/03/2013 Raymond Smith
 */
 
+$(document).ready(function(){
+//Load Grid
+_grid1();
+_group1=function(){}
+_group1_1=function(){_grid1_1()}
+_group3=function(){_grid3()}
+_group5=function(){_grid5()}
+_group6=function(){_grid6()}
+
+});
 
 /*Define Grid Instances*/   
-_gridClients=function(){_jGrid({
-	"grid":"gridClients1",
+_grid1=function(){_jGrid({
+	"grid":"grid1",
 	"url":"clientMaintenance.cfc",
 	"title":"Clients",
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_SALUTATION:{title:'Salutation'},CLIENT_TYPETEXT:{title:'Type'},CLIENT_SINCE:{title:'Since'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#cl_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"client"}',
-	"functions":'$("#cl_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("client,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"client","page":"clientmaintenance"});'
-	});}
-
-_gridContacts=function(){_jGrid({
-	"grid":"gridContacts1",
-	"url":"clientMaintenance.cfc",
-	"title":"Client Contacts",
-	"fields":{contact_id:{key:true,list:false,edit:false},contact_name:{title:'Contact Name'},contact_phone1:{title:'Phone 1'},contact_email1:{title:'Email 1'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#co_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"contact","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"contact","page":"clientmaintenance"});$("#contacts").accordion({active:1});'
-	});}
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
+	"functions":'$("#cl_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cl_id","group":"group1","page":"clientmaintenance"});'
+	}); }
 	
-_gridCustomfields=function(){_jGrid({
-	"grid":"gridCustomFields1",
+_grid1_1=function(){_jGrid({
+	"grid":"grid1_1",
 	"url":"clientMaintenance.cfc",
 	"title":"Custom Fields",
 	"fields":{field_id:{key:true,list:false,edit:false},field_name:{title:'Name'},field_value:{title:'Value'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#cf_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"customfields","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#cl_fieldid").val(record.field_id);_loadData({"id":"cl_fieldid","group":"customfields","page":"clientmaintenance"});$("#client").accordion({active:2});'
-	});}
-	
-_gridStateInformation=function(){_jGrid({
-	"grid":"gridStateInformation1",
-	"url":"clientMaintenance.cfc",
-	"title":"State Information",
-	"fields":{si_id:{key:true,list:false,edit:false},si_state:{title:'State'},si_revenue:{title:'Revenue',type:"checkbox",values:{'0':'No','1':'Yes'}},si_employees:{title:'Employees',type:"checkbox",values:{'0':'No','1':'Yes'}},si_property:{title:'Property',type:"checkbox",values:{'0':'No','1':'Yes'}},si_nexus:{title:'Nexus',type:"checkbox",values:{'0':'No','1':'Yes'}},si_reason:{title:'Reason'},si_registered:{title:'Registered',type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc1:{title:$('#sl_label1').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc2:{title:$('#sl_label2').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc3:{title:$('#sl_label3').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc4:{title:$('#sl_label4').val(),type:"checkbox",values:{'0':'No','1':'Yes'}}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#s_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"stateinformation","clientid":'+$("#cl_id").val()+'}',
-	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"stateinformation","page":"clientmaintenance"});$("#state").accordion({active:1});'
+	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1_1","clientid":'+$("#cl_id").val()+'}',
+	"functions":'$("#cl_fieldid").val(record.field_id);_loadData({"id":"cl_fieldid","group":"group3","page":"clientmaintenance"});$("#client").accordion({active:2});'
 	});}
 
-_gridClientRelations=function(){_jGrid({
-	"grid":"gridRelatedClients1",
+_grid3=function(){_jGrid({
+	"grid":"grid3",
+	"url":"clientMaintenance.cfc",
+	"title":"Client Contacts",
+	"fields":{contact_id:{key:true,list:false,edit:false},contact_name:{title:'Contact Name'},contact_phone1:{title:'Phone 1'},contact_email1:{title:'Email 1'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g1_g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3","clientid":'+$("#cl_id").val()+'}',
+	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"group1_1","page":"clientmaintenance"});$("#contacts").accordion({active:1});'
+	});}
+	
+_grid5=function(){_jGrid({
+	"grid":"grid5",
+	"url":"clientMaintenance.cfc",
+	"title":"State Information",
+	"fields":{si_id:{key:true,list:false,edit:false},g5_state:{title:'State'},g5_revenue:{title:'Revenue',type:"checkbox",values:{'0':'No','1':'Yes'}},g5_employees:{title:'Employees',type:"checkbox",values:{'0':'No','1':'Yes'}},g5_property:{title:'Property',type:"checkbox",values:{'0':'No','1':'Yes'}},g5_nexus:{title:'Nexus',type:"checkbox",values:{'0':'No','1':'Yes'}},g5_reason:{title:'Reason'},g5_registered:{title:'Registered',type:"checkbox",values:{'0':'No','1':'Yes'}},g5_misc1:{title:$('#sl_label1').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},g5_misc2:{title:$('#sl_label2').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},g5_misc3:{title:$('#sl_label3').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},g5_misc4:{title:$('#sl_label4').val(),type:"checkbox",values:{'0':'No','1':'Yes'}}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g5_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group5","clientid":'+$("#cl_id").val()+'}',
+	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"group5","page":"clientmaintenance"});$("#state").accordion({active:1});'
+	});}
+
+_grid6=function(){_jGrid({
+	"grid":"grid6",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Relations",
 	"fields":{client_id:{key:true,list:false,edit:false},client_name:{title:'Client Name'},client_active:{title:'Active',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }},client_since:{title:'Client Since'},client_typeTEXT:{title:'Client Type'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#rc_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#rc_group").val()+'","loadType":"clientrelations","clientid":'+$("#cl_id").val()+'}',
-	"functions":'_loadData({"id":"client_id","group":"clientrelations","page":"clientmaintenance"});$("#rclients").accordion({active:1});'
+	"arguments":'{"search":"'+$("#g6_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#g6_group").val()+'","loadType":"group6","clientid":'+$("#cl_id").val()+'}',
+	"functions":'_loadData({"id":"client_id","group":"group6","page":"clientmaintenance"});$("#rclients").accordion({active:1});'
 	});}
 	
 	
 
-$(document).ready(function(){
-$.ajaxSetup({cache:false});//Stop ajax cacheing
-_gridClients();// Load Initial Client Grid	
-
-
-//Load Select Boxes
-
-
 //Bind Label Elements
-$("#sl_label1").change(function(){$("label[for='s_value1']").html($(this).val());})
-$("#sl_label2").change(function(){$("label[for='s_value2']").html($(this).val());})
-$("#sl_label3").change(function(){$("label[for='s_value3']").html($(this).val());})
-$("#sl_label4").change(function(){$("label[for='s_value4']").html($(this).val());})
+$("#g5_g1_label1").change(function(){$("label[for='g5_value1']").html($(this).val());})
+$("#g5_g1_label2").change(function(){$("label[for='g5_value2']").html($(this).val());})
+$("#g5_g1_label3").change(function(){$("label[for='g5_value3']").html($(this).val());})
+$("#g5_g1_label4").change(function(){$("label[for='g5_value4']").html($(this).val());})
 
 //Load Custom Labels
 _loadData({"id":"cl_id","group":"statelabels","page":"clientmaintenance"});
 
-});
-	
-	
+
 //Load Data call Back
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
 try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Client Group*/case "CLIENT_ACTIVE":var list='cl_active,cl_credit_hold,cl_dms_reference,cl_group,cl_name,cl_notes,cl_referred_by,cl_salutation,cl_since,cl_spouse,cl_trade_name,cl_type,s_label1,s_label2,s_label3,s_label4,rc_group';_loadit({"query":query,"list":list});break;
-/*Taxes*/case "CLIENT_TAX_SERVICES":var list='t_taxservices,t_formtype,t_businessc,t_rentalpropertye,t_disregardedentity,t_personalproperty';_loadit({"query":query,"list":list});break;
-/*Payroll*/case "CLIENT_PAYROLL_PREP":var list='p_payrollpreparation,p_paycheckfrequency,p_payrolltaxservices,p_prtaxdepositschedule,p_1099preparation,p_ein,p_pin,p_password';_loadit({"query":query,"list":list});break;
-/*Accounting*/case "CLIENT_ACCOUNTING_SERVICES":var list='a_accountingServices,a_bookkeeping,a_compilation,a_review,a_audit,a_financialstatementfreq,a_fiscalyearend,a_software,a_version,a_username,a_accountingpassword';_loadit({"query":query,"list":list});break;
-/*Contact*/case "CONTACT_ID":var list='co_id,co_type,co_name,co_address1,co_address2,co_city,co_state,co_zip,co_phone1,co_phone2,co_phone3,co_phone4,co_phone5,co_email1,co_email2,co_website,co_effectivedate,co_acctsoftwareupdate,co_taxupdate,co_customlabel,co_customvalue';_loadit({"query":query,"list":list});break;
-/*CustomFields*/case "FIELD_ID":var list="cl_fieldid,cl_fieldname,cl_fieldvalue";_loadit({"query":query,"list":list});break;
-/*Accounting Consulting Tasks*/case "MCT_ID":var list="m_mct_id,m_mct_duedate,m_mct_group,m_mct_category";_loadit({"query":query,"list":list});break;
-/*Financial Statements*/case "FS_ID":var list="m_fs_id,m_fs_year,m_fs_periodend,m_fs_month,m_fs_subtaskgroup,m_fs_historicalfs";_loadit({"query":query,"list":list});break;
-/*Payroll Checks*/case "PC_ID":var list="m_pc_id,m_pc_year,m_pc_payenddate,m_pc_paydate,m_pc_duedate,m_pc_inforeceived,m_pc_missinginfo";_loadit({"query":query,"list":list});break;
-/*Payroll Taxes*/case "PT_ID":var list="m_pt_id,m_pt_year,m_pt_month,m_pt_returntype,m_pt_lastpaydate,m_pt_duedate,m_pt_inforeceived,m_pt_missinginfo";_loadit({"query":query,"list":list});break;
-/*Tax Status Listing*/case "TSL_ID":var list="m_tsl_id,m_tsl_year,m_tsl_taxform,m_tsl_inforeceived,m_tsl_missinginfo";_loadit({"query":query,"list":list});break;
-/*Other Filings*/case "OF_ID":var list="m_of_id,m_of_year,m_of_duedate,m_of_period,m_of_state,m_of_task,m_of_form";_loadit({"query":query,"list":list});break;
-/*State Labels*/case"CLIENT_STATELABEL1":var list="sl_label1,sl_label2,sl_label3,sl_label4";_loadit({"query":query,"list":list});break;
-/*State Information*/case "SI_ID":var list="si_id,s_state,s_revenue,s_employees,s_property,s_nexus,s_reason,s_registered,s_value1,s_value2,s_value3,s_value4";_loadit({"query":query,"list":list});break;
-/*Related Clients*/case"CLIENT_RELATIONS":var list="rc_group";_loadit({"query":query,"list":list});break;
+/*Group 1*/case "CLIENT_ACTIVE":var list='g1_active,g1_credit_hold,g1_dms_reference,g1_group,g1_name,g1_notes,g1_referred_by,g1_salutation,g1_since,g1_spouse,g1_trade_name,g1_type,g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4,g6_group';_loadit({"query":query,"list":list});break;
+/*Group 1_1*/case "FIELD_ID":var list="cl_fieldid,g1_g1_fieldname,g1_g1_fieldvalue";_loadit({"query":query,"list":list});break;
+/*Group 2_1*/case "CLIENT_TAX_SERVICES":var list='g2_g1_taxservices,g2_g1_formtype,g2_g1_businessc,g2_g1_rentalpropertye,g2_g1_disregardedentity,g2_g1_personalproperty';_loadit({"query":query,"list":list});break;
+/*Group 2_2*/case "CLIENT_PAYROLL_PREP":var list='g2_g2_payrollpreparation,g2_g2_paycheckfrequency,g2_g2_payrolltaxservices,g2_g2_prtaxdepositschedule,g2_g2_1099preparation,g2_g2_ein,g2_g2_pin,g2_g2_password';_loadit({"query":query,"list":list});break;
+/*Group 2_3*/case "CLIENT_ACCOUNTING_SERVICES":var list='g2_g3_accountingServices,g2_g3_bookkeeping,g2_g3_compilation,g2_g3_review,g2_g3_audit,g2_g3_financialstatementfreq,g2_g3_fiscalyearend,g2_g3_software,g2_g3_version,g2_g3_username,g2_g3_accountingpassword';_loadit({"query":query,"list":list});break;
+/*Group 3*/case "CONTACT_ID":var list='co_id,g3_type,g3_name,g3_address1,g3_address2,g3_city,g3_state,g3_zip,g3_phone1,g3_phone2,g3_phone3,g3_phone4,g3_phone5,g3_email1,g3_email2,g3_website,g3_effectivedate,g3_acctsoftwareupdate,g3_taxupdate,g3_customlabel,g3_customvalue';_loadit({"query":query,"list":list});break;
+
+/*Group 4_1*/case "MCT_ID":var list="m_mct_id,g4_g1_duedate,g4_g1_group,g4_g1_category";_loadit({"query":query,"list":list});break;
+/*Group 4_2*/case "FS_ID":var list="m_fs_id,g4_g2_year,g4_g2_periodend,g4_g2_month,g4_g2_subtaskgroup,g4_g2_historicalfs";_loadit({"query":query,"list":list});break;
+/*Group 4_3*/case "PC_ID":var list="m_pc_id,g4_g3_year,g4_g3_payenddate,g4_g3_paydate,g4_g3_duedate,g4_g3_inforeceived,g4_g3_missinginfo";_loadit({"query":query,"list":list});break;
+/*Group 4_4*/case "PT_ID":var list="m_pt_id,g4_g4_year,g4_g4_month,g4_g4_returntype,g4_g4_lastpaydate,g4_g4_duedate,g4_g4_inforeceived,g4_g4_missinginfo";_loadit({"query":query,"list":list});break;
+/*Group 4_5*/case "TSL_ID":var list="m_tsl_id,g4_g5_year,g4_g5_taxform,g4_g5_inforeceived,g4_g5_missinginfo";_loadit({"query":query,"list":list});break;
+/*Group 4_6*/case "OF_ID":var list="m_of_id,g4_g6_year,g4_g6_duedate,g4_g6_period,g4_g6_state,g4_g6_task,g4_g6_form";_loadit({"query":query,"list":list});break;
+
+/*Group 5*/case "SI_ID":var list="si_id,g5_state,g5_revenue,g5_employees,g5_property,g5_nexus,g5_reason,g5_registered,g5_value1,g5_value2,g5_value3,g5_value4";_loadit({"query":query,"list":list});break;
+/*Group 5_1*/case"CLIENT_STATELABEL1":var list="g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4";_loadit({"query":query,"list":list});break;
+
+/*Related Clients*/case"CLIENT_RELATIONS":var list="g6_group";_loadit({"query":query,"list":list});break;
 default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 };
@@ -122,273 +126,235 @@ var e58=document.getElementById("m_fs_subtaskgroup").value
 Build arguments for Related Clients UNDER CONSTRUCTION
 */
 switch(options["group"]){
-/*Save Client*/
-case'client':var json='{"DATA":[["'+
+	
+/*Save Group1*/
+case'group1':var json='{"DATA":[["'+
 $("#cl_id").val()+'","'+
-$("#cl_active").is(':checked')+'","'+
-$("#cl_credit_hold").is(':checked')+'","'+
-$("#cl_dms_reference").val()+'","'+
-$("#cl_group").val()+'","'+
-$("#cl_name").val()+'","'+
-$("#cl_notes").val()+'","'+
-$("#cl_referred_by").val()+'","'+
-$("#cl_salutation").val()+'","'+
-$("#cl_since").val()+'","'+
-$("#cl_spouse").val()+'","'+
-$("#cl_trade_name").val()+'","'+
-$("#cl_type").val()+
+$("#g1_active").is(':checked')+','+
+$("#g1_credit_hold").is(':checked')+',"'+
+$("#g1_dms_reference").val()+'","'+
+$("#g1_group").val()+'","'+
+$("#g1_name").val()+'","'+
+$("#g1_notes").val()+'","'+
+$("#g1_referred_by").val()+'","'+
+$("#g1_salutation").val()+'","'+
+$("#g1_since").val()+'","'+
+$("#g1_spouse").val()+'","'+
+$("#g1_trade_name").val()+'","'+
+$("#g1_type").val()+'","'+
 '"]]}'
-if($("#cl_name").val()!=""&&$("#cl_salutation").val()!=""&&$("#cl_type").val()!=""&&$("#cl_since").val()!=""){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-
+if($("#g1_name").val()!=""&&$("#g1_salutation").val()!=""&&$("#g1_type").val()!=""&&$("#g1_since").val()!=""){
+_saveData({group:"group1","payload":$.parseJSON(json),page:"clientmaintenance"});
 jqMessage({message: "Document is saving. ",type: "save",autoClose: false});
 }
 else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false});}	
-	break;
+break;
 
-/*Save Custom Fields*/
-case'customfields':var json='{"DATA":[["'+options["id"]+'","'+
+/*group 1_2*/
+case'group1_2':var json='{"DATA":[["'+options["id"]+'","'+
 $("#cl_fieldid").val()+'","'+
-$("#cl_fieldname").val()+'","'+
-$("#cl_fieldvalue").val()+
-'"]]}';
-if(options["group"]!=""&&$('#cf_isLoaded').val()==1&&$("#cl_fieldname").val()!=""){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-}
-else{
-	_saveDataCB({"id":$("#cl_id").val(),"group":"taxes"});}
+$("#g1_g2_fieldname").val()+'","'+
+$("#g1_g2_fieldvalue").val()+'","'+
+'"]]}'
+if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group2_1'})}
 break;
 
-/*Save Taxes*/
-case'taxes':var json='{"DATA":[["'+options["id"]+'","'+
-$("#t_taxservices").is(':checked')+'","'+
-$("#t_formtype").val()+'","'+
-$("#t_businessc").is(':checked')+'","'+
-$("#t_rentalpropertye").is(':checked')+'","'+
-$("#t_disregardedentity").is(':checked')+'","'+
-$("#t_personalproperty").is(':checked')+
-'"]]}';
-if(options["group"]!=""&&$("#t_isLoaded").val()==1){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"payroll"});}
+/*Group 2_1*/
+case'group2_1':var json='{"DATA":[["'+options["id"]+'",'+
+$("#g2_g1_taxservices").is(':checked')+',"'+
+$("#g2_g1_formtype").val()+'",'+
+$("#g2_g1_businessc").is(':checked')+','+
+$("#g2_g1_rentalpropertye").is(':checked')+','+
+$("#g2_g1_disregardedentity").is(':checked')+','+
+$("#g2_g1_personalproperty").is(':checked')+',"'+
+'"]]}'
+if($("#isLoaded_group2_1").val()!=0){_saveData({group:"group2_1","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group2_2'})}
 break;
 
-/*Save payroll*/
-case'payroll':var json='{"DATA":[["'+options["id"]+'","'+
-$("#p_payrollpreparation").is(':checked')+'","'+
-$("#p_paycheckfrequency").val()+'","'+
-$("#p_payrolltaxservices").is(':checked')+'","'+
-$("#p_prtaxdepositschedule").val()+'","'+
-$("#p_1099preparation").is(':checked')+'","'+
-$("#p_ein").val()+'","'+
-$("#p_pin").val()+'","'+
-$("#p_password").val()+
-'"]]}';
-if(options["group"]!=""&&$("#p_isLoaded").val()==1){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"accounting"});}
+/*Group 2_2*/
+case'group2_2':var json='{"DATA":[["'+options["id"]+'",'+
+$("#g2_g2_payrollpreparation").is(':checked')+',"'+
+$("#g2_g2_paycheckfrequency").val()+'",'+
+$("#g2_g2_payrolltaxservices").is(':checked')+',"'+
+$("#g2_g2_prtaxdepositschedule").val()+'",'+
+$("#g2_g2_1099preparation").is(':checked')+',"'+
+$("#g2_g2_ein").val()+'","'+
+$("#g2_g2_pin").val()+'","'+
+$("#g2_g2_password").val()+'","'+
+'"]]}'
+if($("#isLoaded_group2_2").val()!=0){_saveData({group:"group2_2","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group2_2'})}
 break;
 
-/*Save accounting*/
-case'accounting':var json='{"DATA":[["'+options["id"]+'","'+
-$("#a_accountingServices").is(':checked')+'","'+
-$("#a_bookkeeping").is(':checked')+'","'+
-$("#a_compilation").is(':checked')+'","'+
-$("#a_review").is(':checked')+'","'+
-$("#a_audit").is(':checked')+'","'+
-$("#a_financialstatementfreq").val()+'","'+
-$("#a_fiscalyearend").val()+'","'+
-$("#a_software").val()+'","'+
-$("#a_version").val()+'","'+
-$("#a_username").val()+'","'+
-$("#a_accountingpassword").val()+
-'"]]}';
-if(options["group"]!=""&&$("#a_isLoaded").val()==1){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"contact"});}
+/*Group 2_3*/
+case'group2_3':var json='{"DATA":[["'+options["id"]+'",'+
+$("#g2_g3accountingServices").is(':checked')+','+
+$("#g2_g3bookkeeping").is(':checked')+','+
+$("#g2_g3compilation").is(':checked')+','+
+$("#g2_g3review").is(':checked')+','+
+$("#g2_g3audit").is(':checked')+',"'+
+$("#g2_g3financialstatementfreq").val()+'","'+
+$("#g2_g3fiscalyearend").val()+'","'+
+$("#g2_g3software").val()+'","'+
+$("#g2_g3version").val()+'","'+
+$("#g2_g3username").val()+'","'+
+$("#g2_g3accountingpassword").val()+'","'+
+'"]]}'
+if($("#isLoaded_group2_3").val()!=0){_saveData({group:"group2_3","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group3'})}
 break;
 
-/*Save Contacts*/
-case'contact':var json='{"DATA":[["'+options["id"]+'","'+
+/*Save group 3*/
+case'group3':var json='{"DATA":[["'+options["id"]+'","'+
 $("#co_id").val()+'","'+
-$("#co_type").val()+'","'+
-$("#co_name").val()+'","'+
-$("#co_address1").val()+'","'+
-$("#co_address2").val()+'","'+
-$("#co_city").val()+'","'+
-$("#co_state").val()+'","'+
-$("#co_zip").val()+'","'+
-$("#co_phone1").val()+'","'+
-$("#co_phone2").val()+'","'+
-$("#co_phone3").val()+'","'+
-$("#co_phone4").val()+'","'+
-$("#co_phone5").val()+'","'+
-$("#co_email1").val()+'","'+
-$("#co_email2").val()+'","'+
-$("#co_website").val()+'","'+
-$("#co_effectivedate").val()+'","'+
-$("#co_acctsoftwareupdate").is(':checked')+'","'+
-$("#co_taxupdate").is(':checked')+'","'+
-$("#co_customlabel").val()+'","'+
-$("#co_customvalue").is(':checked')+
-'"]]}';
-if(options["group"]!=""&&$("#co_isLoaded").val()==1&&$("#co_name").val()!=""){
-
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)}); 
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"financialstatements"});}
+$("#g3_type").val()+'","'+
+$("#g3_name").val()+'","'+
+$("#g3_address1").val()+'","'+
+$("#g3_address2").val()+'","'+
+$("#g3_city").val()+'","'+
+$("#g3_state").val()+'","'+
+$("#g3_zip").val()+'","'+
+$("#g3_phone1").val()+'","'+
+$("#g3_phone2").val()+'","'+
+$("#g3_phone3").val()+'","'+
+$("#g3_phone4").val()+'","'+
+$("#g3_phone5").val()+'","'+
+$("#g3_email1").val()+'","'+
+$("#g3_email2").val()+'","'+
+$("#g3_website").val()+'","'+
+$("#g3_effectivedate").val()+'",'+
+$("#g3_acctsoftwareupdate").is(':checked')+','+
+$("#g3_taxupdate").is(':checked')+',"'+
+$("#g3_customlabel").val()+'",'+
+$("#g3_customvalue").is(':checked')+',"'+
+'"]]}'
+if($("#isLoaded_group2_3").val()!=0){_saveData({group:"group2_3","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group3'})}
 break;
 
-
-/*Save Financial Statements*/
-case'financialstatements':var json='{"DATA":[["'+options["id"]+'","'+
-$("#m_fs_id").val()+'","'+
-$("#m_fs_month").val()+'","'+
-$("#m_fs_periodend").val()+'","'+
-$("#m_fs_year").val()+
-'"]]}';
-if(options["group"]!=""&&$("#m_fs_isLoaded").val()==1&&$("#m_fs_month").val()!="0"&&$("#m_fs_periodend").val()!==""&&$("#m_fs_year").val()!==""){
-_saveData({"group":options["group"],"page":"clientmaintenance","page":"clientmaintenance","payload":$.parseJSON(json)});
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"managementconsulting"});}
-break;
 
 /*Save Management Consulting Tasks*/
-case'managementconsulting':
-var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_1':var json='{"DATA":[["'+options["id"]+'","'+
 $("#m_mct_id").val()+'","'+
-$("#m_mct_category").val()+'","'+
-$("#m_mct_duedate").val()+
-'"]]}';
-if(options["group"]!=""&&$("#m_mct_isLoaded").val()==1&&$("#m_mct_category").val()!="0"&&$("#m_mct_duedate").val()!=""){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"payrollchecks"});}
+$("#g4_g1_category").val()+'","'+
+$("#g4_g1_duedate").val()+'","'+
+'"]]}'
+if($("#isLoaded_group4_1").val()!=0){_saveData({group:"group4_1","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group4_2'})}
+break;
+
+/*Save Financial Statements*/
+case'group4_2':var json='{"DATA":[["'+options["id"]+'","'+
+$("#m_fs_id").val()+'","'+
+$("#g4_g2_month").val()+'","'+
+$("#g4_g2_periodend").val()+'","'+
+$("#g4_g2_year").val()+'","'+
+'"]]}'
+if($("#isLoaded_group4_2").val()!=0){_saveData({group:"group4_2","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group4_3'})}
 break;
 
 /*Save Payroll Checks*/
-case'payrollchecks':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_3':var json='{"DATA":[["'+options["id"]+'","'+
 $("#m_pc_id").val()+'","'+
-$("#m_pc_duedate").val()+'","'+
-$("#m_pc_inforeceived").val()+'","'+
-$("#m_pc_missinginfo").is(':checked')+'","'+
-$("#m_pc_paydate").val()+'","'+
-$("#m_pc_payenddate").val()+'","'+
-$("#m_pc_year").val()+
-'"]]}';
-
-if(options["group"]!=""&&$("#m_pc_isLoaded").val()==1&&$("#m_pc_duedate").val()!=""&&$("#m_pc_inforeceived").val()!=""&&$("#m_pc_paydate").val()!=""&&$("#m_pc_payenddate").val()!=""&&$("#m_pc_year").val()!=""){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"payrolltaxes"});}
+$("#g4_g3_duedate").val()+'","'+
+$("#g4_g3_inforeceived").val()+'",'+
+$("#g4_g3_missinginfo").is(':checked')+',"'+
+$("#g4_g3_paydate").val()+'","'+
+$("#g4_g3_payenddate").val()+'","'+
+$("#g4_g3_year").val()+'","'+
+'"]]}'
+if($("#isLoaded_group4_3").val()!=0){_saveData({group:"group4_3","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group4_4'})}
 break;
 
 /*Save Payroll Taxes*/
-case'payrolltaxes':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_4':var json='{"DATA":[["'+options["id"]+'","'+
 $("#m_pt_id").val()+'","'+
-$("#m_pt_duedate").val()+'","'+
-$("#m_pt_inforeceived").val()+'","'+
-$("#m_pt_lastpaydate").val()+'","'+
-$("#m_pt_missinginfo").is(':checked')+'","'+
-$("#m_pt_month").val()+'","'+
-$("#m_pt_returntype").val()+'","'+
-$("#m_pt_year").val()+
-'"]]}';
-if(options["group"]!=""
-&&$("#m_pt_isLoaded").val()==1
-&&$("#m_pt_duedate").val()!=""
-&&$("#m_pt_inforeceived").val()!=""
-&&$("#m_pt_lastpaydate").val()!=""
-&&$("#m_pt_month").val()!="0"
-&&$("#m_pt_returntype").val()!="0"
-&&$("#m_pt_year").val()!=""){
-	_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-	}
-
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"taxstatuslisting"});}
+$("#g4_g4_duedate").val()+'","'+
+$("#g4_g4_inforeceived").val()+'","'+
+$("#g4_g4_lastpaydate").val()+'",'+
+$("#g4_g4_missinginfo").is(':checked')+',"'+
+$("#g4_g4_month").val()+'","'+
+$("#g4_g4_returntype").val()+'","'+
+$("#g4_g4_year").val()+'","'+
+'"]]}'
+if($("#isLoaded_group4_4").val()!=0){_saveData({group:"group4_4","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group4_5'})}
 break;
 
 /*Save Tax Status Listing*/
-case'taxstatuslisting':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_5':var json='{"DATA":[["'+options["id"]+'","'+
 $("#m_tsl_id").val()+'","'+
-$("#m_tsl_inforeceived").val()+'","'+
-$("#m_tsl_missinginfo").is(':checked')+'","'+
-$("#m_tsl_taxform").val()+'","'+
-$("#m_tsl_taxyear").val()+
-'"]]}';
-if(options["group"]!=""&&$("#m_tsl_isLoaded").val()==1&&$("#m_tsl_id").val()!=""&&$("#m_tsl_inforeceived").val()!=""&&$("#m_tsl_taxform").val()!=""&&$("#m_tsl_taxyear").val()!=""){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)}); 
-	}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"otherfilings"});}
+$("#g4_g5_inforeceived").val()+'",'+
+$("#g4_g5_missinginfo").is(':checked')+',"'+
+$("#g4_g5_taxform").val()+'","'+
+$("#g4_g5_taxyear").val()+'","'+
+'"]]}'
+if($("#isLoaded_group4_5").val()!=0){_saveData({group:"group4_5","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group4_6'})}
 break;
-
 
 /*Save Other Filings*/
-case'otherfilings':
-
-var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_6':var json='{"DATA":[["'+options["id"]+'","'+
 $("#m_of_id").val()+'","'+
-$("#m_of_duedate").val()+'","'+
-$("#m_of_form").val()+'","'+
-$("#m_of_period").val()+'","'+
-$("#m_of_state").val()+'","'+
-$("#m_of_task").val()+'","'+
-$("#m_of_taxyear").val()+
-'"]]}';
-if(options["group"]!=""&&$("#m_of_isLoaded").val()==1&&$("#m_of_duedate").val()!=""&&$("#m_of_form").val()!=""&&$("#m_of_period").val()!=""&&$("#m_of_state").val()!=""&&$("#m_of_task").val()!=""&&$("#m_of_taxyear").val()!=""){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"statelabels"});}
-break;
-/*Save State Labels*/
-case'statelabels':var json='{"DATA":[["'+options["id"]+'","'+
-$("#sl_label1").val()+'","'+
-$("#sl_label2").val()+'","'+
-$("#sl_label3").val()+'","'+
-$("#sl_label4").val()+
-'"]]}';
-if(options["group"]!=""&&$("#sl_label1").val()!=""&&$("#sl_label2").val()!=""&&$("#sl_label3").val()!=""&&$("#sl_label4").val()!=""){	
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)})}
-else{_saveDataCB({"id":$("#cl_id").val(),"group":"stateinformation"})}
+$("#g4_g6_duedate").val()+'","'+
+$("#g4_g6_form").val()+'","'+
+$("#g4_g6_period").val()+'","'+
+$("#g4_g6_state").val()+'","'+
+$("#g4_g6_task").val()+'","'+
+$("#g4_g6_taxyear").val()+'","'+
+'"]]}'
+if($("#isLoaded_group4_6").val()!=0){_saveData({group:"group4_6","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group5'})}
 break;
 
 /*Save State Information*/
-case'stateinformation':
+case'group5':
 var json='{"DATA":[["'+options["id"]+'","'+
-$("#si_id").val()+'","'+
-$("#s_employees").is(':checked')+'","'+
-$("#s_nexus").is(':checked')+'","'+
-$("#s_property").is(':checked')+'","'+
-$("#s_reason").val()+'","'+
-$("#s_registered").is(':checked')+'","'+
-$("#s_revenue").is(':checked')+'","'+
-$("#s_state").val()+'","'+
-$("#s_value1").is(':checked')+'","'+
-$("#s_value2").is(':checked')+'","'+
-$("#s_value3").is(':checked')+'","'+
-$("#s_value4").is(':checked')+
-'"]]}';
-if(options["group"]!=""&&$("#s_isLoaded").val()==1){
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)});
-}else{_saveDataCB({"id":$("#cl_id").val(),"group":"clientrelations"});}
+$("#si_id").val()+'",'+
+$("#g5_employees").is(':checked')+','+
+$("#g5_nexus").is(':checked')+',"'+
+$("#g5_property").is(':checked')+',"'+
+$("#g5_reason").val()+'",'+
+$("#g5_registered").is(':checked')+','+
+$("#g5_revenue").is(':checked')+',"'+
+$("#g5_state").val()+'",'+
+$("#g5_value1").is(':checked')+','+
+$("#g5_value2").is(':checked')+','+
+$("#g5_value3").is(':checked')+','+
+$("#g5_value4").is(':checked')+',"'+
+'"]]}'
+if($("#isLoaded_group5").val()!=0){_saveData({group:"group5","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group5_1'})}
 break;
+
+/*Save State Labels*/
+case'group5_1':var json='{"DATA":[["'+options["id"]+'","'+
+$("#g5_g1_label1").val()+'","'+
+$("#g5_g1_label2").val()+'","'+
+$("#g5_g1_label3").val()+'","'+
+$("#g5_g1_label4").val()+'","'+
+'"]]}'
+if($("#isLoaded_group5_1").val()!=0){_saveData({group:"group5_1","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group6'})}
+break;
+
+
 /*Save Client Relations*/
-case'clientrelations':
+case'group6':
 var json='{"DATA":[["'+options["id"]+'","'+
-$("#rc_group").val()+
-'"]]}';
-
-alert($("#rc_group").val() +" ? "+options["id"])
-if(options["group"]!=""&&$("#rc_isLoaded").val()==1){	
-_saveData({"group":options["group"],"page":"clientmaintenance","payload":$.parseJSON(json)})
-}else{
-_saveDataCB({"id":$("#cl_id").val(),"group":"saved"})
-}
+$("#rc_group").val()+'","'+
+'"]]}'
+if($("#isLoaded_group6").val()!=0){_saveData({group:"group6","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group7'})}
 break;
 
-
+case'group7':
+jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
+break;
 
 
 /*Other Events*/
@@ -399,4 +365,3 @@ case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }
 }catch(err){alert(err)}};
-
