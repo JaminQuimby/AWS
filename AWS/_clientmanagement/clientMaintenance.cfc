@@ -529,6 +529,11 @@ WHERE[field_id]=<cfqueryparam value="#j.DATA[1][2]#">
 
 <!--- Taxes --->
 <cfcase value="group2_1">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][4])><cfset j.DATA[1][4]=1><cfelse><cfset j.DATA[1][4]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][6])><cfset j.DATA[1][6]=1><cfelse><cfset j.DATA[1][6]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][7])><cfset j.DATA[1][7]=1><cfelse><cfset j.DATA[1][7]=0></cfif>
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[CLIENT_LISTING](
@@ -548,14 +553,9 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][7]#"/>
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"group2_2","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_2","result":"ok"}'>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][4])><cfset j.DATA[1][4]=1><cfelse><cfset j.DATA[1][4]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][6])><cfset j.DATA[1][6]=1><cfelse><cfset j.DATA[1][6]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][7])><cfset j.DATA[1][7]=1><cfelse><cfset j.DATA[1][7]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
 SET[client_tax_services]=<cfqueryparam value="#j.DATA[1][2]#"/> 
@@ -566,7 +566,7 @@ SET[client_tax_services]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_personal_property]=<cfqueryparam value="#j.DATA[1][7]#"/> 
 WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"group2_2","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_2","result":"ok"}'>
 </cfif>
 </cfcase>
 
@@ -576,6 +576,32 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',#j.DATA[1][2]#)><cfset #j.DATA[1][2]#=1><cfelse><cfset #j.DATA[1][2]#=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',#j.DATA[1][4]#)><cfset #j.DATA[1][4]#=1><cfelse><cfset #j.DATA[1][4]#=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',#j.DATA[1][6]#)><cfset #j.DATA[1][6]#=1><cfelse><cfset #j.DATA[1][6]#=0></cfif>
+<cfif j.DATA[1][1] eq "0">
+<cfquery name="fquery" datasource="AWS">
+INSERT INTO[CLIENT_LISTING](
+[client_payroll_prep]
+,[client_payroll_freq]
+,[client_payroll_services]
+,[client_pr_tax_deposit_schedule]
+,[client_1099_preperation]
+,[client_ein]
+,[client_pin]
+,[client_password]
+)
+VALUES(
+<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][8]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#"/>
+SELECT SCOPE_IDENTITY()AS[id]
+</cfquery>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
+</cfif>
+<cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
 SET[client_payroll_prep]=<cfqueryparam value="#j.DATA[1][2]#"/> 
@@ -588,8 +614,10 @@ SET[client_payroll_prep]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_password]=<cfqueryparam value="#j.DATA[1][9]#"/> 
 WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'> 
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
+</cfif>
 </cfcase>
+
 <!--- Accounting --->
 <cfcase value="group2_3">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
@@ -597,6 +625,38 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][4])><cfset j.DATA[1][4]=1><cfelse><cfset j.DATA[1][4]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][6])><cfset j.DATA[1][6]=1><cfelse><cfset j.DATA[1][6]=0></cfif>
+<cfif j.DATA[1][1] eq "0">
+<cfquery name="fquery" datasource="AWS">
+INSERT INTO[CLIENT_LISTING](
+[client_accounting_services]
+,[client_bookkeeping]
+,[client_compilation]
+,[client_review]
+,[client_audit]
+,[client_fs_frequency]
+,[client_fiscal_year_end]
+,[client_software]
+,[client_version]
+,[client_username]
+,[client_password2]
+)
+VALUES(
+<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][8]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#"/>
+,<cfqueryparam value="#j.DATA[1][10]#"/>
+,<cfqueryparam value="#j.DATA[1][11]#"/>
+,<cfqueryparam value="#j.DATA[1][12]#"/>
+SELECT SCOPE_IDENTITY()AS[id]
+</cfquery>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
+</cfif>
+<cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
 SET[client_accounting_services]=<cfqueryparam value="#j.DATA[1][2]#"/> 
@@ -671,6 +731,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[contact_id]
 </cfquery>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group4_1","result":"ok"}'>
 </cfif>
 <cfif j.DATA[1][2] neq "0">
 <cfquery name="fquery" datasource="AWS">
@@ -701,6 +762,8 @@ WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][2]#">
 </cfif>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group4_1","result":"ok"}'>
 </cfcase>
+
+
 <!--- Financial Statements --->
 <cfcase value="group4_1">
 <cfquery name="fquery" datasource="AWS">
@@ -806,7 +869,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][6]#">
 )
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6_6","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group5_6","result":"ok"}'>
 </cfcase>
 <!--- Other Filings --->
 <cfcase value="group6_6">

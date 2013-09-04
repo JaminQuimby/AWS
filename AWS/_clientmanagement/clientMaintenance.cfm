@@ -6,7 +6,7 @@
 <cfset page.formid=1>
 <cfset page.title="Client Management">
 <cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,StateInformation,RelatedClients,Documents">
-<cfset page.trackers="cl_id, co_id, si_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group4_1,isLoaded_group4_2,isLoaded_group4_3,isLoaded_group4_4,isLoaded_group4_5,isLoaded_group4_6,isLoaded_group5,isLoaded_group5_1,isLoaded_group6">
+<cfset page.trackers="cl_id, co_id, si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group4_1,isLoaded_group4_2,isLoaded_group4_3,isLoaded_group4_4,isLoaded_group4_5,isLoaded_group4_6,isLoaded_group5,isLoaded_group5_1,isLoaded_group6">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>

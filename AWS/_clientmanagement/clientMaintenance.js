@@ -151,7 +151,8 @@ else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type
 break;
 
 /*group 1_2*/
-case'group1_2':var json='{"DATA":[["'+options["id"]+'","'+
+case'group1_2':var json='{"DATA":[["'+
+$("#cl_id").val()+'","'+
 $("#cl_fieldid").val()+'","'+
 $("#g1_g2_fieldname").val()+'","'+
 $("#g1_g2_fieldvalue").val()+'","'+
@@ -161,7 +162,8 @@ else{_saveDataCB({'group':'group2_1'})}
 break;
 
 /*Group 2_1*/
-case'group2_1':var json='{"DATA":[["'+options["id"]+'",'+
+case'group2_1':var json='{"DATA":[["'+
+$("#cl_id").val()+'","'+
 $("#g2_g1_taxservices").is(':checked')+',"'+
 $("#g2_g1_formtype").val()+'",'+
 $("#g2_g1_businessc").is(':checked')+','+
@@ -174,7 +176,8 @@ else{_saveDataCB({'group':'group2_2'})}
 break;
 
 /*Group 2_2*/
-case'group2_2':var json='{"DATA":[["'+options["id"]+'",'+
+case'group2_2':var json='{"DATA":[["'+
+$("#cl_id").val()+'","'+
 $("#g2_g2_payrollpreparation").is(':checked')+',"'+
 $("#g2_g2_paycheckfrequency").val()+'",'+
 $("#g2_g2_payrolltaxservices").is(':checked')+',"'+
@@ -189,7 +192,8 @@ else{_saveDataCB({'group':'group2_2'})}
 break;
 
 /*Group 2_3*/
-case'group2_3':var json='{"DATA":[["'+options["id"]+'",'+
+case'group2_3':var json='{"DATA":[["'+
+$("#cl_id").val()+'","'+
 $("#g2_g3accountingServices").is(':checked')+','+
 $("#g2_g3bookkeeping").is(':checked')+','+
 $("#g2_g3compilation").is(':checked')+','+
@@ -207,8 +211,9 @@ else{_saveDataCB({'group':'group3'})}
 break;
 
 /*Save group 3*/
-case'group3':var json='{"DATA":[["'+options["id"]+'","'+
+case'group3':var json='{"DATA":[["'+
 $("#co_id").val()+'","'+
+$("#cl_id").val()+'","'+
 $("#g3_type").val()+'","'+
 $("#g3_name").val()+'","'+
 $("#g3_address1").val()+'","'+
@@ -234,20 +239,11 @@ if($("#isLoaded_group2_3").val()!=0){_saveData({group:"group2_3","payload":$.par
 else{_saveDataCB({'group':'group3'})}
 break;
 
-
-/*Save Management Consulting Tasks*/
-case'group4_1':var json='{"DATA":[["'+options["id"]+'","'+
-$("#m_mct_id").val()+'","'+
-$("#g4_g1_category").val()+'","'+
-$("#g4_g1_duedate").val()+'","'+
-'"]]}'
-if($("#isLoaded_group4_1").val()!=0){_saveData({group:"group4_1","payload":$.parseJSON(json),page:"clientmaintenance"})}
-else{_saveDataCB({'group':'group4_2'})}
-break;
-
 /*Save Financial Statements*/
-case'group4_2':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_1':var json='{"DATA":[["'+
 $("#m_fs_id").val()+'","'+
+$("#cl_id").val()+'","'+
+
 $("#g4_g2_month").val()+'","'+
 $("#g4_g2_periodend").val()+'","'+
 $("#g4_g2_year").val()+'","'+
@@ -256,9 +252,23 @@ if($("#isLoaded_group4_2").val()!=0){_saveData({group:"group4_2","payload":$.par
 else{_saveDataCB({'group':'group4_3'})}
 break;
 
+/*Save Management Consulting Tasks*/
+case'group4_2':var json='{"DATA":[["'+
+$("#m_mct_id").val()+'","'+
+$("#cl_id").val()+'","'+
+
+$("#g4_g1_category").val()+'","'+
+$("#g4_g1_duedate").val()+'","'+
+'"]]}'
+if($("#isLoaded_group4_1").val()!=0){_saveData({group:"group4_1","payload":$.parseJSON(json),page:"clientmaintenance"})}
+else{_saveDataCB({'group':'group4_2'})}
+break;
+
 /*Save Payroll Checks*/
-case'group4_3':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_3':var json='{"DATA":[["'+
 $("#m_pc_id").val()+'","'+
+$("#cl_id").val()+'","'+
+
 $("#g4_g3_duedate").val()+'","'+
 $("#g4_g3_inforeceived").val()+'",'+
 $("#g4_g3_missinginfo").is(':checked')+',"'+
@@ -271,8 +281,10 @@ else{_saveDataCB({'group':'group4_4'})}
 break;
 
 /*Save Payroll Taxes*/
-case'group4_4':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_4':var json='{"DATA":[["'+
 $("#m_pt_id").val()+'","'+
+$("#cl_id").val()+'","'+
+
 $("#g4_g4_duedate").val()+'","'+
 $("#g4_g4_inforeceived").val()+'","'+
 $("#g4_g4_lastpaydate").val()+'",'+
@@ -286,8 +298,10 @@ else{_saveDataCB({'group':'group4_5'})}
 break;
 
 /*Save Tax Status Listing*/
-case'group4_5':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_5':var json='{"DATA":[["'+
 $("#m_tsl_id").val()+'","'+
+$("#cl_id").val()+'","'+
+
 $("#g4_g5_inforeceived").val()+'",'+
 $("#g4_g5_missinginfo").is(':checked')+',"'+
 $("#g4_g5_taxform").val()+'","'+
@@ -298,8 +312,10 @@ else{_saveDataCB({'group':'group4_6'})}
 break;
 
 /*Save Other Filings*/
-case'group4_6':var json='{"DATA":[["'+options["id"]+'","'+
+case'group4_6':var json='{"DATA":[["'+
 $("#m_of_id").val()+'","'+
+$("#cl_id").val()+'","'+
+
 $("#g4_g6_duedate").val()+'","'+
 $("#g4_g6_form").val()+'","'+
 $("#g4_g6_period").val()+'","'+
@@ -313,7 +329,7 @@ break;
 
 /*Save State Information*/
 case'group5':
-var json='{"DATA":[["'+options["id"]+'","'+
+var json='{"DATA":[["'+
 $("#si_id").val()+'",'+
 $("#g5_employees").is(':checked')+','+
 $("#g5_nexus").is(':checked')+',"'+
@@ -332,7 +348,7 @@ else{_saveDataCB({'group':'group5_1'})}
 break;
 
 /*Save State Labels*/
-case'group5_1':var json='{"DATA":[["'+options["id"]+'","'+
+case'group5_1':var json='{"DATA":[["'+
 $("#g5_g1_label1").val()+'","'+
 $("#g5_g1_label2").val()+'","'+
 $("#g5_g1_label3").val()+'","'+
@@ -345,7 +361,7 @@ break;
 
 /*Save Client Relations*/
 case'group6':
-var json='{"DATA":[["'+options["id"]+'","'+
+var json='{"DATA":[["'+
 $("#rc_group").val()+'","'+
 '"]]}'
 if($("#isLoaded_group6").val()!=0){_saveData({group:"group6","payload":$.parseJSON(json),page:"clientmaintenance"})}
