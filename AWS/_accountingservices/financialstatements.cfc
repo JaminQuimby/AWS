@@ -69,25 +69,6 @@ SELECT
   FROM [financialdatastatus]
 
 --->
-<!--- LOAD SELECT BOXES --->
-<cffunction name="f_loadSelect" access="remote" output="false">
-<cfargument name="selectName" type="string" required="yes">
-<cfquery name="fquery" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">
-SELECT[optionvalue_id],[optionname]
-FROM[v_selectOptions]
-WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="data">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
-<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cffunction>
 
 
 <!--- LOAD DATA --->

@@ -157,7 +157,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- LOOKUP Financial Statements --->
+<!--- LOOKUP TAX RETURNS --->
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">

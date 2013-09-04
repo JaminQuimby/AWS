@@ -5,8 +5,8 @@
 <cfset page.location="clientmaintenance">
 <cfset page.formid=1>
 <cfset page.title="Client Management">
-<cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,StateInformation,RelatedClients,Documents">
-<cfset page.trackers="cl_id, co_id, si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group4_1,isLoaded_group4_2,isLoaded_group4_3,isLoaded_group4_4,isLoaded_group4_5,isLoaded_group4_6,isLoaded_group5,isLoaded_group5_1,isLoaded_group6">
+<cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients,Documents">
+<cfset page.trackers="cl_id,client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6_1,isLoaded_group7">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>
@@ -79,9 +79,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div><label for="g1_g1_filter">Filter</label><input name="g1_g1_filter" id="g1_g1_filter" type="text" onBlur="_grid1_1();"/></div>
 <div id="grid1_1" class="tblGrid"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onclick="">Add</a>
-</div>
+<div class="buttonbox"><a href="#" class="button optional" onclick="">Add</a></div>
 </div>
 
 <!---Group 1 Sub 2--->
@@ -97,6 +95,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g1_g3_group">Groups</label><select id="g1_g3_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="global_clientgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 
+</div>
 
 <!--- Group 2 --->
 <div id="group2" class="gf-checkbox">
@@ -180,117 +179,122 @@ ACTIVITY (CLIENT DATA)
 <!--- Group 4 --->
 <div id="group4" class="gf-checkbox">
 <h3>Maintenance</h3><div></div>
+
+
+
 <!--- GROUP 4 SUB 1 ADD TO FINANCIAL STATEMENTS --->
-<h4 onClick='_loadData({"id":"cl_id","group":"group4_1","page":"clientmaintenance"});$("#isLoaded_group4_1").val(1);'>Financial Statements</h4>
+<h4 onClick='_grid4_1();'>Financial Statements</h4>
 <div>
-<div><label for="g4_g1_year">Year</label><input id="g4_g1_year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g4_g1_periodend">Period End</label><input id="g4_g1_periodend"  class="date"onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="g4_g1_month">Month</label><select id="g4_g1_month" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g1_subtaskgroup">SubTask Group</label><select id="g4_g1_subtaskgroup" data-placeholder="Select a Subtask Group" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
-<div><label for="g4_g1_historicalfs">Historical Financial Statements</label><select id="g4_g1_historicalfs" onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
-</div>
-<!--- GROUP 4 SUB 2 Accounting &amp; Consulting Tasks --->
-<h4  onClick='_loadData({"id":"cl_id","group":"group4_2","page":"clientmaintenance"});$("#isLoaded_group4_2").val(1);'>Accounting &amp; Consulting Tasks</h4>
-<div>
-<div><!---This does not save anyware it is only for the button to function---><label for="m_mct_group">Group</label><select id="m_mct_group"onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="m_mct_group"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div class="buttonbox"><a onClick="" class="button optional">Duplicate Group</a></div>
-<div><label for="g4_g2_category">Category</label><select id="g4_g2_category"data-placeholder="Select a Category." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g2_duedate">Due Date</label><input id="g4_g2_duedate"  class="date" type="text"onchange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});" onblur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-</div>
-<!--- GROUP 4 SUB 3 ADD TO PAYROLL CHECKS --->
-<h4 onClick='_loadData({"id":"cl_id","group":"grou4_3","page":"clientmaintenance"});$("#isLoaded_group4_3").val(1);'>Payroll Checks</h4>
-<div>
-<div><label for="g4_g3_year">Year</label><input id="g4_g3_year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g4_g3_payenddate">Pay End Date</label><input id="g4_g3_payenddate" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="g4_g3_paydate">Pay Date</label><input id="g4_g3_paydate"  class="date"onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="g4_g3_duedate">Due Date</label><input id="g4_g3_duedate" class="date"onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="g4_g3_inforeceived">Info Received</label><input id="g4_g3_inforeceived" class="date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><input type="checkbox" id="g4_g3_missinginfo" /><label for="g4_g3_missinginfo">Missing Info</label></div>
-</div>
-<!--- GROUP 4 SUB 4 ADD TO PAYROLL TAXES --->
-<h4 onClick='_loadData({"id":"cl_id","group":"group4_4","page":"clientmaintenance"});$("#isLoaded_group4_4").val(1);'>Payroll Taxes</h4>
-<div>
-<div><label for="g4_g4_year">Year</label><input id="g4_g4_year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g4_g4_month">Month</label><select id="g4_g4_month"onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g4_returntype">Return Type</label><select id="g4_g4_returntype" data-placeholder="Select a Return Type." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_returntypes"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g4_lastpaydate">Last Pay Date</label><input id="g4_g4_lastpaydate" class="date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="g4_g4_duedate">Due Date</label><input id="g4_g4_duedate" class="date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="g4_g4_inforeceived">Info Received</label><input  class="date"id="g4_g4_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><input type="checkbox" id="g4_g4_missinginfo" /><label for="g4_g4_missinginfo">Missing Info</label></div>
-</div>
-<!--- GROUP 4 SUB 5 ADD TO TAX STATUS LISTING --->
-<h4 onClick='_loadData({"id":"cl_id","group":"group4_5","page":"clientmaintenance"});$("#isLoaded_group4_5").val(1);'>Tax Status Listing</h4>
-<div>
-<div><label for="g4_g5_taxyear">Tax Year</label><input id="g4_g5_taxyear" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g4_g5_taxform">Tax Form</label><select id="g4_g5_taxform" data-placeholder="Select a Tax Form." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g5_inforeceived">Info Received</label><input class="date" id="g4_g5_inforeceived" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><input type="checkbox" id="g4_g5_missinginfo" /><label for="g4_g5_missinginfo">Missing Info</label></div>
-</div>
-<!--- GROUP 4 SUB 6 OTHER FILINGS --->
-<h4 onClick='_loadData({"id":"cl_id","group":"group4_6","page":"clientmaintenance"});$("#isLoaded_group4_6").val(1);'>Other Filings</h4>
-<div>
-<div><label for="g4_g6_taxyear">Tax Year</label><input id="g4_g6_taxyear" data-placeholder="Select a Tax Year" onblur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g4_g6_duedate">Due Date</label><input id="g4_g6_duedate"  class="date"data-placeholder="Select a Due Date." onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
-<div><label for="g4_g6_period">Period</label><select id="g4_g6_period" data-placeholder="Select aPeriod." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g6_state">State</label><select id="g4_g6_state" data-placeholder="Select a State." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g6_task">Task</label><select id="g4_g6_task" data-placeholder="Select a Task." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><cfoutput query="global_otherfilingtype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g4_g6_form">Form</label><select id="g4_g6_form" data-placeholder="Select a Form." onBlur="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option'});"><option value="0">&nbsp;</option><option value="#optionvalue_id#">#optionname#</option></select></div>
+<div class="tblGrid" id="grid4_1"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
 </div>
 </div>
 
+<!--- GROUP 4 SUB 2 Accounting &amp; Consulting Tasks --->
+<h4  onClick='_grid4_2();'>Accounting &amp; Consulting Tasks</h4>
+<div>
+<div class="tblGrid" id="grid4_2"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctConsultingTasks.cfm'">Add</a></cfoutput>
+</div>
+</div>
+
+<!--- GROUP 4 SUB 3 ADD TO PAYROLL CHECKS --->
+<h4 onClick='_grid4_3();'>Payroll Checks</h4>
+<div>
+<div class="tblGrid" id="grid4_3"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrollPayrollChecks.cfm'">Add</a></cfoutput>
+</div>
+</div>
+
+<!--- GROUP 4 SUB 4 ADD TO PAYROLL TAXES --->
+<h4 onClick='_grid4_4();'>Payroll Taxes</h4>
+<div>
+<div class="tblGrid" id="grid4_4"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrollPayrollTaxes.cfm'">Add</a></cfoutput>
+</div>
+</div>
+
+<!--- GROUP 4 SUB 5 ADD TO TAX STATUS LISTING --->
+<h4 onClick='_grid4_5();'>Tax Status Listing</h4>
+<div>
+<div class="tblGrid" id="grid4_5"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/taxationTaxReturns.cfm'">Add</a></cfoutput>
+</div>
+</div>
+
+<!--- GROUP 4 SUB 6 OTHER FILINGS --->
+<h4 onClick='_grid4_6();'>Other Filings</h4>
+<div>
+<div class="tblGrid" id="grid4_6"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm'">Add</a></cfoutput>
+</div>
+</div>
+</div>
 <!--- GROUP 5--->
 <div id="group5" class="gf-checkbox">
-<h3 onClick="_grid5();">Saved State Information</h3>
-<div>
-<div><label for="g5_filter">Filter</label><input id="g5_filter" onBlur="_grid5();"/></div>
-<div class="tblGrid" id="grid5"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);'>Add</a>
-</div>
-</div>
-<h4 onclick="$('#isLoaded_group5').val(1);">State Information</h4>
-<div>
-<div><label for="g5_state">State</label><select id="g5_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><input type="checkbox" id="g5_revenue" /><label for="g5_revenue">Revenue</label></div>
-<div><input type="checkbox" id="g5_employees" /><label for="g5_employees">Employees</label></div>
-<div><input type="checkbox" id="g5_property"/><label for="g5_property">Property</label></div>
-<div><input type="checkbox" id="g5_nexus" /><label for="g5_nexus">NEXUS</label></div>
-<div><label for="g5_reason">Reason</label><input id="g5_reason" /></div>
-<div><input type="checkbox" id="g5_registered" /><label for="g5_registered">Registered</label></div>
-<div><input type="checkbox" id="g5_value1" /><label for="g5_value1" id="g5_label1"></label></div>
-<div><input type="checkbox" id="g5_value2" /><label for="g5_value2" id="g5_label2"></label></div>
-<div><input type="checkbox" id="g5_value3" /><label for="g5_value3" id="g5_label3"></label></div>
-<div><input type="checkbox" id="g5_value4" /><label for="g5_value4" id="g5_label4"></label></div>
-</div>
-
-<h4 onclick="$('#isLoaded_group5_1').val(1);_loadData({'id':'cl_id','group':'statelabels','page':'clientmaintenance'});">State Labels</h4><div>
-<div><label for="g5_g1_label1">Label 1</label><input type="text" id="g5_g1_label1"/></div>
-<div><label for="g5_g1_label2">Label 2</label><input type="text" id="g5_g1_label2"/></div>
-<div><label for="g5_g1_label3">Label 3</label><input type="text" id="g5_g1_label3"/></div>
-<div><label for="g5_g1_label4">Label 4</label><input type="text" id="g5_g1_label4"/></div>
-</div>
 </div>
 
 
-<!--- GROUP 6 --->
+<!--- GROUP 6--->
 <div id="group6" class="gf-checkbox">
-<h3>Related Client Details</h3>
-<div id="loadRelatedClients">
-<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();"/></div>
-<!--- SET GRID CONTACTS --->
-<div id="gridRelatedClients1" class="tblGrid"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onclick="">Add</a>
-</div>
-</div>
-<h4 onclick="$('#isLoaded_group6').val(1);_loadData({'id':'cl_id','group':'group6','page':'clientmaintenance'});">Related Clients</h4>
+<h3 onClick="_grid6();">Saved State Information</h3>
 <div>
-<div><label for="g6_group">Groups</label><select id="g6_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();"/></div>
+<div class="tblGrid" id="grid6"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);'>Add</a>
+</div>
+</div>
+<h4 onclick="_group6_1();">State Information</h4>
+<div>
+<div><label for="g6_state">State</label><select id="g6_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><input type="checkbox" id="g6_revenue" /><label for="g6_revenue">Revenue</label></div>
+<div><input type="checkbox" id="g6_employees" /><label for="g6_employees">Employees</label></div>
+<div><input type="checkbox" id="g6_property"/><label for="g6_property">Property</label></div>
+<div><input type="checkbox" id="g6_nexus" /><label for="g6_nexus">NEXUS</label></div>
+<div><label for="g6_reason">Reason</label><input id="g6_reason" /></div>
+<div><input type="checkbox" id="g6_registered" /><label for="g6_registered">Registered</label></div>
+<div><input type="checkbox" id="g6_value1" /><label for="g6_value1" id="g6_label1"></label></div>
+<div><input type="checkbox" id="g6_value2" /><label for="g6_value2" id="g6_label2"></label></div>
+<div><input type="checkbox" id="g6_value3" /><label for="g6_value3" id="g6_label3"></label></div>
+<div><input type="checkbox" id="g6_value4" /><label for="g6_value4" id="g6_label4"></label></div>
+</div>
+
+<h4 onclick="$('#isLoaded_group6_1').val(1);_loadData({'id':'cl_id','group':'group6_1','page':'clientmaintenance'});">State Labels</h4>
+<div>
+<div><label for="g6_g1_label1">Label 1</label><input type="text" id="g6_g1_label1"/></div>
+<div><label for="g6_g1_label2">Label 2</label><input type="text" id="g6_g1_label2"/></div>
+<div><label for="g6_g1_label3">Label 3</label><input type="text" id="g6_g1_label3"/></div>
+<div><label for="g6_g1_label4">Label 4</label><input type="text" id="g6_g1_label4"/></div>
+</div>
+</div>
+
+
+<!--- GROUP 7 --->
+<div id="group7" class="gf-checkbox" onClick="_grid7()">
+<h3>Related Client Details</h3>
+<div>
+<div><label for="g7_filter">Filter</label><input id="g7_filter" onBlur="_grid7();"/></div>
+<!--- SET GRID CONTACTS --->
+<div id="grid7" class="tblGrid"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group7").accordion({active:1});$("#isLoaded_group7").val(1);'>Add</a>
+</div>
+</div>
+<h4 onclick="$('#isLoaded_group7').val(1);_loadData({'id':'cl_id','group':'group7','page':'clientmaintenance'});">Related Clients</h4>
+<div>
+<div><label for="g7_group">Groups</label><select id="g7_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>
 
 <!--- UPLOAD FILES TAB --->
-<div id="group7" class="gf-checkbox">
+<div id="group8" class="gf-checkbox">
 <h3>Upload Files</h3>
 <div>
 <cfinclude template="../assets/module/fileUpload/upload.cfm">
