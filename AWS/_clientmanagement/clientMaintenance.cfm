@@ -44,8 +44,6 @@ ACTIVITY (CLIENT DATA)
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
-
-
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
@@ -54,7 +52,7 @@ ACTIVITY (CLIENT DATA)
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7');">Add</a>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8');">Add</a>
 </div></div></div>
 
 <!---Group 1 --->
@@ -172,7 +170,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_effectivedate">Effective Date</label><input type="text" id="g3_effectivedate" class="date"/></div>
 <div><input type="checkbox" id="g3_acctsoftwareupdate" /><label for="g3_acctsoftwareupdate">updated in accounting software</label></div>
 <div><input type="checkbox" id="g3_taxupdate" /><label for="g3_taxupdate">update In tax software</label></div>
-<div><input type="checkbox" id="g3_customvalue" /><label for="g3_customvalue"><input type="text" id="co_customlabel" class="customlabel"/></label></div>
+<div><input type="checkbox" id="g3_customvalue" /><label for="g3_customvalue"><input type="text" id="g3_customlabel" class="customlabel"/></label></div>
 </div>
 </div>
 
@@ -251,7 +249,7 @@ ACTIVITY (CLIENT DATA)
 <a href="#" class="button optional" onClick='$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);'>Add</a>
 </div>
 </div>
-<h4 onclick="_group6_1();">State Information</h4>
+<h4 onclick="_group6();">State Information</h4>
 <div>
 <div><label for="g6_state">State</label><select id="g6_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input type="checkbox" id="g6_revenue" /><label for="g6_revenue">Revenue</label></div>
@@ -266,7 +264,7 @@ ACTIVITY (CLIENT DATA)
 <div><input type="checkbox" id="g6_value4" /><label for="g6_value4" id="g6_label4"></label></div>
 </div>
 
-<h4 onclick="$('#isLoaded_group6_1').val(1);_loadData({'id':'cl_id','group':'group6_1','page':'clientmaintenance'});">State Labels</h4>
+<h4 onclick="_group6();">State Labels</h4>
 <div>
 <div><label for="g6_g1_label1">Label 1</label><input type="text" id="g6_g1_label1"/></div>
 <div><label for="g6_g1_label2">Label 2</label><input type="text" id="g6_g1_label2"/></div>

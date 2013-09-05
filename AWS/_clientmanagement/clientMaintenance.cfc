@@ -52,7 +52,7 @@ WHERE[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Taxes--->
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[cl_id]
+SELECT[client_id]
 	,[client_tax_services]
 	,[client_form_type]
 	,[client_schedule_c]
@@ -68,7 +68,7 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Payroll--->
 <cfcase value="group2_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[cl_id]
+SELECT[client_id]
 	,[client_payroll_prep]
 	,[client_payroll_freq]
 	,[client_payroll_services] 
@@ -86,7 +86,7 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Accounting--->
 <cfcase value="group2_3">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[cl_id]
+SELECT[client_id]
 	,[client_accounting_services]
 	,[client_bookkeeping]
 	,[client_compilation]
@@ -173,7 +173,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load CLIENT RELATIONS --->
 <cfcase value="group7">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[cl_id]
+SELECT[client_id]
 	,[client_relations]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -185,7 +185,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
 <!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
 </cffunction>
@@ -473,17 +473,7 @@ FROM[client_listing]
 LEFT OUTER JOIN[ctrl_selectoptions]
 ON[client_listing].[client_type]=[ctrl_selectoptions].[optionValue_id]
 WHERE([ctrl_selectoptions].[selectName_id]=1)
-AND(
-
-<cfset i=0>
-<cfloop index="cid" list="#ARGUMENTS.ID#">
-<cfset i=i+1>
-<cfif cid neq "">[client_listing].[client_id]='<cfoutput>#trim(cid)#</cfoutput>'
-<cfif not listLen(ARGUMENTS.ID) eq i>OR</cfif>
-</cfif>
-</cfloop>)
-
-
+<cfset i=0>AND(<cfif ARGUMENTS.ID neq "null"><cfloop index="cid" list="#ARGUMENTS.ID#"><cfset i=i+1><cfif cid neq"">[client_listing].[client_id]=<cfqueryparam value="#cid#"/><cfif not listLen(ARGUMENTS.ID) eq i>OR</cfif></cfif></cfloop><cfelse>[client_listing].[client_id]=0</cfif>)
 AND NOT[client_listing].[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
 AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
@@ -502,7 +492,7 @@ AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.cl_id#","MESSAGE":"#cfcatch.detail#"]}'> 
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.client_id#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 
 
@@ -522,10 +512,12 @@ AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#
 
 <!--- Group 1 --->
 <cfcase value="group1">
+
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
 
 <cfif j.DATA[1][1] eq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[CLIENT_LISTING](
 [client_active],
@@ -550,16 +542,23 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][7]#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#"/>)
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
-<cfreturn '{"id":#fquery.clientId#,"group":"group1_2","result":"ok"}'>
+<cfreturn '{"id":#fquery.client_id#,"group":"group1_2","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
 SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -570,13 +569,19 @@ SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_notes]=<cfqueryparam value="#j.DATA[1][7]#"/>
 ,[client_referred_by]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[client_salutation]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[client_since]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[client_since]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[client_spouse]=<cfqueryparam value="#j.DATA[1][11]#"/>
 ,[client_trade_name]=<cfqueryparam value="#j.DATA[1][12]#"/>
 ,[client_type]=<cfqueryparam value="#j.DATA[1][13]#"/>
 WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"group2_1","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+
 </cfif>
 
 </cfcase>
@@ -598,6 +603,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[field_id]
 </cfquery>
+<cfreturn '{"id":#fquery.id#,"group":"group2_1","result":"ok"}'>
 </cfif>
 <cfif j.DATA[1][2] neq "0">
 <cfquery name="fquery" datasource="AWS">
@@ -634,7 +640,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][5]#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#"/>
-SELECT SCOPE_IDENTITY()AS[id]
+SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_2","result":"ok"}'>
 </cfif>
@@ -660,6 +666,7 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',#j.DATA[1][4]#)><cfset #j.DATA[1][4]#=1><cfelse><cfset #j.DATA[1][4]#=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',#j.DATA[1][6]#)><cfset #j.DATA[1][6]#=1><cfelse><cfset #j.DATA[1][6]#=0></cfif>
 <cfif j.DATA[1][1] eq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[CLIENT_LISTING](
 [client_payroll_prep]
@@ -680,11 +687,17 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][7]#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#"/>
-SELECT SCOPE_IDENTITY()AS[id]
+SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
 SET[client_payroll_prep]=<cfqueryparam value="#j.DATA[1][2]#"/> 
@@ -698,6 +711,11 @@ SET[client_payroll_prep]=<cfqueryparam value="#j.DATA[1][2]#"/>
 WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
 </cfcase>
 
@@ -735,7 +753,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][10]#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#"/>
-SELECT SCOPE_IDENTITY()AS[id]
+SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
 </cfif>
@@ -859,7 +877,9 @@ WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][2]#">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][11])><cfset j.DATA[1][11]=1><cfelse><cfset j.DATA[1][11]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][12])><cfset j.DATA[1][12]=1><cfelse><cfset j.DATA[1][12]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][13])><cfset j.DATA[1][13]=1><cfelse><cfset j.DATA[1][13]=0></cfif>
-<cfif j.DATA[1][2] eq "0">
+
+<cfif j.DATA[1][1] eq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[state_information](
 [client_id]
@@ -876,7 +896,7 @@ INSERT INTO[state_information](
 ,[si_misc4]
 )
 VALUES(
-<cfqueryparam value="#j.DATA[1][1]#">
+<cfqueryparam value="#j.DATA[1][2]#">
 ,<cfqueryparam value="#j.DATA[1][3]#">
 ,<cfqueryparam value="#j.DATA[1][4]#">
 ,<cfqueryparam value="#j.DATA[1][5]#">
@@ -891,9 +911,15 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[si_id]
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6_1","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
-<cfif j.DATA[1][2] neq "0">
+<cfif j.DATA[1][1] neq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[state_information]
 SET[si_employees]=<cfqueryparam value="#j.DATA[1][3]#">
@@ -907,15 +933,21 @@ SET[si_employees]=<cfqueryparam value="#j.DATA[1][3]#">
 ,[si_misc2]=<cfqueryparam value="#j.DATA[1][11]#">
 ,[si_misc3]=<cfqueryparam value="#j.DATA[1][12]#">
 ,[si_misc4]=<cfqueryparam value="#j.DATA[1][13]#">
-WHERE[is_id]=<cfqueryparam value="#j.DATA[1][2]#">
+WHERE[si_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
-</cfif>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group6_1","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfif>
 </cfcase>
 
 <!--- State Labels --->
 <cfcase value="group6_1">
 <cfif j.DATA[1][1] eq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[client_listing](
 ,[client_statelabel1]
@@ -929,9 +961,14 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][4]#">
 ,<cfqueryparam value="#j.DATA[1][5]#">
 )
-SELECT SCOPE_IDENTITY()AS[id]
+SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group7","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
 <cfif j.DATA[1][1] neq "0">
 <cfquery name="fquery" datasource="AWS">
@@ -961,7 +998,7 @@ WHERE[CLIENT_ID]='#j.DATA[1][1]#'
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cffunction>
