@@ -20,16 +20,10 @@ _group4_4=function(){_grid4_4()}
 _group4_5=function(){_grid4_5()}
 _group4_6=function(){_grid4_6()}
 _group5=function(){}
-_group6=function(){
-//Load Grid
-_grid6();
-_group6_1();
-}
-
-
+_group6=function(){_grid6();_group6_1();}
 _group6_1=function(){
 $('#isLoaded_group6_1').val(1);
-_loadData({'id':'cl_id','group':'group6_1','page':'clientmaintenance'});
+_loadData({'id':'client_id','group':'group6_1','page':'clientmaintenance'});
 var g6_g1_label1=$("#g6_g1_label1");
 var g6_g1_label2=$("#g6_g1_label2");
 var g6_g1_label3=$("#g6_g1_label3");
@@ -50,6 +44,11 @@ g6_g1_label4.change(function(){g6_value4.html($(this).val())});
 _group7=function(){_grid7()}
 });
 
+_group7_1=function(){
+	$('#isLoaded_group7').val(1);
+	_loadData({'id':'client_id','group':'group7','page':'clientmaintenance'})};
+
+
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -59,7 +58,7 @@ _grid1=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"client_id","group":"group1","page":"clientmaintenance"});'
-	}); }
+	})};
 	
 _grid1_1=function(){_jGrid({
 	"grid":"grid1_1",
@@ -69,7 +68,7 @@ _grid1_1=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1_1","clientid":'+$("#client_id").val()+'}',
 	"functions":'$("#cl_fieldid").val(record.field_id);$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);_loadData({"id":"cl_fieldid","group":"group1_2","page":"clientmaintenance"});'
-	});}
+	})};
 	
 _grid3=function(){_jGrid({
 	"grid":"grid3",
@@ -79,7 +78,7 @@ _grid3=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3","clientid":'+$("#client_id").val()+'}',
 	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"group3","page":"clientmaintenance"});$("#group3").accordion({active:1});'
-	});}
+	})};
 	
 _grid4_1=function(){_jGrid({
 	"grid":"grid4_1",
@@ -89,7 +88,7 @@ _grid4_1=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_1"}',
 	"functions":'$("#fds_id").val(record.FDS_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?fds_id="+$("#fds_id").val();'
-	});}
+	})};
 	
 _grid4_2=function(){_jGrid({
 	"grid":"grid4_2",
@@ -99,7 +98,7 @@ _grid4_2=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_2"}',
 	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctConsultingTasks.cfm?mc_id="+$("#mc_id").val();'
-	});}
+	})};
 
 _grid4_3=function(){_jGrid({
 	"grid":"grid4_3",
@@ -109,7 +108,7 @@ _grid4_3=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_3"}',
 	"functions":'$("#pc_id").val(record.PC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollPayrollChecks.cfm?pc_id="+$("#pc_id").val();'
-	}); }
+	})};
 
 _grid4_4=function(){_jGrid({
 	"grid":"grid4_4",
@@ -119,7 +118,7 @@ _grid4_4=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_4"}',
 	"functions":'$("#pt_id").val(record.PT_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollPayrollTaxes.cfm?pt_id="+$("#pt_id").val();'
-	}); }
+	})};
 	
 _grid4_5=function(){_jGrid({
 	"grid":"grid4_5",
@@ -129,7 +128,7 @@ _grid4_5=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_5"}',
 	"functions":'$("#tr_id").val(record.TR_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxationTaxReturns.cfm?tr_id="+$("#tr_id").val();'
-	}); }
+	})};
 	
 _grid4_6=function(){_jGrid({
 	"grid":"grid4_6",
@@ -139,7 +138,7 @@ _grid4_6=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_6"}',
 	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm?of_id="+$("#of_id").val();'
-	}); }
+	})};
 	
 _grid6=function(){_jGrid({
 	"grid":"grid6",
@@ -149,7 +148,7 @@ _grid6=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g6_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group6","clientid":'+$("#client_id").val()+'}',
 	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"group6","page":"clientmaintenance"});$("#group6").accordion({active:1});'
-	});}
+	})};
 
 _grid7=function(){_jGrid({
 	"grid":"grid7",
@@ -159,7 +158,7 @@ _grid7=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g7_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#g7_group").val()+'","loadType":"group7","clientid":'+$("#client_id").val()+'}',
 	"functions":'_loadData({"id":"client_id","group":"group7","page":"clientmaintenance"});$("#group7").accordion({active:1});'
-	});}
+	})};
 
 
 
@@ -181,7 +180,7 @@ switch(query.COLUMNS[0]){
 /*Group 6*/case "SI_ID":var list="si_id,g6_state,g6_revenue,g6_employees,g6_property,g6_nexus,g6_reason,g6_registered,g6_value1,g6_value2,g6_value3,g6_value4";_loadit({"query":query,"list":list});break;
 /*Group 6_1*/case"CLIENT_STATELABEL1":var list="g6_g1_label1,g6_g1_label2,g6_g1_label3,g6_g1_label4";_loadit({"query":query,"list":list});break;
 /*Group 7*/case"CLIENT_RELATIONS":var list="g7_group";_loadit({"query":query,"list":list});break;
-default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
+default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}
 }catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 };
 
@@ -196,7 +195,6 @@ var options={
 try{	
 $.extend(true, options, params);//turn options into array
 
-alert(options["group"]);
 switch(options["group"]){
 //Starting with Save Message
 case'':
@@ -273,17 +271,17 @@ break;
 /*Group 2_3*/
 case'group2_3':var json='{"DATA":[["'+
 $("#client_id").val()+'",'+
-$("#g2_g3accountingServices").is(':checked')+','+
-$("#g2_g3bookkeeping").is(':checked')+','+
-$("#g2_g3compilation").is(':checked')+','+
-$("#g2_g3review").is(':checked')+','+
-$("#g2_g3audit").is(':checked')+',"'+
-$("#g2_g3financialstatementfreq").val()+'","'+
-$("#g2_g3fiscalyearend").val()+'","'+
-$("#g2_g3software").val()+'","'+
-$("#g2_g3version").val()+'","'+
-$("#g2_g3username").val()+'","'+
-$("#g2_g3accountingpassword").val()+'","'+
+$("#g2_g3_accountingServices").is(':checked')+','+
+$("#g2_g3_bookkeeping").is(':checked')+','+
+$("#g2_g3_compilation").is(':checked')+','+
+$("#g2_g3_review").is(':checked')+','+
+$("#g2_g3_audit").is(':checked')+',"'+
+$("#g2_g3_financialstatementfreq").val()+'","'+
+$("#g2_g3_fiscalyearend").val()+'","'+
+$("#g2_g3_software").val()+'","'+
+$("#g2_g3_version").val()+'","'+
+$("#g2_g3_username").val()+'","'+
+$("#g2_g3_accountingpassword").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2_3").val()!=0){_saveData({group:"group2_3","payload":$.parseJSON(json),page:"clientmaintenance"})}
 else{_saveDataCB({'group':'group3'})}
@@ -355,6 +353,7 @@ break;
 /*Save Client Relations*/
 case'group7':
 var json='{"DATA":[["'+
+$("#client_id").val()+'","'+
 $("#g7_group").val()+'","'+
 '"]]}'
 if($("#isLoaded_group7").val()!=0){_saveData({group:"group7","payload":$.parseJSON(json),page:"clientmaintenance"})}

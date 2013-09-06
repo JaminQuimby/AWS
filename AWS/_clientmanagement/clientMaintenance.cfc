@@ -36,8 +36,6 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-
-
 <!--- Load Custom Fields--->
 <cfcase value="group1_2">
 <cfquery datasource="AWS" name="fQuery">
@@ -52,8 +50,7 @@ WHERE[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Taxes--->
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[client_id]
-	,[client_tax_services]
+SELECT[client_tax_services]
 	,[client_form_type]
 	,[client_schedule_c]
 	,[client_schedule_e]
@@ -68,8 +65,7 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Payroll--->
 <cfcase value="group2_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[client_id]
-	,[client_payroll_prep]
+SELECT[client_payroll_prep]
 	,[client_payroll_freq]
 	,[client_payroll_services] 
 	,[client_pr_tax_deposit_schedule]
@@ -86,8 +82,7 @@ WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Accounting--->
 <cfcase value="group2_3">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[client_id]
-	,[client_accounting_services]
+SELECT[client_accounting_services]
 	,[client_bookkeeping]
 	,[client_compilation]
 	,[client_review]
@@ -173,8 +168,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load CLIENT RELATIONS --->
 <cfcase value="group7">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[client_id]
-	,[client_relations]
+SELECT[client_relations]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -986,15 +980,21 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 
 <!--- Client Relations --->
 <cfcase value="group 7">
+<cfif j.DATA[1][1] neq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
-SET[client_relations]='#j.DATA[1][2]#'
-WHERE[CLIENT_ID]='#j.DATA[1][1]#'
+SET[client_relations]=<cfqueryparam value="#j.DATA[1][2]#">
+WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
-
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group8","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfif>
 </cfcase>
-
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->

@@ -6,7 +6,7 @@
 <cfset page.formid=1>
 <cfset page.title="Client Management">
 <cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients,Documents">
-<cfset page.trackers="cl_id,client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6_1,isLoaded_group7">
+<cfset page.trackers="client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6_1,isLoaded_group7">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>
@@ -100,7 +100,7 @@ ACTIVITY (CLIENT DATA)
 <h3>Services</h3><div></div>
 
 <!---Group 2 Sub 1--->
-<h4 onClick='_loadData({"id":"cl_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);'>Taxes</h4>
+<h4 onClick='_loadData({"id":"client_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);'>Taxes</h4>
 <div>
 <div><input type="checkbox" id="g2_g1_taxservices" /><label for="g2_g1_taxservices">Tax Services</label></div>
 <div><label for="g2_g1_formtype">Form Type</label><select id="g2_g1_formtype" data-placeholder="Select a Company Type."><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -111,7 +111,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 
 <!---Group 2 Sub 2--->
-<h4 onClick='_loadData({"id":"cl_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);'>Payroll</h4>
+<h4 onClick='_loadData({"id":"client_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);'>Payroll</h4>
 <div>
 <div><input type="checkbox" id="g2_g2_payrollpreparation" /><label for="g2_g2_payrollpreparation">Payroll Preparation</label></div>
 <div><label for="g2_g2_paycheckfrequency">Paycheck Frequency</label><select id="g2_g2_paycheckfrequency" data-placeholder="Select a Paycheck Frequency."><option value="0">&nbsp;</option><cfoutput query="q_p_paycheckfrequency"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -124,7 +124,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 
 <!---Group 2 Sub 3--->
-<h4 onClick='_loadData({"id":"cl_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);'>Accounting</h4>
+<h4 onClick='_loadData({"id":"client_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);'>Accounting</h4>
 <div>
 <div><input type="checkbox" id="g2_g3_accountingServices" /><label for="g2_g3_accountingServices">Accounting Services</label></div>
 <div><input type="checkbox" id="g2_g3_bookkeeping" /><label for="g2_g3_bookkeeping">Bookkeeping</label></div>
@@ -132,7 +132,7 @@ ACTIVITY (CLIENT DATA)
 <div><input type="checkbox" id="g2_g3_review" /><label for="g2_g3_review">Review</label></div>
 <div><input type="checkbox" id="g2_g3_audit" /><label for="g2_g3_audit">Audit</label></div>
 <div><label for="g2_g3_financialstatementfreq">Financial Statement Freq</label><select id="g2_g3_financialstatementfreq" data-placeholder="Select a Financial Statment Freq."><option value="0">&nbsp;</option><cfoutput query="q_a_financialstatementfreq"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_g3_fiscalyearend">Fiscal Year End</label><input id="g2_g3_fiscalyearend" type="text"/></div>
+<div><label for="g2_g3_fiscalyearend">Fiscal Year End</label><input id="g2_g3_fiscalyearend" type="text" class="date"/></div>
 <div><label for="g2_g3_software">Software</label><select id="g2_g3_software" data-placeholder="Select a Software"><option value="0">&nbsp;</option><cfoutput query="q_a_software"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_g3_version">Version</label><input id="g2_g3_version" type="text"/></div>
 <div><label for="g2_g3_username">User Name</label><input id="g2_g3_username" type="text"/></div>
@@ -275,8 +275,9 @@ ACTIVITY (CLIENT DATA)
 
 
 <!--- GROUP 7 --->
-<div id="group7" class="gf-checkbox" onClick="_grid7()">
-<h3>Related Client Details</h3>
+<div id="group7" class="gf-checkbox" >
+
+<h3 onClick="_group7()">Related Client Details</h3>
 <div>
 <div><label for="g7_filter">Filter</label><input id="g7_filter" onBlur="_grid7();"/></div>
 <!--- SET GRID CONTACTS --->
@@ -285,10 +286,13 @@ ACTIVITY (CLIENT DATA)
 <a href="#" class="button optional" onClick='$("#group7").accordion({active:1});$("#isLoaded_group7").val(1);'>Add</a>
 </div>
 </div>
-<h4 onclick="$('#isLoaded_group7').val(1);_loadData({'id':'cl_id','group':'group7','page':'clientmaintenance'});">Related Clients</h4>
+
+
+<h4 onclick="_group7_1();">Related Clients</h4>
 <div>
 <div><label for="g7_group">Groups</label><select id="g7_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
+
 </div>
 
 <!--- UPLOAD FILES TAB --->

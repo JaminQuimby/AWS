@@ -458,7 +458,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_status]=<cfqueryparam value="#j.DATA[1][8]#"/>
 WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group4","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
 </cfif>
 </cfcase>
 <!---Group3--->
