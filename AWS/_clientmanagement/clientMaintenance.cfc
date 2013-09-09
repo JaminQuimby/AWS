@@ -16,7 +16,7 @@
 SELECT[client_id]
 	,[client_active]
 	,[client_credit_hold]
-	,[client_dms_refrence]
+	,[client_dms_reference]
 	,[client_group]
 	,[client_name]
 	,[client_notes]
@@ -54,7 +54,7 @@ SELECT[client_tax_services]
 	,[client_form_type]
 	,[client_schedule_c]
 	,[client_schedule_e]
-	,[client_disregaurde]
+	,[client_disregard]
 	,[client_personal_property]
 FROM[CLIENT_LISTING]
 WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -516,7 +516,7 @@ AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#
 INSERT INTO[CLIENT_LISTING](
 [client_active],
 [client_credit_hold],
-[client_dms_refrence],
+[client_dms_reference],
 [client_group],
 [client_name],
 [client_notes],
@@ -557,7 +557,7 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 UPDATE[CLIENT_LISTING]
 SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_credit_hold]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[client_dms_refrence]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[client_dms_reference]=<cfqueryparam value="#j.DATA[1][4]#"/>
 ,[client_group]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[client_name]=<cfqueryparam value="#j.DATA[1][6]#"/>
 ,[client_notes]=<cfqueryparam value="#j.DATA[1][7]#"/>
@@ -624,7 +624,7 @@ INSERT INTO[CLIENT_LISTING](
 ,[client_form_type]
 ,[client_schedule_c]
 ,[client_schedule_e]
-,[client_disregaurde]
+,[client_disregard]
 ,[client_personal_property]
 )
 VALUES(
@@ -645,7 +645,7 @@ SET[client_tax_services]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_form_type]=<cfqueryparam value="#j.DATA[1][3]#"/> 
 ,[client_schedule_c]=<cfqueryparam value="#j.DATA[1][4]#"/> 
 ,[client_schedule_e]=<cfqueryparam value="#j.DATA[1][5]#"/> 
-,[client_disregaurde]=<cfqueryparam value="#j.DATA[1][6]#"/> 
+,[client_disregard]=<cfqueryparam value="#j.DATA[1][6]#"/> 
 ,[client_personal_property]=<cfqueryparam value="#j.DATA[1][7]#"/> 
 WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>

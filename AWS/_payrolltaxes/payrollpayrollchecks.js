@@ -5,6 +5,7 @@ Developers:Jamin Quimby, Raymond Smith
 8/16/2013
 */
 $(document).ready(function(){
+
 /*Define Grid Instances*/   
 _grid1();
 _group1=function(){}
@@ -62,6 +63,7 @@ var options={
 try{	
 $.extend(true, options, params);//turn options into array
 
+alert(options["group"]);
 switch(options["group"]){
 case'':
 if($("#client_id").val()!=0){
