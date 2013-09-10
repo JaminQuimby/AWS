@@ -16,7 +16,7 @@ _grid1=function(){_jGrid({
 	"title":"Client Administrative Tasks",
 	"fields":{CAS_ID:{key:true,list:true,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client'},CAS_DUEDATE:{title:'Due Date'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#e1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#cas_id").val(record.CAS_ID);$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cas_id","group":"group1","page":"clientadministrativetasks"});'
 	});}
 _grid2=function(){_jGrid({

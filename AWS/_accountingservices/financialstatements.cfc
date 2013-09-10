@@ -386,7 +386,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-<!--- RETURN TR_ID--->
+<!--- RETURN FDS_ID--->
 <cfreturn '{"id":#fquery.id#,"group":"group1_1","result":"ok"}'>
 
 <cfcatch>

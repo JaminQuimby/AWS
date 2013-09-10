@@ -4,26 +4,23 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-
-<!--- LOAD SELECT BOXES --->
-<cffunction name="f_loadSelect" access="remote" output="false">
-<cfargument name="selectName" type="string" required="yes">
-<cfquery name="fquery" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">
-SELECT[optionvalue_id],[optionname]
-FROM[v_selectOptions]
-WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="data">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
-<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cffunction>
+<!--- 
+SELECT TOP 1000 [cas_id]
+      ,[client_id]
+      ,[cas_assignto]
+      ,[cas_category]
+      ,[cas_completed]
+      ,[cas_datereqested]
+      ,[cas_datestarted]
+      ,[cas_duedate]
+      ,[cas_estimatedtime]
+      ,[cas_instructions]
+      ,[cas_priority]
+      ,[cas_reqestby]
+      ,[cas_status]
+      ,[cas_taskdesc]
+  FROM [AWS].[dbo].[clientadministrativetasks]
+  --->
 
 
 <!--- LOAD DATA --->

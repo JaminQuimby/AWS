@@ -6,11 +6,11 @@
 <cfset page.formid=3>
 <cfset page.title="Business Formation">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="bf_id,comment_id">
-<!--- TO DO --->
+<cfset page.trackers="bf_id,comment_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,comment_isLoaded">
+<!--- TO DO
 Add Subtasks: 
 	Remove Other Subtask 5 and distribute into Subtask, based on corporate type 
-    
+     --->
 
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='#page.title#'</cfquery>
@@ -32,86 +32,82 @@ Add Subtasks:
 <!--- ENTRANCE --->
 <div id="entrance"class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput><div>
-<div><label for="g1_filter">Filter</label><input id="g1_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance');">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
+
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="g1_clientname">Client Name</label><select id="g1_clientname" data-placeholder="Select a Client."><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_owners">Owners</label><input type="text" id="g1_owners" /></div>
-<div><label for="g1_activity">Activity</label><input type="text" id="g1_activity" /></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
-<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
-<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime" class="date"/></div>
-<div><label for="g1_duedate" >Due Date</label><input type="text" id="g1_duedate" class="date"/></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"/></div>
-<div><label for="g1_paid">Payment Status</label><select id="g1_paid" data-placeholder="Paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_owners">Owners</label><input type="text" id="g1_owners" /></div>
+	<div><label for="g1_activity">Activity</label><input type="text" id="g1_activity" /></div>
+	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
+	<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
+	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"/></div>
+	<div><label for="g1_duedate" >Due Date</label><input type="text" id="g1_duedate" class="date"/></div>
+	<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"/></div>
+	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 
-<h4>Articals</h4><div>
-<div><label for="g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_articlessubmitted" class="date"/></div>
-<div><label for="g1_articlesapproved" >Articles Approved</label><input type="text" id="g1_articlesapproved" class="date"/></div>
-</div>
-
-
-<h4>Trade Names</h4><div>
-<div><label for="g1_tradenamesubmitted" >Trade Name Submitted</label><input type="text" id="g1_tradenamesubmitted" class="date"/></div>
-<div><label for="g1_tradenamereceived" >Trade Name Received</label><input type="text" id="g1_tradenamereceived" class="date"/></div>
+<!---Subgroup 1--->
+<h4 onClick='_loadData({"id":"bf_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);'>Articles</h4>
+<div>
+	<div><label for="g1_g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_g1_articlessubmitted" class="date"/></div>
+	<div><label for="g1_g1_articlesapproved" >Articles Approved</label><input type="text" id="g1_g1_articlesapproved" class="date"/></div>
 </div>
 
 
-<h4>Minutes</h4><div>
-<div><label for="g1_minutesbylawsdraft" >Minutes Bylaws Draft</label><input type="text" id="g1_minutesbylawsdraft" class="date"/></div>
-<div><label for="g1_minutesbylawsfinal" >Minutes Bylaws Final</label><input type="text" id="g1_minutesbylawsfinal" class="date"/></div>
-<div><label for="g1_minutescompleted" >Minutes Complete</label><input type="text" id="g1_minutescompleted" class="date"/></div>
-
+<!---Subgroup 2--->
+<h4 onClick='_loadData({"id":"bf_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);'>Trade Names</h4>
+<div>
+	<div><label for="g1_g2_tradenamesubmitted" >Trade Name Submitted</label><input type="text" id="g1_g2_tradenamesubmitted" class="date"/></div>
+	<div><label for="g1_g2_tradenamereceived" >Trade Name Received</label><input type="text" id="g1_g2_tradenamereceived" class="date"/></div>
 </div>
 
-<h4>Disolution</h4><div>
-<div><label for="g1_dissolutionrequested" >Dissolution Requested</label><input type="text" id="g1_dissolutionrequested" class="date"/></div>
-<div><label for="g1_dissolutionsubmitted" >Dissolution Submitted</label><input type="text" id="g1_dissolutionsubmitted" class="date"/></div>
-<div><label for="g1_disolutioncompleted" >Disolution Completed</label><input type="text" id="g1_disolutioncompleted" class="date"/></div>
+
+<!---Subgroup 3--->
+<h4 onClick='_loadData({"id":"bf_id","group":"group1_3","page":"businessformation"});$("#isLoaded_group1_3").val(1);'>Minutes</h4>
+<div>
+	<div><label for="g1_g3_minutesbylawsdraft" >Minutes Bylaws Draft</label><input type="text" id="g1_g3_minutesbylawsdraft" class="date"/></div>
+	<div><label for="g1_g3_minutesbylawsfinal" >Minutes Bylaws Final</label><input type="text" id="g1_g3_minutesbylawsfinal" class="date"/></div>
+	<div><label for="g1_g3_minutescompleted" >Minutes Complete</label><input type="text" id="g1_g3_minutescompleted" class="date"/></div>
 </div>
 
-<h4>Other</h4><div>
-<div><label for="g1_otheractivity">Other Activity</label><input type="text" id="g1_otheractivity" class="date"/></div>
-<div><label for="g1_otherstarted" >Other Started</label><input type="text" id="g1_otherstarted" class="date"/></div>
-<div><label for="g1_othercompleted" >Other Completed</label><input type="text" id="g1_othercompleted" class="date"/></div>
+<!---Subgroup 4--->
+<h4 onClick='_loadData({"id":"bf_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);'>Dissolution</h4>
+<div>
+	<div><label for="g1_g4_dissolutionrequested" >Dissolution Requested</label><input type="text" id="g1_g4_dissolutionrequested" class="date"/></div>
+	<div><label for="g1_g4_dissolutionsubmitted" >Dissolution Submitted</label><input type="text" id="g1_g4_dissolutionsubmitted" class="date"/></div>
+	<div><label for="g1_g4_disolutioncompleted" >Disolution Completed</label><input type="text" id="g1_g4_disolutioncompleted" class="date"/></div>
+</div>
 
-
-<div><label for="g1_tinss4submitted" >TIN SS-4 Submitted</label><input type="text" id="g1_tinss4submitted" class="date"/></div>
-<div><label for="g1_tinreceived" >TIN Received</label><input type="text" id="g1_tinreceived" class="date"/></div>
-
-<div><label for="g1_poa2848signed" >POA 2848 Signed</label><input type="text" id="g1_poa2848signed" class="date"/></div>
-<div><label for="g1_statecrasubmitted" >State CRA Submitted</label><input type="text" id="g1_statecrasubmitted" class="date"/></div>
-<div><label for="g1_statecrareceived" >State CRA Received</label><input type="text" id="g1_statecrareceived" class="date"/></div>
-<div><label for="g1_scorp2553submitted" >S-Corp 2553 Submitted</label><input type="text" id="g1_scorp2553submitted" class="date"/></div>
-<div><label for="g1_scorp2553received" >S-Corp 2553 Received</label><input type="text" id="g1_scorp2553received" class="date"/></div>
-<div><label for="g1_corp8832submitted" >Corp 8832 Submitted</label><input type="text" id="g1_corp8832submitted" class="date"/></div>
-<div><label for="g1_corp8832received" >Corp 8832 Received</label><input type="text" id="g1_corp8832received" class="date"/></div>
-<div><label for="g1_501c3submitted" >501(c)3 Submitted</label><input type="text" id="g1_501c3submitted" class="date"/></div>
-<div><label for="g1_501creceived" >501(c)3 Received</label><input type="text" id="g1_501creceived" class="date"/></div>
-<div><label for="g1_recoardbookordered" >Recoard Book Ordered</label><input type="text" id="g1_recoardbookordered" class="date"/></div>
-
-
-
+<!---Subgroup 5--->
+<h4 onClick='_loadData({"id":"bf_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);'>Other</h4>
+<div>
+	<div><label for="g1_g5_businesstype">Business Type</label><select id="g1_g5_businesstype"><option value="0">&nbsp;</option></select></div>
+	<div><label for="g1_g5_businesscreceived" >Received</label><input type="text" id="g1_g5_businesscreceived" class="date"/></div>
+	<div><label for="g1_g5_businesssubmitted" >Submitted</label><input type="text" id="g1_g5_businesssubmitted" class="date"/></div>
+	<div><label for="g1_g5_otheractivity">Other Activity</label><input type="text" id="g1_g5_otheractivity" class="date"/></div>
+	<div><label for="g1_g5_otherstarted" >Other Started</label><input type="text" id="g1_g5_otherstarted" class="date"/></div>
+	<div><label for="g1_g5_othercompleted" >Other Completed</label><input type="text" id="g1_g5_othercompleted" class="date"/></div>
 </div>
 </div>
 
+<!--- Comments --->
 <div id="group2" class="gf-checkbox">
-<h3>Comments</h3>
+<h3 onClick="_grid2();">Comments</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1})'>Add</a>
+<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
 </div>
 </div>
 <h4>Add Comment</h4>
@@ -120,6 +116,7 @@ Add Subtasks:
 <div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
+
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>

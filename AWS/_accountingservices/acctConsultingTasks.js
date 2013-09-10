@@ -1,11 +1,13 @@
 /*
 Javascript for Client Accounting and Consulting Tasks
 Developers:Jamin Quimby
-
+Raymond Smith
 Grid1 = Entrance
 */
 
 $(document).ready(function(){
+	
+	
 // Load Initial Client Grid	
 _grid1();
 // Show Entrace Window
@@ -24,16 +26,9 @@ _grid1=function(){_jGrid({
 	"title":"Accounting &amp; Consulting Tasks",
 	"fields":{MC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},MC_CATEGORYTEXT:{title:'Consulting Categories'},MC_DESCRIPTION:{title:'Task Description'},MC_STATUS:{title:'Status'},MC_DUEDATE:{title:'Due Date'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#grid1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
-	"functions":'$(".trackers #mc_id").val(record.MC_ID);'
-	+'_updateh3(record.CLIENT_NAME);'
-	+'_toggle("group1,largeMenu");'
-	+'$(".gf-checkbox").hide();'
-	+'$("div#group1").show();'
-	+'$("div#content").removeClass();'
-	+'$("div#content").addClass("contentbig");'
-	+'_loadData({"id":"mc_id","group":"group1","page":"acctconsultingtasks"});'
-	})}
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#mc_id").val(record.MC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"mc_id","group":"group1","page":"acctconsultingtasks"});'
+	})};
 
 _grid2=function(){_jGrid({
 	"grid":"grid2",
@@ -43,31 +38,42 @@ _grid2=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#mc_id").val()+'","loadType":"group2"}',
 	"functions":'$(".trackers #mcs_id").val(record.MCS_ID);_loadData({"id":"mcs_id","group":"group2","page":"acctconsultingtasks"});$("#group2").accordion({active:1});;'
-	});}
-
+	})};
 _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"acctconsultingtasks.cfc",
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"2","ClientID":"'+$("#g1_client").val()+'","loadType":"group3"}',
+	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"2","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#mc_id").val()+'","loadType":"group3"}',
 	"functions":''
-	});}
+	})};
 
 
 
 //Load Data call Back
-_loadDataCB=function(query){if(query!=null){switch(query.COLUMNS[0]){
+_loadDataCB=function(query){
+	
+if(query!=null){
+	
+switch(query.COLUMNS[0]){
+	
 /*START LOAD DATA */
-/*Group1*/case "MC_ID":var list='mc_id,g1_client,g1_spouse,g1_credithold,g1_consultingcategory,g1_taskdescription,g1_priority,g1_assignedto,g1_status,g1_requestforservices,g1_workinitiated,g1_duedate,g1_projectcompleted,g1_estimatedtime,g1_fees,g1_paid';_loadit({"query":query,"list":list});break;
+/*Group1*/case "MC_ID":var list='mc_id,client_id,g1_assignedto,g1_consultingcategory,g1_credithold,g1_duedate,g1_estimatedtime,g1_fees,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated,g1_spouse';_loadit({"query":query,"list":list});break;
 /*Group2*/case "MCS_ID":var list='mcs_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
 
 /*END LOAD DATA */
-default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}};
+default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})
+
+}
+
+}
+
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
+
+};
 
 
 /*SAVE DATA CALL BACK*/
@@ -76,52 +82,47 @@ var options={
 	"id":"",//ID
 	"group":"",//Switch Group
 	"result":""//Call Back Response
-	}
+	};
 
 $.extend(true, options, params);//turn options into array
-var $g1_client=$("#g1_client");
 switch(options["group"]){
 //Starting with Save Message
 case'':
-if($("#g1_client").val()!=0){
+if($("#client_id").val()>0){
 _saveDataCB({'group':'group1'});
-jqMessage({message: "Saveing.",type: "save",autoClose: true});
+jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
-
 break;
+
 /*Save Group1*/
 case'group1':
-var $g1_estimatedtime=$("#g1_estimatedtime");
-var $g1_fees=$("#g1_fees");
-var $g1_duedate=$("#g1_duedate");
-var $g1_requestforservices=$("#g1_requestforservices");
-var $g1_projectcompleted=$("#g1_projectcompleted");
-/*Convert to numbers*/
-if( $.type($g1_estimatedtime.val())==="number"){$g1_estimatedtime.val()}else{$g1_estimatedtime.val(0)}
-if( $.type($g1_fees.val())==="number"){$g1_fees.val()}else{$g1_fees.val(0)}
 var json='{"DATA":[["'+
 $("#mc_id").val()+'","'+
-$g1_client.val()+'","'+
+$("#client_id").val()+'","'+
 $("#g1_assignedto").val()+'","'+
-$("#g1_consultingcategory").val()+'","'+
-$("#g1_taskdescription").val()+'","'+
-$g1_duedate.val()+'","'+
-$g1_estimatedtime.val()+'","'+
+$("#g1_consultingcategory").val()+'",'+
+$("#g1_credithold").is(':checked')+',"'+
+$("#g1_duedate").val()+'","'+
+$("#g1_estimatedtime").val()+'","'+
 $("#g1_fees").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_priority").val()+'","'+
-$g1_projectcompleted.val()+'","'+
-$g1_requestforservices.val()+'","'+
+$("#g1_projectcompleted").val()+'","'+
+$("#g1_requestforservices").val()+'","'+
 $("#g1_status").val()+'","'+
+$("#g1_taskdescription").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
-$("#g1_credithold").is(":checked")+
 '"]]}'
-if($g1_client.val()!=0 ){
-_saveData({group:"group1",payload:$.parseJSON(json),page:"acctconsultingtasks"});
-}else{
-_saveDataCB({'group':'group2'});
-	}
+
+if($("#client_id").val()>0 && $("#g1_consultingcategory").val()!="" && $("#g1_taskdescription").val()!="" && $("#g1_priority").val()!=""){
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"acctconsultingtasks"})
+}
+
+else{jqMessage({message: "You must enter all required fields.",type: "info",autoClose: true})}
+
 break;
+
+
 /*Save Group2*/
 case'group2':
 var json='{"DATA":[["'+
@@ -136,29 +137,35 @@ $("#g2_estimatedtime").val()+'","'+
 $("#g2_note").val()+'","'+
 $("#g2_sequence").val()+'","'+
 $("#g2_status").val()+'","'+
-$("#g2_subtask").val()+
+$("#g2_subtask").val()+'","'+
 '"]]}'
 
-
-if($("subtask_isLoaded").val()!=0 && $("#g2_subtask").val() !=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"});
-}else{_saveDataCB({'group':'group3'});}
-
-
+if($("#subtask_isLoaded").val()!=0){
+	if( $("#g2_subtask").val()!=0){
+		_saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"});
+	}
+	else{jqMessage({message: "You must select a subtask.",type: "info",autoClose: true});}
+}
+else{_saveDataCB({'group':'group3'});}
 break;
-/*Save Group3*/
+
+
+/*----------Save Group 3-------------*/
 case'group3':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
-$g1_client.val()+'","'+
+$("#client_id").val()+'","'+
+$("#mc_id").val()+'","'+
 $("#g3_commentdate").val()+'","'+
-$("#g3_commenttext").val()+
+$("#g3_commenttext").val()+'","'+
 '"]]}'
-if($("comment_isLoaded").val()!=0 && $("#g3_commenttext").val()!=""){
+if($("#comment_isLoaded").val()!=0){
 _saveData({group:"group3",payload:$.parseJSON(json),page:"acctconsultingtasks"});
-}else{_saveDataCB({'group':'group4'});}
+}else{_saveDataCB({'group':'group4'})}
 break;
+
+
 /*Save Group4*/
 case'group4':
 jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
