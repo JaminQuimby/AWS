@@ -1,6 +1,14 @@
-<cfcomponent>
+<cfcomponent output="true">
  
-<cffunction name="upload" access="remote" returntype="struct" returnformat="json" output="false">
+<cffunction name="upload" access="remote" returnformat="json" output="false">
+<cfargument name="FORMID" type="numeric" required="yes" default="0">
+<cfargument name="CLIENTID" type="numeric" required="yes" default="0">
+<cfargument name="DESCRIPTION" type="string" required="no">
+<cfargument name="DMSREFERENCE" type="string" required="no">
+<cfargument name="FYEAR" type="string" required="no">
+<cfargument name="FMONTH" type="string" required="no">
+<cfargument name="FDAY" type="string" required="no">
+
 <cfscript>
 var uploadDir = expandPath('.') & '/uploads/'; // should be a temp directory that you clear periodically to flush orphaned files
 var uploadFile = uploadDir & arguments.NAME;
@@ -14,11 +22,52 @@ response.id = arguments.CHUNK;
 </cfscript>	
 <!--- save file data from multi-part form.FILE --->
 <cffile action="upload" result="result" filefield="FILE" destination="#uploadFile#" nameconflict="overwrite"/>
+<cfoutput>
+<cfquery datasource="AWS" name="fQuery">
+INSERT INTO[ctrl_files]
+(
+[file_name]
+,[file_savedname]
+,[file_type]
+,[file_subtype]
+,[file_size]
+,[file_ext]
+,[form_id]
+,[client_id]
+,[file_description]
+,[file_dmsReference]
+,[file_year]
+,[file_month]
+,[file_day]
+)
+
+VALUES(
+<cfqueryparam value="#result.clientFile#"/>
+,<cfqueryparam value="#result.serverFile#"/>
+,<cfqueryparam value="#result.contentType#"/>
+,<cfqueryparam value="#result.contentSubType#"/>
+,<cfqueryparam value="#result.fileSize#"/>
+,<cfqueryparam value="#result.clientFileExt#"/>
+,<cfqueryparam value="#arguments.FORMID#"/>
+,<cfqueryparam value="#arguments.CLIENTID#"/>
+,<cfqueryparam value="#arguments.DESCRIPTION#"/>
+,<cfqueryparam value="#arguments.DMSREFERENCE#"/>
+,<cfqueryparam value="#arguments.FYEAR#" null="#LEN(arguments.FYEAR) eq 0#"/>
+,<cfqueryparam value="#arguments.FMONTH#" null="#LEN(arguments.FMONTH) eq 0#"/>
+,<cfqueryparam value="#arguments.FDAY#" null="#LEN(arguments.FDAY) eq 0#"/>
+)
+
+</cfquery>
+</cfoutput>
+
+
 <cfscript>
 // Example: you can return uploaded file data to client
 response['size'] = result.fileSize;
 response['type'] = result.contentType;
 response['saved'] = result.fileWasSaved;
+
+
 // reassemble chunked file
 if (structKeyExists(arguments, 'CHUNKS') && arguments.CHUNK + 1 == arguments.CHUNKS){
 try {
@@ -50,8 +99,12 @@ fileDelete('#uploadDir##d[i]#');
 response = {'error' = {'code' = 500, 'message' = 'Internal Server Error'}, 'id' = 0};
 }
 }
+
 return response;
 </cfscript>
+
+
+
 </cffunction>
  
 </cfcomponent>

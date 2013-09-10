@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 <link rel="stylesheet" media="all" type="text/css" href="#Application.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-timepicker-addon.css" />
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/menu/menu.css"/>
-<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/fileUpload/assets/css/demo.css"/>
 <cfswitch expression="#page.module#">
 <cfcase value="_accountingservices">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jtable/themes/metro/blue/jtable.min.css">
@@ -28,6 +27,7 @@
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/chosen/chosen.css">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jqMessage/jqMessage.css">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jqvalid/jqvalid.css">
+<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jUpload/assets/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/css/aws.css"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -37,6 +37,8 @@
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jqMessage/jqmessage.jquery.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jqValid/jqValid.jquery.js"></script>
+<script type="text/javascript" src="#Application.url#/AWS/assets/module/jUpload/assets/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="#Application.url#/AWS/assets/module/jUpload/assets/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/js/aws.js"></script>
 <link rel="stylesheet" type="text/css" href="#page.module#.css">
 <script type="text/javascript" src="#page.location#.js"></script>

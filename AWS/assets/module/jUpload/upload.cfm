@@ -1,35 +1,94 @@
+<!-- Load Queue widget CSS and jQuery -->
 
-<!---
-	The Name field represents the filename as it exists on the client
-	machine.
+
+<!--- Standalone Requrements
+<link rel="stylesheet" type="text/css" href="../../css/aws.css"/>
+<style type="text/css">@import url(assets/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css);</style>
+<cfset page.formid = 0>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="assets/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="assets/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
 --->
-<cfparam name="form.name" type="string" />
+<cfoutput>
+<script type="text/javascript">
+// Convert divs to queue widgets when the DOM is ready
+$(function() {
+$("##uploader").pluploadQueue({
+		// General settings
+		runtimes : 'html5,flash',
+		url : '#Application.url#/AWS/assets/module/jUpload/upload.cfc?method=upload',
+		max_file_size : '10mb',
+		chunk_size : '1mb',
+		unique_names : true,
 
-<!---
-	The File field represents the TMP file into which the binary 
-	data of the upload is being stored. This can be accessed via 
-	CFFile/Upload.
---->
-<cfparam name="form.file" type="string" />
+		 // The ID of the drop-zone element.
+drop_element: "uploader",
+ 
+// To enable click-to-select-files, you can provide
+// a browse button. We can use the same one as the
+// drop zone.
+browse_button: "selectFiles",
+ 
+// For the Flash engine, we have to define the ID
+// of the node into which Pluploader will inject the
+// <OBJECT> tag for the flash movie.
+container: "uploader",
+ 
+// The URL for the SWF file for the Flash upload
+// engine for browsers that don't support HTML5.
+flash_swf_url: "./assets/plupload/js/plupload.flash.swf",
+ 
+// Needed for the Flash environment to work.
+urlstream_upload: true,
+ 
+// Set up the multi-part data. For now, just leave
+// the params blank - we'll be adding to them as
+// we start to upload files.
+multipart: true,
+multipart_params: { },
+		// Resize images on clientside if we can
+		resize : {width : 320, height : 240, quality : 90},
+
+		// Specify what files to browse for
+		filters : [
+			{title : "Image files", extensions : "jpg,gif,png"},
+			{title : "Zip files", extensions : "zip"}
+		],
+		
 
 
-<!--- Sleep for a brief period to allow UI a chance to show. --->
-<!--- ------------------------------------------------------ --->
-<cfset sleep( 1000 ) />
-<!--- ------------------------------------------------------ --->
+		// Flash settings
+		flash_swf_url : 'assets/plupload/js/plupload.flash.swf',
+
+		// Silverlight settings
+		silverlight_xap_url : 'assets/plupload/js/plupload.silverlight.xap',
+   init : {
+            BeforeUpload: function(up, files) {
+                      up.settings.multipart_params = {
+						  'description' : $('##'+files.id+'_description').val(),
+						  'dmsreference' : $('##'+files.id+'_dmsreference').val(),
+						  'fyear' : $('##'+files.id+'_year').val(),
+						  'fmonth' : $('##'+files.id+'_month').val(),
+						  'fday' : $('##'+files.id+'_day').val(),
+						  'formid':'#page.formid#',
+						  'clientid':$('##client_id').val()			
+						  }
+		            },
+        	FileUploaded: function(up, file, response){
+				   alert(response.response)
+				   }
+		}
+    });
+});
 
 
-<!--- Save the file to the uploads directory. --->
-<cffile
-	result="upload"
-	action="upload"
-	filefield="file"
-	destination="#application.uploadsDirectory#"
-	nameconflict="makeunique"
-	/>
 
-<!--- Return a success message. --->
-<cfheader
-	statuscode="201"
-	statustext="Created"
-	/>
+
+        
+
+	
+</script>
+</cfoutput>
+	<div id="uploader">
+		<p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+	</div>		

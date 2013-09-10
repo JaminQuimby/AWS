@@ -29,7 +29,6 @@
 <!---Page Start--->
 <!--- THINGS TO DO
 
-DOCUMENTS
 ACTIVITY (CLIENT DATA)
 
 --->
@@ -299,7 +298,7 @@ ACTIVITY (CLIENT DATA)
 <div id="group8" class="gf-checkbox">
 <h3>Upload Files</h3>
 <div>
-<cfinclude template="../assets/module/fileUpload/upload.cfm">
+<cfinclude template="../assets/module/jUpload/upload.cfm">
 </div>
 </div>
 </div>

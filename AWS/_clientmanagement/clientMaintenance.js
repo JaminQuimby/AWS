@@ -6,6 +6,12 @@ Developers:Jamin Quimby
 */
 
 $(document).ready(function(){
+
+
+jqMessage({message: "Activly being changed by: Jamin Quimby",type: "warning",autoClose: false});
+
+
+
 //Load Grid
 _grid1();
 _group1=function(){}

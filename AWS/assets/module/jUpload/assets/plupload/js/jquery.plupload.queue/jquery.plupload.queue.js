@@ -1,11 +1,10 @@
 (function(c){var d={};function a(e){return plupload.translate(e)||e}function b(f,e){e.contents().each(function(g,h){h=c(h);if(!h.is(".plupload")){h.remove()}});
 
 
-e.prepend('<div class="plupload_wrapper plupload_scroll"><div id="'+f+'_container" class="plupload_container"><div class="plupload"><div class="plupload_header"><div class="plupload_header_content"><div class="plupload_header_title">'+a("Select files")+'</div><div class="plupload_header_text">'+a("Add files to the upload queue and click the start button.")+'</div></div></div><div class="plupload_content"><div class="plupload_filelist_header"><div class="plupload_file_name">'+a("Filename")+'</div><div class="plupload_file_action">&nbsp;</div><div class="plupload_file_status"><span>'+a("Status")+'</span></div><div class="plupload_file_size">'+a("Size")+'</div>'+
-'<div class="plupload_file_size">'+a("Size2")+'</div>'+
+e.prepend('<div class="plupload_wrapper plupload_scroll"><div id="'+f+'_container" class="plupload_container"><div class="plupload"><div class="plupload_header"><div class="plupload_header_content highlight"><div class="plupload_header_title">'+a("Upload Files")+'</div><div class="plupload_header_text"></div></div></div><div class="plupload_content"><div class="plupload_filelist_header"><div class="plupload_file_name">'+a("Filename")+'</div><div class="plupload_file_action">&nbsp;</div><div class="plupload_file_status"><span>'+a("Status")+'</span></div><div class="plupload_file_size">'+a("Size")+'</div>'+
 '<div class="plupload_clearer">&nbsp;</div></div>'+
 '<ul id="'+f+'_filelist" class="plupload_filelist"></ul>'+
-'<div class="plupload_filelist_footer"><div class="plupload_file_name"><div class="plupload_buttons"><a href="#" class="plupload_button plupload_add">'+a("Add files")+'</a><a href="#" class="plupload_button plupload_start">'+a("Start upload")+'</a></div><span class="plupload_upload_status"></span></div><div class="plupload_file_action"></div><div class="plupload_file_status"><span class="plupload_total_status">0%</span></div><div class="plupload_file_size"><span class="plupload_total_file_size">0 b</span></div><div class="plupload_progress"><div class="plupload_progress_container"><div class="plupload_progress_bar"></div></div></div><div class="plupload_clearer">&nbsp;</div></div></div></div></div><input type="hidden" id="'+f+'_count" name="'+f+'_count" value="0" /></div>')
+'<div class="plupload_filelist_footer"><div class="plupload_file_name"><div class="plupload_buttons buttonbox"><a href="#" class="plupload_button plupload_add button">'+a("Add files")+'</a>&nbsp;<a href="#" class="plupload_button plupload_start button">'+a("Start upload")+'</a></div><span class="plupload_upload_status"></span></div><div class="plupload_file_action"></div><div class="plupload_file_status"><span class="plupload_total_status">0%</span></div><div class="plupload_file_size"><span class="plupload_total_file_size">0 b</span></div><div class="plupload_progress"><div class="plupload_progress_container"><div class="plupload_progress_bar"></div></div></div><div class="plupload_clearer">&nbsp;</div></div></div></div></div><input type="hidden" id="'+f+'_count" name="'+f+'_count" value="0" /></div>')
 
 }c.fn.pluploadQueue=function(e){if(e){this.each(function(){var j,i,k;i=c(this);k=i.attr("id");if(!k){k=plupload.guid();i.attr("id",k)}j=new plupload.Uploader(c.extend({dragdrop:true,container:k},e));d[k]=j;function h(l){var n;if(l.status==plupload.DONE){n="plupload_done"}if(l.status==plupload.FAILED){n="plupload_failed"}if(l.status==plupload.QUEUED){n="plupload_delete"}if(l.status==plupload.UPLOADING){n="plupload_uploading"}var m=c("#"+l.id).attr("class",n).find("a").css("display","block");if(l.hint){m.attr("title",l.hint)}}function f(){c("span.plupload_total_status",i).html(j.total.percent+"%");c("div.plupload_progress_bar",i).css("width",j.total.percent+"%");c("span.plupload_upload_status",i).html(a("Uploaded %d/%d files").replace(/%d\/%d/,j.total.uploaded+"/"+j.files.length))}
 function g(){var m=c("ul.plupload_filelist",i).html(""),n=0,l;c.each(j.files,function(p,o){l="";if(o.status==plupload.DONE){if(o.target_name){l+='<input type="hidden" name="'+k+"_"+n+'_tmpname" value="'+plupload.xmlEncode(o.target_name)+'" />'}l+='<input type="hidden" name="'+k+"_"+n+'_name" value="'+plupload.xmlEncode(o.name)+'" />';l+='<input type="hidden" name="'+k+"_"+n+'_status" value="'+(o.status==plupload.DONE?"done":"failed")+'" />';n++;c("#"+k+"_count").val(n)}
@@ -15,7 +14,14 @@ m.append('<li id="'+o.id+'">'+
 '<div class="plupload_file_action"><a href="#"></a></div>'+
 '<div class="plupload_file_status">'+o.percent+'%</div>'+
 '<div class="plupload_file_size">'+plupload.formatSize(o.size)+'</div>'+
-'<div class="plupload_file_description">Description: <input type="text" id="'+o.id+'_description" /></div>'+
+
+'<div style="clear:both;"><div class="plupload_file_description"><label for="'+o.id+'_description">Description</label> <input type="text" id="'+o.id+'_description" /></div>'+
+
+'<div class="plupload_file_dmsreference"><label for="'+o.id+'_dmsreference">DMS Reference</label> <input type="text" id="'+o.id+'_dmsreference" /></div>'+
+'<div class="plupload_file_year"><label for="'+o.id+'_year">Year</label> <input type="text" id="'+o.id+'_year" /></div>'+
+'<div class="plupload_file_month"><label for="'+o.id+'_month">Month</label> <input type="text" id="'+o.id+'_month" /></div>'+
+'<div class="plupload_file_day"><label for="'+o.id+'_day">Day</label> <input type="text" id="'+o.id+'_day" /></div></div>'+
+
 '<div class="plupload_clearer">&nbsp;</div>'+l+"</li>");
 
 
