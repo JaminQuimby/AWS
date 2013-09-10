@@ -1,7 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset session.module="_payrolltaxes">
+<cfset page.module="_payrolltaxes">
 <cfset page.location="payrollreporting">
 <cfset page.title="Payroll Reporting">
 <cfset page.menuLeft="General,SubTasks,Comment">

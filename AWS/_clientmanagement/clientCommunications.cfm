@@ -1,7 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset session.module="_clientmanagement">
+<cfset page.module="_clientmanagement">
 <cfset page.location="clientcommunications">
 <cfset page.formid=12>
 <cfset page.title="Client Communications">
@@ -43,7 +43,7 @@
 <h3>General</h3>
 <div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetSpouse','page':'clientcommunications'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" class="readonly" readonly="readonly" ></div>
+<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" class="readonly" readonly ></div>
 <div><label for="g1_date">Date</label><input type="text" class="time" id="g1_date"></div>
 <div><label for="g1_takenby">Taken By</label><select id="g1_takenby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_for">For</label><select id="g1_for"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

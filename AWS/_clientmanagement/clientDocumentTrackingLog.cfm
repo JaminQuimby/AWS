@@ -1,7 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset session.module="_clientmanagement">
+<cfset page.module="_clientmanagement">
 <cfset page.location="clientdocumenttrackinglog">
 <cfset page.title="Document Tracking Log">
 <cfset page.menuLeft="General,SubTasks,Comment">

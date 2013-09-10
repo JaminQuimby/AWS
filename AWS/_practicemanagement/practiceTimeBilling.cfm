@@ -1,7 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset session.module="_practicemanagement">
+<cfset page.module="_practicemanagement">
 <cfset page.location="practicetimebilling">
 <cfset page.title="Time &amp; Billing">
 <cfset page.menuLeft="General,SubTasks,Comment">

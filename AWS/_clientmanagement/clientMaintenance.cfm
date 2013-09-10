@@ -1,7 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset session.module="_clientmanagement">
+<cfset page.module="_clientmanagement">
 <cfset page.location="clientmaintenance">
 <cfset page.formid=1>
 <cfset page.title="Client Management">

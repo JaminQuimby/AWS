@@ -1,7 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset session.module="_payrolltaxes">
+<cfset page.module="_payrolltaxes">
 <cfset page.location="payrollotherfilingrequirements">
 <cfset page.formid=11>
 <cfset page.title="Other Filings">
