@@ -12,9 +12,9 @@
 --->
   <cfset Application.path =  getDirectoryFromPath( getCurrentTemplatePath() )> 
   <cfset Application.url="https://"&CGI.SERVER_NAME>
-    <cfset Application.uploadsDirectory = (Application.path  & "\bin\uploads\")>
+   <!--- <cfset Application.uploadsDirectory = (Application.path  & "bin\uploads\")> --->
 
-     
+     <cfset Application.uploadsDirectory = ("c:\bin\uploads\")> 
     <!--- Define the page request properties. --->
     <cfsetting
     requesttimeout="20"
