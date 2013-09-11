@@ -7,14 +7,12 @@
 	<cfset this.sessiontimeout = createTimeSpan( 0, 0, 29, 59 ) />
     <cfset this.name = "AWS" />
     <cfset this.sessionmanagement = true />
-<!---
-	<cfset Application.path = "/AWS/" />
---->
-  <cfset Application.path =  getDirectoryFromPath( getCurrentTemplatePath() )> 
-  <cfset Application.url="https://"&CGI.SERVER_NAME>
+    <cfset Application.uploadsDirectory = ("c:\bin\uploads\") /> 
+	<cfset Application.path =  getDirectoryFromPath( getCurrentTemplatePath() ) /> 
+	<cfset Application.url="https://"&CGI.SERVER_NAME />
    <!--- <cfset Application.uploadsDirectory = (Application.path  & "bin\uploads\")> --->
 
-     <cfset Application.uploadsDirectory = ("c:\bin\uploads\")> 
+    
     <!--- Define the page request properties. --->
     <cfsetting
     requesttimeout="20"
@@ -70,7 +68,7 @@
 <cfabort>
 <cfelse> 
 <cfquery name="loginQuery" dataSource="AWS" cachedwithin="#CreateTimeSpan(0, 0, 0, 0)#">
-SELECT[ctrl_users].[user_id],[ctrl_users].[name],[ctrl_users].[role],[ctrl_organization].[orgName]
+SELECT[ctrl_users].[user_id],[ctrl_users].[name],[ctrl_users].[role],[ctrl_organization].[orgName],[ctrl_organization].[orgStorage],[ctrl_organization].[orgPlugins]
 FROM[ctrl_users]
 LEFT OUTER JOIN[ctrl_organization] ON[ctrl_users].[org_id]=[ctrl_organization].[org_id]
 WHERE([ctrl_users].[email]=<cfqueryparam value="#FORM.J_USERNAME#" CFSQLTYPE="CF_SQL_VARCHAR">)
@@ -83,6 +81,8 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 <cfset Session.user.email = FORM.J_USERNAME>
 <cfset Session.user.role = loginQuery.role>
 <cfset Session.user.organization = loginQuery.orgName>
+<cfset Session.user.plugins = loginQuery.orgPlugins>
+<cfset Session.user.storage = loginQuery.orgStorage &"\"& loginQuery.orgName >
 </cfif>
 <cfif loginQuery.recordCount eq 0>
 

@@ -1,0 +1,71 @@
+<cfoutput>
+<script type="text/javascript">
+$(document).ready(function(){
+$(function() {
+$("##uploader").pluploadQueue({
+// General settings
+runtimes:'html5,flash',
+url:'/AWS/assets/plugins/jUpload/upload.cfc?method=upload',
+max_file_size:'10mb',
+chunk_size:'1mb',
+unique_names:true,
+multiple_queues:true,
+drop_element:"uploader",
+browse_button:"selectFiles",
+container:"uploader",
+flash_swf_url:"./assets/plupload/js/plupload.flash.swf",
+urlstream_upload:true,
+multipart:true,
+multipart_params:{ },
+resize:{width:320, height:240, quality:90},
+filters:[	{title:"Image files", extensions:"jpg,gif,png"},
+			{title:"Zip files", extensions:"zip"}],
+flash_swf_url:'#Application.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.flash.swf',
+silverlight_xap_url:'#Application.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.silverlight.xap',
+init:{
+	BeforeUpload:function(up, files){
+		up.settings.multipart_params = {
+			'description':$('##'+files.id+'_description').val(),
+			'formid':'#page.formid#',
+			'clientid':$('##client_id').val()			
+						  }
+		            },
+	FileUploaded:function(up, file, response){
+		alert(response.response)
+			}
+		}
+    });
+});
+//Start Normal Template Functions
+_group100=function(){_grid100()}
+_grid100=function(){
+	alert('click');
+	_jGrid({
+	"grid":"grid100",
+	"url":"/AWS/assets/plugins/jUpload/upload.cfc",
+	"title":"Files",
+	"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_DMSREFERENCE:{title:'DMS Reference'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("##g100_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","loadType":"group100","clientid":'+$("##client_id").val()+'}',
+			"functions":'_loadData({"id":"client_id","group":"group100","page":"upload"});$("##group100").accordion({active:1});'
+	})};
+})
+</script>
+</cfoutput>
+
+<div id="group100" class="gf-checkbox" >
+<h3 onClick="_group100(); ">Files</h3>
+<div>
+<div><label for="g100_filter">Filter</label><input id="g100_filter" onBlur="_grid100();"/></div>
+<div id="grid100" class="tblGrid"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group100").accordion({active:1});$("#isLoaded_group100").val(1);'>Add</a>
+</div>
+</div>
+<h4>File Meta Data</h4>
+<div></div>
+<h4>Upload Files</h4>
+<div>
+<div id="uploader"><p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p></div>	
+</div>
+</div>
