@@ -20,7 +20,7 @@ $("##uploader").pluploadQueue({
 		max_file_size : '10mb',
 		chunk_size : '1mb',
 		unique_names : true,
-
+multiple_queues:true,
 		 // The ID of the drop-zone element.
 drop_element: "uploader",
  
@@ -66,10 +66,6 @@ multipart_params: { },
             BeforeUpload: function(up, files) {
                       up.settings.multipart_params = {
 						  'description' : $('##'+files.id+'_description').val(),
-						  'dmsreference' : $('##'+files.id+'_dmsreference').val(),
-						  'fyear' : $('##'+files.id+'_year').val(),
-						  'fmonth' : $('##'+files.id+'_month').val(),
-						  'fday' : $('##'+files.id+'_day').val(),
 						  'formid':'#page.formid#',
 						  'clientid':$('##client_id').val()			
 						  }
@@ -81,12 +77,6 @@ multipart_params: { },
     });
 });
 
-
-
-
-        
-
-	
 </script>
 </cfoutput>
 	<div id="uploader">

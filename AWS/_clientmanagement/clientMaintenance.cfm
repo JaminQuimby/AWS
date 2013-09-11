@@ -6,7 +6,7 @@
 <cfset page.formid=1>
 <cfset page.title="Client Management">
 <cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients,Documents">
-<cfset page.trackers="client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7">
+<cfset page.trackers="client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7,isLoaded_group8">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="SelectClientInformation" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]ORDER BY[client_name]</cfquery>
@@ -34,7 +34,7 @@ ACTIVITY (CLIENT DATA)
 --->
 
 <!DOCTYPE html> 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <!---Head & Supporting Documents--->
 <cfinclude template="../assets/inc/header.cfm">
 <body onLoad=" ">
@@ -61,8 +61,8 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g1_name">Client Name</label><input id="g1_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_spouse">Spouse</label><input id="g1_spouse" type="text"/></div>
 <div><label for="g1_salutation">Salutation</label><input id="g1_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g1_type">Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..."onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="q_cl_type"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_since">Client Since</label><input id="g1_since" type="text" class="valid_off date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
+<div><label for="g1_type">Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..." onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="q_cl_type"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_since">Client Since</label><input id="g1_since" type="text" class="valid_off date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});" onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="g1_trade_name">Trade Name</label><input id="g1_trade_name" type="text" /></div>
 <div><label for="g1_referred_by">Referred By</label><input id="g1_referred_by"  type="text"/></div>
 <div><label for="g1_dms_reference">DMS Reference</label><input id="g1_dms_reference" type="text"/></div>
@@ -155,7 +155,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_name">Contact Name</label><input id="g3_name" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g3_address1">Street #1</label><input id="g3_address1" type="text"/></div>
 <div><label for="g3_address2">Street #2</label><input id="g3_address2" type="text"/></div>
-<div><label for="g3_city">City</label><input id="g3_city"type="text" /></div>
+<div><label for="g3_city">City</label><input id="g3_city" type="text" /></div>
 <div><label for="g3_state">State</label><input id="g3_state" type="text"/></div>
 <div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="5" required id="g3_zip" /></div>
 <div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel"/></div>
@@ -295,13 +295,32 @@ ACTIVITY (CLIENT DATA)
 </div>
 
 <!--- UPLOAD FILES TAB --->
-<div id="group8" class="gf-checkbox">
-<h3>Upload Files</h3>
+<div id="group8" class="gf-checkbox" onClick="_group8()">
+
+
+<h3>Files</h3>
+<div>
+<div><label for="g8_filter">Filter</label><input id="g8_filter" onBlur="_grid8();"/></div>
+<div id="grid8" class="tblGrid"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group8").accordion({active:1});$("#isLoaded_group8").val(1);'>Add</a>
+</div>
+
+
+</div>
+
+<h4>File Meta Data</h4>
+<div></div>
+
+
+<h4>Upload Files</h4>
 <div>
 <cfinclude template="../assets/module/jUpload/upload.cfm">
 </div>
+
 </div>
-</div>
+
+
 </div>
 <!---Start of footer--->
 <cfinclude template="../assets/inc/footer.cfm" />

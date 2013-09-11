@@ -5,9 +5,8 @@
 <cfargument name="CLIENTID" type="numeric" required="yes" default="0">
 <cfargument name="DESCRIPTION" type="string" required="no">
 <cfargument name="DMSREFERENCE" type="string" required="no">
-<cfargument name="FYEAR" type="string" required="no">
-<cfargument name="FMONTH" type="string" required="no">
-<cfargument name="FDAY" type="string" required="no">
+<cfargument name="FDATE" type="string" required="no">
+
 
 <cfscript>
 var uploadDir = expandPath('.') & '/uploads/'; // should be a temp directory that you clear periodically to flush orphaned files
@@ -35,10 +34,7 @@ INSERT INTO[ctrl_files]
 ,[form_id]
 ,[client_id]
 ,[file_description]
-,[file_dmsReference]
-,[file_year]
-,[file_month]
-,[file_day]
+
 )
 
 VALUES(
@@ -51,10 +47,6 @@ VALUES(
 ,<cfqueryparam value="#arguments.FORMID#"/>
 ,<cfqueryparam value="#arguments.CLIENTID#"/>
 ,<cfqueryparam value="#arguments.DESCRIPTION#"/>
-,<cfqueryparam value="#arguments.DMSREFERENCE#"/>
-,<cfqueryparam value="#arguments.FYEAR#" null="#LEN(arguments.FYEAR) eq 0#"/>
-,<cfqueryparam value="#arguments.FMONTH#" null="#LEN(arguments.FMONTH) eq 0#"/>
-,<cfqueryparam value="#arguments.FDAY#" null="#LEN(arguments.FDAY) eq 0#"/>
 )
 
 </cfquery>

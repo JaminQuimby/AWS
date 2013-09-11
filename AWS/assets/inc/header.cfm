@@ -1,5 +1,4 @@
 <head>
-<meta "charset=utf-8" />
 <cfoutput><title>#page.title#</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 <link rel="stylesheet" media="all" type="text/css" href="#Application.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-timepicker-addon.css" />
@@ -35,7 +34,7 @@
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jtable/jquery.jtable.min.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/chosen/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="#Application.url#/AWS/assets/module/jqMessage/jqmessage.jquery.js"></script>
+<script type="text/javascript" src="#Application.url#/AWS/assets/module/jqMessage/jqmessage.jquery.min.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jqValid/jqValid.jquery.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jUpload/assets/plupload/js/plupload.full.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jUpload/assets/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>

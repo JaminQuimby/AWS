@@ -4,8 +4,7 @@ div.autosuggestcontainer li {color:#333;}
 #Searchloadingicon{display:none;}
 .x-grid3-header {background-image:none;border-bottom:1px solid #999;}
 .x-grid3-hd-inner {background-image:none;height:40px;padding-top:20px;}
-.x-grid3-row {height:30px;
-padding-top:2px;}
+.x-grid3-row {height:30px; padding-top:2px;}
 .cfdebug{margin-left:360px;margin-top:100px;}
 td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-asc .x-grid3-hd-inner, td.x-grid3-hd-menu-open .x-grid3-hd-inner{background-image:none;
 border-bottom:1px solid #999;}
@@ -13,10 +12,12 @@ border-bottom:1px solid #999;}
 .ui-corner-all,.ui-corner-bottom,.ui-corner-right,.ui-corner-br{border-radius: 0px;}
 .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr{border-radius: 0px;}
 .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{border-radius: 0px;}
-.ui-accordion .ui-accordion-header{ padding:10px;padding-left:2.2em;}
+.ui-accordion .ui-accordion-header{ padding:10px;padding-left:2.2em;margin-top: 0px;}
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{ background:#EFEFEF;}
 .ui-datepicker-trigger{left: 3px; position: relative; top: 3px;}
 .ui-accordion .ui-accordion-content { overflow:inherit;}
+.ui-widget-content{border: none;}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{border: 1px solid #fff;border-bottom: 1px solid #D3D3D3;}
 /* CSS BROWSER RESET TO A STANDARD*/
 *{margin:0;padding:0;border:none;border-collapse :collapse;font-family:"Lucida Sans Unicode","Lucida Grande","tahoma",Verdana,sans-serif; font-size:12px;}
 /*Chosen Mod*/
@@ -29,7 +30,7 @@ html,body{position:relative;height:auto;min-height:100%;}
 h1,h2,h3,h4,h5,h6{font-size:16px;}
 
 /* CSS ELEMENT MOD*/
-a{font-size:14px;color:#000;text-decoration: none;}
+a{font-size:13px;color:#000;text-decoration: none;}
 form{display:inline;}
 footer{position:fixed;bottom:0;width:100%;height:42px;background:#F8F8F8;color:#000;padding-left:34px;border-top-style:solid;border-top-color:#E1E1DC;border-top-width:1px;}
 footer div{font-size:12px;padding-top:2px; display:inline-block; min-width:200px;}
@@ -74,7 +75,7 @@ tr{vertical-align:top;}
 .button{cursor:pointer;background:none repeat scroll 0 0 #FFFF00;border:1px solid #999999;border-radius:2px 2px 2px 2px;display:inline-block;padding:4px;text-align:center;white-space:nowrap;text-decoration:none;min-width:165px;font-size:1em;}
 .optional{background-color:#D3D3D3;}
 .buttonbox{margin-top:5px;white-space:nowrap; min-width:300px; display:inline-block;}/*the box that contains buttons for actions like save and cancel*/
-.contentbig{vertical-align:top;margin-top:36px;margin-left:330px;}/*Changes the content box to render along side a big right side menu*/
+.contentbig{vertical-align:top;margin-top:36px;margin-left:300px;}/*Changes the content box to render along side a big right side menu*/
 .contentsmall{vertical-align:top;margin-top:36px;margin-left:39px;}/*changes the content box to render along side a small right side menu*/
 .customlabel{height:20px;margin-left:-5px;width:379px}/*Customlabels - would be used for text elements that modify a custom label*/
 .help{display:inline-block;font-size:12px;height:30px;line-height:30px;padding-left:10px;}/*div element that render validation results*/
@@ -91,9 +92,10 @@ tr{vertical-align:top;}
 #smallMenu{width:38px;height:100%;float:left;margin-right:45px;position:fixed;}
 #smallMenu h1{ font-size:1em; padding:0px; height:36px;}
 /*Large Right Side Menu*/
-#largeMenu{width:330px;height:100%;position:fixed;}
-#largeMenu h1{border-bottom: 1px solid white;height: 36px;line-height: 36px; padding-bottom: 0;padding-left: 0;padding-right: 0;text-align: center;}
-#largeMenu li{list-style-type:none;background-color:#FFF;border-bottom:1px solid #E1E1DC;color:#069;}
+#largeMenu{width:300px;height:100%;position:fixed;}
+#largeMenu h1{border-bottom: 1px solid #BBBBBB;height: 36px;line-height: 36px; padding-bottom: 0;padding-left: 0;padding-right: 0;text-align: center; background:#EFEFEF;}
+#largeMenu h1 a{ font-size: 14px;}
+#largeMenu li{list-style-type:none;background-color:#FFF;color:#069;}
 #largeMenu li:hover{background-color:#efefef;}
 #largeMenu li a{display:block;overflow:hidden;padding:9px 52px 9px 13px;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;	cursor:pointer;}
 #largeMenu li a:hover{color:#999;}

@@ -54,6 +54,7 @@ _group7_1=function(){
 	$('#isLoaded_group7').val(1);
 	_loadData({'id':'client_id','group':'group7','page':'clientmaintenance'})};
 
+_group8=function(){_grid8();}
 
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
@@ -167,7 +168,15 @@ _grid7=function(){_jGrid({
 	})};
 
 
-
+_grid8=function(){_jGrid({
+	"grid":"grid8",
+	"url":"clientMaintenance.cfc",
+	"title":"Files",
+	"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_DMSREFERENCE:{title:'DMS Reference'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
+	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g8_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#g8_group").val()+'","loadType":"group8","clientid":'+$("#client_id").val()+'}',
+	"functions":'_loadData({"id":"client_id","group":"group8","page":"clientmaintenance"});$("#group8").accordion({active:1});'
+	})};
 
 
 //Load Data call Back

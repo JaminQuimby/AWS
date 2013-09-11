@@ -27,7 +27,12 @@
 	color: #000;
 	text-decoration: none;
 }
-
+.plupload_buttons{background: none repeat scroll 0 0 #FFFFFF;
+    bottom: 5px;
+    display: block;
+    left: 34px;
+    position: fixed;
+    z-index: 100;}
 .plupload_disabled, a.plupload_disabled:hover {
 	  color: #737373 !important;
 	   border-color: #c5c5c5 !important;
@@ -77,10 +82,12 @@
 	padding: 0;
 	list-style: none;
 }
-
+.plupload_filelist li:nth-child(even){background: #CCC}
 .plupload_scroll .plupload_filelist {
 	height: 300px;
 	overflow-y: scroll;
+    border-left: 1px solid #ddd;
+
 }
 
 .plupload_filelist li {

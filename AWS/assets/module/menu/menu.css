@@ -9,7 +9,7 @@
     /*Note: Unlike image file, htc file path is relative to the page, not this CSS file.*/
     behavior: url("menu.htc");
     height: 36px;
-    background: #D4D4D4 url(assets/img/bg.gif) repeat-x 0 0;
+    background: #EFEFEF;
     border-bottom: 1px solid #BBB; 
     position:fixed;/*! for IE htc*/
 	top:0px;
@@ -96,9 +96,7 @@ ul.menuH ul
     white-space:nowrap;
 	font-size:1em;
 	list-style-position:inside;
-border-image: none;
-border-style: solid solid none;
-border-width: 2px 2px 0;
+
 color: #FFFFFF;
 }
 

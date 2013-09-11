@@ -17,11 +17,6 @@ m.append('<li id="'+o.id+'">'+
 
 '<div style="clear:both;"><div class="plupload_file_description"><label for="'+o.id+'_description">Description</label> <input type="text" id="'+o.id+'_description" /></div>'+
 
-'<div class="plupload_file_dmsreference"><label for="'+o.id+'_dmsreference">DMS Reference</label> <input type="text" id="'+o.id+'_dmsreference" /></div>'+
-'<div class="plupload_file_year"><label for="'+o.id+'_year">Year</label> <input type="text" id="'+o.id+'_year" /></div>'+
-'<div class="plupload_file_month"><label for="'+o.id+'_month">Month</label> <input type="text" id="'+o.id+'_month" /></div>'+
-'<div class="plupload_file_day"><label for="'+o.id+'_day">Day</label> <input type="text" id="'+o.id+'_day" /></div></div>'+
-
 '<div class="plupload_clearer">&nbsp;</div>'+l+"</li>");
 
 
