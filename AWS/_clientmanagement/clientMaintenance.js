@@ -172,7 +172,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Group 1*/case "CLIENT_ID":var list='client_id,g1_active,g1_credit_hold,g1_dms_reference,g1_g3_group,g1_name,g1_notes,g1_referred_by,g1_salutation,g1_since,g1_spouse,g1_trade_name,g1_type,g6_g1_label1,g6_g1_label2,g6_g1_label3,g6_g1_label4,g7_group';_loadit({"query":query,"list":list});break;
+/*Group 1*/case "CLIENT_ID":var list='client_id,g1_active,g1_credit_hold,g1_g3_group,g1_name,g1_notes,g1_referred_by,g1_salutation,g1_since,g1_spouse,g1_trade_name,g1_type,g6_g1_label1,g6_g1_label2,g6_g1_label3,g6_g1_label4,g7_group';_loadit({"query":query,"list":list});break;
 /*Group 1_2*/case "FIELD_ID":var list="cl_fieldid,g1_g2_fieldname,g1_g2_fieldvalue";_loadit({"query":query,"list":list});break;
 /*Group 2_1*/case "CLIENT_TAX_SERVICES":var list='g2_g1_taxservices,g2_g1_formtype,g2_g1_businessc,g2_g1_rentalpropertye,g2_g1_disregardedentity,g2_g1_personalproperty';_loadit({"query":query,"list":list});break;
 /*Group 2_2*/case "CLIENT_PAYROLL_PREP":var list='g2_g2_payrollpreparation,g2_g2_paycheckfrequency,g2_g2_payrolltaxservices,g2_g2_prtaxdepositschedule,g2_g2_1099preparation,g2_g2_ein,g2_g2_pin,g2_g2_password';_loadit({"query":query,"list":list});break;
@@ -211,7 +211,6 @@ case'group1':var json='{"DATA":[["'+
 $("#client_id").val()+'",'+
 $("#g1_active").is(':checked')+','+
 $("#g1_credit_hold").is(':checked')+',"'+
-$("#g1_dms_reference").val()+'","'+
 $("#g1_g3_group").val()+'","'+
 $("#g1_name").val()+'","'+
 $("#g1_notes").val()+'","'+

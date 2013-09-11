@@ -16,7 +16,6 @@
 SELECT[client_id]
 	,[client_active]
 	,[client_credit_hold]
-	,[client_dms_reference]
 	,[client_group]
 	,[client_name]
 	,[client_notes]
@@ -504,7 +503,6 @@ AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#
 INSERT INTO[CLIENT_LISTING](
 [client_active],
 [client_credit_hold],
-[client_dms_reference],
 [client_group],
 [client_name],
 [client_notes],
@@ -523,11 +521,10 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][6]#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
-,<cfqueryparam value="#j.DATA[1][13]#"/>)
+,<cfqueryparam value="#j.DATA[1][12]#"/>)
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#fquery.client_id#,"group":"group1_2","result":"ok"}'>
@@ -545,16 +542,15 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 UPDATE[CLIENT_LISTING]
 SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_credit_hold]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[client_dms_reference]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[client_group]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[client_name]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[client_notes]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[client_referred_by]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[client_salutation]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[client_since]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[client_spouse]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[client_trade_name]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[client_type]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[client_group]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[client_name]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[client_notes]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[client_referred_by]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[client_salutation]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[client_since]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[client_spouse]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[client_trade_name]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[client_type]=<cfqueryparam value="#j.DATA[1][12]#"/>
 WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>

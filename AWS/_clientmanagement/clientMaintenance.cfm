@@ -5,7 +5,7 @@
 <cfset page.location="clientmaintenance">
 <cfset page.formid=1>
 <cfset page.title="Client Management">
-<cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients,Documents">
+<cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients">
 <cfset page.trackers="client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7,isLoaded_group8">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
@@ -65,7 +65,6 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g1_since">Client Since</label><input id="g1_since" type="text" class="valid_off date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});" onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="g1_trade_name">Trade Name</label><input id="g1_trade_name" type="text" /></div>
 <div><label for="g1_referred_by">Referred By</label><input id="g1_referred_by"  type="text"/></div>
-<div><label for="g1_dms_reference">DMS Reference</label><input id="g1_dms_reference" type="text"/></div>
 <div><input id="g1_active"  type="checkbox" /><label for="g1_active">Active</label></div>
 <div><input id="g1_credit_hold"  type="checkbox" /><label for="g1_credit_hold">Credit Hold</label></div>
 <div><label for="g1_notes">Notes</label><textarea id="g1_notes" cols="4" rows="4" ></textarea></div>
@@ -291,14 +290,6 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div><label for="g7_group">Groups</label><select id="g7_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="SelectClientInformation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
-
-</div>
-
-<!--- UPLOAD FILES TAB --->
-<div id="group8" class="gf-checkbox" onClick="_group8()">
-
-
-
 </div>
 
 

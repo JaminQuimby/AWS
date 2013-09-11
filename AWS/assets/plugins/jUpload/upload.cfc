@@ -1,9 +1,4 @@
 <cfcomponent output="true">
- 
-
-
-
-
 <!--- LOOKUP DATA --->
 <cffunction name="f_lookupData" access="remote" output="false">
 <cfargument name="clientid" type="string" required="no">
@@ -23,7 +18,6 @@ SELECT [file_id]
       ,[file_description]
       ,[file_size]
       ,[file_type]
-      ,[file_dmsReference]
       ,[file_year]
       ,[file_month]
       ,[file_day]
@@ -40,7 +34,7 @@ ORDER BY[file_name]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'","FILE_NAME":"'&FILE_NAME&'","FILE_DESCRIPTION":"'&FILE_DESCRIPTION&'","FILE_DMSREFERENCE":"'&FILE_DMSREFERENCE&'","FILE_YEAR":"'&FILE_YEAR&'","FILE_MONTH":"'&FILE_MONTH&'","FILE_DAY":"'&FILE_DAY&'"}'>
+<cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'","FILE_NAME":"'&FILE_NAME&'","FILE_DESCRIPTION":"'&FILE_DESCRIPTION&'","FILE_YEAR":"'&FILE_YEAR&'","FILE_MONTH":"'&FILE_MONTH&'","FILE_DAY":"'&FILE_DAY&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -68,7 +62,6 @@ SELECT [file_id]
       ,[file_description]
       ,[file_size]
       ,[file_type]
-      ,[file_dmsReference]
       ,[file_year]
       ,[file_month]
       ,[file_day]
