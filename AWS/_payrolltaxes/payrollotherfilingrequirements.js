@@ -90,8 +90,7 @@ $("#g1_status").val()+'","'+
 $("#g1_task").val()+'","'+
 $("#g1_taxyear").val()+'","'+
 '"]]}'
-if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"});
-}else{_saveDataCB({'group':'group1_1'})}
+_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"});
 break;
 
 case'group1_1':var json='{"DATA":[["'+

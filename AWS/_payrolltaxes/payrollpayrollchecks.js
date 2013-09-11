@@ -87,8 +87,7 @@ $("#g1_payenddate").val()+'","'+
 $("#g1_paymentstatus").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
-if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollpayrollchecks"});
-}else{_saveDataCB({'group':'group1_1'})}
+_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollpayrollchecks"});
 break;
 /*----------Save Group 1 Subgroup 1-------------*/
 case'group1_1':var json='{"DATA":[["'+

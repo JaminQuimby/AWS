@@ -86,8 +86,7 @@ $("#g1_priority").val()+'","'+
 $("#g1_type").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
-if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollpayrolltaxes"});
-}else{_saveDataCB({'group':'group1_1'})}
+_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollpayrolltaxes"});
 break;
 /*----------Save Group 1 Subgroup 1-------------*/
 case'group1_1':var json='{"DATA":[["'+

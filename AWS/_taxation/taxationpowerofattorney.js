@@ -70,10 +70,7 @@ $("#g1_taxforms").val()+'","'+
 $("#g1_taxmatters").val()+'","'+
 $("#g1_taxyears").val()+'","'+
 '"]]}'
-if($client_id.val()!="" ){_saveData({group:"group1",payload:$.parseJSON(json),page:"taxationpowerofattorney"});
-}else{
-_saveDataCB({'group':'group2'});
-	}
+_saveData({group:"group1",payload:$.parseJSON(json),page:"taxationpowerofattorney"});
 break;
 /*----------SAVE GROUP 2----------*/
 case'group2':var json='{"DATA":[["'+

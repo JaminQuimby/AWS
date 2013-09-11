@@ -17,7 +17,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"taxationnotices.cfc",
 	"title":"Notice Matter",
-	"fields":{NM_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},NM_TAXYEAR:{title:'Tax Year'}},
+	"fields":{NM_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},NM_NAME:{title:'Matter Name'},NM_STATUS:{title:'Matter Status'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#nm_id").val(record.NM_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"nm_id","group":"group1","page":"taxationnotices"});'
@@ -77,8 +77,7 @@ $("#client_id").val()+'","'+
 $("#g1_mattername").val()+'","'+
 $("#g1_matterstatus").val()+'","'+
 '"]]}'
-if($client_id.val()!="" ){_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationnotices"});
-}else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false})}	
+_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationnotices"});
 break;
 /*----------Save Group 2-------------*/
 case'group2':var json='{"DATA":[["'+

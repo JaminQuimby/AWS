@@ -2,6 +2,7 @@
 Javascript for Client Administrative Tasks
 Developers:Jamin Quimby
 7/26/2013 - Started
+9/11/2013 Raymond Smith
 */
 $(document).ready(function(){
 //Load Grid 
@@ -14,7 +15,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"clientadministrativetasks.cfc",
 	"title":"Client Administrative Tasks",
-	"fields":{CAS_ID:{key:true,list:true,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client'},CAS_DUEDATE:{title:'Due Date'}},
+	"fields":{CAS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client'},CAS_DUEDATE:{title:'Due Date'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#cas_id").val(record.CAS_ID);$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"cas_id","group":"group1","page":"clientadministrativetasks"});'
@@ -51,10 +52,13 @@ var options={
 try{	
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
-//Starting with Save Message
-case'':_saveDataCB({'group':'group1'});
-jqMessage({message: "Saveing.",type: "save",autoClose: true});
+case'':
+if($("#client_id").val()!=0){
+_saveDataCB({'group':'group1'});
+jqMessage({message: "Saving.",type: "save",autoClose: true});
+}else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
 break;
+
 /*Save Group1*/
 case'group1':var json='{"DATA":[["'+
 $("#cas_id").val()+'","'+
@@ -72,9 +76,7 @@ $("#g1_requestedby").val()+'","'+
 $("#g1_status").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
 '"]]}'
-if($("#client_id").val()!="0"){
 _saveData({"group":"group1","payload":$.parseJSON(json),page:"clientadministrativetasks"});
-}else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false})}	
 break;
 /*Save Group2*/
 case'group2':var json='{"DATA":[["'+

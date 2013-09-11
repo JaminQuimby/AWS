@@ -7,11 +7,6 @@ Developers:Jamin Quimby
 
 $(document).ready(function(){
 
-
-jqMessage({message: "Activly being changed by: Jamin Quimby",type: "warning",autoClose: false});
-
-
-
 //Load Grid
 _grid1();
 _group1=function(){}
@@ -111,9 +106,9 @@ _grid4_3=function(){_jGrid({
 	"grid":"grid4_3",
 	"url":"clientMaintenance.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PC_YEAR:{title:'Year'}},
+	"fields":{PC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PC_YEAR:{title:'Year'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_3"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_3"}',
 	"functions":'$("#pc_id").val(record.PC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollPayrollChecks.cfm?pc_id="+$("#pc_id").val();'
 	})};
 
@@ -121,9 +116,9 @@ _grid4_4=function(){_jGrid({
 	"grid":"grid4_4",
 	"url":"clientMaintenance.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PT_YEAR:{title:'Year'}},
+	"fields":{PT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PT_YEAR:{title:'Year'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_4"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_4"}',
 	"functions":'$("#pt_id").val(record.PT_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollPayrollTaxes.cfm?pt_id="+$("#pt_id").val();'
 	})};
 	
@@ -131,9 +126,9 @@ _grid4_5=function(){_jGrid({
 	"grid":"grid4_5",
 	"url":"clientMaintenance.cfc",
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_5"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_5"}',
 	"functions":'$("#tr_id").val(record.TR_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxationTaxReturns.cfm?tr_id="+$("#tr_id").val();'
 	})};
 	
@@ -141,9 +136,9 @@ _grid4_6=function(){_jGrid({
 	"grid":"grid4_6",
 	"url":"clientMaintenance.cfc",
 	"title":"Other Filings",
-	"fields":{OF_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},OF_TAXYEAR:{title:'Tax Year'}},
+	"fields":{OF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},OF_TAXYEAR:{title:'Tax Year'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4_6"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_6"}',
 	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm?of_id="+$("#of_id").val();'
 	})};
 	
@@ -168,15 +163,6 @@ _grid7=function(){_jGrid({
 	})};
 
 
-_grid8=function(){_jGrid({
-	"grid":"grid8",
-	"url":"clientMaintenance.cfc",
-	"title":"Files",
-	"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_DMSREFERENCE:{title:'DMS Reference'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g8_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#g8_group").val()+'","loadType":"group8","clientid":'+$("#client_id").val()+'}',
-	"functions":'_loadData({"id":"client_id","group":"group8","page":"clientmaintenance"});$("#group8").accordion({active:1});'
-	})};
 
 
 //Load Data call Back

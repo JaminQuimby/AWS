@@ -92,8 +92,7 @@ $("#g1_reason").val()+'","'+
 $("#g1_taxform").val()+'","'+
 $("#g1_taxyear").val()+'","'+
 '"]]}'
-if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationtaxreturns"});
-}else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false})}	
+_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationtaxreturns"});
 break;
 /*----------Save Group 1 Subgroup 1-------------*/
 case'group1_1':var json='{"DATA":[["'+

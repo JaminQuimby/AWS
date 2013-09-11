@@ -76,18 +76,7 @@ WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
-,[cas_category]
-,[cas_taskdesc]
-,[cas_reqestby]
-,[cas_assignto]
-,[cas_status]
-,[cas_priority]
-,[cas_datereqested]
-,[cas_datestarted]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
-,[cas_estimatedtime]
-,[cas_completed]
-,[cas_instructions]
 FROM[v_clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -102,8 +91,6 @@ FROM[v_clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#AR
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-
-
 
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">

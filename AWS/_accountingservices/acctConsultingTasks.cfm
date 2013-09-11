@@ -107,6 +107,10 @@
 <div><label for="g3_commenttext">Comment</label><textarea type="text" id="g3_commenttext"></textarea></div>
 </div>
 </div>
+
+<!--- Start Plugins --->
+<cfinclude template="../assets/plugins/plugins.cfm">
+
 <!--- END FIELD DATA --->
 
 <!--- END CONTENTS --->

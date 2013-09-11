@@ -114,7 +114,7 @@ $("#g1_taskdescription").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
 '"]]}'
 
-if($("#client_id").val()>0 && $("#g1_consultingcategory").val()!="" && $("#g1_taskdescription").val()!="" && $("#g1_priority").val()!=""){
+if($("#g1_consultingcategory").val()!="" && $("#g1_taskdescription").val()!="" && $("#g1_priority").val()!=""){
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"acctconsultingtasks"})
 }
 

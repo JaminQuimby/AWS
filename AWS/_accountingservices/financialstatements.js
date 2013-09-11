@@ -6,7 +6,6 @@ Developers:Jamin Quimby
 
 
 $(document).ready(function(){
-jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: false});
 // Load Initial Client Grid	
 _grid1();
 // Show Entrace Window
@@ -114,8 +113,7 @@ $("#g1_priority").val()+'","'+
 $("#g1_status").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
-if($("#client_id").val()>0){_saveData({group:"group1","payload":$.parseJSON(json),page:"financialstatements"});
-}else{_saveDataCB({'group':'group1_1'})}
+_saveData({group:"group1","payload":$.parseJSON(json),page:"financialstatements"});
 break;
 
 /*----------Save Group 1 Subgroup 1-------------*/

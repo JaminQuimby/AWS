@@ -39,7 +39,7 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="client_id">Client Name</label><select id="client_id" data-placeholder="Select a Client."><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_category">Category</label><select id="g1_category" data-placeholder="Select a Category."><option value="0">&nbsp;</option><cfoutput query="global_admintaskprogress"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taskdescription">Task Description</label><textarea id="g1_taskdescription"></textarea></div>
 <div><label for="g1_requestedby">Requested By</label><select id="g1_requestedby" data-placeholder="Requested By."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -71,6 +71,10 @@
 <div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
+
+<!--- Start Plugins --->
+<cfinclude template="../assets/plugins/plugins.cfm">
+
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>

@@ -86,8 +86,7 @@ $("#g1_reportcompleted").val()+'","'+
 $("#g1_requestforservices").val()+'","'+
 $("#g1_status").val()+'","'+
 '"]]}'
-if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationfinancialtaxplanning"});
-}else{_saveDataCB({'group':'group2'});}	
+_saveData({group:"group1","payload":$.parseJSON(json),page:"taxationfinancialtaxplanning"});
 break;
 
 /*Save Group2*/

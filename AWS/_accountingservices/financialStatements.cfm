@@ -183,6 +183,9 @@
 	</div>
 </div>
 
+<!--- Start Plugins --->
+<cfinclude template="../assets/plugins/plugins.cfm">
+
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>

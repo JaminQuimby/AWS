@@ -297,20 +297,10 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group4_2">
 <cfquery datasource="AWS" name="fquery">
-SELECT[MC_ID]
-,[MC_ASSIGNEDTO]
-,[CLIENT_ID]
-,[CLIENT_NAME]
-,[MC_CATEGORYTEXT]
-,[MC_DESCRIPTION]
-,[MC_STATUS]
-,CONVERT(VARCHAR(10),[MC_DUEDATE], 101)AS[MC_DUEDATE]
+SELECT[mc_id],[client_id],[client_name],[mc_assignedto],[mc_categorytext],[mc_description],[mc_status],CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
-WHERE[CLIENT_NAME]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>
-ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]
-<cfelse>
-ORDER BY[client_name]</cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -334,9 +324,7 @@ SELECT[pc_id]
 ,[client_name]
 ,[CLIENT_ID]
 FROM[v_payrollcheckstatus]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -359,9 +347,7 @@ SELECT[pt_id]
 ,[client_name]
 ,[CLIENT_ID]
 FROM[v_payrolltaxes]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -384,9 +370,7 @@ SELECT[tr_id]
 ,[client_name]
 ,[CLIENT_ID]
 FROM[v_taxreturns]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -409,9 +393,7 @@ SELECT[of_id]
 ,[client_name]
 ,[CLIENT_ID]
 FROM[v_otherfilings]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -485,40 +467,7 @@ AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#
 
 
 <!--- LOOKUP client relations --->
-<cfcase value="group8">
-<cfquery datasource="AWS" name="fquery">
-SELECT [file_id]
-      ,[form_id]
-      ,[client_id]
-      ,[file_name]
-      ,[file_savedname]
-      ,[file_description]
-      ,[file_size]
-      ,[file_type]
-      ,[file_dmsReference]
-      ,[file_year]
-      ,[file_month]
-      ,[file_day]
-      ,[file_timestamp]
-      ,[file_subtype]
-      ,[file_ext]
-  FROM[v_ctrl_files]
-<cfif ARGUMENTS.search neq "">
-WHERE[file_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[file_name]</cfif>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'","FILE_NAME":"'&FILE_NAME&'","FILE_DESCRIPTION":"'&FILE_DESCRIPTION&'","FILE_DMSREFERENCE":"'&FILE_DMSREFERENCE&'","FILE_YEAR":"'&FILE_YEAR&'","FILE_MONTH":"'&FILE_MONTH&'","FILE_DAY":"'&FILE_DAY&'"}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cfcase>
+
 
 
 

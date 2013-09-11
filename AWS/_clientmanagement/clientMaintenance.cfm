@@ -298,28 +298,12 @@ ACTIVITY (CLIENT DATA)
 <div id="group8" class="gf-checkbox" onClick="_group8()">
 
 
-<h3>Files</h3>
-<div>
-<div><label for="g8_filter">Filter</label><input id="g8_filter" onBlur="_grid8();"/></div>
-<div id="grid8" class="tblGrid"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group8").accordion({active:1});$("#isLoaded_group8").val(1);'>Add</a>
-</div>
-
 
 </div>
 
-<h4>File Meta Data</h4>
-<div></div>
 
-
-<h4>Upload Files</h4>
-<div>
-<cfinclude template="../assets/module/jUpload/upload.cfm">
-</div>
-
-</div>
-
+<!--- Start Plugins --->
+<cfinclude template="../assets/plugins/plugins.cfm">
 
 </div>
 <!---Start of footer--->

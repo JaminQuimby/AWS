@@ -11,7 +11,6 @@
 Add Subtasks: 
 	Remove Other Subtask 5 and distribute into Subtask, based on corporate type 
      --->
-
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='#page.title#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1 ORDER BY[client_name]</cfquery>
@@ -116,6 +115,10 @@ Add Subtasks:
 <div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
+
+<!--- Start Plugins --->
+<cfinclude template="../assets/plugins/plugins.cfm">
+
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->

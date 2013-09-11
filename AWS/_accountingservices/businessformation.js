@@ -8,7 +8,6 @@ Raymond Smith
 
 
 $(document).ready(function(){
-jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: false});
 
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
@@ -70,7 +69,6 @@ var options={
 	}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 switch(options["group"]){
 	
 case'':

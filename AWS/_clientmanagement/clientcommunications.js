@@ -98,8 +98,7 @@ $("#g1_telephone").val()+'",'+
 $("#g1_textmessage").is(':checked')+','+
 $("#g1_voicemail").is(':checked')+',"'+
 '"]]}'
-if($("#client_id").val()!=""){_saveData({group:"group1","payload":$.parseJSON(json),page:"clientcommunications"});
-}else{_saveDataCB({'group':'group2'});}	
+_saveData({group:"group1","payload":$.parseJSON(json),page:"clientcommunications"});
 break;
 
 /*Save Group2*/

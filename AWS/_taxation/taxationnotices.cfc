@@ -140,11 +140,12 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- LOOKUP Financial Statements --->
+<!--- LOOKUP Taxation Notices --->
 <!--- Grid 0  --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[nm_id]
+,[nm_name]
 ,[nm_status]
 ,[client_name]
 ,[CLIENT_ID]
@@ -159,7 +160,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","NM_STATUS":"'&NM_STATUS&'"}'>
+<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","NM_NAME":"'&NM_NAME&'","NM_STATUS":"'&NM_STATUS&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

@@ -54,7 +54,6 @@
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" ></div>
 <div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"></option><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"></option><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-
 </div>
 <!---Subgroup 1--->
 <h4 onClick='_loadData({"id":"pc_id","group":"group1_1","page":"payrollpayrollchecks"});$("#isLoaded_group1_1").val(1);'>Obtain Info</h4>
@@ -119,6 +118,9 @@
 <div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
+
+<!--- Start Plugins --->
+<cfinclude template="../assets/plugins/plugins.cfm">
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->

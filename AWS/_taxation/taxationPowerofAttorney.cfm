@@ -67,6 +67,10 @@
 <div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
+
+<!--- Start Plugins --->
+<cfinclude template="../assets/plugins/plugins.cfm">
+
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>
