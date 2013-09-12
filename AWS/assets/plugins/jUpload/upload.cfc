@@ -54,23 +54,40 @@ ORDER BY[file_name]
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
+<cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <cfcase value="group100">
-SELECT [file_id]
-      ,[file_name]
+<cfquery datasource="AWS" name="fQuery">
+
+SELECT 
+'group100'AS[group100]
+,[FILE_ID]
+,[file_name]
+,[file_description]
+,[file_year]
+,[file_month]
+,[file_day]
+      <!---
       ,[file_savedname]
-      ,[file_description]
       ,[file_size]
       ,[file_type]
-      ,[file_year]
-      ,[file_month]
-      ,[file_day]
+
       ,[file_timestamp]
       ,[file_subtype]
       ,[file_ext]
+	  
+	  --->
  FROM[ctrl_files]
+WHERE[file_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
 </cfcase>
 </cfswitch>
+<cfreturn SerializeJSON(fQuery)>
+<cfcatch>
+<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cffunction>
 
 
@@ -82,12 +99,28 @@ SELECT [file_id]
 <cfset j=DeserializeJSON("#ARGUMENTS.payload#")>
 <cfswitch expression="#ARGUMENTS.group#">
 <cfcase value="group100">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[ctrl_files]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[bf_activity]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[file_day]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[file_description]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[file_month]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[file_name]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[file_year]=<cfqueryparam value="#j.DATA[1][7]#"/>
+WHERE[FILE_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
+
+<cfif ListContains(session.user.plugins, "101")>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group101","result":"ok"}'>
+<cfelse>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
+</cfif>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 </cfswitch>
 </cffunction>

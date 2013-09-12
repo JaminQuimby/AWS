@@ -14,17 +14,17 @@ _group2=function(){_grid2()}
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
-	"url":"payrollotherfilingrequirements.cfc",
+	"url":"otherfilings.cfc",
 	"title":"Other Filings",
 	"fields":{OF_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},OF_TAXYEAR:{title:'Tax Year'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#of_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"of_id","group":"group1","page":"payrollotherfilingrequirements"});'
+	"functions":'$("#of_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"of_id","group":"group1","page":"otherfilings"});'
 	}); }
 
 _grid2=function(){_jGrid({
 	"grid":"grid2",
-	"url":"payrollotherfilingrequirements.cfc",
+	"url":"otherfilings.cfc",
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
@@ -90,7 +90,7 @@ $("#g1_status").val()+'","'+
 $("#g1_task").val()+'","'+
 $("#g1_taxyear").val()+'","'+
 '"]]}'
-_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"});
+_saveData({group:"group1","payload":$.parseJSON(json),page:"otherfilings"});
 break;
 
 case'group1_1':var json='{"DATA":[["'+
@@ -100,7 +100,7 @@ $("#g1_g1_completedby").val()+'","'+
 $("#g1_g1_completed").val()+'","'+
 $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
+if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"otherfilings"})}
 else{_saveDataCB({'group':'group1_2'})}
 break;
 
@@ -112,7 +112,7 @@ $("#g1_g2_completedby").val()+'","'+
 $("#g1_g2_completed").val()+'","'+
 $("#g1_g2_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
+if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"otherfilings"})}
 else{_saveDataCB({'group':'group1_3'})}
 break;
 
@@ -124,7 +124,7 @@ $("#g1_g3_completedby").val()+'","'+
 $("#g1_g3_completed").val()+'","'+
 $("#g1_g3_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
+if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.parseJSON(json),page:"otherfilings"})}
 else{_saveDataCB({'group':'group1_4'})}
 break;
 
@@ -136,7 +136,7 @@ $("#g1_g4_completedby").val()+'","'+
 $("#g1_g4_completed").val()+'","'+
 $("#g1_g4_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
+if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.parseJSON(json),page:"otherfilings"})}
 else{_saveDataCB({'group':'group1_5'})}
 break;
 
@@ -148,7 +148,7 @@ $("#g1_g5_completedby").val()+'","'+
 $("#g1_g5_completed").val()+'","'+
 $("#g1_g5_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"payrollotherfilingrequirements"})}
+if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"otherfilings"})}
 else{_saveDataCB({'group':'group2'})}
 break;
 /*----------SAVE GROUP 2----------*/
@@ -162,7 +162,7 @@ $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'
 if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"payrollotherfilingrequirements"});
+_saveData({group:"group2",payload:$.parseJSON(json),page:"otherfilings"});
 }else{_saveDataCB({'group':'group3'})}
 break;
 /*This group does not exist in the cfm, this trigger instance is to update the posted message for the client.*/

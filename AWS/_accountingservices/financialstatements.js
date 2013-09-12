@@ -70,9 +70,11 @@ switch(query.COLUMNS[0]){
 /*Group1_10*/case "FDS_ACCTRPT_ASSIGNEDTO":var list='g1_g10_assignedto,g1_g10_completedby,g1_g10_datecompleted,g1_g10_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_11*/case "FDS_SALES_ASSIGNEDTO":var list='g1_g11_assignedto,g1_g11_completedby,g1_g11_datecompleted,g1_g11_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group2*/case "FDSS_ID":var list='fdss_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
-default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
-}catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
-};
+default:
+/*PLUGIN SUPPORT*/
+if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
+else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}
+}}}catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
 
 /*SAVE DATA CALL BACK*/
@@ -85,11 +87,12 @@ var options={
 try{	
 $.extend(true, options, params);//turn options into array
 
-
+alert(options["group"])
 switch(options["group"]){
 /*Save Client*/
 case'':
 if($("#client_id").val()>0){
+
 _saveDataCB({'group':'group1'});
 jqMessage({message: "Saving.",type: "save",autoClose: true});
 }else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
@@ -266,12 +269,12 @@ $("#g3_commenttext").val()+'","'+
 '"]]}'
 if($("#comment_isLoaded").val()!=0){
 _saveData({group:"group3",payload:$.parseJSON(json),page:"financialstatements"});
-}else{_saveDataCB({'group':'group4'})}
+}//else{_saveDataCB({'group':'group4'})}
 break;
 /*This group does not exist in the cfm, this trigger instance is to update the posted message for the client.*/
-case'group4':
-jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
-break;
+//case'group4':
+//jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
+//break;
 
 
 /*Other Events*/
@@ -279,7 +282,13 @@ case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["
 case'none':break;
 case'next':_saveData();break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
+default:
+/*PLUGIN SUPPORT*/
+if(options["group"]!=""){
+	alert("final")
+	alert(options["group"])
+	_pluginSaveData({group:options["group"]})}
+else{jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}
 }
 }catch(err){alert(err)}};
 
