@@ -1,3 +1,9 @@
+@media print
+{    
+.menuH{display: none !important;}
+
+}
+
 .menuH
 {
     /* You will get totally diffrent menu alignment and layout by setting following margin, width, and float with different values.
@@ -104,7 +110,7 @@ color: #FFFFFF;
 
 .menuH li li:hover, .menuH li li.onhover
 {
-	background: #D4D4D4 url(assets/img/bg.gif) repeat-x 0 0;
+	background: #D4D4D4;
 	filter:alpha(opacity=90);
     opacity: 0.90; 
 	color:#000;
@@ -139,7 +145,7 @@ color: #FFFFFF;
 }
 .menuH ul ul
 {
-    border-top: 1px solid #DDD;
+
 }
 
 .menuH li:hover ul ul, .menuH li:hover ul ul ul, .menuH li:hover ul ul ul ul,
@@ -152,7 +158,7 @@ color: #FFFFFF;
 .menuH li li:hover ul, .menuH li li li:hover ul, .menuH li li li li:hover ul,
 .menuH li li.onhover ul, .menuH li li li.onhover ul, .menuH li li li li.onhover ul
 {
-    left: 200px;
+    left: 300px;
 }
         
 /*####### special effects ##########*/

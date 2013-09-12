@@ -2,8 +2,8 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_accountingservices">
-<cfset page.location="financialstatements">
-<cfset page.title="Financial Statements">
+<cfset page.location="financialreporting">
+<cfset page.title="Financial Reporting">
 <cfset page.menuLeft="General,SubTasks,Comment">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
@@ -23,7 +23,7 @@
 <input type="hidden" id="client_id" value="0"/><!--- Client ID --->
 
 <!--- ENTRANCE --->
-<div id="entrance">
+<div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
 <div><label for="fss_filter">Filter</label><input id="fss_filter" onBlur="_grid1();"/></div>

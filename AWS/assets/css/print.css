@@ -1,0 +1,7 @@
+/*Print should be moved to print.css when finished.*/
+@media print
+{    
+.smallMenu,
+.button,
+.ui-accordion-header{display: none !important;}
+}
