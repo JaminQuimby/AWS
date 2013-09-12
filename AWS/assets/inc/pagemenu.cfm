@@ -15,12 +15,7 @@
 <cfset i="0">
 <cfoutput>
 <cfloop list="#page.menuLeft#"  index="name"><cfset i=i+1><li ><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li></cfloop>
-<cfif session.user.plugins neq "">
-<cfif ListContains(session.user.plugins, "100")>
-<li><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group100').show();_highlight(this);_group100();">Documents</a></li>
-</cfif>
-</cfif>
-
+<cfinclude template="../plugins/menu.cfm">
 </ul>
 </cfoutput>
 <cfif url.debug eq true>
