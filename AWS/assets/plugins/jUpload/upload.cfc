@@ -111,11 +111,9 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 WHERE[FILE_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 
-<cfif ListContains(session.user.plugins, "101")>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group101","result":"ok"}'>
-<cfelse>
+
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
-</cfif>
+
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 

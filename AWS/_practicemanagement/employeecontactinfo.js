@@ -1,12 +1,5 @@
-/*
-Javascript for FinancialStatements
-Developers:Jamin Quimby
-7/26/2013 - Started
-*/
 
 
-
-/*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"financialstatements.cfc",
@@ -64,18 +57,11 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request 
 switch(query.COLUMNS[0]){
 /*Client Group*/case "CLIENT_ACTIVE":var list='cl_active,cl_credit_hold,cl_dms_reference,cl_group,cl_name,cl_notes,cl_referred_by,cl_salutation,cl_since,cl_spouse,cl_trade_name,cl_type,s_label1,s_label2,s_label3,s_label4,rc_group';_loadit({"query":query,"list":list});break;
 
-default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
-}catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
-};
-
-
-/*SAVE DATA CALL BACK*/
+default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
+else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};/*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
-var options={
-	"id":"",//ID
-	"group":"",//Switch Group
-	"result":""//Call Back Response
-	}
+var options={"id":"","group":"","result":""	}
 try{	
 $.extend(true, options, params);//turn options into array
 
@@ -113,13 +99,12 @@ else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type
 
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
-case'none':break;
-case'next':_saveData();break;
+
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }
 }catch(err){alert(err)}};
 
 
-/*Error Handelers*/
-errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};// JavaScript Document// JavaScript Document
+
+// JavaScript Document// JavaScript Document

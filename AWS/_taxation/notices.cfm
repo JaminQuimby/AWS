@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_taxation">
-<cfset page.location="taxationnotices">
+<cfset page.location="notices">
 <cfset page.formid=8>
 <cfset page.title="Notices">
 <cfset page.menuLeft="General,Notice,Comment">
@@ -65,7 +65,7 @@
 <div><label for="g2_estimatedtime">Estimated Time</label><input type="text" id="g2_estimatedtime" ></div>
 </div>
 <!--- GROUP 2_1 --->
-<h4 onClick='_loadData({"id":"n_id","group":"group2_1","page":"taxationnotices"});$("#isLoaded_group2_1").val(1);'>Details</h4>
+<h4 onClick='_loadData({"id":"n_id","group":"group2_1","page":"notices"});$("#isLoaded_group2_1").val(1);'>Details</h4>
 <div>
 <div><label for="g2_1_noticenumber">Notice Number</label><select id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_noticedate">Notice Date</label><input type="text" class="date" id="g2_1_noticedate"></div>
@@ -76,7 +76,7 @@
 <div><label for="g2_1_paid">Paid</label><select id="g2_1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!--- GROUP 2_2 --->
-<h4 onClick='_loadData({"id":"n_id","group":"group2_2","page":"taxationnotices"});$("#isLoaded_group2_2").val(1);'>Correspondence</h4>
+<h4 onClick='_loadData({"id":"n_id","group":"group2_2","page":"notices"});$("#isLoaded_group2_2").val(1);'>Correspondence</h4>
 <div>
 <div><label for="g2_2_datenoticereceived">Date Notice Received</label><input type="text" class="date" id="g2_2_datenoticereceived"></div>
 <div><label for="g2_2_duedateforresponse">Due Date For Response</label><input type="text" class="date" id="g2_2_duedateforresponse"></div>
@@ -89,7 +89,7 @@
 <div><label for="g2_2_irsstateresponserecieved">IRS/State Response Recieved</label><input type="text" class="date" id="g2_2_irsstateresponserecieved"></div>
 </div>
 <!--- GROUP 2_3 --->
-<h4 onClick='_loadData({"id":"n_id","group":"group2_3","page":"taxationnotices"});$("#isLoaded_group2_3").val(1);'>Missing</h4>
+<h4 onClick='_loadData({"id":"n_id","group":"group2_3","page":"notices"});$("#isLoaded_group2_3").val(1);'>Missing</h4>
 <div>
 <div><input id="g2_3_missinginformation" type="checkbox"><label for="g2_3_missinginformation">Missing Information</label></div>
 <div><label for="g2_3_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_3_missinginforeceived" ></div>

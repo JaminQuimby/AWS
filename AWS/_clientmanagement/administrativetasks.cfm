@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_clientmanagement">
-<cfset page.location="clientadministrativetasks">
+<cfset page.location="administrativetasks">
 <cfset page.formid=4>
 <cfset page.title="Client Administrative Tasks">
 <cfset page.menuLeft="General,Comment">

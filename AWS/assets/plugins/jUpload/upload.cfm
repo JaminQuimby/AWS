@@ -1,5 +1,3 @@
-
-
 <cfoutput>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -34,7 +32,7 @@ init:{
 						  }
 		            },
 	FileUploaded:function(up, file, response){
-		alert(response.response)
+		jqMessage({"type":"destroy"});jqMessage({message: "File upload successful",type: "success",autoClose: true,duration: 5})
 			}
 		}
     });
@@ -42,7 +40,6 @@ init:{
 //Start Normal Template Functions
 _group100=function(){_grid100()}
 _grid100=function(){
-	//alert('click');
 	_jGrid({
 	"grid":"grid100",
 	"url":"/AWS/assets/plugins/jUpload/upload.cfc",
@@ -54,10 +51,6 @@ _grid100=function(){
 	})};
 
 })
-
-
-
-
 
 </script>
 </cfoutput>
@@ -72,7 +65,7 @@ _grid100=function(){
 <div><label for="g100_filter">Filter</label><input id="g100_filter" onBlur="_grid100();"/></div>
 <div id="grid100" class="tblGrid"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group100").accordion({active:1});$("#isLoaded_group100").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='$("#group100").accordion({active:2});$("#isLoaded_group100").val(1);'>Add</a>
 </div>
 </div>
 <h4>File Meta Data</h4>

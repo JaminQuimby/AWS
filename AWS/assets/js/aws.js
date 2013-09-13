@@ -71,7 +71,7 @@ $.ajax({
   url:options["url"]+options["page"]+'.cfc?method=f_saveData',
   data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"payload":JSON.stringify(options["payload"])})
   },
-  success:function(json){_saveDataCB($.parseJSON(json));},   // successful request; do something with the data
+  success:function(json){_saveDataCB($.parseJSON(json))},   // successful request; do something with the data
   error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
 });}else{_saveDataCB({"id":options["id"],"group":options["group"]});}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
@@ -104,12 +104,9 @@ try{if(options['query'].DATA!=""){
 	}}}).trigger("liszt:updated");}break;
 				case undefined:/*Detection for undefined objects such as <LABEL>*/
 				$("#"+list[i]).html(options['query'].DATA[0][i]);break;
-				default:$("#"+list[i]).val(options['query'].DATA[0][i]);
-				}
-				
-		if(document.getElementById(list[i]).getAttribute("onblur")!=null){document.getElementById(list[i]).onblur();
-		
-}}}}catch(err){jqMessage({message: "Error in js._loadit: "+err,type: "error",autoClose: false})}};
+				default:$("#"+list[i]).val(options['query'].DATA[0][i])}
+if(document.getElementById(list[i]).getAttribute("onblur")!=null){document.getElementById(list[i]).onblur()}}}}
+catch(err){jqMessage({message: "Error in js._loadit: "+err,type: "error",autoClose: false})}};
 
 _toggle=function(list){try{var arr=list.split(",");for(var i=0;i<arr.length;i++){var el=document.getElementById(arr[i]);el.style.display=(el.style.display!="none"?"none":"");}}catch(error){ jqMessage({message: "Error in js._toggle: "+error,type: "error",autoClose: false})}};
 _hide=function(list){var arr=list.split(",");for(var i=0;i<arr.length;i++){document.getElementById(arr[i]).style.display="none";}};
@@ -155,41 +152,26 @@ $.ajax({
   data: {"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName']})
   },
  success:function(json){
- var j=$.parseJSON(json),items = '';
-      for (var i=0;i<j.Records.length;i++){
+ var j=$.parseJSON(json),items='';
+      for(var i=0;i<j.Records.length;i++){
         items+='<option value="'+ j.Records[i].optionvalue_id+'">'+j.Records[i].optionname+'</option>';
-      }$("select#"+options['selectObject']).html(items);
-  },   // successful request; do something with the data
-  error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
-})};
-
+      }$("select#"+options['selectObject']).html(items)},
+  error:function(data){errorHandle($.parseJSON(data))}})};
 
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
-//Load Accordians
 $('.gf-checkbox').accordion({heightStyle:"content", active:false});
-//Set Date Picker Defaults	
-
-
 $.datepicker.setDefaults({
 showOn:"both",
 buttonImageOnly:true,
 buttonImage:"../assets/img/datepicker.gif",
 constrainInput:true
 });
-
-//Load Time Pickers
-$(".time").datetimepicker({
-	timeFormat: 'hh:mmtt'
-});
-//Load Date Pickers
+$(".time").datetimepicker({timeFormat: 'hh:mmtt'});
 $(".date").datepicker();
-//Load Select Boxes
 $('select').chosen();
-//Hide Groups 
-$('.gf-checkbox').hide()
-//Load Entrace
+$('.gf-checkbox').hide();
 $('#entrance').show();
 });
-/*Error Handelers*/
+
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};

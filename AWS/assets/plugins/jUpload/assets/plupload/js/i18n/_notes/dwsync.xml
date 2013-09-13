@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="cs.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967178890891" remote="130233876120000000" Dst="2" />
-<file name="da.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967178920893" remote="130233876120000000" Dst="2" />
-<file name="de.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967178950895" remote="130233876120000000" Dst="2" />
-<file name="el.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967178970896" remote="130233876120000000" Dst="2" />
-<file name="es.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179080902" remote="130233876120000000" Dst="2" />
-<file name="et.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179110904" remote="130233876120000000" Dst="2" />
-<file name="fa.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179140906" remote="130233876120000000" Dst="2" />
-<file name="fi.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179180908" remote="130233876170000000" Dst="2" />
-<file name="fr-ca.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179200909" remote="130233876170000000" Dst="2" />
-<file name="fr.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179230911" remote="130233876170000000" Dst="2" />
-<file name="hr.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179250912" remote="130233876170000000" Dst="2" />
-<file name="hu.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179280914" remote="130233876170000000" Dst="2" />
-<file name="it.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179300915" remote="130233876170000000" Dst="2" />
-<file name="ja.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179340917" remote="130233876170000000" Dst="2" />
-<file name="ko.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179360918" remote="130233876200000000" Dst="2" />
-<file name="lv.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179390920" remote="130233876200000000" Dst="2" />
-<file name="nl.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179420922" remote="130233876200000000" Dst="2" />
-<file name="pl.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179470925" remote="130233876200000000" Dst="2" />
-<file name="pt-br.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179500926" remote="130233876200000000" Dst="2" />
-<file name="ro.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179520928" remote="130233876200000000" Dst="2" />
-<file name="ru.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179540929" remote="130233876200000000" Dst="2" />
-<file name="sk.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179550929" remote="130233876200000000" Dst="2" />
-<file name="sr.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179580931" remote="130233876200000000" Dst="2" />
-<file name="sv.js" server="https://ftp.awensa.com/MS/MS0213/" local="130232967179600932" remote="130233876200000000" Dst="2" />
+<file name="cs.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540457144" remote="130235055160000000" />
+<file name="da.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540467145" remote="130235055160000000" />
+<file name="de.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540477145" remote="130235055210000000" />
+<file name="el.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540497147" remote="130235055210000000" />
+<file name="es.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540507147" remote="130235055210000000" />
+<file name="et.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540527148" remote="130235055210000000" />
+<file name="fa.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540547149" remote="130235055260000000" />
+<file name="fi.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540567151" remote="130235055260000000" />
+<file name="fr-ca.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540587152" remote="130235055260000000" />
+<file name="fr.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540597152" remote="130235055260000000" />
+<file name="hr.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540637155" remote="130235055260000000" />
+<file name="hu.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540647155" remote="130235055300000000" />
+<file name="it.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540667156" remote="130235055300000000" />
+<file name="ja.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540687157" remote="130235055300000000" />
+<file name="ko.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540697158" remote="130235055300000000" />
+<file name="lv.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540717159" remote="130235055300000000" />
+<file name="nl.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540737160" remote="130235055300000000" />
+<file name="pl.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540747161" remote="130235055300000000" />
+<file name="pt-br.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540767162" remote="130235055300000000" />
+<file name="ro.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540787163" remote="130235055300000000" />
+<file name="ru.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182540927171" remote="130235055300000000" />
+<file name="sk.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182541127183" remote="130235055300000000" />
+<file name="sr.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182541137183" remote="130235055300000000" />
+<file name="sv.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182541157184" remote="130235055300000000" />
 </dwsync>

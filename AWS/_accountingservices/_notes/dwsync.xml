@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="acctConsultingTasks.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130233098517201527" remote="130233098540000000" />
-<file name="acctConsultingTasks.js" server="https://ftp.awensa.com/MS/MS0213/" local="130233096394420111" remote="130233096370000000" />
-<file name="acctConsultingTasks.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130233092999595938" remote="130233093010000000" />
-<file name="businessformation.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234182535806878" remote="130234347090000000" />
-<file name="businessformation.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130233321297840010" remote="130234347090000000" />
-<file name="businessFormation.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130233963897464761" remote="130233964010000000" />
-<file name="financialStatements.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130234398730000000" remote="130234398730000000" />
-<file name="financialstatements.js" server="https://ftp.awensa.com/MS/MS0213/" local="130234923206635407" remote="130234923210000000" />
-<file name="financialstatements.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130234896078983794" remote="130234907290000000" />
-<file name="_accountingservices.css" server="https://ftp.awensa.com/MS/MS0213/" local="130233321297365003" remote="130234347460000000" />
+<file name="businessformation.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130233321297840010" remote="130235226670000000" />
+<file name="businessformation.js" server="https://ftp.awensa.com/MS/MS0213/" local="130235206210000000" remote="130235226670000000" />
+<file name="financialstatements.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130235064575652621" remote="130235226670000000" />
+<file name="financialstatements.js" server="https://ftp.awensa.com/MS/MS0213/" local="130235212356095179" remote="130235226720000000" />
+<file name="_accountingservices.css" server="https://ftp.awensa.com/MS/MS0213/" local="130233321297365003" remote="130235226880000000" />
 </dwsync>

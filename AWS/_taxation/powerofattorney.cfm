@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_taxation">
-<cfset page.location="taxationpowerofattorney">
+<cfset page.location="powerofattorney">
 <cfset page.formid=7>
 <cfset page.title="Power of Attorney">
 <cfset page.menuLeft="General,Comment">

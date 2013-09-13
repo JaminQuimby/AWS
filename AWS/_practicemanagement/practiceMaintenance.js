@@ -75,18 +75,11 @@ switch(query.COLUMNS[0]){
 /*Group2*/case "MHD_ID":var list='mhd_id';_loadit({"query":query,"list":list});break;
 
 
-default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false});}}
-}catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
-};
-
-
-/*SAVE DATA CALL BACK*/
+default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
+else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};/*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
-var options={
-	"id":"",//ID
-	"group":"",//Switch Group
-	"result":""//Call Back Response
-	}
+var options={"id":"","group":"","result":""	}
 try{	
 $.extend(true, options, params);//turn options into array
 
@@ -439,13 +432,11 @@ break;
 
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
-case'none':break;
-case'next':_saveData();break;
+
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
 default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }
 }catch(err){alert(err)}};
 
 
-/*Error Handelers*/
-errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};
+

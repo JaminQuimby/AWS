@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_payrolltaxes">
-<cfset page.location="payrollpayrolltaxes">
+<cfset page.location="payrolltaxes">
 <cfset page.formid=13>
 <cfset page.title="Payroll Taxes">
 <cfset page.menuLeft="General,Comment">
@@ -60,7 +60,7 @@
 
 </div>
 <!---Subgroup 1--->
-<h4 onClick='_loadData({"id":"pt_id","group":"group1_1","page":"payrollpayrolltaxes"});$("#isLoaded_group1_1").val(1);'>Obtain Info</h4>
+<h4 onClick='_loadData({"id":"pt_id","group":"group1_1","page":"payrolltaxes"});$("#isLoaded_group1_1").val(1);'>Obtain Info</h4>
 <div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
@@ -69,7 +69,7 @@
 </div>
 
 <!---Subgroup 2--->
-<h4 onClick='_loadData({"id":"pt_id","group":"group1_2","page":"payrollpayrolltaxes"});$("#isLoaded_group1_2").val(1);'>Entry</h4>
+<h4 onClick='_loadData({"id":"pt_id","group":"group1_2","page":"payrolltaxes"});$("#isLoaded_group1_2").val(1);'>Entry</h4>
 <div>
 <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
@@ -78,7 +78,7 @@
 </div>
 
 <!---Subgroup 3--->
-<h4 onClick='_loadData({"id":"pt_id","group":"group1_3","page":"payrollpayrolltaxes"});$("#isLoaded_group1_3").val(1);'>Reconciliation</h4>
+<h4 onClick='_loadData({"id":"pt_id","group":"group1_3","page":"payrolltaxes"});$("#isLoaded_group1_3").val(1);'>Reconciliation</h4>
 <div>
 <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_completed">Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
@@ -87,7 +87,7 @@
 </div>
 
 <!---Subgroup 4--->
-<h4 onClick='_loadData({"id":"pt_id","group":"group1_4","page":"payrollpayrolltaxes"});$("#isLoaded_group1_4").val(1);'>Review</h4>
+<h4 onClick='_loadData({"id":"pt_id","group":"group1_4","page":"payrolltaxes"});$("#isLoaded_group1_4").val(1);'>Review</h4>
 <div>
 <div><label for="g1_g4_assignedto">Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g4_completed">Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
@@ -96,7 +96,7 @@
 </div>
 
 <!---Subgroup 5--->
-<h4 onClick='_loadData({"id":"pt_id","group":"group1_5","page":"payrollpayrolltaxes"});$("#isLoaded_group1_5").val(1);'>Assembly</h4>
+<h4 onClick='_loadData({"id":"pt_id","group":"group1_5","page":"payrolltaxes"});$("#isLoaded_group1_5").val(1);'>Assembly</h4>
 <div>
 <div><label for="g1_g5_assignedto">Assigned To</label><select id="g1_g5_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>
@@ -105,7 +105,7 @@
 </div>
 
 <!---Subgroup 6--->
-<h4 onClick='_loadData({"id":"pt_id","group":"group1_6","page":"payrollpayrolltaxes"});$("#isLoaded_group1_6").val(1);'>Delivery</h4>
+<h4 onClick='_loadData({"id":"pt_id","group":"group1_6","page":"payrolltaxes"});$("#isLoaded_group1_6").val(1);'>Delivery</h4>
 <div>
 <div><label for="g1_g6_assignedto">Assigned To</label><select id="g1_g6_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g6_completed">Completed</label><input type="text" class="date" id="g1_g6_completed" ></div>

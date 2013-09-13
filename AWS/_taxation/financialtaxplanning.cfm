@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_taxation">
-<cfset page.location="taxationfinancialtaxplanning">
+<cfset page.location="financialtaxplanning">
 <cfset page.formid=9>
 <cfset page.title="Finanical Tax Planning">
 <cfset page.menuLeft="General,Comment">

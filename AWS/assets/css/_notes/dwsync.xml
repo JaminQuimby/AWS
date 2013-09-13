@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="aws.css" server="https://ftp.awensa.com/MS/MS0213/" local="130234292285874223" remote="130234292330000000" />
-<file name="print.css" server="https://ftp.awensa.com/MS/MS0213/" local="130234378981122908" remote="130234379070000000" />
+<file name="aws.css" server="https://ftp.awensa.com/MS/MS0213/" local="130234292285874223" remote="130235046370000000" />
+<file name="loginform.css" server="https://ftp.awensa.com/MS/MS0213/" local="130202202971519297" remote="130235046370000000" />
+<file name="print.css" server="https://ftp.awensa.com/MS/MS0213/" local="130234378981122908" remote="130235046370000000" />
+<file name="report.css" server="https://ftp.awensa.com/MS/MS0213/" local="130234266430000000" remote="130235046370000000" />
+<file name="tabs.css" server="https://ftp.awensa.com/MS/MS0213/" local="130202202971519297" remote="130235046370000000" />
 </dwsync>

@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_clientmanagement">
-<cfset page.location="clientdocumenttrackinglog">
+<cfset page.location="documenttrackinglog">
 <cfset page.title="Document Tracking Log">
 <cfset page.menuLeft="General,SubTasks,Comment">
 <!--- Load ALL Select Options for this page--->

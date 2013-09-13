@@ -1,24 +1,10 @@
-/*
-Javascript for FinancialStatements
-Developers:Jamin Quimby
-7/26/2013 - Started
-*/
-
-
 $(document).ready(function(){
-// Load Initial Client Grid	
 _grid1();
-// Show Entrace Window
-$('#entrance').show();
-
 _group1=function(){}
 _group2=function(){_grid2()}
 _group3=function(){_grid3()}
-
 });
 
-
-/*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"financialstatements.cfc",
@@ -27,7 +13,7 @@ _grid1=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"fds_id","group":"group1","page":"financialstatements"});'
-	});}
+	})};
 	
 _grid2=function(){_jGrid({
 	"grid":"grid2",
@@ -47,15 +33,12 @@ _grid3=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"5","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#fds_id").val()+'","loadType":"group3"}',
 	"functions":''
-	})}
+	})};
 	
-
-//Load Data call Back
 _loadDataCB=function(query){
-/*LOAD DATA BASED ON QUERY RETURN*/
 try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
-{
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
+else{
 switch(query.COLUMNS[0]){
 /*Group1*/case "FDS_ID":var list='fds_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "FDS_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_datecompleted,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -70,32 +53,21 @@ switch(query.COLUMNS[0]){
 /*Group1_10*/case "FDS_ACCTRPT_ASSIGNEDTO":var list='g1_g10_assignedto,g1_g10_completedby,g1_g10_datecompleted,g1_g10_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_11*/case "FDS_SALES_ASSIGNEDTO":var list='g1_g11_assignedto,g1_g11_completedby,g1_g11_datecompleted,g1_g11_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group2*/case "FDSS_ID":var list='fdss_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
-default:
-/*PLUGIN SUPPORT*/
-if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
-else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}
-}}}catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
+default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
+else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
-
-/*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
-var options={
-	"id":"",//ID
-	"group":"",//Switch Group
-	"result":""//Call Back Response
-	}
+var options={"id":"","group":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 
-alert(options["group"])
 switch(options["group"]){
-/*Save Client*/
 case'':
 if($("#client_id").val()>0){
-
 _saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true});
-}else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+jqMessage({message: "Saving.",type: "save",autoClose: true})}
+else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
 break;
 
 case'group1':var json='{"DATA":[["'+
@@ -119,7 +91,6 @@ $("#g1_year").val()+'","'+
 _saveData({group:"group1","payload":$.parseJSON(json),page:"financialstatements"});
 break;
 
-/*----------Save Group 1 Subgroup 1-------------*/
 case'group1_1':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
@@ -130,7 +101,7 @@ $("#g1_g1_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_2'})}
 break;
-/*----------Save Group 1 Subgroup 2-------------*/
+
 case'group1_2':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g2_assignedto").val()+'","'+
@@ -141,7 +112,7 @@ $("#g1_g2_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_3'})}
 break;
-/*----------Save Group 1 Subgroup 3-------------*/
+
 case'group1_3':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g3_assignedto").val()+'","'+
@@ -152,7 +123,7 @@ $("#g1_g3_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_4'})}
 break;
-/*----------Save Group 1 Subgroup 4-------------*/
+
 case'group1_4':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g4_assignedto").val()+'","'+
@@ -163,7 +134,7 @@ $("#g1_g4_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_5'})}
 break;
-/*----------Save Group 1 Subgroup 5-------------*/
+
 case'group1_5':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g5_assignedto").val()+'","'+
@@ -174,7 +145,7 @@ $("#g1_g5_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_6'})}
 break;
-/*----------Save Group 1 Subgroup 6-------------*/
+
 case'group1_6':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g6_assignedto").val()+'","'+
@@ -185,7 +156,7 @@ $("#g1_g6_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_6").val()!=0){_saveData({group:"group1_6","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_7'})}
 break;
-/*----------Save Group 1 Subgroup 7-------------*/
+
 case'group1_7':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g7_assignedto").val()+'","'+
@@ -196,7 +167,7 @@ $("#g1_g7_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_7").val()!=0){_saveData({group:"group1_7","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_8'})}
 break;
-/*----------Save Group 1 Subgroup 8-------------*/
+
 case'group1_8':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g8_assignedto").val()+'","'+
@@ -207,7 +178,7 @@ $("#g1_g8_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_8").val()!=0){_saveData({group:"group1_8","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_9'})}
 break;
-/*----------Save Group 1 Subgroup 9-------------*/
+
 case'group1_9':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g9_assignedto").val()+'","'+
@@ -218,7 +189,7 @@ $("#g1_g9_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_9").val()!=0){_saveData({group:"group1_9","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_10'})}
 break;
-/*----------Save Group 1 Subgroup 10-------------*/
+
 case'group1_10':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g10_assignedto").val()+'","'+
@@ -229,7 +200,7 @@ $("#g1_g10_estimatedtime").val()+'","'+
 if($("#isLoaded_group1_10").val()!=0){_saveData({group:"group1_10","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'group1_11'})}
 break;
-/*----------Save Group 1 Subgroup 11-------------*/
+
 case'group1_11':var json='{"DATA":[["'+
 $("#fds_id").val()+'","'+
 $("#g1_g11_assignedto").val()+'","'+
@@ -241,7 +212,6 @@ if($("#isLoaded_group1_11").val()!=0){_saveData({group:"group1_11","payload":$.p
 else{_saveDataCB({'group':'group2'})}
 break;
 
-/*----------Save Group 2-------------*/
 case'group2':var json='{"DATA":[["'+
 $("#fdss_id").val()+'","'+
 $("#fds_id").val()+'","'+
@@ -257,7 +227,6 @@ if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJS
 else{_saveDataCB({'group':'group3'})}
 break;
 
-/*----------Save Group 3-------------*/
 case'group3':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
@@ -268,30 +237,15 @@ $("#g3_commentdate").val()+'","'+
 $("#g3_commenttext").val()+'","'+
 '"]]}'
 if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group3",payload:$.parseJSON(json),page:"financialstatements"});
-}//else{_saveDataCB({'group':'group4'})}
+_saveData({group:"group3",payload:$.parseJSON(json),page:"financialstatements"})}
+else{_saveDataCB({'group':'plugins'})}
 break;
-/*This group does not exist in the cfm, this trigger instance is to update the posted message for the client.*/
-//case'group4':
-//jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
-//break;
 
+case"plugins":_pluginSaveData();
+break;
 
 /*Other Events*/
-case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
-case'none':break;
-case'next':_saveData();break;
+case'error':jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-default:
-/*PLUGIN SUPPORT*/
-if(options["group"]!=""){
-	alert("final")
-	alert(options["group"])
-	_pluginSaveData({group:options["group"]})}
-else{jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}
-}
-}catch(err){alert(err)}};
-
-
-/*Error Handelers*/
-errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};
+default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
+catch(err){alert(err)}};

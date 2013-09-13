@@ -1,25 +1,10 @@
-/*
-Javascript for Client Accounting and Consulting Tasks
-Developers:Jamin Quimby
-Raymond Smith
-Grid1 = Entrance
-*/
-
 $(document).ready(function(){
-	
-	
-// Load Initial Client Grid	
 _grid1();
-// Show Entrace Window
-$('#entrance').show();
-
 _group1=function(){}
 _group2=function(){_grid2()}
 _group3=function(){_grid3()}
-
 });
-
-/*Define Grid Instances*/   
+  
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"acctconsultingtasks.cfc",
@@ -39,6 +24,7 @@ _grid2=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#mc_id").val()+'","loadType":"group2"}',
 	"functions":'$(".trackers #mcs_id").val(record.MCS_ID);_loadData({"id":"mcs_id","group":"group2","page":"acctconsultingtasks"});$("#group2").accordion({active:1});;'
 	})};
+	
 _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"acctconsultingtasks.cfc",
@@ -49,52 +35,29 @@ _grid3=function(){_jGrid({
 	"functions":''
 	})};
 
-
-
-//Load Data call Back
 _loadDataCB=function(query){
-	
+try{
 if(query!=null){
-	
 switch(query.COLUMNS[0]){
-	
-/*START LOAD DATA */
 /*Group1*/case "MC_ID":var list='mc_id,client_id,g1_assignedto,g1_consultingcategory,g1_credithold,g1_duedate,g1_estimatedtime,g1_fees,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated,g1_spouse';_loadit({"query":query,"list":list});break;
 /*Group2*/case "MCS_ID":var list='mcs_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
+default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
+else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
-/*END LOAD DATA */
-default:jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})
-
-}
-
-}
-
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
-
-};
-
-
-/*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
-var options={
-	"id":"",//ID
-	"group":"",//Switch Group
-	"result":""//Call Back Response
-	};
-
+var options={"id":"","group":"","result":""};
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
-//Starting with Save Message
 case'':
 if($("#client_id").val()>0){
 _saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true});
-}else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+jqMessage({message: "Saving.",type: "save",autoClose: true})}
+else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})};
 break;
 
-/*Save Group1*/
 case'group1':
 var json='{"DATA":[["'+
 $("#mc_id").val()+'","'+
@@ -115,15 +78,10 @@ $("#g1_workinitiated").val()+'","'+
 '"]]}'
 
 if($("#g1_consultingcategory").val()!="" && $("#g1_taskdescription").val()!="" && $("#g1_priority").val()!=""){
-	_saveData({group:"group1","payload":$.parseJSON(json),page:"acctconsultingtasks"})
-}
-
+_saveData({group:"group1","payload":$.parseJSON(json),page:"acctconsultingtasks"})}
 else{jqMessage({message: "You must enter all required fields.",type: "info",autoClose: true})}
-
 break;
 
-
-/*Save Group2*/
 case'group2':
 var json='{"DATA":[["'+
 $("#mcs_id").val()+'","'+
@@ -141,16 +99,12 @@ $("#g2_subtask").val()+'","'+
 '"]]}'
 
 if($("#subtask_isLoaded").val()!=0){
-	if( $("#g2_subtask").val()!=0){
-		_saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"});
-	}
-	else{jqMessage({message: "You must select a subtask.",type: "info",autoClose: true});}
-}
-else{_saveDataCB({'group':'group3'});}
+if( $("#g2_subtask").val()!=0){
+	_saveData({group:"group2",payload:$.parseJSON(json),page:"acctconsultingtasks"})}
+else{jqMessage({message: "You must select a subtask.",type: "info",autoClose: true})}}
+else{_saveDataCB({'group':'group3'})}
 break;
 
-
-/*----------Save Group 3-------------*/
 case'group3':var json='{"DATA":[["'+
 $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
@@ -161,20 +115,12 @@ $("#g3_commentdate").val()+'","'+
 $("#g3_commenttext").val()+'","'+
 '"]]}'
 if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group3",payload:$.parseJSON(json),page:"acctconsultingtasks"});
-}else{_saveDataCB({'group':'group4'})}
+_saveData({group:"group3",payload:$.parseJSON(json),page:"acctconsultingtasks"})}
+else{_saveDataCB({'group':'plugins'})}
 break;
-
-
-/*Save Group4*/
-case'group4':
-jqMessage({message: "Your data has been saved.",type: "success",autoClose: true});
-break;
-
+/*Start Saving Plugins*/
+case"plugins":_pluginSaveData();break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
-case'none':break;
-case'next':_saveData();break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
-}};
+default:jqMessage({message: "A exception coccured in "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}};

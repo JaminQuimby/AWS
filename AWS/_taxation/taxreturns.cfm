@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_taxation">
-<cfset page.location="taxationtaxreturns">
+<cfset page.location="taxreturns">
 <cfset page.formid=6>
 <cfset page.title="Tax Returns">
 <cfset page.menuLeft="General,States,Schedule,Comment">
@@ -44,7 +44,7 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="client_id">Client</label><select id="client_id" onchange="_loadData({'id':'client_id','group':'assetSpouse','page':'taxationtaxreturns'});jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id">Client</label><select id="client_id" onchange="_loadData({'id':'client_id','group':'assetSpouse','page':'taxreturns'});jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_spouse">Spouse</label><input type="text" class="readonly" id="g1_spouse" readonly ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_taxyear">Tax Year</label><select  id="g1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -59,7 +59,7 @@
 <div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
 </div>
 <!--- GROUP1 SUBGROUP1 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_1","page":"taxationtaxreturns"});$("#isLoaded_group1_1").val(1);'>Preparation</h4>
+<h4 onClick='_loadData({"id":"tr_id","group":"group1_1","page":"taxreturns"});$("#isLoaded_group1_1").val(1);'>Preparation</h4>
 <div>
 <div><label for="g1_g1_informationreceived">Information Received</label><input type="text" class="date" id="g1_g1_informationreceived" ></div>
 <div><label for="g1_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_g1_filingdeadline"></div>
@@ -76,7 +76,7 @@
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
 </div>
 <!--- GROUP1 SUBGROUP2 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_2","page":"taxationtaxreturns"});$("#isLoaded_group1_2").val(1)'>Assembly &amp; Delivery</h4>
+<h4 onClick='_loadData({"id":"tr_id","group":"group1_2","page":"taxreturns"});$("#isLoaded_group1_2").val(1)'>Assembly &amp; Delivery</h4>
 <div>
 <div><label for="g1_g2_assemblereturn">Assemble Return</label><input type="text" class="date" id="g1_g2_assemblereturn" ></div>
 <div><label for="g1_g2_contacted">Contacted</label><input type="text" class="date" id="g1_g2_contacted" ></div>
@@ -89,7 +89,7 @@
 <div><input id="g1_g2_multistatereturn" type="checkbox"><label for="g1_g2_multistatereturn">Multistate Return</label></div>
 </div>
 <!--- GROUP1 SUBGROUP3 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_3","page":"taxationtaxreturns"});$("#isLoaded_group1_3").val(1)'>Personal Property Tax</h4>
+<h4 onClick='_loadData({"id":"tr_id","group":"group1_3","page":"taxreturns"});$("#isLoaded_group1_3").val(1)'>Personal Property Tax</h4>
 <div>
 <div><input id="g1_g3_required" type="checkbox"><label for="g1_g3_required">PPTR Required</label></div>
 <div><label for="g1_g3_assignedto">PPTR Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -103,7 +103,7 @@
 <div><label for="g1_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g3_priorfees" ></div>
 </div>
 <!--- GROUP1 SUBGROUP4 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_4","page":"taxationtaxreturns"});$("#isLoaded_group1_4").val(1)'>Appointment</h4>
+<h4 onClick='_loadData({"id":"tr_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)'>Appointment</h4>
 <div>
 <div><label for="g1_g4_dropoffappointment">Drop Off Appointment</label><input type="text" class="time" id="g1_g4_dropoffappointment" ></div>
 <div><label for="g1_g4_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g4_dropoffappointmentlength" ></div>
