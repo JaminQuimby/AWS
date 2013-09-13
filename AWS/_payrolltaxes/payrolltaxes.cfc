@@ -417,7 +417,7 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfquery>
-<cfreturn '{"id":#fquery.comment_id#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#fquery.comment_id#,"group":"plugins","result":"ok"}'>
 </cfif>
 </cfcase>
 </cfswitch>

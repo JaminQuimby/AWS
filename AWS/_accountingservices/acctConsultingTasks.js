@@ -22,7 +22,7 @@ _grid2=function(){_jGrid({
 	"fields":{MCS_ID:{key:true,list:false,edit:false},MCS_SEQUENCE:{title:'Sequence'},MCS_NOTES:{title:'Notes'},MCS_STATUS:{title:'Status'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":'$(".trackers #mcs_id").val(record.MCS_ID);_loadData({"id":"mcs_id","group":"group2","page":"acctconsultingtasks"});$("#group2").accordion({active:1});;'
+	"functions":'$(".trackers #subtask1_id").val(record.MCS_ID);_loadData({"id":"subtask1_id","group":"group2","page":"acctconsultingtasks"});$("#group2").accordion({active:1});;'
 	})};
 	
 _grid3=function(){_jGrid({
@@ -40,7 +40,7 @@ try{
 if(query!=null){
 switch(query.COLUMNS[0]){
 /*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_credithold,g1_duedate,g1_estimatedtime,g1_fees,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated,g1_spouse';_loadit({"query":query,"list":list});break;
-/*Group2*/case "MCS_ID":var list='mcs_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
+/*Group2*/case "MCS_ID":var list='subtask1_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
@@ -84,7 +84,7 @@ break;
 
 case'group2':
 var json='{"DATA":[["'+
-$("#mcs_id").val()+'","'+
+$("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_actualtime").val()+'","'+
 $("#g2_assignedto").val()+'","'+

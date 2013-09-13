@@ -19,10 +19,10 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"financialstatements.cfc",
 	"title":"Subtasks",
-	"fields":{fdss_id:{key:true,list:false,edit:false},fdss_subtaskTEXT:{title:'Subtask'}},
+	"fields":{FDSS_ID:{key:true,list:false,edit:false},fdss_subtaskTEXT:{title:'Subtask'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":'$("#fdss_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"fdss_id","group":"group2","page":"financialstatements"});'
+	"functions":'$("#subtask1_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"financialstatements"});'
 	})};
 	
 _grid3=function(){_jGrid({
@@ -52,7 +52,7 @@ switch(query.COLUMNS[0]){
 /*Group1_9*/case "FDS_DELIVERY_ASSIGNEDTO":var list='g1_g9_assignedto,g1_g9_completedby,g1_g9_datecompleted,g1_g9_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_10*/case "FDS_ACCTRPT_ASSIGNEDTO":var list='g1_g10_assignedto,g1_g10_completedby,g1_g10_datecompleted,g1_g10_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_11*/case "FDS_SALES_ASSIGNEDTO":var list='g1_g11_assignedto,g1_g11_completedby,g1_g11_datecompleted,g1_g11_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group2*/case "FDSS_ID":var list='fdss_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
+/*Group2*/case "FDSS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
@@ -64,10 +64,10 @@ $.extend(true, options, params);//turn options into array
 
 switch(options["group"]){
 case'':
-if($("#client_id").val()>0){
+if($("#client_id").val()>0 && $("#g1_status").val()>0 && $("#g1_duedate").val()!=""){
 _saveDataCB({'group':'group1'});
 jqMessage({message: "Saving.",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+else{jqMessage({message: "You must choose the client, status and due date.",type: "info",autoClose: true})}
 break;
 
 case'group1':var json='{"DATA":[["'+
@@ -213,7 +213,7 @@ else{_saveDataCB({'group':'group2'})}
 break;
 
 case'group2':var json='{"DATA":[["'+
-$("#fdss_id").val()+'","'+
+$("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'","'+

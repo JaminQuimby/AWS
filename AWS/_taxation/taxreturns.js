@@ -12,7 +12,7 @@ _grid1=function(){_jGrid({
 	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#tr_id").val(record.TR_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"tr_id","group":"group1","page":"taxreturns"});'
+	"functions":'$("#task_id").val(record.TR_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"taxreturns"});'
 	})};
 _grid2=function(){_jGrid({
 	"grid":"grid2",
@@ -21,7 +21,7 @@ _grid2=function(){_jGrid({
 	"fields":{TRST_ID:{key:true,list:false,edit:false},TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
-	"functions":'$("#trst_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"trst_id","group":"group2","page":"taxreturns"});'
+	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});'
 	})};
 _grid3=function(){_jGrid({
 	"grid":"grid3",
@@ -30,7 +30,7 @@ _grid3=function(){_jGrid({
 	"fields":{TRSC_ID:{key:true,list:false,edit:false},TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3"}',
-	"functions":'$("#trsc_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadData({"id":"trsc_id","group":"group3","page":"taxreturns"});'
+	"functions":'$("#subtask2_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});'
 	})};
 _grid4=function(){_jGrid({
 	"grid":"grid4",
@@ -38,7 +38,7 @@ _grid4=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"6","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#tr_id").val()+'","loadType":"group4"}',
+	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"6","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group4"}',
 	"functions":''
 	})};
 
@@ -47,13 +47,13 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "TR_ID":var list='tr_id,client_id,g1_credithold,g1_currentfees,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_notrequired,g1_priorfees,g1_priority,g1_reason,g1_taxform,g1_taxyear,g1_spouse';_loadit({"query":query,"list":list});break;
+/*Group1*/case "TR_ID":var list='task_id,client_id,g1_credithold,g1_currentfees,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_notrequired,g1_priorfees,g1_priority,g1_reason,g1_taxform,g1_taxyear,g1_spouse';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "TR_G1_1_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completed,g1_g1_duedate,g1_g1_filingdeadline,g1_g1_informationreceived,g1_g1_missinginforeceived,g1_g1_missinginformation,g1_g1_preparedby,g1_g1_readyforreview,g1_g1_reviewassignedto,g1_g1_reviewed,g1_g1_reviewedby,g1_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "TR_G1_2_ASSEMBLERETURN":var list='g1_g2_assemblereturn,g1_g2_contacted,g1_g2_delivered,g1_g2_deliverymethod,g1_g2_emailed,g1_g2_messageleft,g1_g2_missingsignatures,g1_g2_multistatereturn,g1_g2_multistatereturn';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "TR_G1_3_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completed,g1_g3_currentfees,g1_g3_delivered,g1_g3_extended,g1_g3_paymentstatus,g1_g3_pptresttime,g1_g3_priorfees,g1_g3_required,g1_g3_rfr';_loadit({"query":query,"list":list});break;
 /*Group1_4*/case "TR_G1_4_DROPOFFAPPOINTMENT":var list='g1_g4_dropoffappointment,g1_g4_dropoffappointmentlength,g1_g4_dropoffappointmentwith,g1_g4_pickupappointment,g1_g4_pickupappointmentlength,g1_g4_pickupappointmentwith,g1_g4_whileyouwaitappt';_loadit({"query":query,"list":list});break;
-/*Group2*/case "TRST_ID":var list='trst_id,g2_assignedto,g2_completed,g2_primary,g2_reviewassignedto,g2_state,g2_status';_loadit({"query":query,"list":list});break;
-/*Group3*/case "TRSC_ID":var list='trsc_id,g3_assignedto,g3_reviewassignedto,g3_schedule,g3_status';_loadit({"query":query,"list":list});break;
+/*Group2*/case "TRST_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_primary,g2_reviewassignedto,g2_state,g2_status';_loadit({"query":query,"list":list});break;
+/*Group3*/case "TRSC_ID":var list='subtask2_id,g3_assignedto,g3_reviewassignedto,g3_schedule,g3_status';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -68,7 +68,7 @@ else{jqMessage({message: "You must choose a client.",type: "info",autoClose: tru
 break;
 
 case'group1':var json='{"DATA":[["'+
-$("#tr_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#client_id").val()+'",'+
 $("#g1_credithold").is(':checked')+',"'+
 $("#g1_currentfees").val()+'","'+
@@ -87,7 +87,7 @@ break;
 
 case'group1_1':var json='{"DATA":[["'+
 //group 1 subgroup 1
-$("#tr_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completed").val()+'","'+
 $("#g1_g1_duedate").val()+'","'+
@@ -108,7 +108,7 @@ break;
 
 case'group1_2':var json='{"DATA":[["'+
 //group 1 subgroup 2
-$("#tr_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g2_assemblereturn").val()+'","'+
 $("#g1_g2_contacted").val()+'","'+
 $("#g1_g2_delivered").val()+'","'+
@@ -125,7 +125,7 @@ break;
 
 case'group1_3':var json='{"DATA":[["'+
 //group 1 subgroup 3
-$("#tr_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g3_assignedto").val()+'","'+
 $("#g1_g3_completed").val()+'","'+
 $("#g1_g3_currentfees").val()+'","'+
@@ -143,7 +143,7 @@ break;
 
 case'group1_4':var json='{"DATA":[["'+
 //group 1 subgroup 4
-$("#tr_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g4_dropoffappointment").val()+'","'+
 $("#g1_g4_dropoffappointmentlength").val()+'","'+
 $("#g1_g4_dropoffappointmentwith").val()+'","'+
@@ -157,8 +157,8 @@ else{_saveDataCB({'group':'group2'})};
 break;
 
 case'group2':var json='{"DATA":[["'+
-$("#trst_id").val()+'","'+
-$("#tr_id").val()+'","'+
+$("#subtask1_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'",'+
 $("#g2_primary").is(':checked')+',"'+
@@ -174,8 +174,8 @@ else{_saveDataCB({'group':'group3'})};
 break;
 
 case'group3':var json='{"DATA":[["'+
-$("#trsc_id").val()+'","'+
-$("#tr_id").val()+'","'+
+$("#subtask2_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g3_assignedto").val()+'","'+
 $("#g3_reviewassignedto").val()+'","'+
 $("#g3_schedule").val()+'","'+
@@ -192,7 +192,7 @@ $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
 $("#client_id").val()+'","'+
-$("#tr_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g4_commentdate").val()+'","'+
 $("#g4_commenttext").val()+'","'+
 '"]]}'

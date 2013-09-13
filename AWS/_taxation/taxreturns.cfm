@@ -6,7 +6,7 @@
 <cfset page.formid=6>
 <cfset page.title="Tax Returns">
 <cfset page.menuLeft="General,States,Schedule,Comment">
-<cfset page.trackers="tr_id,trst_id,trsc_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3,isLoaded_group4,comment_id">
+<cfset page.trackers="task_id,subtask1_id,subtask2_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3,isLoaded_group4,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -59,7 +59,7 @@
 <div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
 </div>
 <!--- GROUP1 SUBGROUP1 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_1","page":"taxreturns"});$("#isLoaded_group1_1").val(1);'>Preparation</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"taxreturns"});$("#isLoaded_group1_1").val(1);'>Preparation</h4>
 <div>
 <div><label for="g1_g1_informationreceived">Information Received</label><input type="text" class="date" id="g1_g1_informationreceived" ></div>
 <div><label for="g1_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_g1_filingdeadline"></div>
@@ -76,7 +76,7 @@
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
 </div>
 <!--- GROUP1 SUBGROUP2 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_2","page":"taxreturns"});$("#isLoaded_group1_2").val(1)'>Assembly &amp; Delivery</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"taxreturns"});$("#isLoaded_group1_2").val(1)'>Assembly &amp; Delivery</h4>
 <div>
 <div><label for="g1_g2_assemblereturn">Assemble Return</label><input type="text" class="date" id="g1_g2_assemblereturn" ></div>
 <div><label for="g1_g2_contacted">Contacted</label><input type="text" class="date" id="g1_g2_contacted" ></div>
@@ -89,7 +89,7 @@
 <div><input id="g1_g2_multistatereturn" type="checkbox"><label for="g1_g2_multistatereturn">Multistate Return</label></div>
 </div>
 <!--- GROUP1 SUBGROUP3 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_3","page":"taxreturns"});$("#isLoaded_group1_3").val(1)'>Personal Property Tax</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"taxreturns"});$("#isLoaded_group1_3").val(1)'>Personal Property Tax</h4>
 <div>
 <div><input id="g1_g3_required" type="checkbox"><label for="g1_g3_required">PPTR Required</label></div>
 <div><label for="g1_g3_assignedto">PPTR Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -103,7 +103,7 @@
 <div><label for="g1_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g3_priorfees" ></div>
 </div>
 <!--- GROUP1 SUBGROUP4 --->
-<h4 onClick='_loadData({"id":"tr_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)'>Appointment</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)'>Appointment</h4>
 <div>
 <div><label for="g1_g4_dropoffappointment">Drop Off Appointment</label><input type="text" class="time" id="g1_g4_dropoffappointment" ></div>
 <div><label for="g1_g4_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g4_dropoffappointmentlength" ></div>

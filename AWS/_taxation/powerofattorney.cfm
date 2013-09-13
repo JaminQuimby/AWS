@@ -6,7 +6,7 @@
 <cfset page.formid=7>
 <cfset page.title="Power of Attorney">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="pa_id,isLoaded_group2,comment_id">
+<cfset page.trackers="task_id,isLoaded_group2,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[form_id]='#page.formid#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>

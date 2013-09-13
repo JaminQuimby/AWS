@@ -60,7 +60,7 @@
       <li><a href="#Application.url#/AWS/_clientmanagement/administrativetasks.cfm">Administrative Tasks</a></li>
       <li><a href="#Application.url#/AWS/_clientmanagement/clientmaintenance.cfm">Client Maintenance</a></li>
       <li><a href="#Application.url#/AWS/_clientmanagement/communications.cfm">Communication</a></li>
-      <li><a href="#Application.url#/AWS/_clientmanagement/documenttrackinglog.cfm">Document Tracking Log</a></li>
+      <li><a href="#Application.url#/AWS/_clientmanagement/documenttracking.cfm">Document Tracking Log</a></li>
     </ul>
   </li>
   <!---Practice Management --->

@@ -11,7 +11,7 @@ _grid1=function(){_jGrid({
 	"fields":{NM_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},NM_NAME:{title:'Matter Name'},NM_STATUS:{title:'Matter Status'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#nm_id").val(record.NM_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"nm_id","group":"group1","page":"notices"});'
+	"functions":'$("#task_id").val(record.NM_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"notices"});'
 	})};
 _grid2=function(){_jGrid({
 	"grid":"grid2",
@@ -20,7 +20,7 @@ _grid2=function(){_jGrid({
 	"fields":{N_ID:{key:true,list:false,edit:false},N_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
-	"functions":'$("#n_id").val(record.N_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"n_id","group":"group2","page":"notices"});'
+	"functions":'$("#subtask1_id").val(record.N_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"notices"});'
 	})};
 _grid3=function(){_jGrid({
 	"grid":"grid3",
@@ -28,7 +28,7 @@ _grid3=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"8","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#nm_id").val()+'","loadType":"group3"}',
+	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"8","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group3"}',
 	"functions":''
 	})};
 
@@ -37,8 +37,8 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "NM_ID":var list='nm_id,client_id,g1_mattername,g1_matterstatus';_loadit({"query":query,"list":list});break;
-/*Group2*/case "N_ID":var list='n_id,g2_assignedto,g2_estimatedtime,g2_noticestatus,g2_priority';_loadit({"query":query,"list":list});break;
+/*Group1*/case "NM_ID":var list='task_id,client_id,g1_mattername,g1_matterstatus';_loadit({"query":query,"list":list});break;
+/*Group2*/case "N_ID":var list='subtask1_id,g2_assignedto,g2_estimatedtime,g2_noticestatus,g2_priority';_loadit({"query":query,"list":list});break;
 /*Group2_1*/case "N_1_FEES":var list='g2_1_fees,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_paid,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
 /*Group2_2*/case "N_2_DATENOTICERECEIVED":var list='g2_2_datenoticereceived,g2_2_duedateforresponse,g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
 /*Group2_3*/case "N_3_MISSINGINFORECEIVED":var list='g2_3_missinginforeceived,g2_3_missinginformation';_loadit({"query":query,"list":list});break;
@@ -58,7 +58,7 @@ else{jqMessage({message: "You must choose a client.",type: "info",autoClose: tru
 break;
 
 case'group1':var json='{"DATA":[["'+
-$("#nm_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_mattername").val()+'","'+
 $("#g1_matterstatus").val()+'","'+
@@ -67,8 +67,8 @@ _saveData({group:"group1","payload":$.parseJSON(json),page:"notices"});
 break;
 
 case'group2':var json='{"DATA":[["'+
-$("#n_id").val()+'","'+
-$("#nm_id").val()+'","'+
+$("#subtask1_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
 $("#g2_noticestatus").val()+'","'+
@@ -80,7 +80,7 @@ break;
 
 case'group2_1':var json='{"DATA":[["'+
 //group 1 subgroup 1
-$("#nm_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_1_fees").val()+'","'+
 $("#g2_1_methodreceived").val()+'","'+
 $("#g2_1_noticedate").val()+'","'+
@@ -95,7 +95,7 @@ break;
 
 case'group2_2':var json='{"DATA":[["'+
 //group 1 subgroup 2
-$("#nm_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_2_datenoticereceived").val()+'","'+
 $("#g2_2_duedateforresponse").val()+'","'+
 $("#g2_2_irsstateresponserecieved").val()+'","'+
@@ -112,7 +112,7 @@ break;
 
 case'group2_3':var json='{"DATA":[["'+
 //group 1 subgroup 3
-$("#nm_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_3_missinginforeceived").val()+'",'+
 $("#g2_3_missinginformation").val()+'","'+
 '"]]}'

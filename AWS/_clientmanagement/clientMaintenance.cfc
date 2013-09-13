@@ -971,7 +971,7 @@ UPDATE[CLIENT_LISTING]
 SET[client_relations]=<cfqueryparam value="#j.DATA[1][2]#">
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group8","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 

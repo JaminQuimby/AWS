@@ -6,7 +6,7 @@
 <cfset page.formid=11>
 <cfset page.title="Other Filings">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="of_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,comment_isLoaded,comment_id">
+<cfset page.trackers="task_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,comment_isLoaded,comment_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -68,7 +68,7 @@
 
 </div>
 <!---Subgroup 1--->
-<h4 onClick='_loadData({"id":"of_id","group":"group1_1","page":"otherfilings"});$("#isLoaded_group1_1").val(1);'>Obtain Info</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"otherfilings"});$("#isLoaded_group1_1").val(1);'>Obtain Info</h4>
 <div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
@@ -77,7 +77,7 @@
 </div>
 
 <!---Subgroup 2--->
-<h4 onClick='_loadData({"id":"of_id","group":"group1_2","page":"otherfilings"});$("#isLoaded_group1_2").val(1);'>Preparation</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"otherfilings"});$("#isLoaded_group1_2").val(1);'>Preparation</h4>
 <div>
 <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
@@ -86,7 +86,7 @@
 </div>
 
 <!---Subgroup 3--->
-<h4 onClick='_loadData({"id":"of_id","group":"group1_3","page":"otherfilings"});$("#isLoaded_group1_3").val(1);'>Review</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"otherfilings"});$("#isLoaded_group1_3").val(1);'>Review</h4>
 <div>
 <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_completed">Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
@@ -95,7 +95,7 @@
 </div>
 
 <!---Subgroup 4--->
-<h4 onClick='_loadData({"id":"of_id","group":"group1_4","page":"otherfilings"});$("#isLoaded_group1_4").val(1);'>Assembly</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"otherfilings"});$("#isLoaded_group1_4").val(1);'>Assembly</h4>
 <div>
 <div><label for="g1_g4_assignedto">Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g4_completed">Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
@@ -104,7 +104,7 @@
 </div>
 
 <!---Subgroup 5--->
-<h4 onClick='_loadData({"id":"of_id","group":"group1_5","page":"otherfilings"});$("#isLoaded_group1_5").val(1);'>Delivery</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"otherfilings"});$("#isLoaded_group1_5").val(1);'>Delivery</h4>
 <div>
 <div><label for="g1_g5_assignedto">Assigned To</label><select id="g1_g5_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>

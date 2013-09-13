@@ -1,7 +1,6 @@
 <cfoutput>
 <script type="text/javascript">
 $(document).ready(function(){
-	jqMessage({message: "Functionality of Documents tab actively being changed by: Raymond Smith. This may affect all modules Please do not add data to the database at this time.",type: "information",autoClose: false});
 $(function() {
 $("##uploader").pluploadQueue({
 // General settings

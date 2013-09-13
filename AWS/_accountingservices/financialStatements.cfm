@@ -6,7 +6,7 @@
 <cfset page.formid=5>
 <cfset page.title="Financial Statements">
 <cfset page.menuLeft="General,SubTasks,Comment">
-<cfset page.trackers="task_id,fdss_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group1_6,isLoaded_group1_7,isLoaded_group1_8,isLoaded_group1_9,isLoaded_group1_10,isLoaded_group1_11,isLoaded_group2,comment_id,comment_isLoaded">
+<cfset page.trackers="task_id,subtask1_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group1_6,isLoaded_group1_7,isLoaded_group1_8,isLoaded_group1_9,isLoaded_group1_10,isLoaded_group1_11,isLoaded_group2,comment_id,comment_isLoaded">
 
 
 <!--- Load ALL Select Options for this page--->

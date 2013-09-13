@@ -63,7 +63,7 @@ WHERE[ftp_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
 <!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
 </cffunction>
@@ -245,13 +245,13 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[comment_id]
 </cfquery>
-<cfreturn '{"id":#fquery.comment_id#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#fquery.comment_id#,"group":"plugins","result":"ok"}'>
 </cfif>
 </cfcase>
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cffunction>
