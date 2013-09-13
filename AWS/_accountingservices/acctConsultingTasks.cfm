@@ -6,7 +6,7 @@
 <cfset page.formid=2>
 <cfset page.title="Accounting and Consulting Tasks">
 <cfset page.menuLeft="General,SubTasks,Comment">
-<cfset page.trackers="mc_id,mcs_id,comment_id,subtask_isLoaded,comment_isLoaded">
+<cfset page.trackers="task_id,mcs_id,comment_id,subtask_isLoaded,comment_isLoaded">
 
 
 <!--- Load ALL Select Options for this page--->
@@ -77,7 +77,7 @@
 <a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#subtask_isLoaded").val(1);'>Add</a>
 </div>
 </div>
-<h4 onClick='_loadData({"id":"mc_id","group":"group2","page":"acctconsultingtasks"});$("#subtask_isLoaded").val(1);'>Add Subtask</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group2","page":"acctconsultingtasks"});$("#subtask_isLoaded").val(1);'>Add Subtask</h4>
 <div>
 <div><label for="g2_sequence">Sequence</label><input type="text" id="g2_sequence" ></div>
 <div><label for="g2_subtask">Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="q_global_subtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

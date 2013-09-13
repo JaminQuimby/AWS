@@ -12,7 +12,7 @@ _grid1=function(){_jGrid({
 	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year'},FDS_PERIODEND:{title:'Period End'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#client_id").val(record.CLIENT_ID);$("#fds_id").val(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"fds_id","group":"group1","page":"financialstatements"});'
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"financialstatements"});'
 	})};
 	
 _grid2=function(){_jGrid({
@@ -21,7 +21,7 @@ _grid2=function(){_jGrid({
 	"title":"Subtasks",
 	"fields":{fdss_id:{key:true,list:false,edit:false},fdss_subtaskTEXT:{title:'Subtask'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#fds_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#fdss_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"fdss_id","group":"group2","page":"financialstatements"});'
 	})};
 	
@@ -31,7 +31,7 @@ _grid3=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"5","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#fds_id").val()+'","loadType":"group3"}',
+	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"5","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group3"}',
 	"functions":''
 	})};
 	
@@ -40,7 +40,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "FDS_ID":var list='fds_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year';_loadit({"query":query,"list":list});break;
+/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "FDS_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_datecompleted,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "FDS_SORT_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_datecompleted,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "FDS_CHECKS_ASSIGNEDTO":var list='g1_g3assignedto,g1_g3completedby,g1_g3_datecompleted,g1_g3estimatedtime';_loadit({"query":query,"list":list});break;
@@ -71,7 +71,7 @@ else{jqMessage({message: "You must choose a client.",type: "info",autoClose: tru
 break;
 
 case'group1':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_cmireceived").val()+'",'+
 $("#g1_compilemi").is(':checked')+',"'+
@@ -92,7 +92,7 @@ _saveData({group:"group1","payload":$.parseJSON(json),page:"financialstatements"
 break;
 
 case'group1_1':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
 $("#g1_g1_datecompleted").val()+'","'+
@@ -103,7 +103,7 @@ else{_saveDataCB({'group':'group1_2'})}
 break;
 
 case'group1_2':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g2_assignedto").val()+'","'+
 $("#g1_g2_completedby").val()+'","'+
 $("#g1_g2_datecompleted").val()+'","'+
@@ -114,7 +114,7 @@ else{_saveDataCB({'group':'group1_3'})}
 break;
 
 case'group1_3':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g3_assignedto").val()+'","'+
 $("#g1_g3_completedby").val()+'","'+
 $("#g1_g3_datecompleted").val()+'","'+
@@ -125,7 +125,7 @@ else{_saveDataCB({'group':'group1_4'})}
 break;
 
 case'group1_4':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g4_assignedto").val()+'","'+
 $("#g1_g4_completedby").val()+'","'+
 $("#g1_g4_datecompleted").val()+'","'+
@@ -136,7 +136,7 @@ else{_saveDataCB({'group':'group1_5'})}
 break;
 
 case'group1_5':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g5_assignedto").val()+'","'+
 $("#g1_g5_completedby").val()+'","'+
 $("#g1_g5_datecompleted").val()+'","'+
@@ -147,7 +147,7 @@ else{_saveDataCB({'group':'group1_6'})}
 break;
 
 case'group1_6':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g6_assignedto").val()+'","'+
 $("#g1_g6_completedby").val()+'","'+
 $("#g1_g6_datecompleted").val()+'","'+
@@ -158,7 +158,7 @@ else{_saveDataCB({'group':'group1_7'})}
 break;
 
 case'group1_7':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g7_assignedto").val()+'","'+
 $("#g1_g7_completedby").val()+'","'+
 $("#g1_g7_datecompleted").val()+'","'+
@@ -169,7 +169,7 @@ else{_saveDataCB({'group':'group1_8'})}
 break;
 
 case'group1_8':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g8_assignedto").val()+'","'+
 $("#g1_g8_completedby").val()+'","'+
 $("#g1_g8_datecompleted").val()+'","'+
@@ -180,7 +180,7 @@ else{_saveDataCB({'group':'group1_9'})}
 break;
 
 case'group1_9':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g9_assignedto").val()+'","'+
 $("#g1_g9_completedby").val()+'","'+
 $("#g1_g9_datecompleted").val()+'","'+
@@ -191,7 +191,7 @@ else{_saveDataCB({'group':'group1_10'})}
 break;
 
 case'group1_10':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g10_assignedto").val()+'","'+
 $("#g1_g10_completedby").val()+'","'+
 $("#g1_g10_datecompleted").val()+'","'+
@@ -202,7 +202,7 @@ else{_saveDataCB({'group':'group1_11'})}
 break;
 
 case'group1_11':var json='{"DATA":[["'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g11_assignedto").val()+'","'+
 $("#g1_g11_completedby").val()+'","'+
 $("#g1_g11_datecompleted").val()+'","'+
@@ -214,7 +214,7 @@ break;
 
 case'group2':var json='{"DATA":[["'+
 $("#fdss_id").val()+'","'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'","'+
 $("#g2_duedate").val()+'","'+
@@ -232,7 +232,7 @@ $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
 $("#client_id").val()+'","'+
-$("#fds_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g3_commentdate").val()+'","'+
 $("#g3_commenttext").val()+'","'+
 '"]]}'

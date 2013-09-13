@@ -12,7 +12,7 @@ _grid1=function(){_jGrid({
 	"fields":{MC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},MC_CATEGORYTEXT:{title:'Consulting Categories'},MC_DESCRIPTION:{title:'Task Description'},MC_STATUS:{title:'Status'},MC_DUEDATE:{title:'Due Date'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
-	"functions":'$("#client_id").val(record.CLIENT_ID);$("#mc_id").val(record.MC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"mc_id","group":"group1","page":"acctconsultingtasks"});'
+	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.MC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"acctconsultingtasks"});'
 	})};
 
 _grid2=function(){_jGrid({
@@ -21,7 +21,7 @@ _grid2=function(){_jGrid({
 	"title":"Subtasks",
 	"fields":{MCS_ID:{key:true,list:false,edit:false},MCS_SEQUENCE:{title:'Sequence'},MCS_NOTES:{title:'Notes'},MCS_STATUS:{title:'Status'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#mc_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$(".trackers #mcs_id").val(record.MCS_ID);_loadData({"id":"mcs_id","group":"group2","page":"acctconsultingtasks"});$("#group2").accordion({active:1});;'
 	})};
 	
@@ -31,7 +31,7 @@ _grid3=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"2","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#mc_id").val()+'","loadType":"group3"}',
+	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"2","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group3"}',
 	"functions":''
 	})};
 
@@ -39,7 +39,7 @@ _loadDataCB=function(query){
 try{
 if(query!=null){
 switch(query.COLUMNS[0]){
-/*Group1*/case "MC_ID":var list='mc_id,client_id,g1_assignedto,g1_consultingcategory,g1_credithold,g1_duedate,g1_estimatedtime,g1_fees,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated,g1_spouse';_loadit({"query":query,"list":list});break;
+/*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_credithold,g1_duedate,g1_estimatedtime,g1_fees,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated,g1_spouse';_loadit({"query":query,"list":list});break;
 /*Group2*/case "MCS_ID":var list='mcs_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
@@ -60,7 +60,7 @@ break;
 
 case'group1':
 var json='{"DATA":[["'+
-$("#mc_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_assignedto").val()+'","'+
 $("#g1_consultingcategory").val()+'",'+
@@ -85,7 +85,7 @@ break;
 case'group2':
 var json='{"DATA":[["'+
 $("#mcs_id").val()+'","'+
-$("#mc_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_actualtime").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'","'+
@@ -110,7 +110,7 @@ $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
 $("#client_id").val()+'","'+
-$("#mc_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g3_commentdate").val()+'","'+
 $("#g3_commenttext").val()+'","'+
 '"]]}'

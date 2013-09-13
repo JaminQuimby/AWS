@@ -12,7 +12,7 @@ _grid1=function(){_jGrid({
 	"fields":{BF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},BF_OWNERS:{title:'Owners'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
-	"functions":'$("#bf_id").val(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"bf_id","group":"group1","page":"businessformation"});'
+	"functions":'$("#task_id").val(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"businessformation"});'
 	})};
 
 _grid2=function(){_jGrid({
@@ -21,7 +21,7 @@ _grid2=function(){_jGrid({
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"3","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#bf_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"3","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":''
 	})};
 
@@ -30,7 +30,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "BF_ID":var list='bf_id,client_id,g1_activity,g1_assignedto,g1_dateinitiated,g1_duedate,g1_estimatedtime,g1_fees,g1_owners,g1_paid,g1_priority,g1_status';_loadit({"query":query,"list":list,"page":"businessformation"});break;
+/*Group1*/case "BF_ID":var list='task_id,client_id,g1_activity,g1_assignedto,g1_dateinitiated,g1_duedate,g1_estimatedtime,g1_fees,g1_owners,g1_paid,g1_priority,g1_status';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_1*/case "BF_ARTICLESAPPROVED":var list='g1_g1_articlesapproved,g1_g1_articlessubmitted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_2*/case "BF_TRADENAMERECEIVED":var list='g1_g2_tradenamereceived,g1_g2_tradenamesubmitted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_3*/case "BF_MINUTESBYLAWSDRAFT":var list='g1_g3_minutesbylawsdraft,g1_g3_minutesbylawsfinal,g1_g3_minutescompleted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
@@ -53,7 +53,7 @@ else{jqMessage({message: "You must choose a client.",type: "info",autoClose: tru
 break;
 
 case'group1':var json='{"DATA":[["'+
-$("#bf_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_activity").val()+'","'+
 $("#g1_assignedto").val()+'","'+
@@ -70,7 +70,7 @@ _saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
 break;
 
 case'group1_1':var json='{"DATA":[["'+
-$("#bf_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g1_articlesapproved").val()+'","'+
 $("#g1_g1_articlessubmitted").val()+'","'+
 '"]]}'
@@ -79,7 +79,7 @@ else{_saveDataCB({'group':'group1_2'})};
 break;
 
 case'group1_2':var json='{"DATA":[["'+
-$("#bf_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g2_tradenamereceived").val()+'","'+
 $("#g1_g2_tradenamesubmitted").val()+'","'+
 '"]]}'
@@ -88,7 +88,7 @@ else{_saveDataCB({'group':'group1_3'})};
 break;
 
 case'group1_3':var json='{"DATA":[["'+
-$("#bf_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g3_minutesbylawsdraft").val()+'","'+
 $("#g1_g3_minutesbylawsfinal").val()+'","'+
 $("#g1_g3_minutescompleted").val()+'","'+
@@ -98,7 +98,7 @@ else{_saveDataCB({'group':'group1_4'})};
 break;
 
 case'group1_4':var json='{"DATA":[["'+
-$("#bf_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g4_disolutioncompleted").val()+'","'+
 $("#g1_g4_dissolutionrequested").val()+'","'+
 $("#g1_g4_dissolutionsubmitted").val()+'","'+
@@ -108,7 +108,7 @@ else{_saveDataCB({'group':'group1_5'})};
 break;
 
 case'group1_5':var json='{"DATA":[["'+
-$("#bf_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g1_g5_businesstype").val()+'","'+
 $("#g1_g5_businesscreceived").val()+'","'+
 $("#g1_g5_businesssubmitted").val()+'","'+
@@ -125,7 +125,7 @@ $("#comment_id").val()+'","'+
 $("#form_id").val()+'","'+
 $("#user_id").val()+'","'+
 $("#client_id").val()+'","'+
-$("#bf_id").val()+'","'+
+$("#task_id").val()+'","'+
 $("#g2_commentdate").val()+'","'+
 $("#g2_commenttext").val()+'","'+
 '"]]}'

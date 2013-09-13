@@ -6,7 +6,7 @@
 <cfset page.formid=3>
 <cfset page.title="Business Formation">
 <cfset page.menuLeft="General,Comment">
-<cfset page.trackers="bf_id,comment_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,comment_isLoaded">
+<cfset page.trackers="task_id,comment_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,comment_isLoaded">
 <!--- TO DO
 Add Subtasks: 
 	Remove Other Subtask 5 and distribute into Subtask, based on corporate type 
@@ -56,7 +56,7 @@ Add Subtasks:
 </div>
 
 <!---Subgroup 1--->
-<h4 onClick='_loadData({"id":"bf_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);'>Articles</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);'>Articles</h4>
 <div>
 	<div><label for="g1_g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_g1_articlessubmitted" class="date"/></div>
 	<div><label for="g1_g1_articlesapproved" >Articles Approved</label><input type="text" id="g1_g1_articlesapproved" class="date"/></div>
@@ -64,7 +64,7 @@ Add Subtasks:
 
 
 <!---Subgroup 2--->
-<h4 onClick='_loadData({"id":"bf_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);'>Trade Names</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);'>Trade Names</h4>
 <div>
 	<div><label for="g1_g2_tradenamesubmitted" >Trade Name Submitted</label><input type="text" id="g1_g2_tradenamesubmitted" class="date"/></div>
 	<div><label for="g1_g2_tradenamereceived" >Trade Name Received</label><input type="text" id="g1_g2_tradenamereceived" class="date"/></div>
@@ -72,7 +72,7 @@ Add Subtasks:
 
 
 <!---Subgroup 3--->
-<h4 onClick='_loadData({"id":"bf_id","group":"group1_3","page":"businessformation"});$("#isLoaded_group1_3").val(1);'>Minutes</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"businessformation"});$("#isLoaded_group1_3").val(1);'>Minutes</h4>
 <div>
 	<div><label for="g1_g3_minutesbylawsdraft" >Minutes Bylaws Draft</label><input type="text" id="g1_g3_minutesbylawsdraft" class="date"/></div>
 	<div><label for="g1_g3_minutesbylawsfinal" >Minutes Bylaws Final</label><input type="text" id="g1_g3_minutesbylawsfinal" class="date"/></div>
@@ -80,7 +80,7 @@ Add Subtasks:
 </div>
 
 <!---Subgroup 4--->
-<h4 onClick='_loadData({"id":"bf_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);'>Dissolution</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);'>Dissolution</h4>
 <div>
 	<div><label for="g1_g4_dissolutionrequested" >Dissolution Requested</label><input type="text" id="g1_g4_dissolutionrequested" class="date"/></div>
 	<div><label for="g1_g4_dissolutionsubmitted" >Dissolution Submitted</label><input type="text" id="g1_g4_dissolutionsubmitted" class="date"/></div>
@@ -88,7 +88,7 @@ Add Subtasks:
 </div>
 
 <!---Subgroup 5--->
-<h4 onClick='_loadData({"id":"bf_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);'>Other</h4>
+<h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);'>Other</h4>
 <div>
 	<div><label for="g1_g5_businesstype">Business Type</label><select id="g1_g5_businesstype"><option value="0">&nbsp;</option></select></div>
 	<div><label for="g1_g5_businesscreceived" >Received</label><input type="text" id="g1_g5_businesscreceived" class="date"/></div>
