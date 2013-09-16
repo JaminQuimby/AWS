@@ -55,7 +55,7 @@ break;
 		$("##g100_year").val()+'","'+
 		'"]]}'
         alert('saving data	1')
-		if($("##isLoaded_group100").val()!=0){
+		if($("##isLoaded_group100_1").val()!=0){
          alert('saving data 2')
 		_saveData({payload:$.parseJSON(json),page:"upload","plugin":"group100"});
        

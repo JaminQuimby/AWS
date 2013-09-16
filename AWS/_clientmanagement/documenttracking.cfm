@@ -44,8 +44,8 @@
 <div><label for="g1_staff">Staff</label><select id="g1_staff"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_sender">Sender</label><input type="text" id="g1_sender"></div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="form_id">Module</label><select id="form_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option></select></div>
-<div><label for="file_id">File</label><select id="file_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option></select></div>
+<!---<div><label for="form_id" style="display:none">Module</label><select id="form_id" style="display:none"><option value="0" style="display:none">&nbsp;</option></select></div>
+<div><label for="file_id" style="visibility:hidden">File</label><select id="file_id" style="visibility:hidden"><option value="0" style="visibility:hidden">&nbsp;</option></select></div>--->
 <div><label for="g1_description">Description</label><textarea id="g1_description" ></textarea></div>
 <div><input id="g1_fax" type="checkbox"><label for="g1_fax">Fax</label></div>
 <div><input id="g1_mail" type="checkbox"><label for="g1_mail">Mail</label></div>

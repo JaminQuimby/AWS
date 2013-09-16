@@ -64,10 +64,10 @@ _grid100=function(){
 <div><label for="g100_filter">Filter</label><input id="g100_filter" onBlur="_grid100();"/></div>
 <div id="grid100" class="tblGrid"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group100").accordion({active:2});$("#isLoaded_group100").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='$("#group100").accordion({active:2});'>Add</a>
 </div>
 </div>
-<h4>File Meta Data</h4>
+<h4 onClick='_loadData({"id":"file_id","group":"group100","page":"upload",plugin:"group100"});$("#isLoaded_group100").val(1);'>File Meta Data</h4>
 <div><div><label for="g100_name">Name</label><input type="text" id="g100_name"></div>
 <div><label for="g100_description">Description</label><select id="g100_description" ><option value="0">&nbsp;</option></select></div>
 <div><label for="g100_year">Year</label><input type="text" id="g100_year"></div>

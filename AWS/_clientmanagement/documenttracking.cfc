@@ -32,8 +32,8 @@ SELECT
 <cfquery datasource="AWS" name="fQuery">
 SELECT[DT_ID]
  ,[client_id]
- ,[form_id]
- ,[file_id]
+<!--- ,[form_id]
+ ,[file_id]--->
  ,[dt_assignedto]
 ,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
  ,[dt_delivery]
@@ -139,18 +139,18 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <!--- Group1 --->
 <cfcase value="group1">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][7])><cfset j.DATA[1][7]=1><cfelse><cfset j.DATA[1][7]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][11])><cfset j.DATA[1][11]=1><cfelse><cfset j.DATA[1][11]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[documenttracking](
 [client_id]
-,[form_id]
-,[file_id]
+<!---,[form_id]
+,[file_id]--->
 ,[dt_assignedto]
 ,[dt_date]
 ,[dt_delivery]
@@ -174,8 +174,8 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][10]#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#"/>
-,<cfqueryparam value="#j.DATA[1][13]#"/>
-,<cfqueryparam value="#j.DATA[1][14]#"/>
+<!---,<cfqueryparam value="#j.DATA[1][13]#"/>
+,<cfqueryparam value="#j.DATA[1][14]#"/>--->
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -192,18 +192,18 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[documenttracking]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[form_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[file_id]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[dt_assignedto]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[dt_date]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[dt_delivery]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[dt_description]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[dt_email]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[dt_fax]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[dt_mail]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[dt_routing]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[dt_sender]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[dt_staff]=<cfqueryparam value="#j.DATA[1][14]#"/>
+<!---,[form_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[file_id]=<cfqueryparam value="#j.DATA[1][4]#"/>--->
+,[dt_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[dt_date]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[dt_delivery]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[dt_description]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[dt_email]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[dt_fax]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[dt_mail]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[dt_routing]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[dt_sender]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[dt_staff]=<cfqueryparam value="#j.DATA[1][12]#"/>
 WHERE[DT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 </cfif>

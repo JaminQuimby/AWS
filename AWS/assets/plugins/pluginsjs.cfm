@@ -5,6 +5,9 @@ _pluginURL=function(params){
 		case"group100":
 		return "https://"+window.location.hostname+"/AWS/assets/plugins/jUpload/";
 		break;
+        case"group101":
+		return "https://"+window.location.hostname+"/AWS/assets/plugins/jComment/";
+		break;
 }};
 
 _pluginLoadData=function(params){	
@@ -26,6 +29,8 @@ _pluginSaveData=function(params){
 _pluginSaveDataCB=function(params){	
 var options={"group":""}
 $.extend(true, options, params);
+alert(options["group"]);
+
 switch(options['group']){
 case"group0":_saveDataCB({'group':'saved'});break;
 case"group100":var json='{"DATA":[["'+
@@ -39,6 +44,18 @@ case"group100":var json='{"DATA":[["'+
 		'"]]}'
 		if($("##isLoaded_group100").val()!=0){
 			_saveData({"group":"group100",payload:$.parseJSON(json),page:"upload",plugin:"group100"})}
+		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}
+		break;
+case"group101":var json='{"DATA":[["'+
+		$("##comment_id").val()+'","'+
+		$("##form_id").val()+'","'+
+		$("##client_id").val()+'","'+
+		$("##task_id").val()+'","'+
+		$("##g101_commentdate").val()+'","'+
+		$("##g101_commenttext").val()+'","'+
+		'"]]}'
+		if($("##isLoaded_group101").val()!=0){
+			_saveData({"group":"group101",payload:$.parseJSON(json),page:"comment",plugin:"group101"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}
 		break;
 		default:alert('Plugin data could not be saved.'); break;
