@@ -5,8 +5,8 @@
 <cfset page.location="financialtaxplanning">
 <cfset page.formid=9>
 <cfset page.title="Finanical Tax Planning">
-<cfset page.menuLeft="General,Comment">
-<cfset page.trackers="task_id,comment_isLoaded,comment_id">
+<cfset page.menuLeft="General">
+<cfset page.trackers="task_id">
 
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
@@ -62,22 +62,6 @@
 </div>
 </div>
 
-<!--- Comments --->
-<div id="group2" class="gf-checkbox">
-<h3 onClick="_grid2();">Comments</h3>
-<div>
-<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
-<div class="tblGrid" id="grid2"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
-</div>
-</div>
-<h4>Add Comment</h4>
-<div>
-<div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
-<div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
-</div>
-</div>
 
 <!--- Start Plugins --->
 <cfinclude template="../assets/plugins/plugins.cfm">

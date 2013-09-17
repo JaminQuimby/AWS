@@ -5,8 +5,8 @@
 <cfset page.location="powerofattorney">
 <cfset page.formid=7>
 <cfset page.title="Power of Attorney">
-<cfset page.menuLeft="General,Comment">
-<cfset page.trackers="task_id,isLoaded_group2,comment_id">
+<cfset page.menuLeft="General">
+<cfset page.trackers="task_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[form_id]='#page.formid#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -49,22 +49,6 @@
 <div><label for="g1_datesenttoirs">Date Sent to IRS</label><input type="text" class="date" id="g1_datesenttoirs" ></div>
 <div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></select></div>
 <div><label for="g1_dateofrevocation">Date of Revocation</label><input type="text" class="date" id="g1_dateofrevocation" ></div>
-</div>
-</div>
-<!--- Comments --->
-<div id="group2" class="gf-checkbox">
-<h3 onClick="_grid2();">Comments</h3>
-<div>
-<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
-<div class="tblGrid" id="grid2"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
-</div>
-</div>
-<h4>Add Comment</h4>
-<div>
-<div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
-<div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
 

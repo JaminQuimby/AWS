@@ -5,8 +5,8 @@
 <cfset page.location="communications">
 <cfset page.formid=12>
 <cfset page.title="Client Communications">
-<cfset page.menuLeft="General,Comment">
-<cfset page.trackers="task_id,comment_isLoaded,comment_id">
+<cfset page.menuLeft="General">
+<cfset page.trackers="task_id">
 
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
@@ -66,23 +66,6 @@
 <div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"></div>
 <div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="q_global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-</div>
-</div>
-
-<!--- Comments --->
-<div id="group2" class="gf-checkbox">
-<h3>Comments</h3>
-<div>
-<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
-<div class="tblGrid" id="grid2"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
-</div>
-</div>
-<h4>Add Comment</h4>
-<div>
-<div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
-<div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
 </div>
 </div>
 

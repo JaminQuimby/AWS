@@ -14,16 +14,6 @@ _grid1=function(){_jGrid({
 	"functions":'$("#task_id").val(record.CO_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"communications"});_loadData({"id":"client_id","group":"assetSpouse","page":"communications"});'
 	})};
 
-_grid2=function(){_jGrid({
-	"grid":"grid2",
-	"url":"communications.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"12","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":''
-	})};
-
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
@@ -75,20 +65,6 @@ $("#g1_textmessage").is(':checked')+','+
 $("#g1_voicemail").is(':checked')+',"'+
 '"]]}'
 _saveData({group:"group1","payload":$.parseJSON(json),page:"communications"});
-break;
-
-case'group2':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+'","'+
-'"]]}'
-if($("comment_isLoaded").val()!=0 && $("#g2_commenttext").val()!=""){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"communications"});
-}else{_saveDataCB({'group':'plugins'})}
 break;
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData();break;

@@ -55,7 +55,6 @@ SELECT[n_id]
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
-
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[nm_id]
@@ -136,7 +135,6 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-<cfargument name="otherid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -171,41 +169,18 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- Grid 2  --->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
-SELECT[n_id]
+SELECT[nm_id]
+,[n_id]
 ,[n_assignedtoTEXT]
-,[n_1_taxyear]
-
 FROM[v_notice]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'","N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cfcase>
-
-<!--- Grid 3 --->
-<cfcase value="group3">
-<cfquery datasource="AWS" name="fquery">
-SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
-FROM[v_comments]
-WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"COMMENT_ID":"'&COMMENT_ID&'","C_DATE":"'&C_DATE&'","U_NAME":"'&U_NAME&'","U_EMAIL":"'&U_EMAIL&'","C_NOTES":"'&C_NOTES&'"}'>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -247,10 +222,10 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
 )
-SELECT SCOPE_IDENTITY()AS[id]
+SELECT SCOPE_IDENTITY()AS[nm_id]
 </cfquery>
 <!--- RETURN TR_ID--->
-<cfreturn '{"id":#fquery.id#,"group":"group2","result":"ok"}'>
+<cfreturn '{"id":#fquery.nm_id#,"group":"group2","result":"ok"}'>
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
@@ -260,7 +235,7 @@ SET
 [client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[nm_name]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[nm_status]=<cfqueryparam value="#j.DATA[1][4]#"/>
-WHERE[NM_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[nm_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 </cfif>
 </cfcase>
@@ -269,6 +244,7 @@ WHERE[NM_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group2--->
 <cfcase value="group2">
 <cfif j.DATA[1][1] eq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[NOTICE](
 [nm_id]
@@ -280,23 +256,28 @@ INSERT INTO[NOTICE](
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
 )
-SELECT SCOPE_IDENTITY()AS[id]
+SELECT SCOPE_IDENTITY()AS[n_id]
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"group2_1","result":"ok"}'>
+<cfreturn '{"id":#fquery.n_id#,"group":"group2_1","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
 SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[n_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[n_esttime]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[n_esttime]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[n_noticestatus]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[n_priority]=<cfqueryparam value="#j.DATA[1][6]#"/>
-WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+,[n_priority]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
+WHERE[n_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>
 </cfif>
@@ -305,13 +286,13 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_1">
  <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
-SET[n_1_fees]=<cfqueryparam value="#j.DATA[1][2]#"/>
+SET[n_1_fees]=<cfqueryparam value="#j.DATA[1][2]#" NULL="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[n_1_methodreceived]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[n_1_noticedate]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[n_1_noticenumber]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[n_1_paid]=<cfqueryparam value="#j.DATA[1][6]#"/>
 ,[n_1_taxform]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[n_1_taxyear]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[n_1_taxyear]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -346,31 +327,7 @@ SET[n_3_missinginfo]=<cfqueryparam value="#j.DATA[1][2]#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
-</cfcase>
-<!---Group3--->
-<cfcase value="group3">
-<cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
-INSERT INTO[comments](
-[form_id]
-,[user_id]
-,[client_id]
-,[other_id]
-,[c_date]
-,[c_notes]
-)
-VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-)
-SELECT SCOPE_IDENTITY()AS[comment_id]
-</cfquery>
-<cfreturn '{"id":#fquery.comment_id#,"group":"plugins","result":"ok"}'>
-</cfif>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

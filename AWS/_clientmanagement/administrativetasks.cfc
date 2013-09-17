@@ -67,7 +67,6 @@ WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-<cfargument name="otherid" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP GROUP1 --->
@@ -86,25 +85,6 @@ FROM[v_clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#AR
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CAS_DUEDATE":"'&CAS_DUEDATE&'"}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cfcase>
-
-<cfcase value="group2">
-<cfquery datasource="AWS" name="fquery">
-SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
-FROM[v_comments]
-WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[other_id]=<cfqueryparam value="#ARGUMENTS.otherid#"/> 
-AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"COMMENT_ID":"'&COMMENT_ID&'","C_DATE":"'&C_DATE&'","U_NAME":"'&U_NAME&'","U_EMAIL":"'&U_EMAIL&'","C_NOTES":"'&C_NOTES&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -166,7 +146,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[cas_id]
 </cfquery>
-<cfreturn '{"id":#fquery.cas_id#,"group":"group2","result":"ok"}'>
+<cfreturn '{"id":#fquery.cas_id#,"group":"plugins","result":"ok"}'>
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
@@ -187,31 +167,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[cas_taskdesc]=<cfqueryparam value="#j.DATA[1][14]#"/>
 WHERE[cas_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
-</cfif>
-</cfcase>
-<!--- Group2 --->
-<cfcase value="group2">
-<cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
-INSERT INTO[comments](
-[form_id]
-,[user_id]
-,[client_id]
-,[other_id]
-,[c_date]
-,[c_notes]
-)
-VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-)
-SELECT SCOPE_IDENTITY()AS[comment_id]
-</cfquery>
-<cfreturn '{"id":#fquery.comment_id#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>
 </cfcase>
 </cfswitch>

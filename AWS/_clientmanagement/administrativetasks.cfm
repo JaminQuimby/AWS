@@ -5,8 +5,8 @@
 <cfset page.location="administrativetasks">
 <cfset page.formid=4>
 <cfset page.title="Client Administrative Tasks">
-<cfset page.menuLeft="General,Comment">
-<cfset page.trackers="task_id,comment_id,isLoaded_group2">
+<cfset page.menuLeft="General">
+<cfset page.trackers="task_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[form_id]='#page.formid#'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1 ORDER BY[client_name]</cfquery>
@@ -55,22 +55,6 @@
 </div>
 </div>
 
-<!--- Comments --->
-<div id="group2" class="gf-checkbox">
-<h3 onClick="_grid2();">Comments</h3>
-<div>
-<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
-<div class="tblGrid" id="grid2"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
-</div>
-</div>
-<h4 onClick="$('#isLoaded_group2').val(1);">Add Comment</h4>
-<div>
-<div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
-<div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
-</div>
-</div>
 
 <!--- Start Plugins --->
 <cfinclude template="../assets/plugins/plugins.cfm">

@@ -5,8 +5,8 @@
 <cfset page.location="businessformation">
 <cfset page.formid=3>
 <cfset page.title="Business Formation">
-<cfset page.menuLeft="General,Comment">
-<cfset page.trackers="task_id,comment_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,comment_isLoaded">
+<cfset page.menuLeft="General">
+<cfset page.trackers="task_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5">
 <!--- TO DO
 Add Subtasks: 
 	Remove Other Subtask 5 and distribute into Subtask, based on corporate type 
@@ -99,22 +99,6 @@ Add Subtasks:
 </div>
 </div>
 
-<!--- Comments --->
-<div id="group2" class="gf-checkbox">
-<h3 onClick="_grid2();">Comments</h3>
-<div>
-<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
-<div class="tblGrid" id="grid2"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
-</div>
-</div>
-<h4>Add Comment</h4>
-<div>
-<div><label for="g2_commentdate">Date</label><input type="text" class="date" id="g2_commentdate"/></div>
-<div><label for="g2_commenttext">Comment</label><textarea type="text" id="g2_commenttext"></textarea></div>
-</div>
-</div>
 
 <!--- Start Plugins --->
 <cfinclude template="../assets/plugins/plugins.cfm">

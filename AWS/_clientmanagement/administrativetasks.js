@@ -13,15 +13,7 @@ _grid1=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#task_id").val(record.CAS_ID);$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"administrativetasks"});'
 	})};
-_grid2=function(){_jGrid({
-	"grid":"grid2",
-	"url":"administrativetasks.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"4","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":''
-	})};
+
 
 //Load Data call Back
 _loadDataCB=function(query){
@@ -66,20 +58,6 @@ $("#g1_status").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
 '"]]}'
 _saveData({"group":"group1","payload":$.parseJSON(json),page:"administrativetasks"});
-break;
-/*Save Group2*/
-case'group2':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+'","'+
-'"]]}'
-if($("#isLoaded_group2").val()!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"administrativetasks"});
-}else{_saveDataCB({'group':'plugins'})}
 break;
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData();break;

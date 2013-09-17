@@ -5,8 +5,8 @@
 <cfset page.location="financialstatements">
 <cfset page.formid=5>
 <cfset page.title="Financial Statements">
-<cfset page.menuLeft="General,SubTasks,Comment">
-<cfset page.trackers="task_id,subtask1_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group1_6,isLoaded_group1_7,isLoaded_group1_8,isLoaded_group1_9,isLoaded_group1_10,isLoaded_group1_11,isLoaded_group2,comment_id,comment_isLoaded">
+<cfset page.menuLeft="General,SubTasks">
+<cfset page.trackers="task_id,subtask1_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group1_6,isLoaded_group1_7,isLoaded_group1_8,isLoaded_group1_9,isLoaded_group1_10,isLoaded_group1_11,isLoaded_group2">
 
 
 <!--- Load ALL Select Options for this page--->
@@ -163,23 +163,6 @@
 		<div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date"/></div>
 		<div><label for="g2_completed">Completed</label><input type="text" id="g2_completed"  class="date" /></div>
 		<div><label for="g2_notes">Notes</label><textarea id="g2_notes" ></textarea></div>
-	</div>
-</div>
-
-<!--- Comments --->
-<div id="group3" class="gf-checkbox">
-	<h3 onClick="_grid3();">Comments</h3>
-	<div>
-		<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();"/></div>
-		<div class="tblGrid" id="grid3"></div>
-		<div class="buttonbox">
-		<a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
-		</div>
-	</div>
-	<h4>Add Comment</h4>
-	<div>
-		<div><label for="g3_commentdate">Date</label><input type="text" class="date" id="g3_commentdate"/></div>
-		<div><label for="g3_commenttext">Comment</label><textarea type="text" id="g3_commenttext"></textarea></div>
 	</div>
 </div>
 

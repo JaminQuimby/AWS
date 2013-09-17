@@ -1,7 +1,6 @@
 $(document).ready(function(){
 _grid1();
 _group1=function(){}
-_group2=function(){_grid2()}
 });
  
 _grid1=function(){_jGrid({
@@ -14,15 +13,6 @@ _grid1=function(){_jGrid({
 	"functions":'$("#task_id").val(record.PC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrollchecks"});'
 	})};
 
-_grid2=function(){_jGrid({
-	"grid":"grid2",
-	"url":"payrollchecks.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"10","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":''
-	})};
 
 _loadDataCB=function(query){
 try{
@@ -120,22 +110,9 @@ $("#g1_g5_completed").val()+'","'+
 $("#g1_g5_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"payrollchecks"})}
-else{_saveDataCB({'group':'group2'})}
+else{_saveDataCB({'group':'plugins'})}
 break;
 
-case'group2':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+'","'+
-'"]]}'
-if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"payrollchecks"});
-}else{_saveDataCB({'group':'plugins'})}
-break;
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData();break;
 /*Other Events*/

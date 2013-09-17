@@ -1,28 +1,16 @@
 $(document).ready(function(){
 _grid1();
 _group1=function(){}
-_group2=function(){_grid2()}
-_group3=function(){}
 });
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"businessformation.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},BF_OWNERS:{title:'Owners'}},
+	"fields":{BF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},BF_OWNERS:{title:'Owners'},BF_STATUS:{title:'Status'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#task_id").val(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"businessformation"});'
-	})};
-
-_grid2=function(){_jGrid({
-	"grid":"grid2",
-	"url":"businessformation.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"3","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":''
 	})};
 
 _loadDataCB=function(query){
@@ -117,22 +105,9 @@ $("#g1_g5_othercompleted").val()+'","'+
 $("#g1_g5_otherstarted").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"businessformation"})}
-else{_saveDataCB({'group':'group2'})};
-break;
-
-case'group2':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+'","'+
-'"]]}'
-if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"businessformation"})}
 else{_saveDataCB({'group':'plugins'})};
 break;
+
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData();break;
 /*Other Events*/

@@ -188,25 +188,6 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryp
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-
-<!--- LOOKUP Group3 --->
-<cfcase value="group3">
-<cfquery datasource="AWS" name="fquery">
-SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
-FROM[v_comments]
-WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"COMMENT_ID":"'&COMMENT_ID&'","C_DATE":"'&C_DATE&'","U_NAME":"'&U_NAME&'","U_EMAIL":"'&U_EMAIL&'","C_NOTES":"'&C_NOTES&'"}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cfcase>
 </cfswitch>
 
 
@@ -346,7 +327,7 @@ VALUES(
 SELECT SCOPE_IDENTITY()AS[mcs_id]
 </cfquery>
 
-<cfreturn '{"id":#fquery.mcs_id#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#fquery.mcs_id#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -371,7 +352,7 @@ SET[mc_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mcs_subtask]=<cfqueryparam value="#j.DATA[1][12]#"/>
 WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -380,29 +361,6 @@ WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfif>
 
 </cfcase>
-<!--- Group3 --->
-<cfcase value="group3">
-<cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
-INSERT INTO[comments](
-[form_id]
-,[user_id]
-,[client_id]
-,[c_date]
-,[c_notes]
-)
-VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-)
-SELECT SCOPE_IDENTITY()AS[comment_id]
-</cfquery>
-<cfreturn '{"id":#fquery.comment_id#,"group":"plugins","result":"ok"}'>
-</cfif>
-</cfcase>
-
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->

@@ -1,7 +1,6 @@
 $(document).ready(function(){
 _grid1();
 _group1=function(){}
-_group2=function(){_grid2()}
 });
 
 /*Define Grid Instances*/   
@@ -13,16 +12,6 @@ _grid1=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"otherfilings"});'
-	})};
-
-_grid2=function(){_jGrid({
-	"grid":"grid2",
-	"url":"otherfilings.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"11","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":''
 	})};
 
 _loadDataCB=function(query){
@@ -128,22 +117,9 @@ $("#g1_g5_completed").val()+'","'+
 $("#g1_g5_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"otherfilings"})}
-else{_saveDataCB({'group':'group2'})};
-break;
-/*----------SAVE GROUP 2----------*/
-case'group2':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+'","'+
-'"]]}'
-if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"otherfilings"})}
 else{_saveDataCB({'group':'plugins'})};
 break;
+
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData();break;
 /*Other Events*/

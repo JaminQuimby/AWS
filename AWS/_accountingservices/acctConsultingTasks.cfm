@@ -5,8 +5,8 @@
 <cfset page.location="acctconsultingtasks">
 <cfset page.formid=2>
 <cfset page.title="Accounting and Consulting Tasks">
-<cfset page.menuLeft="General,SubTasks,Comment">
-<cfset page.trackers="task_id,subtask1_id,comment_id,subtask_isLoaded,comment_isLoaded">
+<cfset page.menuLeft="General,SubTasks">
+<cfset page.trackers="task_id,subtask1_id,subtask_isLoaded">
 
 
 <!--- Load ALL Select Options for this page--->
@@ -89,22 +89,6 @@
 <div><label for="g2_estimatedtime">Estimated Time</label><input type="text" id="g2_estimatedtime" ></div>
 <div><label for="g2_actualtime">Actual Time</label><input type="text" id="g2_actualtime"></div>
 <div><label for="g2_note">Notes</label><textarea  id="g2_note" cols="4" rows="4"></textarea></div>
-</div>
-</div>
-<!--- Comments --->
-<div id="group3" class="gf-checkbox">
-<h3>Comments</h3>
-<div>
-<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();"/></div>
-<div class="tblGrid" id="grid3"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
-</div>
-</div>
-<h4>Add Comment</h4>
-<div>
-<div><label for="g3_commentdate">Date</label><input type="text" class="date" id="g3_commentdate"/></div>
-<div><label for="g3_commenttext">Comment</label><textarea type="text" id="g3_commenttext"></textarea></div>
 </div>
 </div>
 

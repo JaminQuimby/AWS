@@ -5,8 +5,8 @@
 <cfset page.location="taxreturns">
 <cfset page.formid=6>
 <cfset page.title="Tax Returns">
-<cfset page.menuLeft="General,States,Schedule,Comment">
-<cfset page.trackers="task_id,subtask1_id,subtask2_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3,isLoaded_group4,comment_id">
+<cfset page.menuLeft="General,States,Schedule">
+<cfset page.trackers="task_id,subtask1_id,subtask2_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -116,7 +116,7 @@
 </div>
 <!--- GROUP2 --->
 <div id="group2" class="gf-checkbox">
-<h3>States</h3>
+<h3 onClick="_grid2();">States</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
 <div class="tblGrid" id="grid2"></div>
@@ -124,7 +124,7 @@
 <a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
 </div>
 </div>
-<h3 onClick='$("#isLoaded_group2").val(1);'>Add States</h3>
+<h3 onClick='_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});$("#isLoaded_group2").val(1);'>Add States</h3>
 <div>
 <div><label for="g2_state">State</label><select id="g2_state" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g2_primary" type="checkbox"><label for="g2_primary">Primary</label></div>
@@ -136,7 +136,7 @@
 </div>
 <!--- Group3 --->
 <div id="group3" class="gf-checkbox">
-<h3>Schedule</h3>
+<h3 onClick="_grid3();">Schedule</h3>
 <div>
 <div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();"/></div>
 <div class="tblGrid" id="grid3"></div>
@@ -144,28 +144,12 @@
 <a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a>
 </div>
 </div>
-<h4 onClick='$("#isLoaded_group3").val(1);'>Add Schedule</h4>
+<h4 onClick='_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});$("#isLoaded_group3").val(1);'>Add Schedule</h4>
 <div>
 <div><label for="g3_schedule">Schedule</label><select id="g3_schedule" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="q_p_prtaxdepositschedule"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_status">Status</label><select id="g3_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_assignedto">Assigned To</label><select id="g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_reviewassignedto">Review Assigned To</label><select id="g3_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-</div>
-</div>
-<!--- Group4 --->
-<div id="group4" class="gf-checkbox">
-<h3 onClick="_grid4();">Comments</h3>
-<div>
-<div><label for="g4_filter">Filter</label><input id="g4_filter" onBlur="_grid4();"/></div>
-<div class="tblGrid" id="grid4"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group4").accordion({active:1});$("#isLoaded_group4").val(1);'>Add</a>
-</div>
-</div>
-<h4 onClick="$('#isLoaded_group4').val(1);">Add Comment</h4>
-<div>
-<div><label for="g4_commentdate">Date</label><input type="text" class="date" id="g4_commentdate"/></div>
-<div><label for="g4_commenttext">Comment</label><textarea type="text" id="g4_commenttext"></textarea></div>
 </div>
 </div>
 

@@ -2,7 +2,6 @@ $(document).ready(function(){
 _grid1();
 _group1=function(){}
 _group2=function(){_grid2()}
-_group3=function(){_grid3()}
 });
 
 _grid1=function(){_jGrid({
@@ -23,16 +22,6 @@ _grid2=function(){_jGrid({
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#subtask1_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"financialstatements"});'
-	})};
-	
-_grid3=function(){_jGrid({
-	"grid":"grid3",
-	"url":"financialstatements.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"5","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group3"}',
-	"functions":''
 	})};
 	
 _loadDataCB=function(query){
@@ -224,20 +213,6 @@ $("#g2_status").val()+'","'+
 $("#g2_subtask").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group3'})}
-break;
-
-case'group3':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g3_commentdate").val()+'","'+
-$("#g3_commenttext").val()+'","'+
-'"]]}'
-if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group3",payload:$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'plugins'})}
 break;
 

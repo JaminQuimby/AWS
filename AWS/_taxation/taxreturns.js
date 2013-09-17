@@ -3,7 +3,6 @@ _grid1();
 _group1=function(){}
 _group2=function(){_grid2()}
 _group3=function(){_grid3()}
-_group4=function(){_grid4()}
 });
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -20,7 +19,7 @@ _grid2=function(){_jGrid({
 	"title":"State",
 	"fields":{TRST_ID:{key:true,list:false,edit:false},TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});'
 	})};
 _grid3=function(){_jGrid({
@@ -29,18 +28,10 @@ _grid3=function(){_jGrid({
 	"title":"Schedule",
 	"fields":{TRSC_ID:{key:true,list:false,edit:false},TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3"}',
+	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3"}',
 	"functions":'$("#subtask2_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});'
 	})};
-_grid4=function(){_jGrid({
-	"grid":"grid4",
-	"url":"taxreturns.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"6","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group4"}',
-	"functions":''
-	})};
+
 
 _loadDataCB=function(query){
 try{
@@ -184,22 +175,9 @@ $("#g3_status").val()+'","'+
 if($("#isLoaded_group3").val()!=0){
 if($("#g3_schedule").val()==0){jqMessage({message: "You must choose a schedule.",type: "info",autoClose: true})}
 else{_saveData({group:"group3",payload:$.parseJSON(json),page:"taxreturns"})}}
-else{_saveDataCB({'group':'group4'})};
+else{_saveDataCB({'group':'plugins'})};
 break;
 
-case'group4':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g4_commentdate").val()+'","'+
-$("#g4_commenttext").val()+'","'+
-'"]]}'
-if($("#isLoaded_group4").val()!=0){
-_saveData({group:"group4",payload:$.parseJSON(json),page:"taxreturns"});
-}else{_saveDataCB({'group':'plugins'})}
-break;
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData();break;
 

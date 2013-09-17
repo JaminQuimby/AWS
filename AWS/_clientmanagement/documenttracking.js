@@ -1,7 +1,6 @@
 $(document).ready(function(){
 _grid1();
 _group1=function(){}
-_group2=function(){_grid2()}
 });
 
 
@@ -16,16 +15,6 @@ _grid1=function(){_jGrid({
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#file_id").val(record.FILE_ID);$("#task_id").val(record.DT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"documenttracking"});'
 	})};
 
-_grid2=function(){_jGrid({
-	"grid":"grid2",
-	"url":"documenttracking.cfc",
-	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"14","ClientID":"'+$("#client_id").val()+'","OTHERID":"'+$("#task_id").val()+'","loadType":"group2"}',
-	"functions":''
-	})};
-	
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
@@ -68,20 +57,6 @@ $("#g1_sender").val()+'","'+
 $("#g1_staff").val()+'","'+
 '"]]}'
 _saveData({group:"group1","payload":$.parseJSON(json),page:"documenttracking"});
-break;
-
-case'group2':var json='{"DATA":[["'+
-$("#comment_id").val()+'","'+
-$("#form_id").val()+'","'+
-$("#user_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#task_id").val()+'","'+
-$("#g2_commentdate").val()+'","'+
-$("#g2_commenttext").val()+'","'+
-'"]]}'
-if($("#comment_isLoaded").val()!=0){
-_saveData({group:"group2",payload:$.parseJSON(json),page:"documenttracking"})}
-else{_saveDataCB({'group':'plugins'})};
 break;
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData();break;
