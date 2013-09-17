@@ -56,15 +56,16 @@ $("#g1_matterstatus").val()+'","'+
 _saveData({group:"group1","payload":$.parseJSON(json),page:"notices"});
 break;
 
-case'group2':var json='{"DATA":[["'+
+case'group2':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
 $("#g2_noticestatus").val()+'","'+
 $("#g2_priority").val()+'","'+
-'"]]}'
-if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}
+'"]]}'if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'group2_1'})};
 break;
 

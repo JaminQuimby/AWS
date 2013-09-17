@@ -3,10 +3,33 @@
 	{
 		"selected_items":
 		[
+			[
+				"fun",
+				"function"
+			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"contents": "\n_pluginURL=function(params){	\n	switch(params){\n		case\"group100\":\n		return \"https://\"+window.location.hostname+\"/AWS/assets/plugins/jUpload/\";\n		break;\n}\n};\n\n_pluginLoadData=function(params){	\n	switch(params){\n 		case\"GROUP100\":\n		return 'file_id,file_id,g100_name,g100_description,g100_year,g100_month,g100_day';\n		break;\n	}\n};\n\n_pluginSaveData=function(params){	\n\nswitch(params){\ncase\"Plugins\":\n_saveDataCB({'group':'group100'}\nbreak;\n\ncase\"GROUP100\":var json='{\"DATA\":[[\"'+\n$(\"#file_id\").val()+'\",\"'+\n$(\"#client_id\").val()+'\",\"'+\n$(\"#g100_day\").val()+'\",\"'+\n$(\"#g100_description\").val()+'\",\"'+\n$(\"#g100_month\").val()+'\",\"'+\n$(\"#g100_name\").val()+'\",\"'+\n$(\"#g100_year\").val()+'\",\"'+\n'\"]]}'\n\nif($(\"#isLoaded_group100\").val()!=0){\n\n_saveData({payload:$.parseJSON(json),page:\"upload\",\"plugin\":\"group100\"});\n\n}else{jqMessage({message: \"Your data has been saved.\",type: \"success\",autoClose: true});}\n\n	\nreturn 'file_id,file_id,g100_name,g100_description,g100_year,g100_month,g100_day';\n		\n		\n		break;\n	}\n};\n",
+			"file": "/C/Users/DEV/Desktop/Security Package Fix.js",
+			"file_size": 2048,
+			"file_write_time": 130234930444540018,
+			"settings":
+			{
+				"buffer_size": 1004,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/DEV/Downloads/HauNow 8-2011.rdp",
+			"settings":
+			{
+				"buffer_size": 7045,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -35,6 +58,9 @@
 	},
 	"file_history":
 	[
+		"/C/Users/DEV/Documents/LuckaSoft/GitHub/AWS/AWS/_accountingservices/financialreporting.js",
+		"/C/Users/DEV/Documents/LuckaSoft/GitHub/AWS/AWS/_accountingservices/financialstatements.cfc",
+		"/C/Users/DEV/AppData/Roaming/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
 		"/C/Users/DEV/Documents/LuckaSoft/GitHub/AWS/AWS/_taxation/taxationreporting.js",
 		"/C/Users/DEV/Desktop/test.js",
 		"/C/Users/DEV/Documents/LuckaSoft/GitHub/AWS/AWS/_practicemanagement/practiceworkinprogress.js"
@@ -72,8 +98,64 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/DEV/Desktop/Security Package Fix.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1004,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								655,
+								655
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/DEV/Downloads/HauNow 8-2011.rdp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7045,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -145,7 +227,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 228.0,
+	"side_bar_width": 232.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

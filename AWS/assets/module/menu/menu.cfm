@@ -11,7 +11,7 @@
        </ul>
       </li>
       <li><a href="#Application.url#/AWS/_payrolltaxes/payrollchecks.cfm">Payroll Checks</a></li>
-      <li><a href="#Application.url#/AWS/_payrolltaxes/payrolltaxes.cfm">Payroll Tax Retuns</a></li>
+      <li><a href="#Application.url#/AWS/_payrolltaxes/payrolltaxes.cfm">Payroll Taxes</a></li>
       <li><a href="#Application.url#/AWS/_payrolltaxes/otherfilings.cfm">Other Filing Requirements</a></li>
     </ul>
   </li>
@@ -42,7 +42,7 @@
        </ul>
       </li>
       <li><a href="#Application.url#/AWS/_taxation/financialtaxplanning.cfm">Financial &amp; Tax Planning</a></li>
-      <li><a href="#Application.url#/AWS/_taxation/notices.cfm">Notices</a></li>
+      <li><a href="#Application.url#/AWS/_taxation/notices.cfm">Notice Matter</a></li>
       <li><a href="#Application.url#/AWS/_taxation/powerofattorney.cfm">Power of Attorney</a></li>
       <li><a href="#Application.url#/AWS/_taxation/taxreturns.cfm">Tax Returns</a></li>
     </ul>
