@@ -16,6 +16,7 @@
 <cfoutput>
 <cfloop list="#page.menuLeft#"  index="name"><cfset i=i+1><li ><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li></cfloop>
 <cfinclude template="../plugins/menu.cfm">
+
 </ul>
 </cfoutput>
 <cfif url.debug eq true>
@@ -27,6 +28,7 @@
 
 </nav>
 </div>
+<cfinclude template="../addins/menu.cfm">
 <span class="trackers">
 <cfoutput><cfloop list="#page.trackers#" index="name"><cfset i=i+1><input type="hidden" id="#name#" value="0" /></cfloop><cfif page.formid neq 0><input type="hidden" id="form_id" value="#page.formid#" /></cfif><input type="hidden" id="user_id" value="#session.user.id#" /></cfoutput>
 </span>

@@ -43,6 +43,47 @@ $(grid).jtable({
 				 }}});
 $(grid).jtable('load')};
 
+_jGridReport=function(params){
+	var options={
+		"grid":"", // jtable grid id
+		"title":"",
+		"fields":"",
+		"arguments":"", //ajax json arguments
+		"functions":"", //on click function
+		"url":"",//&argumentCollection=
+		"method":"",//&method=
+		"sort":""
+	}
+	$.extend(true, options, params);
+	var grid=$("#"+options['grid']);
+$(grid).jtable({ajaxSettings:{ type:'GET', cache:false }});
+$(grid).jtable('destroy');
+$(grid).jtable({
+	ajaxSettings:{ type:'GET', cache:false },
+	title:options['title'],
+	selecting:true,
+	sorting: true, //Enable sorting
+	defaultSorting: options['sort'], //Set default sorting
+	columnResizable: true, //Actually, no need to set true since it's default
+	columnSelectable: true, //Actually, no need to set true since it's default
+	saveUserPreferences: true, //Actually, no need to set true since it's default
+	actions:{
+	listAction:options['url']+"?returnFormat=json&method="+options['method']+"&argumentCollection="+options['arguments'],
+	},
+	fields:options['fields'],
+		selectionChanged:function(){
+			var $selectedRows=$(grid).jtable('selectedRows');//Get all selected rows
+				$('#SelectedRowList').empty();
+                if($selectedRows.length > 0){//Show selected rows
+                   $selectedRows.each(function(){
+					var record=$(this).data('record');
+						eval(options['functions']);//Functions for onclick
+					});
+                }else{
+                    //No rows selected
+                 $('#SelectedRowList').append('No row selected! Select rows to see here...');
+				 }}});
+$(grid).jtable('load')};
 
 //Load Data
 _loadData=function(params){
@@ -164,7 +205,7 @@ $('.gf-checkbox').accordion({heightStyle:"content", active:false});
 $.datepicker.setDefaults({
 showOn:"both",
 buttonImageOnly:true,
-buttonImage:"../assets/img/datepicker.gif",
+buttonImage: "https://"+ window.location.hostname + "/AWS/assets/img/datepicker.gif",
 constrainInput:true
 });
 $(".time").datetimepicker({timeFormat: 'hh:mmtt'});
