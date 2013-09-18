@@ -69,7 +69,16 @@
       <li><a href="#Application.url#/AWS/_PracticeManagement/workinprogress.cfm">Work in Progress</a></li>
       <li><a href="#Application.url#/AWS/_PracticeManagement/employeedashboard.cfm">Employee Dashboard</a></li>
       <li><a href="#Application.url#/AWS/_PracticeManagement/employeecontactinfo.cfm">Employee Contact Information</a></li>
-      <li><a href="#Application.url#/AWS/_PracticeManagement/maintenance.cfm">AWS Maintenance</a></li>
+      <li><a class="arrow">AWS Maintenance</a>
+      
+      <ul class="_practicemanagement">
+       <li><a href="#Application.url#/AWS/_PracticeManagement/_maintenance/table.cfm">Table Maintenance</a></li>
+       <li><a href="#Application.url#/AWS/_PracticeManagement/_maintenance/historical.cfm">Historical Data</a></li>
+
+       </ul>
+      
+      </li>
+      
       <li><a href="#Application.url#/AWS/_PracticeManagement/timebilling.cfm">Time &amp; Billing</a></li>
     </ul>
 </li>
