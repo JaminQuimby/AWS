@@ -65,7 +65,8 @@ $("#g2_assignedto").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
 $("#g2_noticestatus").val()+'","'+
 $("#g2_priority").val()+'","'+
-'"]]}'if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}
+'"]]}';
+if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'group2_1'})};
 break;
 
