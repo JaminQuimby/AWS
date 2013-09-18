@@ -20,7 +20,7 @@
 <cfquery dbtype="query" name="q_p_prtaxdepositschedule">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='p_prtaxdepositschedule'</cfquery>
 <cfquery dbtype="query" name="q_a_financialstatementfreq">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='a_financialstatementfreq'</cfquery>
 <cfquery dbtype="query" name="q_a_software">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='a_software'</cfquery>
-<cfquery dbtype="query" name="q_a_coType">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='co_type'</cfquery>
+<cfquery dbtype="query" name="global_contacttype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_contacttype'</cfquery>
 <cfquery dbtype="query" name="m_mct_group">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='m_mct_group'</cfquery>
 <cfquery dbtype="query" name="global_consultingcategory">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_consultingcategory'</cfquery>
 <cfquery dbtype="query" name="global_clientgroup">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_clientgroup'</cfquery>
@@ -149,7 +149,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 <h4>Contact</h4>
 <div id="dataContacts">
-<div><label for="g3_type">Type</label><select id="g3_type"><cfoutput query="q_a_coType"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g3_type">Type</label><select id="g3_type"><cfoutput query="global_contacttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_name">Contact Name</label><input id="g3_name" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g3_address1">Street #1</label><input id="g3_address1" type="text"/></div>
 <div><label for="g3_address2">Street #2</label><input id="g3_address2" type="text"/></div>
