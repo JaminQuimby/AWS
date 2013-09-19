@@ -1,4 +1,3 @@
-<cfparam name="page.type" default="">
 <head>
 <cfoutput><title>#page.title#</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
@@ -14,9 +13,6 @@
 <cfcase value="_payrolltaxes">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jtable/themes/metro/red/jtable.min.css">
 </cfcase>
-<cfcase value="_payrolltaxes_report">
-<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jtable/themes/metro/red/jtable.min.css">
-</cfcase>
 <cfcase value="_practicemanagement">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jtable/themes/metro/darkgray/jtable.min.css">
 </cfcase>
@@ -24,22 +20,14 @@
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jtable/themes/metro/darkorange/jtable.min.css">
 </cfcase>
 <cfdefaultcase>
-<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jtable/themes/metro/pink/jtable.min.css">
+<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jtable/themes/metro/darkgray/jtable.min.css">
 </cfdefaultcase>
 </cfswitch>
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/chosen/chosen.css">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jqMessage/jqMessage.css">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/module/jqvalid/jqvalid.css">
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/plugins/jUpload/assets/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css">
-
-<cfswitch expression="#page.type#">
-<cfcase value="report">
-<link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/css/report.css"/>
-</cfcase>
-<cfdefaultcase>
 <link rel="stylesheet" type="text/css" href="#Application.url#/AWS/assets/css/aws.css"/>
-</cfdefaultcase>
-</cfswitch>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script type="text/javascript" src="#Application.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-sliderAccess.js"></script>
