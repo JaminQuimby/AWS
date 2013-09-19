@@ -13,7 +13,7 @@
       ,[pc_datedue]
       ,[pc_esttime]
       ,[pt_altfreq]
-      ,[pc_missingInfo]
+      ,[pc_missinginfo]
       ,[pc_missingreceived]
       ,[pc_fees]
       ,[pc_paymentstatus]

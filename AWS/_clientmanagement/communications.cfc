@@ -64,7 +64,7 @@ WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="clientid" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- LOOKUP Financial Statements --->
+<!--- LOOKUP Communications --->
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
