@@ -127,6 +127,8 @@ WHERE[FILE_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cffunction name="upload" access="remote" returnformat="json" output="false">
 <cfargument name="FORMID" type="numeric" required="no" default="0">
 <cfargument name="CLIENTID" type="numeric" required="no" default="0">
+<cfargument name="TASKID" type="numeric" required="no" default="0">
+<cfargument name="USERID" type="numeric" required="no" default="0">
 <cfargument name="DESCRIPTION" type="string" required="no">
 
 <cftry>
@@ -155,6 +157,8 @@ INSERT INTO[ctrl_files]
 ,[file_ext]
 ,[form_id]
 ,[client_id]
+,[task_id]
+,[user_id]
 ,[file_description]
 )
 VALUES(
@@ -166,6 +170,8 @@ VALUES(
 ,<cfqueryparam value="#result.clientFileExt#"/>
 ,<cfqueryparam value="#arguments.FORMID#"/>
 ,<cfqueryparam value="#arguments.CLIENTID#"/>
+,<cfqueryparam value="#arguments.TASKID#"/>
+,<cfqueryparam value="#arguments.USERID#"/>
 ,<cfqueryparam value="#arguments.DESCRIPTION#"/>
 )
 </cfquery>
