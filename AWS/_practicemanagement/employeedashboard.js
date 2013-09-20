@@ -10,10 +10,13 @@ $(document).ready(function(){
 
 _grid1();
 _group1=function(){}
+
+_group2=function(){}
 _group2_1=function(){_grid2_1()};
 _group2_2=function(){_grid2_2()};
 _group2_3=function(){_grid2_3()};
 
+_group3=function(){}
 _group3_1=function(){_grid3_1()};
 _group3_2=function(){_grid3_2()};
 _group3_3=function(){_grid3_3()};
@@ -69,7 +72,7 @@ _grid3_1=function(){_jGrid({
 	"fields":{BF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},BF_ACTIVITY:{title:'Activity'},BF_STATUS:{title:'Status'},BF_DUEDATE:{title:'Due Date'},BF_FEES:{title:'Fees'},BF_PAID:{title:'Paid'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#task_id").val()+',"loadType":"group3_1"}',
-	"functions":'$("#bf_id").val(record.BF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?bf_id="+$("#bf_id").val();'
+	"functions":'$("#bf_id").val(record.BF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?bf_id="+$("#bf_id").val();'
 	})};
 	
 _grid3_2=function(){_jGrid({
@@ -79,14 +82,14 @@ _grid3_2=function(){_jGrid({
 	"fields":{MC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},MC_CATEGORYTEXT:{title:'Consulting Categories'},MC_DESCRIPTION:{title:'Task Description'},MC_STATUS:{title:'Status'},MC_DUEDATE:{title:'Due Date'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#task_id").val()+',"loadType":"group3_2"}',
-	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?mc_id="+$("#mc_id").val();'
+	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctConsultingTasks.cfm?mc_id="+$("#mc_id").val();'
 	})};	
 	
 _grid3_3=function(){_jGrid({
 	"grid":"grid3_3",
 	"url":"employeedashboard.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_YEAR:{title:'Year'},FDS_MONTH:{title:'Month'},FDS_DUEDATE:{title:'Due Date'},FDS_MIRECEIVED:{title:'Missing Information Received'},FDS_MISSINGINFO:{title:'Missing Information'},FDS_CMIRECEIVED:{title:'Compiled Missing Information Received'},FDS_COMPILEMI:{title:'Compile Missing Information'}},
+	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_YEAR:{title:'Year'},FDS_MONTHTEXT:{title:'Month'},FDS_DUEDATE:{title:'Due Date'},FDS_MIRECEIVED:{title:'Missing Information Received'},FDS_MISSINGINFO:{title:'Missing Information'},FDS_CMIRECEIVED:{title:'Compiled Missing Information Received'},FDS_COMPILEMI:{title:'Compile Missing Information'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#task_id").val()+',"loadType":"group3_3"}',
 	"functions":'$("#fds_id").val(record.FDS_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?fds_id="+$("#fds_id").val();'
@@ -118,7 +121,7 @@ _grid5_1=function(){_jGrid({
 	"grid":"grid5_1",
 	"url":"employeedashboard.cfc",	
 	"title":"Tax Returns Ready For Data Entry",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_TAXFORM:{title:'Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_PRIORFEES:{title:'Prior Fees'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick UP Appointment'},TR_MISSINGINFORECEIVED:{title:'Missing Information Received'},TR_DUEDATE:{title:'Due Date'},TR_REVIEWEDWITHNOTES:{title:'Reviewed With Notes'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_TAXFORM:{title:'Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_PRIORFEES:{title:'Prior Fees'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick UP Appointment'},TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received'},TR_G1_1_DUEDATE:{title:'Due Date'},TR_G1_1_REVIEWEDWITHNOTES:{title:'Reviewed With Notes'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#task_id").val()+',"loadType":"group5_1"}',
 	"functions":'$("#tr_id").val(record.TR_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?tr_id="+$("#tr_id").val();'
@@ -156,16 +159,17 @@ _grid5_5=function(){_jGrid({
 	"grid":"grid5_5",
 	"url":"employeedashboard.cfc",	
 	"title":"Incomplete State Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
+	"fields":{TRST_ID:{key:true,list:false,edit:false},TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#task_id").val()+',"loadType":"group5_5"}',
 	"functions":'$("#tr_id").val(record.TR_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?tr_id="+$("#tr_id").val();'
-	})};	
+	})};
+	
 _grid5_6=function(){_jGrid({
 	"grid":"grid5_6",
 	"url":"employeedashboard.cfc",	
-	"title":"Financial & Tax Planning",
-	"fields":{FTP_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FTP_CATEGORY:{title:'Category'},FTP_REQUESTFORSERVICE:{title:'Requesst for Services'},FTP_DUEDATE:{title:'Due Date'},FTP_INFORECEIVED:{title:'Information Received'},FTP_MISSINGINFO:{title:'Missing Information'},FTP_STATUS:{title:'Status'}},
+	"title":"Financial & Tax Planning", 
+	"fields":{FTP_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FTP_CATEGORY:{title:'Category'},FTP_REQUESTFORSERVICE:{title:'Request for Services'},FTP_DUEDATE:{title:'Due Date'},FTP_INFORECEIVED:{title:'Information Received'},FTP_MISSINGINFO:{title:'Missing Information'},FTP_STATUS:{title:'Status'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#task_id").val()+',"loadType":"group5_6"}',
 	"functions":'$("#tr_id").val(record.TR_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?tr_id="+$("#tr_id").val();'

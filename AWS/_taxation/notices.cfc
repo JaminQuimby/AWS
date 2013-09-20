@@ -69,11 +69,12 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[n_id]
+	,[nm_name]
       ,[n_assignedto]
       ,[n_esttime]
       ,[n_noticestatus]
       ,[n_priority]
-FROM[notice]
+FROM[v_notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -81,12 +82,12 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[n_1_fees]
-      ,[n_1_methodreceived]
-      ,[n_1_noticedate]
-      ,[n_1_noticenumber]
-      ,[n_1_paid]
-      ,[n_1_taxform]
-      ,[n_1_taxyear]
+,[n_1_methodreceived]
+,CONVERT(VARCHAR(10),[n_1_noticedate], 101)AS[n_1_noticedate]
+,[n_1_noticenumber]
+,[n_1_paid]
+,[n_1_taxform]
+,[n_1_taxyear]
 FROM[notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -94,15 +95,15 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub2 --->
 <cfcase value="group2_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[n_2_datenoticereceived]
-      ,[n_2_duedateforresponse]
-      ,[n_2_irsstateresponserecieved]
-      ,[n_2_responsecompleted]
-      ,[n_2_responsecompletedby]
-      ,[n_2_responsesubmitted]
-      ,[n_2_reviewassignedto]
-      ,[n_2_reviewcompleted]
-      ,[n_2_reviewrequired]
+SELECT CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
+,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
+,CONVERT(VARCHAR(10),[n_2_irsstateresponse], 101)AS[n_2_irsstateresponse]
+,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
+,[n_2_rescompletedby]
+,CONVERT(VARCHAR(10),[n_2_ressubmited], 101)AS[n_2_ressubmited]      
+,[n_2_revassignedto]
+,CONVERT(VARCHAR(10),[n_2_revcompleted], 101)AS[n_2_revcompleted]
+,CONVERT(VARCHAR(10),[n_2_revrequired], 101)AS[n_2_revrequired]  
 FROM[notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -110,8 +111,8 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group3 sub3 --->
 <cfcase value="group2_3">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[n_3_missinginforeceived]
-      ,[n_3_missinginformation]
+SELECT[n_3_missinginfo]
+,CONVERT(VARCHAR(10),[n_3_missingrec], 101)AS[n_3_missingrec]
 FROM[notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -302,16 +303,16 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_2">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
  <cfquery name="fquery" datasource="AWS">
-UPDATE[NOTICE]
+UPDATE[NOTICE]  
 SET[n_2_datenoticerec]=<cfqueryparam value="#j.DATA[1][2]#" NULL="#LEN(j.DATA[1][2]) eq 0#"/>
-,[n_2_irsstateresponse]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
-,[n_2_rescompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
-,[n_2_rescompletedby]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[n_2_resduedate]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
+,[n_2_resduedate]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
+,[n_2_irsstateresponse]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
+,[n_2_rescompleted]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
+,[n_2_rescompletedby]=<cfqueryparam value="#j.DATA[1][6]#"/>
 ,[n_2_ressubmited]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[n_2_revassignedto]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[n_2_revcompleted]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0#"/>
-,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#LEN(j.DATA[1][10]) eq 0#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -320,6 +321,7 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group2 Subgroup3 --->
 <cfcase value="group2_3">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
+<cftry> 
  <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
 SET[n_3_missinginfo]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -328,6 +330,11 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 </cfswitch>
 <cfcatch>

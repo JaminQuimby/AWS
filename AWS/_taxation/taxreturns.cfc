@@ -388,10 +388,10 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
 SET
-[tr_g1_4_dropoffappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][2],'YYYY-MM-DD')# #timeFormat(j.DATA[1][2],'hh:mm:ss tt')#"/>
+[tr_g1_4_dropoffappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][2],'YYYY-MM-DD')# #timeFormat(j.DATA[1][2],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[tr_g1_4_dropoffappointmentlength]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[tr_g1_4_dropoffappointmentwith]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[tr_g1_4_pickupappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][5],'YYYY-MM-DD')# #timeFormat(j.DATA[1][5],'hh:mm:ss tt')#"/>
+,[tr_g1_4_pickupappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][5],'YYYY-MM-DD')# #timeFormat(j.DATA[1][5],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tr_g1_4_pickupappointmentlength]=<cfqueryparam value="#j.DATA[1][6]#"/>
 ,[tr_g1_4_pickupappointmentwith]=<cfqueryparam value="#j.DATA[1][7]#"/>
 ,[tr_g1_4_whileyouwaitappt]=<cfqueryparam value="#j.DATA[1][8]#"/>

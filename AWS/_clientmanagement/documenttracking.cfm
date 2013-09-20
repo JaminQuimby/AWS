@@ -5,7 +5,7 @@
 <cfset page.location="documenttracking">
 <cfset page.formid=14>
 <cfset page.title="Document Tracking">
-<cfset page.menuLeft="General,Comment">
+<cfset page.menuLeft="General">
 <cfset page.trackers="task_id,file_id">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 0, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>

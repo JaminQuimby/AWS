@@ -79,7 +79,6 @@
 
 
 <div id="group3" class="gf-checkbox">
-	
  <h3>Accounting & Consulting</h3><div></div>
 	
 	<!--- GROUP 3 SUB 1 Business Formation --->
@@ -121,7 +120,7 @@
 		<div>
 		<div class="tblGrid" id="grid4_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/notices.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -130,7 +129,7 @@
 		<div>
 		<div class="tblGrid" id="grid4_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/notices.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>

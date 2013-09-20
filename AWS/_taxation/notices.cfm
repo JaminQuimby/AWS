@@ -61,7 +61,7 @@
 </div>
 <h4 onClick='_loadData({"id":"subtask1_id","group":"group2","page":"notices"});$("#isLoaded_group2").val(1);'>Add Notice</h4>
 <div>
-<div><label for="g2_matter">Matter</label><select id="g2_matter"><option value="0">&nbsp;</option></select></div>
+<div><label for="g2_matter">Matter Name</label><input type="text" id="g2_matter" class="readonly" readonly="readonly"></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_noticestatus">Notice Status</label><select id="g2_noticestatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_priority">Priority</label><input type="text" id="g2_priority" ></div>
