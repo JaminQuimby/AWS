@@ -322,7 +322,7 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_3">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
 <cftry> 
- <cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
 SET[n_3_missinginfo]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[n_3_missingrec]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>/>

@@ -259,9 +259,16 @@ SELECT[nm_id]
 ,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
 ,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
 ,[n_assignedtoTEXT]
+<<<<<<< HEAD
 ,[client_name]
 FROM[v_notice]
 WHERE[n_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+=======
+,[client_id]
+,[client_name]
+FROM[v_notice]
+WHERE[n_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+>>>>>>> 266179aed8844ea2f4ba682ac1d49c9681c14b7d
 ORDER BY[n_2_resduedate]
 </cfquery>
 <cfset myResult="">
@@ -353,9 +360,14 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
+<<<<<<< HEAD
 ,[tr_g1_1_informationreceived]
 ,[tr_g1_1_missinginfo]
 ,[tr_g1_1_missinginforeceived]
+=======
+
+
+>>>>>>> 266179aed8844ea2f4ba682ac1d49c9681c14b7d
 ,[client_name]
 ,[CLIENT_ID]
 FROM[v_taxreturns]
@@ -369,8 +381,12 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
+<<<<<<< HEAD
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","TR_TAXYEAR":"'&TR_TAXYEAR&'","TR_TAXFORM":"'&TR_TAXFORM&'","TR_G1_1_INFORMATIONRECEIVED":"'&TR_G1_1_INFORMATIONRECEIVED&'","TR_G1_1MISSINGINFO":"'&TR_G1_1MISSINGINFO&'","TR_TAXFORM":"'&TR_TAXFORM&'"}'>
 ,TR_TAXFORM:{title:'Tax Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_G1_1_MISSINGINFO:{title:'Missing Information'},TR_MISSINGINFORECEIVED:{title:'Missing Information Received'}},
+=======
+<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","TR_TAXYEAR":"'&TR_TAXYEAR&'","TR_TAXFORM":"'&TR_TAXFORM&'"}'>
+>>>>>>> 266179aed8844ea2f4ba682ac1d49c9681c14b7d
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

@@ -49,7 +49,7 @@ legend{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;fo
 nav{background-color:#F8F8F8;border-bottom:1px solid #E1E1DC;border-right:1px solid #E1E1DC;}
 select {border-radius:2px 2px 2px 2px;min-height:30px;width:400px;border:solid 1px #666;}
 td{vertical-align:top;}
-textarea{border: 1px solid #AAAAAA;border-radius: 5px 5px 5px 5px;box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);min-width:400px;font-size:1em;}
+textarea{border: 1px solid #AAAAAA;border-radius: 5px 5px 5px 5px;box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);min-width:400px;font-size:1em; padding: 6px;}
 
 tr{vertical-align:top;}
 
@@ -75,7 +75,7 @@ tr{vertical-align:top;}
 .button{cursor:pointer;background:none repeat scroll 0 0 #FFFF00;border:1px solid #999999;border-radius:2px 2px 2px 2px;display:inline-block;padding:4px;text-align:center;white-space:nowrap;text-decoration:none;min-width:165px;font-size:1em;}
 .optional{background-color:#D3D3D3;}
 .buttonbox{margin-top:5px;white-space:nowrap; min-width:300px; display:inline-block;}/*the box that contains buttons for actions like save and cancel*/
-.contentbig{vertical-align:top;margin-top:36px;margin-left:300px;}/*Changes the content box to render along side a big right side menu*/
+.contentbig{vertical-align:top;margin-top:36px;margin-left:300px;margin-bottom: 42px;}/*Changes the content box to render along side a big right side menu*/
 .contentsmall{vertical-align:top;margin-top:36px;margin-left:39px;}/*changes the content box to render along side a small right side menu*/
 .customlabel{height:20px;margin-left:-5px;width:379px}/*Customlabels - would be used for text elements that modify a custom label*/
 .help{display:inline-block;font-size:12px;height:30px;line-height:30px;padding-left:10px;}/*div element that render validation results*/

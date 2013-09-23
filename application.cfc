@@ -3,14 +3,13 @@
     <cfcomponent displayname="AWS_REGISTER" output="true" hint="Component for AWS Registration">   
      
     <!--- Set up the application. --->
-    <cfset this.applicationtimeout = CreateTimeSpan( 0, 0, 30, 0 ) />	
-	<cfset this.sessiontimeout = createTimeSpan( 0, 0, 29, 59 ) />
-    <cfset this.name = "AWS" />
-    <cfset this.sessionmanagement = true />
-    <cfset Application.uploadsDirectory = ("c:\bin\uploads\") /> 
-	<cfset Application.path =  getDirectoryFromPath( getCurrentTemplatePath() ) /> 
+    <cfset this.applicationtimeout=CreateTimeSpan( 0, 0, 30, 0 ) />	
+	<cfset this.sessiontimeout=createTimeSpan( 0, 0, 29, 59 ) />
+    <cfset this.name="AWS" />
+    <cfset this.sessionmanagement=true />
+	<cfset Application.path=getDirectoryFromPath( getCurrentTemplatePath() ) /> 
 	<cfset Application.url="https://"&CGI.SERVER_NAME />
-   <!--- <cfset Application.uploadsDirectory = (Application.path  & "bin\uploads\")> --->
+   <!--- <cfset Application.uploadsDirectory=(Application.path  & "bin\uploads\")> --->
 
     
     <!--- Define the page request properties. --->
@@ -53,7 +52,7 @@
     output="true"
     hint="Fires at first part of page processing.">
  <!--- Define Login Requirements--->
-  <cfargument name = "request" required="true"/>     
+  <cfargument name="request" required="true"/>     
     
 <cfif IsDefined("Form.logout")> 
 <cfset StructClear(form)>
@@ -76,13 +75,13 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 </cfquery>
 
 <cfif loginQuery.recordCount eq 1>
-<cfset Session.user.id = loginQuery.user_id>
-<cfset Session.user.name = loginQuery.name>
-<cfset Session.user.email = FORM.J_USERNAME>
-<cfset Session.user.role = loginQuery.role>
-<cfset Session.user.organization = loginQuery.orgName>
-<cfset Session.user.plugins = loginQuery.orgPlugins>
-<cfset Session.user.storage = loginQuery.orgStorage &"\"& loginQuery.orgName >
+<cfset Session.user.id=loginQuery.user_id>
+<cfset Session.user.name=loginQuery.name>
+<cfset Session.user.email=FORM.J_USERNAME>
+<cfset Session.user.role=loginQuery.role>
+<cfset Session.user.organization=loginQuery.orgName>
+<cfset Session.user.plugins=loginQuery.orgPlugins>
+<cfset Session.user.storage=LCase(loginQuery.orgStorage&"\"&loginQuery.orgName&"\") >
 </cfif>
 <cfif loginQuery.recordCount eq 0>
 

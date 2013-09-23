@@ -7,6 +7,7 @@
 <cfset page.title="Employee Contact Info">
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id,client_id">
+<cfset page.plugins.disable="100,101">
 <!--- Load ALL Select Options for this page--->
 <cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
 <cfquery name="selectClients" cachedWithin="#CreateTimeSpan(0, 0, 1, 0)#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
@@ -43,7 +44,7 @@
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="g1_name">Name</label><input type="text" id="g1_name" class="readonly" readonly="readonly"></div>
+<div><label for="g1_name">Name</label><input type="text" id="g1_name" class="readonly" readonly></div>
 <div><label for="g1_initials">Initials</label><input type="text" id="g1_initials"></div>
 <div><input id="g1_active" type="checkbox"><label for="g1_active">Active</label></div>
 <div><label for="g1_address">Address</label><input type="text" id="g1_address"></div>

@@ -121,7 +121,7 @@ _grid5_1=function(){_jGrid({
 	"grid":"grid5_1",
 	"url":"employeedashboard.cfc",	
 	"title":"Tax Returns Ready For Data Entry",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_TAXFORM:{title:'Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_PRIORFEES:{title:'Prior Fees'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick UP Appointment'},TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received'},TR_G1_1_DUEDATE:{title:'Due Date'},TR_G1_1_REVIEWEDWITHNOTES:{title:'Reviewed With Notes'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_TAXFORM:{title:'Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},sTR_G1_3_PRIORFEES:{title:'Prior Fees'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick UP Appointment'},TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received'},TR_G1_1_DUEDATE:{title:'Due Date'},TR_G1_1_REVIEWEDWITHNOTES:{title:'Reviewed With Notes'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#task_id").val()+',"loadType":"group5_1"}',
 	"functions":'$("#tr_id").val(record.TR_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?tr_id="+$("#tr_id").val();'
