@@ -97,6 +97,6 @@ _grid100=function(){
 </div>
 <h4>Upload Files</h4>
 <div>
-<div id="uploader"><p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p></div>	
+<div id="uploader"><p>You browser doesn't have Flash or HTML5 support.</p></div>	
 </div>
 </div>
