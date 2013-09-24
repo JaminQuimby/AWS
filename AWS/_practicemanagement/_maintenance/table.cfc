@@ -57,8 +57,8 @@ WHERE[selectName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!---  LOOKUP GROUP2 --->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
-SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription]
-FROM[ctrl_selectoptions]
+SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroup]
+FROM[v_selectoptions]
 WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 <cfset myResult="">
@@ -66,7 +66,7 @@ WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"SELECT_ID":"'&SELECT_ID&'","OPTIONNAME":"'&OPTIONNAME&'","OPTIONDESCRIPTION":"'&OPTIONDESCRIPTION&'"}'>
+<cfset queryResult=queryResult&'{"SELECT_ID":"'&SELECT_ID&'","OPTIONNAME":"'&OPTIONNAME&'","OPTIONGROUP":"'&OPTIONGROUP&'","OPTIONDESCRIPTION":"'&OPTIONDESCRIPTION&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

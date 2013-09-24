@@ -9,9 +9,8 @@
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group2">
 <cfset page.plugins.disable="100,101">
 <!--- Load ALL Select Options for this page--->
-<cfquery name="optionGroup" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[form_id]AS[optionvalue_id],[formName]AS[optionname]FROM[ctrl_forms]</cfquery>
+<cfquery name="optionGroup" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[form_id]AS[optionvalue_id],[formName]AS[optionname]FROM[ctrl_forms]ORDER BY[formName]</cfquery>
 <!--- Load Select Options for each dropdown--->
-
 
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -52,10 +51,9 @@
 </div>
 <h4 onClick='$("#isLoaded_group2").val(1);'>Option</h4>
 <div>
+<div><label for="g2_optionGroup">Form Specific</label><select id="g2_optionGroup"></option><option value="0">&nbsp;</option><cfoutput query="optionGroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_optionName">Option Name</label><input type="text" id="g2_optionName"></div>
 <div><label for="g2_optionDescription">Option Description</label><textarea  id="g2_optionDescription" cols="4" rows="4"></textarea></div>
-<div><label for="g2_optionGroup">Form Specific</label><select id="g2_optionGroup"></option><option value="0">&nbsp;</option><cfoutput query="optionGroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-
 </div>
 </div>
 <!--- Start Plugins --->
