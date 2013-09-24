@@ -16,7 +16,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"table.cfc",
 	"title":"Select Options",
-	"fields":{SELECT_ID:{key:true,list:false,edit:false},OPTIONNAME:{title:'Option Name'},OPTIONDESCRIPTION:{title:'Option Description'}},
+	"fields":{SELECT_ID:{key:true,list:false,edit:false},OPTIONNAME:{title:'Option Name'},OPTIONGROUPTEXT:{title:'Option Group'},OPTIONDESCRIPTION:{title:'Option Description'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$(".trackers #subtask1_id").val(record.SELECT_ID);_loadData({"id":"subtask1_id","group":"group2","page":"table"});$("#group2").accordion({active:1});;'
@@ -27,7 +27,7 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request 
 else{
 switch(query.COLUMNS[0]){
 /*Group1*/case "SELECTNAME_ID":var list='task_id,g1_selectLabel,g1_selectDescription';_loadit({"query":query,"list":list,"page":"table"});break;
-/*Group2*/case "SELECT_ID":var list='subtask1_id,g2_optionName,g2_optionDescription';_loadit({"query":query,"list":list,"page":"table"});break;
+/*Group2*/case "SELECT_ID":var list='subtask1_id,g2_optionName,g2_optionDescription,g2_optionGroup';_loadit({"query":query,"list":list,"page":"table"});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};

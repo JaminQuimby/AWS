@@ -19,7 +19,7 @@ WHERE[selectName_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2--->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[select_id],[optionName],[optionDescription]
+SELECT[select_id],[optionName],[optionDescription],[optionGroup]
 FROM[ctrl_selectoptions]
 WHERE[select_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -57,7 +57,7 @@ WHERE[selectName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!---  LOOKUP GROUP2 --->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
-SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroup]
+SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroupTEXT]
 FROM[v_selectoptions]
 WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -66,7 +66,7 @@ WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"SELECT_ID":"'&SELECT_ID&'","OPTIONNAME":"'&OPTIONNAME&'","OPTIONGROUP":"'&OPTIONGROUP&'","OPTIONDESCRIPTION":"'&OPTIONDESCRIPTION&'"}'>
+<cfset queryResult=queryResult&'{"SELECT_ID":"'&SELECT_ID&'","OPTIONNAME":"'&OPTIONNAME&'","OPTIONGROUPTEXT":"'&OPTIONGROUPTEXT&'","OPTIONDESCRIPTION":"'&OPTIONDESCRIPTION&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -91,12 +91,13 @@ WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT COUNT(*)+1 AS [OPTIONCOUNT]FROM[ctrl_selectoptions]WHERE[selectName_id]=<cfqueryparam value=" #j.DATA[1][2]#"/>
 </cfquery>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[ctrl_selectoptions]([selectName_id],[optionValue_id],[optionName],[optionDescription])
+INSERT INTO[ctrl_selectoptions]([selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroup])
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,#pquery.OPTIONCOUNT#
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[select_id]
 </cfquery>
@@ -111,7 +112,7 @@ SELECT SCOPE_IDENTITY()AS[select_id]
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[ctrl_selectoptions]SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#"/>,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#"/>
+UPDATE[ctrl_selectoptions]SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#"/>,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#"/>,[optionGroup]=<cfqueryparam value="#j.DATA[1][6]#"/>
 WHERE[select_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
