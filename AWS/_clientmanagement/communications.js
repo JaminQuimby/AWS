@@ -19,7 +19,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "CO_ID":var list='task_id,client_id,g1_briefmessage,g1_caller,g1_completed,g1_credithold,g1_date,g1_duedate,g1_email,g1_emailaddress,g1_ext,g1_fax,g1_faxnumber,g1_fees,g1_for,g1_mail,g1_paid,g1_personalcontact,g1_responsenotneeded,g1_returnedcall,g1_takenby,g1_telephone,g1_textmessage,g1_voicemail,g1_spouse';_loadit({"query":query,"list":list});break;
+/*Group1*/case "CO_ID":var list='task_id,client_id,g1_briefmessage,g1_caller,g1_completed,g1_credithold,g1_date,g1_duedate,g1_email,g1_emailaddress,g1_ext,g1_fax,g1_faxnumber,g1_fees,g1_for,g1_mail,g1_paid,g1_personalcontact,g1_responseneeded,g1_returnedcall,g1_takenby,g1_telephone,g1_textmessage,g1_voicemail,g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -57,7 +57,7 @@ $("#g1_for").val()+'",'+
 $("#g1_mail").is(':checked')+',"'+
 $("#g1_paid").val()+'",'+
 $("#g1_personalcontact").is(':checked')+','+
-$("#g1_responsenotneeded").is(':checked')+','+
+$("#g1_responseneeded").is(':checked')+','+
 $("#g1_returnedcall").is(':checked')+',"'+
 $("#g1_takenby").val()+'","'+
 $("#g1_telephone").val()+'",'+

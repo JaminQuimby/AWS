@@ -61,7 +61,7 @@
 <div><input id="g1_mail" type="checkbox"><label for="g1_mail">Mail</label></div>
 <div><input id="g1_fax" type="checkbox"><label for="g1_fax">Fax</label></div>
 <div><label for="g1_briefmessage">Brief Message</label><input type="text" id="g1_briefmessage" ></div>
-<div><input id="g1_responsenotneeded" type="checkbox"><label for="g1_responsenotneeded">Response Not Needed</label></div>
+<div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Not Needed</label></div>
 <div><input id="g1_returnedcall" type="checkbox"><label for="g1_returnedcall">Returned Call</label></div>
 <div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"></div>

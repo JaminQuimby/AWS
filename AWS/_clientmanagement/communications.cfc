@@ -34,7 +34,7 @@ SELECT[CO_ID]
 ,[co_mail]
 ,[co_paid]
 ,[co_personalcontact]
-,[co_responsenotneeded]
+,[co_responseneeded]
 ,[co_returncall]
 ,[co_takenby]
 ,[co_telephone]
@@ -142,7 +142,7 @@ INSERT INTO[COMMUNICATIONS](
 ,[co_mail]
 ,[co_paid]
 ,[co_personalcontact]
-,[co_responsenotneeded]
+,[co_responseneeded]
 ,[co_returncall]
 ,[co_takenby]
 ,[co_telephone]
@@ -205,7 +205,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[co_mail]=<cfqueryparam value="#j.DATA[1][16]#"/>
 ,[co_paid]=<cfqueryparam value="#j.DATA[1][17]#"/>
 ,[co_personalcontact]=<cfqueryparam value="#j.DATA[1][18]#"/>
-,[co_responsenotneeded]=<cfqueryparam value="#j.DATA[1][19]#"/>
+,[co_responseneeded]=<cfqueryparam value="#j.DATA[1][19]#"/>
 ,[co_returncall]=<cfqueryparam value="#j.DATA[1][20]#"/>
 ,[co_takenby]=<cfqueryparam value="#j.DATA[1][21]#"/>
 ,[co_telephone]=<cfqueryparam value="#j.DATA[1][22]#"/>

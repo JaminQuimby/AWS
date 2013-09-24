@@ -57,9 +57,9 @@
 		<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority"  /></div>
 		<div><label for="g1_esttime">Est. Time</label><input type="text" id="g1_esttime"  /></div>
 		<div><input type="checkbox" id="g1_missinginfo"><label for="g1_missinginfo">Missing Info</label></div>
-		<div><label for="g1_mireceived">MI Received</label><input type="text"id="g1_mireceived" class="date"/></div>
-		<div><input type="checkbox" id="g1_compilemi"/><label for="g1_compilemi">Compile MI</label></div>
-		<div><label for="g1_cmireceived">CMI Received</label><input type="text" id="g1_cmireceived" class="date"/></div>
+		<div><label for="g1_mireceived">Missing Information Received</label><input type="text"id="g1_mireceived" class="date"/></div>
+		<div><input type="checkbox" id="g1_compilemi"/><label for="g1_compilemi">Missing Information Compiled</label></div>
+		<div><label for="g1_cmireceived">Compiled Missing Information Received</label><input type="text" id="g1_cmireceived" class="date"/></div>
 		<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"  /></div>
 		<div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

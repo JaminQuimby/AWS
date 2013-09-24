@@ -71,15 +71,20 @@ WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
-,[pc_payenddate]
-,[pc_paydate]
+,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
+,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
 ,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
-,[pc_missingreceived]
-,[pc_missinginfo]
+,CONVERT(VARCHAR(10),[pc_missingreceived], 101)AS[pc_missingreceived]
+,CASE [pc_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [pc_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
-WHERE[pc_obtaininfo_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pc_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pc_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pc_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pc_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[pc_datedue]
 </cfquery>
 <cfset myResult="">
@@ -103,14 +108,19 @@ SELECT[pt_id]
 ,[pt_month]
 ,[pt_type]
 ,[pt_paymentstatus]
-,[pt_lastpay]
+,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
-,[pt_delivery_datecompleted]
-,[pt_obtaininfo_assignedto]
+,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_payrolltaxes]
-WHERE[pt_obtaininfo_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[pt_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR [pt_entry_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pt_rec_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pt_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pt_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [pt_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[pt_duedate]
 </cfquery>
 <cfset myResult="">
@@ -137,11 +147,15 @@ SELECT[of_id]
 ,[of_form]
 ,[of_status]
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
-,[of_missinginfo]
+,CASE [of_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [of_missinginfo]
 ,[client_name]
-,[of_obtaininfo_assignedto]
 FROM[v_otherfilings]
-WHERE[of_obtaininfo_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[of_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR [of_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [of_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [of_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [of_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[of_duedate]
 </cfquery>
 <cfset myResult="">
@@ -164,6 +178,7 @@ ORDER BY[of_duedate]
 
 <!--- LOOKUP Business Formation --->
 <cfcase value="group3_1">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[bf_id]
 ,[client_id]
@@ -173,9 +188,9 @@ SELECT[bf_id]
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 ,[bf_fees]
 ,[bf_paid]
-,[bf_assignedto]
 FROM[v_businessformation]
-WHERE[bf_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[bf_duedate]
 </cfquery>
 <cfset myResult="">
@@ -188,22 +203,29 @@ ORDER BY[bf_duedate]
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
 
 <!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group3_2">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[mc_id]
 ,[client_id]
 ,[client_name]
-,[mc_assignedto]
 ,[mc_categorytext]
 ,[mc_description]
 ,[mc_status]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
-WHERE[mc_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR [mcs_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[mc_duedate]
 </cfquery>
 <cfset myResult="">
@@ -211,11 +233,16 @@ ORDER BY[mc_duedate]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUS":"'&MC_STATUS&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
+<cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUS":"'&MC_STATUS&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
 <!--- LOOKUP Financial Statements --->
@@ -228,14 +255,24 @@ SELECT[fds_id]
 ,[fds_month]
 ,[fds_year]
 ,[fds_monthTEXT]
-,CONVERT(VARCHAR(10),[fds_missinginfo], 101)AS[fds_missinginfo]
-,[fds_mireceived]
-,[fds_compilemi]
+,CASE [fds_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_missinginfo]
+,CONVERT(VARCHAR(10),[fds_mireceived], 101)AS[fds_mireceived]
+,CASE [fds_compilemi] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_compilemi]
 ,CONVERT(VARCHAR(10),[fds_cmireceived], 101)AS[fds_cmireceived]
-,[fds_obtaininfo_assignedto]
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
 FROM[v_financialDataStatus]
-WHERE[fds_obtaininfo_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[fds_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR [fds_sort_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_checks_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_sales_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_entry_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_reconcile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_compile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR [fds_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+OR [fds_acctrpt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[fds_duedate]
 </cfquery>
 <cfset myResult="">
@@ -266,14 +303,15 @@ SELECT[nm_id]
 ,[n_1_taxyear]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
-,[n_3_missinginfo]
+,CASE [n_3_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [n_3_missinginfo]
 ,[nm_status]
 ,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
 ,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
 ,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
 ,[client_name]
 FROM[v_notice]
-WHERE[n_assignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[n_2_resduedate]
 </cfquery>
 <cfset myResult="">
@@ -304,14 +342,15 @@ SELECT[nm_id]
 ,[n_1_taxyear]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
-,[n_3_missinginfo]
+,CASE [n_3_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [n_3_missinginfo]
 ,[nm_status]
 ,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
 ,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
 ,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
 ,[client_name]
 FROM[v_notice]
-WHERE[n_2_revassignedto]LIKE <cfqueryparam value="#ARGUMENTS.userid#%"/> AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+WHERE[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[n_2_resduedate]
 </cfquery>
 <cfset myResult="">
@@ -349,6 +388,11 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_g1_1_reviewedwithnotes], 101)AS[tr_g1_1_reviewedwithnotes]
 FROM[v_taxreturns]
 WHERE[tr_g1_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [tr_g1_1_informationreceived] IS NOT NULL
+AND [tr_g1_1_missinginfo]='0'
+AND [tr_notrequired]='0'
+AND [tr_g1_1_completed] IS NULL
+AND [tr_g1_1_reviewedwithnotes] IS NOT NULL
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_g1_1_duedate]</cfif>
 </cfquery>
@@ -391,9 +435,12 @@ SELECT[tr_id]
 ,CASE [tr_g1_1_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [tr_g1_1_missinginfo]
 ,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_taxreturns]
-WHERE([tr_g1_1_missinginfo]='1'AND[tr_g1_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
+WHERE [tr_g1_1_missinginfo]='1'
+AND [tr_g1_1_informationreceived] IS NOT NULL
+AND [tr_notrequired]='0'
+AND [tr_g1_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_g1_1_duedate]</cfif>
 </cfquery>
@@ -428,13 +475,17 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
 ,CONVERT(VARCHAR(10),[tr_g1_4_dropoffappointment], 101)AS[tr_g1_4_dropoffappointment]
 ,CONVERT(VARCHAR(10),[tr_g1_4_pickupappointment], 101)AS[tr_g1_4_pickupappointment]
-,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
+,CASE [tr_g1_1_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [tr_g1_1_missinginfo]
 ,CONVERT(VARCHAR(10),[tr_g1_1_reviewedwithnotes], 101)AS[tr_g1_1_reviewedwithnotes]
 ,CONVERT(VARCHAR(10),[tr_g1_1_completed], 101)AS[tr_g1_1_completed]
 ,CONVERT(VARCHAR(10),[tr_g1_2_delivered], 101)AS[tr_g1_2_delivered]
 ,[tr_g1_2_paymentstatus]
 FROM[v_taxreturns]
-WHERE[tr_g1_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+WHERE[tr_g1_1_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [tr_g1_3_rfr] IS NOT NULL
+AND [tr_g1_1_informationreceived] IS NOT NULL
+AND [tr_g1_1_completed] IS NULL
+AND [tr_notrequired]='0'
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_g1_1_duedate]</cfif>
 </cfquery>
@@ -453,7 +504,7 @@ WHERE[tr_g1_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 								,"TR_G1_3_RFR":"'&TR_G1_3_RFR&'"
 								,"TR_G1_4_DROPOFFAPPOINTMENT":"'&TR_G1_4_DROPOFFAPPOINTMENT&'"
 								,"TR_G1_4_PICKUPAPPOINTMENT":"'&TR_G1_4_PICKUPAPPOINTMENT&'"
-								,"TR_G1_1_MISSINGINFORECEIVED":"'&TR_G1_1_MISSINGINFORECEIVED&'"
+								,"TR_G1_1_MISSINGINFO":"'&TR_G1_1_MISSINGINFO&'"
 								,"TR_G1_1_REVIEWEDWITHNOTES":"'&TR_G1_1_REVIEWEDWITHNOTES&'"
 								,"TR_G1_1_COMPLETED":"'&TR_G1_1_COMPLETED&'"
 								,"TR_G1_2_DELIVERED":"'&TR_G1_2_DELIVERED&'"
@@ -489,6 +540,10 @@ SELECT[tr_id]
 ,[tr_g1_2_paymentstatus]
 FROM[v_taxreturns]
 WHERE[tr_g1_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [tr_g1_1_informationreceived] IS NOT NULL
+AND [tr_g1_1_completed] IS NULL
+AND [tr_notrequired]='0'
+AND [tr_g1_2_delivered] IS NULL
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_g1_1_duedate]</cfif>
 </cfquery>
@@ -536,7 +591,9 @@ SELECT[trst_id]
 ,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
 ,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
 FROM[v_TAXRETURNS_STATE]
-WHERE[trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+WHERE [trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR [trst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [trst_status] != '2'
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_g1_1_duedate]</cfif>
 </cfquery>
@@ -550,7 +607,7 @@ WHERE[trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TRST_STATE":"'&TRST_STATE&'"
-								,"TR_G1_INFORMATIONRECEIVED":"'&TR_G1_INFORMATIONRECEIVED&'"
+								,"TR_G1_1_INFORMATIONRECEIVED":"'&TR_G1_1_INFORMATIONRECEIVED&'"
 								,"TR_G1_1_DUEDATE":"'&TR_G1_1_DUEDATE&'"
 								,"TR_G1_1_MISSINGINFORECEIVED":"'&TR_G1_1_MISSINGINFORECEIVED&'"
 								,"TR_G1_3_RFR":"'&TR_G1_3_RFR&'"}'>
@@ -565,7 +622,7 @@ WHERE[trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 </cftry>
 </cfcase>
 
-<!--- LOOKUP TAX RETURNS --->
+<!--- LOOKUP Financial Tax Planning --->
 <cfcase value="group5_6">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
@@ -580,6 +637,7 @@ SELECT[ftp_id]
 ,[ftp_status]
 FROM[v_financialtaxplanning]
 WHERE[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [ftp_status] != '2'
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -611,7 +669,7 @@ SELECT [cas_id]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
 ,[cas_priority]
 ,[cas_status]
-,[cas_taskdesc]
+,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
 FROM[v_clientadministrativetasks]
 WHERE[cas_assignto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
@@ -621,7 +679,14 @@ WHERE[cas_assignto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CAS_DUEDATE":"'&CAS_DUEDATE&'","CAS_PRIORITY":"'&CAS_PRIORITY&'","CAS_STATUS":"'&CAS_STATUS&'","CAS_TASKDESC":"'&CAS_TASKDESC&'"}'>
+<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
+								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
+								,"CAS_STATUS":"'&CAS_STATUS&'"
+								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -638,13 +703,24 @@ WHERE[cas_assignto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[co_id]
-,[co_forTEXT]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
+,[co_caller]
+,[co_credithold]
+,[co_fees]
+,[co_paid]
+,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
+,[co_telephone]
+,[co_ext]
+,[co_emailaddress]
+,CASE [co_responsenotneeded] WHEN 1 THEN 'Not Needed' ELSE 'Needed' END AS [co_responsenotneeded]
+,CASE [co_returncall] WHEN 1 THEN 'Yes' ELSE 'No' END AS [co_returncall]
+,[co_briefmessage]
 FROM[v_communications]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+WHERE[co_for]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+And[co_completed]='0'
+
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -652,7 +728,21 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CO_FORTEXT":"'&CO_FORTEXT&'"}'>
+<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CO_CALLER":"'&CO_CALLER&'"
+								,"CO_CREDITHOLD":"'&CO_CREDITHOLD&'"
+								,"CO_FEES":"'&CO_FEES&'"
+								,"CO_PAID":"'&CO_PAID&'"
+								,"CO_DATE":"'&CO_DATE&'"
+								,"CO_TELEPHONE":"'&CO_TELEPHONE&'"
+								,"CO_EXT":"'&CO_EXT&'"
+								,"CO_EMAILADDRESS":"'&CO_EMAILADDRESS&'"
+								,"CO_RESPONSENOTNEEDED":"'&CO_RESPONSENOTNEEDED&'"
+								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
+								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"								
+								}'>                          
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -671,14 +761,15 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT[dt_id]
 ,[dt_sender]
 ,[dt_description]
-,[dt_assignedto]
 ,[dt_routing]
+,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
+,[dt_delivery]
+,[dt_staff]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_documenttracking]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+WHERE[dt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -686,7 +777,16 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"DT_ID":"'&DT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","DT_SENDER":"'&DT_SENDER&'","DT_ASSIGNEDTO":"'&DT_ASSIGNEDTO&'","DT_ROUTING":"'&DT_ROUTING&'","DT_DESCRIPTION":"'&DT_DESCRIPTION&'"}'>
+<cfset queryResult=queryResult&'{"DT_ID":"'&DT_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"DT_DATE":"'&DT_DATE&'"
+								,"DT_STAFF":"'&DT_STAFF&'"
+								,"DT_SENDER":"'&DT_SENDER&'"
+								,"DT_DESCRIPTION":"'&DT_DESCRIPTION&'"
+								,"DT_DELIVERY":"'&DT_DELIVERY&'"
+								,"DT_ROUTING":"'&DT_ROUTING&'"			
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

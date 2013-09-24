@@ -21,8 +21,24 @@ _group3_1=function(){_grid3_1()};
 _group3_2=function(){_grid3_2()};
 _group3_3=function(){_grid3_3()};
 
+_group4=function(){}
 _group4_1=function(){_grid4_1()};
 _group4_2=function(){_grid4_2()};
+
+_group5=function(){}
+_group5_1=function(){_grid5_1()};
+_group5_2=function(){_grid5_2()};
+_group5_3=function(){_grid5_3()};
+_group5_4=function(){_grid5_4()};
+_group5_5=function(){_grid5_5()};
+_group5_6=function(){_grid5_6()};
+
+_group6=function(){}
+_group6_1=function(){_grid6_1()};
+_group6_2=function(){_grid6_2()};
+_group6_3=function(){_grid6_3()};
+
+_group7=function(){_grid7()}
 
 
 });
@@ -89,7 +105,7 @@ _grid3_3=function(){_jGrid({
 	"grid":"grid3_3",
 	"url":"employeedashboard.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_YEAR:{title:'Year'},FDS_MONTHTEXT:{title:'Month'},FDS_DUEDATE:{title:'Due Date'},FDS_MIRECEIVED:{title:'Missing Information Received'},FDS_MISSINGINFO:{title:'Missing Information'},FDS_CMIRECEIVED:{title:'Compiled Missing Information Received'},FDS_COMPILEMI:{title:'Compile Missing Information'}},
+	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_YEAR:{title:'Year'},FDS_MONTHTEXT:{title:'Month'},FDS_DUEDATE:{title:'Due Date'},FDS_MIRECEIVED:{title:'Missing Information Received'},FDS_MISSINGINFO:{title:'Missing Information'},FDS_CMIRECEIVED:{title:'Compiled Missing Information Received'},FDS_COMPILEMI:{title:'Missing Information Compiled'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group3_3"}',
 	"functions":'$("#fds_id").val(record.FDS_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID'
@@ -180,7 +196,7 @@ _grid6_1=function(){_jGrid({
 	"grid":"grid6_1",
 	"url":"employeedashboard.cfc",	
 	"title":"Administrative Tasks",
-	"fields":{CAS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client'},CAS_DUEDATE:{title:'Due Date'},CAS_PRIORITY:{title:'Priority'},CAS_STATUS:{title:'Status'},CAS_DESCRIPTION:{title:'Description'}},
+	"fields":{CAS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client'},CAS_DUEDATE:{title:'Due Date'},CAS_PRIORITY:{title:'Priority'},CAS_STATUS:{title:'Status'},CAS_TASKDESC:{title:'Description'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group6_1"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.CAS_ID'
@@ -190,7 +206,7 @@ _grid6_2=function(){_jGrid({
 	"grid":"grid6_2",
 	"url":"employeedashboard.cfc",	
 	"title":"Communications Dashboard",
-	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_FORTEXT:{title:'For'}},
+	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_CALLER:{title:'Caller'},CO_CREDITHOLD:{title:'Credit Hold'},CO_FEES:{title:'Fees'},CO_PAID:{title:'Paid'},CO_DATE:{title:'Date &amp; Time'},CO_TELEPHONE:{title:'Phone'},CO_EXT:{title:'Ext'},CO_EMAILADDRESS:{title:'Email'},CO_RESPONSENOTNEEDED:{title:'Response Not Needed'},CO_RETURNCALL:{title:'Returned Call'},CO_BRIEFMESSAGE:{title:'Brief Message'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group6_2"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID'
@@ -200,11 +216,13 @@ _grid6_3=function(){_jGrid({
 	"grid":"grid6_3",
 	"url":"employeedashboard.cfc",	
 	"title":"Document Tracking Log",
-	"fields":{DT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},DT_SENDER:{title:'Sender'},DT_DESCRIPTION:{title:'Description'},DT_ASSIGNEDTO:{title:'Assigned To'},DT_ROUTING:{title:'Routing'}},
+	"fields":{DT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},DT_DATE:{title:'Date'},DT_STAFF:{title:'Staff'},DT_SENDER:{title:'Sender'},DT_DESCRIPTION:{title:'Description'},DT_DELIVERY:{title:'Delivery'},DT_ROUTING:{title:'Routing'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group6_3"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/documenttracking.cfm?task_id="+record.DT_ID'
-	})};	
+	})};
+	
+	
 	
 	
 	
@@ -213,7 +231,7 @@ _grid6_3=function(){_jGrid({
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
 try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}else
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
 
