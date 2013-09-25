@@ -8,15 +8,14 @@
 <cfset page.menuLeft="General,Options">
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group2">
 <cfset page.plugins.disable="100,101">
-<!--- Load ALL Select Options for this page--->
-<cfquery name="optionGroup" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[form_id]AS[optionvalue_id],[formName]AS[optionname]FROM[ctrl_forms]ORDER BY[formName]</cfquery>
-<!--- Load Select Options for each dropdown--->
-
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!---Head & Supporting Documents--->
 <cfinclude template="../../assets/inc/header.cfm">
-<body onLoad=" ">
+<cfquery name="optionGroup" cachedWithin="#page.cache.users#" datasource="AWS">SELECT[form_id]AS[optionvalue_id],[formName]AS[optionname]FROM[ctrl_forms]ORDER BY[formName]</cfquery>
+
+
+
+<body>
 <!--- Load Left Menus --->
 <cfinclude template="../../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->

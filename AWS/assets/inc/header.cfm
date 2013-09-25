@@ -1,4 +1,7 @@
 <cfparam name="page.type" default="">
+<cfset page.cache.users=CreateTimeSpan(0,0,0,0)>
+<cfset page.cache.options=CreateTimeSpan(0,0,0,0)>
+<cfset page.cache.clients=CreateTimeSpan(0,0,0,0)>
 <head>
 <cfoutput><title>#page.title#</title>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>

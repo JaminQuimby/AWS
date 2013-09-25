@@ -8,7 +8,7 @@
 <!--- LOAD SELECT BOXES --->
 <cffunction name="f_loadSelect" access="remote" output="false">
 <cfargument name="selectName" type="string" required="yes">
-<cfquery name="fquery" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">
+<cfquery name="fquery" cachedWithin="#page.cache.users#" datasource="AWS">
 SELECT[optionvalue_id],[optionname]
 FROM[v_selectOptions]
 WHERE[formName]='Client Maintenance'AND[selectName]='#ARGUMENTS.selectName#'

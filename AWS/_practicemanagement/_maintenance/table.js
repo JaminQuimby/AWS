@@ -43,6 +43,7 @@ $("#task_id").val()+'","'+
 'ROWCOUNT'+'","'+
 $("#g2_optionName").val()+'","'+
 $("#g2_optionDescription").val()+'","'+
+$("#g2_optionGroup").val()+'","'+
 '"]]}'
 _saveData({group:"group1",payload:$.parseJSON(json),page:"table"});
 break;

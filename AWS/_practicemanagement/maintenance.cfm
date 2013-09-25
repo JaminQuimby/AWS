@@ -7,14 +7,14 @@
 <cfset page.title="Practice Maintenance">
 <cfset page.menuLeft="General,Comment">
 <cfset page.trackers="o=m_id,mhd_id,mm_id,mtb_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group1_6,isLoaded_group1_7,isLoaded_group1_8,isLoaded_group1_9,isLoaded_group1_10,isLoaded_group1_11,isLoaded_group1_12,isLoaded_group1_13,isLoaded_group1_14,isLoaded_group1_15,isLoaded_group1_16,isLoaded_group1_17,isLoaded_group1_18,isLoaded_group1_19,isLoaded_group1_20,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group2_4,isLoaded_group2_5,isLoaded_group2_6,isLoaded_group2_7,isLoaded_group2_8,isLoaded_group2_9,isLoaded_group2_10,isLoaded_group2_11,isLoaded_group3_1,isLoaded_group3_2,isLoaded_group3_3,isLoaded_group3_4,isLoaded_group2,comment_id">
-<!--- Load ALL Select Options for this page--->
-<cfquery name="selectOptions" cachedWithin="#CreateTimeSpan(0, 1, 0, 0)#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE[formName]='Client Maintenance'</cfquery>
-<!--- Load Select Options for each dropdown--->
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<!---Head & Supporting Documents--->
 <cfinclude template="../assets/inc/header.cfm">
-<body onLoad=" ">
+<!--- Load ALL Select Options for this page--->
+<cfquery name="selectOptions" cachedWithin="#page.cache.options#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE([form_id]='#page.formid#'OR[form_id]='0')AND([optionGroup]='#page.formid#'OR[optionGroup]='0')</cfquery>
+<!--- Load Select Options for each dropdown--->
+
+<body>
 <!--- Load Left Menus --->
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->

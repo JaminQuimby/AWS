@@ -73,7 +73,7 @@ _grid100=function(){
 
 </script>
 </cfoutput>
-
+<cfquery dbtype="query" name="plugin_documents">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='plugin_documents'</cfquery>
 <span class="trackers">
 <input type="hidden" id="file_id" value="0" />
 <input type="hidden" id="isLoaded_group100" value="0" />
@@ -89,7 +89,7 @@ _grid100=function(){
 </div>
 <h4 onClick='_loadData({"id":"file_id","group":"group100","page":"upload",plugin:"group100"});$("#isLoaded_group100").val(1);'>File Meta Data</h4>
 <div><div><label for="g100_name">Name</label><input type="text" id="g100_name"></div>
-<div><label for="g100_description">Description</label><select id="g100_description" ><option value="0">&nbsp;</option></select></div>
+<div><label for="g100_description">Description</label><select id="g100_description" ><option value="0">&nbsp;</option><cfoutput query="plugin_documents"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g100_year">Year</label><input type="text" id="g100_year"></div>
 <div><label for="g100_month">Month</label><input type="text" id="g100_month"></div>
 <div><label for="g100_day">Day</label><input type="text" id="g100_day"></div>
