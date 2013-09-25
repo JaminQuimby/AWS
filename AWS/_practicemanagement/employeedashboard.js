@@ -147,7 +147,7 @@ _grid5_2=function(){_jGrid({
 	"grid":"grid5_2",
 	"url":"employeedashboard.cfc",	
 	"title":"Tax Returns With Missing Information",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'},TR_TAXFORM:{title:'Tax Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_G1_1_MISSINGINFO:{title:'Missing Information'},TR_MISSINGINFORECEIVED:{title:'Missing Information Received'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'},TR_TAXFORM:{title:'Tax Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group5_2"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
@@ -206,7 +206,7 @@ _grid6_2=function(){_jGrid({
 	"grid":"grid6_2",
 	"url":"employeedashboard.cfc",	
 	"title":"Communications Dashboard",
-	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_CALLER:{title:'Caller'},CO_CREDITHOLD:{title:'Credit Hold'},CO_FEES:{title:'Fees'},CO_PAID:{title:'Paid'},CO_DATE:{title:'Date &amp; Time'},CO_TELEPHONE:{title:'Phone'},CO_EXT:{title:'Ext'},CO_EMAILADDRESS:{title:'Email'},CO_RESPONSENOTNEEDED:{title:'Response Not Needed'},CO_RETURNCALL:{title:'Returned Call'},CO_BRIEFMESSAGE:{title:'Brief Message'}},
+	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_CALLER:{title:'Caller'},CO_CREDITHOLD:{title:'Credit Hold'},CO_FEES:{title:'Fees'},CO_PAID:{title:'Paid'},CO_DATE:{title:'Date &amp; Time'},CO_TELEPHONE:{title:'Phone'},CO_EXT:{title:'Ext'},CO_EMAILADDRESS:{title:'Email'},CO_RESPONSENEEDED:{title:'Response Needed'},CO_RETURNCALL:{title:'Returned Call'},CO_BRIEFMESSAGE:{title:'Brief Message'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group6_2"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID'

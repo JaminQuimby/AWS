@@ -29,7 +29,7 @@
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
@@ -44,13 +44,9 @@
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <!---<div><label for="form_id" style="display:none">Module</label><select id="form_id" style="display:none"><option value="0" style="display:none">&nbsp;</option></select></div>
 <div><label for="file_id" style="visibility:hidden">File</label><select id="file_id" style="visibility:hidden"><option value="0" style="visibility:hidden">&nbsp;</option></select></div>--->
-<div><label for="g1_description">Description</label><textarea id="g1_description" ></textarea></div>
-<div><input id="g1_fax" type="checkbox"><label for="g1_fax">Fax</label></div>
-<div><input id="g1_mail" type="checkbox"><label for="g1_mail">Mail</label></div>
-<div><input id="g1_email" type="checkbox"><label for="g1_email">Email</label></div>
-<div><input id="g1_delivery" type="checkbox"><label for="g1_delivery">Delivery</label></div>
+<div><label for="g1_description">Description</label><textarea id="g1_description" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"  multiple="multiple" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_routing">Routing</label><textarea id="g1_routing" ></textarea></div>
+<div><label for="g1_routing">Routing</label><textarea id="g1_routing" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 </div>
 </div>
 

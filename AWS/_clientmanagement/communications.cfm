@@ -16,6 +16,7 @@
 <cfquery name="selectUsers" cachedWithin="#page.cache.users#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="q_global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+<cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 
 
 <body>
@@ -30,7 +31,7 @@
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
@@ -53,12 +54,7 @@
 <div><label for="g1_ext">Ext</label><input type="text" id="g1_ext"></div>
 <div><label for="g1_faxnumber">Fax Number</label><input type="text" id="g1_faxnumber"></div>
 <div><label for="g1_emailaddress">Email</label><input type="text" id="g1_emailaddress"></div>
-<div><input id="g1_voicemail" type="checkbox"><label for="g1_voicemail">Voice Mail</label></div>
-<div><input id="g1_personalcontact" type="checkbox"><label for="g1_personalcontact">Personal Contact</label></div>
-<div><input id="g1_textmessage" type="checkbox"><label for="g1_textmessage">Text Message</label></div>
-<div><input id="g1_email" type="checkbox"><label for="g1_email">Email</label></div>
-<div><input id="g1_mail" type="checkbox"><label for="g1_mail">Mail</label></div>
-<div><input id="g1_fax" type="checkbox"><label for="g1_fax">Fax</label></div>
+<div><label for="g1_contactmethod">Contact Methods</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_briefmessage">Brief Message</label><input type="text" id="g1_briefmessage" ></div>
 <div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Not Needed</label></div>
 <div><input id="g1_returnedcall" type="checkbox"><label for="g1_returnedcall">Returned Call</label></div>

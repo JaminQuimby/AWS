@@ -36,11 +36,7 @@ SELECT[DT_ID]
  ,[file_id]--->
  ,[dt_assignedto]
 ,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
- ,[dt_delivery]
  ,[dt_description]
- ,[dt_email]
- ,[dt_fax]
- ,[dt_mail]
  ,[dt_routing]
  ,[dt_sender]
  ,[dt_staff]
@@ -74,9 +70,9 @@ WHERE[dt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[dt_id]
 ,[dt_sender]
-,[dt_description]
+,CASE WHEN LEN([dt_description]) >= 101 THEN SUBSTRING([dt_description],0,100) +  '...' ELSE [dt_description] END AS[dt_description]
 ,[dt_assignedto]
-,[dt_routing]
+,CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing] END AS[dt_routing]
 ,[client_name]
 ,[CLIENT_ID]
 FROM[v_documenttracking]
@@ -118,10 +114,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][7])><cfset j.DATA[1][7]=1><cfelse><cfset j.DATA[1][7]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -132,11 +124,7 @@ INSERT INTO[documenttracking](
 ,[file_id]--->
 ,[dt_assignedto]
 ,[dt_date]
-,[dt_delivery]
 ,[dt_description]
-,[dt_email]
-,[dt_fax]
-,[dt_mail]
 ,[dt_routing]
 ,[dt_sender]
 ,[dt_staff]
@@ -149,12 +137,6 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][6]#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
-<!---,<cfqueryparam value="#j.DATA[1][13]#"/>
-,<cfqueryparam value="#j.DATA[1][14]#"/>--->
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -175,14 +157,10 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[file_id]=<cfqueryparam value="#j.DATA[1][4]#"/>--->
 ,[dt_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[dt_date]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[dt_delivery]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[dt_description]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[dt_email]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[dt_fax]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[dt_mail]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[dt_routing]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[dt_sender]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[dt_staff]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[dt_description]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[dt_routing]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[dt_sender]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[dt_staff]=<cfqueryparam value="#j.DATA[1][8]#"/>
 WHERE[DT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>

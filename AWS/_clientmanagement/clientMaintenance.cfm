@@ -43,7 +43,7 @@ ACTIVITY (CLIENT DATA)
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
@@ -69,9 +69,9 @@ ACTIVITY (CLIENT DATA)
 <!---Group 1 Sub 1--->
 <h4 onClick="_grid1_1();">Saved Custom Fields</h4>
 <div>
-<div><label for="g1_g1_filter">Filter</label><input name="g1_g1_filter" id="g1_g1_filter" type="text" onBlur="_grid1_1();"/></div>
+<div><label for="g1_g1_filter">Filter</label><input id="g1_g1_filter" onBlur="_grid1_1();" onKeyPress="if(event.keyCode==13){_grid1_1();}"/></div>
 <div id="grid1_1" class="tblGrid"></div>
-<div class="buttonbox"><a href="#" class="button optional" onclick="">Add</a></div>
+<a href="#" class="button optional" onClick='$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);'>Add</a>
 </div>
 
 <!---Group 1 Sub 2--->
@@ -138,7 +138,7 @@ ACTIVITY (CLIENT DATA)
 <div id="group3" class="gf-checkbox">
 <h3 onClick="_grid3();">Saved Contacts</h3>
 <div>
-<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();"/></div>
+<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a>
@@ -237,7 +237,7 @@ ACTIVITY (CLIENT DATA)
 <div id="group6" class="gf-checkbox">
 <h3 onClick="_grid6();">Saved State Information</h3>
 <div>
-<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();"/></div>
+<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();" onKeyPress="if(event.keyCode==13){_grid6();}"/></div>
 <div class="tblGrid" id="grid6"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);'>Add</a>
@@ -273,7 +273,7 @@ ACTIVITY (CLIENT DATA)
 
 <h3 onClick="_group7()">Related Client Details</h3>
 <div>
-<div><label for="g7_filter">Filter</label><input id="g7_filter" onBlur="_grid7();"/></div>
+<div><label for="g7_filter">Filter</label><input id="g7_filter" onBlur="_grid7();"  onKeyPress="if(event.keyCode==13){_grid7();}"/></div>
 <!--- SET GRID CONTACTS --->
 <div id="grid7" class="tblGrid"></div>
 <div class="buttonbox">

@@ -41,13 +41,13 @@ _grid101=function(){
 <div id="group101" class="gf-checkbox" >
 	<h3 onClick="_group101(); ">Comment</h3>
 	<div>
-		<div><label for="g101_filter">Filter</label><input id="g101_filter" onBlur="_grid101();"/></div>
+		<div><label for="g101_filter">Filter</label><input id="g101_filter" onBlur="_grid101();" onKeyPress="if(event.keyCode==13){_grid101();}"/></div>
 		<div id="grid101" class="tblGrid"></div>
 		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group101").accordion({active:1});$("#isLoaded_group101").val(1);'>Add</a></div>
 	</div>
 	<h4 onClick='_loadData({"id":"comment_id","group":"group101","page":"comment",plugin:"group101"});$("#isLoaded_group101").val(1);'>Add Comment</h4>
 	<div>
 		<div><label for="g101_commentdate">Date</label><input type="text" class="date" id="g101_commentdate"/></div>
-		<div><label for="g101_commenttext">Comment</label><textarea type="text" id="g101_commenttext"></textarea></div>
+		<div><label for="g101_commenttext">Comment</label><textarea type="text" id="g101_commenttext" cols="4" rows="4"  maxlength="1000"></textarea></div>
 	</div>
 </div>

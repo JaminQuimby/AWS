@@ -27,7 +27,6 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","result":""	}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 var $client_id=$("#client_id");
 switch(options["group"]){
 

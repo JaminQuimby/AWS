@@ -32,7 +32,7 @@
 <div id="entrance" class="gf-checkbox">
 	<cfoutput><h3>#page.title# Search</h3></cfoutput>
 	<div>
-		<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
+		<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 		<!--- Entrace Grid --->
 		<div class="tblGrid" id="grid1"></div>
 		<div class="buttonbox">
@@ -144,7 +144,7 @@
 <div id="group2" class="gf-checkbox" >
 	<h3 onClick="_grid2();">Subtasks</h3>
 	<div>
-		<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();"/></div>
+    	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 		<div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox">
 		<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
@@ -158,7 +158,7 @@
 		<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date"/></div>
 		<div><label for="g2_completed">Completed</label><input type="text" id="g2_completed"  class="date" /></div>
-		<div><label for="g2_notes">Notes</label><textarea id="g2_notes" ></textarea></div>
+		<div><label for="g2_notes">Notes</label><textarea id="g2_notes" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 	</div>
 </div>
 

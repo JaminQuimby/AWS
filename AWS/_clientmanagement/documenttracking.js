@@ -20,7 +20,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "DT_ID":var list='task_id,client_id,g1_assignedto,g1_date,g1_delivery,g1_description,g1_email,g1_fax,g1_mail,g1_routing,g1_sender,g1_staff';_loadit({"query":query,"list":list});break;
+/*Group1*/case "DT_ID":var list='task_id,client_id,g1_assignedto,g1_date,g1_description,g1_routing,g1_sender,g1_staff';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
@@ -46,12 +46,8 @@ $("#client_id").val()+'","'+
 /*$("#form_id").val()+'","'+
 $("#file_id").val()+'","'+*/
 $("#g1_assignedto").val()+'","'+
-$("#g1_date").val()+'",'+
-$("#g1_delivery").is(':checked')+',"'+
-$("#g1_description").val()+'",'+
-$("#g1_email").is(':checked')+','+
-$("#g1_fax").is(':checked')+','+
-$("#g1_mail").is(':checked')+',"'+
+$("#g1_date").val()+'","'+
+$("#g1_description").val()+'","'+
 $("#g1_routing").val()+'","'+
 $("#g1_sender").val()+'","'+
 $("#g1_staff").val()+'","'+

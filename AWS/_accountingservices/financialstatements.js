@@ -32,7 +32,7 @@ switch(query.COLUMNS[0]){
 /*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "FDS_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_datecompleted,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "FDS_SORT_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_datecompleted,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group1_3*/case "FDS_CHECKS_ASSIGNEDTO":var list='g1_g3assignedto,g1_g3completedby,g1_g3_datecompleted,g1_g3estimatedtime';_loadit({"query":query,"list":list});break;
+/*Group1_3*/case "FDS_CHECKS_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_datecompleted,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_4*/case "FDS_ENTRY_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completedby,g1_g4_datecompleted,g1_g4_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_5*/case "FDS_RECONCILE_ASSIGNEDTO":var list='g1_g5_assignedto,g1_g5_completedby,g1_g5_datecompleted,g1_g5_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_6*/case "FDS_COMPILE_ASSIGNEDTO":var list='g1_g6_assignedto,g1_g6_completedby,g1_g6_datecompleted,g1_g6_estimatedtime';_loadit({"query":query,"list":list});break;

@@ -81,7 +81,7 @@ _grid100=function(){
 <div id="group100" class="gf-checkbox" >
 <h3 onClick="_group100(); ">Files</h3>
 <div>
-<div><label for="g100_filter">Filter</label><input id="g100_filter" onBlur="_grid100();"/></div>
+<div><label for="g100_filter">Filter</label><input id="g100_filter" onBlur="_grid100();" onKeyPress="if(event.keyCode==13){_grid100();}"/></div>
 <div id="grid100" class="tblGrid"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='$("#group100").accordion({active:2});'>Add</a>
