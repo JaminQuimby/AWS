@@ -65,7 +65,7 @@
   </li>
   <!---Practice Management --->
   <li><a class="arrow">Practice Management</a>
-    <ul class="_practicemanagement dropToLeft">
+    <ul class="_practicemanagement">
       <li><a href="#Application.url#/AWS/_PracticeManagement/workinprogress.cfm">Work in Progress</a></li>
       <li><a href="#Application.url#/AWS/_PracticeManagement/employeedashboard.cfm">Employee Dashboard</a></li>
       <li><a href="#Application.url#/AWS/_PracticeManagement/employeecontactinfo.cfm">Employee Contact Information</a></li>
