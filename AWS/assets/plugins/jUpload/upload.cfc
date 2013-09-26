@@ -159,7 +159,7 @@ INSERT INTO[ctrl_files]
 ,[client_id]
 ,[task_id]
 ,[user_id]
-,[file_description]
+
 )
 VALUES(
 <cfqueryparam value="#result.clientFile#"/>
@@ -172,7 +172,7 @@ VALUES(
 ,<cfqueryparam value="#arguments.CLIENTID#"/>
 ,<cfqueryparam value="#arguments.TASKID#"/>
 ,<cfqueryparam value="#arguments.USERID#"/>
-,<cfqueryparam value="#arguments.DESCRIPTION#"/>
+
 )
 </cfquery>
 </cfoutput>

@@ -15,7 +15,6 @@ m.append('<li id="'+o.id+'">'+
 '<div class="plupload_file_status">'+o.percent+'%</div>'+
 '<div class="plupload_file_size">'+plupload.formatSize(o.size)+'</div>'+
 
-'<div style="clear:both;"><div class="plupload_file_description"><label for="'+o.id+'_description">Description</label> <input type="text" id="'+o.id+'_description" /></div>'+
 
 '<div class="plupload_clearer"> </div>'+l+"</li>");
 

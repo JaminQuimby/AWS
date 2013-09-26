@@ -1,4 +1,5 @@
 <cfparam name="page.type" default="">
+<cfparam name="url.taskid" default="0">
 <cfset page.cache.users=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.options=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.clients=CreateTimeSpan(0,0,25,0)>
@@ -68,6 +69,29 @@ $(function() {
         adjustStyle($(this).width());
     });
 });
+
 </script>
+<cfif url.taskid GT 0>
+<cfquery dbtype="query" name="clientName">SELECT[optionname]FROM[selectClients]WHERE[optionvalue_id]=#url.taskid#</cfquery>
+<script>
+
+// A $( document ).ready() block.
+$( document ).ready(function() {
+$("##task_id").val('#url.taskid#');	
+
+_toggle('group1,largeMenu');
+_hide('entrance');
+
+
+$("##content").removeClass();
+$("##content").addClass("contentbig");
+_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
+_updateh3("#clientName.optionname#");
+
+
+});
+</script>
+<cfdump var="#clientName#">
+</cfif>
 </cfoutput>
 </head>

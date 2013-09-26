@@ -4,6 +4,7 @@ $(document).ready(function(){
 $(function() {
 $("##uploader").pluploadQueue({
 // General settings
+preinit:_FileUploadedCB,
 runtimes:'html5,flash',
 url:'/AWS/assets/plugins/jUpload/upload.cfc?method=upload',
 max_file_size:'10mb',
@@ -27,20 +28,24 @@ silverlight_xap_url:'#Application.url#/AWS/assets/plugins/jUpload/assets/pluploa
 init:{
 	BeforeUpload:function(up, files){
 		up.settings.multipart_params = {
-			'description':$('##'+files.id+'_description').val(),
 			'formid':'#page.formid#',
 			'clientid':$('##client_id').val(),
 			'userid':'#session.user.id#',
 			'taskid':$('##task_id').val(),
 						  }
-		            },
-	FileUploaded:function(up, file, response){
-		jqMessage({"type":"destroy"});jqMessage({message: "File upload successful",type: "success",autoClose: true,duration: 5})
-			}
+		            }
+					//ADD LINE
+
 		}
     });
 });
 //Start Normal Template Functions
+
+_FileUploadedCB=function(Uploader){
+Uploader.bind('FileUploaded', function(Up, File, Response){
+if((Uploader.total.uploaded + 1) == Uploader.files.length){_group100();$("##group100").accordion({active:0});}
+})}
+
 _pluginURL100=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jUpload/"}
 _pluginLoadData100=function(){return 'file_id,file_id,g100_name,g100_description,g100_year,g100_month,g100_day'}
 _pluginSaveData100=function(){

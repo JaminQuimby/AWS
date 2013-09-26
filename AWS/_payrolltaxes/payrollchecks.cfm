@@ -15,6 +15,7 @@
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 
 
+
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="../assets/inc/pagemenu.cfm">
@@ -22,9 +23,7 @@
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
 
-<!---TRACKERS--->
 
-<!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>

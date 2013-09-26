@@ -7,7 +7,7 @@
 <cfset page.title="Table Maintenance">
 <cfset page.menuLeft="General,Options">
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group2">
-<cfset page.plugins.disable="100,101">
+<cfset page.plugins.disable="ALL">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="../../assets/inc/header.cfm">
