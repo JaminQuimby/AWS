@@ -6,8 +6,6 @@ Developers:Jamin Quimby
 
 $(document).ready(function(){
 	
-	jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: false});
-
 _grid1();
 _group1=function(){}
 
@@ -166,7 +164,7 @@ _grid5_4=function(){_jGrid({
 	"grid":"grid5_4",
 	"url":"employeedashboard.cfc",	
 	"title":"Tax Returns Ready for Assembly & Delivery",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'},TR_TAXFORM:{title:'Tax Form'},TR_G1_1_COMPLETED:{title:'Completed'},TR_CURRENTFEES:{title:'Fees'},TR_G1_2_ASSEMBLERETURN:{title:'Assembled'},TR_G1_2_CONTACTED:{title:'Contacted'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment'},TR_G1_2_DELIVERED:{title:'Delivered'},TR_G1_2_PAYMENTSTATUS:{title:'Paid'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'},TR_TAXFORM:{title:'Tax Form'},TR_G1_1_COMPLETED:{title:'Completed'},TR_CURRENTFEES:{title:'Fees'},TR_G1_2_ASSEMBLERETURN:{title:'Assembled'},TR_G1_2_CONTACTED:{title:'Contacted'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment'},TR_G1_2_PAYMENTSTATUS:{title:'Paid'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group5_4"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
@@ -185,10 +183,10 @@ _grid5_6=function(){_jGrid({
 	"grid":"grid5_6",
 	"url":"employeedashboard.cfc",	
 	"title":"Financial & Tax Planning", 
-	"fields":{FTP_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FTP_CATEGORY:{title:'Category'},FTP_REQUESTFORSERVICE:{title:'Request for Services'},FTP_DUEDATE:{title:'Due Date'},FTP_INFORECEIVED:{title:'Information Received'},FTP_MISSINGINFO:{title:'Missing Information'},FTP_STATUS:{title:'Status'}},
+	"fields":{FTP_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FTP_CATEGORY:{title:'Category'},FTP_REQUESTSERVICE:{title:'Request for Services'},FTP_DUEDATE:{title:'Due Date'},FTP_INFORECEIVED:{title:'Information Received'},FTP_MISSINGINFO:{title:'Missing Information'},FTP_STATUS:{title:'Status'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group5_6"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
+	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/financialtaxplanning.cfm?task_id="+record.FTP_ID'
 	})};
 	
 	
@@ -216,7 +214,7 @@ _grid6_3=function(){_jGrid({
 	"grid":"grid6_3",
 	"url":"employeedashboard.cfc",	
 	"title":"Document Tracking Log",
-	"fields":{DT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},DT_DATE:{title:'Date'},DT_STAFF:{title:'Staff'},DT_SENDER:{title:'Sender'},DT_DESCRIPTION:{title:'Description'},DT_DELIVERY:{title:'Delivery'},DT_ROUTING:{title:'Routing'},DT_ASSIGNEDTOTEXT:{title:'Assigned To'}},
+	"fields":{DT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},DT_DATE:{title:'Date'},DT_STAFFTEXT:{title:'Staff'},DT_SENDER:{title:'Sender'},DT_DESCRIPTION:{title:'Description'},DT_DELIVERY:{title:'Delivery'},DT_ROUTING:{title:'Routing'},DT_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group6_3"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/documenttracking.cfm?task_id="+record.DT_ID'

@@ -51,8 +51,11 @@ WHERE[pa_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pa_id]
 ,[pa_taxyears]
+,[pa_preparers]
+,[pa_status]
+,[pa_taxmatters]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_powerofattorney]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -64,7 +67,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PA_ID":"'&PA_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PA_TAXYEARS":"'&PA_TAXYEARS&'"}'>
+<cfset queryResult=queryResult&'{"PA_ID":"'&PA_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PA_TAXYEARS":"'&PA_TAXYEARS&'","PA_TAXMATTERS":"'&PA_TAXMATTERS&'","PA_STATUS":"'&PA_STATUS&'","PA_PREPARERS":"'&PA_PREPARERS&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

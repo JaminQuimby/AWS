@@ -151,7 +151,6 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
 <cfargument name="orderBy" type="any" required="no">
-<cfargument name="jtSorting" type="any" required="no" default="client_name">
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
@@ -171,10 +170,7 @@ FROM[v_payrolltaxes]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
-ORDER BY #ARGUMENTS.jtSorting#
-
-
-
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

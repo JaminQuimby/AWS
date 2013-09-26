@@ -7,7 +7,7 @@
 <cfset page.title="Employee Dashboard">
 <cfset page.menuLeft="All Modules,Payroll & Taxes,Accounting Services,Notices,Taxation,Client Management">
 <cfset page.trackers="task_id">
-<cfset page.plugins.disable='100,101'>
+<cfset page.plugins.disable="100,101">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="../assets/inc/header.cfm">

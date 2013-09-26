@@ -200,6 +200,7 @@ SELECT[bf_id]
 ,[bf_paid]
 FROM[v_businessformation]
 WHERE[bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND ([bf_status] !=3 OR [bf_status] !=6)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[bf_duedate]
 </cfquery>
@@ -235,6 +236,7 @@ SELECT[mc_id]
 FROM[v_managementconsulting]
 WHERE[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR [mcs_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+AND ([mc_status] !=2 OR [mc_status] !=5)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[mc_duedate]
 </cfquery>
@@ -271,17 +273,21 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(10),[fds_cmireceived], 101)AS[fds_cmireceived]
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
 FROM[v_financialDataStatus]
-WHERE[fds_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-OR [fds_sort_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_checks_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_sales_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_entry_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_reconcile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_compile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-OR [fds_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-OR [fds_acctrpt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
+WHERE([fds_acctrpt_datecompleted] IS NULL)
+AND(
+ ([fds_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_obtaininfo_datecompleted] IS NULL )
+OR ([fds_sort_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_sort_datecompleted] IS NULL)
+OR ([fds_checks_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_checks_datecompleted] IS NULL)
+OR ([fds_sales_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_sales_datecompleted] IS NULL)
+OR ([fds_entry_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_entry_datecompleted] IS NULL)
+OR ([fds_reconcile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_reconcile_datecompleted] IS NULL)
+OR ([fds_compile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_compile_datecompleted] IS NULL)
+OR ([fds_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_review_datecompleted] IS NULL)
+OR ([fds_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_assembly_datecompleted] IS NULL)
+OR ([fds_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_delivery_datecompleted] IS NULL)
+OR ([fds_acctrpt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  )
+)
+AND ([fds_status] !=2 OR [fds_status] !=5)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[fds_duedate]
 </cfquery>
@@ -321,6 +327,7 @@ SELECT[nm_id]
 ,[client_name]
 FROM[v_notice]
 WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND ([n_noticestatus] !=2 OR [n_noticestatus] !=5)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[n_2_resduedate]
 </cfquery>
@@ -360,6 +367,7 @@ SELECT[nm_id]
 ,[client_name]
 FROM[v_notice]
 WHERE[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND ([n_noticestatus] !=3 OR [n_noticestatus] !=6)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[n_2_resduedate]
 </cfquery>
@@ -539,18 +547,17 @@ SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,CONVERT(VARCHAR(10),[tr_g1_1_completed], 101)AS[tr_g1_1_completed]
-,[tr_priorfees]
+,[tr_currentfees]
 ,CONVERT(VARCHAR(10),[tr_g1_2_assemblereturn], 101)AS[tr_g1_2_assemblereturn]
 ,CONVERT(VARCHAR(10),[tr_g1_2_contacted], 101)AS[tr_g1_2_contacted]
 ,CONVERT(VARCHAR(10),[tr_g1_4_dropoffappointment], 101)AS[tr_g1_4_dropoffappointment]
 ,CONVERT(VARCHAR(10),[tr_g1_4_pickupappointment], 101)AS[tr_g1_4_pickupappointment]
 ,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_g1_2_delivered], 101)AS[tr_g1_2_delivered]
 ,[tr_g1_2_paymentstatus]
 FROM[v_taxreturns]
 WHERE[tr_g1_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 AND [tr_g1_1_informationreceived] IS NOT NULL
-AND [tr_g1_1_completed] IS NULL
+AND [tr_g1_1_completed] IS NOT NULL
 AND [tr_notrequired]='0'
 AND [tr_g1_2_delivered] IS NULL
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
@@ -567,12 +574,11 @@ AND [tr_g1_2_delivered] IS NULL
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TR_G1_1_COMPLETED":"'&TR_G1_1_COMPLETED&'"
-								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
+								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
 								,"TR_G1_2_ASSEMBLERETURN":"'&TR_G1_2_ASSEMBLERETURN&'"
 								,"TR_G1_2_CONTACTED":"'&TR_G1_2_CONTACTED&'"
 								,"TR_G1_4_DROPOFFAPPOINTMENT":"'&TR_G1_4_DROPOFFAPPOINTMENT&'"
 								,"TR_G1_4_PICKUPAPPOINTMENT":"'&TR_G1_4_PICKUPAPPOINTMENT&'"
-								,"TR_G1_2_DELIVERED":"'&TR_G1_2_DELIVERED&'"
 								,"TR_G1_2_PAYMENTSTATUS":"'&TR_G1_2_PAYMENTSTATUS&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -602,7 +608,7 @@ SELECT[trst_id]
 FROM[v_TAXRETURNS_STATE]
 WHERE [trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR [trst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [trst_status] != '2'
+AND ([trst_status] != '2' OR [trst_status] != '5')
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_g1_1_duedate]</cfif>
 </cfquery>
@@ -772,7 +778,7 @@ SELECT[dt_id]
 ,CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing] END AS[dt_routing]
 ,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
 ,[dt_delivery]
-,[dt_staff]
+,[dt_staffTEXT]
 ,[client_name]
 ,[client_id]
 ,STUFF((SELECT','+[si_initials] 
@@ -795,7 +801,7 @@ WHERE(','+[dt_assignedto]LIKE'%,'+CONVERT(VARCHAR(12),<cfqueryparam value="#ARGU
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"DT_DATE":"'&DT_DATE&'"
-								,"DT_STAFF":"'&DT_STAFF&'"
+								,"DT_STAFFTEXT":"'&DT_STAFFTEXT&'"
 								,"DT_SENDER":"'&DT_SENDER&'"
 								,"DT_DESCRIPTION":"'&DT_DESCRIPTION&'"
 								,"DT_DELIVERY":"'&DT_DELIVERY&'"

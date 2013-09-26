@@ -163,8 +163,10 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
+,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
+,CASE [pt_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [pt_missinginfo]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_payrolltaxes]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -176,7 +178,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PT_YEAR":"'&PT_YEAR&'"}'>
+<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PT_YEAR":"'&PT_YEAR&'","PT_DUEDATE":"'&PT_DUEDATE&'","PT_MISSINGINFO":"'&PT_MISSINGINFO&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

@@ -6,13 +6,14 @@
     <ul class="_payrolltaxes">
       <li><a class="arrow" >Reporting</a>
        <ul class="_payrolltaxes">
-       <li><a href="#Application.url#/AWS/_payrolltaxes/reports/payroll_report.cfm">Payroll</a></li>
+       <li><a href="#Application.url#/AWS/_payrolltaxes/reports/payrollchecks_report.cfm">Payroll Checks</a></li>
+       <li><a href="#Application.url#/AWS/_payrolltaxes/reports/payrolltaxreturns_report.cfm">Payroll Taxes</a></li>
        <li><a href="#Application.url#/AWS/_payrolltaxes/reports/otherfilings_report.cfm">Other Filings</a></li>
        </ul>
       </li>
       <li><a href="#Application.url#/AWS/_payrolltaxes/payrollchecks.cfm">Payroll Checks</a></li>
       <li><a href="#Application.url#/AWS/_payrolltaxes/payrolltaxes.cfm">Payroll Taxes</a></li>
-      <li><a href="#Application.url#/AWS/_payrolltaxes/otherfilings.cfm">Other Filing Requirements</a></li>
+      <li><a href="#Application.url#/AWS/_payrolltaxes/otherfilings.cfm">Other Filings</a></li>
     </ul>
   </li>
   <!---Accounting Services --->
