@@ -216,7 +216,7 @@ _grid6_3=function(){_jGrid({
 	"grid":"grid6_3",
 	"url":"employeedashboard.cfc",	
 	"title":"Document Tracking Log",
-	"fields":{DT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},DT_DATE:{title:'Date'},DT_STAFF:{title:'Staff'},DT_SENDER:{title:'Sender'},DT_DESCRIPTION:{title:'Description'},DT_DELIVERY:{title:'Delivery'},DT_ROUTING:{title:'Routing'}},
+	"fields":{DT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},DT_DATE:{title:'Date'},DT_STAFF:{title:'Staff'},DT_SENDER:{title:'Sender'},DT_DESCRIPTION:{title:'Description'},DT_DELIVERY:{title:'Delivery'},DT_ROUTING:{title:'Routing'},DT_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group6_3"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/documenttracking.cfm?task_id="+record.DT_ID'

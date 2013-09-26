@@ -66,7 +66,7 @@
 <cfinclude template="assets/module/login/loginform.cfm">
 <cfabort>
 <cfelse> 
-<cfquery name="loginQuery" dataSource="AWS" cachedwithin="#CreateTimeSpan(0, 0, 0, 0)#">
+<cfquery name="loginQuery" dataSource="AWS" cachedwithin="#CreateTimeSpan(0, 0, 28, 0)#">
 SELECT[ctrl_users].[user_id],[ctrl_users].[name],[ctrl_users].[role],[ctrl_organization].[orgName],[ctrl_organization].[orgStorage],[ctrl_organization].[orgPlugins]
 FROM[ctrl_users]
 LEFT OUTER JOIN[ctrl_organization] ON[ctrl_users].[org_id]=[ctrl_organization].[org_id]

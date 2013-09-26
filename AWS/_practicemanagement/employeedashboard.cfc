@@ -775,6 +775,11 @@ SELECT[dt_id]
 ,[dt_staff]
 ,[client_name]
 ,[client_id]
+,STUFF((SELECT','+[name]
+FROM[v_staffinitials] 
+WHERE(','+[v_documenttracking].[dt_assignedto]
+LIKE'%,'+CONVERT(VARCHAR(12),[user_id])+'%'  )
+FOR XML PATH('')),1,1,'') AS 'dt_assignedtoTEXT' 
 FROM[v_documenttracking]
 WHERE[dt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
@@ -793,7 +798,8 @@ WHERE[dt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 								,"DT_SENDER":"'&DT_SENDER&'"
 								,"DT_DESCRIPTION":"'&DT_DESCRIPTION&'"
 								,"DT_DELIVERY":"'&DT_DELIVERY&'"
-								,"DT_ROUTING":"'&DT_ROUTING&'"			
+								,"DT_ROUTING":"'&DT_ROUTING&'"
+								,"DT_ASSIGNEDTOTEXT":"'&DT_ASSIGNEDTOTEXT&'"		
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
