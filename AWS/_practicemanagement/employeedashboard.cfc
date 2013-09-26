@@ -775,13 +775,14 @@ SELECT[dt_id]
 ,[dt_staff]
 ,[client_name]
 ,[client_id]
-,STUFF((SELECT','+[name]
-FROM[v_staffinitials] 
+,STUFF((SELECT','+[si_initials] 
+FROM[staffinitials] 
 WHERE(','+[v_documenttracking].[dt_assignedto]
 LIKE'%,'+CONVERT(VARCHAR(12),[user_id])+'%'  )
 FOR XML PATH('')),1,1,'') AS 'dt_assignedtoTEXT' 
 FROM[v_documenttracking]
-WHERE[dt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+WHERE(','+[dt_assignedto]LIKE'%,'+CONVERT(VARCHAR(12),<cfqueryparam value="#ARGUMENTS.userid#"/>)+'%')
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
