@@ -1,10 +1,10 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfset page.module="_payrolltaxes_report">
-<cfset page.location="payrollchecks_report">
-<cfset page.formid=10>
-<cfset page.title="Payroll Checks">
+<cfset page.module="_taxation">
+<cfset page.location="financialtaxplanning_report.cfm">
+<cfset page.formid=9>
+<cfset page.title="Financial Tax Planning Report">
 <cfset page.type="report">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
@@ -12,9 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
 <cfinclude template="../../assets/inc/header.cfm">
-
 <body>
-
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall">
 <nav id="topMenu"><cfinclude template="../../assets/module/menu/menu.cfm"></nav>
@@ -28,10 +26,8 @@
 <div class="buttonbox">
 <a href="#" class="button optional" onClick="">Add</a>
 </div></div></div>
-
 <!--- Start Plugins --->
 <cfinclude template="../assets/plugins/plugins.cfm">
-
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>

@@ -4,148 +4,61 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!--- 
-
-[pt_id]
-      ,[client_id]
-      ,[pt_year]
-      ,[pt_month]
-      ,[pt_duedate]
-      ,[pt_type]
-      ,[pt_lastpay]
-      ,[pt_priority]
-      ,[pt_esttime]
-      ,[pt_missinginfo]
-      ,[pt_missingreceived]
-      ,[pt_fees]
-      ,[pt_paymentstatus]
-      ,[pt_deliverymethod]
-      ,[pt_obtaininfo_assignedto]
-      ,[pt_obtaininfo_datecomplted]
-      ,[pt_obtaininfo_completedby]
-      ,[pt_obtaininfo_esttime]
-      ,[pt_entry_assignedto]
-      ,[pt_entry_datecompleted]
-      ,[pt_entry_completedby]
-      ,[pt_entry_esttime]
-      ,[pt_rec_assignedto]
-      ,[pt_rec_datecompleted]
-      ,[pt_rec_completedby]
-      ,[pt_rec_esttime]
-      ,[pt_review_assignedto]
-      ,[pt_review_datecompleted]
-      ,[pt_review_completedby]
-      ,[pt_review_esttime]
-      ,[pt_assembly_assignedto]
-      ,[pt_assembly_datecompleted]
-      ,[pt_assembly_completedby]
-      ,[pt_assembly_esttime]
-      ,[pt_delivery_assignedto]
-      ,[pt_delivery_datecompleted]
-      ,[pt_delivery_completedby]
-      ,[pt_delivery_esttime]
-	  
-	  --->
-<cffunction name="f_loadData" access="remote" output="false">
-<cfargument name="ID" type="numeric" required="yes" default="0">
-<cfargument name="loadType" type="string" required="no">
-<cftry>
-<cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Load Group1--->
-<cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[PT_ID]
- ,[client_id]
- ,[pt_deliverymethod]
-,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
- ,[pt_esttime]
- ,[pt_fees]
-,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
- ,[pt_missinginfo]
-,CONVERT(VARCHAR(10),[pt_missingreceived], 101)AS[pt_missingreceived]
- ,[pt_month]
- ,[pt_paymentstatus]
- ,[pt_priority]
- ,[pt_type]
- ,[pt_year]
-FROM[payrolltaxes]
-WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-<!--- Load Group1 Subgroup1 --->
-<cfcase value="group1_1">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[pt_obtaininfo_assignedto]
-,[pt_obtaininfo_completedby]
-,CONVERT(VARCHAR(10),[pt_obtaininfo_datecompleted], 101)AS[pt_obtaininfo_datecompleted]
-,[pt_obtaininfo_esttime]
-FROM[payrolltaxes]
-WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-<!--- Load Group1 Subgroup2 --->
-<cfcase value="group1_2">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[pt_entry_assignedto]
-,[pt_entry_completedby]
-,CONVERT(VARCHAR(10),[pt_entry_datecompleted], 101)AS[pt_entry_datecompleted]
-,[pt_entry_esttime]
-FROM[payrolltaxes]
-WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-<!--- Load Group1 Subgroup3 --->
-<cfcase value="group1_3">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[pt_rec_assignedto]
-,[pt_rec_completedby]
-,CONVERT(VARCHAR(10),[pt_rec_datecompleted], 101)AS[pt_rec_datecompleted]
-,[pt_rec_esttime]
-FROM[payrolltaxes]
-WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-<!--- Load Group1 Subgroup4 --->
-<cfcase value="group1_4">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[pt_review_assignedto]
-,[pt_review_completedby]
-,CONVERT(VARCHAR(10),[pt_review_datecompleted], 101)AS[pt_review_datecompleted]
-,[pt_review_esttime]
-FROM[payrolltaxes]
-WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-<!--- Load Group1 Subgroup5 --->
-<cfcase value="group1_5">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[pt_assembly_assignedto]
-,[pt_assembly_completedby]
-,CONVERT(VARCHAR(10),[pt_assembly_datecompleted], 101)AS[pt_assembly_datecompleted]
-,[pt_assembly_esttime]
-FROM[payrolltaxes]
-WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-<!--- Load Group1 Subgroup6 --->
-<cfcase value="group1_6">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[pt_delivery_assignedto]
-,[pt_delivery_completedby]
-,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
-,[pt_delivery_esttime]
-FROM[payrolltaxes]
-WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-</cfswitch>
-<cfreturn SerializeJSON(fQuery)>
-<cfcatch>
-<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cffunction>
+<!---
+SELECT
+[client_id]
+	,[client_active]
+	,[client_credit_hold]
+	,[client_group]
+	,[client_name]
+	,[client_notes]
+	,[client_referred_by]
+	,[client_salutation]
+	,CONVERT(VARCHAR(10),[CLIENT_SINCE], 101)AS[CLIENT_SINCE]
+	,[client_spouse]
+	,[client_trade_name]
+	,[client_type]
+	,[client_statelabel1]
+	,[client_statelabel2]
+	,[client_statelabel3]
+	,[client_statelabel4]
+	,[client_relations]
+	
+	
+	,[client_schedule_c]
+	,[client_schedule_e]
+	,[client_disregard]
+	,[client_personal_property]
+	
+	
+	
+	
+	[contact_id]
+	,[contact_type]
+	,[contact_name]
+	,[contact_address1]
+	,[contact_address2]
+	,[contact_city]
+	,[contact_state]
+	,[contact_zip]
+	,[contact_phone1]
+	,[contact_phone2]
+	,[contact_phone3]
+	,[contact_phone4]
+	,[contact_phone5]
+	,[contact_email1]
+	,[contact_email2]
+	,[contact_website]
+	,CONVERT(VARCHAR(10),[contact_effectivedate], 101)AS[contact_effectivedate]
+	,[contact_acctsoftwareupdate]
+	,[contact_taxupdate]
+	,[contact_customLabel]
+	,[contact_customValue]
+	
+	
+	
+FROM[CLIENT_LISTING]
+--->
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
@@ -155,18 +68,34 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-<cfargument name="otherid" type="string" required="no">
+
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Grid 0 Entrance --->
+<!--- Grid 1 Entrance --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
-SELECT[pt_id]
-,[pt_year]
+SELECT[client_id]
 ,[client_name]
-,[CLIENT_ID]
-FROM[v_payrolltaxes]
+,[client_salutation]
+,[client_spouse]
+,[client_credit_hold]
+,[contact_id]
+,[contact_type]
+,[contact_name]
+,[contact_address1]
+,[contact_address2]
+,[contact_city]
+,[contact_state]
+,[contact_zip]
+,[contact_phone1]
+,[contact_phone2]
+,[contact_phone3]
+,[contact_phone4]
+,[contact_phone5]
+,[contact_email1]
+,[contact_email2]
+ FROM[v_client_listing]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
@@ -177,27 +106,26 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PT_YEAR":"'&PT_YEAR&'"}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cfcase>
-
-<!--- Grid 2  --->
-<cfcase value="group2">
-<cfquery datasource="AWS" name="fquery">
-SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],[c_notes]
-FROM[v_comments]
-WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND[client_id]=<cfqueryparam value="#ARGUMENTS.CLIENTID#"/> AND[other_id]=<cfqueryparam value="#ARGUMENTS.otherid#"/> 
-AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"COMMENT_ID":"'&COMMENT_ID&'","C_DATE":"'&C_DATE&'","U_NAME":"'&U_NAME&'","U_EMAIL":"'&U_EMAIL&'","C_NOTES":"'&C_NOTES&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'"
+								,"CLIENT_SPOUSE":"'&CLIENT_SPOUSE&'"
+								,"CLIENT_CREDIT_HOLD":"'&CLIENT_CREDIT_HOLD&'"
+								,"CONTACT_TYPE":"'&CONTACT_TYPE&'"
+								,"CONTACT_NAME":"'&CONTACT_NAME&'"
+								,"CONTACT_ADDRESS2":"'&CONTACT_ADDRESS2&'"
+								,"CONTACT_ADDRESS1":"'&CONTACT_ADDRESS1&'"
+								,"CONTACT_CITY":"'&CONTACT_CITY&'"
+								,"CONTACT_STATE":"'&CONTACT_STATE&'"
+								,"CONTACT_ZIP":"'&CONTACT_ZIP&'"
+								,"CONTACT_PHONE1":"'&CONTACT_PHONE1&'"
+								,"CONTACT_PHONE2":"'&CONTACT_PHONE2&'"
+								,"CONTACT_PHONE3":"'&CONTACT_PHONE3&'"
+								,"CONTACT_PHONE4":"'&CONTACT_PHONE4&'"
+								,"CONTACT_PHONE5":"'&CONTACT_PHONE5&'"
+								,"CONTACT_EMAIL1":"'&CONTACT_EMAIL1&'"
+								,"CONTACT_EMAIL2":"'&CONTACT_EMAIL2&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -207,223 +135,6 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cffunction>
-
-<!--- [SAVE FUNCTIONs] --->
-<cffunction name="f_saveData" access="remote" output="false" returntype="any">
-<cfargument name="group" type="string" required="true">
-<cfargument name="payload" type="string" required="true">
-<cftry>
-<cfset j=DeserializeJSON("#ARGUMENTS.payload#")>
-<cfswitch expression="#ARGUMENTS.group#">
-<cfcase value="none">
-</cfcase>
-<!--- Group1 --->
-<cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<!--- if this is a new record, then insert it--->
-<cfif j.DATA[1][1] eq "0">
-<cftry>
-<cfquery name="fquery" datasource="AWS">
-INSERT INTO[payrolltaxes](
-[client_id]
-,[pt_deliverymethod]
-,[pt_duedate]
-,[pt_esttime]
-,[pt_fees]
-,[pt_lastpay]
-,[pt_missinginfo]
-,[pt_missingreceived]
-,[pt_month]
-,[pt_paymentstatus]
-,[pt_priority]
-,[pt_type]
-,[pt_year]
-)
-VALUES(
-<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
-,<cfqueryparam value="#j.DATA[1][13]#"/>
-,<cfqueryparam value="#j.DATA[1][14]#"/>
-)
-SELECT SCOPE_IDENTITY()AS[id]
-</cfquery>
-<!--- RETURN PT_ID--->
-<cfreturn '{"id":#fquery.id#,"group":"group1_1","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
-</cfif>
-<!--- if this is a not a new record, then insert it--->
-<cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
-UPDATE[payrolltaxes]
-SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_deliverymethod]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[pt_duedate]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[pt_fees]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[pt_lastpay]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[pt_missingreceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[pt_month]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[pt_paymentstatus]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[pt_priority]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[pt_type]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[pt_year]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
-</cfif>
-</cfcase>
-<!---Group1 Subgroup1 --->
-<cfcase value="group1_1">
-<cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLTAXES]
-SET[pt_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[pt_obtaininfo_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_obtaininfo_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery>
-<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
-</cfcase>
-<!---Group1 Subgroup2 --->
-<cfcase value="group1_2">
-<cftry>
-<cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLTAXES]
-SET[pt_entry_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_entry_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[pt_entry_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_entry_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery>
-<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_3","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
-</cfcase>
-<!---Group1 Subgroup3 --->
-<cfcase value="group1_3">
-<cftry>
-<cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLTAXES]
-SET[pt_rec_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_rec_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[pt_rec_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_rec_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery>
-<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_4","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
-</cfcase>
-<!---Group1 Subgroup4 --->
-<cfcase value="group1_4">
-<cftry>
-<cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLTAXES]
-SET[pt_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[pt_review_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_review_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery>
-<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_5","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
-</cfcase>
-<!---Group1 Subgroup5 --->
-<cfcase value="group1_5">
-<cftry>
-<cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLTAXES]
-SET[pt_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[pt_assembly_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_assembly_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery>
-<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_6","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
-</cfcase>
-<!---Group1 Subgroup6 --->
-<cfcase value="group1_6">
-<cftry>
-<cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLTAXES]
-SET[pt_delivery_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_delivery_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[pt_delivery_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_delivery_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery>
-<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
-</cfcase>
-<!---Group2--->
-<cfcase value="group2">
-<cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
-INSERT INTO[comments](
-[form_id]
-,[user_id]
-,[client_id]
-,[other_id]
-,[c_date]
-,[c_notes]
-)
-VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-)
-SELECT SCOPE_IDENTITY()AS[comment_id]
-</cfquery>
-<cfreturn '{"id":#fquery.comment_id#,"group":"group3","result":"ok"}'>
-</cfif>
-</cfcase>
-</cfswitch>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cffunction>

@@ -4,7 +4,7 @@
 <cfset page.module="_clientmanagement">
 <cfset page.location="administrativetasks">
 <cfset page.formid=4>
-<cfset page.title="Client Administrative Tasks">
+<cfset page.title="Administrative Tasks Report">
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id">
 <!DOCTYPE html> 

@@ -156,7 +156,7 @@ SELECT[of_id]
 ,CASE [of_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [of_missinginfo]
 ,[client_name]
 FROM[v_otherfilings]
-WHERE([pc_delivery_datecompleted] IS NULL)
+WHERE([of_delivery_datecompleted] IS NULL)
 AND(
  ([of_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [of_obtaininfo_datecompleted] IS NULL )
 OR ([of_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [of_preparation_datecompleted] IS NULL)
