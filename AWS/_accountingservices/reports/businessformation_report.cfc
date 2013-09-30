@@ -62,13 +62,14 @@
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[bf_id]
-
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 
 
 
 ,[bf_fees]
 ,[bf_paid]
+,[client_name]
+,[client_id]
 FROM[v_businessformation]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>

@@ -11,6 +11,7 @@ _grid1=function(){_jGrid({
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name',width:'20%'}
 
+
 			,MC_PAYMENTSTATUS:{title:'Payment Status',width:'10%'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
