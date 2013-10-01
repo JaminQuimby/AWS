@@ -1,5 +1,4 @@
 $(document).ready(function(){
-		jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: false});
 _grid1()
 _group1=function(){_grid1()}
 _group2=function(){_grid2()}
@@ -38,9 +37,6 @@ _grid1=function(){_jGrid({
 			,TR_G1_3_RFR:{title:'PPTR Ready For Review',width:'1%'}
 			,TR_G1_3_COMPLETED:{title:'PPTR Completed',width:'1%'}
 			,TR_G1_3_DELIVERED:{title:'PPTR Delivered',width:'1%'}	
-			/*,TRST_STATE:{title:'State'}	
-			,TRST_PRIMARY:{title:'Primary State',width:'1%'}	
-			,TRST_COMPLETED:{title:'State Return Completed',width:'1%'}	*/
 			,TR_G1_3_CURRENTFEES:{title:'PPTR Current Fees'}
 			,TR_CURRENTFEES:{title:'Current Fees'}
 			,TR_PAYMENTSTATUS:{title:'Payment Status'}

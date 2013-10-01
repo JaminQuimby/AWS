@@ -16,7 +16,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1--->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[CO_ID]
+SELECT[co_id]
 ,[client_id]
 ,[co_briefmessage]
 ,[co_caller]

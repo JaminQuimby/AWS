@@ -55,25 +55,21 @@ SELECT TOP 1000 [mcs_id]
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
-SELECT[pt_id]
-,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
-,[pt_type]
-,[pt_year]
-,[pt_month]
-,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
-,CONVERT(VARCHAR(10),[pt_obtaininfo_datecompleted], 101)AS[pt_obtaininfo_datecompleted]
-,CASE [pt_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [pt_missinginfo]
-,CONVERT(VARCHAR(10),[pt_missingreceived], 101)AS[pt_missingreceived]
-,CONVERT(VARCHAR(10),[pt_entry_datecompleted], 101)AS[pt_entry_datecompleted]
-,CONVERT(VARCHAR(10),[pt_rec_datecompleted], 101)AS[pt_rec_datecompleted]
-,CONVERT(VARCHAR(10),[pt_review_datecompleted], 101)AS[pt_review_datecompleted]
-,CONVERT(VARCHAR(10),[pt_assembly_datecompleted], 101)AS[pt_assembly_datecompleted]
-,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
-,[pt_fees]
-,[pt_paymentstatus]      
+SELECT[mc_id]
+,[mc_category]
+,[mc_assignedto]
+,[mc_status]
+,[mc_description]
+,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
+,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
+,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
+,[mc_estimatedtime]
+,[mc_fees]
+,[mc_paid]    
 ,[client_name]
 ,[client_id]
-FROM[v_payrolltaxes]
+FROM[v_managementconsulting]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
@@ -84,24 +80,20 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
+<cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"PT_DUEDATE":"'&PT_DUEDATE&'"
-								,"PT_TYPE":"'&PT_TYPE&'"
-								,"PT_YEAR":"'&PT_YEAR&'"
-								,"PT_MONTH":"'&PT_MONTH&'"
-								,"PT_LASTPAY":"'&PT_LASTPAY&'"
-								,"PT_OBTAININFO_DATECOMPLETED":"'&PT_OBTAININFO_DATECOMPLETED&'"
-								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
-								,"PT_MISSINGRECEIVED":"'&PT_MISSINGRECEIVED&'"
-								,"PT_ENTRY_DATECOMPLETED":"'&PT_ENTRY_DATECOMPLETED&'"
-								,"PT_REC_DATECOMPLETED":"'&PT_REC_DATECOMPLETED&'"
-								,"PT_REVIEW_DATECOMPLETED":"'&PT_REVIEW_DATECOMPLETED&'"
-								,"PT_ASSEMBLY_DATECOMPLETED":"'&PT_ASSEMBLY_DATECOMPLETED&'"
-								,"PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"
-								,"PT_FEES":"'&PT_FEES&'"
-								,"PT_PAYMENTSTATUS":"'&PT_PAYMENTSTATUS&'"
+								,"MC_CATEGORY":"'&MC_CATEGORY&'"
+								,"MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'"
+								,"MC_STATUS":"'&MC_STATUS&'"
+								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
+								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								,"MC_WORKINITIATED":"'&MC_WORKINITIATED&'"
+								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
+								,"MC_ESTIMATEDTIME":"'&MC_ESTIMATEDTIME&'"
+								,"MC_FEES":"'&MC_FEES&'"
+								,"MC_PAID":"'&MC_PAID&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

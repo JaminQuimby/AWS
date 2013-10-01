@@ -90,27 +90,28 @@ SELECT [fdss_id]
 <cfargument name="clientid" type="string" required="no">
 
 
-<cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
+<cftry>
+
 <cfquery datasource="AWS" name="fquery">
 SELECT[fds_id]
 ,[fds_year]
 ,[fds_month]
 ,CASE [fds_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_missinginfo]
 ,CASE [fds_compilemi] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_compilemi]
-,CONVERT(VARCHAR(10),[fds_obtaininfo_datecompleted], 101)AS[fds_obtaininfo_datecompleted]
-,CONVERT(VARCHAR(10),[fds_sort_datecompleted], 101)AS[fds_sort_datecompleted]
-,CONVERT(VARCHAR(10),[fds_checks_datecompleted], 101)AS[fds_checks_datecompleted]
-,CONVERT(VARCHAR(10),[fds_sales_datecompleted], 101)AS[fds_sales_datecompleted]
-,CONVERT(VARCHAR(10),[fds_entry_datecompleted], 101)AS[fds_entry_datecompleted]
-,CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 101)AS[fds_reconcile_datecompleted]
-,CONVERT(VARCHAR(10),[fds_compile_datecompleted], 101)AS[fds_compile_datecompleted]
-,CONVERT(VARCHAR(10),[fds_review_datecompleted], 101)AS[fds_review_datecompleted]
-,CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 101)AS[fds_assembly_datecompleted]
-,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101)AS[fds_delivery_datecompleted]
-,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101)AS[fds_acctrpt_datecompleted]
+,CONVERT(VARCHAR(10),fds_obtaininfo_datecompleted, 101) + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedto) AS [fds_obtaininfo]
+,CONVERT(VARCHAR(10),[fds_sort_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedto) AS [fds_sort]
+,CONVERT(VARCHAR(10),[fds_checks_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedto) AS [fds_checks]
+,CONVERT(VARCHAR(10),[fds_sales_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedto) AS [fds_sales]
+,CONVERT(VARCHAR(10),[fds_entry_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedto) AS [fds_entry]
+,CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedto) AS [fds_reconcile]
+,CONVERT(VARCHAR(10),[fds_compile_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedto) AS [fds_compile]
+,CONVERT(VARCHAR(10),[fds_review_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedto) AS [fds_review]
+,CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedto) AS [fds_assembly]
+,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedto) AS [fds_delivery]
+,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedto) AS [fds_acctrpt]
 ,[fds_fees]
 ,[fds_paymentstatus]
 ,[client_name]
@@ -133,17 +134,17 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FDS_MONTH":"'&FDS_MONTH&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
-								,"FDS_OBTAININFO_DATECOMPLETED":"'&FDS_OBTAININFO_DATECOMPLETED&'"
-								,"FDS_SORT_DATECOMPLETED":"'&FDS_SORT_DATECOMPLETED&'"
-								,"FDS_CHECKS_DATECOMPLETED":"'&FDS_CHECKS_DATECOMPLETED&'"
-								,"FDS_SALES_DATECOMPLETED":"'&FDS_SALES_DATECOMPLETED&'"
-								,"FDS_ENTRY_DATECOMPLETED":"'&FDS_ENTRY_DATECOMPLETED&'"
-								,"FDS_RECONCILE_DATECOMPLETED":"'&FDS_RECONCILE_DATECOMPLETED&'"
-								,"FDS_COMPILE_DATECOMPLETED":"'&FDS_COMPILE_DATECOMPLETED&'"
-								,"FDS_REVIEW_DATECOMPLETED":"'&FDS_REVIEW_DATECOMPLETED&'"
-								,"FDS_ASSEMBLY_DATECOMPLETED":"'&FDS_ASSEMBLY_DATECOMPLETED&'"
-								,"FDS_DELIVERY_DATECOMPLETED":"'&FDS_DELIVERY_DATECOMPLETED&'"
-								,"FDS_ACCTRPT_DATECOMPLETED":"'&FDS_ACCTRPT_DATECOMPLETED&'"
+								,"FDS_OBTAININFO":"'&FDS_OBTAININFO&'"
+								,"FDS_SORT":"'&FDS_SORT&'"
+								,"FDS_CHECKS":"'&FDS_CHECKS&'"
+								,"FDS_SALES":"'&FDS_SALES&'"
+								,"FDS_ENTRY":"'&FDS_ENTRY&'"
+								,"FDS_RECONCILE":"'&FDS_RECONCILE&'"
+								,"FDS_COMPILE":"'&FDS_COMPILE&'"
+								,"FDS_REVIEW":"'&FDS_REVIEW&'"
+								,"FDS_ASSEMBLY":"'&FDS_ASSEMBLY&'"
+								,"FDS_DELIVERY":"'&FDS_DELIVERY&'"
+								,"FDS_ACCTRPT":"'&FDS_ACCTRPT&'"
 								,"FDS_FEES":"'&FDS_FEES&'"
 								,"FDS_PAYMENTSTATUS":"'&FDS_PAYMENTSTATUS&'"
 								}'>
@@ -151,12 +152,87 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-</cfcase>
-</cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
+</cfcase>
+
+<!--- Grid 2 Entrance --->
+<cfcase value="group2">
+<cftry>
+
+<cfquery datasource="AWS" name="fquery">
+SELECT[fdss_id]
+,[fds_id]
+,[fds_year]
+,[fds_month]
+,CASE [fds_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_missinginfo]
+,CASE [fds_compilemi] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_compilemi]
+,COALESCE(CONVERT(VARCHAR(10),fds_obtaininfo_datecompleted, 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedto) AS [fds_obtaininfo]
+,COALESCE(CONVERT(VARCHAR(10),[fds_sort_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedto) AS [fds_sort]
+,COALESCE(CONVERT(VARCHAR(10),[fds_checks_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedto) AS [fds_checks]
+,COALESCE(CONVERT(VARCHAR(10),[fds_sales_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedto) AS [fds_sales]
+,COALESCE(CONVERT(VARCHAR(10),[fds_entry_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedto) AS [fds_entry]
+,COALESCE(CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedto) AS [fds_reconcile]
+,COALESCE(CONVERT(VARCHAR(10),[fds_compile_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedto) AS [fds_compile]
+,COALESCE(CONVERT(VARCHAR(10),[fds_review_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedto) AS [fds_review]
+,COALESCE(CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedto) AS [fds_assembly]
+,COALESCE(CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedto) AS [fds_delivery]
+,COALESCE(CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedto) AS [fds_acctrpt]
+,[fds_fees]
+,[fds_paymentstatus]
+,[fdss_subtask]
+,[fdss_status]
+
+,[client_name]
+,[client_id]
+FROM[v_financialdatastatus_subtask]
+<cfif ARGUMENTS.search neq "">
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"FDSS_ID":"'&FDSS_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"FDS_YEAR":"'&FDS_YEAR&'"
+								,"FDS_MONTH":"'&FDS_MONTH&'"
+								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
+								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
+								,"FDS_OBTAININFO":"'&FDS_OBTAININFO&'"
+								,"FDS_SORT":"'&FDS_SORT&'"
+								,"FDS_CHECKS":"'&FDS_CHECKS&'"
+								,"FDS_SALES":"'&FDS_SALES&'"
+								,"FDS_ENTRY":"'&FDS_ENTRY&'"
+								,"FDS_RECONCILE":"'&FDS_RECONCILE&'"
+								,"FDS_COMPILE":"'&FDS_COMPILE&'"
+								,"FDS_REVIEW":"'&FDS_REVIEW&'"
+								,"FDS_ASSEMBLY":"'&FDS_ASSEMBLY&'"
+								,"FDS_DELIVERY":"'&FDS_DELIVERY&'"
+								,"FDS_ACCTRPT":"'&FDS_ACCTRPT&'"
+								,"FDSS_SUBTASK":"'&FDSS_SUBTASK&'"
+								,"FDSS_STATUS":"'&FDSS_STATUS&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+
+
+</cfswitch>
 </cffunction>
 </cfcomponent>

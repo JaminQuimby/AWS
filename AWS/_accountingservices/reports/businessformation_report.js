@@ -1,20 +1,37 @@
 $(document).ready(function(){
-		jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: false});
 _grid1()
 _group1=function(){_grid1()}
 });
  
 _grid1=function(){_jGrid({
 	"grid":"grid1",
-	"url":"acctingconsulting_report.cfc",
-	"title":"Accounting &amp; Consulting",
+	"url":"businessformation_report.cfc",
+	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name',width:'20%'}
-			,BF_DATEDUE:{title:'Due Date',width:'1%'}
-
-
-			,BF_FEES:{title:'Fees',width:'9%'}
-			,BF_PAYMENTSTATUS:{title:'Payment Status',width:'10%'}},
+			,BF_STATUS:{title:'Status',width:'1%'}
+			,BF_ASSIGNEDTO:{title:'Assignedto',width:'1%'}
+ 			,BF_DATEINITIATED:{title:'Date Initiated',width:'1%'}
+ 			,BF_BUSINESSTYPE:{title:'Business Type',width:'1%'}
+ 			,BF_BUSINESSSUBMITTED:{title:'Form Submitted',width:'1%'}
+ 			,BF_BUSINESSRECEIVED:{title:'Form Received',width:'1%'}
+			,BF_ARTICLESSUBMITTED:{title:'Article Submitted',width:'1%'}
+			,BF_ARTICLESAPPROVED:{title:'Article Approved',width:'1%'}
+			,BF_TRADENAMESUBMITTED:{title:'Trade Name Submitted',width:'1%'}
+			,BF_TRADENAMERECEIVED:{title:'Trade Name Received',width:'1%'}
+			,BF_MINUTESBYLAWSDRAFT:{title:'Minutes By Laws Draft',width:'1%'}
+			,BF_MINUTESBYLAWSFINAL:{title:'Minutes By Laws Final',width:'1%'}
+			,BF_MINUTESCOMPLETED:{title:'Minutes Completed',width:'1%'}
+			,BF_DISSOLUTIONREQUESTED:{title:'Dissolution Requested',width:'1%',list:false}
+			,BF_DISSOLUTIONSUBMITTED:{title:'Dissolution Submitted',width:'1%',list:false}
+			,BF_DISSOLUTIONCOMPLETED:{title:'Dissolution Completed',width:'1%',list:false}
+			,BF_OTHERACTIVITY:{title:'Other Activity',width:'1%'}
+			,BF_OTHERSTARTED:{title:'Other Started',width:'1%'}
+			,BF_OTHERCOMPLETED:{title:'Other Completed',width:'1%'}
+			,BF_RECORDBOOKORDERED:{title:'Record Book Ordered',width:'1%'}
+  			,BF_FEES:{title:'Fees'}
+			,BF_PAID:{title:'Payment Status'}
+},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
 	"functions":''

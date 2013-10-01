@@ -13,7 +13,7 @@
 <!--- Load Group1--->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[PA_ID]
+SELECT[pa_id]
  ,[client_id]
  ,CONVERT(VARCHAR(10),[pa_dateofrevocation], 101)AS[pa_dateofrevocation]
  ,CONVERT(VARCHAR(10),[pa_datesenttoirs], 101)AS[pa_datesenttoirs]
