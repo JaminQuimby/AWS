@@ -8,7 +8,7 @@ _grid1=function(){_jGrid({
 	"url":"businessformation_report.cfc",
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name',width:'20%'}
+			,CLIENT_NAME:{title:'Client Name'}
 			,BF_STATUS:{title:'Status',width:'1%'}
 			,BF_ASSIGNEDTO:{title:'Assignedto',width:'1%'}
  			,BF_DATEINITIATED:{title:'Date Initiated',width:'1%'}

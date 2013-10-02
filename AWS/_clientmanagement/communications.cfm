@@ -52,7 +52,7 @@
 <div><label for="g1_emailaddress">Email</label><input type="text" id="g1_emailaddress"></div>
 <div><label for="g1_contactmethod">Contact Methods</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_briefmessage">Brief Message</label><input type="text" id="g1_briefmessage" ></div>
-<div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Not Needed</label></div>
+<div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Needed</label></div>
 <div><input id="g1_returnedcall" type="checkbox"><label for="g1_returnedcall">Returned Call</label></div>
 <div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"></div>

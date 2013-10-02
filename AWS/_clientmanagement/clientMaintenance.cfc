@@ -253,7 +253,7 @@ SELECT
 ,[contact_name]
 ,[contact_phone1]
 ,[contact_email1]
-FROM[CLIENT_CONTACT]
+FROM[client_contact]
 WHERE
 <cfif ARGUMENTS.ID neq "0">[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
 [client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>AND
@@ -321,7 +321,7 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 SELECT[pc_id]
 ,[pc_year]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_payrollcheckstatus]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -344,7 +344,7 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 SELECT[pt_id]
 ,[pt_year]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_payrolltaxes]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -367,7 +367,7 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_taxreturns]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -390,7 +390,7 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 SELECT[of_id]
 ,[of_taxyear]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_otherfilings]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -551,7 +551,7 @@ SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_spouse]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[client_trade_name]=<cfqueryparam value="#j.DATA[1][11]#"/>
 ,[client_type]=<cfqueryparam value="#j.DATA[1][12]#"/>
-WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
 <cfcatch>
@@ -631,7 +631,7 @@ SET[client_tax_services]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_schedule_e]=<cfqueryparam value="#j.DATA[1][5]#"/> 
 ,[client_disregard]=<cfqueryparam value="#j.DATA[1][6]#"/> 
 ,[client_personal_property]=<cfqueryparam value="#j.DATA[1][7]#"/> 
-WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_2","result":"ok"}'>
 </cfif>
@@ -686,7 +686,7 @@ SET[client_payroll_prep]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_ein]=<cfqueryparam value="#j.DATA[1][7]#"/> 
 ,[client_pin]=<cfqueryparam value="#j.DATA[1][8]#"/> 
 ,[client_password]=<cfqueryparam value="#j.DATA[1][9]#"/> 
-WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
 <cfcatch>
@@ -749,7 +749,7 @@ SET[client_accounting_services]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_version]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[client_username]=<cfqueryparam value="#j.DATA[1][11]#"/>
 ,[client_password2]=<cfqueryparam value="#j.DATA[1][12]#"/>
-WHERE[CLIENT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
 </cfif>

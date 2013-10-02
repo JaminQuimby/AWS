@@ -10,7 +10,7 @@ _grid1=function(){_jGrid({
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORY:{title:'Consulting Category'}
-			,MC_ASSIGNEDTO:{title:'Assigned To'}
+			,MC_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
 			,MC_STATUS:{title:'Status'}
 			,MC_DESCRIPTION:{title:'Description'}
 			,MC_REQUESTFORSERVICE:{title:'Request For Service',width:'1%'}

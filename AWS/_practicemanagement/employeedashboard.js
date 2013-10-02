@@ -96,7 +96,7 @@ _grid3_2=function(){_jGrid({
 	"fields":{MC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},MC_CATEGORYTEXT:{title:'Consulting Categories'},MC_DESCRIPTION:{title:'Task Description'},MC_STATUS:{title:'Status'},MC_DUEDATE:{title:'Due Date'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group3_2"}',
-	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctConsultingTasks.cfm?task_id="+record.MC_ID'
+	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID'
 	})};	
 	
 _grid3_3=function(){_jGrid({
@@ -155,7 +155,7 @@ _grid5_3=function(){_jGrid({
 	"grid":"grid5_3",
 	"url":"employeedashboard.cfc",	
 	"title":"Tax Returns Ready for Review",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_FORM:{title:'Tax Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_G1_1_DUEDATE:{title:'Due Date'},TR_G1_3_RFR:{title:'RFR'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment'},TR_G1_1_MISSINGINFO:{title:'Missing Information'},TR_G1_1_REVIEWEDWITHNOTES:{title:'Review With Notes'},TR_G1_1_COMPLETED:{title:'Completed'},TR_G1_2_DELIVERED:{title:'Delivered'},TR_G1_2_PAYMENTSTATUS:{title:'Paid'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_FORM:{title:'Tax Form'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_G1_1_DUEDATE:{title:'Due Date'},TR_G1_1_READYFORREVIEW:{title:'Ready for Review'},TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment'},TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment'},TR_G1_1_MISSINGINFO:{title:'Missing Information'},TR_G1_1_REVIEWEDWITHNOTES:{title:'Review With Notes'},TR_G1_1_COMPLETED:{title:'Completed'},TR_G1_2_DELIVERED:{title:'Delivered'},TR_G1_2_PAYMENTSTATUS:{title:'Paid'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group5_3"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
@@ -173,7 +173,7 @@ _grid5_5=function(){_jGrid({
 	"grid":"grid5_5",
 	"url":"employeedashboard.cfc",	
 	"title":"Incomplete State Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_FORM:{title:'Tax Form'},TRST_STATE:{title:'State'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_G1_1_DUEDATE:{title:'Due Date'},TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received'},TR_G1_3_RFR:{title:'RFR'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Year'},TR_FORM:{title:'Tax Form'},TRST_STATE:{title:'State'},TR_G1_1_INFORMATIONRECEIVED:{title:'Information Received'},TR_G1_1_DUEDATE:{title:'Due Date'},TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received'},TR_G1_1_READYFORREVIEW:{title:'Ready for Review'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group5_5"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'

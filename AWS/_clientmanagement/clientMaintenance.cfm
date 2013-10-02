@@ -4,7 +4,7 @@
 <cfset page.module="_clientmanagement">
 <cfset page.location="clientmaintenance">
 <cfset page.formid=1>
-<cfset page.title="Client Management">
+<cfset page.title="Client Maintenance">
 <cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients">
 <cfset page.trackers="client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7,isLoaded_group8">
 <!DOCTYPE html> 
@@ -159,8 +159,8 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_email2">Email 2</label><input id="g3_email2" type="email"/></div>
 <div><label for="g3_website">Website</label><input type="url" id="g3_website" /></div>
 <div><label for="g3_effectivedate">Effective Date</label><input type="text" id="g3_effectivedate" class="date"/></div>
-<div><input type="checkbox" id="g3_acctsoftwareupdate" /><label for="g3_acctsoftwareupdate">updated in accounting software</label></div>
-<div><input type="checkbox" id="g3_taxupdate" /><label for="g3_taxupdate">update In tax software</label></div>
+<div><input type="checkbox" id="g3_acctsoftwareupdate" /><label for="g3_acctsoftwareupdate">Updated in accounting software</label></div>
+<div><input type="checkbox" id="g3_taxupdate" /><label for="g3_taxupdate">Update in tax software</label></div>
 <div><input type="checkbox" id="g3_customvalue" /><label for="g3_customvalue"><input type="text" id="g3_customlabel" class="customlabel"/></label></div>
 </div>
 </div>
@@ -185,7 +185,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_2"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctConsultingTasks.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
 </div>
 </div>
 

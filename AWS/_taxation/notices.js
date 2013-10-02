@@ -28,8 +28,8 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "NM_ID":var list='task_id,client_id,g1_mattername,g1_matterstatus';_loadit({"query":query,"list":list});break;
-/*Group2*/case "N_ID":var list='subtask1_id,g2_matter,g2_assignedto,g2_estimatedtime,g2_noticestatus,g2_priority';_loadit({"query":query,"list":list});break;
+/*Group1*/case "NM_ID":var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});break;
+/*Group2*/case "N_ID":var list='subtask1_id,g2_assignedto,g2_estimatedtime,g2_noticestatus,g2_priority';_loadit({"query":query,"list":list});break;
 /*Group2_1*/case "N_1_FEES":var list='g2_1_fees,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_paid,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
 /*Group2_2*/case "N_2_DATENOTICEREC":var list='g2_2_datenoticereceived,g2_2_duedateforresponse,g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
 /*Group2_3*/case "N_3_MISSINGINFO":var list='g2_3_missinginformation,g2_3_missinginforeceived';_loadit({"query":query,"list":list});break;

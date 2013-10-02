@@ -27,7 +27,7 @@
        </ul>
       </li>
       <li><a href="#Application.url#/AWS/_accountingservices/businessformation.cfm">Business Formation</a></li>
-      <li><a href="#Application.url#/AWS/_accountingservices/acctconsultingtasks.cfm">Accounting &amp; Consulting Tasks</a></li>
+      <li><a href="#Application.url#/AWS/_accountingservices/acctingconsulting.cfm">Accounting &amp; Consulting Tasks</a></li>
       <li><a href="#Application.url#/AWS/_accountingservices/financialstatements.cfm">Financial Statements</a></li>
     </ul>
   </li>
@@ -55,7 +55,7 @@
       		<ul class="_clientmanagement">
        <li><a href="#Application.url#/AWS/_clientmanagement/reports/administrativetasks_report.cfm">Administrative Tasks</a></li>
        <li><a href="#Application.url#/AWS/_clientmanagement/reports/communications_report.cfm">Communications</a></li>
-       <li><a href="#Application.url#/AWS/_clientmanagement/reports/clientlisting_report.cfm">Client Listing</a></li>
+       <li><a href="#Application.url#/AWS/_clientmanagement/reports/clientmaintenance_report.cfm">Client Maintenance</a></li>
        </ul>
       </li>
       <li><a href="#Application.url#/AWS/_clientmanagement/administrativetasks.cfm">Administrative Tasks</a></li>

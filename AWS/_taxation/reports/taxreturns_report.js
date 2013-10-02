@@ -42,7 +42,7 @@ _grid1=function(){_jGrid({
 			,TR_PAYMENTSTATUS:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
 	"functions":''
 	})};
 

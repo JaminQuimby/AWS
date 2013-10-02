@@ -61,6 +61,7 @@ SELECT[nm_id]
 ,[client_id]
 ,[nm_name]
 ,[nm_status]
+,[nm_name]
 FROM[noticematter]
 WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -69,7 +70,6 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[n_id]
-	,[nm_name]
       ,[n_assignedto]
       ,[n_esttime]
       ,[n_noticestatus]

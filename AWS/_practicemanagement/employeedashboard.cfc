@@ -489,7 +489,7 @@ SELECT[tr_id]
 ,[tr_taxform]
 ,CONVERT(VARCHAR(10),[tr_g1_1_informationreceived], 101)AS[tr_g1_1_informationreceived]
 ,CONVERT(VARCHAR(10),[tr_g1_1_duedate], 101)AS[tr_g1_1_duedate]
-,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
+,CONVERT(VARCHAR(10),[tr_g1_1_readyforreview], 101)AS[tr_g1_1_readyforreview]
 ,CONVERT(VARCHAR(10),[tr_g1_4_dropoffappointment], 101)AS[tr_g1_4_dropoffappointment]
 ,CONVERT(VARCHAR(10),[tr_g1_4_pickupappointment], 101)AS[tr_g1_4_pickupappointment]
 ,CASE [tr_g1_1_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [tr_g1_1_missinginfo]
@@ -499,7 +499,7 @@ SELECT[tr_id]
 ,[tr_g1_2_paymentstatus]
 FROM[v_taxreturns]
 WHERE[tr_g1_1_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [tr_g1_3_rfr] IS NOT NULL
+AND [tr_g1_1_readyforreview] IS NOT NULL
 AND [tr_g1_1_informationreceived] IS NOT NULL
 AND [tr_g1_1_completed] IS NULL
 AND [tr_notrequired]='0'
@@ -518,7 +518,7 @@ AND [tr_notrequired]='0'
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TR_G1_1_INFORMATIONRECEIVED":"'&TR_G1_1_INFORMATIONRECEIVED&'"
 								,"TR_G1_1_DUEDATE":"'&TR_G1_1_DUEDATE&'"
-								,"TR_G1_3_RFR":"'&TR_G1_3_RFR&'"
+								,"TR_G1_1_READYFORREVIEW":"'&TR_G1_1_READYFORREVIEW&'"
 								,"TR_G1_4_DROPOFFAPPOINTMENT":"'&TR_G1_4_DROPOFFAPPOINTMENT&'"
 								,"TR_G1_4_PICKUPAPPOINTMENT":"'&TR_G1_4_PICKUPAPPOINTMENT&'"
 								,"TR_G1_1_MISSINGINFO":"'&TR_G1_1_MISSINGINFO&'"
@@ -604,7 +604,7 @@ SELECT[trst_id]
 ,CONVERT(VARCHAR(10),[tr_g1_1_informationreceived], 101)AS[tr_g1_1_informationreceived]
 ,CONVERT(VARCHAR(10),[tr_g1_1_duedate], 101)AS[tr_g1_1_duedate]
 ,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
+,CONVERT(VARCHAR(10),[tr_g1_1_readyforreview], 101)AS[tr_g1_1_readyforreview]
 FROM[v_TAXRETURNS_STATE]
 WHERE [trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR [trst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
@@ -625,7 +625,7 @@ AND ([trst_status] != '2' OR [trst_status] != '5')
 								,"TR_G1_1_INFORMATIONRECEIVED":"'&TR_G1_1_INFORMATIONRECEIVED&'"
 								,"TR_G1_1_DUEDATE":"'&TR_G1_1_DUEDATE&'"
 								,"TR_G1_1_MISSINGINFORECEIVED":"'&TR_G1_1_MISSINGINFORECEIVED&'"
-								,"TR_G1_3_RFR":"'&TR_G1_3_RFR&'"}'>
+								,"TR_G1_1_READYFORREVIEW":"'&TR_G1_1_READYFORREVIEW&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

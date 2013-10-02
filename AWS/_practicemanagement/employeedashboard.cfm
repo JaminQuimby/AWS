@@ -20,7 +20,6 @@
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="../assets/module/menu/menu.cfm"></nav>
 
-<!---TRACKERS--->
 
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
@@ -96,7 +95,7 @@
 		<div><label for="g3_2_filter">Filter</label><input id="g3_2_filter" onBlur="_grid3_2();" onKeyPress="if(event.keyCode==13){_grid3_2();}"/></div>
 		<div class="tblGrid" id="grid3_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctConsultingTasks.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -222,7 +221,7 @@
 		<div><label for="g6_2_filter">Filter</label><input id="g6_2_filter" onBlur="_grid6_2();" onKeyPress="if(event.keyCode==13){_grid6_2();}"/></div>
 		<div class="tblGrid" id="grid6_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctConsultingTasks.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -238,14 +237,6 @@
 		</div>
 	</div>
 </div>
-<!--
-<div id="group7" class="gf-checkbox">
-        <h3>All Modules</h3>
- 		<div>
- 		<div><label for="g7_filter">Filter</label><input id="g7_filter" onBlur="_grid7();" onKeyPress="if(event.keyCode==13){_grid7();}"/></div>
-		<div class="tblGrid" id="grid7"></div>
- 		</div>
- </div>-->
 
 
 <!--- Start Plugins --->

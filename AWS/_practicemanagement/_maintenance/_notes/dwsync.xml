@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="historical.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130240076480000000" remote="130240077730000000" Dst="-1" />
-<file name="historical.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130240213813730851" remote="130245531490000000" Dst="-1" />
-<file name="historical.js" server="https://ftp.awensa.com/MS/MS0213/" local="130240076670000000" remote="130240077730000000" Dst="-1" />
-<file name="table.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130245327484421946" remote="130245327650000000" Dst="-1" />
-<file name="table.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130246960906946919" remote="130246961170000000" Dst="2" />
-<file name="table.js" server="https://ftp.awensa.com/MS/MS0213/" local="130245453661667187" remote="130245453770000000" Dst="-1" />
-<file name="_maintenance.css" server="https://ftp.awensa.com/MS/MS0213/" local="130240888932038655" remote="130240888990000000" Dst="-1" />
+<file name="historical.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130240077730000000" remote="130240077730000000" />
+<file name="historical.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130245531490000000" remote="130245531490000000" />
+<file name="historical.js" server="https://ftp.awensa.com/MS/MS0213/" local="130240077730000000" remote="130240077730000000" />
+<file name="table.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130245327650000000" remote="130245327650000000" />
+<file name="table.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130246961170000000" remote="130246961170000000" />
+<file name="table.js" server="https://ftp.awensa.com/MS/MS0213/" local="130245453770000000" remote="130245453770000000" />
+<file name="_maintenance.css" server="https://ftp.awensa.com/MS/MS0213/" local="130240888932038655" remote="130240888990000000" />
 </dwsync>

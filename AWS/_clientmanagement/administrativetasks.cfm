@@ -4,7 +4,7 @@
 <cfset page.module="_clientmanagement">
 <cfset page.location="administrativetasks">
 <cfset page.formid=4>
-<cfset page.title="Administrative Tasks Report">
+<cfset page.title="Administrative Tasks">
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id">
 <!DOCTYPE html> 
@@ -46,7 +46,7 @@
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" /></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime" /></div>
 <div><label for="g1_completed">Completed</label><input type="text" class="date" id="g1_completed" /></div>
-<div><label for="g1_instructions">Instructions</label><textarea id="g1_instructions"></textarea></div>
+<div><label for="g1_instructions">Instructions</label><textarea id="g1_instructions" maxlength="1000" ></textarea></div>
 </div>
 </div>
 

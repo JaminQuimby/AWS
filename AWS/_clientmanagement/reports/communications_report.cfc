@@ -6,13 +6,15 @@
 <!--- [LOAD FUNCTIONs] --->
 <!---
 
+SELECT[co_id]
+,[client_id]
 ,[co_briefmessage]
 ,[co_caller]
 ,[co_completed]
 ,[co_contactmethod]
 ,[co_credithold]
-,[co_date]
-,[co_duedate]
+,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
+,CONVERT(VARCHAR(10),[co_duedate], 101)AS[co_duedate]
 ,[co_emailaddress]
 ,[co_ext]
 ,[co_faxnumber]
@@ -23,8 +25,9 @@
 ,[co_returncall]
 ,[co_takenby]
 ,[co_telephone]
-
-
+   FROM [v_communications]
+  
+  
 --->
 
 
@@ -38,29 +41,28 @@
 <cfargument name="clientid" type="string" required="no">
 
 
-<cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
+<cftry>
+
 <cfquery datasource="AWS" name="fquery">
 SELECT[co_id]
-,CONVERT(VARCHAR(10),[co_duedate], 101)AS[co_duedate]
-,[co_briefmessage]
 ,[co_caller]
-,[co_completed]
-,[co_contactmethod]
-,[co_credithold]
-,[co_date]
-,[co_emailaddress]
-,[co_ext]
 ,[co_for]
-,[co_responseneeded]
-,CASE [co_returncall] WHEN 1 THEN 'Yes' ELSE 'No' END AS [co_returncall]
-,[co_takenby]
-,[co_telephone]
 ,[co_fees]
 ,[co_paid]
-FROM[v_businessformation]
+,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
+,[co_telephone]
+,[co_ext]
+,[co_emailaddress]
+,CASE [co_responseneeded] WHEN 1 THEN 'Yes' ELSE 'No' END AS[co_responseneeded]
+,CASE [co_returncall] WHEN 1 THEN 'Yes' ELSE 'No' END AS[co_returncall]
+,CASE [co_completed] WHEN 1 THEN 'Yes' ELSE 'No' END AS[co_completed]
+,[co_briefmessage]
+,[client_name]
+,[client_id]
+FROM[v_communications]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
@@ -75,27 +77,30 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CO_CALLER":"'&CO_CALLER&'"
-								,"CO_CREDITHOLD":"'&CO_CREDITHOLD&'"
+								,"CO_FOR":"'&CO_FOR&'"
+								,"CO_FEES":"'&CO_FEES&'"
+								,"CO_PAID":"'&CO_PAID&'"
 								,"CO_DATE":"'&CO_DATE&'"
 								,"CO_TELEPHONE":"'&CO_TELEPHONE&'"
 								,"CO_EXT":"'&CO_EXT&'"
 								,"CO_EMAILADDRESS":"'&CO_EMAILADDRESS&'"
 								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
 								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
-								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"					
-								,"CO_FEES":"'&CO_FEES&'"
-								,"CO_PAYMENTSTATUS":"'&CO_PAYMENTSTATUS&'"
+								,"CO_COMPLETED":"'&CO_COMPLETED&'"
+								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
+								
+
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-</cfcase>
-</cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
+</cfcase>
+</cfswitch>
 </cffunction>
 </cfcomponent>

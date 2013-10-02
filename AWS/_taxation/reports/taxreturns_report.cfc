@@ -1,12 +1,4 @@
 <cfcomponent output="true">
-<!--- f_saveData = Insert or Update tables with json data from ajax--->
-<!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
-<!--- f_loadSelect = get select data--->
-<!--- [LOAD FUNCTIONs] --->
-
-
-
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -51,7 +43,6 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_g1_3_completed], 101)AS[tr_g1_3_completed]
 ,CONVERT(VARCHAR(10),[tr_g1_3_delivered], 101)AS[tr_g1_3_delivered]
 ,[tr_g1_3_currentfees]
-
 ,[tr_currentfees]
 ,[tr_g1_2_paymentstatus]
 ,[client_type]
@@ -149,8 +140,6 @@ SELECT[trst_id]
 ,[trst_state]
 ,[trst_primary]
 ,CONVERT(VARCHAR(10),[trst_completed], 101)AS[trst_completed]
-
-
 ,[tr_currentfees]
 ,[tr_g1_2_paymentstatus]
 ,[client_type]
@@ -221,7 +210,4 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcatch>
 </cftry>
 </cffunction>
-
-
-
 </cfcomponent>

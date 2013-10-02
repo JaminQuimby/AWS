@@ -1,11 +1,5 @@
 <cfcomponent output="true">
-<!--- f_saveData = Insert or Update tables with json data from ajax--->
-<!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
-<!--- f_loadSelect = get select data--->
-<!--- [LOAD FUNCTIONs] --->
 <!---
-
 SELECT TOP 1000 [mc_id]
       ,[client_id]
       ,[mc_assignedto]
@@ -59,7 +53,7 @@ SELECT[mc_id]
 ,[mc_category]
 ,[mc_assignedto]
 ,[mc_status]
-,[mc_description]
+,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 ,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 ,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
