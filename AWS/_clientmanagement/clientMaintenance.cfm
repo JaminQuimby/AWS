@@ -6,7 +6,7 @@
 <cfset page.formid=1>
 <cfset page.title="Client Maintenance">
 <cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients">
-<cfset page.trackers="client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7,isLoaded_group8">
+<cfset page.trackers="task_id,client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7,isLoaded_group8">
 <!DOCTYPE html> 
 <html>
 <cfinclude template="../assets/inc/header.cfm">
@@ -141,14 +141,14 @@ ACTIVITY (CLIENT DATA)
 <a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a>
 </div>
 </div>
-<h4>Contact</h4>
-<div id="dataContacts">
-<div><label for="g3_type">Type</label><select id="g3_type"><cfoutput query="global_contacttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<h4 onclick="_group3();">Contact</h4>
+<div>
+<div><label for="g3_type">Type</label><select id="g3_type"><option value="0">&nbsp;</option><cfoutput query="global_contacttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_name">Contact Name</label><input id="g3_name" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g3_address1">Street #1</label><input id="g3_address1" type="text"/></div>
 <div><label for="g3_address2">Street #2</label><input id="g3_address2" type="text"/></div>
 <div><label for="g3_city">City</label><input id="g3_city" type="text" /></div>
-<div><label for="g3_state">State</label><input id="g3_state" type="text"/></div>
+<div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="5" required id="g3_zip" /></div>
 <div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel"/></div>
 <div><label for="g3_phone2">Phone 2</label><input id="g3_phone2" type="tel"/></div>

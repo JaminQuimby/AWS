@@ -55,8 +55,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1 Subgroup2 --->
 <cfcase value="group1_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT
-CONVERT(VARCHAR(10),[tr_g1_2_assemblereturn], 101)AS[tr_g1_2_assemblereturn]
+SELECT CONVERT(VARCHAR(10),[tr_g1_2_assemblereturn], 101)AS[tr_g1_2_assemblereturn]
 ,CONVERT(VARCHAR(10),[tr_g1_2_contacted], 101)AS[tr_g1_2_contacted]
 ,CONVERT(VARCHAR(10),[tr_g1_2_delivered], 101)AS[tr_g1_2_delivered]
 ,[tr_g1_2_deliverymethod]

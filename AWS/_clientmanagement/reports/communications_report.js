@@ -1,6 +1,7 @@
 $(document).ready(function(){
 _grid1()
 _group1=function(){_grid1()}
+_group2=function(){_grid2()}
 });
  
 _grid1=function(){_jGrid({
@@ -24,5 +25,20 @@ _grid1=function(){_jGrid({
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
+	"functions":''
+	})};
+	
+	_grid2=function(){_jGrid({
+	"grid":"grid2",
+	"url":"Communications_report.cfc",
+	"title":"Communications Responses",
+	"fields":{CO_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,CO_CALLER:{title:'Caller'}
+			,CO_BRIEFMESSAGE:{title:'Brief Message'}
+
+			},
+ 	"method":"f_lookupData",
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":''
 	})};

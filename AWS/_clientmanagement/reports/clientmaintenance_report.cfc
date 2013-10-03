@@ -70,31 +70,25 @@ FROM[CLIENT_LISTING]
 <cfargument name="clientid" type="string" required="no">
 
 
-<cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[client_id]
 ,[client_name]
+,[client_typeTEXT]
+,[client_trade_name]
+,[client_active]
 ,[client_salutation]
 ,[client_spouse]
-,[client_credit_hold]
-,[contact_id]
-,[contact_type]
-,[contact_name]
-,[contact_address1]
-,[contact_address2]
-,[contact_city]
-,[contact_state]
-,[contact_zip]
-,[contact_phone1]
-,[contact_phone2]
-,[contact_phone3]
-,[contact_phone4]
-,[contact_phone5]
-,[contact_email1]
-,[contact_email2]
+,CASE [client_credit_hold] WHEN 1 THEN 'Yes' ELSE 'No' END AS[client_credit_hold]
+
+,[client_schedule_c]
+,[client_schedule_e]
+,[client_disregard]
+,[client_personal_property]
+
  FROM[v_client_listing]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -108,11 +102,68 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
+								,"CLIENT_TRADE_NAME":"'&CLIENT_TRADE_NAME&'"
+								,"CLIENT_ACTIVE":"'&CLIENT_ACTIVE&'"
 								,"CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'"
 								,"CLIENT_SPOUSE":"'&CLIENT_SPOUSE&'"
 								,"CLIENT_CREDIT_HOLD":"'&CLIENT_CREDIT_HOLD&'"
-								,"CONTACT_TYPE":"'&CONTACT_TYPE&'"
+								,"CLIENT_SCHEDULE_C":"'&CLIENT_SCHEDULE_C&'"
+								,"CLIENT_SCHEDULE_E":"'&CLIENT_SCHEDULE_E&'"
+								,"CLIENT_DISREGARD":"'&CLIENT_DISREGARD&'"
+								,"CLIENT_PERSONAL_PROPERTY":"'&CLIENT_PERSONAL_PROPERTY&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+
+</cfcase>
+
+
+
+
+
+<!--- Grid 2 Entrance --->
+<cfcase value="group2">
+<cftry>
+<cfquery datasource="AWS" name="fquery">
+SELECT[client_id]
+,[client_name]
+,[contact_id]
+,[contact_name]
+,[contact_type]
+,[contact_address1]
+,[contact_address2]
+,[contact_city]
+,[contact_state]
+,[contact_zip]
+,[contact_phone1]
+,[contact_phone2]
+,[contact_phone3]
+,[contact_phone4]
+,[contact_phone5]
+,[contact_email1]
+,[contact_email2]
+ FROM[v_client_listing]
+WHERE[contact_name] IS NOT NULL
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CONTACT_NAME":"'&CONTACT_NAME&'"
+								,"CONTACT_TYPE":"'&CONTACT_TYPE&'"
 								,"CONTACT_ADDRESS2":"'&CONTACT_ADDRESS2&'"
 								,"CONTACT_ADDRESS1":"'&CONTACT_ADDRESS1&'"
 								,"CONTACT_CITY":"'&CONTACT_CITY&'"
@@ -130,12 +181,13 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-</cfcase>
-</cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
+
+</cfcase>
+</cfswitch>
 </cffunction>
 </cfcomponent>

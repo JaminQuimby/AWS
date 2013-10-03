@@ -5,7 +5,7 @@
 <cfset page.location="communications_report">
 <cfset page.formid=4>
 <cfset page.title="Communications Report">
-<cfset page.menuLeft="General">
+<cfset page.menuLeft="General,Responses">
 <cfset page.type="report">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
@@ -27,6 +27,15 @@
 	<div>
 		<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 		<div class="tblGrid" id="grid1"></div>
+		<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
+    </div>
+ </div>
+
+ <div id="group2" class="gf-checkbox">
+	<cfoutput><h3>#page.title# Search</h3></cfoutput>
+	<div>
+		<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
+		<div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
     </div>
  </div>
