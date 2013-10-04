@@ -11,7 +11,7 @@ _grid1=function(){_jGrid({
 	"title":"Client Maintenance Report",	
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_TYPE:{title:'Client Type'}
+			,CLIENT_TYPE:{title:'Client Type',width:"1%"}
 			,CLIENT_TRADE_NAME:{title:'Trade Name'}
 			,CLIENT_ACTIVE:{title:'Active',width:"1%"}
 			,CLIENT_SALUTATION:{title:'Salutation'}
@@ -22,8 +22,8 @@ _grid1=function(){_jGrid({
 			,CLIENT_DISREGARD:{title:'Disregarded',width:'1%'}
 			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%'}
 			},
-/*			
 			
+/*			
 			            //CHILD GRID DEFINITION FOR "CONTACTS"
                 Contacts: {title: '',width: '5%',sorting: false,edit: false,create: false,display: function (clientData) {
                         //Create an image that will be used to open child table
@@ -59,7 +59,8 @@ _grid1=function(){_jGrid({
                         //Return image to show on the client row
                         return $img;
                     }
-                },*/
+                },
+*/
 
 
 	"method":"f_lookupData",

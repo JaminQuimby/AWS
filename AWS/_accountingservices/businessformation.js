@@ -7,7 +7,14 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"businessformation.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},BF_OWNERS:{title:'Owners'},BF_STATUS:{title:'Status'}},
+	"fields":{BF_ID:{key:true,list:false,edit:false}
+			,CLIENT_ID:{list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,BF_OWNERS:{title:'Owners'}
+			,BF_STATUS:{title:'Status'}
+			,BF_ACTIVITY:{title:'Activity'}
+			,BF_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#task_id").val(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"businessformation"});'

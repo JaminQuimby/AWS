@@ -76,6 +76,12 @@ SELECT [cas_id]
 ,[client_id]
 ,[client_name]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
+,[cas_assignto]
+,[cas_category]
+,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
+,[cas_status]
+,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_completed]
+,[cas_priority]
 FROM[v_clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -84,7 +90,17 @@ FROM[v_clientadministrativetasks]WHERE[client_name]LIKE <cfqueryparam value="#AR
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CAS_DUEDATE":"'&CAS_DUEDATE&'"}'>
+<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
+								,"CAS_ASSIGNTO":"'&CAS_ASSIGNTO&'"
+								,"CAS_CATEGORY":"'&CAS_CATEGORY&'"
+								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
+								,"CAS_STATUS":"'&CAS_STATUS&'"
+								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"
+								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

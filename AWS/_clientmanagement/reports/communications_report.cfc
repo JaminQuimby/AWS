@@ -39,6 +39,7 @@ SELECT[co_id]
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="formid" type="string" required="no">
 
 
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -88,8 +89,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
 								,"CO_COMPLETED":"'&CO_COMPLETED&'"
 								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
-								
-
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -108,31 +107,29 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcase value="group2">
 <cftry>
 
+
 <cfquery datasource="AWS" name="fquery">
-SELECT[co_id]
-,[co_caller]
-,[co_briefmessage]
-,[client_name]
-,[client_id]
-FROM[v_communications]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+SELECT[comment_id]
+,CONVERT(VARCHAR(10),[c_date], 101)AS[c_date]
+,[u_name]
+,[u_email]
+,CASE WHEN LEN([c_notes]) >= 101 THEN SUBSTRING([c_notes],0,100) +  '...' ELSE [c_notes] END AS[c_notes]
+FROM[v_comments]
+WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
+AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
+AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/> 
+AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'"
-								,"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CO_CALLER":"'&CO_CALLER&'"
-								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
-
-								
-
+<cfset queryResult=queryResult&'{"COMMENT_ID":"'&COMMENT_ID&'"
+								,"C_DATE":"'&C_DATE&'"
+								,"U_NAME":"'&U_NAME&'"
+								,"U_EMAIL":"'&U_EMAIL&'"
+								,"C_NOTES":"'&C_NOTES&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -144,6 +141,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcatch>
 </cftry>
 </cfcase>
+
 </cfswitch>
 </cffunction>
 </cfcomponent>

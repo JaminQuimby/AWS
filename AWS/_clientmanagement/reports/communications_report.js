@@ -32,13 +32,12 @@ _grid1=function(){_jGrid({
 	"grid":"grid2",
 	"url":"Communications_report.cfc",
 	"title":"Communications Responses",
-	"fields":{CO_ID:{key:true,list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,CO_CALLER:{title:'Caller'}
-			,CO_BRIEFMESSAGE:{title:'Brief Message'}
-
+	"fields":{COMMENT_ID:{key:true,list:false,edit:false}
+			 ,C_DATE:{title:'Date'}
+			 ,U_NAME:{title:'Name'}
+			 ,C_NOTES:{title:'Comment'}
 			},
  	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","formid":"4","clientid":"'+$("#client_id").val()+'","taskid":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":''
 	})};

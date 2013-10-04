@@ -147,7 +147,7 @@ SELECT[nm_id]
 ,[nm_name]
 ,[nm_status]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_noticematter]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -172,7 +172,11 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[nm_id]
 ,[n_id]
+,[nm_name]
 ,[n_assignedtoTEXT]
+,[n_noticestatus]
+,[n_priority]
+,[n_1_noticenumber]
 FROM[v_notice]
 WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
@@ -181,7 +185,12 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <c
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"}'>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
+								,"NM_NAME":"'&NM_NAME&'"
+								,"N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"
+								,"N_NOTICESTATUS":"'&N_NOTICESTATUS&'"
+								,"N_PRIORITY":"'&N_PRIORITY&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

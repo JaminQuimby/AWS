@@ -161,8 +161,10 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
+,[tr_priority]
+,[tr_taxform]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_taxreturns]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -174,7 +176,13 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","TR_TAXYEAR":"'&TR_TAXYEAR&'"}'>
+<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"TR_PRIORITY":"'&TR_PRIORITY&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -185,14 +193,10 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
 	  ,[trst_id]
-      ,[trst_assignedto]
       ,[trst_assignedtoTEXT]
-      ,[trst_completed]
-      ,[trst_primary]
-      ,[trst_reviewassignedto]
       ,[trst_state]
       ,[trst_status]
-FROM[v_TAXRETURNS_STATE]
+FROM[v_taxreturns_state]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trst_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trst_status]</cfif>
 </cfquery>
@@ -201,7 +205,11 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trst_status]LIKE <cfquer
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'","TRST_ASSIGNEDTOTEXT":"'&TRST_ASSIGNEDTOTEXT&'"}'>
+<cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'"
+								,"TRST_STATE":"'&TRST_STATE&'"
+								,"TRST_STATUS":"'&TRST_STATUS&'"
+								,"TRST_ASSIGNEDTOTEXT":"'&TRST_ASSIGNEDTOTEXT&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -212,12 +220,10 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trst_status]LIKE <cfquer
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
 	  ,[trsc_id]
-      ,[trsc_assignedto]
       ,[trsc_assignedtoTEXT]
-      ,[trsc_reviewassignedto]
       ,[trsc_schedule]
       ,[trsc_status]
-FROM[v_TAXRETURNS_SCHEDULE]
+FROM[v_taxreturns_schedule]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trsc_status]</cfif>
 </cfquery>
@@ -226,7 +232,11 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trsc_status]LIKE <cfquer
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"TRSC_ID":"'&TRSC_ID&'","TRSC_ASSIGNEDTOTEXT":"'&TRSC_ASSIGNEDTOTEXT&'"}'>
+<cfset queryResult=queryResult&'{"TRSC_ID":"'&TRSC_ID&'"
+								,"TRSC_SCHEDULE":"'&TRSC_SCHEDULE&'"
+								,"TRSC_STATUS":"'&TRSC_STATUS&'"
+								,"TRSC_ASSIGNEDTOTEXT":"'&TRSC_ASSIGNEDTOTEXT&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

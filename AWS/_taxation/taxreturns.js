@@ -8,7 +8,11 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"taxreturns.cfc",
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,TR_TAXYEAR:{title:'Tax Year'}
+			,TR_TAXFORM:{title:'Tax Form'}
+			,TR_PRIORITY:{title:'Priority'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.TR_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"taxreturns"});'
@@ -17,7 +21,11 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"taxreturns.cfc",
 	"title":"State",
-	"fields":{TRST_ID:{key:true,list:false,edit:false},TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}},
+	"fields":{TRST_ID:{key:true,list:false,edit:false}
+	,TRST_STATE:{title:'State'}
+	,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
+	,TRST_STATUS:{title:'Status'}
+	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});'
@@ -26,7 +34,10 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"taxreturns.cfc",
 	"title":"Schedule",
-	"fields":{TRSC_ID:{key:true,list:false,edit:false},TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}},
+	"fields":{TRSC_ID:{key:true,list:false,edit:false}
+	,TRSC_SCHEDULE:{title:'Schedule'}
+	,TRSC_STATUS:{title:'Status'}
+	,TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3"}',
 	"functions":'$("#subtask2_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});'

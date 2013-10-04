@@ -21,7 +21,7 @@ SELECT[client_id]
 	,[client_notes]
 	,[client_referred_by]
 	,[client_salutation]
-	,CONVERT(VARCHAR(10),[CLIENT_SINCE], 101)AS[CLIENT_SINCE]
+	,CONVERT(VARCHAR(10),[client_since], 101)AS[client_since]
 	,[client_spouse]
 	,[client_trade_name]
 	,[client_type]
@@ -30,8 +30,8 @@ SELECT[client_id]
 	,[client_statelabel3]
 	,[client_statelabel4]
 	,[client_relations]
-FROM[CLIENT_LISTING]
-WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+FROM[client_listing]
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
@@ -72,8 +72,8 @@ SELECT[client_payroll_prep]
 	,[client_ein]
 	,[client_pin]
 	,[client_password]
-FROM[CLIENT_LISTING]
-WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+FROM[client_listing]
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
@@ -92,8 +92,8 @@ SELECT[client_accounting_services]
 	,[client_version]
 	,[client_username]
 	,[client_password2]
-FROM[CLIENT_LISTING]
-WHERE[CLIENT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+FROM[client_listing]
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
@@ -123,7 +123,7 @@ SELECT[contact_id]
 	,[contact_taxupdate]
 	,[contact_customLabel]
 	,[contact_customValue]
-FROM[CLIENT_CONTACT]
+FROM[client_contact]
 WHERE[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -145,7 +145,7 @@ SELECT[si_id]
     ,[si_misc2]
     ,[si_misc3]
     ,[si_misc4]
-FROM[state_information]
+FROM[client_state]
 WHERE[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -196,28 +196,32 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP CLIENT --->
 <cfcase value="group0">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[client_listing].[CLIENT_ID]
-,[client_listing].[CLIENT_NAME]
-,[client_listing].[CLIENT_SALUTATION]
-,CONVERT(VARCHAR(10),[client_listing].[CLIENT_SINCE], 101)AS[CLIENT_SINCE]
-,[ctrl_selectoptions].[optionName]AS[CLIENT_TYPETEXT]
-FROM[client_listing]
-LEFT OUTER JOIN[ctrl_selectoptions]
-ON[client_listing].[client_type]=[ctrl_selectoptions].[optionValue_id]
-WHERE([ctrl_selectoptions].[selectName_id]=1)AND([client_listing].[CLIENT_NAME]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>)
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_listing].[client_name]</cfif>
+SELECT[client_id]
+,[client_name]
+,[client_salutation]
+,CONVERT(VARCHAR(10),[client_since], 101)AS[client_since]
+,[client_type]
+FROM[v_client_listing]
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'","CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'","CLIENT_SINCE":"'&CLIENT_SINCE&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'","CLIENT_TYPE":"'&CLIENT_TYPE&'","CLIENT_SINCE":"'&CLIENT_SINCE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
 <!--- LOOKUP CUSTOM FIELDS --->
@@ -225,20 +229,18 @@ WHERE([ctrl_selectoptions].[selectName_id]=1)AND([client_listing].[CLIENT_NAME]L
 SELECT[field_id],[field_name],[field_value]
 FROM[ctrl_customfields]
 WHERE[form_id]='1'
-
 <cfif ARGUMENTS.ID neq "0">
 AND[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfif>
 AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
 AND[field_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
-
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[field_name]</cfif></cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"field_id":"'&field_id&'","field_name":"'&field_name&'","field_value":"'&field_value&'"}'>
+<cfset queryResult=queryResult&'{"FIELD_ID":"'&FIELD_ID&'","FIELD_NAME":"'&FIELD_NAME&'","FIELD_VALUE":"'&FIELD_VALUE&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -266,7 +268,7 @@ WHERE
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"contact_id":"'&contact_id&'","contact_name":"'&contact_name&'","contact_phone1":"'&contact_phone1&'","contact_email1":"'&contact_email1&'"}'>
+<cfset queryResult=queryResult&'{"CONTACT_ID":"'&CONTACT_ID&'","CONTACT_NAME":"'&CONTACT_NAME&'","CONTACT_PHONE1":"'&CONTACT_PHONE1&'","CONTACT_EMAIL1":"'&CONTACT_EMAIL1&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -409,25 +411,30 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 
 <!--- LOOKUP STATE INFORMATION --->
 <cfcase value="group6"><cfquery datasource="AWS" name="fquery">
-SELECT[state_information].[si_id],[state_information].[si_revenue],[state_information].[si_employees]
-,[state_information].[si_property],[state_information].[si_nexus],[state_information].[si_reason],[state_information].[si_registered]
-,[state_information].[si_misc1],[state_information].[si_misc2],[state_information].[si_misc3],[state_information].[si_misc4]
-,[ctrl_selectoptions].[optionName]AS[si_state]
-FROM[state_information]
-LEFT OUTER JOIN[ctrl_selectoptions]
-ON[state_information].[si_state]=[ctrl_selectoptions].[optionValue_id]
-WHERE([ctrl_selectoptions].[selectName_id]=9)AND
-(
-<cfif ARGUMENTS.ID neq "0">[state_information].[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND</cfif>
-[state_information].[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>AND
-[state_information].[si_reason]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> )
+SELECT[si_id]
+,[si_revenue]
+,[si_employees]
+,[si_property]
+,[si_nexus]
+,[si_reason]
+,[si_registered]
+,[si_misc1]
+,[si_misc2]
+,[si_misc3]
+,[si_misc4]
+,[si_stateTEXT]
+FROM[v_client_state]
+WHERE(
+<cfif ARGUMENTS.ID neq "0">[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND</cfif>
+[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>AND
+[si_reason]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> )
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"si_id":"'&si_id&'","si_state":"'&si_state&'","si_revenue":"'&si_revenue&'","si_employees":"'&si_employees&'","si_property":"'&si_property&'","si_nexus":"'&si_nexus&'","si_reason":"'&si_reason&'","si_registered":"'&si_registered&'","si_misc1":"'&si_misc1&'","si_misc2":"'&si_misc2&'","si_misc3":"'&si_misc3&'","si_misc4":"'&si_misc4&'"}'>
+<cfset queryResult=queryResult&'{"SI_ID":"'&SI_ID&'","SI_STATETEXT":"'&SI_STATETEXT&'","SI_REVENUE":"'&SI_REVENUE&'","SI_EMPLOYEES":"'&SI_EMPLOYEES&'","SI_PROPERTY":"'&SI_PROPERTY&'","SI_NEXUS":"'&SI_NEXUS&'","SI_REASON":"'&SI_REASON&'","SI_REGISTERED":"'&SI_REGISTERED&'","SI_MISC1":"'&SI_MISC1&'","SI_MISC2":"'&SI_MISC2&'","SI_MISC3":"'&SI_MISC3&'","SI_MISC4":"'&SI_MISC4&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -437,20 +444,18 @@ WHERE([ctrl_selectoptions].[selectName_id]=9)AND
 
 <!--- LOOKUP client relations --->
 <cfcase value="group7">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[client_listing].[client_id]
-,[client_listing].[client_name]
-,[client_listing].[client_active]
-,CONVERT(VARCHAR(10),[client_listing].[client_since], 101)AS[client_since]
-,[ctrl_selectoptions].[optionName]AS[client_typeTEXT]
-,[client_listing].[client_type]
-FROM[client_listing]
-LEFT OUTER JOIN[ctrl_selectoptions]
-ON[client_listing].[client_type]=[ctrl_selectoptions].[optionValue_id]
-WHERE([ctrl_selectoptions].[selectName_id]=1)
-<cfset i=0>AND(<cfif ARGUMENTS.ID neq "null"><cfloop index="cid" list="#ARGUMENTS.ID#"><cfset i=i+1><cfif cid neq"">[client_listing].[client_id]=<cfqueryparam value="#cid#"/><cfif not listLen(ARGUMENTS.ID) eq i>OR</cfif></cfif></cfloop><cfelse>[client_listing].[client_id]=0</cfif>)
-AND NOT[client_listing].[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
-AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+SELECT[client_id]
+,[client_name]
+,[client_active]
+,CONVERT(VARCHAR(10),[client_since], 101)AS[client_since]
+,[client_typeTEXT]
+,[client_type]
+FROM[v_client_listing]
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+<cfset i=0>AND(<cfif ARGUMENTS.ID neq "null"><cfloop index="cid" list="#ARGUMENTS.ID#"><cfset i=i+1><cfif cid neq"">[client_id]=<cfqueryparam value="#cid#"/><cfif not listLen(ARGUMENTS.ID) eq i>OR</cfif></cfif></cfloop><cfelse>[client_id]=0</cfif>)
+AND NOT[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -462,6 +467,12 @@ AND[ctrl_selectoptions].[optionName]LIKE <cfqueryparam value="#ARGUMENTS.search#
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+
 </cfcase>
 
 
@@ -852,7 +863,7 @@ WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][1]#">
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[state_information](
+INSERT INTO[client_state](
 [client_id]
 ,[si_employees]
 ,[si_nexus]
@@ -892,7 +903,7 @@ SELECT SCOPE_IDENTITY()AS[si_id]
 <cfif j.DATA[1][1] neq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[state_information]
+UPDATE[client_state]
 SET[si_employees]=<cfqueryparam value="#j.DATA[1][3]#">
 ,[si_nexus]=<cfqueryparam value="#j.DATA[1][4]#">
 ,[si_property]=<cfqueryparam value="#j.DATA[1][5]#">

@@ -8,7 +8,13 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"acctingconsulting.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
-	"fields":{MC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},MC_CATEGORYTEXT:{title:'Consulting Categories'},MC_DESCRIPTION:{title:'Task Description'},MC_STATUS:{title:'Status'},MC_DUEDATE:{title:'Due Date'}},
+	"fields":{MC_ID:{key:true,list:false,edit:false}
+			,CLIENT_ID:{list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
+			,MC_DESCRIPTION:{title:'Task Description'}
+			,MC_STATUS:{title:'Status'}
+			,MC_DUEDATE:{title:'Due Date',width:'1%'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.MC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"acctingconsulting"});'
@@ -18,7 +24,12 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"acctingconsulting.cfc",
 	"title":"Subtasks",
-	"fields":{MCS_ID:{key:true,list:false,edit:false},MCS_SEQUENCE:{title:'Sequence'},MCS_NOTES:{title:'Notes'},MCS_STATUS:{title:'Status'}},
+	"fields":{MCS_ID:{key:true,list:false,edit:false}
+			,MCS_SUBTASK:{title:'Subtask'}
+			,MCS_NOTES:{title:'Notes'}
+			,MCS_STATUS:{title:'Status'}
+			,MCS_DEPENDENCIES:{title:'Dependencies'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$(".trackers #subtask1_id").val(record.MCS_ID);_loadData({"id":"subtask1_id","group":"group2","page":"acctingconsulting"});$("#group2").accordion({active:1});;'

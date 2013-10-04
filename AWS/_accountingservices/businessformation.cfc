@@ -158,7 +158,13 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP Business Formation --->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
-SELECT[bf_id],[client_id],[client_name],[bf_owners],[bf_status]
+SELECT[bf_id]
+,[client_id]
+,[client_name]
+,[bf_owners]
+,[bf_status]
+,[bf_assignedto]
+,[bf_activity]
 FROM[v_businessformation]
 WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
@@ -167,7 +173,7 @@ WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","BF_OWNERS":"'&BF_OWNERS&'","BF_STATUS":"'&BF_STATUS&'"}'>
+<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","BF_OWNERS":"'&BF_OWNERS&'","BF_STATUS":"'&BF_STATUS&'","BF_ASSIGNEDTO":"'&BF_ASSIGNEDTO&'","BF_ACTIVITY":"'&BF_ACTIVITY&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

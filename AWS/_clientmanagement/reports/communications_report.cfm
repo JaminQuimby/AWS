@@ -3,11 +3,11 @@
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_clientmanagement">
 <cfset page.location="communications_report">
-<cfset page.formid=4>
+<cfset page.formid=4>  
 <cfset page.title="Communications Report">
 <cfset page.menuLeft="General,Responses">
 <cfset page.type="report">
-<cfset page.trackers="task_id">
+<cfset page.trackers="task_id,client_id">
 <cfset page.plugins.disable="ALL">
 <!DOCTYPE html> 
 

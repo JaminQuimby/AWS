@@ -34,8 +34,6 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-
-
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
@@ -44,9 +42,6 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcatch>
 </cftry>
 </cffunction>
-
-
-
 
 
 <!--- SAVE DATA --->

@@ -23,16 +23,14 @@ SELECT
 	,[client_statelabel3]
 	,[client_statelabel4]
 	,[client_relations]
-	
-	
 	,[client_schedule_c]
 	,[client_schedule_e]
 	,[client_disregard]
 	,[client_personal_property]
-	
-	
-	
-	
+FROM[CLIENT_LISTING]
+
+
+
 	[contact_id]
 	,[contact_type]
 	,[contact_name]
@@ -54,10 +52,7 @@ SELECT
 	,[contact_taxupdate]
 	,[contact_customLabel]
 	,[contact_customValue]
-	
-	
-	
-FROM[CLIENT_LISTING]
+FROM[CLIENT_CONTACT]
 --->
 
 <!--- [LOOKUP FUNCTIONS] --->
@@ -77,19 +72,17 @@ FROM[CLIENT_LISTING]
 <cfquery datasource="AWS" name="fquery">
 SELECT[client_id]
 ,[client_name]
-,[client_typeTEXT]
+,[client_type]
 ,[client_trade_name]
 ,[client_active]
 ,[client_salutation]
 ,[client_spouse]
 ,CASE [client_credit_hold] WHEN 1 THEN 'Yes' ELSE 'No' END AS[client_credit_hold]
-
 ,[client_schedule_c]
 ,[client_schedule_e]
 ,[client_disregard]
 ,[client_personal_property]
-
- FROM[v_client_listing]
+FROM[v_client_listing]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
@@ -102,7 +95,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
+								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
 								,"CLIENT_TRADE_NAME":"'&CLIENT_TRADE_NAME&'"
 								,"CLIENT_ACTIVE":"'&CLIENT_ACTIVE&'"
 								,"CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'"
@@ -117,18 +110,12 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
-
 </cfcase>
-
-
-
-
 
 <!--- Grid 2 Entrance --->
 <cfcase value="group2">
@@ -151,7 +138,7 @@ SELECT[client_id]
 ,[contact_phone5]
 ,[contact_email1]
 ,[contact_email2]
- FROM[v_client_listing]
+ FROM[v_client_contact]
 WHERE[contact_name] IS NOT NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -186,7 +173,6 @@ WHERE[contact_name] IS NOT NULL
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
-
 </cfcase>
 </cfswitch>
 </cffunction>

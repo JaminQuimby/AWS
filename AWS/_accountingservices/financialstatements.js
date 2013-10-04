@@ -8,7 +8,13 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"financialstatements.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year'},FDS_PERIODEND:{title:'Period End'}},
+	"fields":{FDS_ID:{key:true,list:false,edit:false}
+			,CLIENT_ID:{list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,FDS_MONTHTEXT:{title:'Month'}
+			,FDS_YEAR:{title:'Year',width:'1%'}
+			,FDS_PERIODEND:{title:'Period End',width:'1%'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"financialstatements"});'
@@ -18,7 +24,9 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"financialstatements.cfc",
 	"title":"Subtasks",
-	"fields":{FDSS_ID:{key:true,list:false,edit:false},fdss_subtaskTEXT:{title:'Subtask'}},
+	"fields":{FDSS_ID:{key:true,list:false,edit:false}
+			,fdss_subtaskTEXT:{title:'Subtask'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#subtask1_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"financialstatements"});'

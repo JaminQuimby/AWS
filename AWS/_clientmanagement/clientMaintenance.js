@@ -42,7 +42,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"clientMaintenance.cfc",
 	"title":"Clients",
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_SALUTATION:{title:'Salutation'},CLIENT_TYPETEXT:{title:'Type'},CLIENT_SINCE:{title:'Since'}},
+	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_SALUTATION:{title:'Salutation'},CLIENT_TYPE:{title:'Type'},CLIENT_SINCE:{title:'Client Since',width:"1%"}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"client_id","group":"group1","page":"clientmaintenance"});'
@@ -52,7 +52,7 @@ _grid1_1=function(){_jGrid({
 	"grid":"grid1_1",
 	"url":"clientMaintenance.cfc",
 	"title":"Custom Fields",
-	"fields":{field_id:{key:true,list:false,edit:false},field_name:{title:'Name'},field_value:{title:'Value'}},
+	"fields":{FIELD_ID:{key:true,list:false,edit:false},FIELD_NAME:{title:'Name'},FIELD_VALUE:{title:'Value'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1_1","clientid":'+$("#client_id").val()+'}',
 	"functions":'$("#cl_fieldid").val(record.field_id);$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);_loadData({"id":"cl_fieldid","group":"group1_2","page":"clientmaintenance"});'
@@ -62,7 +62,7 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Contacts",
-	"fields":{contact_id:{key:true,list:false,edit:false},contact_name:{title:'Contact Name'},contact_phone1:{title:'Phone 1'},contact_email1:{title:'Email 1'}},
+	"fields":{CONTACT_ID:{key:true,list:false,edit:false},CONTACT_NAME:{title:'Contact Name'},CONTACT_PHONE1:{title:'Phone 1',width:'1%'},CONTACT_EMAIL1:{title:'Email 1'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3","clientid":'+$("#client_id").val()+'}',
 	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"group3","page":"clientmaintenance"});$("#group3").accordion({active:1});'
@@ -72,7 +72,7 @@ _grid4_1=function(){_jGrid({
 	"grid":"grid4_1",
 	"url":"clientMaintenance.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year'},FDS_PERIODEND:{title:'Period End'}},
+	"fields":{FDS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FDS_MONTHTEXT:{title:'Month'},FDS_YEAR:{title:'Year',width:"1%"},FDS_PERIODEND:{title:'Period End',width:"1%"}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_1"}',
 	"functions":'$("#fds_id").val(record.FDS_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?fds_id="+$("#fds_id").val();'
@@ -82,7 +82,7 @@ _grid4_2=function(){_jGrid({
 	"grid":"grid4_2",
 	"url":"clientMaintenance.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
-	"fields":{MC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},MC_CATEGORYTEXT:{title:'Consulting Categories'},MC_DESCRIPTION:{title:'Task Description'},MC_STATUS:{title:'Status'},MC_DUEDATE:{title:'Due Date'}},
+	"fields":{MC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},MC_CATEGORYTEXT:{title:'Consulting Categories'},MC_DESCRIPTION:{title:'Task Description'},MC_STATUS:{title:'Status'},MC_DUEDATE:{title:'Due Date',width:"1%"}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_2"}',
 	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?mc_id="+$("#mc_id").val();'
@@ -92,7 +92,7 @@ _grid4_3=function(){_jGrid({
 	"grid":"grid4_3",
 	"url":"clientMaintenance.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PC_YEAR:{title:'Year'}},
+	"fields":{PC_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PC_YEAR:{title:'Year',width:"1%"}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_3"}',
 	"functions":'$("#pc_id").val(record.PC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollchecks.cfm?pc_id="+$("#pc_id").val();'
@@ -102,7 +102,7 @@ _grid4_4=function(){_jGrid({
 	"grid":"grid4_4",
 	"url":"clientMaintenance.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PT_YEAR:{title:'Year'}},
+	"fields":{PT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PT_YEAR:{title:'Year',width:"1%"}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_4"}',
 	"functions":'$("#pt_id").val(record.PT_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrolltaxes.cfm?pt_id="+$("#pt_id").val();'
@@ -112,7 +112,7 @@ _grid4_5=function(){_jGrid({
 	"grid":"grid4_5",
 	"url":"clientMaintenance.cfc",
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year'}},
+	"fields":{TR_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},TR_TAXYEAR:{title:'Tax Year',width:"1%"}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_5"}',
 	"functions":'$("#tr_id").val(record.TR_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?tr_id="+$("#tr_id").val();'
@@ -122,7 +122,7 @@ _grid4_6=function(){_jGrid({
 	"grid":"grid4_6",
 	"url":"clientMaintenance.cfc",
 	"title":"Other Filings",
-	"fields":{OF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},OF_TAXYEAR:{title:'Tax Year'}},
+	"fields":{OF_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},OF_TAXYEAR:{title:'Tax Year',width:"1%"}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_6"}',
 	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm?of_id="+$("#of_id").val();'
@@ -132,7 +132,7 @@ _grid6=function(){_jGrid({
 	"grid":"grid6",
 	"url":"clientMaintenance.cfc",
 	"title":"State Information",
-	"fields":{SI_ID:{key:true,list:false,edit:false},si_state:{title:'State'},si_revenue:{title:'Revenue',type:"checkbox",values:{'0':'No','1':'Yes'}},si_employees:{title:'Employees',type:"checkbox",values:{'0':'No','1':'Yes'}},si_property:{title:'Property',type:"checkbox",values:{'0':'No','1':'Yes'}},si_nexus:{title:'Nexus',type:"checkbox",values:{'0':'No','1':'Yes'}},si_reason:{title:'Reason'},si_registered:{title:'Registered',type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc1:{title:$('#g6_g1_label1').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc2:{title:$('#g6_g1_label2').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc3:{title:$('#g6_g1_label3').val(),type:"checkbox",values:{'0':'No','1':'Yes'}},si_misc4:{title:$('#g6_g1_label4').val(),type:"checkbox",values:{'0':'No','1':'Yes'}}},
+	"fields":{SI_ID:{key:true,list:false,edit:false},SI_STATETEXT:{title:'State'},SI_REVENUE:{title:'Revenue',width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_EMPLOYEES:{title:'Employees',width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_PROPERTY:{title:'Property',width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_NEXUS:{title:'Nexus',width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_REASON:{title:'Reason'},SI_REGISTERED:{title:'Registered',width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_MISC1:{title:$('#g6_g1_label1').val(),width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_MISC2:{title:$('#g6_g1_label2').val(),width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_MISC3:{title:$('#g6_g1_label3').val(),width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}},SI_MISC4:{title:$('#g6_g1_label4').val(),width:"1%",type:"checkbox",values:{'0':'No','1':'Yes'}}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g6_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group6","clientid":'+$("#client_id").val()+'}',
 	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"group6","page":"clientmaintenance"});$("#group6").accordion({active:1});'
@@ -142,7 +142,7 @@ _grid7=function(){_jGrid({
 	"grid":"grid7",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Relations",
-	"fields":{client_id:{key:true,list:false,edit:false},client_name:{title:'Client Name'},client_active:{title:'Active',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }},client_since:{title:'Client Since'},client_typeTEXT:{title:'Client Type'}},
+	"fields":{CLIENT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CLIENT_ACTIVE:{title:'Active',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }},CLIENT_SINCE:{title:'Client Since'},CLIENT_TYPETEXT:{title:'Client Type'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g7_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#g7_group").val()+'","loadType":"group7","clientid":'+$("#client_id").val()+'}',
 	"functions":'_loadData({"id":"client_id","group":"group7","page":"clientmaintenance"});$("#group7").accordion({active:1});'

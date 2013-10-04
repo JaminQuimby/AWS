@@ -6,7 +6,12 @@ _group1=function(){}
 	"grid":"grid1",
 	"url":"financialtaxplanning.cfc",
 	"title":"Financial Tax Planning",
-	"fields":{FTP_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},FTP_STATUS:{title:'Status'}},
+	"fields":{FTP_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,FTP_STATUS:{title:'Status'}
+			,FTP_CATEGORY:{title:'Category'}
+			,FTP_ASSIGNEDTO:{title:'Assigned To'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.FTP_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"financialtaxplanning"});'

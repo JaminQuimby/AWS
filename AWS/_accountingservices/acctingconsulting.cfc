@@ -130,22 +130,20 @@ AND[optionValue_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP Group1 --->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
-SELECT[MC_ID]
-,[MC_ASSIGNEDTO]
-,[CLIENT_ID]
-,[CLIENT_NAME]
-,[MC_CATEGORYTEXT]
-,[MC_DESCRIPTION]
-,[MC_STATUS]
-,CONVERT(VARCHAR(10),[MC_DUEDATE], 101)AS[MC_DUEDATE]
+SELECT[mc_id]
+,[mc_assignedto]
+,[client_id]
+,[client_name]
+,[mc_categoryTEXT]
+,[mc_description]
+,[mc_status]
+,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
-WHERE[CLIENT_NAME]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>
 ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]
 <cfelse>
 ORDER BY[client_name]</cfif>
-
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -171,9 +169,10 @@ SELECT
 ,[mcs_dependencies]
 ,[mcs_duedate]
 ,[mcs_estimatedtime]
-,[mcs_notes]
+,CASE WHEN LEN([mcs_notes]) >= 101 THEN SUBSTRING([mcs_notes],0,100) +  '...' ELSE [mcs_notes] END AS[mcs_notes]
 ,[mcs_sequence]
 ,[mcs_status]
+,[mcs_subtask] 
 FROM[managementconsulting_subtask]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
@@ -182,7 +181,7 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryp
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'","MCS_SEQUENCE":"'&MCS_SEQUENCE&'","MCS_NOTES":"'&MCS_NOTES&'","MCS_STATUS":"'&MCS_STATUS&'"}'>
+<cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'","MCS_SUBTASK":"'&MCS_SUBTASK&'","MCS_NOTES":"'&MCS_NOTES&'","MCS_STATUS":"'&MCS_STATUS&'","MCS_DEPENDENCIES":"'&MCS_DEPENDENCIES&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

@@ -8,7 +8,17 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"administrativetasks.cfc",
 	"title":"Client Administrative Tasks",
-	"fields":{CAS_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client'},CAS_DUEDATE:{title:'Due Date'}},
+	"fields":{CAS_ID:{key:true,list:false,edit:false}
+			,CLIENT_ID:{list:false,edit:false}
+			,CLIENT_NAME:{title:'Client'}
+			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
+			,CAS_ASSIGNTO:{title:'Assigned To',width:'1%'}
+			,CAS_CATEGORY:{title:'Category'}
+			,CAS_TASKDESC:{title:'Description'}
+			,CAS_STATUS:{title:'Status'}
+			,CAS_COMPLETED:{title:'Completed',width:'1%'}
+			,CAS_PRIORITY:{title:'Priotity',width:'1%'}								
+			},			
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#task_id").val(record.CAS_ID);$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"administrativetasks"});'
