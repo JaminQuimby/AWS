@@ -15,7 +15,7 @@ _grid1=function(){_jGrid({
 			,PT_MONTH:{title:'Month'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 			,PT_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'}
-			,PT_MISSINGINFO:{title:'Missing Info',width:'1%'}
+			,PT_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,PT_MISSINGRECEIVED:{title:'Missing Information Received',width:'1%'}
 			,PT_ENTRY_DATECOMPLETED:{title:'Entry',width:'1%'}
 			,PT_REC_DATECOMPLETED:{title:'Reconcile',width:'1%'}

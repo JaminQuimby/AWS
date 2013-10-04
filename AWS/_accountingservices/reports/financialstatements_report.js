@@ -12,8 +12,8 @@ _grid1=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
 			,FDS_MONTH:{title:'Month'}
-			,FDS_MISSINGINFO:{title:'Missing Info',width:'1%'}
-			,FDS_COMPILEMI:{title:'Compile Missing Info',width:'1%'}
+			,FDS_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_COMPILEMI:{title:'Compile Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_OBTAININFO:{title:'Info',width:'1%'}
 			,FDS_SORT:{title:'Sort',width:'1%'}
 			,FDS_CHECKS:{title:'Checks',width:'1%'}
@@ -39,8 +39,8 @@ _grid2=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
 			,FDS_MONTH:{title:'Month'}
-			,FDS_MISSINGINFO:{title:'Missing Info',width:'1%'}
-			,FDS_COMPILEMI:{title:'Compile Missing Info',width:'1%'}
+			,FDS_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_COMPILEMI:{title:'Compile Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_OBTAININFO:{title:'Info',width:'1%'}
 			,FDS_SORT:{title:'Sort',width:'1%'}
 			,FDS_CHECKS:{title:'Checks',width:'1%'}

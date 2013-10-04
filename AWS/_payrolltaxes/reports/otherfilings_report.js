@@ -15,7 +15,7 @@ _grid1=function(){_jGrid({
 			,OF_STATE:{title:'State'}
 			,OF_FORM:{title:'Form',width:'1%'}
 			,OF_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'}
-			,OF_MISSINGINFO:{title:'Missing Info',width:'1%'}
+			,OF_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,OF_MIRECEIVED:{title:'Missing Information Received',width:'1%'}
 			,OF_PREPARATION_DATECOMPLETED:{title:'Preparation',width:'1%'}
 			,OF_REVIEW_DATECOMPLETED:{title:'Review',width:'1%'}

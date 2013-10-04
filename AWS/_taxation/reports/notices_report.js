@@ -14,11 +14,11 @@ _grid1=function(){_jGrid({
 			,N_1_TAXFORM:{title:'Tax Form'}
 			,N_1_NOTICENUMBER:{title:'Notice Number'}
 			,N_NOTICESTATUS:{title:'Notice Status'}
-			,N_3_MISSINGINFO:{title:'Missing Information',width:"1%"}
+			,N_3_MISSINGINFO:{title:'Missing Information',width:"1%",type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,N_2_DATENOTICEREC:{title:'Date Notice Received',width:"1%"}
 			,N_2_RESDUEDATE:{title:'Response Due Date',width:"1%"}
 			,N_2_RESSUBMITED:{title:'Response Submitted',width:"1%"}
-			,N_2_REVREQUIRED:{title:'Review Required',width:"1%"}
+			,N_2_REVREQUIRED:{title:'Review Required',width:"1%",type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,N_1_FEES:{title:'Fees'}
 			,N_1_PAID:{title:'Payment Status'}
 },
