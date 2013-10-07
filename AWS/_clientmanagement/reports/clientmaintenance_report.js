@@ -16,11 +16,11 @@ _grid1=function(){_jGrid({
 			,CLIENT_ACTIVE:{title:'Active',width:"1%"}
 			,CLIENT_SALUTATION:{title:'Salutation'}
 			,CLIENT_SPOUSE:{title:'Spouse'}
-			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'1%'}
-			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'1%'}
-			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'1%'}
-			,CLIENT_DISREGARD:{title:'Disregarded',width:'1%'}
-			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%'}
+			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_DISREGARD:{title:'Disregarded',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 			
 /*			

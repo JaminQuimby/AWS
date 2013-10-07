@@ -148,7 +148,7 @@ WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[pc_id]
 ,[pc_year]
 ,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
-,CASE [pc_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [pc_missinginfo]
+,[pc_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]

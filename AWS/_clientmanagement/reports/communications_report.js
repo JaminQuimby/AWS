@@ -14,13 +14,13 @@ _grid1=function(){_jGrid({
 			,CO_FOR:{title:'For'}
 			,CO_FEES:{title:'Fees'}
 			,CO_PAID:{title:'Paid'}
-			,CO_DATE:{title:'Date',width:"1%"}
+			,CO_DATE:{title:'Date',width:'1%'}
 			,CO_TELEPHONE:{title:'Phone'}
 			,CO_EXT:{title:'Ext'}
 			,CO_EMAILADDRESS:{title:'Email Address'}
-			,CO_RESPONSENEEDED:{title:'Response Needed',width:"1%"}
-			,CO_RETURNCALL:{title:'Return Call',width:"1%"}
-			,CO_COMPLETED:{title:'Completed',width:"1%"}
+			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RETURNCALL:{title:'Return Call',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_COMPLETED:{title:'Completed',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			},
  	"method":"f_lookupData",

@@ -18,13 +18,13 @@ _grid1=function(){_jGrid({
 			,TR_PRIORFEES:{title:'Prior Fees'}
 			,TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
 			,TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
-			,TR_G1_1_MISSINGINFO:{title:'Missing Information',width:'1%'}
+			,TR_G1_1_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,TR_G1_1_DUEDATE:{title:'Due Date',width:'1%'}
 			,TR_G1_1_READYFORREVIEW:{title:'Ready For Review',width:'1%'}
 			,TR_EXTENSIONREQUESTED:{title:'Extension Requested',width:'1%'}
 			,TR_EXTENSIONDONE:{title:'Extension Done',width:'1%'}
-			,TR_G1_2_MISSINGSIGNATURES:{title:'Missing Signatures',width:'1%'}
+			,TR_G1_2_MISSINGSIGNATURES:{title:'Missing Signatures',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_G1_2_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
 			,TR_G1_2_CONTACTED:{title:'Contacted',width:'1%'}
 			,TR_G1_1_PREPAREDBY:{title:'Prepared By',width:'1%'}
@@ -32,7 +32,7 @@ _grid1=function(){_jGrid({
 			,TR_G1_1_COMPLETED:{title:'Completed',width:'1%'}
 			,TR_G1_2_DELIVERED:{title:'Delivered',width:'1%'}
 			,TR_G1_1_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
-			,TR_G1_3_REQUIRED:{title:'PPTR Required',width:'1%'}
+			,TR_G1_3_REQUIRED:{title:'PPTR Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_G1_3_EXTENDED:{title:'PPTR Extended',width:'1%'}
 			,TR_G1_3_RFR:{title:'PPTR Ready For Review',width:'1%'}
 			,TR_G1_3_COMPLETED:{title:'PPTR Completed',width:'1%'}
@@ -60,13 +60,13 @@ _grid2=function(){_jGrid({
 			,TR_PRIORFEES:{title:'Prior Fees'}
 			,TR_G1_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
 			,TR_G1_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
-			,TR_G1_1_MISSINGINFO:{title:'Missing Information',width:'1%'}
+			,TR_G1_1_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_G1_1_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,TR_G1_1_DUEDATE:{title:'Due Date',width:'1%'}
 			,TR_G1_1_READYFORREVIEW:{title:'Ready For Review',width:'1%'}
 			,TR_EXTENSIONREQUESTED:{title:'Extension Requested',width:'1%'}
 			,TR_EXTENSIONDONE:{title:'Extension Done',width:'1%'}
-			,TR_G1_2_MISSINGSIGNATURES:{title:'Missing Signatures',width:'1%'}
+			,TR_G1_2_MISSINGSIGNATURES:{title:'Missing Signatures',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_G1_2_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
 			,TR_G1_2_CONTACTED:{title:'Contacted',width:'1%'}
 			,TR_G1_1_PREPAREDBY:{title:'Prepared By',width:'1%'}
@@ -74,7 +74,7 @@ _grid2=function(){_jGrid({
 			,TR_G1_1_COMPLETED:{title:'Completed',width:'1%'}
 			,TR_G1_2_DELIVERED:{title:'Delivered',width:'1%'}
 			,TR_G1_1_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
-			,TR_G1_3_REQUIRED:{title:'PPTR Required',width:'1%'}
+			,TR_G1_3_REQUIRED:{title:'PPTR Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_G1_3_EXTENDED:{title:'PPTR Extended',width:'1%'}
 			,TR_G1_3_RFR:{title:'PPTR Ready For Review',width:'1%'}
 			,TR_G1_3_COMPLETED:{title:'PPTR Completed',width:'1%'}

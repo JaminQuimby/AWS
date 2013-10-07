@@ -7,7 +7,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"payrolltaxes.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PT_YEAR:{title:'Year'},PT_DUEDATE:{title:'Date Due'},PT_MISSINGINFO:{title:'Missing Information'}},
+	"fields":{PT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PT_YEAR:{title:'Year'},PT_DUEDATE:{title:'Date Due'},PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.PT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrolltaxes"});'

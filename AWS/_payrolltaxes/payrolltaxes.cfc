@@ -164,7 +164,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[pt_id]
 ,[pt_year]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
-,CASE [pt_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [pt_missinginfo]
+,[pt_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_payrolltaxes]

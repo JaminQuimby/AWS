@@ -160,7 +160,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[of_id]
 ,[of_taxyear]
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
-,CASE [of_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [of_missinginfo]
+,[of_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_otherfilings]
