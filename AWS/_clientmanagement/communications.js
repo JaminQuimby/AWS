@@ -8,7 +8,13 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"communications.cfc",
 	"title":"Communications",
-	"fields":{CO_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},CO_FORTEXT:{title:'For'}},
+	"fields":{CO_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,CO_FORTEXT:{title:'For'}
+			,CO_BRIEFMESSAGE:{title:'Brief Message'}
+			,CO_CALLER:{title:'Caller'}
+			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.CO_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"communications"});_loadData({"id":"client_id","group":"assetSpouse","page":"communications"});'

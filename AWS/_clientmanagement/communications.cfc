@@ -65,8 +65,11 @@ WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[co_id]
 ,[co_forTEXT]
+,[co_briefmessage]
+,[co_caller]
+,[co_responseneeded]
 ,[client_name]
-,[CLIENT_ID]
+,[client_id]
 FROM[v_communications]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -78,7 +81,14 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CO_FORTEXT":"'&CO_FORTEXT&'"}'>
+<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CO_FORTEXT":"'&CO_FORTEXT&'"
+								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
+								,"CO_CALLER":"'&CO_CALLER&'"
+								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
