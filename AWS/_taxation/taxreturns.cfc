@@ -35,19 +35,19 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[tr_g1_1_assignedto]
-,CONVERT(VARCHAR(10),[tr_g1_1_completed], 101)AS[tr_g1_1_completed]
-,CONVERT(VARCHAR(10),[tr_g1_1_duedate], 101)AS[tr_g1_1_duedate]
-,CONVERT(VARCHAR(10),[tr_g1_1_filingdeadline], 101)AS[tr_g1_1_filingdeadline]
-,CONVERT(VARCHAR(10),[tr_g1_1_informationreceived], 101)AS[tr_g1_1_informationreceived]
-,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
-,[tr_g1_1_missinginfo]
-,[tr_g1_1_preparedby]
-,CONVERT(VARCHAR(10),[tr_g1_1_readyforreview], 101)AS[tr_g1_1_readyforreview]
-,[tr_g1_1_reviewassignedto]
-,CONVERT(VARCHAR(10),[tr_g1_1_reviewd], 101)AS[tr_g1_1_reviewd]
-,[tr_g1_1_reviewedby]
-,CONVERT(VARCHAR(10),[tr_g1_1_reviewedwithnotes], 101)AS[tr_g1_1_reviewedwithnotes]
+SELECT[tr_1_assignedto]
+,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
+,CONVERT(VARCHAR(10),[tr_1_duedate], 101)AS[tr_1_duedate]
+,CONVERT(VARCHAR(10),[tr_1_filingdeadline], 101)AS[tr_1_filingdeadline]
+,CONVERT(VARCHAR(10),[tr_1_informationreceived], 101)AS[tr_1_informationreceived]
+,CONVERT(VARCHAR(10),[tr_1_missinginforeceived], 101)AS[tr_1_missinginforeceived]
+,[tr_1_missinginfo]
+,[tr_1_preparedby]
+,CONVERT(VARCHAR(10),[tr_1_readyforreview], 101)AS[tr_1_readyforreview]
+,[tr_1_reviewassignedto]
+,CONVERT(VARCHAR(10),[tr_1_reviewd], 101)AS[tr_1_reviewd]
+,[tr_1_reviewedby]
+,CONVERT(VARCHAR(10),[tr_1_reviewedwithnotes], 101)AS[tr_1_reviewedwithnotes]
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -55,15 +55,15 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1 Subgroup2 --->
 <cfcase value="group1_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[tr_g1_2_assemblereturn], 101)AS[tr_g1_2_assemblereturn]
-,CONVERT(VARCHAR(10),[tr_g1_2_contacted], 101)AS[tr_g1_2_contacted]
-,CONVERT(VARCHAR(10),[tr_g1_2_delivered], 101)AS[tr_g1_2_delivered]
-,[tr_g1_2_deliverymethod]
-,[tr_g1_2_emailed]
-,[tr_g1_2_messageleft]
-,[tr_g1_2_missingsignatures]
-,[tr_g1_2_multistatereturn]
-,[tr_g1_2_paymentstatus]
+SELECT CONVERT(VARCHAR(10),[tr_2_assemblereturn], 101)AS[tr_2_assemblereturn]
+,CONVERT(VARCHAR(10),[tr_2_contacted], 101)AS[tr_2_contacted]
+,CONVERT(VARCHAR(10),[tr_2_delivered], 101)AS[tr_2_delivered]
+,[tr_2_deliverymethod]
+,[tr_2_emailed]
+,[tr_2_messageleft]
+,[tr_2_missingsignatures]
+,[tr_2_multistatereturn]
+,[tr_2_paymentstatus]
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -71,16 +71,16 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[tr_g1_3_assignedto]
-,CONVERT(VARCHAR(10),[tr_g1_3_completed], 101)AS[tr_g1_3_completed]
-,[tr_g1_3_currentfees]
-,CONVERT(VARCHAR(10),[tr_g1_3_delivered], 101)AS[tr_g1_3_delivered]
-,CONVERT(VARCHAR(10),[tr_g1_3_extended], 101)AS[tr_g1_3_extended]
-,[tr_g1_3_paymentstatus]
-,[tr_g1_3_pptresttime]
-,[tr_g1_3_priorfees]
-,[tr_g1_3_required]
-,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
+SELECT[tr_3_assignedto]
+,CONVERT(VARCHAR(10),[tr_3_completed], 101)AS[tr_3_completed]
+,[tr_3_currentfees]
+,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
+,CONVERT(VARCHAR(10),[tr_3_extended], 101)AS[tr_3_extended]
+,[tr_3_paymentstatus]
+,[tr_3_pptresttime]
+,[tr_3_priorfees]
+,[tr_3_required]
+,CONVERT(VARCHAR(10),[tr_3_rfr], 101)AS[tr_3_rfr]
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -89,13 +89,13 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group1_4">
 <cfquery datasource="AWS" name="fQuery">
 SELECT
-CONVERT(CHAR(10),[tr_g1_4_dropoffappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_g1_4_dropoffappointment, 100),7)AS[tr_g1_4_dropoffappointment]
-,[tr_g1_4_dropoffappointmentlength]
-,[tr_g1_4_dropoffappointmentwith]
-,CONVERT(CHAR(10),[tr_g1_4_pickupappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_g1_4_pickupappointment, 100),7)AS[tr_g1_4_pickupappointment]
-,[tr_g1_4_pickupappointmentlength]
-,[tr_g1_4_pickupappointmentwith]
-,[tr_g1_4_whileyouwaitappt]
+CONVERT(CHAR(10),[tr_4_dropoffappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_4_dropoffappointment, 100),7)AS[tr_4_dropoffappointment]
+,[tr_4_dropoffappointmentlength]
+,[tr_4_dropoffappointmentwith]
+,CONVERT(CHAR(10),[tr_4_pickupappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_4_pickupappointment, 100),7)AS[tr_4_pickupappointment]
+,[tr_4_pickupappointmentlength]
+,[tr_4_pickupappointmentwith]
+,[tr_4_whileyouwaitappt]
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -114,6 +114,65 @@ FROM[TAXRETURNS_STATE]
 WHERE[TRST_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
+
+
+
+<!--- Load Group2 Subgroup1 --->
+<cfcase value="group2_1">
+<cfquery datasource="AWS" name="fQuery">
+SELECT [trst_1_assignedto]
+,CONVERT(VARCHAR(10),[trst_1_completed], 101)AS[trst_1_completed]
+,CONVERT(VARCHAR(10),[trst_1_duedate], 101)AS[trst_1_duedate]
+,CONVERT(VARCHAR(10),[trst_1_informationreceived], 101)AS[trst_1_informationreceived]
+,CONVERT(VARCHAR(10),[trst_1_missinginforeceived], 101)AS[trst_1_missinginforeceived]
+,[trst_1_missinginformation]
+,[trst_1_preparedby]
+,CONVERT(VARCHAR(10),[trst_1_readyforreview], 101)AS[trst_1_readyforreview]
+,[trst_1_reviewassignedto]
+,CONVERT(VARCHAR(10),[trst_1_reviewed], 101)AS[trst_1_reviewed]
+,[trst_1_reviewedby]
+,CONVERT(VARCHAR(10),[trst_1_reviewedwithnotes], 101)AS[trst_1_reviewedwithnotes]
+FROM[taxreturns_state]
+WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
+<!--- Load Group2 Subgroup2 --->
+<cfcase value="group2_2">
+<cfquery datasource="AWS" name="fQuery">
+SELECT  CONVERT(VARCHAR(10),[trst_2_assemblereturn], 101)AS[trst_2_assemblereturn]
+,CONVERT(VARCHAR(10),[trst_2_contacted], 101)AS[trst_2_contacted]
+,[trst_2_currentfees]
+,CONVERT(VARCHAR(10),[trst_2_delivered], 101)AS[trst_2_delivered]
+,[trst_2_deliverymethod]
+,[trst_2_emailed]
+,[trst_2_messageleft]
+,[trst_2_missingsignatures]
+,[trst_2_paymentstatus]
+,[trst_2_priorfees]
+,[trst_2_requiredforms]
+FROM[taxreturns_state]
+WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+<!--- Load Group2 Subgroup3 --->
+<cfcase value="group2_3">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[trst_3_pptrassignedto]
+,CONVERT(VARCHAR(10),[trst_3_pptrcompleted], 101)AS[trst_3_pptrcompleted]
+,[trst_3_pptrcurrentfees]
+,CONVERT(VARCHAR(10),[trst_3_pptrdelivered], 101)AS[trst_3_pptrdelivered]
+,CONVERT(VARCHAR(10),[trst_3_pptrextended], 101)AS[trst_3_pptrextended]
+,[trst_3_paymentstatus]
+,[trst_3_pptrpriorfees]
+,[trst_3_pptrrequired]
+,CONVERT(VARCHAR(10),[trst_3_pptrrfr], 101)AS[trst_3_pptrrfr]
+FROM[taxreturns_state]
+WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
 <!--- Load Group 3--->
 <cfcase value="group3">
 <cfquery datasource="AWS" name="fQuery">
@@ -122,10 +181,33 @@ SELECT[trsc_id]
 ,[trsc_reviewassignedto]
 ,[trsc_schedule]
 ,[trsc_status]
-FROM[TAXRETURNS_SCHEDULE]
-WHERE[TRSC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+FROM[taxreturns_schedule]
+WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
+<!--- Load Group3 Subgroup1 --->
+<cfcase value="group3_1">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[trsc_1_assignedto]
+,CONVERT(VARCHAR(10),[trsc_1_completed], 101)AS[trsc_1_completed]
+,CONVERT(VARCHAR(10),[trsc_1_duedate], 101)AS[trsc_1_duedate]
+,CONVERT(VARCHAR(10),[trsc_1_informationreceived], 101)AS[trsc_1_informationreceived]
+,CONVERT(VARCHAR(10),[trsc_1_missinginforeceived], 101)AS[trsc_1_missinginforeceived]
+,[trsc_1_missinginfo]
+,[trsc_1_preparedby]
+,CONVERT(VARCHAR(10),[trsc_1_readyforreview], 101)AS[trsc_1_readyforreview]
+,[trsc_1_reviewassignedto]
+,CONVERT(VARCHAR(10),[trsc_1_reviewed], 101)AS[trsc_1_reviewed]
+,[trsc_1_reviewedby]
+,CONVERT(VARCHAR(10),[trsc_1_reviewedwithnotes], 101)AS[trsc_1_reviewedwithnotes]
+FROM[taxreturns_schedule]
+WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
+
+
 <!--- Asset Spouse --->
 <cfcase value="assetSpouse">
 <cfquery datasource="AWS" name="fQuery">
@@ -331,19 +413,19 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
-SET[tr_g1_1_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[tr_g1_1_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_g1_1_duedate]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[tr_g1_1_filingdeadline]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[tr_g1_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#"  null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[tr_g1_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[tr_g1_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[tr_g1_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[tr_g1_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#"  null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[tr_g1_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[tr_g1_1_reviewd]=<cfqueryparam value="#j.DATA[1][12]#"  null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[tr_g1_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[tr_g1_1_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][14]#"  null="#LEN(j.DATA[1][14]) eq 0#"/>
+SET[tr_1_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[tr_1_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[tr_1_duedate]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[tr_1_filingdeadline]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[tr_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#"  null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[tr_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[tr_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[tr_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tr_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#"  null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[tr_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[tr_1_reviewd]=<cfqueryparam value="#j.DATA[1][12]#"  null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tr_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[tr_1_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][14]#"  null="#LEN(j.DATA[1][14]) eq 0#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -357,15 +439,15 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
-SET[tr_g1_2_assemblereturn]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
-,[tr_g1_2_contacted]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_g1_2_delivered]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[tr_g1_2_deliverymethod]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[tr_g1_2_emailed]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[tr_g1_2_messageleft]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[tr_g1_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[tr_g1_2_multistatereturn]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[tr_g1_2_paymentstatus]=<cfqueryparam value="#j.DATA[1][10]#"/>
+SET[tr_2_assemblereturn]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
+,[tr_2_contacted]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[tr_2_delivered]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[tr_2_deliverymethod]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[tr_2_emailed]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[tr_2_messageleft]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tr_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[tr_2_multistatereturn]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tr_2_paymentstatus]=<cfqueryparam value="#j.DATA[1][10]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -376,16 +458,16 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
-SET[tr_g1_3_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[tr_g1_3_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_g1_3_currentfees]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[tr_g1_3_delivered]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[tr_g1_3_extended]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[tr_g1_3_paymentstatus]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[tr_g1_3_pptresttime]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[tr_g1_3_priorfees]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[tr_g1_3_required]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[tr_g1_3_rfr]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+SET[tr_3_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[tr_3_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[tr_3_currentfees]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[tr_3_delivered]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[tr_3_extended]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[tr_3_paymentstatus]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tr_3_pptresttime]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[tr_3_priorfees]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[tr_3_required]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[tr_3_rfr]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -397,13 +479,13 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
 SET
-[tr_g1_4_dropoffappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][2],'YYYY-MM-DD')# #timeFormat(j.DATA[1][2],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][2]) eq 0#"/>
-,[tr_g1_4_dropoffappointmentlength]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[tr_g1_4_dropoffappointmentwith]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[tr_g1_4_pickupappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][5],'YYYY-MM-DD')# #timeFormat(j.DATA[1][5],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[tr_g1_4_pickupappointmentlength]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[tr_g1_4_pickupappointmentwith]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[tr_g1_4_whileyouwaitappt]=<cfqueryparam value="#j.DATA[1][8]#"/>
+[tr_4_dropoffappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][2],'YYYY-MM-DD')# #timeFormat(j.DATA[1][2],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][2]) eq 0#"/>
+,[tr_4_dropoffappointmentlength]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[tr_4_dropoffappointmentwith]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[tr_4_pickupappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][5],'YYYY-MM-DD')# #timeFormat(j.DATA[1][5],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[tr_4_pickupappointmentlength]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[tr_4_pickupappointmentwith]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tr_4_whileyouwaitappt]=<cfqueryparam value="#j.DATA[1][8]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

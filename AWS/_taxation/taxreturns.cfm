@@ -6,7 +6,7 @@
 <cfset page.formid=6>
 <cfset page.title="Tax Returns">
 <cfset page.menuLeft="General,States,Schedule">
-<cfset page.trackers="task_id,subtask1_id,subtask2_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group3">
+<cfset page.trackers="task_id,subtask1_id,subtask2_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group3_1">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="../assets/inc/header.cfm">
@@ -129,7 +129,56 @@
 <div><label for="g2_reviewassignedto">Review Assigned To</label><select id="g2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_completed">Completed</label><input type="text" class="date" id="g2_completed" ></div>
 </div>
+<!--- GROUP2 SUBGROUP1 --->
+<h4 onClick='_loadData({"id":"subtask1_id","group":"group2_1","page":"taxreturns"});$("#isLoaded_group2_1").val(1);'>Preparation</h4>
+<div>
+<div><label for="g2_g1_informationreceived">Information Received</label><input type="text" class="date" id="g2_g1_informationreceived" ></div>
+<div><label for="g2_g1_duedate">Due Date</label><input type="text" class="date" id="g2_g1_duedate"></div>
+<div><input id="g2_g1_missinginformation" type="checkbox"><label for="g2_g1_missinginformation">Missing Information</label></div>
+<div><label for="g2_g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_g1_missinginforeceived" ></div>
+<div><label for="g2_g1_assignedto">Assigned To</label><select id="g2_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g1_preparedby">Prepared By</label><select id="g2_g1_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g1_readyforreview">Ready for Review</label><input type="text" class="date" id="g2_g1_readyforreview" ></div>
+<div><label for="g2_g1_reviewassignedto">Review Assigned To</label><select id="g2_g1_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g1_reviewed">Reviewed</label><input type="text" class="date" id="g2_g1_reviewed" ></div>
+<div><label for="g2_g1_reviewedby">Reviewed By</label><select id="g2_g1_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g1_reviewedwithnotes">Reviewed With Notes</label><input type="text" class="date" id="g2_g1_reviewedwithnotes" ></div>
+<div><label for="g2_g1_completed">Completed</label><input type="text" class="date" id="g2_g1_completed" ></div>
 </div>
+<!--- GROUP2 SUBGROUP2 --->
+<h4 onClick='_loadData({"id":"subtask1_id","group":"group2_2","page":"taxreturns"});$("#isLoaded_group2_2").val(1)'>Assembly &amp; Delivery</h4>
+<div>
+<div><label for="g2_g2_assemblereturn">Assemble Return</label><input type="text" class="date" id="g2_g2_assemblereturn" ></div>
+<div><label for="g2_g2_contacted">Contacted</label><input type="text" class="date" id="g2_g2_contacted" ></div>
+<div><input id="g2_g2_messageleft" type="checkbox"><label for="g2_g2_messageleft">Message Left</label></div>
+<div><input id="g2_g2_emailed" type="checkbox"><label for="g2_g2_emailed">Emailed</label></div>
+<div><input id="g2_g2_missingsignatures" type="checkbox"><label for="g2_g2_missingsignatures">Missing Signatures</label></div>
+<div><label for="g2_g2_delivered">Delivered</label><input type="text" class="date" id="g2_g2_delivered" ></div>
+<div><label for="g2_g2_deliverymethod">Delivery Method</label><select id="g2_g2_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g2_paymentstatus">Payment Status</label><select id="g2_g2_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g2_currentfees">Current Fees</label><input type="text" id="g2_g2_currentfees" ></div>
+<div><label for="g2_g2_priorfees">Prior Fees</label><input type="text" id="g2_g2_priorfees" ></div>
+<div><label for="g2_g2_requiredforms">Required Forms</label><select  id="g2_g2_requiredforms" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+
+
+</div>
+<!--- GROUP2 SUBGROUP3 --->
+<h4 onClick='_loadData({"id":"subtask1_id","group":"group2_3","page":"taxreturns"});$("#isLoaded_group2_3").val(1)'>Personal Property Tax</h4>
+<div>
+<div><input id="g2_g3_required" type="checkbox"><label for="g2_g3_required">PPTR Required</label></div>
+<div><label for="g2_g3_assignedto">PPTR Assigned To</label><select id="g2_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g3_extended">PPTR Extended</label><input type="text" class="date" id="g2_g3_extended" ></div>
+<div><label for="g2_g3_rfr">PPTR RFR</label><input type="text" class="date" id="g2_g3_rfr" ></div>
+<div><label for="g2_g3_completed">PPTR Completed</label><input type="text" class="date" id="g2_g3_completed" ></div>
+<div><label for="g2_g3_delivered">PPTR Delivered</label><input type="text" class="date" id="g2_g3_delivered" ></div>
+<div><label for="g2_g3_paymentstatus">Payment Status</label><select id="g2_g3_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_g3_currentfees">PPTR Current Fees</label><input type="text" id="g2_g3_currentfees" ></div>
+<div><label for="g2_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g2_g3_priorfees" ></div>
+</div>
+</div>
+
+
+
 <!--- Group3 --->
 <div id="group3" class="gf-checkbox">
 <h3 onClick="_grid3();">Schedule</h3>
@@ -146,6 +195,23 @@
 <div><label for="g3_status">Status</label><select id="g3_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_assignedto">Assigned To</label><select id="g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_reviewassignedto">Review Assigned To</label><select id="g3_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+</div>
+
+<h4 onClick='_loadData({"id":"subtask2_id","group":"group3_1","page":"taxreturns"});$("#isLoaded_group3_1").val(1)'>Preparation</h4>
+<div>
+<div><label for="g3_g1_informationreceived">Information Received</label><input type="text" class="date" id="g3_g1_informationreceived" ></div>
+<div><label for="g3_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g3_g1_filingdeadline"></div>
+<div><label for="g3_g1_duedate">Due Date</label><input type="text" class="date" id="g3_g1_duedate"></div>
+<div><input id="g3_g1_missinginformation" type="checkbox"><label for="g3_g1_missinginformation">Missing Information</label></div>
+<div><label for="g3_g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g3_g1_missinginforeceived" ></div>
+<div><label for="g3_g1_assignedto">Assigned To</label><select id="g3_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g3_g1_preparedby">Prepared By</label><select id="g3_g1_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g3_g1_readyforreview">Ready for Review</label><input type="text" class="date" id="g3_g1_readyforreview" ></div>
+<div><label for="g3_g1_reviewassignedto">Review Assigned To</label><select id="g3_g1_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g3_g1_reviewed">Reviewed</label><input type="text" class="date" id="g3_g1_reviewed" ></div>
+<div><label for="g3_g1_reviewedby">Reviewed By</label><select id="g3_g1_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g3_g1_reviewedwithnotes">Reviewed With Notes</label><input type="text" class="date" id="g3_g1_reviewedwithnotes" ></div>
+<div><label for="g3_g1_completed">Completed</label><input type="text" class="date" id="g3_g1_completed" ></div>
 </div>
 </div>
 

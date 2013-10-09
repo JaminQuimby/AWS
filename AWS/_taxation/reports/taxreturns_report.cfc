@@ -18,33 +18,33 @@
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_g1_1_informationreceived], 101)AS[tr_g1_1_informationreceived]
-,[tr_g1_1_assignedto]
+,CONVERT(VARCHAR(10),[tr_1_informationreceived], 101)AS[tr_1_informationreceived]
+,[tr_1_assignedto]
 ,[tr_priorfees]
-,CONVERT(VARCHAR(10),[tr_g1_4_dropoffappointment], 101)AS[tr_g1_4_dropoffappointment]
-,CONVERT(VARCHAR(10),[tr_g1_4_pickupappointment], 101)AS[tr_g1_4_pickupappointment]
-,[tr_g1_1_missinginfo]
-,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_g1_1_duedate], 101)AS[tr_g1_1_duedate]
-,CONVERT(VARCHAR(10),[tr_g1_1_readyforreview], 101)AS[tr_g1_1_readyforreview]
+,CONVERT(VARCHAR(10),[tr_4_dropoffappointment], 101)AS[tr_4_dropoffappointment]
+,CONVERT(VARCHAR(10),[tr_4_pickupappointment], 101)AS[tr_4_pickupappointment]
+,[tr_1_missinginfo]
+,CONVERT(VARCHAR(10),[tr_1_missinginforeceived], 101)AS[tr_1_missinginforeceived]
+,CONVERT(VARCHAR(10),[tr_1_duedate], 101)AS[tr_1_duedate]
+,CONVERT(VARCHAR(10),[tr_1_readyforreview], 101)AS[tr_1_readyforreview]
 ,CONVERT(VARCHAR(10),[tr_extensionrequested], 101)AS[tr_extensionrequested]
 ,CONVERT(VARCHAR(10),[tr_extensiondone], 101)AS[tr_extensiondone]
-,[tr_g1_2_missingsignatures]
-,CONVERT(VARCHAR(10),[tr_g1_2_assemblereturn], 101)AS[tr_g1_2_assemblereturn]
-,CONVERT(VARCHAR(10),[tr_g1_2_contacted], 101)AS[tr_g1_2_contacted]
-,[tr_g1_1_preparedby]
-,CONVERT(VARCHAR(10),[tr_g1_1_reviewedwithnotes], 101)AS[tr_g1_1_reviewedwithnotes]
-,CONVERT(VARCHAR(10),[tr_g1_1_completed], 101)AS[tr_g1_1_completed]
-,CONVERT(VARCHAR(10),[tr_g1_2_delivered], 101)AS[tr_g1_2_delivered]
-,CONVERT(VARCHAR(10),[tr_g1_1_filingdeadline], 101)AS[tr_g1_1_filingdeadline]
-,[tr_g1_3_required]
-,CONVERT(VARCHAR(10),[tr_g1_3_extended], 101)AS[tr_g1_3_extended]
-,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
-,CONVERT(VARCHAR(10),[tr_g1_3_completed], 101)AS[tr_g1_3_completed]
-,CONVERT(VARCHAR(10),[tr_g1_3_delivered], 101)AS[tr_g1_3_delivered]
-,[tr_g1_3_currentfees]
+,[tr_2_missingsignatures]
+,CONVERT(VARCHAR(10),[tr_2_assemblereturn], 101)AS[tr_2_assemblereturn]
+,CONVERT(VARCHAR(10),[tr_2_contacted], 101)AS[tr_2_contacted]
+,[tr_1_preparedby]
+,CONVERT(VARCHAR(10),[tr_1_reviewedwithnotes], 101)AS[tr_1_reviewedwithnotes]
+,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
+,CONVERT(VARCHAR(10),[tr_2_delivered], 101)AS[tr_2_delivered]
+,CONVERT(VARCHAR(10),[tr_1_filingdeadline], 101)AS[tr_1_filingdeadline]
+,[tr_3_required]
+,CONVERT(VARCHAR(10),[tr_3_extended], 101)AS[tr_3_extended]
+,CONVERT(VARCHAR(10),[tr_3_rfr], 101)AS[tr_3_rfr]
+,CONVERT(VARCHAR(10),[tr_3_completed], 101)AS[tr_3_completed]
+,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
+,[tr_3_currentfees]
 ,[tr_currentfees]
-,[tr_g1_2_paymentstatus]
+,[tr_2_paymentstatus]
 ,[client_type]
 ,[client_name]
 ,[client_id]
@@ -64,33 +64,33 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
-								,"TR_G1_1_INFORMATIONRECEIVED":"'&TR_G1_1_INFORMATIONRECEIVED&'"
-								,"TR_G1_1_ASSIGNEDTO":"'&TR_G1_1_ASSIGNEDTO&'"
+								,"TR_1_INFORMATIONRECEIVED":"'&TR_1_INFORMATIONRECEIVED&'"
+								,"TR_1_ASSIGNEDTO":"'&TR_1_ASSIGNEDTO&'"
 								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
-								,"TR_G1_4_DROPOFFAPPOINTMENT":"'&TR_G1_4_DROPOFFAPPOINTMENT&'"
-								,"TR_G1_4_PICKUPAPPOINTMENT":"'&TR_G1_4_PICKUPAPPOINTMENT&'"
-								,"TR_G1_1_MISSINGINFO":"'&TR_G1_1_MISSINGINFO&'"
-								,"TR_G1_1_MISSINGINFORECEIVED":"'&TR_G1_1_MISSINGINFORECEIVED&'"
-								,"TR_G1_1_DUEDATE":"'&TR_G1_1_DUEDATE&'"
-								,"TR_G1_1_READYFORREVIEW":"'&TR_G1_1_READYFORREVIEW&'"
+								,"TR_4_DROPOFFAPPOINTMENT":"'&TR_4_DROPOFFAPPOINTMENT&'"
+								,"TR_4_PICKUPAPPOINTMENT":"'&TR_4_PICKUPAPPOINTMENT&'"
+								,"TR_1_MISSINGINFO":"'&TR_1_MISSINGINFO&'"
+								,"TR_1_MISSINGINFORECEIVED":"'&TR_1_MISSINGINFORECEIVED&'"
+								,"TR_1_DUEDATE":"'&TR_1_DUEDATE&'"
+								,"TR_1_READYFORREVIEW":"'&TR_1_READYFORREVIEW&'"
 								,"TR_EXTENSIONREQUESTED":"'&TR_EXTENSIONREQUESTED&'"
 								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
-								,"TR_G1_2_MISSINGSIGNATURES":"'&TR_G1_2_MISSINGSIGNATURES&'"
-								,"TR_G1_2_ASSEMBLERETURN":"'&TR_G1_2_ASSEMBLERETURN&'"
-								,"TR_G1_2_CONTACTED":"'&TR_G1_2_CONTACTED&'"
-								,"TR_G1_1_PREPAREDBY":"'&TR_G1_1_PREPAREDBY&'"
-								,"TR_G1_1_REVIEWEDWITHNOTES":"'&TR_G1_1_REVIEWEDWITHNOTES&'"
-								,"TR_G1_1_COMPLETED":"'&TR_G1_1_COMPLETED&'"
-								,"TR_G1_2_DELIVERED":"'&TR_G1_2_DELIVERED&'"
-								,"TR_G1_1_FILINGDEADLINE":"'&TR_G1_1_FILINGDEADLINE&'"
-								,"TR_G1_3_REQUIRED":"'&TR_G1_3_REQUIRED&'"
-								,"TR_G1_3_EXTENDED":"'&TR_G1_3_EXTENDED&'"
-								,"TR_G1_3_RFR":"'&TR_G1_3_RFR&'"
-								,"TR_G1_3_COMPLETED":"'&TR_G1_3_COMPLETED&'"
-								,"TR_G1_3_DELIVERED":"'&TR_G1_3_DELIVERED&'"
-								,"TR_G1_3_CURRENTFEES":"'&TR_G1_3_CURRENTFEES&'"
+								,"TR_2_MISSINGSIGNATURES":"'&TR_2_MISSINGSIGNATURES&'"
+								,"TR_2_ASSEMBLERETURN":"'&TR_2_ASSEMBLERETURN&'"
+								,"TR_2_CONTACTED":"'&TR_2_CONTACTED&'"
+								,"TR_1_PREPAREDBY":"'&TR_1_PREPAREDBY&'"
+								,"TR_1_REVIEWEDWITHNOTES":"'&TR_1_REVIEWEDWITHNOTES&'"
+								,"TR_1_COMPLETED":"'&TR_1_COMPLETED&'"
+								,"TR_2_DELIVERED":"'&TR_2_DELIVERED&'"
+								,"TR_1_FILINGDEADLINE":"'&TR_1_FILINGDEADLINE&'"
+								,"TR_3_REQUIRED":"'&TR_3_REQUIRED&'"
+								,"TR_3_EXTENDED":"'&TR_3_EXTENDED&'"
+								,"TR_3_RFR":"'&TR_3_RFR&'"
+								,"TR_3_COMPLETED":"'&TR_3_COMPLETED&'"
+								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
+								,"TR_3_CURRENTFEES":"'&TR_3_CURRENTFEES&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
-								,"TR_G1_2_PAYMENTSTATUS":"'&TR_G1_2_PAYMENTSTATUS&'"
+								,"TR_2_PAYMENTSTATUS":"'&TR_2_PAYMENTSTATUS&'"
 
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -112,36 +112,36 @@ SELECT[trst_id]
 ,[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_g1_1_informationreceived], 101)AS[tr_g1_1_informationreceived]
-,[tr_g1_1_assignedto]
+,CONVERT(VARCHAR(10),[tr_1_informationreceived], 101)AS[tr_1_informationreceived]
+,[tr_1_assignedto]
 ,[tr_priorfees]
-,CONVERT(VARCHAR(10),[tr_g1_4_dropoffappointment], 101)AS[tr_g1_4_dropoffappointment]
-,CONVERT(VARCHAR(10),[tr_g1_4_pickupappointment], 101)AS[tr_g1_4_pickupappointment]
-,[tr_g1_1_missinginfo]
-,CONVERT(VARCHAR(10),[tr_g1_1_missinginforeceived], 101)AS[tr_g1_1_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_g1_1_duedate], 101)AS[tr_g1_1_duedate]
-,CONVERT(VARCHAR(10),[tr_g1_1_readyforreview], 101)AS[tr_g1_1_readyforreview]
+,CONVERT(VARCHAR(10),[tr_4_dropoffappointment], 101)AS[tr_4_dropoffappointment]
+,CONVERT(VARCHAR(10),[tr_4_pickupappointment], 101)AS[tr_4_pickupappointment]
+,[tr_1_missinginfo]
+,CONVERT(VARCHAR(10),[tr_1_missinginforeceived], 101)AS[tr_1_missinginforeceived]
+,CONVERT(VARCHAR(10),[tr_1_duedate], 101)AS[tr_1_duedate]
+,CONVERT(VARCHAR(10),[tr_1_readyforreview], 101)AS[tr_1_readyforreview]
 ,CONVERT(VARCHAR(10),[tr_extensionrequested], 101)AS[tr_extensionrequested]
 ,CONVERT(VARCHAR(10),[tr_extensiondone], 101)AS[tr_extensiondone]
-,[tr_g1_2_missingsignatures]
-,CONVERT(VARCHAR(10),[tr_g1_2_assemblereturn], 101)AS[tr_g1_2_assemblereturn]
-,CONVERT(VARCHAR(10),[tr_g1_2_contacted], 101)AS[tr_g1_2_contacted]
-,[tr_g1_1_preparedby]
-,CONVERT(VARCHAR(10),[tr_g1_1_reviewedwithnotes], 101)AS[tr_g1_1_reviewedwithnotes]
-,CONVERT(VARCHAR(10),[tr_g1_1_completed], 101)AS[tr_g1_1_completed]
-,CONVERT(VARCHAR(10),[tr_g1_2_delivered], 101)AS[tr_g1_2_delivered]
-,CONVERT(VARCHAR(10),[tr_g1_1_filingdeadline], 101)AS[tr_g1_1_filingdeadline]
-,[tr_g1_3_required]
-,CONVERT(VARCHAR(10),[tr_g1_3_extended], 101)AS[tr_g1_3_extended]
-,CONVERT(VARCHAR(10),[tr_g1_3_rfr], 101)AS[tr_g1_3_rfr]
-,CONVERT(VARCHAR(10),[tr_g1_3_completed], 101)AS[tr_g1_3_completed]
-,CONVERT(VARCHAR(10),[tr_g1_3_delivered], 101)AS[tr_g1_3_delivered]
-,[tr_g1_3_currentfees]
+,[tr_2_missingsignatures]
+,CONVERT(VARCHAR(10),[tr_2_assemblereturn], 101)AS[tr_2_assemblereturn]
+,CONVERT(VARCHAR(10),[tr_2_contacted], 101)AS[tr_2_contacted]
+,[tr_1_preparedby]
+,CONVERT(VARCHAR(10),[tr_1_reviewedwithnotes], 101)AS[tr_1_reviewedwithnotes]
+,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
+,CONVERT(VARCHAR(10),[tr_2_delivered], 101)AS[tr_2_delivered]
+,CONVERT(VARCHAR(10),[tr_1_filingdeadline], 101)AS[tr_1_filingdeadline]
+,[tr_3_required]
+,CONVERT(VARCHAR(10),[tr_3_extended], 101)AS[tr_3_extended]
+,CONVERT(VARCHAR(10),[tr_3_rfr], 101)AS[tr_3_rfr]
+,CONVERT(VARCHAR(10),[tr_3_completed], 101)AS[tr_3_completed]
+,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
+,[tr_3_currentfees]
 ,[trst_state]
 ,[trst_primary]
 ,CONVERT(VARCHAR(10),[trst_completed], 101)AS[trst_completed]
 ,[tr_currentfees]
-,[tr_g1_2_paymentstatus]
+,[tr_2_paymentstatus]
 ,[client_type]
 ,[client_name]
 ,[client_id]
@@ -161,36 +161,36 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
-								,"TR_G1_1_INFORMATIONRECEIVED":"'&TR_G1_1_INFORMATIONRECEIVED&'"
-								,"TR_G1_1_ASSIGNEDTO":"'&TR_G1_1_ASSIGNEDTO&'"
+								,"TR_1_INFORMATIONRECEIVED":"'&TR_1_INFORMATIONRECEIVED&'"
+								,"TR_1_ASSIGNEDTO":"'&TR_1_ASSIGNEDTO&'"
 								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
-								,"TR_G1_4_DROPOFFAPPOINTMENT":"'&TR_G1_4_DROPOFFAPPOINTMENT&'"
-								,"TR_G1_4_PICKUPAPPOINTMENT":"'&TR_G1_4_PICKUPAPPOINTMENT&'"
-								,"TR_G1_1_MISSINGINFO":"'&TR_G1_1_MISSINGINFO&'"
-								,"TR_G1_1_MISSINGINFORECEIVED":"'&TR_G1_1_MISSINGINFORECEIVED&'"
-								,"TR_G1_1_DUEDATE":"'&TR_G1_1_DUEDATE&'"
-								,"TR_G1_1_READYFORREVIEW":"'&TR_G1_1_READYFORREVIEW&'"
+								,"TR_4_DROPOFFAPPOINTMENT":"'&TR_4_DROPOFFAPPOINTMENT&'"
+								,"TR_4_PICKUPAPPOINTMENT":"'&TR_4_PICKUPAPPOINTMENT&'"
+								,"TR_1_MISSINGINFO":"'&TR_1_MISSINGINFO&'"
+								,"TR_1_MISSINGINFORECEIVED":"'&TR_1_MISSINGINFORECEIVED&'"
+								,"TR_1_DUEDATE":"'&TR_1_DUEDATE&'"
+								,"TR_1_READYFORREVIEW":"'&TR_1_READYFORREVIEW&'"
 								,"TR_EXTENSIONREQUESTED":"'&TR_EXTENSIONREQUESTED&'"
 								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
-								,"TR_G1_2_MISSINGSIGNATURES":"'&TR_G1_2_MISSINGSIGNATURES&'"
-								,"TR_G1_2_ASSEMBLERETURN":"'&TR_G1_2_ASSEMBLERETURN&'"
-								,"TR_G1_2_CONTACTED":"'&TR_G1_2_CONTACTED&'"
-								,"TR_G1_1_PREPAREDBY":"'&TR_G1_1_PREPAREDBY&'"
-								,"TR_G1_1_REVIEWEDWITHNOTES":"'&TR_G1_1_REVIEWEDWITHNOTES&'"
-								,"TR_G1_1_COMPLETED":"'&TR_G1_1_COMPLETED&'"
-								,"TR_G1_2_DELIVERED":"'&TR_G1_2_DELIVERED&'"
-								,"TR_G1_1_FILINGDEADLINE":"'&TR_G1_1_FILINGDEADLINE&'"
-								,"TR_G1_3_REQUIRED":"'&TR_G1_3_REQUIRED&'"
-								,"TR_G1_3_EXTENDED":"'&TR_G1_3_EXTENDED&'"
-								,"TR_G1_3_RFR":"'&TR_G1_3_RFR&'"
-								,"TR_G1_3_COMPLETED":"'&TR_G1_3_COMPLETED&'"
-								,"TR_G1_3_DELIVERED":"'&TR_G1_3_DELIVERED&'"
-								,"TR_G1_3_CURRENTFEES":"'&TR_G1_3_CURRENTFEES&'"
+								,"TR_2_MISSINGSIGNATURES":"'&TR_2_MISSINGSIGNATURES&'"
+								,"TR_2_ASSEMBLERETURN":"'&TR_2_ASSEMBLERETURN&'"
+								,"TR_2_CONTACTED":"'&TR_2_CONTACTED&'"
+								,"TR_1_PREPAREDBY":"'&TR_1_PREPAREDBY&'"
+								,"TR_1_REVIEWEDWITHNOTES":"'&TR_1_REVIEWEDWITHNOTES&'"
+								,"TR_1_COMPLETED":"'&TR_1_COMPLETED&'"
+								,"TR_2_DELIVERED":"'&TR_2_DELIVERED&'"
+								,"TR_1_FILINGDEADLINE":"'&TR_1_FILINGDEADLINE&'"
+								,"TR_3_REQUIRED":"'&TR_3_REQUIRED&'"
+								,"TR_3_EXTENDED":"'&TR_3_EXTENDED&'"
+								,"TR_3_RFR":"'&TR_3_RFR&'"
+								,"TR_3_COMPLETED":"'&TR_3_COMPLETED&'"
+								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
+								,"TR_3_CURRENTFEES":"'&TR_3_CURRENTFEES&'"
 								,"TRST_STATE":"'&TRST_STATE&'"
 								,"TRST_PRIMARY":"'&TRST_PRIMARY&'"
 								,"TRST_COMPLETED":"'&TRST_COMPLETED&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
-								,"TR_G1_2_PAYMENTSTATUS":"'&TR_G1_2_PAYMENTSTATUS&'"
+								,"TR_2_PAYMENTSTATUS":"'&TR_2_PAYMENTSTATUS&'"
 
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
