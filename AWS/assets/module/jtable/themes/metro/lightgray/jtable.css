@@ -356,10 +356,7 @@ div.jtable-main-container > table.jtable > thead th {
   font-size: 15px;
   color: #fff;
 }
-div.jtable-main-container > table.jtable > thead th.jtable-column-header div.jtable-column-header-container {
-  height: 24px;
-  margin-left: 4px;
-}
+div.jtable-main-container > table.jtable > thead th.jtable-column-header div.jtable-column-header-container{ min-height: 24px; margin-left: 4px;}
 div.jtable-main-container > table.jtable > thead th.jtable-column-header div.jtable-column-header-container div.jtable-column-resize-handler {
   height: 28px;
 }

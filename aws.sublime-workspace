@@ -29,6 +29,14 @@
 				"buffer_size": 7045,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPremierGeneral2013.rdp",
+			"settings":
+			{
+				"buffer_size": 7021,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
@@ -98,7 +106,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -144,6 +152,33 @@
 							[
 								0,
 								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPremierGeneral2013.rdp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7021,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								538,
+								518
 							]
 						],
 						"settings":

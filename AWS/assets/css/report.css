@@ -1,3 +1,19 @@
+/*Print should be moved to print.css when finished.*/
+@media print
+{
+@page {size: landscape}
+nav{display: none !important;} 
+#largeMenu{display: none !important;}
+#content{margin-left: -5px;margin-top: -5px;margin-bottom: -5px; margin-right:-5px; !important;}
+#{box-shadow: inset 0 0 0 1000px #CCCCCC;}
+.smallMenu,.button,input,label,.ui-accordion-header{display: none !important;}
+.jtable-data-row{ border-bottom:#999 solid 1px;!important;}
+.contentbig{margin-left: 5px;margin-top: 5px;margin-bottom: 5px;!important;}
+.ui-accordion .ui-accordion-content { padding:0px;}
+thead{ border-bottom:2px solid #666;}
+}
+
+
 /*ColdFusion Mod*/
 div.autosuggestcontainer .yui-ac-shadow{margin:1px;}
 div.autosuggestcontainer li {color:#333;}
