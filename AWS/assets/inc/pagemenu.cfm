@@ -17,6 +17,7 @@
 <cfloop list="#page.menuLeft#"  index="name">
 <cfset i=i+1><li ><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li>
 </cfloop>
+
 <cfinclude template="../plugins/menu.cfm">
 
 </ul>
