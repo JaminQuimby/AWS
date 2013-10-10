@@ -115,9 +115,6 @@ WHERE[TRST_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-
-
-
 <!--- Load Group2 Subgroup1 --->
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
@@ -415,7 +412,7 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 UPDATE[TAXRETURNS]
 SET[tr_1_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_1_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_1_duedate]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[tr_1_duedate]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[tr_1_filingdeadline]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tr_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#"  null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[tr_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
@@ -516,9 +513,10 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#fquery.id#,"group":"group2_1","result":"ok"}'>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -530,9 +528,103 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_status]=<cfqueryparam value="#j.DATA[1][8]#"/>
 WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
 </cfcase>
+
+<!---Group2 Subgroup1 --->
+<cfcase value="group2_1">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+<cftry>
+<cfquery name="fquery" datasource="AWS">
+UPDATE[TAXRETURNS_STATE]
+SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[trst_1_assignedto]= <cfqueryparam value="#j.DATA[1][3]#"/>
+,[trst_1_completed]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[trst_1_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[trst_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[trst_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[trst_1_missinginformation]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trst_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[trst_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[trst_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[trst_1_reviewed]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[trst_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[trst_1_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery>
+<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_2","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<!---Group2 Subgroup2 --->
+<cfcase value="group2_2">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
+<cftry>
+<cfquery name="fquery" datasource="AWS">
+UPDATE[TAXRETURNS_STATE]
+SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[trst_2_assemblereturn]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[trst_2_contacted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[trst_2_currentfees]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[trst_2_delivered]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[trst_2_deliverymethod]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[trst_2_emailed]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trst_2_messageleft]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[trst_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[trst_2_paymentstatus]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[trst_2_priorfees]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[trst_2_requiredforms]=<cfqueryparam value="#j.DATA[1][13]#"/>
+WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery>
+<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<!---Group2 Subgroup3 --->
+<cfcase value="group2_3">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
+<cftry>
+<cfquery name="fquery" datasource="AWS">
+UPDATE[TAXRETURNS_STATE]
+SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[trst_3_pptrassignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[trst_3_pptrcompleted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[trst_3_pptrcurrentfees]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[trst_3_pptrdelivered]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[trst_3_pptrextended]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[trst_3_paymentstatus]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trst_3_pptrpriorfees]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[trst_3_pptrrequired]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[trst_3_pptrrfr]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery>
+<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
 <!---Group3--->
 <cfcase value="group3">
 <cfif j.DATA[1][1] eq "0">
@@ -552,7 +644,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"id":#fquery.id#,"group":"group3_1","result":"ok"}'>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
@@ -564,8 +656,31 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trsc_status]=<cfqueryparam value="#j.DATA[1][6]#"/>
 WHERE[TRSC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group3_1","result":"ok"}'>
 </cfif>
+</cfcase>
+<!---Group3 Subgroup1 --->
+<cfcase value="group3_1">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+<cfquery name="fquery" datasource="AWS">
+UPDATE[TAXRETURNS_SCHEDULE]
+SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[trsc_1_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[trsc_1_completed]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[trsc_1_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[trsc_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[trsc_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[trsc_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trsc_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[trsc_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[trsc_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[trsc_1_reviewed]=<cfqueryparam value="#j.DATA[1][12]#"  null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[trsc_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[trsc_1_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][14]#"  null="#LEN(j.DATA[1][14]) eq 0#"/>
+WHERE[trsc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery>
+<!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

@@ -7,7 +7,20 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"payrollchecks.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PC_YEAR:{title:'Year'},PC_DATEDUE:{title:'Due Date'},PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}},
+	"fields":{PC_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,PC_YEAR:{title:'Year',width:'1%'}
+			,PC_DATEDUE:{title:'Due Date',width:'1%'}
+			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
+			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_OBTAININFO_ASSIGNEDTO:{title:'Obtain Information Assigned To',width:'1%'}
+			,PC_PREPARATION_ASSIGNEDTO:{title:'Preparation Assigned To',width:'1%'}
+			,PC_REVIEW_ASSIGNEDTO:{title:'Review Assigned To',width:'1%'}
+			,PC_ASSEMBLY_ASSIGNEDTO:{title:'Assembly Assigned To',width:'1%'}
+			,PC_DELIVERY_ASSIGNEDTO:{title:'Delivery Assigned To',width:'1%'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.PC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrollchecks"});'

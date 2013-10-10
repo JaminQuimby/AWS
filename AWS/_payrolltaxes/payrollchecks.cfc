@@ -149,6 +149,13 @@ SELECT[pc_id]
 ,[pc_year]
 ,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
 ,[pc_missinginfo]
+,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
+,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
+,[pc_obtaininfo_assignedto]
+,[pc_preparation_assignedto]
+,[pc_review_assignedto]
+,[pc_assembly_assignedto]
+,[pc_delivery_assignedto]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -162,7 +169,21 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PC_YEAR":"'&PC_YEAR&'","PC_DATEDUE":"'&PC_DATEDUE&'","PC_MISSINGINFO":"'&PC_MISSINGINFO&'"}'>
+<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PC_YEAR":"'&PC_YEAR&'"
+								,"PC_DATEDUE":"'&PC_DATEDUE&'"
+								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
+								,"PC_PAYDATE":"'&PC_PAYDATE&'"
+								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
+								,"PC_PAYDATE":"'&PC_PAYDATE&'"
+								,"PC_OBTAININFO_ASSIGNEDTO":"'&PC_OBTAININFO_ASSIGNEDTO&'"
+								,"PC_PREPARATION_ASSIGNEDTO":"'&PC_PREPARATION_ASSIGNEDTO&'"
+								,"PC_REVIEW_ASSIGNEDTO":"'&PC_REVIEW_ASSIGNEDTO&'"
+								,"PC_ASSEMBLY_ASSIGNEDTO":"'&PC_ASSEMBLY_ASSIGNEDTO&'"
+								,"PC_DELIVERY_ASSIGNEDTO":"'&PC_DELIVERY_ASSIGNEDTO&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
