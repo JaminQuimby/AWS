@@ -10,9 +10,10 @@ _grid1=function(){_jGrid({
 	"title":"Communications",
 	"fields":{CO_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CO_FORTEXT:{title:'For'}
-			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			,CO_CALLER:{title:'Caller'}
+			,CO_BRIEFMESSAGE:{title:'Brief Message'}
+			,CO_FORTEXT:{title:'For',width:'1%'}
+			,CO_DUEDATE:{title:'Due Date',width:'1%'}
 			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",

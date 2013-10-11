@@ -163,6 +163,15 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
+,[pt_month]
+,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
+,[pt_type]
+,[pt_obtaininfo_assignedto]
+,[pt_entry_assignedto]
+,[pt_rec_assignedto]
+,[pt_review_assignedto]
+,[pt_assembly_assignedto]
+,[pt_delivery_assignedto]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
 ,[pt_missinginfo]
 ,[client_name]
@@ -178,7 +187,22 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PT_YEAR":"'&PT_YEAR&'","PT_DUEDATE":"'&PT_DUEDATE&'","PT_MISSINGINFO":"'&PT_MISSINGINFO&'"}'>
+<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PT_YEAR":"'&PT_YEAR&'"
+								,"PT_MONTH":"'&PT_MONTH&'"
+								,"PT_LASTPAY":"'&PT_LASTPAY&'"
+								,"PT_TYPE":"'&PT_TYPE&'"
+								,"PT_DUEDATE":"'&PT_DUEDATE&'"
+								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
+								,"PT_OBTAININFO_ASSIGNEDTO":"'&PT_OBTAININFO_ASSIGNEDTO&'"
+								,"PT_ENTRY_ASSIGNEDTO":"'&PT_ENTRY_ASSIGNEDTO&'"
+								,"PT_REC_ASSIGNEDTO":"'&PT_REC_ASSIGNEDTO&'"
+								,"PT_REVIEW_ASSIGNEDTO":"'&PT_REVIEW_ASSIGNEDTO&'"
+								,"PT_ASSEMBLY_ASSIGNEDTO":"'&PT_ASSEMBLY_ASSIGNEDTO&'"
+								,"PT_DELIVERY_ASSIGNEDTO":"'&PT_DELIVERY_ASSIGNEDTO&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

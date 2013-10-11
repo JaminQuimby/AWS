@@ -42,8 +42,6 @@
 ,[bf_fees]
 ,[bf_paid]
 ,[bf_activity]
-
-
 --->
 
 <!--- LOAD DATA --->

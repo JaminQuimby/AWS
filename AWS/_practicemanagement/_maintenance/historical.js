@@ -188,8 +188,8 @@ _grid9=function(){_jGrid({
 			,OF_TASK:{title:'Task'}
 			,OF_FORM:{title:'Form'}
 			,OF_STATUS:{title:'Status'}
-			,OF_DUEDATE:{title:'Due Date'}
-			,OF_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,OF_DUEDATE:{title:'Due Date',width:'1%'}
+			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g9_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group9"}',
@@ -204,11 +204,11 @@ _grid10=function(){_jGrid({
 	"fields":{PC_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,PC_YEAR:{title:'Year'}
-			,PC_PAYENDDATE:{title:'Pay End'}
-			,PC_PAYDATE:{title:'Pay Date'}
-			,PC_DATEDUE:{title:'Due Date'}
-			,PC_MISSINGRECEIVED:{title:'Information Received'}
+			,PC_YEAR:{title:'Year',width:'1%'}
+			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
+			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_DATEDUE:{title:'Due Date',width:'1%'}
+			,PC_MISSINGRECEIVED:{title:'Information Received',width:'1%'}
 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",

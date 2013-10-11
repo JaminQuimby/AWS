@@ -67,6 +67,7 @@ SELECT[co_id]
 ,[co_forTEXT]
 ,[co_briefmessage]
 ,[co_caller]
+,CONVERT(VARCHAR(10),[co_duedate], 101)AS[co_duedate]
 ,[co_responseneeded]
 ,[client_name]
 ,[client_id]
@@ -87,6 +88,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CO_FORTEXT":"'&CO_FORTEXT&'"
 								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
 								,"CO_CALLER":"'&CO_CALLER&'"
+								,"CO_DUEDATE":"'&CO_DUEDATE&'"
 								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>

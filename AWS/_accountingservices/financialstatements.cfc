@@ -269,7 +269,17 @@ WHERE[fdss_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP Financial Statements --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
-SELECT[fds_id],[client_id],[client_name],CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend],[fds_month],[fds_year],[fds_monthTEXT]
+SELECT[fds_id]
+,[client_id]
+,[client_name]
+,CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend]
+,[fds_month]
+,[fds_year]
+,[fds_monthTEXT]
+,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
+,[fds_status]
+,[fds_missinginfo]
+,[fds_compilemi]
 FROM[v_financialDataStatus]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -279,7 +289,17 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_PERIODEND":"'&FDS_PERIODEND&'"}'>
+<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
+								,"FDS_YEAR":"'&FDS_YEAR&'"
+								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
+								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
+								,"FDS_STATUS":"'&FDS_STATUS&'"
+								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
+								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

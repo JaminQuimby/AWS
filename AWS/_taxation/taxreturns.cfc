@@ -240,8 +240,10 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
-,[tr_priority]
 ,[tr_taxform]
+,CONVERT(VARCHAR(10),[tr_1_duedate], 101)AS[tr_1_duedate]
+,[tr_1_missinginfo]
+,[tr_1_assignedto]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
@@ -260,7 +262,9 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
-								,"TR_PRIORITY":"'&TR_PRIORITY&'"
+								,"TR_1_DUEDATE":"'&TR_1_DUEDATE&'"
+								,"TR_1_MISSINGINFO":"'&TR_1_MISSINGINFO&'"
+								,"TR_1_ASSIGNEDTO":"'&TR_1_ASSIGNEDTO&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -12,12 +12,10 @@ _grid1=function(){_jGrid({
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client'}
 			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
-			,CAS_ASSIGNTO:{title:'Assigned To',width:'1%'}
 			,CAS_CATEGORY:{title:'Category'}
 			,CAS_TASKDESC:{title:'Description'}
 			,CAS_STATUS:{title:'Status'}
-			,CAS_COMPLETED:{title:'Completed',width:'1%'}
-			,CAS_PRIORITY:{title:'Priotity',width:'1%'}								
+			,CAS_ASSIGNTO:{title:'Assigned To',width:'1%'}						
 			},			
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',

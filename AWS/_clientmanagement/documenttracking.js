@@ -9,7 +9,14 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"documenttracking.cfc",
 	"title":"Document Tracking",
-	"fields":{DT_ID:{key:true,list:false,edit:false},CLIENT_ID:{list:false,edit:false},CLIENT_NAME:{title:'Client Name'},DT_SENDER:{title:'Sender'},DT_DESCRIPTION:{title:'Description'},DT_ASSIGNEDTOTEXT:{title:'Assigned To'},DT_ROUTING:{title:'Routing'}},
+	"fields":{DT_ID:{key:true,list:false,edit:false}
+			,CLIENT_ID:{list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,DT_SENDER:{title:'Sender'}
+			,DT_DESCRIPTION:{title:'Description'}
+			,DT_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			,DT_ROUTING:{title:'Routing'}
+	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#file_id").val(record.FILE_ID);$("#task_id").val(record.DT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"documenttracking"});'

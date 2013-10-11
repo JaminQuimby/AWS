@@ -22,9 +22,12 @@ _grid2=function(){_jGrid({
 	"title":"Notice",
 	"fields":{N_ID:{key:true,list:false,edit:false}
 	,NM_NAME:{title:'Matter'}
-	,N_ASSIGNEDTOTEXT:{title:'Assigned To'}
 	,N_NOTICESTATUS:{title:'Status'}
-	,N_PRIORITY:{title:'Priority'}
+	,N_1_TAXFORM:{title:'Tax Form'}
+	,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
+	,N_2_RESDUEDATE:{title:'Due Date for Response',width:'1%'}
+	,N_1_NOTICENUMBER:{title:'Notice Number',width:'1%'}
+	,N_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',

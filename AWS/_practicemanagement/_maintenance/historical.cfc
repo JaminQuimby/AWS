@@ -565,10 +565,6 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfcatch>
 </cftry>
 </cfcase>
-
-
-
-
 </cfswitch>
 
 </cffunction>

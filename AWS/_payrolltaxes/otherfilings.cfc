@@ -159,6 +159,16 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[of_id]
 ,[of_taxyear]
+,[of_period]
+,[of_state]
+,[of_task]
+,[of_form]
+,[of_period]
+,[of_obtaininfo_assignedto]
+,[of_preparation_assignedto]
+,[of_review_assignedto]
+,[of_assembly_assignedto]
+,[of_delivery_assignedto]
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
 ,[of_missinginfo]
 ,[client_name]
@@ -174,7 +184,22 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","OF_TAXYEAR":"'&OF_TAXYEAR&'","OF_DUEDATE":"'&OF_DUEDATE&'","OF_MISSINGINFO":"'&OF_MISSINGINFO&'"}'>
+<cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"								
+								,"OF_PERIOD":"'&OF_PERIOD&'"
+								,"OF_STATE":"'&OF_STATE&'"
+								,"OF_TASK":"'&OF_TASK&'"
+								,"OF_FORM":"'&OF_FORM&'"
+								,"OF_OBTAININFO_ASSIGNEDTO":"'&OF_OBTAININFO_ASSIGNEDTO&'"
+								,"OF_PREPARATION_ASSIGNEDTO":"'&OF_PREPARATION_ASSIGNEDTO&'"
+								,"OF_REVIEW_ASSIGNEDTO":"'&OF_REVIEW_ASSIGNEDTO&'"
+								,"OF_ASSEMBLY_ASSIGNEDTO":"'&OF_ASSEMBLY_ASSIGNEDTO&'"
+								,"OF_DELIVERY_ASSIGNEDTO":"'&OF_DELIVERY_ASSIGNEDTO&'"								
+								,"OF_DUEDATE":"'&OF_DUEDATE&'"
+								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

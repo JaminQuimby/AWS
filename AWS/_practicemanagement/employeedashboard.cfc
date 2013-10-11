@@ -6,30 +6,6 @@
 <!--- [LOAD FUNCTIONs] --->
 
 
-<!--- LOAD DATA --->
-<cffunction name="f_loadData" access="remote" output="false">
-<cfargument name="ID" type="numeric" required="yes" default="0">
-<cfargument name="loadType" type="string" required="no">
-<cftry>
-
-<cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Load Client--->
-
-
-
-
-
-
-
-</cfswitch>
-<cfreturn SerializeJSON(fQuery)>
-<cfcatch>
-<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cffunction>
-
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
@@ -75,7 +51,7 @@ SELECT[pc_id]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
 ,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
 ,CONVERT(VARCHAR(10),[pc_missingreceived], 101)AS[pc_missingreceived]
-,CASE [pc_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [pc_missinginfo]
+,[pc_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -153,7 +129,7 @@ SELECT[of_id]
 ,[of_form]
 ,[of_status]
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
-,CASE [of_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [of_missinginfo]
+,[of_missinginfo]
 ,[client_name]
 FROM[v_otherfilings]
 WHERE([of_delivery_datecompleted] IS NULL)
@@ -267,9 +243,9 @@ SELECT[fds_id]
 ,[fds_month]
 ,[fds_year]
 ,[fds_monthTEXT]
-,CASE [fds_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_missinginfo]
+,[fds_missinginfo]
 ,CONVERT(VARCHAR(10),[fds_mireceived], 101)AS[fds_mireceived]
-,CASE [fds_compilemi] WHEN 1 THEN 'Yes' ELSE 'No' END AS [fds_compilemi]
+,[fds_compilemi]
 ,CONVERT(VARCHAR(10),[fds_cmireceived], 101)AS[fds_cmireceived]
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
 FROM[v_financialDataStatus]
@@ -319,7 +295,7 @@ SELECT[nm_id]
 ,[n_1_taxyear]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
-,CASE [n_3_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [n_3_missinginfo]
+,[n_3_missinginfo]
 ,[nm_status]
 ,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
 ,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
@@ -359,7 +335,7 @@ SELECT[nm_id]
 ,[n_1_taxyear]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
-,CASE [n_3_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [n_3_missinginfo]
+,[n_3_missinginfo]
 ,[nm_status]
 ,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
 ,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
@@ -492,7 +468,7 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_1_readyforreview], 101)AS[tr_1_readyforreview]
 ,CONVERT(VARCHAR(10),[tr_4_dropoffappointment], 101)AS[tr_4_dropoffappointment]
 ,CONVERT(VARCHAR(10),[tr_4_pickupappointment], 101)AS[tr_4_pickupappointment]
-,CASE [tr_1_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [tr_1_missinginfo]
+,[tr_1_missinginfo]
 ,CONVERT(VARCHAR(10),[tr_1_reviewedwithnotes], 101)AS[tr_1_reviewedwithnotes]
 ,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
 ,CONVERT(VARCHAR(10),[tr_2_delivered], 101)AS[tr_2_delivered]
@@ -601,10 +577,10 @@ SELECT[trst_id]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[trst_state]
-,CONVERT(VARCHAR(10),[tr_1_informationreceived], 101)AS[tr_1_informationreceived]
-,CONVERT(VARCHAR(10),[tr_1_duedate], 101)AS[tr_1_duedate]
-,CONVERT(VARCHAR(10),[tr_1_missinginforeceived], 101)AS[tr_1_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_1_readyforreview], 101)AS[tr_1_readyforreview]
+,CONVERT(VARCHAR(10),[trst_1_informationreceived], 101)AS[trst_1_informationreceived]
+,CONVERT(VARCHAR(10),[trst_1_duedate], 101)AS[trst_1_duedate]
+,CONVERT(VARCHAR(10),[trst_1_missinginforeceived], 101)AS[trst_1_missinginforeceived]
+,CONVERT(VARCHAR(10),[trst_1_readyforreview], 101)AS[trst_1_readyforreview]
 FROM[v_TAXRETURNS_STATE]
 WHERE [trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR [trst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
@@ -622,10 +598,10 @@ AND ([trst_status] != '2' OR [trst_status] != '5')
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TRST_STATE":"'&TRST_STATE&'"
-								,"TR_1_INFORMATIONRECEIVED":"'&TR_1_INFORMATIONRECEIVED&'"
-								,"TR_1_DUEDATE":"'&TR_1_DUEDATE&'"
-								,"TR_1_MISSINGINFORECEIVED":"'&TR_1_MISSINGINFORECEIVED&'"
-								,"TR_1_READYFORREVIEW":"'&TR_1_READYFORREVIEW&'"}'>
+								,"TRST_1_INFORMATIONRECEIVED":"'&TRST_1_INFORMATIONRECEIVED&'"
+								,"TRST_1_DUEDATE":"'&TRST_1_DUEDATE&'"
+								,"TRST_1_MISSINGINFORECEIVED":"'&TRST_1_MISSINGINFORECEIVED&'"
+								,"TRST_1_READYFORREVIEW":"'&TRST_1_READYFORREVIEW&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -648,7 +624,7 @@ SELECT[ftp_id]
 ,CONVERT(VARCHAR(10),[ftp_requestservice], 101)AS[ftp_requestservice]
 ,CONVERT(VARCHAR(10),[ftp_duedate], 101)AS[ftp_duedate]
 ,CONVERT(VARCHAR(10),[ftp_inforeceived], 101)AS[ftp_inforeceived]
-,CASE [ftp_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [ftp_missinginfo]
+,[ftp_missinginfo]
 ,[ftp_status]
 FROM[v_financialtaxplanning]
 WHERE[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
@@ -728,8 +704,8 @@ SELECT[co_id]
 ,[co_telephone]
 ,[co_ext]
 ,[co_emailaddress]
-,CASE [co_responseneeded] WHEN 1 THEN 'YES' ELSE 'No' END AS [co_responseneeded]
-,CASE [co_returncall] WHEN 1 THEN 'Yes' ELSE 'No' END AS [co_returncall]
+,[co_responseneeded]
+,[co_returncall]
 ,[co_briefmessage]
 FROM[v_communications]
 WHERE[co_for]=<cfqueryparam value="#ARGUMENTS.userid#"/>
@@ -818,10 +794,6 @@ WHERE(','+[dt_assignedto]LIKE'%,'+CONVERT(VARCHAR(12),<cfqueryparam value="#ARGU
 </cfcatch>
 </cftry>
 </cfcase>
-
-
-
 </cfswitch>
-
 </cffunction>
 </cfcomponent>

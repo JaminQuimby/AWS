@@ -32,6 +32,10 @@ SELECT[n_id]
       ,[n_1_fees]
       ,[n_1_paid]
       ,[n_2_datenoticerec]
+        ,[n_1_noticedate]
+      ,[n_1_noticenumber]
+      ,[n_1_taxform]
+      ,[n_1_taxyear]
       ,[n_2_resduedate]
       ,[n_2_rescompleted]
       ,[n_2_rescompletedby]
@@ -159,7 +163,12 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","NM_NAME":"'&NM_NAME&'","NM_STATUS":"'&NM_STATUS&'"}'>
+<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"NM_NAME":"'&NM_NAME&'"
+								,"NM_STATUS":"'&NM_STATUS&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -175,8 +184,10 @@ SELECT[nm_id]
 ,[nm_name]
 ,[n_assignedtoTEXT]
 ,[n_noticestatus]
-,[n_priority]
 ,[n_1_noticenumber]
+,[n_1_taxform]
+,[n_1_taxyear]
+,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
 FROM[v_notice]
 WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
@@ -189,7 +200,10 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <c
 								,"NM_NAME":"'&NM_NAME&'"
 								,"N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"
 								,"N_NOTICESTATUS":"'&N_NOTICESTATUS&'"
-								,"N_PRIORITY":"'&N_PRIORITY&'"
+								,"N_1_TAXFORM":"'&N_1_TAXFORM&'"
+								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
+								,"N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'"
+								,"N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

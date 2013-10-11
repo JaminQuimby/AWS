@@ -17,6 +17,7 @@ SELECT[ftp_id]
       ,[ftp_inforequested]
       ,[ftp_inforeceived]
       ,[ftp_infocompiled]
+      ,[ftp_duedate]
       ,[ftp_missinginfo]
       ,[ftp_missinginforec]
       ,[ftp_reportcompleted]
@@ -88,6 +89,8 @@ SELECT[ftp_id]
 ,[ftp_status]
 ,[ftp_category]
 ,[ftp_assignedto]
+,[ftp_duedate]
+,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_financialtaxplanning]
@@ -107,6 +110,8 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FTP_STATUS":"'&FTP_STATUS&'"
 								,"FTP_CATEGORY":"'&FTP_CATEGORY&'"
 								,"FTP_ASSIGNEDTO":"'&FTP_ASSIGNEDTO&'"
+								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
+								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

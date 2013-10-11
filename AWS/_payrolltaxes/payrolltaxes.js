@@ -7,7 +7,21 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"payrolltaxes.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false},CLIENT_NAME:{title:'Client Name'},PT_YEAR:{title:'Year'},PT_DUEDATE:{title:'Date Due'},PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}},
+	"fields":{PT_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,PT_YEAR:{title:'Year',width:'1%'}
+			,PT_MONTH:{title:'Period'}
+			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
+			,PT_TYPE:{title:'Return Type'}
+			,PT_DUEDATE:{title:'Date Due',width:'1%'}
+			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,PT_OBTAININFO_ASSIGNEDTO:{title:'Obtain Information Assigned To',width:'1%'}
+			,PT_ENTRY_ASSIGNEDTO:{title:'Entry Assigned To',width:'1%'}
+			,PT_REC_ASSIGNEDTO:{title:'Reconciliation Assigned To',width:'1%'}
+			,PT_REVIEW_ASSIGNEDTO:{title:'Review Assigned To',width:'1%'}
+			,PT_ASSEMBLY_ASSIGNEDTO:{title:'Assembly Assigned To',width:'1%'}
+			,PT_DELIVERY_ASSIGNEDTO:{title:'Delivery Assigned To',width:'1%'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.PT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrolltaxes"});'
@@ -113,7 +127,7 @@ $("#g1_g5_completed").val()+'","'+
 $("#g1_g5_estimatedtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"payrolltaxes"})}
-else{_saveDataCB({'group':'group2'})};
+else{_saveDataCB({'group':'group1_6'})};
 break;
 
 case'group1_6':var json='{"DATA":[["'+

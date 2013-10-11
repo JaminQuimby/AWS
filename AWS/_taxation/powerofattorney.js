@@ -9,6 +9,7 @@ _group1=function(){}
 	"fields":{PA_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PA_TAXYEARS:{title:'Tax Years'}
+			,PA_TAXFORMS:{title:'Tax Forms'}
 			,PA_TAXMATTERS:{title:'Tax Matters'}
 			,PA_STATUS:{title:'Tax Status'}
 			,PA_PREPARERS:{title:'Tax Preparers',width:'1%'}
