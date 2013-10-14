@@ -48,7 +48,7 @@
 		<div><label for="g2_1_filter">Filter</label><input id="g2_1_filter" onBlur="_grid2_1();" onKeyPress="if(event.keyCode==13){_grid2_1();}"/></div>	
 		<div class="tblGrid" id="grid2_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrollchecks.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -58,7 +58,7 @@
 		<div><label for="g2_2_filter">Filter</label><input id="g2_2_filter" onBlur="_grid2_2();" onKeyPress="if(event.keyCode==13){_grid2_2();}"/></div>
 		<div class="tblGrid" id="grid2_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrolltaxes.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -70,7 +70,7 @@
 		<div><label for="g2_3_filter">Filter</label><input id="g2_3_filter" onBlur="_grid2_3();" onKeyPress="if(event.keyCode==13){_grid2_3();}"/></div>
 		<div class="tblGrid" id="grid2_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/otherfilings.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/otherfilings.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>
@@ -85,7 +85,7 @@
 		<div><label for="g3_1_filter">Filter</label><input id="g3_1_filter" onBlur="_grid3_1();" onKeyPress="if(event.keyCode==13){_grid3_1();}"/></div>
 		<div class="tblGrid" id="grid3_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/businessformation.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/businessformation.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -95,7 +95,7 @@
 		<div><label for="g3_2_filter">Filter</label><input id="g3_2_filter" onBlur="_grid3_2();" onKeyPress="if(event.keyCode==13){_grid3_2();}"/></div>
 		<div class="tblGrid" id="grid3_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -107,7 +107,7 @@
 		<div><label for="g3_3_filter">Filter</label><input id="g3_3_filter" onBlur="_grid3_3();" onKeyPress="if(event.keyCode==13){_grid3_3();}"/></div>
 		<div class="tblGrid" id="grid3_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>
@@ -122,7 +122,7 @@
 		<div><label for="g4_1_filter">Filter</label><input id="g4_1_filter" onBlur="_grid4_1();" onKeyPress="if(event.keyCode==13){_grid4_1();}"/></div>
 		<div class="tblGrid" id="grid4_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -132,7 +132,7 @@
 		<div><label for="g4_2_filter">Filter</label><input id="g4_2_filter" onBlur="_grid4_2();" onKeyPress="if(event.keyCode==13){_grid4_2();}"/></div>
 		<div class="tblGrid" id="grid4_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>
@@ -146,7 +146,7 @@
 		<div><label for="g5_1_filter">Filter</label><input id="g5_1_filter" onBlur="_grid5_1();" onKeyPress="if(event.keyCode==13){_grid5_1();}"/></div>
 		<div class="tblGrid" id="grid5_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -156,7 +156,7 @@
 		<div><label for="g5_2_filter">Filter</label><input id="g5_2_filter" onBlur="_grid5_2();" onKeyPress="if(event.keyCode==13){_grid5_2();}"/></div>
 		<div class="tblGrid" id="grid5_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -166,7 +166,7 @@
 		<div><label for="g5_3_filter">Filter</label><input id="g5_3_filter" onBlur="_grid5_3();" onKeyPress="if(event.keyCode==13){_grid5_3();}"/></div>
 		<div class="tblGrid" id="grid5_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -176,7 +176,7 @@
 		<div><label for="g5_4_filter">Filter</label><input id="g5_4_filter" onBlur="_grid5_4();" onKeyPress="if(event.keyCode==13){_grid5_4();}"/></div>
 		<div class="tblGrid" id="grid5_4"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -186,7 +186,7 @@
 		<div><label for="g5_5_filter">Filter</label><input id="g5_5_filter" onBlur="_grid5_5();" onKeyPress="if(event.keyCode==13){_grid5_5();}"/></div>
 		<div class="tblGrid" id="grid5_5"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -196,7 +196,7 @@
 		<div><label for="g5_6_filter">Filter</label><input id="g5_6_filter" onBlur="_grid5_6();" onKeyPress="if(event.keyCode==13){_grid5_6();}"/></div>
 		<div class="tblGrid" id="grid5_6"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/financialtaxplanning.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/financialtaxplanning.cfm'">Add</a></cfoutput>
 		</div>        
 	</div>
 </div>
@@ -211,7 +211,7 @@
 		<div><label for="g6_1_filter">Filter</label><input id="g6_1_filter" onBlur="_grid6_1();" onKeyPress="if(event.keyCode==13){_grid6_1();}"/></div>
 		<div class="tblGrid" id="grid6_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_clientmanagement/administrativetasks.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_clientmanagement/administrativetasks.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -221,7 +221,7 @@
 		<div><label for="g6_2_filter">Filter</label><input id="g6_2_filter" onBlur="_grid6_2();" onKeyPress="if(event.keyCode==13){_grid6_2();}"/></div>
 		<div class="tblGrid" id="grid6_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -233,7 +233,7 @@
 		<div><label for="g6_3_filter">Filter</label><input id="g6_3_filter" onBlur="_grid6_3();" onKeyPress="if(event.keyCode==13){_grid6_3();}"/></div>
 		<div class="tblGrid" id="grid6_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
+		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>

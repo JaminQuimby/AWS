@@ -1,4 +1,14 @@
 <cfsetting showDebugOutput="No">
+<!--- Required for AJAX --->
+<cfheader name="Cache-Control" value="no-cache"/>
+<cfheader name="Expires" value="0"/>
+<cfset page.module="">
+<cfset page.location="">
+<cfset page.formid=0>
+<cfset page.title="Home">
+<cfset page.menuLeft="">
+<cfset page.trackers="">
+<cfset page.plugins.disable="ALL">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -35,14 +45,17 @@
 
 <body>
 <!--- Load Left Menus and trackers --->
-
-
+<cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
- 	
 
+<cfdump var='#expandPath("/assets")#'>
 
-<div id="content" class="contentsmall"><nav id="topMenu"><cfinclude template="AWS/assets/module/menu/menu.cfm"></nav>
+<div id="content" class="contentsmall"><nav id="topMenu">
 
+<cfinclude template="/assets/module/menu/menu.cfm">
+
+</nav>
+test
 
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">

@@ -176,7 +176,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_1"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
 </div>
 </div>
 
@@ -185,7 +185,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_2"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
 </div>
 </div>
 
@@ -194,7 +194,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_3"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrollchecks.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm'">Add</a></cfoutput>
 </div>
 </div>
 
@@ -203,7 +203,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_4"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrolltaxes.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm'">Add</a></cfoutput>
 </div>
 </div>
 
@@ -212,7 +212,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_5"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 </div>
 </div>
 
@@ -221,7 +221,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_6"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#Application.url#/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm'">Add</a></cfoutput>
 </div>
 </div>
 </div>

@@ -4,7 +4,7 @@ jqMessage Required
 <footer id="footer">
 <div class="buttonbox">
 <cfoutput>
-<a href="##" onclick="_saveData();" class="button">Save</a> | <a href="#Application.url##CGI.SCRIPT_NAME#">Cancel</a>
+<a href="##" onclick="_saveData();" class="button">Save</a> | <a href="#this.url##CGI.SCRIPT_NAME#">Cancel</a>
 </cfoutput>
 </div>
 <div><div id="progressbar"></div></div>

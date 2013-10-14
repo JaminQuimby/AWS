@@ -2,14 +2,18 @@
   <!--- 7/26/2013 Added Base Path ~ Jamin Quimby --->
     <cfcomponent displayname="AWS_REGISTER" output="true" hint="Component for AWS Registration">   
      
-    <!--- Set up the application. --->
+    <!--- Set up the Application --->
     <cfset this.applicationtimeout=CreateTimeSpan( 0, 0, 30, 0 ) />	
 	<cfset this.sessiontimeout=createTimeSpan( 0, 0, 29, 59 ) />
     <cfset this.name="AWS" />
     <cfset this.sessionmanagement=true />
-	<cfset Application.path=getDirectoryFromPath( getCurrentTemplatePath() ) /> 
-	<cfset Application.url="https://"&CGI.SERVER_NAME />
-   <!--- <cfset Application.uploadsDirectory=(Application.path  & "bin\uploads\")> --->
+    
+  
+	<cfset this.path=getDirectoryFromPath(getCurrentTemplatePath())/> 
+    <cfset this.mappings[ "/assets" ] = "#this.path#AWS/assets/" />
+    <cfset this.url="https://"&CGI.SERVER_NAME />
+    
+   <!--- <cfset this.uploadsDirectory=(this.path  & "bin\uploads\")> --->
 
     
     <!--- Define the page request properties. --->

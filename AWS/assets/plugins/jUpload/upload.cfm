@@ -23,8 +23,8 @@ filters:[	{title:"Image files", extensions:"jpg,gif,png"},
 			{title:"Zip files", extensions:"zip"},
 			{title:"QuickBooks", extensions:"QBB,QBW"}],
 			
-flash_swf_url:'#Application.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.flash.swf',
-silverlight_xap_url:'#Application.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.silverlight.xap',
+flash_swf_url:'#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.flash.swf',
+silverlight_xap_url:'#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.silverlight.xap',
 init:{
 	BeforeUpload:function(up, files){
 		up.settings.multipart_params = {

@@ -2,6 +2,7 @@
 <cfparam name="page.menuLeft" default="">
 <cfparam name="page.formid" default="0">
 <cfparam name="url.debug" default="false">
+
 <!--- VERTICAL MENUS --->
 <div class="menus">
 <!--- SMALL MENU --->
@@ -10,7 +11,7 @@
 </nav>
 <!--- LARGE MENU --->
 <nav id="largeMenu" style="display:none;">
-<cfoutput><h1 class="#page.module#"><a href="#Application.url##CGI.SCRIPT_NAME#">#page.title#</a></h1></cfoutput>
+<cfoutput><h1 class="#page.module#"><a href="#this.url##CGI.SCRIPT_NAME#">#page.title#</a></h1></cfoutput>
 <ul id="menuLeft">
 <cfset i="0">
 <cfoutput>
@@ -18,7 +19,7 @@
 <cfset i=i+1><li ><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li>
 </cfloop>
 
-<cfinclude template="../plugins/menu.cfm">
+<cfinclude template="/assets/plugins/menu.cfm">
 
 </ul>
 </cfoutput>
