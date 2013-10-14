@@ -1,12 +1,5 @@
 <cfcomponent output="true">
-<!--- f_saveData = Insert or Update tables with json data from ajax--->
 <!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
-<!--- f_loadSelect = get select data--->
-<!--- [LOAD FUNCTIONs] --->
-
-
-
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -19,7 +12,7 @@
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 
-<!--- Grid 0 Entrance --->
+<!--- LOOKUP EMPLOYEES --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[user_id],[name]
@@ -44,18 +37,19 @@ WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <!--- LOOKUP Payroll Checks --->
 <cfcase value="group2_1">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
 ,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
-,CONVERT(VARCHAR(10),[pc_missingreceived], 101)AS[pc_missingreceived]
+,CONVERT(VARCHAR(10),[pc_obtaininfo_datecompleted], 101)AS[pc_obtaininfo_datecompleted]
 ,[pc_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
-WHERE([pc_delivery_datecompleted] IS NULL)
+WHERE ([pc_delivery_datecompleted] IS NULL)
 AND(
  ([pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [pc_obtaininfo_datecompleted] IS NULL )
 OR ([pc_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [pc_preparation_datecompleted] IS NULL)
@@ -71,11 +65,16 @@ ORDER BY[pc_datedue]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PC_YEAR":"'&PC_YEAR&'","PC_PAYENDDATE":"'&PC_PAYENDDATE&'","PC_PAYDATE":"'&PC_PAYDATE&'","PC_DATEDUE":"'&PC_DATEDUE&'","PC_MISSINGRECEIVED":"'&PC_MISSINGRECEIVED&'","PC_MISSINGINFO":"'&PC_MISSINGINFO&'"}'>
+<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PC_YEAR":"'&PC_YEAR&'","PC_PAYENDDATE":"'&PC_PAYENDDATE&'","PC_PAYDATE":"'&PC_PAYDATE&'","PC_DATEDUE":"'&PC_DATEDUE&'","PC_OBTAININFO_DATECOMPLETED":"'&PC_OBTAININFO_DATECOMPLETED&'","PC_MISSINGINFO":"'&PC_MISSINGINFO&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
 

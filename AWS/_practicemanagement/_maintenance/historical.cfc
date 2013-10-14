@@ -1,14 +1,5 @@
 <cfcomponent output="true">
-<!--- f_saveData = Insert or Update tables with json data from ajax--->
 <!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
-<!--- f_loadSelect = get select data--->
-<!--- [LOAD FUNCTIONs] --->
-
-
-
-
-
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -20,7 +11,6 @@
 <cfargument name="userid" type="string" required="no">
 
 <cfswitch expression="#ARGUMENTS.loadType#">
-
 <!--- LOOKUP Administrative Tasks --->
 <cfcase value="group1">
 <cftry>
@@ -102,8 +92,6 @@ ORDER BY[bf_duedate]
 </cfcatch>
 </cftry>
 </cfcase>
-
-
 
 <!--- LOOKUP Communications --->
 <cfcase value="group3">
@@ -210,8 +198,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cftry>
 </cfcase>
 
-
-
 <!--- LOOKUP Financial Tax Planning --->
 <cfcase value="group5">
 <cftry>
@@ -223,7 +209,7 @@ SELECT[ftp_id]
 ,CONVERT(VARCHAR(10),[ftp_requestservice], 101)AS[ftp_requestservice]
 ,CONVERT(VARCHAR(10),[ftp_duedate], 101)AS[ftp_duedate]
 ,CONVERT(VARCHAR(10),[ftp_inforeceived], 101)AS[ftp_inforeceived]
-,CASE [ftp_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [ftp_missinginfo]
+,[ftp_missinginfo]
 ,[ftp_status]
 FROM[v_financialtaxplanning]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -255,9 +241,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcatch>
 </cftry>
 </cfcase>
-
-
-
 
 <!--- LOOKUP Financial Statements --->
 <cfcase value="group6">
@@ -304,7 +287,6 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif></cfqu
 </cftry>
 </cfcase>
 
-
 <!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group7">
 <cftry>
@@ -344,24 +326,15 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cftry>
 </cfcase>
 
-
 <!--- Grid Notice  --->
 <cfcase value="group8">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[nm_id]
-,[n_id]
 ,[nm_name]
-,[n_1_taxyear]
-,[n_1_taxform]
-,[n_1_noticenumber]
-,[n_3_missinginfo]
 ,[nm_status]
-,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
-,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
-,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
 ,[client_name]
-FROM[v_notice]
+FROM[v_noticematter]
 <cfif ARGUMENTS.search neq "">
 WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
@@ -370,17 +343,10 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
+<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"NM_NAME":"'&NM_NAME&'"
-								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
-								,"N_1_TAXFORM":"'&N_1_TAXFORM&'"
-								,"N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'"
-								,"N_3_MISSINGINFO":"'&N_3_MISSINGINFO&'"
 								,"NM_STATUS":"'&NM_STATUS&'"
-								,"N_2_DATENOTICEREC":"'&N_2_DATENOTICEREC&'"
-								,"N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'"
-								,"N_2_RESCOMPLETED":"'&N_2_RESCOMPLETED&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -392,7 +358,6 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfcatch>
 </cftry>
 </cfcase>
-
 
 <!--- LOOKUP Other Filings --->
 <cfcase value="group9">
@@ -437,8 +402,6 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cftry>
 </cfcase>
 
-
-
 <!--- LOOKUP Payroll Checks --->
 <cfcase value="group10">
 <cfquery datasource="AWS" name="fquery">
@@ -448,7 +411,7 @@ SELECT[pc_id]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
 ,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
 ,CONVERT(VARCHAR(10),[pc_missingreceived], 101)AS[pc_missingreceived]
-,CASE [pc_missinginfo] WHEN 1 THEN 'Yes' ELSE 'No' END AS [pc_missinginfo]
+,[pc_missinginfo]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -475,8 +438,6 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-
-
 
 <!--- LOOKUP Payroll Taxes --->
 <cfcase value="group11">
@@ -516,7 +477,6 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-
 
 <!--- LOOKUP TAX RETURNS --->
 <cfcase value="group12">
@@ -566,6 +526,5 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cftry>
 </cfcase>
 </cfswitch>
-
 </cffunction>
 </cfcomponent>

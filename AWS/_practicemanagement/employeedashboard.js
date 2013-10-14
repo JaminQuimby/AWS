@@ -65,7 +65,7 @@ _grid2_1=function(){_jGrid({
 			PC_PAYENDDATE:{title:'Pay End',width:'1%'},
 			PC_PAYDATE:{title:'Pay Date',width:'1%'},
 			PC_DATEDUE:{title:'Due Date',width:'1%'},
-			PC_MISSINGRECEIVED:{title:'Information Received'},
+			PC_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'},
 			PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",

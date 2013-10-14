@@ -65,8 +65,8 @@ _grid3=function(){_jGrid({
 	,CO_TELEPHONE:{title:'Phone'}
 	,CO_EXT:{title:'Ext'}
 	,CO_EMAILADDRESS:{title:'Email'}
-	,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-	,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+	,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+	,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 	,CO_BRIEFMESSAGE:{title:'Brief Message'}
 	},
 	"method":"f_lookupData",
@@ -83,14 +83,14 @@ _grid4=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,CLIENT_TYPE:{title:'Client Type',width:"1%"}
 			,CLIENT_TRADE_NAME:{title:'Trade Name'}
-			,CLIENT_ACTIVE:{title:'Active',width:"1%"}
+			,CLIENT_ACTIVE:{title:'Active',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SALUTATION:{title:'Salutation'}
 			,CLIENT_SPOUSE:{title:'Spouse'}
-			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_DISREGARD:{title:'Disregarded',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_DISREGARD:{title:'Disregarded',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group4"}',
@@ -101,14 +101,14 @@ _grid4=function(){_jGrid({
 _grid5=function(){_jGrid({
 	"grid":"grid5",
 	"url":"historical.cfc",	
-	"title":"Financial & Tax Planning", 
+	"title":"Financial &amp; Tax Planning", 
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FTP_CATEGORY:{title:'Category'}
 			,FTP_REQUESTSERVICE:{title:'Request for Services'}
 			,FTP_DUEDATE:{title:'Due Date'}
 			,FTP_INFORECEIVED:{title:'Information Received'}
-			,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,FTP_STATUS:{title:'Status'}
 			},
 	"method":"f_lookupData",
@@ -128,9 +128,9 @@ _grid6=function(){_jGrid({
 			,FDS_MONTHTEXT:{title:'Month'}
 			,FDS_DUEDATE:{title:'Due Date'}
 			,FDS_MIRECEIVED:{title:'Missing Information Received'}
-			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_CMIRECEIVED:{title:'Compiled Missing Information Received'}
-			,FDS_COMPILEMI:{title:'Missing Information Compiled',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_COMPILEMI:{title:'Missing Information Compiled',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g6_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group6"}',
@@ -140,7 +140,7 @@ _grid6=function(){_jGrid({
 _grid7=function(){_jGrid({
 	"grid":"grid7",
 	"url":"historical.cfc",
-	"title":"Accounting & Consulting",
+	"title":"Accounting &amp; Consulting",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -161,14 +161,7 @@ _grid8=function(){_jGrid({
 	"fields":{NM_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,NM_NAME:{title:'Matter Name'}
-			,N_1_TAXYEAR:{title:'Tax Year'}
-			,N_1_TAXFORM:{title:'Tax Form'}
-			,N_1_NOTICENUMBER:{title:'Notice Number'}
-			,N_3_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,NM_STATUS:{title:'Notice Status'}
-			,N_2_DATENOTICEREC:{title:'Notice Received'}
-			,N_2_RESDUEDATE:{title:'Response Due'}
-			,N_2_RESCOMPLETED:{title:'Response Submitted'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g8_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group8"}',
@@ -189,7 +182,7 @@ _grid9=function(){_jGrid({
 			,OF_FORM:{title:'Form'}
 			,OF_STATUS:{title:'Status'}
 			,OF_DUEDATE:{title:'Due Date',width:'1%'}
-			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g9_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group9"}',
@@ -209,7 +202,7 @@ _grid10=function(){_jGrid({
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
 			,PC_DATEDUE:{title:'Due Date',width:'1%'}
 			,PC_MISSINGRECEIVED:{title:'Information Received',width:'1%'}
-			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g10_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group10"}',
