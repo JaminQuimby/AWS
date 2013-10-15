@@ -14,7 +14,7 @@ _grid1=function(){_jGrid({
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			,CO_FORTEXT:{title:'For',width:'1%'}
 			,CO_DUEDATE:{title:'Due Date',width:'1%'}
-			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',

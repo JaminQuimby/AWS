@@ -13,7 +13,7 @@ _grid1=function(){_jGrid({
 			,PC_DATEDUE:{title:'Due Date',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
-			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
 			,PC_OBTAININFO_ASSIGNEDTO:{title:'Obtain Information Assigned To',width:'1%'}
 			,PC_PREPARATION_ASSIGNEDTO:{title:'Preparation Assigned To',width:'1%'}
