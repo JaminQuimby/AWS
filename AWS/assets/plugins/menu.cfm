@@ -7,5 +7,8 @@
 <cfif ListContains(session.user.plugins, "101") AND NOT ListContains(page.plugins.disable,"101")>
 <li><a href="##" #IIF( i eq 101, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group101').show();_highlight(this);_group101();">Comments</a></li>
 </cfif>
+<cfif ListContains(session.user.plugins, "102") AND NOT ListContains(page.plugins.disable,"102")>
+<li><a href="##" #IIF( i eq 102, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group102').show();_highlight(this);_group102();">Time &amp; Billing</a></li>
+</cfif>
 </cfif>
 </cfoutput>
