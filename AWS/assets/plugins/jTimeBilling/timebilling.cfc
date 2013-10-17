@@ -25,20 +25,21 @@ SELECT TOP 1000 [tb_id]
       ,[tb_manualtime]
       ,[tb_timestamp]
   FROM [AWS].[dbo].[timebilling]
-
 --->
 
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
-<cfargument name="loadType" type="string" required="no">
+
 <cftry>
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group102--->
 <cfcase value="group102">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[tb_id]
+SELECT 
+'group102'AS[group102]
+,[tb_id]
 ,[tb_adjustment]
 ,[tb_billingtype]
 ,[tb_date]
@@ -51,7 +52,7 @@ SELECT[tb_id]
 ,[tb_ratetype]
 ,[tb_reimbursment]
 FROM[timebilling]
-WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.id#"/>
 </cfquery>
 </cfcase>
 </cfswitch>
@@ -64,6 +65,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cffunction>
 
 
+
 <!--- LOOKUP DATA --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -74,10 +76,10 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="clientid" type="string" required="no">
 <cfargument name="formid" type="string" required="no">
 <cfargument name="taskid" type="string" required="no">
+
+
 <cftry>
-
 <cfswitch expression="#ARGUMENTS.loadType#">
-
 <!--- Grid 102  --->
 <cfcase value="group102">
 <cfquery datasource="AWS" name="fquery">
@@ -99,21 +101,13 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 								,"TB_DATE":"'&TB_DATE&'"
 								,"U_NAME":"'&U_NAME&'"
 								,"TB_DESCRIPTION":"'&TB_DESCRIPTION&'"
-								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-</cfswitch>
-<cfreturn SerializeJSON(fQuery)>
-<cfcatch>
-<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-<!---
+
 <!--- Grid 102_1  --->
 <cfcase value="group102_1">
 <cfquery datasource="AWS" name="fquery">
@@ -122,9 +116,8 @@ SELECT[t_id]
 ,[t_start]
 ,[t_stop]
 FROM[v_time]
-WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
-AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
-AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/> 
+WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -140,16 +133,26 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
+
+ 
 </cfswitch>
-<cfreturn SerializeJSON(fQuery)>
+
+
 <cfcatch>
-<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#cfcatch.detail#"]}'> 
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
 
---->
+
+
 </cffunction>
+
+
+
+
+
+
 
 
 <!--- SAVE DATA --->
@@ -188,17 +191,17 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#Session.user.id#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#"/>
-,<cfqueryparam value="#j.DATA[1][15]#"/>
+,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[tb_id]
 </cfquery>
