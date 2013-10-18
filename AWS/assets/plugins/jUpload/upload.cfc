@@ -58,7 +58,6 @@ ORDER BY[file_name]
 <cfswitch expression="#ARGUMENTS.loadType#">
 <cfcase value="group100">
 <cfquery datasource="AWS" name="fQuery">
-
 SELECT 
 'group100'AS[group100]
 ,[FILE_ID]
@@ -71,11 +70,9 @@ SELECT
       ,[file_savedname]
       ,[file_size]
       ,[file_type]
-
       ,[file_timestamp]
       ,[file_subtype]
       ,[file_ext]
-	  
 	  --->
  FROM[ctrl_files]
 WHERE[file_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -85,7 +82,7 @@ WHERE[file_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
 <!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.cl_id#","#cfcatch.detail#"]}'> 
+<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
 </cffunction>

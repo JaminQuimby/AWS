@@ -30,11 +30,9 @@ SELECT TOP 1000 [tb_id]
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
-
+<cfargument name="loadType" type="string" required="no">
 <cftry>
-
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Load Group102--->
 <cfcase value="group102">
 <cfquery datasource="AWS" name="fQuery">
 SELECT 
@@ -52,7 +50,7 @@ SELECT
 ,[tb_ratetype]
 ,[tb_reimbursment]
 FROM[timebilling]
-WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.id#"/>
+WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 </cfswitch>
@@ -63,8 +61,6 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.id#"/>
 </cfcatch>
 </cftry>
 </cffunction>
-
-
 
 <!--- LOOKUP DATA --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
@@ -117,7 +113,6 @@ SELECT[t_id]
 ,[t_stop]
 FROM[v_time]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -133,25 +128,13 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-
- 
 </cfswitch>
-
-
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
-
-
-
 </cffunction>
-
-
-
-
-
 
 
 
@@ -212,7 +195,28 @@ SELECT SCOPE_IDENTITY()AS[tb_id]
 </cfcatch>
 </cftry>
 </cfif>
-
+<!--- if this is a not a new record, then insert it--->
+<cfif #j.DATA[1][1]# neq "0">
+<cfquery name="fquery" datasource="AWS">
+UPDATE[timebilling]
+SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[user_id]=<cfqueryparam value="#Session.user.id#"/>
+,[client_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[task_id]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[tb_adjustment]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[tb_billingtype]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[tb_date]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tb_description]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[tb_flatfee]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[tb_mileage]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[tb_notes]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][15]#"/>
+WHERE[tb_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
+</cfif>
 </cfcase>
 </cfswitch>
 <cfcatch>

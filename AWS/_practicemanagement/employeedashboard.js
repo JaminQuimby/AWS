@@ -315,7 +315,7 @@ _grid5_5=function(){_jGrid({
 _grid5_6=function(){_jGrid({
 	"grid":"grid5_6",
 	"url":"employeedashboard.cfc",	
-	"title":"Financial & Tax Planning", 
+	"title":"Financial &amp; Tax Planning", 
 	"fields":{FTP_ID:{key:true,list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
 			FTP_CATEGORY:{title:'Category'},
