@@ -5,7 +5,7 @@
 <file name="payrolltaxes_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130251198400049755" remote="130251238680000000" />
 <file name="payrolltaxes_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130253926299343520" remote="130253927180000000" />
 <file name="otherfilings_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130253925886439903" remote="130253926050000000" />
-<file name="otherfilings_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130251198556288691" remote="130251198590000000" />
+<file name="otherfilings_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130251198590000000" remote="130251198590000000" />
 <file name="otherfilings_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130253925957863989" remote="130253925990000000" />
 <file name="payroll_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130235879610000000" remote="130235879610000000" />
 <file name="payroll_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130246922980000000" remote="130246922980000000" />

@@ -6,7 +6,7 @@
 $(document).ready(function(){
 //Start Normal Template Functions
 _pluginURL102=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jTimeBilling/"}
-_pluginLoadData102=function(){return 'tb_id,tb_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement'}
+_pluginLoadData102=function(){return "tb_id,tb_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
 _pluginSaveData102=function(){
 	var json='{"DATA":[["'+
 		$("##tb_id").val()+'","'+

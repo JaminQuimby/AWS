@@ -26,9 +26,9 @@ _grid2=function(){_jGrid({
 	"url":"taxreturns.cfc",
 	"title":"State",
 	"fields":{TRST_ID:{key:true,list:false,edit:false}
-	,TRST_STATE:{title:'State'}
-	,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
-	,TRST_STATUS:{title:'Status'}
+			,TRST_STATE:{title:'State'}
+			,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,TRST_STATUS:{title:'Status'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
@@ -39,9 +39,9 @@ _grid3=function(){_jGrid({
 	"url":"taxreturns.cfc",
 	"title":"Schedule",
 	"fields":{TRSC_ID:{key:true,list:false,edit:false}
-	,TRSC_SCHEDULE:{title:'Schedule'}
-	,TRSC_STATUS:{title:'Status'}
-	,TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}},
+			,TRSC_SCHEDULE:{title:'Schedule'}
+			,TRSC_STATUS:{title:'Status'}
+			,TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3"}',
 	"functions":'$("#subtask2_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});'

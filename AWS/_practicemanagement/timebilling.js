@@ -9,13 +9,12 @@ _group6=function(){_grid6()}
 _group7=function(){_grid7()}
 _group8=function(){_grid8()}
 _group9=function(){_grid9()}
-_group9_1=function(){_grid9_1()}
-_group9_2=function(){_grid9_2()}
-_group9_3=function(){_grid9_3()}
 _group10=function(){_grid10()}
+_group11=function(){_grid11()}
+_group12=function(){_grid12()}
+_group13=function(){_grid13()}
 });
  
-/*Define Grid Instances*/   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"timebilling.cfc",
@@ -34,10 +33,12 @@ _grid1=function(){_jGrid({
 			,PC_PAYMENTSTATUS:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group1"}',
+	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group1"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollchecks.cfm?task_id="+record.PC_ID'
 })};
 
+
+ 
 _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"timebilling.cfc",
@@ -127,7 +128,7 @@ _grid4=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group4"}',
 	"functions":'$("#bf_id").val(record.BF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?task_id="+record.BF_ID'
 })};
-	
+
 _grid5=function(){_jGrid({
 	"grid":"grid5",
 	"url":"timebilling.cfc",
@@ -247,8 +248,8 @@ _grid9=function(){_jGrid({
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
 })};	
 
-_grid9_1=function(){_jGrid({
-	"grid":"grid9_1",
+_grid10=function(){_jGrid({
+	"grid":"grid10",
 	"url":"timebilling.cfc",	
 	"title":"PPTRs",
 	"fields":{TR_ID:{key:true,list:false,edit:false},
@@ -257,18 +258,17 @@ _grid9_1=function(){_jGrid({
 			TR_TAXFORM:{title:'Tax Form'},
 			TR_3_COMPLETED:{title:'Completed',width:'1%'},
 			TR_3_CURRENTFEES:{title:'Current Fees'},		
-			TR_3_DELIVERED:{title:'Delivered',width:'1%'},
 			TR_3_PAYMENTSTATUS:{title:'Payment Status'},
 			TR_3_DELIVERED:{title:'Delivered',width:'1%'},
 			TR_3_MULTISTATERETURN:{title:'Multi State Return',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g9_1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group9_1"}',
+	"arguments":'{"search":"'+$("#g10_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group10"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
 })};	
 
-_grid9_2=function(){_jGrid({
-	"grid":"grid9_2",
+_grid11=function(){_jGrid({
+	"grid":"grid11",
 	"url":"timebilling.cfc",	
 	"title":"State Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false},
@@ -282,13 +282,13 @@ _grid9_2=function(){_jGrid({
 			TRST_3_PAYMENTSTATUS:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g9_2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group9_2"}',
+	"arguments":'{"search":"'+$("#g11_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group11"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
 })};
 
 
-_grid9_3=function(){_jGrid({
-	"grid":"grid9_3",
+_grid12=function(){_jGrid({
+	"grid":"grid12",
 	"url":"timebilling.cfc",	
 	"title":"State Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false},
@@ -302,13 +302,13 @@ _grid9_3=function(){_jGrid({
 			TRST_3_PPTRDELIVERED:{title:'Delivered',width:'1%'}			
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g9_3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group9_3"}',
+	"arguments":'{"search":"'+$("#g12_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group12"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
 })};
 
 
-_grid10=function(){_jGrid({
-	"grid":"grid10",
+_grid13=function(){_jGrid({
+	"grid":"grid13",
 	"url":"timebilling.cfc",	
 	"title":"Communications",
 	"fields":{CO_ID:{key:true,list:false,edit:false},
@@ -326,41 +326,8 @@ _grid10=function(){_jGrid({
 			CO_BRIEFMESSAGE:{title:'Brief Message'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g10_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group10"}',
+	"arguments":'{"search":"'+$("#g13_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group13"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID'
 })};
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
