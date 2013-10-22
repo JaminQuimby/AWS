@@ -7,11 +7,12 @@
 <cfset page.title="Document Tracking">
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id,file_id">
+<cfset page.plugins.disable="102">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="../assets/inc/header.cfm">
 <!--- Load Select Options for each dropdown--->
-
+<cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="../assets/inc/pagemenu.cfm">

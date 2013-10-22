@@ -19,43 +19,42 @@
 <style>
 .splash{}
 .splash li{ display:inline-block;vertical-align:top;}
-.group1{margin:15px;text-align:center;}
-.group1 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
-.group1 li a{background-color:#F60000;border-color:#6B1301;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
+.group1{margin-left:15px;text-align:center;}
+.group1 li{align-items:center;justify-content:center;display:flex;border-top:1px solid #fff;}
+.group1 li a{background-color:#F60000;align-items:center;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
 .group1 li a:hover{background-color:#E33C0F;}
-.group2{margin:15px;text-align:center;}
-.group2 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
-.group2 li a{border-color:#1E344E;background-color:#370EE4;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
+.group2{margin-left:15px;text-align:center;}
+.group2 li{align-items:center;justify-content:center;display:flex;border-top:1px solid #fff;}
+.group2 li a{background-color:#1E344E;align-items:center;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
 .group2 li a:hover{background-color:#0D92CD;}
-.group3{margin:15px;text-align:center;}
-.group3 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
-.group3 li a{border-color:#6B1301;background-color:#e46c0a;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
+.group3{margin-left:15px;text-align:center;}
+.group3 li{align-items:center;justify-content:center;display:flex;border-top:1px solid #fff;}
+.group3 li a{border-color:#6B1301;background-color:#e46c0a;align-items:center;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
 .group3 li a:hover{background-color:#FFF200;}
-.group4{margin:15px;text-align:center;}
-.group4 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
-.group4 li a{border-color:#154728;background-color:#247639;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
+.group4{margin-left:15px;text-align:center;}
+.group4 li{align-items:center;justify-content:center;display:flex;border-top:1px solid #fff;}
+.group4 li a{border-color:#154728;background-color:#247639;align-items:center;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
 .group4 li a:hover{background-color:#22B14C;}
-.group5{margin:15px;text-align:center;}
-.group5 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
-.group5 li a{border-color:#8C8C8C;background-color:#a6a6a6;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
+.group5{margin-left:15px;text-align:center;}
+.group5 li{align-items:center;justify-content:center;display:flex;border-top:1px solid #fff;}
+.group5 li a{border-color:#8C8C8C;background-color:#a6a6a6;align-items:center;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;}
 .group5 li a:hover{background-color:#BFBFBF;}
 </style>
 
 </head>
 
 <body>
+
 <!--- Load Left Menus and trackers --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
-
-<cfdump var='#expandPath("/assets")#'>
 
 <div id="content" class="contentsmall"><nav id="topMenu">
 
 <cfinclude template="/assets/module/menu/menu.cfm">
 
 </nav>
-test
+
 
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
@@ -63,6 +62,9 @@ test
 
 
 <img src="assets/images/logo_workflow4accountants.PNG" width="269" height="112" alt="Workflow 4 Accountants">
+<cfoutput>
+<img src="/assets/img/bgnoise.png">
+</cfoutput>
 <br/>
 <ul class="splash">
   <li>

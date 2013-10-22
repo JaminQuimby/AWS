@@ -208,8 +208,9 @@ buttonImageOnly:true,
 buttonImage: "https://"+ window.location.hostname + "/AWS/assets/img/datepicker.gif",
 constrainInput:true
 });
-$(".time").datetimepicker({timeFormat: 'hh:mmtt'});
+$(".datetime").datetimepicker({timeFormat: 'hh:mmtt'});
 $(".date").datepicker();
+$(".time").timepicker();
 $('select').chosen();
 $('.gf-checkbox').hide();
 $('#entrance').show();

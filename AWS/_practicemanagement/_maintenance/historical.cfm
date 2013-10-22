@@ -12,6 +12,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
 <cfinclude template="../../assets/inc/header.cfm">
+<cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+
 <cfinclude template="../../assets/inc/pagemenu.cfm">
 
 
