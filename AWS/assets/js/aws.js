@@ -91,7 +91,9 @@ var options={"id":"","group":"","page":"","plugin":""}
 try{$.extend(true, options, params);
 if(options["plugin"]!=""){options["url"]= _pluginURL(options["plugin"]);}else{options["url"]=""};
 $.ajax({type:'GET',url:options["url"]+options["page"]+'.cfc?method=f_loadData',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"id":$('#'+options["id"]).val(),"loadType":options["group"]})}
-,success:function(json){_loadDataCB($.parseJSON(json))}
+,success:function(json){
+	_loadDataCB($.parseJSON(json))
+	}
 ,error:function(data){errorHandle($.parseJSON(data))}})}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 //Save Data
