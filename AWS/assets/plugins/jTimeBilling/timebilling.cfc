@@ -41,6 +41,7 @@ SELECT TOP 1000 [tb_id]
 SELECT 
 'GROUP102'AS[GROUP102]
 ,[tb_id]
+,[user_id]
 ,[tb_adjustment]
 ,[tb_billingtype]
 ,CONVERT(VARCHAR(10),[tb_date], 101)AS[tb_date]
@@ -189,20 +190,20 @@ INSERT INTO[timebilling](
 ,[tb_reimbursment]
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#Session.user.id#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#"/>
-,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][15]#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[tb_id]
 </cfquery>
@@ -219,19 +220,20 @@ SELECT SCOPE_IDENTITY()AS[tb_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[timebilling]
 SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[client_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[task_id]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[tb_adjustment]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[tb_billingtype]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[tb_date]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[tb_description]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[tb_flatfee]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[tb_mileage]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[tb_notes]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][14]#"/>
-,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[user_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[client_id]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[task_id]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[tb_adjustment]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[tb_billingtype]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tb_date]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[tb_description]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tb_flatfee]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[tb_mileage]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tb_notes]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][15]#"/>
+,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group102_1","result":"ok"}'>
 </cfif>

@@ -84,7 +84,6 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div><label for="g1_g3_group">Groups</label><select id="g1_g3_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="global_clientgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
-
 </div>
 
 <!--- Group 2 --->
