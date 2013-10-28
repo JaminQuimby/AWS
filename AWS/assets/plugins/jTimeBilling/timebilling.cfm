@@ -8,6 +8,7 @@ $(document).ready(function(){
 _pluginURL102=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jTimeBilling/"}
 _pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
 _pluginSaveData102=function(){
+
 	var json='{"DATA":[["'+
 		$("##tb_id").val()+'","'+
 		$("##form_id").val()+'","'+
@@ -26,24 +27,33 @@ _pluginSaveData102=function(){
     	$("##g102_ratetype").val()+'","'+
         $("##g102_reimbursement").val()+'","'+
 		'"]]}'
-		if($("##isLoaded_group102").val()!=0){_saveData({"group":"group102",payload:$.parseJSON(json),page:"timebilling",plugin:"group102"})}
-		else{ _pluginSaveDataCB({'group':'group102_1'}) }}
-/*
+		if($("##isLoaded_group102").val()!=0){
+			
+			alert('Saving group102');
+			_saveData({"group":"group102",payload:$.parseJSON(json),page:"timebilling",plugin:"group102"})}
+		else{
+			alert('Trigger callback group102_1');
+			_pluginSaveDataCB({'group':'group102_1'})
+			
+			}}
+
 _pluginSaveData102_1=function(){
+	alert('Triggered 102_1 Save');
 	var json='{"DATA":[["'+
 		$("##t_id").val()+'","'+
 		$("##tb_id").val()+'","'+
-		$("##form_id").val()+'","'+
-		$("##client_id").val()+'","'+
-		$("##task_id").val()+'","'+
         $("##g102_1_start").val()+'","'+
 		$("##g102_1_stop").val()+'","'+
 		'"]]}'
-		if($("##isLoaded_group102_1").val()!=0){_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"group102_1"})}
+		if($("##isLoaded_group102_1").val()!=0){
+			alert('Group 102_1 Save')
+			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"group102_1"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
-*/
+
 _group102=function(){_grid102(), jqMessage({message: "Time And Billing under construction.",type: "information",autoClose: true})}
+
 _group102_1=function(){_grid102_1()}
+
 _grid102=function(){
 	_jGrid({
 	"grid":"grid102",
@@ -56,9 +66,9 @@ _grid102=function(){
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g102_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","clientid":"'+$("##client_id").val()+'","taskid":"'+$("##task_id").val()+'","loadType":"group102"}',
-	"functions": '$("##tb_id").val(record.TB_ID);$("##isLoaded_group102").val(1);$("##group102").accordion({active:1}); _loadData({"id":"tb_id","group":"group102","page":"timebilling","plugin":"group102"});	'
+	"functions": '$("##tb_id").val(record.TB_ID);$("##isLoaded_group102").val(1);$("##group102").accordion({active:1}); _loadData({"id":"tb_id","group":"group102","page":"timebilling","plugin":"group102"});'
 })};
-	
+
 _grid102_1=function(){
 	_jGrid({
 	"grid":"grid102_1",
@@ -69,7 +79,7 @@ _grid102_1=function(){
 			,T_STOP:{title:'End Time',width:'1%'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("##g102_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'","loadType":"group102_1"}',
+	"arguments":'{"search":"'+$("##g102_1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'","loadType":"group102_1"}',
 	"functions":''
 })};
 
@@ -122,22 +132,17 @@ _grid102_1=function(){
         <div><label for="g102_adjustment">Adjustment</label><input type="text" id="g102_adjustment" ></div>
 	</div>  
     
-    
-    <h3 id="group102_1" onClick="_group102_1();">Time</h3>
-	<div>
-		<div><label for="g102_1_filter">Filter</label><input id="g102_1_filter" onBlur="_grid102_1();" onKeyPress="if(event.keyCode==13){_grid102_1();}"/></div>
-		<div id="grid102_1" class="tblGrid"></div>
-		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:3});$("#isLoaded_group102_1").val(1);'>Add</a></div>
-	</div>
-    
-	<h4 onClick='_loadData({"id":"t_id","group":"group102_1","page":"timebilling",plugin:"group102_1"});$("#isLoaded_group102_1").val(1);'>Add Time</h4>
-	<div>
+
+
+<h3 group="group102_1" onClick="_grid102_1();">Add Time</h3>
+<div>
+	<div><label for="g102_1_filter">Filter</label><input id="g102_1_filter" onBlur="_grid102_1();" onKeyPress="if(event.keyCode==13){_grid102_1();}"/></div>
+	<div id="grid102_1" class="tblGrid"></div>
+	<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:3});$("#isLoaded_group102_1").val(1);'>Add</a></div>
+</div>
+<h4 onClick='$("#isLoaded_group102_1").val(1);'>Time</h4>
+<div>
         <div><label for="g102_1_start">Start Time</label><input type="text" class="time" id="g102_1_start" ></div>
         <div><label for="g102_1_stop">End Time</label><input type="text" class="time" id="g102_1_stop" ></div>
-	</div>  
-
 </div>
-
- 
-
-
+</div>

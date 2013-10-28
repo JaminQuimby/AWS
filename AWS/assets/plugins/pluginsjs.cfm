@@ -7,7 +7,9 @@ _pluginSaveData=function(params){<cfloop index="i" list="#session.user.plugins#"
 _pluginSaveDataCB=function(params){	
 var options={"group":""}
 $.extend(true, options, params);
+alert(options['group']);
 switch(options['group']){
+case"group102_1":alert('Hello ?'); break;
 case"group0":_saveDataCB({'group':'saved'});break;
 <cfloop index="i" list="#session.user.plugins#"><cfif !ListContains(#page.plugins.disable#,#i#)>case"group#i#":_pluginSaveData#i#();break;</cfif></cfloop>
 default:alert('Plugin data could not be saved.');break;}};

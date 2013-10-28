@@ -1,38 +1,11 @@
 <cfcomponent output="true">
 
-<!---
-SELECT TOP 1000 [t_id]
-      ,[tb_id]
-      ,[t_start]
-      ,[t_stop]
-  FROM [AWS].[dbo].[time]
-
-SELECT TOP 1000 [tb_id]
-      ,[client_id]
-      ,[user_id]
-      ,[form_id]
-      ,[task_id]
-      ,[tb_date]
-      ,[tb_description]
-      ,[tb_notes]
-      ,[tb_paymentstatus]
-      ,[tb_mileage]
-      ,[tb_reimbursment]
-      ,[tb_billingtype]
-      ,[tb_ratetype]
-      ,[tb_flatfee]
-      ,[tb_adjustment]
-      ,[tb_manualtime]
-      ,[tb_timestamp]
-  FROM [AWS].[dbo].[timebilling]
---->
-
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
 
-<cftry>
+
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group102--->
@@ -59,11 +32,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
-<cfcatch>
-<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
+
 </cffunction>
 
 
@@ -80,11 +49,11 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="taskid" type="string" required="no">
 
 
-<cftry>
+
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 102  --->
 <cfcase value="group102">
-<cftry>
+
 <cfquery datasource="AWS" name="fquery">
 SELECT[tb_id]
 ,CONVERT(VARCHAR(10),[tb_date], 101)AS[tb_date]
@@ -109,23 +78,18 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cfcase>
 
+</cfcase>
 <!--- Grid 102_1  --->
 <cfcase value="group102_1">
-<cftry>
+
 <cfquery datasource="AWS" name="fquery">
 SELECT[t_id]
 ,[tb_id]
 ,[t_start]
 ,[t_stop]
 FROM[v_time]
-WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+WHERE[t_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -133,6 +97,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"T_ID":"'&T_ID&'"
+								,"TB_ID":"'&TB_ID&'"
 								,"T_START":"'&T_START&'"
 								,"T_STOP":"'&T_STOP&'"
 								}'>
@@ -140,20 +105,8 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
 </cfcase>
-
- 
 </cfswitch>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
 </cffunction>
 
 
@@ -161,16 +114,15 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cffunction name="f_saveData" access="remote" output="false" returntype="any">
 <cfargument name="group" type="string" required="true">
 <cfargument name="payload" type="string" required="true">
-<cftry>
+
+
 <cfset j=DeserializeJSON("#ARGUMENTS.payload#")>
 <cfswitch expression="#ARGUMENTS.group#">
-
-
 
 <!---Group102--->
 <cfcase value="group102">
 <cfif j.DATA[1][1] eq "0">
-<cftry>
+
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[timebilling](
 [form_id]
@@ -208,12 +160,8 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 SELECT SCOPE_IDENTITY()AS[tb_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group102_1","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfif>
+
 
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
@@ -235,60 +183,42 @@ SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][15]#"/>
 ,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group102_1","result":"ok"}'>
+</cfquery><cfreturn '{"id":"#j.DATA[1][1]#","group":"group102_1","result":"ok"}'>
 </cfif>
 </cfcase>
-
-
-
-
-<!---
 
 <!---Group102_1--->
 <cfcase value="group102_1">
 <cfif j.DATA[1][1] eq "0">
-<cftry>
+
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[time](
 [tb_id]
 ,[t_start]
 ,[t_stop]
 )
-VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
+VALUES(
+<cfqueryparam value="#j.DATA[1][1]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[t_id]
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
+<cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
+
 </cfif>
 
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[time]
-SET[tb_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+SET[tb_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 ,[t_start]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[t_stop]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-WHERE[T_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
+WHERE[T_ID]=<cfqueryparam value="#j.DATA[1][2]#"/>
+</cfquery><cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
 </cfif>
-
 </cfcase>
---->
-
-
-
 </cfswitch>
-<cfcatch>
-<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
 </cffunction>
 </cfcomponent>
