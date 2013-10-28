@@ -41,12 +41,13 @@ SELECT TOP 1000 [tb_id]
 SELECT 
 'GROUP102'AS[GROUP102]
 ,[tb_id]
+,[user_id]
 ,[tb_adjustment]
 ,[tb_billingtype]
 ,CONVERT(VARCHAR(10),[tb_date], 101)AS[tb_date]
 ,[tb_description]
 ,[tb_flatfee]
-,[tb_manualtime]
+,CONVERT(VARCHAR(5),[tb_manualtime], 108)AS[tb_manualtime]
 ,[tb_mileage]
 ,[tb_notes]
 ,[tb_paymentstatus]
@@ -83,6 +84,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 102  --->
 <cfcase value="group102">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tb_id]
 ,CONVERT(VARCHAR(10),[tb_date], 101)AS[tb_date]
@@ -107,10 +109,16 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
 <!--- Grid 102_1  --->
 <cfcase value="group102_1">
+<cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[t_id]
 ,[tb_id]
@@ -118,7 +126,6 @@ SELECT[t_id]
 ,[t_stop]
 FROM[v_time]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -133,6 +140,11 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
  
@@ -142,16 +154,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
-
-
-
 </cffunction>
-
-
-
-
-
-
 
 
 <!--- SAVE DATA --->
@@ -187,22 +190,75 @@ INSERT INTO[timebilling](
 ,[tb_reimbursment]
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#Session.user.id#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#"/>
-,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][15]#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[tb_id]
+</cfquery>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group102_1","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfif>
+
+<!--- if this is a not a new record, then insert it--->
+<cfif #j.DATA[1][1]# neq "0">
+<cfquery name="fquery" datasource="AWS">
+UPDATE[timebilling]
+SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[user_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[client_id]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[task_id]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[tb_adjustment]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[tb_billingtype]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tb_date]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[tb_description]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tb_flatfee]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[tb_mileage]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tb_notes]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][15]#"/>
+,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group102_1","result":"ok"}'>
+</cfif>
+</cfcase>
+
+
+
+
+<!---
+
+<!---Group102_1--->
+<cfcase value="group102_1">
+<cfif j.DATA[1][1] eq "0">
+<cftry>
+<cfquery name="fquery" datasource="AWS">
+INSERT INTO[time](
+[tb_id]
+,[t_start]
+,[t_stop]
+)
+VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+)
+SELECT SCOPE_IDENTITY()AS[t_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
 <cfcatch>
@@ -212,7 +268,22 @@ SELECT SCOPE_IDENTITY()AS[tb_id]
 </cftry>
 </cfif>
 
+<!--- if this is a not a new record, then insert it--->
+<cfif #j.DATA[1][1]# neq "0">
+<cfquery name="fquery" datasource="AWS">
+UPDATE[time]
+SET[tb_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[t_start]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[t_stop]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+WHERE[T_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"saved","result":"ok"}'>
+</cfif>
+
 </cfcase>
+--->
+
+
+
 </cfswitch>
 <cfcatch>
 <!--- CACHE ERRORS DEBUG CODE --->

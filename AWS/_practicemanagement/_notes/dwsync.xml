@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="employeecontactinfo.js" server="https://ftp.awensa.com/MS/MS0213/" local="130240783456980097" remote="130240783530000000" Dst="-1" />
-<file name="employeecontactInfo.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130245529048334370" remote="130245531540000000" Dst="-1" />
-<file name="employeecontactinfo.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130240108772226359" remote="130240108830000000" Dst="-1" />
-<file name="_practicemanagement.css" server="https://ftp.awensa.com/MS/MS0213/" local="130239988825098583" remote="130239988870000000" Dst="-1" />
-<file name="employeedashboard.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130269491687584654" remote="130269491760000000" Dst="2" />
-<file name="employeedashboard.js" server="https://ftp.awensa.com/MS/MS0213/" local="130262405565732501" remote="130262405610000000" Dst="-1" />
-<file name="employeedashboard.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130262404936276498" remote="130262405130000000" Dst="-1" />
-<file name="maintenance.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130245529048834371" remote="130245531540000000" Dst="-1" />
-<file name="timebilling.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130269493505108610" remote="130269493570000000" Dst="2" />
-<file name="workinprogress.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130245529049134372" remote="130245531550000000" Dst="-1" />
-<file name="timebilling.js" server="https://ftp.awensa.com/MS/MS0213/" local="130269427176274080" remote="130269428510000000" Dst="-1" />
-<file name="timebilling.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130269453763014754" remote="130269453820000000" Dst="-1" />
+<file name="employeecontactinfo.js" server="https://ftp.awensa.com/MS/MS0213/" local="130240783456980097" remote="130240783530000000" />
+<file name="employeecontactInfo.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130245529048334370" remote="130245531540000000" />
+<file name="employeecontactinfo.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130240108772226359" remote="130240108830000000" />
+<file name="_practicemanagement.css" server="https://ftp.awensa.com/MS/MS0213/" local="130239988825098583" remote="130239988870000000" />
+<file name="employeedashboard.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130269491687584654" remote="130269491760000000" />
+<file name="employeedashboard.js" server="https://ftp.awensa.com/MS/MS0213/" local="130262405565732501" remote="130262405610000000" />
+<file name="employeedashboard.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130262404936276498" remote="130262405130000000" />
+<file name="maintenance.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130245529048834371" remote="130245531540000000" />
+<file name="timebilling.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130270220746373693" remote="130270220810000000" />
+<file name="workinprogress.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130245529049134372" remote="130245531550000000" />
+<file name="timebilling.js" server="https://ftp.awensa.com/MS/MS0213/" local="130269427176274080" remote="130269428510000000" />
+<file name="timebilling.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130269453763014754" remote="130269453820000000" />
 </dwsync>

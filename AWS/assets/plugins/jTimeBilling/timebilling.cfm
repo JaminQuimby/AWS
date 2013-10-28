@@ -6,11 +6,12 @@
 $(document).ready(function(){
 //Start Normal Template Functions
 _pluginURL102=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jTimeBilling/"}
-_pluginLoadData102=function(){return "tb_id,tb_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
+_pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
 _pluginSaveData102=function(){
 	var json='{"DATA":[["'+
 		$("##tb_id").val()+'","'+
 		$("##form_id").val()+'","'+
+		$("##user_id").val()+'","'+
 		$("##client_id").val()+'","'+
 		$("##task_id").val()+'","'+
         $("##g102_adjustment").val()+'","'+
@@ -25,10 +26,22 @@ _pluginSaveData102=function(){
     	$("##g102_ratetype").val()+'","'+
         $("##g102_reimbursement").val()+'","'+
 		'"]]}'
-		alert('102 saved')
 		if($("##isLoaded_group102").val()!=0){_saveData({"group":"group102",payload:$.parseJSON(json),page:"timebilling",plugin:"group102"})}
+		else{ _pluginSaveDataCB({'group':'group102_1'}) }}
+/*
+_pluginSaveData102_1=function(){
+	var json='{"DATA":[["'+
+		$("##t_id").val()+'","'+
+		$("##tb_id").val()+'","'+
+		$("##form_id").val()+'","'+
+		$("##client_id").val()+'","'+
+		$("##task_id").val()+'","'+
+        $("##g102_1_start").val()+'","'+
+		$("##g102_1_stop").val()+'","'+
+		'"]]}'
+		if($("##isLoaded_group102_1").val()!=0){_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"group102_1"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
-
+*/
 _group102=function(){_grid102(), jqMessage({message: "Time And Billing under construction.",type: "information",autoClose: true})}
 _group102_1=function(){_grid102_1()}
 _grid102=function(){
@@ -56,7 +69,7 @@ _grid102_1=function(){
 			,T_STOP:{title:'End Time',width:'1%'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("##g102_1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'"","loadType":"group102_1"}',
+	"arguments":'{"search":"'+$("##g102_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'","loadType":"group102_1"}',
 	"functions":''
 })};
 
@@ -72,11 +85,11 @@ _grid102_1=function(){
 </span>
 <div id="group102" class="gf-checkbox" >
 	<h3 onClick="_group102(); ">Time Card</h3>
-		<div>
-		<div><label for="g102_filter">Filter</label><input id="g102_filter" onBlur="_grid102();" onKeyPress="if(event.keyCode==13){_grid102();}"/></div>
-		<div id="grid102" class="tblGrid"></div>
-		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:1});$("#isLoaded_group102").val(1);'>Add</a></div>
-</div>
+	<div>
+			<div><label for="g102_filter">Filter</label><input id="g102_filter" onBlur="_grid102();" onKeyPress="if(event.keyCode==13){_grid102();}"/></div>
+			<div id="grid102" class="tblGrid"></div>
+			<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:1});$("#isLoaded_group102").val(1);'>Add</a></div>
+	</div>
     
 	<h4 onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});$("#isLoaded_group102").val(1);'>Add Time Card</h4>
 	<div>
@@ -101,32 +114,28 @@ _grid102_1=function(){
     	<div><label for="g102_billingtype">Billing Type</label><select id="g102_billingtype"><option value="0">&nbsp;</option></select></div>
     	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option></select></div>
         
-        
         <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly="readonly" id="g102_rate" ></div>
         <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly="readonly" id="g102_totaltime" ></div>
         <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly="readonly" id="g102_subtotal" ></div>   
-        
             
         <div><label for="g102_flatfee">Flat Fee</label><input type="text" id="g102_flatfee" ></div>
         <div><label for="g102_adjustment">Adjustment</label><input type="text" id="g102_adjustment" ></div>
 	</div>  
     
     
-    <h3 onClick="_group102_1(); ">Time</h3>
-		<div>
+    <h3 id="group102_1" onClick="_group102_1();">Time</h3>
+	<div>
 		<div><label for="g102_1_filter">Filter</label><input id="g102_1_filter" onBlur="_grid102_1();" onKeyPress="if(event.keyCode==13){_grid102_1();}"/></div>
 		<div id="grid102_1" class="tblGrid"></div>
-		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102_1").accordion({active:1});$("#isLoaded_group102_1").val(1);'>Add</a></div>
+		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:3});$("#isLoaded_group102_1").val(1);'>Add</a></div>
 	</div>
     
 	<h4 onClick='_loadData({"id":"t_id","group":"group102_1","page":"timebilling",plugin:"group102_1"});$("#isLoaded_group102_1").val(1);'>Add Time</h4>
 	<div>
         <div><label for="g102_1_start">Start Time</label><input type="text" class="time" id="g102_1_start" ></div>
         <div><label for="g102_1_stop">End Time</label><input type="text" class="time" id="g102_1_stop" ></div>
-	</div>
-    
-    
-    
+	</div>  
+
 </div>
 
  
