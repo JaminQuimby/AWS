@@ -180,7 +180,6 @@ $("#g2_reviewassignedto").val()+'","'+
 $("#g2_state").val()+'","'+
 $("#g2_status").val()+'","'+
 '"]]}'
-
 if($("#isLoaded_group2").val()!=0){
 if($("#g2_state").val()==0){jqMessage({message: "You must choose a state.",type: "info",autoClose: true})}
 else{_saveData({group:"group2","payload":$.parseJSON(json),page:"taxreturns"})}}

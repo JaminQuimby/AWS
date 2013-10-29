@@ -80,7 +80,7 @@
       
       </li>
       
-      <li><a href="#this.url#/AWS/_PracticeManagement/timebilling.cfm">Time &amp; Billing</a></li>
+      <li><a href="#this.url#/AWS/assets/plugins/jTimeBilling/timebillingreport.cfm">Time &amp; Billing</a></li>
     </ul>
 </li>
 

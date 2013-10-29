@@ -17,7 +17,7 @@ _group13=function(){_grid13()}
  
 _grid1=function(){_jGrid({
 	"grid":"grid1",
-	"url":"timebilling.cfc",
+	"url":"timebillingreport.cfc",
 	"title":"Payroll Checks",
 	"fields":{PC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -41,7 +41,7 @@ _grid1=function(){_jGrid({
  
 _grid2=function(){_jGrid({
 	"grid":"grid2",
-	"url":"timebilling.cfc",
+	"url":"timebillingreport.cfc",
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -68,7 +68,7 @@ _grid2=function(){_jGrid({
 
 _grid3=function(){_jGrid({
 	"grid":"grid3",
-	"url":"timebilling.cfc",
+	"url":"timebillingreport.cfc",
 	"title":"Other Fililngs",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -97,7 +97,7 @@ _grid3=function(){_jGrid({
 	
 _grid4=function(){_jGrid({
 	"grid":"grid4",
-	"url":"timebilling.cfc",
+	"url":"timebillingreport.cfc",
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -131,7 +131,7 @@ _grid4=function(){_jGrid({
 
 _grid5=function(){_jGrid({
 	"grid":"grid5",
-	"url":"timebilling.cfc",
+	"url":"timebillingreport.cfc",
 	"title":"Accounting & Consulting",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -154,7 +154,7 @@ _grid5=function(){_jGrid({
 	
 _grid6=function(){_jGrid({
 	"grid":"grid6",
-	"url":"timebilling.cfc",
+	"url":"timebillingreport.cfc",
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -184,7 +184,7 @@ _grid6=function(){_jGrid({
 		
 _grid7=function(){_jGrid({
 	"grid":"grid7",
-	"url":"timebilling.cfc",	
+	"url":"timebillingreport.cfc",	
 	"title":"Financial &amp; Tax Planning", 
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -211,7 +211,7 @@ _grid7=function(){_jGrid({
 	
 _grid8=function(){_jGrid({
 	"grid":"grid8",
-	"url":"timebilling.cfc",
+	"url":"timebillingreport.cfc",
 	"title":"Notices",
 	"fields":{NM_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -230,7 +230,7 @@ _grid8=function(){_jGrid({
 
 _grid9=function(){_jGrid({
 	"grid":"grid9",
-	"url":"timebilling.cfc",	
+	"url":"timebillingreport.cfc",	
 	"title":"Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
@@ -250,7 +250,7 @@ _grid9=function(){_jGrid({
 
 _grid10=function(){_jGrid({
 	"grid":"grid10",
-	"url":"timebilling.cfc",	
+	"url":"timebillingreport.cfc",	
 	"title":"PPTRs",
 	"fields":{TR_ID:{key:true,list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
@@ -269,9 +269,10 @@ _grid10=function(){_jGrid({
 
 _grid11=function(){_jGrid({
 	"grid":"grid11",
-	"url":"timebilling.cfc",	
+	"url":"timebillingreport.cfc",	
 	"title":"State Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},
+	"fields":{TRST_ID:{key:true,list:false,edit:false},
+			TR_ID:{list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Year',width:'1%'},
 			TRST_STATE:{title:'State'},
@@ -279,19 +280,20 @@ _grid11=function(){_jGrid({
 			TRST_2_DELIVERED:{title:'Delivered',width:'1%'},
 			TRST_1_PREPAREDBY:{title:'Prepared By',width:'1%'},
 			TRST_2_CURRENTFEES:{title:'Fees'},
-			TRST_3_PAYMENTSTATUS:{title:'Payment Status'}
+			TRST_2_PAYMENTSTATUS:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g11_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group11"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
+	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID+"&subtask1_id="+record.TRST_ID'
 })};
 
 
 _grid12=function(){_jGrid({
 	"grid":"grid12",
-	"url":"timebilling.cfc",	
+	"url":"timebillingreport.cfc",	
 	"title":"State Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},
+	"fields":{TRST_ID:{key:true,list:false,edit:false},
+			TR_ID:{list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Year',width:'1%'},
 			TR_TAXFORM:{title:'Tax Form'},
@@ -303,13 +305,13 @@ _grid12=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g12_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group12"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
+	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID+"&subtask1_id="+record.TRST_ID'
 })};
 
 
 _grid13=function(){_jGrid({
 	"grid":"grid13",
-	"url":"timebilling.cfc",	
+	"url":"timebillingreport.cfc",	
 	"title":"Communications",
 	"fields":{CO_ID:{key:true,list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},

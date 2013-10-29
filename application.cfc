@@ -198,7 +198,7 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
     access="public"
     returntype="void"
     output="true"
-    hint="Fires when an exception occures that is not caught by a try/catch.">
+    hint="Fires when an exception occurs that is not caught by a try/catch.">
      
     <!--- Define arguments. --->
     <cfargument

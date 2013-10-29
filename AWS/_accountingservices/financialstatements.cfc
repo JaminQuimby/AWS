@@ -281,7 +281,11 @@ SELECT[fds_id]
 ,[fds_missinginfo]
 ,[fds_compilemi]
 FROM[v_financialDataStatus]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[fds_status] != 2 
+AND [fds_status] != 5
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">

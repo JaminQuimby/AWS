@@ -177,9 +177,10 @@ SELECT[pt_id]
 ,[client_name]
 ,[client_id]
 FROM[v_payrolltaxes]
+WHERE[pt_delivery_datecompleted] IS NULL
 <cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">

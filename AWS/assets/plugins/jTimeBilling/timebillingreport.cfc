@@ -648,6 +648,7 @@ AND ([trst_2_paymentstatus]IS NULL OR [trst_2_paymentstatus] = '6' OR [trst_2_pa
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'"
+								,"TR_ID":"'&TR_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TRST_STATE":"'&TRST_STATE&'"
@@ -655,7 +656,7 @@ AND ([trst_2_paymentstatus]IS NULL OR [trst_2_paymentstatus] = '6' OR [trst_2_pa
 								,"TRST_2_DELIVERED":"'&TRST_2_DELIVERED&'"								
 								,"TRST_1_PREPAREDBY":"'&TRST_1_PREPAREDBY&'"
 								,"TRST_2_CURRENTFEES":"'&TRST_2_CURRENTFEES&'"
-								,"TRST_3_PAYMENTSTATUS":"'&TRST_3_PAYMENTSTATUS&'"
+								,"TRST_2_PAYMENTSTATUS":"'&TRST_2_PAYMENTSTATUS&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -673,7 +674,8 @@ AND ([trst_2_paymentstatus]IS NULL OR [trst_2_paymentstatus] = '6' OR [trst_2_pa
 <cfcase value="group12">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[tr_id]
+SELECT[trst_id]
+,[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[trst_state]
@@ -697,6 +699,7 @@ AND ([trst_3_paymentstatus] IS NULL OR [trst_3_paymentstatus] ='6' OR [trst_3_pa
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'"
+								,"TR_ID":"'&TR_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
@@ -736,7 +739,7 @@ SELECT[co_id]
 ,[co_briefmessage]
 ,[client_name]
 ,[client_id]
-FROM[v_taxreturns]
+FROM[v_communications]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 AND[co_completed] = 1

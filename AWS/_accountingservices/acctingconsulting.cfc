@@ -139,11 +139,12 @@ SELECT[mc_id]
 ,[mc_status]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>
-ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]
-<cfelse>
-ORDER BY[client_name]</cfif>
+WHERE[mc_status] != 2 
+AND [mc_status] != 3
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

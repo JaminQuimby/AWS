@@ -164,8 +164,12 @@ SELECT[bf_id]
 ,[bf_assignedto]
 ,[bf_activity]
 FROM[v_businessformation]
-WHERE[bf_owners]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfquery>
+WHERE[bf_status] != 2 
+AND [bf_status] != 5
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif></cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
