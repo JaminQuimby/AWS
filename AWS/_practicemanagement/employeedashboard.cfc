@@ -36,7 +36,7 @@ WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 
 <!--- LOOKUP Payroll Checks --->
-<cfcase value="group2_1">
+<cfcase value="group1_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pc_id]
@@ -79,7 +79,7 @@ ORDER BY[pc_datedue]
 
 
 <!--- LOOKUP Payroll Taxes --->
-<cfcase value="group2_2">
+<cfcase value="group1_2">
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
@@ -118,7 +118,7 @@ ORDER BY[pt_duedate]
 
 
 <!--- LOOKUP Other Filings --->
-<cfcase value="group2_3">
+<cfcase value="group1_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[of_id]
@@ -162,7 +162,7 @@ ORDER BY[of_duedate]
 
 
 <!--- LOOKUP Business Formation --->
-<cfcase value="group3_1">
+<cfcase value="group2_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[bf_id]
@@ -198,7 +198,7 @@ ORDER BY[bf_duedate]
 
 
 <!--- LOOKUP Accounting and Consulting Tasks --->
-<cfcase value="group3_2">
+<cfcase value="group2_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[mc_id]
@@ -233,7 +233,7 @@ ORDER BY[mc_duedate]
 </cfcase>
 
 <!--- LOOKUP Financial Statements --->
-<cfcase value="group3_3">
+<cfcase value="group2_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[fds_id]
@@ -285,7 +285,7 @@ ORDER BY[fds_duedate]
 
 
 <!--- Grid Notice  --->
-<cfcase value="group4_1">
+<cfcase value="group3_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[nm_id]
@@ -325,7 +325,7 @@ ORDER BY[n_2_resduedate]
 
 
 <!--- Grid Notice  --->
-<cfcase value="group4_2">
+<cfcase value="group3_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[nm_id]
@@ -364,7 +364,7 @@ ORDER BY[n_2_resduedate]
 </cfcase>
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group5_1">
+<cfcase value="group4_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
@@ -418,7 +418,7 @@ AND [tr_1_reviewedwithnotes] IS NOT NULL
 </cfcase>
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group5_2">
+<cfcase value="group4_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
@@ -454,7 +454,7 @@ AND [tr_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 </cfcase>
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group5_3">
+<cfcase value="group4_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
@@ -513,7 +513,7 @@ AND [tr_notrequired]='0'
 </cfcase>
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group5_4">
+<cfcase value="group4_4">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
@@ -567,7 +567,7 @@ AND [tr_2_delivered] IS NULL
 </cfcase>
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group5_5">
+<cfcase value="group4_5">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[trst_id]
@@ -613,7 +613,7 @@ AND ([trst_status] != '2' OR [trst_status] != '5')
 </cfcase>
 
 <!--- LOOKUP Financial Tax Planning --->
-<cfcase value="group5_6">
+<cfcase value="group4_6">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[ftp_id]
@@ -650,7 +650,7 @@ AND [ftp_status] != '2'
 
 
 <!--- LOOKUP Administrative Tasks --->
-<cfcase value="group6_1">
+<cfcase value="group5_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT [cas_id]
@@ -689,7 +689,7 @@ WHERE[cas_assignto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 </cfcase>
 
 <!--- LOOKUP Communications --->
-<cfcase value="group6_2">
+<cfcase value="group5_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[co_id]
@@ -744,7 +744,7 @@ And[co_completed]='0'
 </cfcase>
 
 <!--- LOOKUP Document Tracking Log --->
-<cfcase value="group6_3">
+<cfcase value="group5_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[dt_id]

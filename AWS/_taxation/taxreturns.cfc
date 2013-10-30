@@ -247,13 +247,9 @@ SELECT[tr_id]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
-WHERE[tr_1_informationreceived] IS NOT NULL
-AND [tr_2_delivered] IS NULL
-AND [tr_notrequired] = 0
 <cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif><cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -274,6 +270,13 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
+<!---
+[tr_1_informationreceived] IS NOT NULL
+AND [tr_2_delivered] IS NULL
+AND [tr_notrequired] = 0--->
+
+
+
 <!--- Grid 2 --->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
@@ -585,14 +588,14 @@ UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_2_assemblereturn]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[trst_2_contacted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[trst_2_currentfees]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[trst_2_currentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trst_2_delivered]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_2_deliverymethod]=<cfqueryparam value="#j.DATA[1][7]#"/>
 ,[trst_2_emailed]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[trst_2_messageleft]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[trst_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[trst_2_paymentstatus]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[trst_2_priorfees]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[trst_2_priorfees]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[trst_2_requiredforms]=<cfqueryparam value="#j.DATA[1][13]#"/>
 WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
@@ -614,11 +617,11 @@ UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_3_pptrassignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[trst_3_pptrcompleted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[trst_3_pptrcurrentfees]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[trst_3_pptrcurrentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trst_3_pptrdelivered]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_3_pptrextended]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[trst_3_paymentstatus]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[trst_3_pptrpriorfees]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[trst_3_pptrpriorfees]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[trst_3_pptrrequired]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[trst_3_pptrrfr]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>

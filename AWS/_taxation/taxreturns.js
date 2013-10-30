@@ -72,8 +72,6 @@ else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error"
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
 _saveDataCB=function(params){var options={"id":"","group":"","result":""};$.extend(true, options, params);var $client_id=$("#client_id");
-
-alert(options["group"])
 switch(options["group"]){
 
 case'':
@@ -218,7 +216,7 @@ $("#g2_g2_delivered").val()+'","'+
 $("#g2_g2_deliverymethod").val()+'",'+
 $("#g2_g2_emailed").is(':checked')+','+
 $("#g2_g2_messageleft").is(':checked')+','+
-$("#g2_g2_missingsignatures").is(':checked')+','+
+$("#g2_g2_missingsignatures").is(':checked')+',"'+
 $("#g2_g2_paymentstatus").val()+'","'+
 $("#g2_g2_priorfees").val()+'","'+
 $("#g2_g2_requiredforms").val()+'","'+
@@ -253,9 +251,7 @@ $("#g3_reviewassignedto").val()+'","'+
 $("#g3_schedule").val()+'","'+
 $("#g3_status").val()+'","'+
 '"]]}'
-if($("#isLoaded_group3").val()!=0){
-if($("#g3_schedule").val()==0){jqMessage({message: "You must choose a schedule.",type: "info",autoClose: true})}
-else{_saveData({group:"group3",payload:$.parseJSON(json),page:"taxreturns"})}}
+if($("#isLoaded_group3").val()!=0){_saveData({group:"group3",payload:$.parseJSON(json),page:"taxreturns"})}
 else{_saveDataCB({'group':'group3_1'})};
 break;
 
