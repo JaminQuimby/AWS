@@ -32,7 +32,7 @@
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
-<h3>Payroll & Taxes</h3><div></div>
+ <h3>Payroll &amp; Taxes</h3><div></div>
 <!--- GROUP 1 SUB 1 PAYROLL CHECKS --->
 	<h4 onClick='_grid1_1();'>Payroll Checks</h4>
 	<div>
@@ -57,7 +57,7 @@
 	<h4 onClick='_grid1_3();'>Other Filings</h4>
 		<div>
 		<div><label for="g1_3_filter">Filter</label><input id="g1_3_filter" onBlur="_grid1_3();" onKeyPress="if(event.keyCode==13){_grid1_3();}"/></div>
-		<div class="tblGrid" id="grid2_3"></div>
+		<div class="tblGrid" id="grid1_3"></div>
 		<div class="buttonbox">
 		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/otherfilings.cfm'">Add</a></cfoutput>
 		</div>
@@ -192,7 +192,7 @@
 
 
 <div id="group5" class="gf-checkbox">
- <h3>Client Management</h3>s
+ <h3>Client Management</h3><div></div>
 	
 	<!--- GROUP 5 SUB 1 Administrative Tasks --->
 	<h4 onClick='_grid5_1();'>Administrative Tasks</h4>

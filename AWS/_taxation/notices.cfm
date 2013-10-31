@@ -60,7 +60,7 @@
 <div><label for="g2_matter">Matter Name</label><input type="text" id="g2_matter" class="readonly" readonly></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_noticestatus">Notice Status</label><select id="g2_noticestatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_priority">Priority</label><input type="text" id="g2_priority" ></div>
+<div><label for="g2_priority">Priority</label><input type="text" id="g2_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g2_estimatedtime">Estimated Time</label><input type="text" id="g2_estimatedtime" ></div>
 </div>
 <!--- GROUP 2_1 --->
@@ -71,7 +71,7 @@
 <div><label for="g2_1_taxform">Tax Form</label><select id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_taxyear">Tax Year</label><select  id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_methodreceived">Method Recieved</label><select id="g2_1_methodreceived"><option value="0">&nbsp;</option></select></div>
-<div><label for="g2_1_fees">Fees</label><input type="text" id="g2_1_fees"></div>
+<div><label for="g2_1_fees">Fees</label><input type="text" id="g2_1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g2_1_paid">Paid</label><select id="g2_1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!--- GROUP 2_2 --->

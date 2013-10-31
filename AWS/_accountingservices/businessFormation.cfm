@@ -40,13 +40,13 @@ Add Subtasks:
 	<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_owners">Owners</label><input type="text" id="g1_owners" /></div>
+	<div><label for="g1_owners">Owners</label><input type="text" id="g1_owners"  /></div>
 	<div><label for="g1_activity">Activity</label><input type="text" id="g1_activity" /></div>
-	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
+	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
 	<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
 	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"/></div>
 	<div><label for="g1_duedate" >Due Date</label><input type="text" id="g1_duedate" class="date"/></div>
-	<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"/></div>
+	<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 

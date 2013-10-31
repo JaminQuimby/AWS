@@ -39,7 +39,7 @@
 <div><label for="g1_category">Category</label><select id="g1_category"><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" ></div>
+<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_requestforservices">Request For Services</label><input type="text" class="date" id="g1_requestforservices" ></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" ></div>
 <div><label for="g1_informationrequested">Information Requested</label><input type="text" class="date" id="g1_informationrequested" ></div>
@@ -50,7 +50,7 @@
 <div><label for="g1_reportcompleted">Report Completed</label><input type="text" class="date" id="g1_reportcompleted" ></div>
 <div><label for="g1_finalclientmeeting">Final Client Meeting</label><input type="text" class="date" id="g1_finalclientmeeting" ></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime" ></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" ></div>
+<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
  <div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>

@@ -335,7 +335,7 @@ SET[n_2_datenoticerec]=<cfqueryparam value="#j.DATA[1][2]#" NULL="#LEN(j.DATA[1]
 ,[n_2_ressubmited]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[n_2_revassignedto]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[n_2_revcompleted]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0#"/>
-,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#LEN(j.DATA[1][10]) eq 0#"/>
+,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][10]#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -348,7 +348,7 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
 SET[n_3_missinginfo]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[n_3_missingrec]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>/>
+,[n_3_missingrec]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

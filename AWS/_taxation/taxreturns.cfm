@@ -44,11 +44,11 @@
 <div><label for="g1_spouse">Spouse</label><input type="text" class="readonly" id="g1_spouse" readonly ></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
 <div><label for="g1_taxyear">Tax Year</label><select  id="g1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" ></div>
+<div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" ></div>
+<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_taxform">Tax Form</label><select  id="g1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" ></div>
+<div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_extensiondone">Extension Done</label><input type="text" class="date" id="g1_extensiondone" ></div>
 <div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime" ></div>
 <div><input id="g1_notrequired" type="checkbox"><label for="g1_notrequired">Not Required</label></div>
@@ -95,8 +95,8 @@
 <div><label for="g1_g3_delivered">PPTR Delivered</label><input type="text" class="date" id="g1_g3_delivered" ></div>
 <div><label for="g1_g3_paymentstatus">Payment Status</label><select id="g1_g3_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_pptresttime">PPTR Est Time</label><input type="text" id="g1_g3_pptresttime" ></div>
-<div><label for="g1_g3_currentfees">PPTR Current Fees</label><input type="text" id="g1_g3_currentfees" ></div>
-<div><label for="g1_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g3_priorfees" ></div>
+<div><label for="g1_g3_currentfees">PPTR Current Fees</label><input type="text" id="g1_g3_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g1_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g3_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 </div>
 <!--- GROUP1 SUBGROUP4 --->
 <h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)'>Appointment</h4>
@@ -156,11 +156,9 @@
 <div><label for="g2_g2_delivered">Delivered</label><input type="text" class="date" id="g2_g2_delivered" ></div>
 <div><label for="g2_g2_deliverymethod">Delivery Method</label><select id="g2_g2_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_g2_paymentstatus">Payment Status</label><select id="g2_g2_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_g2_currentfees">Current Fees</label><input type="text" id="g2_g2_currentfees" ></div>
-<div><label for="g2_g2_priorfees">Prior Fees</label><input type="text" id="g2_g2_priorfees" ></div>
+<div><label for="g2_g2_currentfees">Current Fees</label><input type="text" id="g2_g2_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_g2_priorfees">Prior Fees</label><input type="text" id="g2_g2_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g2_g2_requiredforms">Required Forms</label><select  id="g2_g2_requiredforms" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-
-
 </div>
 <!--- GROUP2 SUBGROUP3 --->
 <h4 onClick='_loadData({"id":"subtask1_id","group":"group2_3","page":"taxreturns"});$("#isLoaded_group2_3").val(1)'>Personal Property Tax</h4>
@@ -172,12 +170,10 @@
 <div><label for="g2_g3_completed">PPTR Completed</label><input type="text" class="date" id="g2_g3_completed" ></div>
 <div><label for="g2_g3_delivered">PPTR Delivered</label><input type="text" class="date" id="g2_g3_delivered" ></div>
 <div><label for="g2_g3_paymentstatus">Payment Status</label><select id="g2_g3_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_g3_currentfees">PPTR Current Fees</label><input type="text" id="g2_g3_currentfees" ></div>
-<div><label for="g2_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g2_g3_priorfees" ></div>
+<div><label for="g2_g3_currentfees">PPTR Current Fees</label><input type="text" id="g2_g3_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g2_g3_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 </div>
 </div>
-
-
 
 <!--- Group3 --->
 <div id="group3" class="gf-checkbox">

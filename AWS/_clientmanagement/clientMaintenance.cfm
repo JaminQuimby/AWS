@@ -7,6 +7,7 @@
 <cfset page.title="Client Maintenance">
 <cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients">
 <cfset page.trackers="task_id,client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7,isLoaded_group8">
+<cfset page.plugins.disable="102">
 <!DOCTYPE html> 
 <html>
 <cfinclude template="../assets/inc/header.cfm">

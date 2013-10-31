@@ -39,8 +39,8 @@ _grid0=function(){_jGrid({
 	"grid":"grid0",
 	"url":"employeedashboard.cfc",
 	"title":"Employee Dashboard",
-	"fields":{CLIENT_ID:{list:false,edit:false},
-			CLIENT_NAME:{title:'Client Name'},
+"fields":{SI_ID:{key:true,list:false,edit:false},
+			NAME:{title:'Employee Name'},
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
@@ -120,7 +120,7 @@ _grid2_1=function(){_jGrid({
 			BF_PAID:{title:'Paid'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group3_1"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group2_1"}',
 	"functions":'$("#bf_id").val(record.BF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?task_id="+record.BF_ID'
 })};
 	
@@ -153,8 +153,8 @@ _grid2_3=function(){_jGrid({
 			FDS_DUEDATE:{title:'Due Date',width:'1%'},
 			FDS_MIRECEIVED:{title:'Missing Information Received',width:'1%'},
 			FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }},
-			FDS_CMIRECEIVED:{title:'Compiled Missing Information Received',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }},
-			FDS_COMPILEMI:{title:'Missing Information Compiled',width:'1%'}
+			FDS_CMIRECEIVED:{title:'Compiled Missing Information Received',width:'1%'},
+			FDS_COMPILEMI:{title:'Missing Information Compiled',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group2_3"}',

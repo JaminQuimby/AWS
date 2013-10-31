@@ -54,7 +54,7 @@
 <div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Needed</label></div>
 <div><input id="g1_returnedcall" type="checkbox"><label for="g1_returnedcall">Returned Call</label></div>
 <div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees"></div>
+<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>

@@ -119,7 +119,7 @@ break;
 case'group2_3':var json='{"DATA":[["'+
 //group 2 subgroup 3
 $("#task_id").val()+'",'+
-$("#g2_3_missinginformation").val()+',"'+
+$("#g2_3_missinginformation").is(':checked')+',"'+
 $("#g2_3_missinginforeceived").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2_3").val()!=0){_saveData({group:"group2_3",payload:$.parseJSON(json),page:"notices"})}

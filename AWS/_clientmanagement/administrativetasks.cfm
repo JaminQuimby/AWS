@@ -41,7 +41,7 @@
 <div><label for="g1_requestedby">Requested By</label><select id="g1_requestedby" data-placeholder="Requested By."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"  multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" /></div>
+<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"/></div>
 <div><label for="g1_daterequested">Date Requested</label><input type="text" class="date" id="g1_daterequested" /></div>
 <div><label for="g1_datestarted">Date Started</label><input type="text" class="date"id="g1_datestarted" /></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" /></div>

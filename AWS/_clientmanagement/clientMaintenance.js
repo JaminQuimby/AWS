@@ -158,7 +158,7 @@ switch(query.COLUMNS[0]){
 /*Group 2_1*/case "CLIENT_TAX_SERVICES":var list='g2_g1_taxservices,g2_g1_formtype,g2_g1_businessc,g2_g1_rentalpropertye,g2_g1_disregardedentity,g2_g1_personalproperty';_loadit({"query":query,"list":list});break;
 /*Group 2_2*/case "CLIENT_PAYROLL_PREP":var list='g2_g2_payrollpreparation,g2_g2_paycheckfrequency,g2_g2_payrolltaxservices,g2_g2_prtaxdepositschedule,g2_g2_1099preparation,g2_g2_ein,g2_g2_pin,g2_g2_password';_loadit({"query":query,"list":list});break;
 /*Group 2_3*/case "CLIENT_ACCOUNTING_SERVICES":var list='g2_g3_accountingServices,g2_g3_bookkeeping,g2_g3_compilation,g2_g3_review,g2_g3_audit,g2_g3_financialstatementfreq,g2_g3_fiscalyearend,g2_g3_software,g2_g3_version,g2_g3_username,g2_g3_accountingpassword';_loadit({"query":query,"list":list});break;
-/*Group 3*/case "CONTACT_ID":var list='co_id,g3_type,g3_name,g3_address1,g3_address2,g3_city,g3_state,g3_zip,g3_phone1,g3_phone2,g3_phone3,g3_phone4,g3_phone5,g3_email1,g3_email2,g3_website,g3_effectivedate,g3_acctsoftwareupdate,g3_taxupdate,g3_customlabel,g3_customvalue';_loadit({"query":query,"list":list});break;
+/*Group 3*/case "CONTACT_ID":var list='co_id,g3_acctsoftwareupdate,g3_address1,g3_address2,g3_city,g3_customlabel,g3_customvalue,g3_effectivedate,g3_email1,g3_email2,g3_name,g3_phone1,g3_phone2,g3_phone3,g3_phone4,g3_phone5,g3_state,g3_taxupdate,g3_type,g3_website,g3_zip';_loadit({"query":query,"list":list});break;
 /*Group 6*/case "SI_ID":var list="si_id,g6_state,g6_revenue,g6_employees,g6_property,g6_nexus,g6_reason,g6_registered,g6_value1,g6_value2,g6_value3,g6_value4";_loadit({"query":query,"list":list});break;
 /*Group 6_1*/case"CLIENT_STATELABEL1":var list="g6_g1_label1,g6_g1_label2,g6_g1_label3,g6_g1_label4";_loadit({"query":query,"list":list});break;
 /*Group 7*/case"CLIENT_RELATIONS":var list="g7_group";_loadit({"query":query,"list":list});break;
@@ -170,6 +170,8 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
+
+alert(options["group"]);
 switch(options["group"]){
 case'':
 if($("#g1_name").val()!=""){
@@ -255,27 +257,27 @@ break;
 
 case'group3':var json='{"DATA":[["'+
 $("#co_id").val()+'","'+
-$("#client_id").val()+'","'+
-$("#g3_type").val()+'","'+
-$("#g3_name").val()+'","'+
+$("#client_id").val()+'",'+
+$("#g3_acctsoftwareupdate").is(':checked')+',"'+
 $("#g3_address1").val()+'","'+
 $("#g3_address2").val()+'","'+
 $("#g3_city").val()+'","'+
-$("#g3_state").val()+'","'+
-$("#g3_zip").val()+'","'+
+$("#g3_customlabel").val()+'",'+
+$("#g3_customvalue").is(':checked')+',"'+
+$("#g3_effectivedate").val()+'","'+
+$("#g3_email1").val()+'","'+
+$("#g3_email2").val()+'","'+
+$("#g3_name").val()+'","'+
 $("#g3_phone1").val()+'","'+
 $("#g3_phone2").val()+'","'+
 $("#g3_phone3").val()+'","'+
 $("#g3_phone4").val()+'","'+
 $("#g3_phone5").val()+'","'+
-$("#g3_email1").val()+'","'+
-$("#g3_email2").val()+'","'+
-$("#g3_website").val()+'","'+
-$("#g3_effectivedate").val()+'",'+
-$("#g3_acctsoftwareupdate").is(':checked')+','+
+$("#g3_state").val()+'",'+
 $("#g3_taxupdate").is(':checked')+',"'+
-$("#g3_customlabel").val()+'",'+
-$("#g3_customvalue").is(':checked')+',"'+
+$("#g3_type").val()+'","'+
+$("#g3_website").val()+'","'+
+$("#g3_zip").val()+'","'+
 '"]]}'
 if($("#isLoaded_group3").val()!=0){_saveData({group:"group3","payload":$.parseJSON(json),page:"clientmaintenance"})}
 else{_saveDataCB({'group':'group6'})}

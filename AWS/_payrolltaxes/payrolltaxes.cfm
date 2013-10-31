@@ -40,7 +40,7 @@
 <h3>General</h3>
 <div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_year">Year</label><input type="text" id="g1_year"></div>
+<div><label for="g1_year">Year</label><input type="text" id="g1_year" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_month">Month</label><select id="g1_month"></option><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_type">Return Type</label><select id="g1_type"></option><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
@@ -49,7 +49,7 @@
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_estimatedtime" ></div>
 <div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" ></div>
+<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"></option><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"></option><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 
