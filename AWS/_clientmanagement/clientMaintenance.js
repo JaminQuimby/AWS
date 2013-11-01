@@ -55,17 +55,17 @@ _grid1_1=function(){_jGrid({
 	"fields":{FIELD_ID:{key:true,list:false,edit:false},FIELD_NAME:{title:'Name'},FIELD_VALUE:{title:'Value'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1_1","clientid":'+$("#client_id").val()+'}',
-	"functions":'$("#cl_fieldid").val(record.field_id);$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);_loadData({"id":"cl_fieldid","group":"group1_2","page":"clientmaintenance"});'
+	"functions":'$("#cl_fieldid").val(record.FIELD_ID);$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);_loadData({"id":"cl_fieldid","group":"group1_2","page":"clientmaintenance"});'
 	})};
 	
 _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Contacts",
-	"fields":{CONTACT_ID:{key:true,list:false,edit:false},CONTACT_NAME:{title:'Contact Name'},CONTACT_PHONE1:{title:'Phone 1',width:'1%'},CONTACT_EMAIL1:{title:'Email 1'}},
+	"fields":{CONTACT_ID:{key:true,list:true,edit:false},CONTACT_NAME:{title:'Contact Name'},CONTACT_PHONE1:{title:'Phone 1',width:'1%'},CONTACT_EMAIL1:{title:'Email 1'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3","clientid":'+$("#client_id").val()+'}',
-	"functions":'$("#co_id").val(record.contact_id);_loadData({"id":"co_id","group":"group3","page":"clientmaintenance"});$("#group3").accordion({active:1});'
+	"functions":'$("#co_id").val(record.CONTACT_ID);_loadData({"id":"co_id","group":"group3","page":"clientmaintenance"});$("#group3").accordion({active:1});'
 	})};
 	
 _grid4_1=function(){_jGrid({
@@ -135,7 +135,7 @@ _grid6=function(){_jGrid({
 	"fields":{SI_ID:{key:true,list:false,edit:false},SI_STATETEXT:{title:'State'},SI_REVENUE:{title:'Revenue',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_EMPLOYEES:{title:'Employees',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_PROPERTY:{title:'Property',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_NEXUS:{title:'Nexus',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_REASON:{title:'Reason'},SI_REGISTERED:{title:'Registered',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_MISC1:{title:$('#g6_g1_label1').val(),width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_MISC2:{title:$('#g6_g1_label2').val(),width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_MISC3:{title:$('#g6_g1_label3').val(),width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}},SI_MISC4:{title:$('#g6_g1_label4').val(),width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g6_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group6","clientid":'+$("#client_id").val()+'}',
-	"functions":'$("#si_id").val(record.si_id);_loadData({"id":"si_id","group":"group6","page":"clientmaintenance"});$("#group6").accordion({active:1});'
+	"functions":'$("#si_id").val(record.SI_ID);_loadData({"id":"si_id","group":"group6","page":"clientmaintenance"});$("#group6").accordion({active:1});'
 	})};
 
 _grid7=function(){_jGrid({
