@@ -247,9 +247,13 @@ SELECT[tr_id]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
+WHERE[tr_1_informationreceived] IS NOT NULL
+AND [tr_2_delivered] IS NULL
+AND [tr_notrequired] = 0
 <cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif><cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -270,12 +274,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
-<!---
-[tr_1_informationreceived] IS NOT NULL
-AND [tr_2_delivered] IS NULL
-AND [tr_notrequired] = 0--->
-
-
 
 <!--- Grid 2 --->
 <cfcase value="group2">

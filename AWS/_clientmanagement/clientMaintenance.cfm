@@ -5,8 +5,8 @@
 <cfset page.location="clientmaintenance">
 <cfset page.formid=1>
 <cfset page.title="Client Maintenance">
-<cfset page.menuLeft="Client,Services,Contacts,Maintenance,Activity,State Information,Related Clients">
-<cfset page.trackers="task_id,client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group6,isLoaded_group6_1,isLoaded_group7,isLoaded_group8">
+<cfset page.menuLeft="Client,Services,Contacts,Maintenance,State Information,Related Clients">
+<cfset page.trackers="task_id,client_id,co_id,si_id,fds_id,mc_id,pc_id,pt_id,tr_id,of_id,cl_fieldid,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group5,isLoaded_group5_1,isLoaded_group6">
 <cfset page.plugins.disable="102">
 <!DOCTYPE html> 
 <html>
@@ -226,63 +226,60 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 </div>
+
+
 <!--- GROUP 5--->
 <div id="group5" class="gf-checkbox">
+<h3 onClick="_grid5();">Saved State Information</h3>
+<div>
+<div><label for="g5_filter">Filter</label><input id="g5_filter" onBlur="_grid5();" onKeyPress="if(event.keyCode==13){_grid5();}"/></div>
+<div class="tblGrid" id="grid5"></div>
+<div class="buttonbox">
+<a href="#" class="button optional" onClick='$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);'>Add</a>
+</div>
+</div>
+<h4 onclick="_group5();">State Information</h4>
+<div>
+<div><label for="g5_state">State</label><select id="g5_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><input type="checkbox" id="g5_revenue" /><label for="g5_revenue">Revenue</label></div>
+<div><input type="checkbox" id="g5_employees" /><label for="g5_employees">Employees</label></div>
+<div><input type="checkbox" id="g5_property"/><label for="g5_property">Property</label></div>
+<div><input type="checkbox" id="g5_nexus" /><label for="g5_nexus">NEXUS</label></div>
+<div><label for="g5_reason">Reason</label><input id="g5_reason" /></div>
+<div><input type="checkbox" id="g5_registered" /><label for="g5_registered">Registered</label></div>
+<div><input type="checkbox" id="g5_value1" /><label for="g5_value1" id="g5_label1"></label></div>
+<div><input type="checkbox" id="g5_value2" /><label for="g5_value2" id="g5_label2"></label></div>
+<div><input type="checkbox" id="g5_value3" /><label for="g5_value3" id="g5_label3"></label></div>
+<div><input type="checkbox" id="g5_value4" /><label for="g5_value4" id="g5_label4"></label></div>
+</div>
+
+<h4 onclick="_group5_1();">State Labels</h4>
+<div>
+<div><label for="g5_g1_label1">Label 1</label><input type="text" id="g5_g1_label1"/></div>
+<div><label for="g5_g1_label2">Label 2</label><input type="text" id="g5_g1_label2"/></div>
+<div><label for="g5_g1_label3">Label 3</label><input type="text" id="g5_g1_label3"/></div>
+<div><label for="g5_g1_label4">Label 4</label><input type="text" id="g5_g1_label4"/></div>
+</div>
 </div>
 
 
-<!--- GROUP 6--->
-<div id="group6" class="gf-checkbox">
-<h3 onClick="_grid6();">Saved State Information</h3>
+<!--- GROUP 6 --->
+<div id="group6" class="gf-checkbox" >
+
+<h3 onClick="_group6()">Related Client Details</h3>
 <div>
-<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();" onKeyPress="if(event.keyCode==13){_grid6();}"/></div>
-<div class="tblGrid" id="grid6"></div>
+<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();"  onKeyPress="if(event.keyCode==13){_grid6();}"/></div>
+<!--- SET GRID CONTACTS --->
+<div id="grid6" class="tblGrid"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);'>Add</a>
 </div>
 </div>
-<h4 onclick="_group6();">State Information</h4>
+
+
+<h4 onclick="_group6_1();">Related Clients</h4>
 <div>
-<div><label for="g6_state">State</label><select id="g6_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><input type="checkbox" id="g6_revenue" /><label for="g6_revenue">Revenue</label></div>
-<div><input type="checkbox" id="g6_employees" /><label for="g6_employees">Employees</label></div>
-<div><input type="checkbox" id="g6_property"/><label for="g6_property">Property</label></div>
-<div><input type="checkbox" id="g6_nexus" /><label for="g6_nexus">NEXUS</label></div>
-<div><label for="g6_reason">Reason</label><input id="g6_reason" /></div>
-<div><input type="checkbox" id="g6_registered" /><label for="g6_registered">Registered</label></div>
-<div><input type="checkbox" id="g6_value1" /><label for="g6_value1" id="g6_label1"></label></div>
-<div><input type="checkbox" id="g6_value2" /><label for="g6_value2" id="g6_label2"></label></div>
-<div><input type="checkbox" id="g6_value3" /><label for="g6_value3" id="g6_label3"></label></div>
-<div><input type="checkbox" id="g6_value4" /><label for="g6_value4" id="g6_label4"></label></div>
-</div>
-
-<h4 onclick="_group6();">State Labels</h4>
-<div>
-<div><label for="g6_g1_label1">Label 1</label><input type="text" id="g6_g1_label1"/></div>
-<div><label for="g6_g1_label2">Label 2</label><input type="text" id="g6_g1_label2"/></div>
-<div><label for="g6_g1_label3">Label 3</label><input type="text" id="g6_g1_label3"/></div>
-<div><label for="g6_g1_label4">Label 4</label><input type="text" id="g6_g1_label4"/></div>
-</div>
-</div>
-
-
-<!--- GROUP 7 --->
-<div id="group7" class="gf-checkbox" >
-
-<h3 onClick="_group7()">Related Client Details</h3>
-<div>
-<div><label for="g7_filter">Filter</label><input id="g7_filter" onBlur="_grid7();"  onKeyPress="if(event.keyCode==13){_grid7();}"/></div>
-<!--- SET GRID CONTACTS --->
-<div id="grid7" class="tblGrid"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group7").accordion({active:1});$("#isLoaded_group7").val(1);'>Add</a>
-</div>
-</div>
-
-
-<h4 onclick="_group7_1();">Related Clients</h4>
-<div>
-<div><label for="g7_group">Groups</label><select id="g7_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g6_group">Groups</label><select id="g6_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>
 

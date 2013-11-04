@@ -71,49 +71,90 @@
 
 <ul class="group1">
 <li>Payroll &amp;Taxes</li>
-<li><a href="#">Reporting</a></li>
-<li><a href="#">Payroll Checks</a></li>
-<li><a href="#">Payroll Tax Returns</a></li>
-<li><a href="#">Other Filing Requirements</a></li>
+      <li><a class="arrow" >Reporting</a>
+<!---
+       <ul class="_payrolltaxes">
+       <li><a href="AWS/_payrolltaxes/reports/payrollchecks_report.cfm">Payroll Checks</a></li>
+       <li><a href="AWS/_payrolltaxes/reports/payrolltaxes_report.cfm">Payroll Taxes</a></li>
+       <li><a href="AWS/_payrolltaxes/reports/otherfilings_report.cfm">Other Filings</a></li>
+       </ul>
+      </li>
+--->
+<li><a href="AWS/_payrolltaxes/payrollchecks.cfm">Payroll Checks</a></li>
+<li><a href="AWS/_payrolltaxes/payrolltaxes.cfm">Payroll Tax Returns</a></li>
+<li><a href="AWS/_payrolltaxes/otherfilings.cfm">Other Filing Requirements</a></li>
 </ul>
 </li><li>
 
 <ul class="group2">
 <li>Accounting Services</li>
-<li><a href="#">Reporting</a></li>
-<li><a href="#">Business Formation</a></li>
-<li><a href="_accountingservices/acctingconsulting.cfm">Accounting &amp; Consulting Tasks</a></li>
-<li><a href="#">Financial Statements</a></li>
+      <li><a class="arrow">Reporting</a>
+<!---
+		<ul class="_accountingservices">
+       <li><a href="AWS/_accountingservices/reports/businessformation_report.cfm">Business Formation</a></li>
+       <li><a href="AWS/_accountingservices/reports/acctingconsulting_report.cfm">Accounting &amp; Consulting</a></li>
+       <li><a href="AWS/_accountingservices/reports/financialstatements_report.cfm">Financial Statements</a></li>
+       </ul>
+      </li>
+--->
+<li><a href="AWS/_accountingservices/businessformation.cfm">Business Formation</a></li>
+<li><a href="AWS/_accountingservices/acctingconsulting.cfm">Accounting &amp; Consulting Tasks</a></li>
+<li><a href="AWS/_accountingservices/financialstatements.cfm">Financial Statements</a></li>
 </ul>
 </li><li>
 
 <ul class="group3">
 <li>Taxation</li>
-<li><a href="#">Reporting</a></li>
-<li><a href="#">Financial &amp;Tax Planning</a></li>
-<li><a href="#">Notices</a></li>
-<li><a href="#">Power of Attorney</a></li>
-<li><a href="#">Tax Returns</a></li>
+      <li><a class="arrow">Reporting</a>
+<!---
+      <ul class="_taxation">
+       <li><a href="AWS/_taxation/reports/financialtaxplanning_report.cfm">Financial &amp Tax Planning</a></li>
+       <li><a href="AWS/_taxation/reports/notices_report.cfm">Notices</a></li>
+       <li><a href="AWS/_taxation/reports/powerofattorney_report.cfm">Power of Attorney</a></li>
+       <li><a href="AWS/_taxation/reports/taxreturns_report.cfm">Tax Returns</a></li>
+       </ul>
+      </li>
+--->      
+<li><a href="AWS/_taxation/financialtaxplanning.cfm">Financial &amp; Tax Planning</a></li>
+<li><a href="AWS/_taxation/notices.cfm">Notices</a></li>
+<li><a href="AWS/_taxation/powerofattorney.cfm">Power of Attorney</a></li>
+<li><a href="AWS/_taxation/taxreturns.cfm">Tax Returns</a></li>
 </ul>
 </li><li>
 
 <ul class="group4">
 <li>Client Management</li>
-<li><a href="#">Reporting</a></li>
-<li><a href="#">Administrative Tasks</a></li>
-<li><a href="_clientmanagement/clientmaintenance.cfm">Client Maintenance</a></li>
-<li><a href="#">Communications</a></li>
-<li><a href="#">Document Tracking Log</a></li>
+      <li><a class="arrow">Reporting</a>
+<!---
+	  <ul class="_clientmanagement">
+       <li><a href="#this.url#/AWS/_clientmanagement/reports/administrativetasks_report.cfm">Administrative Tasks</a></li>
+       <li><a href="#this.url#/AWS/_clientmanagement/reports/communications_report.cfm">Communications</a></li>
+       <li><a href="#this.url#/AWS/_clientmanagement/reports/clientmaintenance_report.cfm">Client Maintenance</a></li>
+       </ul>
+      </li>
+--->      
+<li><a href="AWS/_clientmanagement/administrativetasks.cfm">Administrative Tasks</a></li>
+<li><a href="AWS/_clientmanagement/clientmaintenance.cfm">Client Maintenance</a></li>
+<li><a href="AWS/_clientmanagement/communications.cfm">Communications</a></li>
+<li><a href="AWS/_clientmanagement/documenttracking.cfm">Document Tracking Log</a></li>
 </ul>
 </li><li>
 
 <ul class="group5">
 <li>Practice Management</li>
 <li><a href="#">Work in Progress</a></li>
-<li><a href="#">Employee Dashboard</a></li>
-<li><a href="#">Employee Contact Information</a></li>
-<li><a href="#">AWS Maintenance</a></li>
-<li><a href="#">Time &amp;Billing</a></li>
+<li><a href="AWS/_PracticeManagement/employeedashboard.cfm">Employee Dashboard</a></li>
+<li><a href="AWS/_PracticeManagement/employeecontactinfo.cfm">Employee Contact Information</a></li>
+<li><a class="arrow">AWS Maintenance</a>
+<!---
+      <ul class="_practicemanagement">
+       <li><a href="AWS/_PracticeManagement/_maintenance/table.cfm">Table Maintenance</a></li>
+       <li><a href="AWS/_PracticeManagement/_maintenance/historical.cfm">Historical Data</a></li>
+      </ul>
+--->
+</li>
+       
+<li><a href="AWS/assets/plugins/jTimeBilling/timebillingreport.cfm">Time &amp; Billing</a></li>
 </ul>
 
 </li>

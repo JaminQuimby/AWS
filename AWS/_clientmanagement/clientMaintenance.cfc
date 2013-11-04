@@ -131,7 +131,7 @@ WHERE[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 
 <!--- Load STATE INFORMATION --->
-<cfcase value="group6">
+<cfcase value="group5">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[si_id]
 	,[si_state]
@@ -151,7 +151,7 @@ WHERE[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 
 <!--- Load State Labels--->
-<cfcase value="group6_1">
+<cfcase value="group5_1">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[client_statelabel1]
 	,[client_statelabel2]
@@ -164,7 +164,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 
 <!--- Load CLIENT RELATIONS --->
-<cfcase value="group7">
+<cfcase value="group6">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[client_relations]
 FROM[client_listing]
@@ -421,7 +421,8 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 </cfcase>
 
 <!--- LOOKUP STATE INFORMATION --->
-<cfcase value="group6"><cfquery datasource="AWS" name="fquery">
+<cfcase value="group5">
+<cfquery datasource="AWS" name="fquery">
 SELECT[si_id]
 ,[si_revenue]
 ,[si_employees]
@@ -445,7 +446,19 @@ WHERE(
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"SI_ID":"'&SI_ID&'","SI_STATETEXT":"'&SI_STATETEXT&'","SI_REVENUE":"'&SI_REVENUE&'","SI_EMPLOYEES":"'&SI_EMPLOYEES&'","SI_PROPERTY":"'&SI_PROPERTY&'","SI_NEXUS":"'&SI_NEXUS&'","SI_REASON":"'&SI_REASON&'","SI_REGISTERED":"'&SI_REGISTERED&'","SI_MISC1":"'&SI_MISC1&'","SI_MISC2":"'&SI_MISC2&'","SI_MISC3":"'&SI_MISC3&'","SI_MISC4":"'&SI_MISC4&'"}'>
+<cfset queryResult=queryResult&'{"SI_ID":"'&SI_ID&'"
+								,"SI_STATETEXT":"'&SI_STATETEXT&'"
+								,"SI_REVENUE":"'&SI_REVENUE&'"
+								,"SI_EMPLOYEES":"'&SI_EMPLOYEES&'"
+								,"SI_PROPERTY":"'&SI_PROPERTY&'"
+								,"SI_NEXUS":"'&SI_NEXUS&'"
+								,"SI_REASON":"'&SI_REASON&'"
+								,"SI_REGISTERED":"'&SI_REGISTERED&'"
+								,"SI_MISC1":"'&SI_MISC1&'"
+								,"SI_MISC2":"'&SI_MISC2&'"
+								,"SI_MISC3":"'&SI_MISC3&'"
+								,"SI_MISC4":"'&SI_MISC4&'"
+								}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -454,7 +467,7 @@ WHERE(
 
 
 <!--- LOOKUP client relations --->
-<cfcase value="group7">
+<cfcase value="group6">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[client_id]
@@ -515,7 +528,7 @@ AND NOT[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[CLIENT_LISTING](
+INSERT INTO[client_listing](
 [client_active],
 [client_credit_hold],
 [client_group],
@@ -548,13 +561,11 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
-
 </cfif>
-
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[CLIENT_LISTING]
+UPDATE[client_listing]
 SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_credit_hold]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[client_group]=<cfqueryparam value="#j.DATA[1][4]#"/>
@@ -827,7 +838,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[contact_id]
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group5","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -860,12 +871,12 @@ SET[contact_acctsoftwareupdate]=<cfqueryparam value="#j.DATA[1][3]#">
 WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
 </cfif>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group5","result":"ok"}'>
 </cfcase>
 
 
 <!--- State Information --->
-<cfcase value="group6">
+<cfcase value="group5">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][4])><cfset j.DATA[1][4]=1><cfelse><cfset j.DATA[1][4]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
@@ -908,7 +919,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[si_id]
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6_1","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group5_1","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -932,7 +943,7 @@ SET[si_employees]=<cfqueryparam value="#j.DATA[1][3]#">
 ,[si_misc4]=<cfqueryparam value="#j.DATA[1][13]#">
 WHERE[si_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6_1","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group5_1","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -942,7 +953,7 @@ WHERE[si_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfcase>
 
 <!--- State Labels --->
-<cfcase value="group6_1">
+<cfcase value="group5_1">
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
@@ -960,7 +971,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group7","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -977,16 +988,16 @@ SET[client_statelabel1]=<cfqueryparam value="#j.DATA[1][2]#">
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
 </cfif>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group7","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group6","result":"ok"}'>
 </cfcase>
 
 
 <!--- Client Relations --->
-<cfcase value="group 7">
+<cfcase value="group6">
 <cfif j.DATA[1][1] neq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[CLIENT_LISTING]
+UPDATE[client_listing]
 SET[client_relations]=<cfqueryparam value="#j.DATA[1][2]#">
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
