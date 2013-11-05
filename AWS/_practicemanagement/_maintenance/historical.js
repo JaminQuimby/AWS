@@ -234,7 +234,7 @@ _grid11=function(){_jGrid({
 _grid12=function(){_jGrid({
 	"grid":"grid12",
 	"url":"historical.cfc",	
-	"title":"Tax Returns Ready For Data Entry",
+	"title":"Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
@@ -251,27 +251,3 @@ _grid12=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g12_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group12"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
 })};	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
