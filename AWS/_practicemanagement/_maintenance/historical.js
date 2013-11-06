@@ -22,7 +22,7 @@ _grid1=function(){_jGrid({
 	"title":"Administrative Tasks",
 	"fields":{CAS_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client'}
+			,CLIENT_NAME:{title:'Client Name'}
 			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
 			,CAS_PRIORITY:{title:'Priority',width:'1%'}
 			,CAS_STATUS:{title:'Status'}

@@ -28,7 +28,6 @@
 	<div>
 	<div><label for="g1_filter">Filter</label><input id="g1_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 	<div class="tblGrid" id="grid1"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
     </div>
   </div>
 
@@ -37,7 +36,6 @@
 	<div>
 	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 	<div class="tblGrid" id="grid2"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>  
   
@@ -46,7 +44,6 @@
 	<div>
 	<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 	<div class="tblGrid" id="grid3"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -55,7 +52,6 @@
 	<div>
 	<div><label for="g4_filter">Filter</label><input id="g4_filter" onBlur="_grid4();" onKeyPress="if(event.keyCode==13){_grid4();}"/></div>
 	<div class="tblGrid" id="grid4"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -64,7 +60,6 @@
 	<div>
 	<div><label for="g5_filter">Filter</label><input id="g5_filter" onBlur="_grid5();" onKeyPress="if(event.keyCode==13){_grid5();}"/></div>
 	<div class="tblGrid" id="grid5"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -73,7 +68,6 @@
 	<div>
 	<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();" onKeyPress="if(event.keyCode==13){_grid6();}"/></div>
 	<div class="tblGrid" id="grid6"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -82,7 +76,6 @@
 	<div>
 	<div><label for="g7_filter">Filter</label><input id="g7_filter" onBlur="_grid7();" onKeyPress="if(event.keyCode==13){_grid7();}"/></div>
 	<div class="tblGrid" id="grid7"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -91,7 +84,6 @@
 	<div>
 	<div><label for="g8_filter">Filter</label><input id="g8_filter" onBlur="_grid8();" onKeyPress="if(event.keyCode==13){_grid8();}"/></div>
 	<div class="tblGrid" id="grid8"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -100,7 +92,6 @@
 	<div>
 	<div><label for="g9_filter">Filter</label><input id="g9_filter" onBlur="_grid9();" onKeyPress="if(event.keyCode==13){_grid9();}"/></div>
 	<div class="tblGrid" id="grid9"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -109,7 +100,6 @@
 	<div>
 	<div><label for="g10_filter">Filter</label><input id="g10_filter" onBlur="_grid10();" onKeyPress="if(event.keyCode==13){_grid10();}"/></div>
 	<div class="tblGrid" id="grid10"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -118,7 +108,6 @@
 	<div>
 	<div><label for="g11_filter">Filter</label><input id="g11_filter" onBlur="_grid11();" onKeyPress="if(event.keyCode==13){_grid11();}"/></div>
 	<div class="tblGrid" id="grid11"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
@@ -127,7 +116,6 @@
 	<div>
 	<div><label for="g12_filter">Filter</label><input id="g12_filter" onBlur="_grid12();" onKeyPress="if(event.keyCode==13){_grid12();}"/></div>
 	<div class="tblGrid" id="grid12"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick="">Add</a></div>
 	</div>
   </div>
   
