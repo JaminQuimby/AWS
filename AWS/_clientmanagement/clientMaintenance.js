@@ -67,7 +67,7 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Contacts",
-	"fields":{CONTACT_ID:{key:true,list:true,edit:false}
+	"fields":{CONTACT_ID:{key:true,list:false,edit:false}
 			,CONTACT_NAME:{title:'Contact Name'}
 			,CONTACT_PHONE1:{title:'Phone 1',width:'1%'}
 			,CONTACT_EMAIL1:{title:'Email 1'}

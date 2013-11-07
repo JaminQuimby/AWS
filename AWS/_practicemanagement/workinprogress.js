@@ -1,9 +1,10 @@
 $(document).ready(function(){
 	
 	jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: true});
-
+/*
 _grid1();
 _group1=function(){_grid1()}
+*/
 _group2=function(){_grid2()}
 _group3=function(){_grid3()}
 _group4=function(){_grid4()}
@@ -17,6 +18,7 @@ _group11=function(){_grid11()}
 _group12=function(){_grid12()}
 });
 
+/*
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"workinprogress.cfc",	
@@ -28,7 +30,7 @@ _grid1=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":''
 })};
-
+*/
 
 _grid2=function(){_jGrid({
 	"grid":"grid2",

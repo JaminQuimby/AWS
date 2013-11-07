@@ -58,8 +58,9 @@ SELECT [cas_id]
 ,[cas_category]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
 FROM[v_clientadministrativetasks]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+WHERE([cas_status] !=3 OR [cas_status] !=6 OR [cas_status] IS NULL)
+<cfif ARGUMENTS.search neq "">
+AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -105,9 +106,9 @@ SELECT[bf_id]
 ,[bf_estimatedtime]
 ,[bf_activity]
 FROM[v_businessformation]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[bf_duedate]
+WHERE([bf_status] !=3 OR [bf_status] !=6 OR [bf_status] IS NULL)
+<cfif ARGUMENTS.search neq "">
+AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -154,8 +155,9 @@ SELECT[ftp_id]
 ,[ftp_esttime]
 ,[ftp_category]
 FROM[v_financialtaxplanning]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+WHERE([ftp_status] !=3 OR [ftp_status] !=6 OR [ftp_status] IS NULL)
+<cfif ARGUMENTS.search neq "">
+AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -259,7 +261,7 @@ SELECT[mc_id]
 FROM[v_managementconsulting]
 WHERE([mc_status] !=3 OR [mc_status] !=6 OR [mc_status] IS NULL)
 <cfif ARGUMENTS.search neq "">
-WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
