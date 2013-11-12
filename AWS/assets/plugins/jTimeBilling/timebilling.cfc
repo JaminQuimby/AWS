@@ -158,8 +158,10 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[tb_id]
+
+
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group102_1","result":"ok"}'>
+<cfreturn '{"id":#fquery.tb_id#,"group":"group102_1","result":"ok"}'>
 </cfif>
 
 
