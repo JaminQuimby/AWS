@@ -7,13 +7,13 @@
 <!--- 
 SELECT TOP 1000 [cas_id]
       ,[client_id]
-      ,[cas_assignto]
+      ,[cas_assignedto]
       ,[cas_category]
       ,[cas_completed]
       ,[cas_datereqested]
       ,[cas_datestarted]
       ,[cas_duedate]
-      ,[cas_estimatedtime]
+      ,[cas_esttime]
       ,[cas_instructions]
       ,[cas_priority]
       ,[cas_reqestby]
@@ -34,13 +34,13 @@ SELECT TOP 1000 [cas_id]
 <cfquery datasource="AWS" name="fQuery">
 SELECT[cas_id]
 ,[client_id]
-,[cas_assignto]
+,[cas_assignedto]
 ,[cas_category]
 ,CONVERT(VARCHAR(10),[cas_completed], 101)AS[cas_completed]
 ,CONVERT(VARCHAR(10),[cas_datereqested], 101)AS[cas_datereqested]
 ,CONVERT(VARCHAR(10),[cas_datestarted], 101)AS[cas_datestarted]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
-,[cas_estimatedtime]
+,[cas_esttime]
 ,[cas_instructions]
 ,[cas_priority]
 ,[cas_reqestby]
@@ -76,7 +76,7 @@ SELECT [cas_id]
 ,[client_id]
 ,[client_name]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
-,[cas_assignto]
+,[cas_assignedto]
 ,[cas_category]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,[cas_status]
@@ -96,7 +96,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_ASSIGNTO":"'&CAS_ASSIGNTO&'"
+								,"CAS_ASSIGNEDTO":"'&CAS_ASSIGNEDTO&'"
 								,"CAS_CATEGORY":"'&CAS_CATEGORY&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
 								,"CAS_STATUS":"'&CAS_STATUS&'"
@@ -132,13 +132,13 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[clientadministrativetasks](
 [client_id]
-,[cas_assignto]
+,[cas_assignedto]
 ,[cas_category]
 ,[cas_completed]
 ,[cas_datereqested]
 ,[cas_datestarted]
 ,[cas_duedate]
-,[cas_estimatedtime]
+,[cas_esttime]
 ,[cas_instructions]
 ,[cas_reqestby]
 ,[cas_status]
@@ -169,13 +169,13 @@ SELECT SCOPE_IDENTITY()AS[cas_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[clientadministrativetasks]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[cas_assignto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq 'null'#"/>
+,[cas_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq 'null'#"/>
 ,[cas_category]=<cfqueryparam value="#j.DATA[1][4]#"/>
 ,[cas_completed]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[cas_datereqested]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[cas_datestarted]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[cas_duedate]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[cas_estimatedtime]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[cas_esttime]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[cas_instructions]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[cas_priority]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[cas_reqestby]=<cfqueryparam value="#j.DATA[1][12]#"/>

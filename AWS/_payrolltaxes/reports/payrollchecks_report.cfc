@@ -10,9 +10,9 @@
       ,[pc_esttime]
       ,[pt_altfreq]
       ,[pc_missinginfo]
-      ,[pc_missingreceived]
+      ,[pc_missinginforeceived]
       ,[pc_fees]
-      ,[pc_paymentstatus]
+      ,[pc_paid]
       ,[pc_deliverymethod]
       ,[pc_obtaininfo_assignedto]
       ,[pc_obtaininfo_datecompleted]
@@ -64,7 +64,7 @@ SELECT[pc_id]
 ,CONVERT(VARCHAR(10),[pc_assembly_datecompleted], 101)AS[pc_assembly_datecompleted]
 ,CONVERT(VARCHAR(10),[pc_delivery_datecompleted], 101)AS[pc_delivery_datecompleted]
 ,[pc_fees]
-,[pc_paymentstatus]      
+,[pc_paid]      
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -90,7 +90,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PC_ASSEMBLY_DATECOMPLETED":"'&PC_ASSEMBLY_DATECOMPLETED&'"
 								,"PC_DELIVERY_DATECOMPLETED":"'&PC_DELIVERY_DATECOMPLETED&'"
 								,"PC_FEES":"'&PC_FEES&'"
-								,"PC_PAYMENTSTATUS":"'&PC_PAYMENTSTATUS&'"
+								,"PC_PAID":"'&PC_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

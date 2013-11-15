@@ -37,7 +37,7 @@
 ,CONVERT(VARCHAR(10),[bf_otherstarted], 101)AS[bf_otherstarted]
 ,CONVERT(VARCHAR(10),[bf_othercompleted], 101)AS[bf_othercompleted]
 ,CONVERT(VARCHAR(10),[bf_recordbookordered], 101)AS[bf_recordbookordered]
-,CONVERT(VARCHAR(10),[bf_estimatedtime], 101)AS[bf_estimatedtime]
+,CONVERT(VARCHAR(10),[bf_esttime], 101)AS[bf_esttime]
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 ,[bf_fees]
 ,[bf_paid]
@@ -60,7 +60,7 @@ SELECT[bf_id]
 ,[bf_assignedto]
 ,CONVERT(VARCHAR(10),[bf_dateinitiated], 101)AS[bf_dateinitiated]
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
-,[bf_estimatedtime]
+,[bf_esttime]
 ,[bf_fees]
 ,[bf_owners]
 ,[bf_paid]
@@ -211,7 +211,7 @@ INSERT INTO[BUSINESSFORMATION](
 ,[bf_assignedto]
 ,[bf_dateinitiated]
 ,[bf_duedate]
-,[bf_estimatedtime]
+,[bf_esttime]
 ,[bf_fees]
 ,[bf_owners]
 ,[bf_paid]
@@ -249,7 +249,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#"/>
 ,[bf_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[bf_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[bf_estimatedtime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[bf_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[bf_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[bf_owners]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[bf_paid]=<cfqueryparam value="#j.DATA[1][10]#"/>

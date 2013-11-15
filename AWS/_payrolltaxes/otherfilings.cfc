@@ -20,26 +20,26 @@ SELECT TOP 1000 [of_id]
       ,[of_priority]
       ,[of_esttime]
       ,[of_missinginfo]
-      ,[of_mireceived]
+      ,[of_missinginforeceived]
       ,[of_fees]
-      ,[of_paymentstatus]
+      ,[of_paid]
       ,[of_deliverymethod]
       ,[of_obtaininfo_assignedto]
       ,[of_obtaininfo_datecompleted]
       ,[of_obtaininfo_completedby]
-      ,[of_obtaininfo_estimatedtime]
+      ,[of_obtaininfo_esttime]
       ,[of_preparation_assignedto]
       ,[of_preparation_datecompleted]
       ,[of_preparation_completedby]
-      ,[of_preparation_estimatedtime]
+      ,[of_preparation_esttime]
       ,[of_review_assignedto]
       ,[of_review_datecompleted]
       ,[of_review_completedby]
-      ,[of_review_estimatedtime]
+      ,[of_review_esttime]
       ,[of_assembly_assignedto]
       ,[of_assembly_datecomplted]
       ,[of_assembly_compltedby]
-      ,[of_assembly_estimatedtime]
+      ,[of_assembly_esttime]
       ,[of_delivery_assignedto]
       ,[of_delivery_datecomplted]
       ,[of_delivery_compltedby]
@@ -65,9 +65,9 @@ SELECT[OF_ID]
 ,[of_fees]
 ,CONVERT(VARCHAR(10),[of_filingdeadline], 101)AS[of_filingdeadline]
 ,[of_form]
-,CONVERT(VARCHAR(10),[of_mireceived], 101)AS[of_mireceived]
+,CONVERT(VARCHAR(10),[of_missinginforeceived], 101)AS[of_missinginforeceived]
 ,[of_missinginfo]
-,[of_paymentstatus]
+,[of_paid]
 ,[of_period]
 ,[of_priority]
 ,[of_state]
@@ -84,7 +84,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[of_obtaininfo_assignedto]
 ,[of_obtaininfo_completedby]
 ,CONVERT(VARCHAR(10),[of_obtaininfo_datecompleted], 101)AS[of_obtaininfo_datecompleted]
-,[of_obtaininfo_estimatedtime]
+,[of_obtaininfo_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -95,7 +95,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[of_preparation_assignedto]
 ,[of_preparation_completedby]
 ,CONVERT(VARCHAR(10),[of_preparation_datecompleted], 101)AS[of_preparation_datecompleted]
-,[of_preparation_estimatedtime]
+,[of_preparation_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -106,7 +106,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[of_review_assignedto]
 ,[of_review_completedby]
 ,CONVERT(VARCHAR(10),[of_review_datecompleted], 101)AS[of_review_datecompleted]
-,[of_review_estimatedtime]
+,[of_review_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -117,7 +117,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[of_assembly_assignedto]
 ,[of_assembly_completedby]
 ,CONVERT(VARCHAR(10),[of_assembly_datecompleted], 101)AS[of_assembly_datecompleted]
-,[of_assembly_estimatedtime]
+,[of_assembly_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -241,9 +241,9 @@ INSERT INTO[otherfilings](
 ,[of_fees]
 ,[of_filingdeadline]
 ,[of_form]
-,[of_mireceived]
+,[of_missinginforeceived]
 ,[of_missinginfo]
-,[of_paymentstatus]
+,[of_paid]
 ,[of_period]
 ,[of_priority]
 ,[of_state]
@@ -294,9 +294,9 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_fees]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[of_filingdeadline]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[of_form]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[of_mireceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[of_missinginforeceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[of_missinginfo]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[of_paymentstatus]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[of_paid]=<cfqueryparam value="#j.DATA[1][13]#"/>
 ,[of_period]=<cfqueryparam value="#j.DATA[1][14]#"/>
 ,[of_priority]=<cfqueryparam value="#j.DATA[1][15]#"/>
 ,[of_state]=<cfqueryparam value="#j.DATA[1][16]#"/>
@@ -314,7 +314,7 @@ UPDATE[OTHERFILINGS]
 SET[of_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_obtaininfo_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[of_obtaininfo_estimatedtime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[of_obtaininfo_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -327,7 +327,7 @@ UPDATE[OTHERFILINGS]
 SET[of_preparation_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_preparation_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_preparation_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[of_preparation_estimatedtime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[of_preparation_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -340,7 +340,7 @@ UPDATE[OTHERFILINGS]
 SET[of_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_review_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[of_review_estimatedtime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[of_review_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -353,7 +353,7 @@ UPDATE[OTHERFILINGS]
 SET[of_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_assembly_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[of_assembly_estimatedtime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[of_assembly_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

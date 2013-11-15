@@ -27,12 +27,12 @@ SELECT[pc_id]
 ,CONVERT(VARCHAR(10),[pc_assembly_datecompleted], 101)AS[pc_assembly_datecompleted]
 ,CONVERT(VARCHAR(10),[pc_delivery_datecompleted], 101)AS[pc_delivery_datecompleted]
 ,[pc_fees]
-,[pc_paymentstatus]      
+,[pc_paid]      
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
 WHERE ([pc_delivery_datecompleted] IS NULL)
-AND ([pc_paymentstatus] = '6' OR [pc_paymentstatus] IS NULL OR [pc_paymentstatus] = '0' )
+AND ([pc_paid] = '6' OR [pc_paid] IS NULL OR [pc_paid] = '0' )
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[pc_datedue]
 </cfquery>
@@ -53,7 +53,7 @@ ORDER BY[pc_datedue]
 								,"PC_ASSEMBLY_DATECOMPLETED":"'&PC_ASSEMBLY_DATECOMPLETED&'"
 								,"PC_DELIVERY_DATECOMPLETED":"'&PC_DELIVERY_DATECOMPLETED&'"
 								,"PC_FEES":"'&PC_FEES&'"
-								,"PC_PAYMENTSTATUS":"'&PC_PAYMENTSTATUS&'"
+								,"PC_PAID":"'&PC_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -79,19 +79,19 @@ SELECT[pt_id]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
 ,CONVERT(VARCHAR(10),[pt_obtaininfo_datecompleted], 101)AS[pt_obtaininfo_datecompleted]
 ,[pt_missinginfo]
-,CONVERT(VARCHAR(10),[pt_missingreceived], 101)AS[pt_missingreceived]
+,CONVERT(VARCHAR(10),[pt_missinginforeceived], 101)AS[pt_missinginforeceived]
 ,CONVERT(VARCHAR(10),[pt_entry_datecompleted], 101)AS[pt_entry_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_rec_datecompleted], 101)AS[pt_rec_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_review_datecompleted], 101)AS[pt_review_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_assembly_datecompleted], 101)AS[pt_assembly_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
 ,[pt_fees]
-,[pt_paymentstatus]      
+,[pt_paid]      
 ,[client_name]
 ,[client_id]
 FROM[v_payrolltaxes]
 WHERE ([pt_assembly_datecompleted] IS NULL)
-AND ([pt_paymentstatus] = '6' OR [pt_paymentstatus] IS NULL OR [pt_paymentstatus] = '0')
+AND ([pt_paid] = '6' OR [pt_paid] IS NULL OR [pt_paid] = '0')
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[pt_duedate]
 </cfquery>
@@ -110,14 +110,14 @@ ORDER BY[pt_duedate]
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_OBTAININFO_DATECOMPLETED":"'&PT_OBTAININFO_DATECOMPLETED&'"
 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
-								,"PT_MISSINGRECEIVED":"'&PT_MISSINGRECEIVED&'"
+								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
 								,"PT_ENTRY_DATECOMPLETED":"'&PT_ENTRY_DATECOMPLETED&'"
 								,"PT_REC_DATECOMPLETED":"'&PT_REC_DATECOMPLETED&'"
 								,"PT_REVIEW_DATECOMPLETED":"'&PT_REVIEW_DATECOMPLETED&'"
 								,"PT_ASSEMBLY_DATECOMPLETED":"'&PT_ASSEMBLY_DATECOMPLETED&'"
 								,"PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"
 								,"PT_FEES":"'&PT_FEES&'"
-								,"PT_PAYMENTSTATUS":"'&PT_PAYMENTSTATUS&'"
+								,"PT_PAID":"'&PT_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -145,19 +145,19 @@ SELECT[of_id]
 ,[of_form]
 ,CONVERT(VARCHAR(10),[of_obtaininfo_datecompleted], 101)AS[of_obtaininfo_datecompleted]
 ,[of_missinginfo]
-,CONVERT(VARCHAR(10),[of_mireceived], 101)AS[of_mireceived]      
+,CONVERT(VARCHAR(10),[of_missinginforeceived], 101)AS[of_missinginforeceived]      
 ,CONVERT(VARCHAR(10),[of_preparation_datecompleted], 101)AS[of_preparation_datecompleted]
 ,CONVERT(VARCHAR(10),[of_review_datecompleted], 101)AS[of_review_datecompleted]
 ,CONVERT(VARCHAR(10),[of_assembly_datecompleted], 101)AS[of_assembly_datecompleted]
 ,CONVERT(VARCHAR(10),[of_delivery_datecompleted], 101)AS[of_delivery_datecompleted]
 ,[of_fees]
 ,[of_esttime]
-,[of_paymentstatus]  
+,[of_paid]  
 ,[client_name]
 ,[client_id]
 FROM[v_otherfilings]
 WHERE ([of_status] = 2 OR [of_status] = 5)
-AND ([of_paymentstatus] = '6' OR [of_paymentstatus] IS NULL OR [of_paymentstatus] = '0')
+AND ([of_paid] = '6' OR [of_paid] IS NULL OR [of_paid] = '0')
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[of_duedate]
 </cfquery>
@@ -289,7 +289,7 @@ SELECT[mc_id]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 ,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
 ,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
-,[mc_estimatedtime]
+,[mc_esttime]
 ,[mc_fees]
 ,[mc_paid]    
 ,[client_name]
@@ -316,7 +316,7 @@ AND ([mc_paid] = '6' OR [mc_paid] IS NULL OR [mc_paid] = '0')
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								,"MC_WORKINITIATED":"'&MC_WORKINITIATED&'"
 								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
-								,"MC_ESTIMATEDTIME":"'&MC_ESTIMATEDTIME&'"
+								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_FEES":"'&MC_FEES&'"
 								,"MC_PAID":"'&MC_PAID&'"	
 								}'>
@@ -353,12 +353,12 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),[fds_delivery_assignedto]) AS [fds_delivery]
 ,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),[fds_acctrpt_assignedto]) AS [fds_acctrpt]
 ,[fds_fees]
-,[fds_paymentstatus]
+,[fds_paid]
 ,[client_name]
 ,[client_id]
 FROM[v_financialdatastatus]
 WHERE ([fds_status] = '2' OR [fds_status] = '5')
-AND ([fds_paymentstatus] = '6' OR [fds_paymentstatus] IS NULL OR [fds_paymentstatus] = '0') 
+AND ([fds_paid] = '6' OR [fds_paid] IS NULL OR [fds_paid] = '0') 
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -386,7 +386,7 @@ AND ([fds_paymentstatus] = '6' OR [fds_paymentstatus] IS NULL OR [fds_paymentsta
 								,"FDS_DELIVERY":"'&FDS_DELIVERY&'"
 								,"FDS_ACCTRPT":"'&FDS_ACCTRPT&'"
 								,"FDS_FEES":"'&FDS_FEES&'"
-								,"FDS_PAYMENTSTATUS":"'&FDS_PAYMENTSTATUS&'"
+								,"FDS_PAID":"'&FDS_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -416,7 +416,7 @@ SELECT[ftp_id]
 ,CONVERT(VARCHAR(10),[ftp_inforeceived], 101)AS[ftp_inforeceived]
 ,CONVERT(VARCHAR(10),[ftp_infocompiled], 101)AS[ftp_infocompiled]
 ,[ftp_missinginfo]
-,CONVERT(VARCHAR(10),[ftp_missinginforec], 101)AS[ftp_missinginforec]
+,CONVERT(VARCHAR(10),[ftp_missinginforeceived], 101)AS[ftp_missinginforeceived]
 ,CONVERT(VARCHAR(10),[ftp_reportcompleted], 101)AS[ftp_reportcompleted]
 ,CONVERT(VARCHAR(10),[ftp_finalclientmeeting], 101)AS[ftp_finalclientmeeting]
 ,[ftp_fees]
@@ -446,7 +446,7 @@ AND ([ftp_paid] = '6' OR [ftp_paid] IS NULL OR [ftp_paid] = '0')
 								,"FTP_INFORECEIVED":"'&FTP_INFORECEIVED&'"
 								,"FTP_INFOCOMPILED":"'&FTP_INFOCOMPILED&'"
 								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
-								,"FTP_MISSINGINFOREC":"'&FTP_MISSINGINFOREC&'"
+								,"FTP_MISSINGINFORECEIVED":"'&FTP_MISSINGINFORECEIVED&'"
 								,"FTP_REPORTCOMPLETED":"'&FTP_REPORTCOMPLETED&'"
 								,"FTP_FINALCLIENTMEETING":"'&FTP_FINALCLIENTMEETING&'"
 								,"FTP_FEES":"'&FTP_FEES&'"
@@ -532,12 +532,12 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
 ,CONVERT(VARCHAR(10),[tr_2_delivered], 101)AS[tr_2_delivered]
 ,[tr_currentfees]
-,[tr_2_paymentstatus]
+,[tr_2_paid]
 ,[tr_2_multistatereturn]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
-WHERE([tr_2_paymentstatus]IS NULL OR [tr_2_paymentstatus] = '6' OR [tr_2_paymentstatus] = '0')
+WHERE([tr_2_paid]IS NULL OR [tr_2_paid] = '6' OR [tr_2_paid] = '0')
 <cfif ARGUMENTS.search neq "">AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -579,14 +579,14 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_3_completed], 101)AS[tr_3_completed]
 ,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
 ,[tr_3_currentfees]
-,[tr_3_paymentstatus]
+,[tr_3_paid]
 ,[tr_2_multistatereturn]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-AND ([tr_3_paymentstatus]IS NULL OR[tr_3_paymentstatus] = '6' OR[tr_3_paymentstatus] = '0')
+AND ([tr_3_paid]IS NULL OR[tr_3_paid] = '6' OR[tr_3_paid] = '0')
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -629,7 +629,7 @@ SELECT[trst_id]
 ,CONVERT(VARCHAR(10),[trst_2_delivered], 101)AS[trst_2_delivered]
 ,[trst_1_preparedby]
 ,[trst_2_currentfees]
-,[trst_2_paymentstatus]
+,[trst_2_paid]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns_state]
@@ -638,7 +638,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 AND[trst_status] = '2'
 AND[trst_1_informationreceived] IS NOT NULL
 AND[trst_completed] IS NOT NULL
-AND ([trst_2_paymentstatus]IS NULL OR [trst_2_paymentstatus] = '6' OR [trst_2_paymentstatus] = '0')
+AND ([trst_2_paid]IS NULL OR [trst_2_paid] = '6' OR [trst_2_paid] = '0')
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>

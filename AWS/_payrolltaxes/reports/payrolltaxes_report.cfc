@@ -12,9 +12,9 @@
       ,[pt_priority]
       ,[pt_esttime]
       ,[pt_missinginfo]
-      ,[pt_missingreceived]
+      ,[pt_missinginforeceived]
       ,[pt_fees]
-      ,[pt_paymentstatus]
+      ,[pt_paid]
       ,[pt_deliverymethod]
       ,[pt_obtaininfo_assignedto]
       ,[pt_obtaininfo_datecomplted]
@@ -67,14 +67,14 @@ SELECT[pt_id]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
 ,CONVERT(VARCHAR(10),[pt_obtaininfo_datecompleted], 101)AS[pt_obtaininfo_datecompleted]
 ,[pt_missinginfo]
-,CONVERT(VARCHAR(10),[pt_missingreceived], 101)AS[pt_missingreceived]
+,CONVERT(VARCHAR(10),[pt_missinginforeceived], 101)AS[pt_missinginforeceived]
 ,CONVERT(VARCHAR(10),[pt_entry_datecompleted], 101)AS[pt_entry_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_rec_datecompleted], 101)AS[pt_rec_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_review_datecompleted], 101)AS[pt_review_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_assembly_datecompleted], 101)AS[pt_assembly_datecompleted]
 ,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
 ,[pt_fees]
-,[pt_paymentstatus]      
+,[pt_paid]      
 ,[client_name]
 ,[client_id]
 FROM[v_payrolltaxes]
@@ -98,14 +98,14 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_OBTAININFO_DATECOMPLETED":"'&PT_OBTAININFO_DATECOMPLETED&'"
 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
-								,"PT_MISSINGRECEIVED":"'&PT_MISSINGRECEIVED&'"
+								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
 								,"PT_ENTRY_DATECOMPLETED":"'&PT_ENTRY_DATECOMPLETED&'"
 								,"PT_REC_DATECOMPLETED":"'&PT_REC_DATECOMPLETED&'"
 								,"PT_REVIEW_DATECOMPLETED":"'&PT_REVIEW_DATECOMPLETED&'"
 								,"PT_ASSEMBLY_DATECOMPLETED":"'&PT_ASSEMBLY_DATECOMPLETED&'"
 								,"PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"
 								,"PT_FEES":"'&PT_FEES&'"
-								,"PT_PAYMENTSTATUS":"'&PT_PAYMENTSTATUS&'"
+								,"PT_PAID":"'&PT_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

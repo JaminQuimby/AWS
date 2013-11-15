@@ -11,7 +11,7 @@ _grid1=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,CAS_DUEDATE:{title:'Due Date'}
 			,CAS_PRIORITY:{title:'Priority'}
-			,CAS_ASSIGNTO:{title:'Assigned To',width:'1%'}
+			,CAS_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
 			,CAS_STATUS:{title:'Status',width:'1%'}
 			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}
 			,CAS_COMPLETED:{title:'Completed'}

@@ -19,7 +19,7 @@ SELECT[ftp_id]
       ,[ftp_infocompiled]
       ,[ftp_duedate]
       ,[ftp_missinginfo]
-      ,[ftp_missinginforec]
+      ,[ftp_missinginforeceived]
       ,[ftp_reportcompleted]
       ,[ftp_finalclientmeeting]
       ,[ftp_esttime]
@@ -50,7 +50,7 @@ SELECT[FTP_ID]
  ,CONVERT(VARCHAR(10),[ftp_inforeceived], 101)AS[ftp_inforeceived]
  ,CONVERT(VARCHAR(10),[ftp_inforequested], 101)AS[ftp_inforequested]
  ,[ftp_missinginfo]
- ,CONVERT(VARCHAR(10),[ftp_missinginforec], 101)AS[ftp_missinginforec]
+ ,CONVERT(VARCHAR(10),[ftp_missinginforeceived], 101)AS[ftp_missinginforeceived]
  ,[ftp_paid]
  ,[ftp_priority]
  ,CONVERT(VARCHAR(10),[ftp_reportcompleted], 101)AS[ftp_reportcompleted]
@@ -157,7 +157,7 @@ INSERT INTO[FINANCIALTAXPLANNING](
  ,[ftp_inforeceived]
  ,[ftp_inforequested]
  ,[ftp_missinginfo]
- ,[ftp_missinginforec]
+ ,[ftp_missinginforeceived]
  ,[ftp_paid]
  ,[ftp_priority]
  ,[ftp_reportcompleted]
@@ -209,7 +209,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
  ,[ftp_inforeceived]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
  ,[ftp_inforequested]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
  ,[ftp_missinginfo]=<cfqueryparam value="#j.DATA[1][12]#"/>
- ,[ftp_missinginforec]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+ ,[ftp_missinginforeceived]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
  ,[ftp_paid]=<cfqueryparam value="#j.DATA[1][14]#"/>
  ,[ftp_priority]=<cfqueryparam value="#j.DATA[1][15]#"/>
  ,[ftp_reportcompleted]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>

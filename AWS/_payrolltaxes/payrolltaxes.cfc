@@ -16,9 +16,9 @@
       ,[pt_priority]
       ,[pt_esttime]
       ,[pt_missinginfo]
-      ,[pt_missingreceived]
+      ,[pt_missinginforeceived]
       ,[pt_fees]
-      ,[pt_paymentstatus]
+      ,[pt_paid]
       ,[pt_deliverymethod]
       ,[pt_obtaininfo_assignedto]
       ,[pt_obtaininfo_datecomplted]
@@ -62,9 +62,9 @@ SELECT[PT_ID]
  ,[pt_fees]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
  ,[pt_missinginfo]
-,CONVERT(VARCHAR(10),[pt_missingreceived], 101)AS[pt_missingreceived]
+,CONVERT(VARCHAR(10),[pt_missinginforeceived], 101)AS[pt_missinginforeceived]
  ,[pt_month]
- ,[pt_paymentstatus]
+ ,[pt_paid]
  ,[pt_priority]
  ,[pt_type]
  ,[pt_year]
@@ -242,9 +242,9 @@ INSERT INTO[payrolltaxes](
 ,[pt_fees]
 ,[pt_lastpay]
 ,[pt_missinginfo]
-,[pt_missingreceived]
+,[pt_missinginforeceived]
 ,[pt_month]
-,[pt_paymentstatus]
+,[pt_paid]
 ,[pt_priority]
 ,[pt_type]
 ,[pt_year]
@@ -285,9 +285,9 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_fees]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[pt_lastpay]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[pt_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[pt_missingreceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[pt_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[pt_month]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[pt_paymentstatus]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[pt_paid]=<cfqueryparam value="#j.DATA[1][11]#"/>
 ,[pt_priority]=<cfqueryparam value="#j.DATA[1][12]#"/>
 ,[pt_type]=<cfqueryparam value="#j.DATA[1][13]#"/>
 ,[pt_year]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>

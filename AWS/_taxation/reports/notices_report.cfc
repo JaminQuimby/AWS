@@ -32,7 +32,7 @@ SELECT[n_id]
       ,[n_2_ressubmited]
       ,[n_2_irsstateresponse]
       ,[n_3_missinginfo]
-      ,[n_3_missingrec]
+      ,[n_3_missinginforeceived]
   FROM[notice]
   
 --->

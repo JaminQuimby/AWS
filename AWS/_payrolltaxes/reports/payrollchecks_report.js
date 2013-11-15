@@ -18,7 +18,7 @@ _grid1=function(){_jGrid({
 			,PC_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'1%'}
 			,PC_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'1%'}
 			,PC_FEES:{title:'Fees'}
-			,PC_PAYMENTSTATUS:{title:'Payment Status'}
+			,PC_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',

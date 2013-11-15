@@ -14,7 +14,7 @@ SELECT[ftp_id]
       ,[ftp_inforeceived]
       ,[ftp_infocompiled]
       ,[ftp_missinginfo]
-      ,[ftp_missinginforec]
+      ,[ftp_missinginforeceived]
       ,[ftp_reportcompleted]
       ,[ftp_finalclientmeeting]
       ,[ftp_esttime]
@@ -51,7 +51,7 @@ SELECT[ftp_id]
 ,CONVERT(VARCHAR(10),[ftp_inforeceived], 101)AS[ftp_inforeceived]
 ,CONVERT(VARCHAR(10),[ftp_infocompiled], 101)AS[ftp_infocompiled]
 ,[ftp_missinginfo]
-,CONVERT(VARCHAR(10),[ftp_missinginforec], 101)AS[ftp_missinginforec]
+,CONVERT(VARCHAR(10),[ftp_missinginforeceived], 101)AS[ftp_missinginforeceived]
 ,CONVERT(VARCHAR(10),[ftp_reportcompleted], 101)AS[ftp_reportcompleted]
 ,CONVERT(VARCHAR(10),[ftp_finalclientmeeting], 101)AS[ftp_finalclientmeeting]
 ,[ftp_fees]
@@ -81,7 +81,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FTP_INFORECEIVED":"'&FTP_INFORECEIVED&'"
 								,"FTP_INFOCOMPILED":"'&FTP_INFOCOMPILED&'"
 								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
-								,"FTP_MISSINGINFOREC":"'&FTP_MISSINGINFOREC&'"
+								,"FTP_MISSINGINFORECEIVED":"'&FTP_MISSINGINFORECEIVED&'"
 								,"FTP_REPORTCOMPLETED":"'&FTP_REPORTCOMPLETED&'"
 								,"FTP_FINALCLIENTMEETING":"'&FTP_FINALCLIENTMEETING&'"
 								,"FTP_FEES":"'&FTP_FEES&'"

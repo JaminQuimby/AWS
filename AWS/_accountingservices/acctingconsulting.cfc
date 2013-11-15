@@ -13,7 +13,7 @@ SELECT TOP 1000 [mc_id]
       ,[mc_category]
       ,[mc_description]
       ,[mc_duedate]
-      ,[mc_estimatedtime]
+      ,[mc_esttime]
       ,[mc_fees]
       ,[mc_paid]
       ,[mc_priority]
@@ -32,7 +32,7 @@ SELECT TOP 1000 [mcs_id]
       ,[mcs_completed]
       ,[mcs_dependencies]
       ,[mcs_duedate]
-      ,[mcs_estimatedtime]
+      ,[mcs_esttime]
       ,[mcs_notes]
       ,[mcs_sequence]
       ,[mcs_status]
@@ -56,7 +56,7 @@ SELECT[mc_id]
 ,[mc_category]
 ,[mc_credithold]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
-,[mc_estimatedtime]
+,[mc_esttime]
 ,[mc_fees]
 ,[mc_paid]
 ,[mc_priority]
@@ -79,7 +79,7 @@ SELECT[mcs_id]
 ,CONVERT(VARCHAR(10),[mcs_completed], 101)AS[mcs_completed]
 ,[mcs_dependencies]
 ,CONVERT(VARCHAR(10),[mcs_duedate], 101)AS[mcs_duedate]
-,[mcs_estimatedtime]
+,[mcs_esttime]
 ,[mcs_notes]
 ,[mcs_sequence]
 ,[mcs_status]
@@ -169,7 +169,7 @@ SELECT
 ,[mcs_completed]
 ,[mcs_dependencies]
 ,[mcs_duedate]
-,[mcs_estimatedtime]
+,[mcs_esttime]
 ,CASE WHEN LEN([mcs_notes]) >= 101 THEN SUBSTRING([mcs_notes],0,100) +  '...' ELSE [mcs_notes] END AS[mcs_notes]
 ,[mcs_sequence]
 ,[mcs_status]
@@ -225,7 +225,7 @@ INSERT INTO[managementconsulting](
 ,[mc_category]
 ,[mc_credithold]
 ,[mc_duedate]
-,[mc_estimatedtime]
+,[mc_esttime]
 ,[mc_fees]
 ,[mc_paid]
 ,[mc_priority]
@@ -272,7 +272,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mc_category]=<cfqueryparam value="#j.DATA[1][4]#"/>
 ,[mc_credithold]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[mc_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[mc_estimatedtime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[mc_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[mc_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[mc_paid]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[mc_priority]=<cfqueryparam value="#j.DATA[1][10]#"/>
@@ -305,7 +305,7 @@ INSERT INTO[managementconsulting_subtask](
 ,[mcs_completed]
 ,[mcs_dependencies]
 ,[mcs_duedate]
-,[mcs_estimatedtime]
+,[mcs_esttime]
 ,[mcs_notes]
 ,[mcs_sequence]
 ,[mcs_status]
@@ -345,7 +345,7 @@ SET[mc_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mcs_completed]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[mcs_dependencies]=<cfqueryparam value="#j.DATA[1][6]#"/>
 ,[mcs_duedate]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[mcs_estimatedtime]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[mcs_esttime]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[mcs_notes]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[mcs_sequence]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[mcs_status]=<cfqueryparam value="#j.DATA[1][11]#"/>

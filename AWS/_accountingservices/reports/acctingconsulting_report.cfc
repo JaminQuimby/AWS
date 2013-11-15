@@ -6,7 +6,7 @@ SELECT TOP 1000 [mc_id]
       ,[mc_category]
       ,[mc_description]
       ,[mc_duedate]
-      ,[mc_estimatedtime]
+      ,[mc_esttime]
       ,[mc_fees]
       ,[mc_paid]
       ,[mc_priority]
@@ -25,7 +25,7 @@ SELECT TOP 1000 [mcs_id]
       ,[mcs_completed]
       ,[mcs_dependencies]
       ,[mcs_duedate]
-      ,[mcs_estimatedtime]
+      ,[mcs_esttime]
       ,[mcs_notes]
       ,[mcs_sequence]
       ,[mcs_status]
@@ -58,7 +58,7 @@ SELECT[mc_id]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 ,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
 ,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
-,[mc_estimatedtime]
+,[mc_esttime]
 ,[mc_fees]
 ,[mc_paid]    
 ,[client_name]
@@ -85,7 +85,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								,"MC_WORKINITIATED":"'&MC_WORKINITIATED&'"
 								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
-								,"MC_ESTIMATEDTIME":"'&MC_ESTIMATEDTIME&'"
+								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_FEES":"'&MC_FEES&'"
 								,"MC_PAID":"'&MC_PAID&'"	
 								}'>

@@ -30,7 +30,7 @@ _grid1=function(){_jGrid({
 			,PC_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'1%'}
 			,PC_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'1%'}
 			,PC_FEES:{title:'Fees'}
-			,PC_PAYMENTSTATUS:{title:'Payment Status'}
+			,PC_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group1"}',
@@ -52,14 +52,14 @@ _grid2=function(){_jGrid({
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 			,PT_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'}
 			,PT_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,PT_MISSINGRECEIVED:{title:'Missing Information Received',width:'1%'}
+			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,PT_ENTRY_DATECOMPLETED:{title:'Entry',width:'1%'}
 			,PT_REC_DATECOMPLETED:{title:'Reconcile',width:'1%'}
 			,PT_REVIEW_DATECOMPLETED:{title:'Review',width:'1%'}
 			,PT_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'1%'}
 			,PT_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'1%'}
 			,PT_FEES:{title:'Fees'}
-			,PT_PAYMENTSTATUS:{title:'Payment Status'}
+			,PT_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
@@ -143,7 +143,7 @@ _grid5=function(){_jGrid({
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
 			,MC_WORKINITIATED:{title:'Work Initiated',width:'1%'}
 			,MC_PROJECTCOMPLETED:{title:'Project Completed',width:'1%'}
-			,MC_ESTIMATEDTIME:{title:'Estimated Time'}
+			,MC_ESTTIME:{title:'Estimated Time'}
 			,MC_FEES:{title:'Fees'}
 			,MC_PAID:{title:'Payment Status'}
 			},
@@ -197,7 +197,7 @@ _grid7=function(){_jGrid({
 			,FTP_INFORECEIVED:{title:'Information Received',width:'1%'}
 			,FTP_INFOCOMPILED:{title:'Information Compiled',width:'1%'}
 			,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,FTP_MISSINGINFOREC:{title:'Missing information Received',width:'1%'}
+			,FTP_MISSINGINFORECEIVED:{title:'Missing information Received',width:'1%'}
 			,FTP_REPORTCOMPLETED:{title:'Report Completed',width:'1%'}
 			,FTP_FINALCLIENTMEETING:{title:'Final Client Meeting',width:'1%'}
 			,FTP_FEES:{title:'Fees'}

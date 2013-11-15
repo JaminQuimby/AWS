@@ -45,7 +45,7 @@ SELECT[tr_1_assignedto]
 ,[tr_1_preparedby]
 ,CONVERT(VARCHAR(10),[tr_1_readyforreview], 101)AS[tr_1_readyforreview]
 ,[tr_1_reviewassignedto]
-,CONVERT(VARCHAR(10),[tr_1_reviewd], 101)AS[tr_1_reviewd]
+,CONVERT(VARCHAR(10),[tr_1_reviewed], 101)AS[tr_1_reviewed]
 ,[tr_1_reviewedby]
 ,CONVERT(VARCHAR(10),[tr_1_reviewedwithnotes], 101)AS[tr_1_reviewedwithnotes]
 FROM[taxreturns]
@@ -63,7 +63,7 @@ SELECT CONVERT(VARCHAR(10),[tr_2_assemblereturn], 101)AS[tr_2_assemblereturn]
 ,[tr_2_messageleft]
 ,[tr_2_missingsignatures]
 ,[tr_2_multistatereturn]
-,[tr_2_paymentstatus]
+,[tr_2_paid]
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -76,7 +76,7 @@ SELECT[tr_3_assignedto]
 ,[tr_3_currentfees]
 ,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
 ,CONVERT(VARCHAR(10),[tr_3_extended], 101)AS[tr_3_extended]
-,[tr_3_paymentstatus]
+,[tr_3_paid]
 ,[tr_3_pptresttime]
 ,[tr_3_priorfees]
 ,[tr_3_required]
@@ -123,7 +123,7 @@ SELECT [trst_1_assignedto]
 ,CONVERT(VARCHAR(10),[trst_1_duedate], 101)AS[trst_1_duedate]
 ,CONVERT(VARCHAR(10),[trst_1_informationreceived], 101)AS[trst_1_informationreceived]
 ,CONVERT(VARCHAR(10),[trst_1_missinginforeceived], 101)AS[trst_1_missinginforeceived]
-,[trst_1_missinginformation]
+,[trst_1_missinginfo]
 ,[trst_1_preparedby]
 ,CONVERT(VARCHAR(10),[trst_1_readyforreview], 101)AS[trst_1_readyforreview]
 ,[trst_1_reviewassignedto]
@@ -146,7 +146,7 @@ SELECT  CONVERT(VARCHAR(10),[trst_2_assemblereturn], 101)AS[trst_2_assembleretur
 ,[trst_2_emailed]
 ,[trst_2_messageleft]
 ,[trst_2_missingsignatures]
-,[trst_2_paymentstatus]
+,[trst_2_paid]
 ,[trst_2_priorfees]
 ,[trst_2_requiredforms]
 FROM[taxreturns_state]
@@ -428,7 +428,7 @@ SET[tr_1_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[tr_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#"  null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[tr_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[tr_1_reviewd]=<cfqueryparam value="#j.DATA[1][12]#"  null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tr_1_reviewed]=<cfqueryparam value="#j.DATA[1][12]#"  null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[tr_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
 ,[tr_1_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][14]#"  null="#LEN(j.DATA[1][14]) eq 0#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -452,7 +452,7 @@ SET[tr_2_assemblereturn]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[
 ,[tr_2_messageleft]=<cfqueryparam value="#j.DATA[1][7]#"/>
 ,[tr_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[tr_2_multistatereturn]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[tr_2_paymentstatus]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[tr_2_paid]=<cfqueryparam value="#j.DATA[1][10]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -468,7 +468,7 @@ SET[tr_3_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_3_currentfees]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[tr_3_delivered]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tr_3_extended]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[tr_3_paymentstatus]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tr_3_paid]=<cfqueryparam value="#j.DATA[1][7]#"/>
 ,[tr_3_pptresttime]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[tr_3_priorfees]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[tr_3_required]=<cfqueryparam value="#j.DATA[1][10]#"/>
@@ -557,7 +557,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_1_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trst_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[trst_1_missinginformation]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trst_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[trst_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[trst_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[trst_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
@@ -592,7 +592,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_2_emailed]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[trst_2_messageleft]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[trst_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[trst_2_paymentstatus]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[trst_2_paid]=<cfqueryparam value="#j.DATA[1][11]#"/>
 ,[trst_2_priorfees]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[trst_2_requiredforms]=<cfqueryparam value="#j.DATA[1][13]#"/>
 WHERE[TRST_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>

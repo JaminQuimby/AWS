@@ -127,7 +127,7 @@ _grid6=function(){_jGrid({
 			,FDS_YEAR:{title:'Year',width:'1%'}
 			,FDS_MONTHTEXT:{title:'Month'}
 			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
-			,FDS_MIRECEIVED:{title:'Missing Information Received',width:'1%'}
+			,FDS_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_CMIRECEIVED:{title:'Compiled Missing Information Received',width:'1%'}
 			,FDS_COMPILEMI:{title:'Missing Information Compiled',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
@@ -201,7 +201,7 @@ _grid10=function(){_jGrid({
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
 			,PC_DATEDUE:{title:'Due Date',width:'1%'}
-			,PC_MISSINGRECEIVED:{title:'Information Received',width:'1%'}
+			,PC_MISSINGINFORECEIVED:{title:'Information Received',width:'1%'}
 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
@@ -220,7 +220,7 @@ _grid11=function(){_jGrid({
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTH:{title:'Month'}
 			,PT_TYPE:{title:'Type'}
-			,PT_PAYMENTSTATUS:{title:'Status'}
+			,PT_PAID:{title:'Status'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 			,PT_DUEDATE:{title:'Due Date',width:'1%'}
 			,PT_DELIVERY_DATECOMPLETED:{title:'Completed',width:'1%'}

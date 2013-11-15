@@ -253,7 +253,7 @@ SELECT[fds_id]
 ,[fds_year]
 ,[fds_monthTEXT]
 ,[fds_missinginfo]
-,CONVERT(VARCHAR(10),[fds_mireceived], 101)AS[fds_mireceived]
+,CONVERT(VARCHAR(10),[fds_missinginforeceived], 101)AS[fds_missinginforeceived]
 ,[fds_compilemi]
 ,CONVERT(VARCHAR(10),[fds_cmireceived], 101)AS[fds_cmireceived]
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
@@ -271,7 +271,7 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif></cfqu
 								,"FDS_YEAR":"'&FDS_YEAR&'"
 								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
 								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
-								,"FDS_MIRECEIVED":"'&FDS_MIRECEIVED&'"
+								,"FDS_MISSINGINFORECEIVED":"'&FDS_MISSINGINFORECEIVED&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_CMIRECEIVED":"'&FDS_CMIRECEIVED&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
@@ -410,7 +410,7 @@ SELECT[pc_id]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
 ,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
-,CONVERT(VARCHAR(10),[pc_missingreceived], 101)AS[pc_missingreceived]
+,CONVERT(VARCHAR(10),[pc_missinginforeceived], 101)AS[pc_missinginforeceived]
 ,[pc_missinginfo]
 ,[client_name]
 ,[client_id]
@@ -430,7 +430,7 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								,"PC_DATEDUE":"'&PC_DATEDUE&'"
-								,"PC_MISSINGRECEIVED":"'&PC_MISSINGRECEIVED&'"
+								,"PC_MISSINGINFORECEIVED":"'&PC_MISSINGINFORECEIVED&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -446,7 +446,7 @@ SELECT[pt_id]
 ,[pt_year]
 ,[pt_month]
 ,[pt_type]
-,[pt_paymentstatus]
+,[pt_paid]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
 ,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
@@ -467,7 +467,7 @@ WHERE [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"PT_YEAR":"'&PT_YEAR&'"
 								,"PT_MONTH":"'&PT_MONTH&'"
 								,"PT_TYPE":"'&PT_TYPE&'"
-								,"PT_PAYMENTSTATUS":"'&PT_PAYMENTSTATUS&'"
+								,"PT_PAID":"'&PT_PAID&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
 								,"PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"

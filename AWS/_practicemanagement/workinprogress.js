@@ -42,9 +42,9 @@ _grid2=function(){_jGrid({
 			,CAS_COMPLETED:{title:'Completed',width:'1%'}
 			,CAS_STATUS:{title:'Status',width:'1%'}
 			,CAS_PRIORITY:{title:'Priority',width:"1%"}
-			,CAS_ASSIGNTO:{title:'Assigned To'}
+			,CAS_ASSIGNEDTO:{title:'Assigned To'}
 			,CAS_DUEDATE:{title:'Due Date',width:"1%"}
-			,CAS_ESTIMATEDTIME:{title:'Estimated Time'}
+			,CAS_ESTTIME:{title:'Estimated Time'}
 			,CAS_CATEGORY:{title:'Category'}
 			,CAS_TASKDESC:{title:'Task Description'}		
 			},
@@ -65,7 +65,7 @@ _grid3=function(){_jGrid({
 			,BF_PRIORITY:{title:'Priority',width:'1%'}
 			,BF_ASSIGNEDTO:{title:'Assigned To'}
 			,BF_DUEDATE:{title:'Due Date'}
-			,BF_ESTIMATEDTIME:{title:'Estimated Time'}
+			,BF_ESTTIME:{title:'Estimated Time'}
 			,BF_ACTIVITY:{title:'Activity'}
 	},
 	"method":"f_lookupData",
@@ -133,7 +133,7 @@ _grid6=function(){_jGrid({
 			,MC_PRIORITY:{title:'Priority'}
 			,MC_ASSIGNEDTO:{title:'Assigned To'}			
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
-			,MC_ESTIMATEDTIME:{title:'Estimated Time',width:'1%'}
+			,MC_ESTTIME:{title:'Estimated Time',width:'1%'}
 			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
 			,MC_DESCRIPTION:{title:'Task Description'}									
 			},

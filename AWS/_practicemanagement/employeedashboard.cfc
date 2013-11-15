@@ -85,7 +85,7 @@ SELECT[pt_id]
 ,[pt_year]
 ,[pt_month]
 ,[pt_type]
-,[pt_paymentstatus]
+,[pt_paid]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
 ,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
@@ -109,7 +109,7 @@ ORDER BY[pt_duedate]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PT_YEAR":"'&PT_YEAR&'","PT_MONTH":"'&PT_MONTH&'","PT_TYPE":"'&PT_TYPE&'","PT_PAYMENTSTATUS":"'&PT_PAYMENTSTATUS&'","PT_LASTPAY":"'&PT_LASTPAY&'","PT_DUEDATE":"'&PT_DUEDATE&'","PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"}'>
+<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PT_YEAR":"'&PT_YEAR&'","PT_MONTH":"'&PT_MONTH&'","PT_TYPE":"'&PT_TYPE&'","PT_PAID":"'&PT_PAID&'","PT_LASTPAY":"'&PT_LASTPAY&'","PT_DUEDATE":"'&PT_DUEDATE&'","PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -243,7 +243,7 @@ SELECT[fds_id]
 ,[fds_year]
 ,[fds_monthTEXT]
 ,[fds_missinginfo]
-,CONVERT(VARCHAR(10),[fds_mireceived], 101)AS[fds_mireceived]
+,CONVERT(VARCHAR(10),[fds_missinginforeceived], 101)AS[fds_missinginforeceived]
 ,[fds_compilemi]
 ,CONVERT(VARCHAR(10),[fds_cmireceived], 101)AS[fds_cmireceived]
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
@@ -271,7 +271,7 @@ ORDER BY[fds_duedate]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_DUEDATE":"'&FDS_DUEDATE&'","FDS_MIRECEIVED":"'&FDS_MIRECEIVED&'","FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'","FDS_CMIRECEIVED":"'&FDS_CMIRECEIVED&'","FDS_COMPILEMI":"'&FDS_COMPILEMI&'"}'>
+<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_DUEDATE":"'&FDS_DUEDATE&'","FDS_MISSINGINFORECEIVED":"'&FDS_MISSINGINFORECEIVED&'","FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'","FDS_CMIRECEIVED":"'&FDS_CMIRECEIVED&'","FDS_COMPILEMI":"'&FDS_COMPILEMI&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -471,7 +471,7 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_1_reviewedwithnotes], 101)AS[tr_1_reviewedwithnotes]
 ,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
 ,CONVERT(VARCHAR(10),[tr_2_delivered], 101)AS[tr_2_delivered]
-,[tr_2_paymentstatus]
+,[tr_2_paid]
 FROM[v_taxreturns]
 WHERE[tr_1_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 AND [tr_1_readyforreview] IS NOT NULL
@@ -528,7 +528,7 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(10),[tr_4_dropoffappointment], 101)AS[tr_4_dropoffappointment]
 ,CONVERT(VARCHAR(10),[tr_4_pickupappointment], 101)AS[tr_4_pickupappointment]
 ,CONVERT(VARCHAR(10),[tr_1_missinginforeceived], 101)AS[tr_1_missinginforeceived]
-,[tr_2_paymentstatus]
+,[tr_2_paid]
 FROM[v_taxreturns]
 WHERE[tr_1_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 AND [tr_1_informationreceived] IS NOT NULL
@@ -661,7 +661,7 @@ SELECT [cas_id]
 ,[cas_status]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
 FROM[v_clientadministrativetasks]
-WHERE[cas_assignto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+WHERE[cas_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
 <cfset myResult="">

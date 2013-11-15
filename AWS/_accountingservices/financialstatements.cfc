@@ -16,11 +16,11 @@ SELECT
       ,[fds_priority]
       ,[fds_esttime]
       ,[fds_missinginfo]
-      ,[fds_mireceived]
+      ,[fds_missinginforeceived]
       ,[fds_compilemi]
       ,[fds_cmireceived]
       ,[fds_fees]
-      ,[fds_paymentstatus]
+      ,[fds_paid]
       ,[fds_deliverymethod]
       ,[fds_obtaininfo_assignedto]
       ,[fds_obtaininfo_datecompleted]
@@ -96,10 +96,10 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
 ,[fds_esttime]
 ,[fds_fees]
-,CONVERT(VARCHAR(10),[fds_mireceived], 101)AS[fds_mireceived]
+,CONVERT(VARCHAR(10),[fds_missinginforeceived], 101)AS[fds_missinginforeceived]
 ,[fds_missinginfo]
 ,[fds_month]
-,[fds_paymentstatus]
+,[fds_paid]
 ,CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend]
 ,[fds_priority]
 ,[fds_status]
@@ -362,10 +362,10 @@ INSERT INTO[financialdatastatus](
 ,[fds_duedate]
 ,[fds_esttime]
 ,[fds_fees]
-,[fds_mireceived]
+,[fds_missinginforeceived]
 ,[fds_missinginfo]
 ,[fds_month]
-,[fds_paymentstatus]
+,[fds_paid]
 ,[fds_periodend]
 ,[fds_priority]
 ,[fds_status]
@@ -410,10 +410,10 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[fds_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[fds_fees]=<cfqueryparam value="#j.DATA[1][8]#"  null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[fds_mireceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[fds_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[fds_missinginfo]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[fds_month]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[fds_paymentstatus]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[fds_paid]=<cfqueryparam value="#j.DATA[1][12]#"/>
 ,[fds_periodend]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[fds_priority]=<cfqueryparam value="#j.DATA[1][14]#"/>
 ,[fds_status]=<cfqueryparam value="#j.DATA[1][15]#"/>

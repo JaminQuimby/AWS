@@ -2,13 +2,13 @@
 <!---  Few of mispelled column names
 [cas_id]
       ,[client_id]
-      ,[cas_assignto]
+      ,[cas_assignedto]
       ,[cas_category]
       ,[cas_completed]
       ,[cas_datereqested]
       ,[cas_datestarted]
       ,[cas_duedate]
-      ,[cas_estimatedtime]
+      ,[cas_esttime]
       ,[cas_instructions]
       ,[cas_priority]
       ,[cas_reqestby]
@@ -35,7 +35,7 @@
 SELECT[cas_id]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
 ,[cas_priority]
-,[cas_assignto]
+,[cas_assignedto]
 ,[cas_status]
 ,CONVERT(VARCHAR(10),[cas_datereqested], 101)AS[cas_datereqested]
 ,CONVERT(VARCHAR(10),[cas_completed], 101)AS[cas_completed]
@@ -59,7 +59,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
 								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_ASSIGNTO":"'&CAS_ASSIGNTO&'"
+								,"CAS_ASSIGNEDTO":"'&CAS_ASSIGNEDTO&'"
 								,"CAS_STATUS":"'&CAS_STATUS&'"
 								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"
 								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"

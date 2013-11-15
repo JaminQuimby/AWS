@@ -45,7 +45,7 @@ SELECT[n_id]
       ,[n_2_ressubmited]
       ,[n_2_irsstateresponse]
       ,[n_3_missinginfo]
-      ,[n_3_missingrec]
+      ,[n_3_missinginforeceived]
   FROM[notice]
   
 --->
@@ -116,7 +116,7 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2_3">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[n_3_missinginfo]
-,CONVERT(VARCHAR(10),[n_3_missingrec], 101)AS[n_3_missingrec]
+,CONVERT(VARCHAR(10),[n_3_missinginforeceived], 101)AS[n_3_missinginforeceived]
 FROM[notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -348,7 +348,7 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
 SET[n_3_missinginfo]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[n_3_missingrec]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
+,[n_3_missinginforeceived]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

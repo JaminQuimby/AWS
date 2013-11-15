@@ -52,9 +52,9 @@ SELECT [cas_id]
 ,CONVERT(VARCHAR(10),[cas_completed], 101)AS[cas_completed]
 ,[cas_status]
 ,[cas_priority]
-,[cas_assignto]
+,[cas_assignedto]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
-,[cas_estimatedtime]
+,[cas_esttime]
 ,[cas_category]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
 FROM[v_clientadministrativetasks]
@@ -73,9 +73,9 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"
 								,"CAS_STATUS":"'&CAS_STATUS&'"
 								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_ASSIGNTO":"'&CAS_ASSIGNTO&'"
+								,"CAS_ASSIGNEDTO":"'&CAS_ASSIGNEDTO&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_ESTIMATEDTIME":"'&CAS_ESTIMATEDTIME&'"
+								,"CAS_ESTTIME":"'&CAS_ESTTIME&'"
 								,"CAS_CATEGORY":"'&CAS_CATEGORY&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
 								}'>
@@ -103,7 +103,7 @@ SELECT[bf_id]
 ,[bf_priority]
 ,[bf_assignedto]
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
-,[bf_estimatedtime]
+,[bf_esttime]
 ,[bf_activity]
 FROM[v_businessformation]
 WHERE([bf_status] !=3 OR [bf_status] !=6 OR [bf_status] IS NULL)
@@ -123,7 +123,7 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"BF_PRIORITY":"'&BF_PRIORITY&'"
 								,"BF_ASSIGNEDTO":"'&BF_ASSIGNEDTO&'"
 								,"BF_DUEDATE":"'&BF_DUEDATE&'"
-								,"BF_ESTIMATEDTIME":"'&BF_ESTIMATEDTIME&'"
+								,"BF_ESTTIME":"'&BF_ESTTIME&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -254,7 +254,7 @@ SELECT[mc_id]
 ,[mc_priority]
 ,[mc_assignedto]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
-,[mc_estimatedtime]
+,[mc_esttime]
 ,[mc_category]
 ,[mc_categorytext]
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
@@ -277,7 +277,7 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"MC_PRIORITY":"'&MC_PRIORITY&'"
 								,"MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
-								,"MC_ESTIMATEDTIME":"'&MC_ESTIMATEDTIME&'"
+								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
 								}'>

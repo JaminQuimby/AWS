@@ -10,11 +10,11 @@ SELECT[fds_id]
       ,[fds_priority]
       ,[fds_esttime]
       ,[fds_missinginfo]
-      ,[fds_mireceived]
+      ,[fds_missinginforeceived]
       ,[fds_compilemi]
       ,[fds_cmireceived]
       ,[fds_fees]
-      ,[fds_paymentstatus]
+      ,[fds_paid]
       ,[fds_deliverymethod]
       ,[fds_obtaininfo_assignedto]
       ,[fds_obtaininfo_datecompleted]
@@ -107,7 +107,7 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedto) AS [fds_delivery]
 ,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101) + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedto) AS [fds_acctrpt]
 ,[fds_fees]
-,[fds_paymentstatus]
+,[fds_paid]
 ,[client_name]
 ,[client_id]
 FROM[v_financialdatastatus]
@@ -140,7 +140,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FDS_DELIVERY":"'&FDS_DELIVERY&'"
 								,"FDS_ACCTRPT":"'&FDS_ACCTRPT&'"
 								,"FDS_FEES":"'&FDS_FEES&'"
-								,"FDS_PAYMENTSTATUS":"'&FDS_PAYMENTSTATUS&'"
+								,"FDS_PAID":"'&FDS_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -176,7 +176,7 @@ SELECT[fdss_id]
 ,COALESCE(CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedto) AS [fds_delivery]
 ,COALESCE(CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101), '') + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedto) AS [fds_acctrpt]
 ,[fds_fees]
-,[fds_paymentstatus]
+,[fds_paid]
 ,[fdss_subtask]
 ,[fdss_status]
 

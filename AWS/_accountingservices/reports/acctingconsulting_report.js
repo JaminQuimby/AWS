@@ -17,7 +17,7 @@ _grid1=function(){_jGrid({
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
 			,MC_WORKINITIATED:{title:'Work Initiated',width:'1%'}
 			,MC_PROJECTCOMPLETED:{title:'Project Completed',width:'1%'}
-			,MC_ESTIMATEDTIME:{title:'Estimated Time'}
+			,MC_ESTTIME:{title:'Estimated Time'}
 			,MC_FEES:{title:'Fees'}
 			,MC_PAID:{title:'Payment Status'}
 			},
