@@ -90,8 +90,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
 								,"TR_3_CURRENTFEES":"'&TR_3_CURRENTFEES&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
-								,"TR_2_PAYMENTSTATUS":"'&TR_2_PAYMENTSTATUS&'"
-
+								,"TR_2_PAID":"'&TR_2_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -190,8 +189,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TRST_PRIMARY":"'&TRST_PRIMARY&'"
 								,"TRST_COMPLETED":"'&TRST_COMPLETED&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
-								,"TR_2_PAYMENTSTATUS":"'&TR_2_PAYMENTSTATUS&'"
-
+								,"TR_2_PAID":"'&TR_2_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

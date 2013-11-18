@@ -99,14 +99,14 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"OF_FORM":"'&OF_FORM&'"
 								,"OF_OBTAININFO_DATECOMPLETED":"'&OF_OBTAININFO_DATECOMPLETED&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
-								,"OF_MIRECEIVED":"'&OF_MIRECEIVED&'"
+								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"
 								,"OF_PREPARATION_DATECOMPLETED":"'&OF_PREPARATION_DATECOMPLETED&'"
 								,"OF_REVIEW_DATECOMPLETED":"'&OF_REVIEW_DATECOMPLETED&'"
 								,"OF_ASSEMBLY_DATECOMPLETED":"'&OF_ASSEMBLY_DATECOMPLETED&'"
 								,"OF_DELIVERY_DATECOMPLETED":"'&OF_DELIVERY_DATECOMPLETED&'"
 								,"OF_FEES":"'&OF_FEES&'"
 								,"OF_ESTTIME":"'&OF_ESTTIME&'"
-								,"OF_PAYMENTSTATUS":"'&OF_PAYMENTSTATUS&'"
+								,"OF_PAID":"'&OF_PAID&'"
 								}'>                              
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
