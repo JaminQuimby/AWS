@@ -15,11 +15,11 @@
 .group1 li a:hover{background-color:#E33C0F;}
 .group2{margin:15px;text-align:center;}
 .group2 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
-.group2 li a{border-color:#1E344E;background-color:#370EE4;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;font-weight:bold;}
+.group2 li a{border-color:#390ce7;background-color:#370EE4;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;font-weight:bold;}
 .group2 li a:hover{background-color:#0D92CD;}
 .group3{margin:15px;text-align:center;}
 .group3 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
-.group3 li a{border-color:#6B1301;background-color:#e46c0a;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;font-weight:bold;}
+.group3 li a{border-color:#6B1301;background-color:#f7ae00;border-style:solid;border-width:2px;align-items:center;border-radius:5px;justify-content:center;display:flex;height:50px;margin:auto 0;width:150px;cursor:pointer;color:white;font-weight:bold;}
 .group3 li a:hover{background-color:#FFF200;}
 .group4{margin:15px;text-align:center;}
 .group4 li{align-items:center;justify-content:center;display:flex;margin-top:2px;}
