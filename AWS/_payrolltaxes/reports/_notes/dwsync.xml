@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="_payrolltaxes_report.css" server="https://ftp.awensa.com/MS/MS0213/" local="130235911820000000" remote="130235911820000000" />
-<file name="payrolltaxes_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290101555454562" remote="130290101680000000" />
-<file name="payrolltaxes_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130290137410000000" remote="130290137920000000" />
-<file name="payrolltaxes_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130290101705653153" remote="130290101820000000" />
-<file name="otherfilings_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130292661871729911" remote="130292662310000000" />
-<file name="otherfilings_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130290137389774168" remote="130290137820000000" />
-<file name="otherfilings_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130292789843179460" remote="130292789900000000" />
-<file name="payroll_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130235879610000000" remote="130235879610000000" />
-<file name="payroll_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130246922980000000" remote="130246922980000000" />
-<file name="payroll_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130274673713085133" remote="130274673930000000" />
-<file name="payrollchecks_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130290137398314656" remote="130290137880000000" />
-<file name="payrollchecks_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130290102022171257" remote="130290102160000000" />
-<file name="payrollchecks_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290102087214977" remote="130290102240000000" />
+<file name="_payrolltaxes_report.css" server="https://ftp.awensa.com/MS/MS0213/" local="130235911820000000" remote="130235911820000000" Dst="-1" />
+<file name="payrolltaxes_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290101555454562" remote="130290101680000000" Dst="-1" />
+<file name="payrolltaxes_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130290137410000000" remote="130290137920000000" Dst="-1" />
+<file name="payrolltaxes_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130290101705653153" remote="130290101820000000" Dst="-1" />
+<file name="otherfilings_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130292661871729911" remote="130292662310000000" Dst="-1" />
+<file name="otherfilings_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130290137389774168" remote="130290137820000000" Dst="-1" />
+<file name="otherfilings_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130292789843179460" remote="130292789900000000" Dst="-1" />
+<file name="payroll_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130235879610000000" remote="130235879610000000" Dst="-1" />
+<file name="payroll_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130246922980000000" remote="130246922980000000" Dst="-1" />
+<file name="payroll_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130274673713085133" remote="130274673930000000" Dst="-1" />
+<file name="payrollchecks_report.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130290137398314656" remote="130290137880000000" Dst="-1" />
+<file name="payrollchecks_report.js" server="https://ftp.awensa.com/MS/MS0213/" local="130298913676185948" remote="130298913710000000" Dst="1" />
+<file name="payrollchecks_report.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290102087214977" remote="130290102240000000" Dst="-1" />
 </dwsync>

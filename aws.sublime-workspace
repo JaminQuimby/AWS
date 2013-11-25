@@ -37,6 +37,22 @@
 				"buffer_size": 7021,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPro2012.rdp",
+			"settings":
+			{
+				"buffer_size": 6981,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/DEV/Desktop/quickbooks_twain_fix.reg",
+			"settings":
+			{
+				"buffer_size": 196,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
@@ -106,7 +122,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -179,6 +195,60 @@
 							[
 								538,
 								518
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPro2012.rdp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6981,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								630,
+								606
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/DEV/Desktop/quickbooks_twain_fix.reg",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 196,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
