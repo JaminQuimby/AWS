@@ -35,19 +35,44 @@ Add Subtasks:
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance');">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
+<!--- fields that werent in the original
+filingdeadline
+extensiondeadline
+extensionrequested
+extensioncompleted
+missinginformation
+missinginforeceived
+articles assignedto
+articles drafted
+articles approved estimated time
 
+
+
+--->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-	<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_owners">Owners</label><input type="text" id="g1_owners"  /></div>
-	<div><label for="g1_activity">Activity</label><input type="text" id="g1_activity" /></div>
-	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
-	<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
-	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"/></div>
+	<div><label for="client_id"><strong>Client</strong></label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold"><strong>Credit Hold</strong></label></div>
+	<div><label for="g1_owners"><strong>Owners</strong></label><input type="text" id="g1_owners"  /></div>
+	<div><label for="g1_activity"><strong>Activity</strong></label><input type="text" id="g1_activity" /></div>	
+    <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>   
+    
+    <div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_duedate" >Due Date</label><input type="text" id="g1_duedate" class="date"/></div>
+
+	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
+	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"/></div>
+	<div><label for="g1_filingdeadline" >Filing Deadline</label><input type="text" id="g1_filingdeadline" class="date"/></div>
+	<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
+
+	<div><label for="g1_extensiondeadline" >Extension Deadline</label><input type="text" id="g1_extensiondeadline" class="date"/></div>
+	<div><label for="g1_extensionrequested" >Extension Requested</label><input type="text" id="g1_extensionrequested" class="date"/></div>
+	<div><label for="g1_extensioncompleted" >Extension Completed</label><input type="text" id="g1_extensioncompleted" class="date"/></div>
+
+	<div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
+	<div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
+	
 	<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
@@ -55,14 +80,17 @@ Add Subtasks:
 <!---Subgroup 1--->
 <h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);'>Articles</h4>
 <div>
+    <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>   
+	<div><label for="g1_g1_articlesdrafted" >Articles Drafted</label><input type="text" id="g1_g1_articlessubmitted" class="date"/></div>
 	<div><label for="g1_g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_g1_articlessubmitted" class="date"/></div>
 	<div><label for="g1_g1_articlesapproved" >Articles Approved</label><input type="text" id="g1_g1_articlesapproved" class="date"/></div>
+	<div><label for="g1_g1_estimatedtime" >Articles Approved Estimated Time</label><input type="text" id="g1_g1_estimatedtime" class="date"/></div>
 </div>
-
 
 <!---Subgroup 2--->
 <h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);'>Trade Names</h4>
 <div>
+    <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>   
 	<div><label for="g1_g2_tradenamesubmitted" >Trade Name Submitted</label><input type="text" id="g1_g2_tradenamesubmitted" class="date"/></div>
 	<div><label for="g1_g2_tradenamereceived" >Trade Name Received</label><input type="text" id="g1_g2_tradenamereceived" class="date"/></div>
 </div>
@@ -79,6 +107,7 @@ Add Subtasks:
 <!---Subgroup 4--->
 <h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);'>Dissolution</h4>
 <div>
+    <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>   
 	<div><label for="g1_g4_dissolutionrequested" >Dissolution Requested</label><input type="text" id="g1_g4_dissolutionrequested" class="date"/></div>
 	<div><label for="g1_g4_dissolutionsubmitted" >Dissolution Submitted</label><input type="text" id="g1_g4_dissolutionsubmitted" class="date"/></div>
 	<div><label for="g1_g4_disolutioncompleted" >Disolution Completed</label><input type="text" id="g1_g4_disolutioncompleted" class="date"/></div>
