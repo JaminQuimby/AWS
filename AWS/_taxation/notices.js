@@ -57,8 +57,8 @@ alert(options["group"])
 switch(options["group"]){
 
 case'':
-if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})};
+if($("#client_id").val()!=0 && $("#g1_mattername").val()!="" && $("#g1_matterstatus").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
+else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
 break;
 
 case'group1':var json='{"DATA":[["'+
@@ -71,6 +71,18 @@ _saveData({group:"group1","payload":$.parseJSON(json),page:"notices"});
 break;
 
 case'group2':
+if($("#isLoaded_group2").val()==0) 
+{
+if($("#g2_1_noticenumber").val()!= null && $("#g2_1_noticedate").val()!=null && $("#g2_1_taxyear").val()!=null && $("#g2_1_taxform").val()!=null && $("#g2_1_methodreceived").val()!=null){alert("test")}
+else{
+	jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})
+break;
+};
+}
+else{
+	jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})
+break;
+}
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
@@ -91,6 +103,7 @@ break;
 
 case'group2_1':var json='{"DATA":[["'+
 //group 2 subgroup 1
+$("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_1_noticenumber").val()+'","'+
 $("#g2_1_noticedate").val()+'","'+
@@ -106,6 +119,7 @@ break;
 
 case'group2_2':var json='{"DATA":[["'+
 //group 2 subgroup 2
+$("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_2_irsstateresponserecieved").val()+'","'+
 $("#g2_2_responsecompleted").val()+'","'+

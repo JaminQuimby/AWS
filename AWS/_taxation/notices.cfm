@@ -53,10 +53,10 @@ due date for response
 <div id="group1" class="gf-checkbox">
 <h3>Add Notice Matter</h3>
 <div>
-<div><label for="client_id"><strong>Client</strong></label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold"><strong>Credit Hold</strong></label></div>
-<div><label for="g1_mattername"><strong>Matter Name</strong></label><input type="text" id="g1_mattername"></div>
-<div><label for="g1_matterstatus"><strong>Matter Status</strong></label><select id="g1_matterstatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id">Client*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
+<div><label for="g1_mattername">Matter Name*</label><input type="text" id="g1_mattername"></div>
+<div><label for="g1_matterstatus">Matter Status*</label><select id="g1_matterstatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <!-- <div style="margin-top:5px;"><a href="#" class="button optional" onClick="_grid1();_toggle('entrance2');_hide('entrance,group2,group3');">Add Notice</a></div> -->
 </div>
 </div>
@@ -90,11 +90,11 @@ due date for response
 <!--- GROUP 2_1 --->
 <h4 onClick='_loadData({"id":"subtask1_id","group":"group2_1","page":"notices"});$("#isLoaded_group2_1").val(1);'>Details</h4>
 <div>
-<div><label for="g2_1_noticenumber"><strong>Notice Number</strong></label><select id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_noticedate"><strong>Notice Date</strong></label><input type="text" class="date" id="g2_1_noticedate"></div>
-<div><label for="g2_1_taxyear"><strong>Tax Year</strong></label><select  id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_taxform"><strong>Tax Form</strong></label><select id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_methodreceived"><strong>Method Recieved</strong></label><select id="g2_1_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_noticenumber">Notice Number*</label><select id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_noticedate">Notice Date*</label><input type="text" class="date" id="g2_1_noticedate"></div>
+<div><label for="g2_1_taxyear">Tax Year*</label><select  id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_taxform">Tax Form*</label><select id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_methodreceived">Method Recieved*</label><select id="g2_1_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_datenoticereceived">Date Notice Received</label><input type="text" class="date" id="g2_1_datenoticereceived"></div>
 <div><label for="g2_1_duedateforresponse">Due Date For Response</label><input type="text" class="date" id="g2_1_duedateforresponse"></div>
 
@@ -111,11 +111,6 @@ due date for response
 
 <div><label for="g2_2_responsesubmitted">Response Submitted</label><input type="text" class="date" id="g2_2_responsesubmitted"></div>
 <div><label for="g2_2_irsstateresponserecieved">IRS/State Response Recieved</label><input type="text" class="date" id="g2_2_irsstateresponserecieved"></div>
-</div>
-<!--- GROUP 2_3 --->
-<h4 onClick='_loadData({"id":"subtask1_id","group":"group2_3","page":"notices"});$("#isLoaded_group2_3").val(1);'>Missing</h4>
-<div>
-
 </div>
 </div>
 
