@@ -41,7 +41,7 @@
 <div><label for="g1_year"><strong>Year</strong></label><input type="text" id="g1_year" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_month"><strong>Period</strong></label><select id="g1_month"></option><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput><option value="0">&nbsp;</option></select></div>
 <div><label for="g1_lastpay"><strong>Last Pay</strong></label><input type="text" class="date" id="g1_lastpay"></div>
-<div><label for="g1_type"><strong>Return Type</strong></label><select id="g1_type"></option><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_type"><strong>Return Type</strong></label><select id="g1_type"></option><option value="0">&nbsp;</option><cfoutput query="global_returntypes"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 <div><label for="g1_priority">Priority</label><input type="text"  id="g1_priority" ></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_estimatedtime" ></div>

@@ -53,6 +53,14 @@
 				"buffer_size": 196,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "/C/Users/DEV/Desktop/test/flexnav-master/index.html",
+			"settings":
+			{
+				"buffer_size": 11034,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -122,7 +130,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -257,6 +265,33 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/DEV/Desktop/test/flexnav-master/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11034,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								644,
+								644
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2850.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

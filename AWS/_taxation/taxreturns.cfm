@@ -25,7 +25,14 @@
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu/menu.cfm"></nav>
+<cfif session.user.id eq 10000 >
+<cfinclude template="/assets/module/menu/menu2.cfm">
+<cfelse>
+<cfinclude template="../assets/module/menu/menu.cfm">
+</cfif>
+
+
+</nav>
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
