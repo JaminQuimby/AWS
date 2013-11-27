@@ -17,6 +17,8 @@ Add Subtasks:
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+<cfquery dbtype="query" name="global_businesstype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_businesstype'</cfquery>
+
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="../assets/inc/pagemenu.cfm">
@@ -85,7 +87,7 @@ Add Subtasks:
 <!---Subgroup 5--->
 <h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);'>Other</h4>
 <div>
-	<div><label for="g1_g5_businesstype">Business Type</label><select id="g1_g5_businesstype"><option value="0">&nbsp;</option></select></div>
+	<div><label for="g1_g5_businesstype">Business Type</label><select id="g1_g5_businesstype"><option value="0">&nbsp;</option><cfoutput query="global_businesstype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g5_businesscreceived" >Received</label><input type="text" id="g1_g5_businesscreceived" class="date"/></div>
 	<div><label for="g1_g5_businesssubmitted" >Submitted</label><input type="text" id="g1_g5_businesssubmitted" class="date"/></div>
 	<div><label for="g1_g5_otheractivity">Other Activity</label><input type="text" id="g1_g5_otheractivity" class="date"/></div>

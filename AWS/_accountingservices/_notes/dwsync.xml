@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="businessformation.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290108845621536" remote="130290109970000000" />
-<file name="businessFormation.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130277126449804975" remote="130277127740000000" />
-<file name="businessformation.js" server="https://ftp.awensa.com/MS/MS0213/" local="130274671091645195" remote="130274671820000000" />
-<file name="financialstatements.js" server="https://ftp.awensa.com/MS/MS0213/" local="130274671243023853" remote="130274671290000000" />
-<file name="financialStatements.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130277127624407379" remote="130277127690000000" />
-<file name="financialstatements.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290101806908944" remote="130290101960000000" />
-<file name="acctingconsulting.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130277125579780839" remote="130277125640000000" />
-<file name="acctingconsulting.js" server="https://ftp.awensa.com/MS/MS0213/" local="130280223390029913" remote="130280655520000000" />
-<file name="acctingconsulting.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290108799698909" remote="130290110380000000" />
+<file name="businessformation.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290108845621536" remote="130290109970000000" Dst="-1" />
+<file name="businessFormation.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130300406511772512" remote="130300407220000000" Dst="1" />
+<file name="businessformation.js" server="https://ftp.awensa.com/MS/MS0213/" local="130274671091645195" remote="130274671820000000" Dst="-1" />
+<file name="financialstatements.js" server="https://ftp.awensa.com/MS/MS0213/" local="130274671243023853" remote="130274671290000000" Dst="-1" />
+<file name="financialStatements.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130277127624407379" remote="130277127690000000" Dst="-1" />
+<file name="financialstatements.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290101806908944" remote="130290101960000000" Dst="-1" />
+<file name="acctingconsulting.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130277125579780839" remote="130277125640000000" Dst="-1" />
+<file name="acctingconsulting.js" server="https://ftp.awensa.com/MS/MS0213/" local="130280223390029913" remote="130280655520000000" Dst="-1" />
+<file name="acctingconsulting.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130290108799698909" remote="130290110380000000" Dst="-1" />
 </dwsync>
