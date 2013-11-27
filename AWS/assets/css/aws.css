@@ -49,7 +49,7 @@ legend{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;fo
 nav{background-color:#F8F8F8;border-bottom:1px solid #E1E1DC;border-right:1px solid #E1E1DC;}
 select {border-radius:2px 2px 2px 2px;min-height:30px;width:400px;border:solid 1px #666;}
 td{vertical-align:top;}
-textarea{border: 1px solid #AAAAAA;border-radius: 5px 5px 5px 5px;box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);min-width:400px;font-size:1em; padding: 6px;}
+textarea{border: 1px solid #AAAAAA;border-radius: 5px 5px 5px 5px;box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);min-width:400px;font-size:1em; padding: 6px; min-height: 300px;}
 
 tr{vertical-align:top;}
 
