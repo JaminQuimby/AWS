@@ -39,19 +39,27 @@
 <h3>General</h3>
 <div>
 <!---Developer Note:[Table Management Consulting Tasks]--->
-<div><label for="client_id">Clients</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetSpouse','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" readonly class="readonly"></div>
-<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
-<div><label for="g1_consultingcategory">Consulting Category</label><select id="g1_consultingcategory" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_consultingcategory','group':'assetCategory','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="q_global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_taskdescription">Task Description</label><textarea  id="g1_taskdescription" cols="4" rows="4"  maxlength="1000" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" ></textarea></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<!--- Missing fields
+missinginformation
+missinginforeceived
+--->
+
+<div><label for="client_id"><strong>Clients</strong></label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetSpouse','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold"><strong>Credit Hold</strong></label></div>
+<div><label for="g1_consultingcategory"><strong>Consulting Category</strong></label><select id="g1_consultingcategory" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_consultingcategory','group':'assetCategory','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="q_global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taskdescription"><strong>Task Description</strong></label><textarea  id="g1_taskdescription" cols="4" rows="4"  maxlength="1000" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" ></textarea></div>
 <div><label for="g1_assignedto">Assigned To</label><select  id="g1_assignedto" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+
+
 <div><label for="g1_status">Status</label><select id="g1_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0" >&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" ></div>
+<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"></div>
+
 <div><label for="g1_requestforservices">Request for Services</label><input class="date" type="text" id="g1_requestforservices" ></div>
 <div><label for="g1_workinitiated">Work Initiated</label><input type="text" class="date" id="g1_workinitiated" ></div>
-<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" ></div>
 <div><label for="g1_projectcompleted">Project Completed</label><input type="text" class="date" id="g1_projectcompleted" ></div>
-<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime"></div>
+
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" ></div>
 <div><label for="g1_paid">Payment Status</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>

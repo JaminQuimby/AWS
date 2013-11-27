@@ -1,4 +1,6 @@
 $(document).ready(function(){
+jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: false});
+
 _grid1();
 _group1=function(){}
 _group2=function(){_grid2()}
@@ -21,14 +23,14 @@ _grid2=function(){_jGrid({
 	"url":"notices.cfc",
 	"title":"Notice",
 	"fields":{N_ID:{key:true,list:false,edit:false}
-	,NM_NAME:{title:'Matter'}
-	,N_NOTICESTATUS:{title:'Status'}
-	,N_1_TAXFORM:{title:'Tax Form'}
-	,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
-	,N_2_RESDUEDATE:{title:'Due Date for Response',width:'1%'}
-	,N_1_NOTICENUMBER:{title:'Notice Number',width:'1%'}
-	,N_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-	},
+			,NM_NAME:{title:'Matter'}
+			,N_NOTICESTATUS:{title:'Status'}
+			,N_1_TAXFORM:{title:'Tax Form'}
+			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,N_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	
+			,N_1_NOTICENUMBER:{title:'Notice Number',width:'1%'}
+			,N_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#subtask1_id").val(record.N_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"notices"});'
@@ -41,10 +43,9 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request w
 else{
 switch(query.COLUMNS[0]){
 /*Group1*/case "NM_ID":var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});break;
-/*Group2*/case "N_ID":var list='subtask1_id,g2_assignedto,g2_estimatedtime,g2_noticestatus,g2_priority';_loadit({"query":query,"list":list});break;
-/*Group2_1*/case "N_1_FEES":var list='g2_1_fees,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_paid,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
-/*Group2_2*/case "N_2_DATENOTICEREC":var list='g2_2_datenoticereceived,g2_2_duedateforresponse,g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
-/*Group2_3*/case "N_3_MISSINGINFO":var list='g2_3_missinginformation,g2_3_missinginforeceived';_loadit({"query":query,"list":list});break;
+/*Group2*/case "N_ID":var list='subtask1_id,g2_assignedto,g2_deliverymethod,g2_estimatedtime,g2_fees,g2_missinginformation,g2_missinginforeceived,g2_noticestatus,g2_paid,g2_priority';_loadit({"query":query,"list":list});break;
+/*Group2_1*/case "N_1_DATENOTICEREC":var list='g2_1_datenoticereceived,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_duedateforresponse,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
+/*Group2_2*/case "N_2_IRSSTATERESPONSE":var list='g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
@@ -53,7 +54,6 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","result":""}
 $.extend(true, options, params);
 
-alert(options["group"])
 switch(options["group"]){
 
 case'':
@@ -76,8 +76,13 @@ var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
+$("#g2_deliverymethod").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
+$("#g2_fees").val()+'","'+
+$("#g2_missinginformation").val()+'","'+
+$("#g2_missinginforeceived").val()+'","'+
 $("#g2_noticestatus").val()+'","'+
+$("#g2_paid").val()+'","'+
 $("#g2_priority").val()+'","'+
 '"]]}';
 if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}
@@ -87,13 +92,13 @@ break;
 case'group2_1':var json='{"DATA":[["'+
 //group 2 subgroup 1
 $("#task_id").val()+'","'+
-$("#g2_1_fees").val()+'","'+
-$("#g2_1_methodreceived").val()+'","'+
-$("#g2_1_noticedate").val()+'","'+
 $("#g2_1_noticenumber").val()+'","'+
-$("#g2_1_paid").val()+'","'+
-$("#g2_1_taxform").val()+'","'+
+$("#g2_1_noticedate").val()+'","'+
 $("#g2_1_taxyear").val()+'","'+
+$("#g2_1_taxform").val()+'","'+
+$("#g2_1_methodreceived").val()+'","'+
+$("#g2_1_datenoticereceived").val()+'","'+
+$("#g2_1_duedateforresponse").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2_1").val()!=0){_saveData({group:"group2_1","payload":$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'group2_2'})};
@@ -102,8 +107,6 @@ break;
 case'group2_2':var json='{"DATA":[["'+
 //group 2 subgroup 2
 $("#task_id").val()+'","'+
-$("#g2_2_datenoticereceived").val()+'","'+
-$("#g2_2_duedateforresponse").val()+'","'+
 $("#g2_2_irsstateresponserecieved").val()+'","'+
 $("#g2_2_responsecompleted").val()+'","'+
 $("#g2_2_responsecompletedby").val()+'","'+
@@ -113,16 +116,6 @@ $("#g2_2_reviewcompleted").val()+'",'+
 $("#g2_2_reviewrequired").is(':checked')+',"'+
 '"]]}'
 if($("#isLoaded_group2_2").val()!=0){_saveData({group:"group2_2",payload:$.parseJSON(json),page:"notices"})}
-else{_saveDataCB({'group':'group2_3'})};
-break;
-
-case'group2_3':var json='{"DATA":[["'+
-//group 2 subgroup 3
-$("#task_id").val()+'",'+
-$("#g2_3_missinginformation").is(':checked')+',"'+
-$("#g2_3_missinginforeceived").val()+'","'+
-'"]]}'
-if($("#isLoaded_group2_3").val()!=0){_saveData({group:"group2_3",payload:$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'plugins'})};
 break;
 
