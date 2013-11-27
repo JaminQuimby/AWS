@@ -318,13 +318,14 @@ WHERE[n_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_1">
  <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]
-SET[n_1_datenoticerec]=<cfqueryparam value="#j.DATA[1][2]#" NULL="#LEN(j.DATA[1][2]) eq 0#"/>
-,[n_1_methodreceived]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[n_1_noticedate]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
-,[n_1_noticenumber]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[n_1_resduedate]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
-,[n_1_taxform]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[n_1_taxyear]=<cfqueryparam value="#j.DATA[1][8]#"/>
+SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[n_1_datenoticerec]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
+,[n_1_methodreceived]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[n_1_noticedate]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
+,[n_1_noticenumber]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[n_1_resduedate]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
+,[n_1_taxform]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[n_1_taxyear]=<cfqueryparam value="#j.DATA[1][9]#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -335,13 +336,14 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[NOTICE]  
-SET[n_2_irsstateresponse]=<cfqueryparam value="#j.DATA[1][2]#" NULL="#LEN(j.DATA[1][2]) eq 0#"/>
-,[n_2_rescompleted]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
-,[n_2_rescompletedby]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[n_2_ressubmited]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
-,[n_2_revassignedto]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[n_2_revcompleted]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
-,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][8]#"/>
+SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[n_2_irsstateresponse]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
+,[n_2_rescompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
+,[n_2_rescompletedby]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[n_2_ressubmited]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
+,[n_2_revassignedto]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[n_2_revcompleted]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
+,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][9]#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

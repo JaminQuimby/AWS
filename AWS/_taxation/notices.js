@@ -53,7 +53,7 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",auto
 _saveDataCB=function(params){
 var options={"id":"","group":"","result":""}
 $.extend(true, options, params);
-
+alert(options["group"])
 switch(options["group"]){
 
 case'':
@@ -78,8 +78,8 @@ $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_deliverymethod").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
-$("#g2_fees").val()+'","'+
-$("#g2_missinginformation").val()+'","'+
+$("#g2_fees").val()+'",'+
+$("#g2_missinginformation").is(':checked')+',"'+
 $("#g2_missinginforeceived").val()+'","'+
 $("#g2_noticestatus").val()+'","'+
 $("#g2_paid").val()+'","'+
