@@ -17,7 +17,7 @@
 <cfquery dbtype="query" name="global_noticenumber">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_noticenumber'</cfquery>
 <cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
-
+<cfquery dbtype="query" name="global_noticemethods">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_noticemethods'</cfquery>
 
 <body>
 <!--- Load Left Menus --->
@@ -70,7 +70,7 @@
 <div><label for="g2_1_noticedate">Notice Date</label><input type="text" class="date" id="g2_1_noticedate"></div>
 <div><label for="g2_1_taxform">Tax Form</label><select id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_taxyear">Tax Year</label><select  id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_methodreceived">Method Recieved</label><select id="g2_1_methodreceived"><option value="0">&nbsp;</option></select></div>
+<div><label for="g2_1_methodreceived">Method Recieved</label><select id="g2_1_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_fees">Fees</label><input type="text" id="g2_1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g2_1_paid">Paid</label><select id="g2_1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
