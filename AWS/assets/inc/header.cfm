@@ -9,7 +9,7 @@
 <head>
 
 <cfoutput><title>#page.title#</title>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 <link rel="stylesheet" media="all" type="text/css" href="#this.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-timepicker-addon.css" />
 
 <link rel="stylesheet" id="size-stylesheet"  media='screen and (min-width: 1000px)'  href="#this.url#/AWS/assets/module/menu/menu.css"/>
@@ -28,7 +28,6 @@
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jqMessage/jqMessage.css">
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jqvalid/jqvalid.css">
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
 <cfswitch expression="#page.type#">
 <cfcase value="report"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/report.css"/></cfcase>
 <cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/aws.css"/></cfdefaultcase>
@@ -36,7 +35,7 @@
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+
 <!---
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
