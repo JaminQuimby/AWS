@@ -52,10 +52,10 @@ articles approved estimated time
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-	<div><label for="client_id"><strong>Client</strong></label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold"><strong>Credit Hold</strong></label></div>
-	<div><label for="g1_owners"><strong>Owners</strong></label><input type="text" id="g1_owners"  /></div>
-	<div><label for="g1_activity"><strong>Activity</strong></label><input type="text" id="g1_activity" /></div>	
+	<div><label for="client_id">Client*</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
+	<div><label for="g1_owners">Owners*</label><input type="text" id="g1_owners"  /></div>
+	<div><label for="g1_activity">Activity*</label><input type="text" id="g1_activity" /></div>	
     <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>   
     
     <div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

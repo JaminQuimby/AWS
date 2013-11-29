@@ -40,11 +40,11 @@
 <div id="group1" class="gf-checkbox">
 	<h3>General</h3>
 	<div>
-  		<div><label for="client_id"><strong>Client</strong></label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold"><strong>Credit Hold</strong></label></div>
-        <div><label for="g1_year"><strong>Year</strong></label><input type="text" id="g1_year" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"/></div>
-		<div><label for="g1_month"><strong>Month</strong></label><select id="g1_month"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><label for="g1_periodend"><strong>Period End</strong></label><input type="text" id="g1_periodend" class="date"/></div>
+  		<div><label for="client_id">Client*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+		<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
+        <div><label for="g1_year">Year*</label><input type="text" id="g1_year" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"/></div>
+		<div><label for="g1_month">Month*</label><select id="g1_month"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+		<div><label for="g1_periodend">Period End*</label><input type="text" id="g1_periodend" class="date"/></div>
 		
 		<div><label for="g1_status">Status</label><select id="g1_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_duedate">Due Date</label><input type="text" id="g1_duedate" class="date" /></div>

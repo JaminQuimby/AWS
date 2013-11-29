@@ -5,10 +5,10 @@
 
 <!--- VERTICAL MENUS --->
 <div class="menus">
-<!--- SMALL MENU --->
+<!--- SMALL MENU ---><cfoutput>
 <nav id="smallMenu" style="display:inherit;">
-<cfoutput><h1 class="#page.module#">&nbsp;</h1></cfoutput>
-</nav>
+
+</nav></cfoutput>
 <!--- LARGE MENU --->
 <nav id="largeMenu" style="display:none;">
 <cfoutput><h1 class="#page.module#"><a href="#this.url##CGI.SCRIPT_NAME#">#page.title#</a></h1></cfoutput>

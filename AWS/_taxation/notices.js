@@ -71,18 +71,6 @@ _saveData({group:"group1","payload":$.parseJSON(json),page:"notices"});
 break;
 
 case'group2':
-if($("#isLoaded_group2").val()==0) 
-{
-if($("#g2_1_noticenumber").val()!= null && $("#g2_1_noticedate").val()!=null && $("#g2_1_taxyear").val()!=null && $("#g2_1_taxform").val()!=null && $("#g2_1_methodreceived").val()!=null){alert("test")}
-else{
-	jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})
-break;
-};
-}
-else{
-	jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})
-break;
-}
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
