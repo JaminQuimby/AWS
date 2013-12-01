@@ -14,7 +14,7 @@ border-bottom:1px solid #999;}
 .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{border-radius: 0px;}
 .ui-accordion .ui-accordion-header{ padding:10px;padding-left:2.2em;margin-top: 0px;}
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{ background:#EFEFEF;}
-.ui-datepicker-trigger{left: 3px; position: relative; top: 3px;}
+.ui-datepicker-trigger{    height: 20px;    left: -24px;    position: relative;    top: 5px;}
 .ui-accordion .ui-accordion-content { overflow:inherit;}
 .ui-widget-content{border: none;}
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default{border: 1px solid #fff;border-bottom: 1px solid #D3D3D3;}
@@ -37,7 +37,7 @@ footer div{font-size:12px;padding-top:2px; display:inline-block; min-width:200px
 header{height:34px;background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;width:100%;opacity:0.9;}
 h1{font-weight:normal;}
 h3{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-bottom:35px;color:#666;}
-h4{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-top:35px;color:#666;}
+h4{font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-top:35px;color:#666;}
 input{border: 1px solid #AAAAAA; padding: 0 0 0 8px;   border-radius: 5px 5px 5px 5px;    box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);width:400px;height:36px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;!important;}
 input:focus{color:#0088CE;	box-shadow:0 0 0 2px rgba(0, 136,206,0.5);	}
 input[type="button"]{background:#FF0;width:165px;}
@@ -75,8 +75,8 @@ tr{vertical-align:top;}
 .button{cursor:pointer;background:none repeat scroll 0 0 #FFFF00;border:1px solid #999999;border-radius:2px 2px 2px 2px;display:inline-block;padding:4px;text-align:center;white-space:nowrap;text-decoration:none;min-width:165px;font-size:1em;}
 .optional{background-color:#D3D3D3;}
 .buttonbox{margin-top:5px;white-space:nowrap; min-width:300px; display:inline-block;}/*the box that contains buttons for actions like save and cancel*/
-.contentbig{vertical-align:top;margin-top:36px;margin-left:300px;margin-bottom: 42px;}/*Changes the content box to render along side a big right side menu*/
-.contentsmall{vertical-align:top;margin-top:36px;margin-left:39px;}/*changes the content box to render along side a small right side menu*/
+.contentbig{vertical-align:top;padding-left:300px;margin-bottom: 42px;}/*padding-top:36px;Changes the content box to render along side a big right side menu*/
+.contentsmall{vertical-align:top;padding-left:39px;}/*padding-top:36px; changes the content box to render along side a small right side menu*/
 .customlabel{height:20px;margin-left:-5px;width:379px}/*Customlabels - would be used for text elements that modify a custom label*/
 .help{display:inline-block;font-size:12px;height:30px;line-height:30px;padding-left:10px;}/*div element that render validation results*/
 .smallMenuIcon li{border:1px solid #CCCCCC;cursor:pointer;height:34px;margin:2px 2px 4px;width:34px;cursor:pointer;}/*Icons for the small menus, graphics are modifed in the modual.css*/
@@ -93,7 +93,7 @@ tr{vertical-align:top;}
 #smallMenu h1{ font-size:1em; padding:0px; height:36px;}
 /*Large Right Side Menu*/
 #largeMenu{width:300px;height:100%;position:fixed;}
-#largeMenu h1{border-bottom: 1px solid #BBBBBB;height: 36px;line-height: 36px; padding-bottom: 0;padding-left: 0;padding-right: 0;text-align: center; background:#EFEFEF;}
+#largeMenu h1{border-bottom: 1px solid #BBBBBB;padding: 0.7em 2em;text-align: center; background:#EFEFEF;}
 #largeMenu h1 a{ font-size: 14px;}
 #largeMenu li{list-style-type:none;background-color:#FFF;color:#069;}
 #largeMenu li:hover{background-color:#efefef;}
@@ -103,23 +103,23 @@ tr{vertical-align:top;}
 
 /*MODUAL SPECIFIC COLORS*/
 /*Payroll & Taxes*/
-._payrolltaxes{background-color:#F60000;border-bottom-color:#600;color:#fff;opacity: 0.8;}
+._payrolltaxes{background-color:#F60000;border-bottom-color:#600;color:#fff;}
 ._payrolltaxes li{border-color:#600;}
 ._payrolltaxes li a{color:#fff;}
 /*Accounting Services*/
-._accountingservices{background-color:#370EE4;border-bottom-color:#003;color:#fff;opacity: 0.8;}
+._accountingservices{background-color:#370EE4;border-bottom-color:#003;color:#fff;}
 ._accountingservices li{border-color:#003;}
 ._accountingservices li a{color:#fff;}
 /*Taxation*/
-._taxation{background-color:#F3AE03;border-bottom-color:#F90;color:#fff;opacity: 0.8;}
+._taxation{background-color:#F3AE03;border-bottom-color:#F90;color:#fff;}
 ._taxation li{border-color:#F90;}
 ._taxation li a{color:#000;}
 /*Client Management*/
-._clientmanagement{background-color:#247639;border-bottom-color:#030;color:#fff;opacity: 0.8;}
+._clientmanagement{background-color:#247639;border-bottom-color:#030;color:#fff;}
 ._clientmanagement li{border-color:#030;}
 ._clientmanagement li a{color:#fff;}
 /*Practice Management*/
-._practicemanagement{background-color:#A6A6A6;border-bottom-color:#333;color:#fff;opacity: 0.8;}
+._practicemanagement{background-color:#A6A6A6;border-bottom-color:#333;color:#fff;}
 ._practicemanagement li{border-color:#333;}
 ._practicemanagement li a{color:#000;}
 
