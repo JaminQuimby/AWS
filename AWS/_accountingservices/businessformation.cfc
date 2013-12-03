@@ -43,6 +43,17 @@
 ,[bf_activity]
 --->
 
+<!---
+SELECT[bfs_id]
+,[bf_id]
+,[bfs_taskname]
+,[bfs_assignedto]
+,[bfs_dateinitiated]
+,[bfs_datecompleted]
+,[bfs_estimatedtime]
+FROM [businessformation_subtask]
+--->
+
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -126,8 +137,21 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-
-
+<!--- Load Group 2--->
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[bfs_id]
+,[bfs_assignedto]
+,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
+,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
+,[bfs_taskname]
+,[fdss_sequence]
+,[fdss_status]
+,[fdss_subtask]
+FROM[businessformation_subtask]
+WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
 
 
 
@@ -174,8 +198,45 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","BF_OWNERS":"'&BF_OWNERS&'","BF_STATUS":"'&BF_STATUS&'","BF_ASSIGNEDTO":"'&BF_ASSIGNEDTO&'","BF_ACTIVITY":"'&BF_ACTIVITY&'"}'>
+<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"BF_OWNERS":"'&BF_OWNERS&'"
+								,"BF_STATUS":"'&BF_STATUS&'"
+								,"BF_ASSIGNEDTO":"'&BF_ASSIGNEDTO&'"
+								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cfcase>
+ 
+
+<!--- Grid 2 --->
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fquery">
+SELECT[bfs_id]
+,[bfs_taskname]
+,[bfs_assignedto]
+,[bfs_dateinitiated]
+,[bfs_datecompleted]
+FROM[v_businessformation_subtask]
+WHERE<cfif ARGUMENTS.ID neq "0">[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
+[bfs_id]=<cfqueryparam value="#ARGUMENTS.id#"/>AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[bfs_taskname]</cfif></cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'"
+								,"BFS_TASKNAME":"'&BFS_TASKNAME&'
+								,"BFS_ASSIGNEDTO":"'&BFS_ASSIGNEDTO&'
+								,"BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'
+								,"BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'								
+								"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
@@ -187,7 +248,6 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcatch>
 </cftry>
 </cffunction>
-
 
 
 <!--- [SAVE FUNCTIONs] --->
@@ -353,12 +413,60 @@ SET[bf_businesstype]=<cfqueryparam value="#j.DATA[1][2]#"/>
 WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<!---Group2--->
+<cfcase value="group2">
+<cfif j.DATA[1][1] eq "0">
+<cftry>
+<cfquery name="fquery" datasource="AWS">
+INSERT INTO[BUSINESSFORMATION_SUBTASK]([bf_id]
+,[bfs_assignedto]
+,[bfs_datecompleted]
+,[bfs_dateinitiated]
+,[bfs_taskname]
+)
+VALUES(
+<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#" />
+,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#" />
+,<cfqueryparam value="#j.DATA[1][6]#"/>
+
+)
+SELECT SCOPE_IDENTITY()AS[id]
+</cfquery>
+<cfreturn '{"id":#fquery.id#,"group":"plugins","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfif>
+<cfif #j.DATA[1][1]# neq "0">
+<cftry>
+<cfquery name="fquery" datasource="AWS">
+UPDATE[FINANCIALDATASTATUS_SUBTASK]
+SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[bfs_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[bfs_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
+,[bfs_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
+,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][6]#"/>
+WHERE[BFS_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
+</cfif>
 </cfcase>
 
 </cfswitch>

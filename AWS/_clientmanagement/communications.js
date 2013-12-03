@@ -23,7 +23,7 @@ _grid1=function(){_jGrid({
 
 _loadDataCB=function(query){
 try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
 /*Group1*/case "CO_ID":var list='task_id,client_id,g1_briefmessage,g1_caller,g1_completed,g1_contactmethod,g1_credithold,g1_date,g1_duedate,g1_emailaddress,g1_ext,g1_faxnumber,g1_fees,g1_for,g1_paid,g1_responseneeded,g1_returnedcall,g1_takenby,g1_telephone,g1_spouse';_loadit({"query":query,"list":list});break;
