@@ -6,7 +6,6 @@
 <!--- [LOAD FUNCTIONs] --->
 
 <!---
-
 ,[bf_status]
 ,[bf_assignedto]
 ,[bf_owners]

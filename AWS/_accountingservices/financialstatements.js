@@ -65,10 +65,10 @@ $.extend(true, options, params);//turn options into array
 
 switch(options["group"]){
 case'':
-if($("#client_id").val()>0 && $("#g1_status").val()>0 && $("#g1_duedate").val()!=""){
-_saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose the client, status and due date.",type: "info",autoClose: true})}
+if($("#client_id").val()!="" && $("#g1_year").val()!=0 && $("#g1_month").val()!="")
+{
+	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
+else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
 break;
 
 case'group1':var json='{"DATA":[["'+
