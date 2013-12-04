@@ -35,7 +35,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8,group9,group10,group11,group12'); ">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../../assets/module/menu/menu.cfm"></nav>
+<cfinclude template="../../assets/module/menu2/menu.cfm"></nav>
 
 <!--- ENTRANCE --->
   <div id="group1" class="gf-checkbox">

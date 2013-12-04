@@ -22,7 +22,7 @@
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2'); ">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../../assets/module/menu/menu.cfm"></nav>
+<cfinclude template="../../assets/module/menu2/menu.cfm"></nav>
 
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">

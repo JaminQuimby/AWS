@@ -20,7 +20,7 @@
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu'); ">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../../assets/module/menu/menu.cfm"></nav>
+<cfinclude template="../../assets/module/menu2/menu.cfm"></nav>
 
  <div id="group1" class="gf-checkbox">
 	<cfoutput><h3>#page.title# Search</h3></cfoutput>
