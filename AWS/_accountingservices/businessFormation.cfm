@@ -5,8 +5,8 @@
 <cfset page.location="businessformation">
 <cfset page.formid=3>
 <cfset page.title="Business Formation">
-<cfset page.menuLeft="General">
-<cfset page.trackers="task_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5">
+<cfset page.menuLeft="General,Subtask">
+<cfset page.trackers="task_id,subtask1_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group2">
 <!--- TO DO
 Add Subtasks: 
 	Remove Other Subtask 5 and distribute into Subtask, based on corporate type 
@@ -45,8 +45,6 @@ missinginforeceived
 articles assignedto
 articles drafted
 articles approved estimated time
-
-
 
 --->
 <div id="group1" class="gf-checkbox">
@@ -125,6 +123,26 @@ articles approved estimated time
 </div>
 </div>
 
+
+<!--- SubTasks Group --->
+<div id="group2" class="gf-checkbox" >
+	<h3 onClick="_grid2();">Subtasks</h3>
+	<div>
+    	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
+		<div class="tblGrid" id="grid2"></div>
+		<div class="buttonbox">
+		<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
+		</div>
+	</div>
+	<h4>Add Subtask</h4>
+    <div>
+    	<div><label for="g2_task">Task Name</label><input type="text" id="g2_task"  /></div>
+		<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+		<div><label for="g2_dateinitiated">Date Initiated</label><input type="text" id="g2_dateinitiated" class="date"/></div>
+		<div><label for="g2_completed">Date Completed</label><input type="text" id="g2_completed"  class="date" /></div>
+		<div><label for="g2_esttime">Estimated Time </label><input type="text" id="g2_esttime"  /></div>
+	</div>
+</div>
 
 <!--- Start Plugins --->
 <cfinclude template="../assets/plugins/plugins.cfm">

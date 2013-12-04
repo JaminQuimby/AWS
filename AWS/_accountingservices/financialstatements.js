@@ -38,7 +38,7 @@ _grid2=function(){_jGrid({
 	
 _loadDataCB=function(query){
 try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Recoard request was not found ",type: "error",autoClose: false})}
+if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
 /*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year';_loadit({"query":query,"list":list});break;
@@ -65,10 +65,10 @@ $.extend(true, options, params);//turn options into array
 
 switch(options["group"]){
 case'':
-if($("#client_id").val()>0 && $("#g1_status").val()>0 && $("#g1_duedate").val()!=""){
-_saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose the client, status and due date.",type: "info",autoClose: true})}
+if($("#client_id").val()!="" && $("#g1_year").val()!=0 && $("#g1_month").val()!="")
+{
+	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
+else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
 break;
 
 case'group1':var json='{"DATA":[["'+
