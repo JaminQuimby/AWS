@@ -53,7 +53,7 @@ footer div{font-size:12px;padding-top:2px; display:inline-block; min-width:200px
 header{height:34px;background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;width:100%;opacity:0.9;}
 h1{font-weight:normal;}
 h3{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-bottom:35px;color:#666;}
-h4{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-top:35px;color:#666;}
+h4{font-size:1em;font-weight:normal;min-width:400px;padding:10px;margin-top:35px;color:#666;}
 input{border: 1px solid #AAAAAA; padding: 0 0 0 8px;   border-radius: 5px 5px 5px 5px;    box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);width:400px;height:36px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;!important;}
 input:focus{color:#0088CE;	box-shadow:0 0 0 2px rgba(0, 136,206,0.5);	}
 input[type="button"]{background:#FF0;width:165px;}
@@ -91,7 +91,7 @@ tr{vertical-align:top;}
 .button{cursor:pointer;background:none repeat scroll 0 0 #FFFF00;border:1px solid #999999;border-radius:2px 2px 2px 2px;display:inline-block;padding:4px;text-align:center;white-space:nowrap;text-decoration:none;min-width:165px;font-size:1em;}
 .optional{background-color:#D3D3D3;}
 .buttonbox{margin-top:5px;white-space:nowrap; min-width:300px; display:inline-block;}/*the box that contains buttons for actions like save and cancel*/
-.contentbig{vertical-align:top;margin-top:36px;margin-left:300px;margin-bottom: 42px;}/*Changes the content box to render along side a big right side menu*/
+.contentbig{vertical-align:top;margin-left:300px;margin-bottom: 42px;}/*margin-top:36px;Changes the content box to render along side a big right side menu*/
 .contentsmall{vertical-align:top;margin-top:36px;margin-left:39px;}/*changes the content box to render along side a small right side menu*/
 .customlabel{height:20px;margin-left:-5px;width:379px}/*Customlabels - would be used for text elements that modify a custom label*/
 .help{display:inline-block;font-size:12px;height:30px;line-height:30px;padding-left:10px;}/*div element that render validation results*/

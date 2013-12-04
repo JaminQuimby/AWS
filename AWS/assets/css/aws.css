@@ -50,7 +50,6 @@ nav{background-color:#F8F8F8;border-bottom:1px solid #E1E1DC;border-right:1px so
 select {border-radius:2px 2px 2px 2px;min-height:30px;width:400px;border:solid 1px #666;}
 td{vertical-align:top;}
 textarea{border: 1px solid #AAAAAA;border-radius: 5px 5px 5px 5px;box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);min-width:400px;font-size:1em; padding: 6px; min-height: 300px;}
-
 tr{vertical-align:top;}
 
 /* CSS CLASS MOD*/
@@ -80,7 +79,7 @@ tr{vertical-align:top;}
 .customlabel{height:20px;margin-left:-5px;width:379px}/*Customlabels - would be used for text elements that modify a custom label*/
 .help{display:inline-block;font-size:12px;height:30px;line-height:30px;padding-left:10px;}/*div element that render validation results*/
 .smallMenuIcon li{border:1px solid #CCCCCC;cursor:pointer;height:34px;margin:2px 2px 4px;width:34px;cursor:pointer;}/*Icons for the small menus, graphics are modifed in the modual.css*/
-
+#topMenu{display:block; height:41px}
 .menus{height:100%;display:inline-block;vertical-align:top;position:fixed;left:0px;top:0px;}
 /*.valid_on{border-left:5px solid rgb(50, 205, 50);width:395px;}is element valid yes*/
 /*.valid_off{border-left:5px solid #EA1717;width: 395px;}is element valid no*/
