@@ -16,9 +16,9 @@
 .cbp-hrmenu > ul,
 .cbp-hrmenu .cbp-hrsub-inner {
 	width: 90%;
-/*	max-width: 70em;  */
+/*	max-width: 70em; 
 	margin: 0 auto;
-	padding: 0 1.875em;
+	padding: 0 1.875em; */
 }
 
 .cbp-hrmenu > ul > li {
@@ -36,10 +36,20 @@
 .cbp-hrmenu > ul > li > a:hover {}
 
 .cbp-hrmenu > ul > li.cbp-hropen:nth-child(1){background: #A6A6A6;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(1) h4{text-decoration:underline;}
 .cbp-hrmenu > ul > li.cbp-hropen:nth-child(2){background: #F60000;}
-.cbp-hrmenu > ul > li.cbp-hropen:nth-child(3){background: #F3AE03;}
-.cbp-hrmenu > ul > li.cbp-hropen:nth-child(4){background: #247639;}
-.cbp-hrmenu > ul > li.cbp-hropen:nth-child(5){background: #A6A6A6;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(2) a{color:#FFF;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(2) h4{color:#FFF; text-decoration:underline;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(3){background: #370EE4;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(3) a{color:#FFF;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(3) h4{color:#FFF; text-decoration:underline;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(4){background: #F3AE03;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(4) h4{text-decoration:underline;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(5){background: #247639;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(5) a{color:#FFF;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(5) h4{color:#FFF; text-decoration:underline;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(6){background: #A6A6A6;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(6) h4{text-decoration:underline;}
 
 .cbp-hrmenu > ul > li.cbp-hropen a,
 .cbp-hrmenu > ul > li.cbp-hropen > a:hover {
@@ -119,7 +129,7 @@
 
 	.cbp-hrmenu > ul > li {
 		display: block;
-		border-bottom: 4px solid #47a3da;
+		border-bottom: 2px solid #47a3da;
 	}
 
 	.cbp-hrmenu > ul > li > a { 

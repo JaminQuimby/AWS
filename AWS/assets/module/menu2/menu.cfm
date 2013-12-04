@@ -7,7 +7,7 @@
 <div class="container">
 <div class="main">
 <nav id="cbp-hrmenu" class="cbp-hrmenu">
-<ul>        <li><a href="https://cj.qutera.com/default.cfm">#session.user.name#</a>
+<ul>        <li><a href="https://cj.qutera.com/default.cfm">Home</a>
         <div class="cbp-hrsub _practicemanagement">
 		<div class="cbp-hrsub-inner"> 
 		<div>
@@ -41,6 +41,28 @@
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
 	</li>
+    <li><a href="##">Accounting Services</a>
+		<div class="cbp-hrsub _accountingservices">
+		<div class="cbp-hrsub-inner"> 
+		<div>
+			<h4>Reporting</h4>
+			<ul>
+       <li><a href="#this.url#/AWS/_accountingservices/reports/businessformation_report.cfm">Business Formation</a></li>
+       <li><a href="#this.url#/AWS/_accountingservices/reports/acctingconsulting_report.cfm">Accounting &amp; Consulting</a></li>
+       <li><a href="#this.url#/AWS/_accountingservices/reports/financialstatements_report.cfm">Financial Statements</a></li>
+			</ul>
+		</div>
+		<div>
+			<h4>Utilities</h4>
+			<ul>
+      <li><a href="#this.url#/AWS/_accountingservices/businessformation.cfm">Business Formation</a></li>
+      <li><a href="#this.url#/AWS/_accountingservices/acctingconsulting.cfm">Accounting &amp; Consulting Tasks</a></li>
+      <li><a href="#this.url#/AWS/_accountingservices/financialstatements.cfm">Financial Statements</a></li>
+			</ul>
+		</div>
+		</div><!-- /cbp-hrsub-inner -->
+		</div><!-- /cbp-hrsub -->
+	</li> 
 	<li><a href="##">Taxation</a>
 		<div class="cbp-hrsub _taxation">
 		<div class="cbp-hrsub-inner">
