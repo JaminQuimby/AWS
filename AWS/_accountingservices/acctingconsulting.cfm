@@ -19,7 +19,7 @@
 <!--- Load Left Menus and trackers --->
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
-<div id="content" class="contentsmall"><nav id="topMenu"><cfinclude template="../assets/module/menu/menu.cfm"></nav>
+<div id="content" class="contentsmall"><nav id="topMenu"><cfinclude template="../assets/module/menu2/menu.cfm"></nav>
 
 
 <!--- ENTRANCE --->

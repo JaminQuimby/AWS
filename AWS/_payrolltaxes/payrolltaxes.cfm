@@ -21,11 +21,7 @@
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfif session.user.id eq 10000>
 <cfinclude template="../assets/module/menu2/menu.cfm">
-<cfelse>
-<cfinclude template="../assets/module/menu/menu.cfm">
-</cfif>
 </nav>
 <br/>
 

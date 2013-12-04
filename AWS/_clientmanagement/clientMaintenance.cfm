@@ -37,7 +37,7 @@ ACTIVITY (CLIENT DATA)
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu/menu.cfm"></nav>
+<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>

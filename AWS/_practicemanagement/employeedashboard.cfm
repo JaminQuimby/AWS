@@ -33,7 +33,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu/menu.cfm"></nav>
+<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
 
 
 <!--- ENTRANCE --->

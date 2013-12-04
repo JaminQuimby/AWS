@@ -17,7 +17,7 @@
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu/menu.cfm"></nav>
+<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
 
 <!---TRACKERS--->
 <input type="hidden" id="client_id" value="0"/><!--- Client ID --->
