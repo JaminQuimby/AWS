@@ -70,7 +70,7 @@ default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
-_saveDataCB=function(params){var options={"id":"","group":"","result":""};$.extend(true, options, params);var $client_id=$("#client_id");
+_saveDataCB=function(params){var options={"id":"","group":"","subgroup":"","result":""};$.extend(true, options, params);var $client_id=$("#client_id");
 switch(options["group"]){
 
 case'':
@@ -283,7 +283,7 @@ break;
 
 
 /*Start Saving Plugins*/
-case"plugins":_pluginSaveData();break;
+case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
 
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;

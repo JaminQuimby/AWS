@@ -86,10 +86,10 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[t_id]
 ,[tb_id]
-,[t_start]
-,[t_stop]
+,CONVERT(VARCHAR(8),t_start,108)AS[t_start]
+,CONVERT(VARCHAR(8),t_stop,108)AS[t_stop]
 FROM[v_time]
-WHERE[t_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -161,7 +161,7 @@ SELECT SCOPE_IDENTITY()AS[tb_id]
 
 
 </cfquery>
-<cfreturn '{"id":#fquery.tb_id#,"group":"group102_1","result":"ok"}'>
+<cfreturn '{"id":#fquery.tb_id#,"group":"plugins","subgroup":"102_1","result":"ok"}'>
 </cfif>
 
 
@@ -185,7 +185,7 @@ SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][15]#"/>
 ,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
-</cfquery><cfreturn '{"id":"#j.DATA[1][1]#","group":"group102_1","result":"ok"}'>
+</cfquery><cfreturn '{"id":"#j.DATA[1][1]#","group":"plugins","subgroup":"102_1","result":"ok"}'>
 </cfif>
 </cfcase>
 
@@ -200,7 +200,7 @@ INSERT INTO[time](
 ,[t_stop]
 )
 VALUES(
-<cfqueryparam value="#j.DATA[1][1]#"/>
+<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 )

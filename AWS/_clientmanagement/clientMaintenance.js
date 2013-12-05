@@ -222,7 +222,7 @@ else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error"
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
 _saveDataCB=function(params){
-var options={"id":"","group":"","result":""}
+var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 

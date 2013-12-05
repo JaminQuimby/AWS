@@ -1,3 +1,4 @@
+<cflocation url="https://cj.qutera.com/AWS/_PracticeManagement/employeedashboard.cfm">
 <cfsetting showDebugOutput="No">
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>

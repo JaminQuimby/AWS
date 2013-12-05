@@ -37,7 +37,7 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",auto
 
 /*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
-var options={"id":"","group":"","result":""	}
+var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
@@ -68,7 +68,7 @@ $("#g1_taskdescription").val()+'","'+
 _saveData({"group":"group1","payload":$.parseJSON(json),page:"administrativetasks"});
 break;
 /*Start Saving Plugins*/
-case"plugins":_pluginSaveData();break;
+case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 

@@ -6,6 +6,7 @@
 $(document).ready(function(){
 //Start Normal Template Functions
 _pluginURL102=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jTimeBilling/"}
+_pluginURL102_1=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jTimeBilling/"}
 _pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
 _pluginSaveData102=function(){
 
@@ -28,17 +29,13 @@ _pluginSaveData102=function(){
         $("##g102_reimbursement").val()+'","'+
 		'"]]}'
 		if($("##isLoaded_group102").val()!=0){
-			
-			alert('Saving group102');
 			_saveData({"group":"group102",payload:$.parseJSON(json),page:"timebilling",plugin:"group102"})}
 		else{
-			alert('Trigger callback group102_1');
-			_pluginSaveDataCB({'group':'group102_1'})
+			_pluginSaveDataCB({'subgroup':'102_1'})
 			
 			}}
 
 _pluginSaveData102_1=function(){
-	alert('Triggered 102_1 Save');
 	var json='{"DATA":[["'+
 		$("##t_id").val()+'","'+
 		$("##tb_id").val()+'","'+
@@ -46,8 +43,7 @@ _pluginSaveData102_1=function(){
 		$("##g102_1_stop").val()+'","'+
 		'"]]}'
 		if($("##isLoaded_group102_1").val()!=0){
-			alert('Group 102_1 Save')
-			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"group102_1"})}
+			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"102_1"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
 
 _group102=function(){_grid102(), jqMessage({message: "Time And Billing under construction.",type: "information",autoClose: true})}

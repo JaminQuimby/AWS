@@ -43,7 +43,7 @@ else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error"
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
 _saveDataCB=function(params){
-var options={"id":"","group":"","result":""}
+var options={"id":"","group":"","subgroup":"","result":""}
 try{$.extend(true, options, params);
 switch(options["group"]){
 case'':
@@ -125,9 +125,9 @@ else{_saveDataCB({'group':'plugins'})}
 break;
 
 /*Start Saving Plugins*/
-case"plugins":_pluginSaveData();break;
+case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-default:jqMessage({message: "A exception in payrollchecks.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: false,duration: 5});break;}}
+default:jqMessage({message: "A exception in payrollchecks.js in group "+options["group"]+" json: "+json+"  id: "+options["id"],type: "error",autoClose: false,duration: 5});break;}}
 catch(err){alert(err)}};
