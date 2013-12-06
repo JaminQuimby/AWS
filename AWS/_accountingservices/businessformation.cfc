@@ -144,10 +144,8 @@ SELECT[bfs_id]
 ,[bfs_assignedto]
 ,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
 ,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
+,[bfs_estimatedtime]
 ,[bfs_taskname]
-,[fdss_sequence]
-,[fdss_status]
-,[fdss_subtask]
 FROM[businessformation_subtask]
 WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -219,23 +217,19 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT[bfs_id]
 ,[bfs_taskname]
 ,[bfs_assignedto]
-,[bfs_dateinitiated]
-,[bfs_datecompleted]
+,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
+,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
 FROM[v_businessformation_subtask]
-WHERE<cfif ARGUMENTS.ID neq "0">[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
-[bfs_id]=<cfqueryparam value="#ARGUMENTS.id#"/>AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+WHERE
+[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[bfs_taskname]</cfif></cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'"
-								,"BFS_TASKNAME":"'&BFS_TASKNAME&'
-								,"BFS_ASSIGNEDTO":"'&BFS_ASSIGNEDTO&'
-								,"BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'
-								,"BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'								
-								"}'>
+<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'","BFS_TASKNAME":"'&BFS_TASKNAME&'","BFS_ASSIGNEDTO":"'&BFS_ASSIGNEDTO&'","BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'","BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -426,10 +420,11 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[BUSINESSFORMATION_SUBTASK]([bf_id]
+INSERT INTO[businessformation_subtask]([bf_id]
 ,[bfs_assignedto]
 ,[bfs_datecompleted]
 ,[bfs_dateinitiated]
+,[bfs_estimatedtime]
 ,[bfs_taskname]
 )
 VALUES(
@@ -438,6 +433,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][7]#"/>
 
 )
 SELECT SCOPE_IDENTITY()AS[id]
@@ -452,13 +448,14 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[FINANCIALDATASTATUS_SUBTASK]
+UPDATE[businessformation_subtask]
 SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bfs_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[bfs_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[bfs_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][6]#"/>
-WHERE[BFS_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+,[bfs_estimatedtime]=<cfqueryparam value="#j.DATA[1][7]#"/>
+WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 <cfcatch>

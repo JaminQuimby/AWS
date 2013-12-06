@@ -24,10 +24,8 @@ _grid1=function(){_jGrid({
 _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"businessformation.cfc",
-	"title":"Business Formation",
+	"title":"Business Formation Subtask",
 	"fields":{BFS_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
 			,BFS_TASKNAME:{title:'Task'}
 			,BFS_DATEINITIATED:{title:'Date Initiated'}
 			,BF_DATECOMPLETED:{title:'Date Completed'}
@@ -50,7 +48,7 @@ switch(query.COLUMNS[0]){
 /*Group1_3*/case "BF_MINUTESBYLAWSDRAFT":var list='g1_g3_minutesbylawsdraft,g1_g3_minutesbylawsfinal,g1_g3_minutescompleted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_4*/case "BF_DISSOLUTIONCOMPLETED":var list='g1_g4_disolutioncompleted,g1_g4_dissolutionrequested,g1_g4_dissolutionsubmitted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_5*/case "BF_BUSINESSTYPE":var list='g1_g5_businesstype,g1_g5_businesscreceived,g1_g5_businesssubmitted,g1_g5_otheractivity,g1_g5_othercompleted,g1_g5_otherstarted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
-/*Group2*/case "BFS_ID":var list='subtask1_id,g2_assignedto,,g2_completed,g2_dateinitiated,g2_esttime,g2_task';_loadit({"query":query,"list":list,"page":"businessformation"});break;
+/*Group2*/case "BFS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_dateinitiated,g2_esttime,g2_task';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
@@ -142,6 +140,7 @@ $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'","'+
 $("#g2_dateinitiated").val()+'","'+
+$("#g2_completed").val()+'","'+
 $("#g2_esttime").val()+'","'+
 $("#g2_task").val()+'","'+
 '"]]}'
