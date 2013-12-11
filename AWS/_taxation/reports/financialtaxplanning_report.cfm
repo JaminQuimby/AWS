@@ -1,18 +1,3 @@
-<cfparam name="URL.task_id" default="0">
-<cfif URL.task_id gt 0>
-<cfoutput>
-<script>
-$(document).ready(function(){
-$('##task_id').val('#URL.task_id#');
-_toggle("group1,largeMenu");
-_hide("entrance");$("##content").removeClass();
-$("##content").addClass("contentbig");
-_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
-})
-</script>
-</cfoutput>
-</cfif>
-
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>

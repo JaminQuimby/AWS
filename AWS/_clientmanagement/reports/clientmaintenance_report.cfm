@@ -1,17 +1,3 @@
-<cfparam name="URL.task_id" default="0">
-<cfif URL.task_id gt 0>
-<cfoutput>
-<script>
-$(document).ready(function(){
-$('##task_id').val('#URL.task_id#');
-_toggle("group1,largeMenu");
-_hide("entrance");$("##content").removeClass();
-$("##content").addClass("contentbig");
-_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
-})
-</script>
-</cfoutput>
-</cfif>
 
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
@@ -29,8 +15,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!---Head & Supporting Documents--->
 <cfinclude template="../../assets/inc/header.cfm">
 <cfinclude template="../../assets/inc/pagemenu.cfm">
-
-
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu'); ">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
