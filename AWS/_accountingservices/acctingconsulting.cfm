@@ -1,6 +1,8 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
+<cfparam name="url.taskid" default="0">
+<cfparam name="url.nav" default="1">
 <cfset page.module="_accountingservices">
 <cfset page.location="acctingconsulting">
 <cfset page.formid=2>

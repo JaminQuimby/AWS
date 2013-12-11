@@ -1,5 +1,4 @@
 <cfparam name="page.type" default="">
-<cfparam name="url.taskid" default="0">
 <cfset page.cache.users=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.options=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.clients=CreateTimeSpan(0,0,25,0)>

@@ -1,6 +1,8 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
+<cfparam name="url.taskid" default="0">
+<cfparam name="url.nav" default="1">
 <cfset page.module="_payrolltaxes">
 <cfset page.location="payrollchecks">
 <cfset page.formid=10>
@@ -10,6 +12,11 @@
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="../assets/inc/header.cfm">
+
+<!--- Load Select Options for each dropdown--->
+<cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+<cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
+
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
@@ -23,11 +30,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </script>
 </cfoutput>
 </cfif>
-<!--- Load Select Options for each dropdown--->
-<cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
-<cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
-
-
 
 <body>
 <!--- Load Left Menus --->
