@@ -46,6 +46,8 @@ switch(query.COLUMNS[0]){
 /*Group2*/case "MCS_ID":var list='subtask1_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
+/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
+
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};

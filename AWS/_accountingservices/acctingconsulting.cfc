@@ -52,20 +52,21 @@ SELECT TOP 1000 [mcs_id]
 <cfquery datasource="AWS" name="fQuery">
 SELECT[mc_id]
 ,[client_id]
+,[mc_description]
 ,[mc_assignedto]
-,[mc_category]
-,[mc_credithold]
+,[mc_status]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+,[mc_priority]
 ,[mc_esttime]
+,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
+,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
+,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
+,[mc_missinginfo]
+,[mc_missinginforeceived]
 ,[mc_fees]
 ,[mc_paid]
-,[mc_priority]
-,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
-,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
-,[mc_status]
-,[mc_description]
-,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
-,[client_spouse]
+,[mc_category]
+,[mc_credithold]
 FROM[v_managementconsulting]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -88,14 +89,6 @@ FROM[managementconsulting_subtask]
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 </cfcase>
 
-<cfcase value="assetSpouse">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[client_spouse]
-FROM[client_listing]
-WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-
 
 <cfcase value="assetCategory">
 <cfquery datasource="AWS" name="fQuery">
@@ -103,6 +96,15 @@ SELECT[optionDescription]
 FROM[v_selectOptions]
 WHERE[selectName]='global_consultingcategory'
 AND[optionValue_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
+<!--- Asset Credit Hold --->
+<cfcase value="assetCreditHold">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[client_credit_hold]
+FROM[client_listing]
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 </cfswitch>
@@ -223,11 +225,12 @@ INSERT INTO[managementconsulting](
 [client_id]
 ,[mc_assignedto]
 ,[mc_category]
-,[mc_credithold]
 ,[mc_duedate]
 ,[mc_esttime]
 ,[mc_fees]
 ,[mc_paid]
+,[mc_missinginfo]
+,[mc_missinginforeceived]
 ,[mc_priority]
 ,[mc_projectcompleted]
 ,[mc_requestforservice]
@@ -239,17 +242,18 @@ VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
+,<cfqueryparam value="#j.DATA[1][8]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][13]#"/>
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#"/>
-,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][15]#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[mc_id]
 </cfquery>
@@ -270,17 +274,18 @@ UPDATE[managementconsulting]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mc_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[mc_category]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[mc_credithold]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[mc_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[mc_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[mc_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[mc_paid]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[mc_priority]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[mc_projectcompleted]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[mc_requestforservice]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[mc_status]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[mc_description]=<cfqueryparam value="#j.DATA[1][14]#"/>
-,[mc_workinitiated]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[mc_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[mc_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[mc_fees]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[mc_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[mc_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[mc_paid]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[mc_priority]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[mc_projectcompleted]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[mc_requestforservice]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[mc_status]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[mc_description]=<cfqueryparam value="#j.DATA[1][15]#"/>
+,[mc_workinitiated]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[mc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>

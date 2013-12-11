@@ -52,26 +52,33 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
-<div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetSpouse','page':'communications'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_spouse">Spouse</label><input type="text" id="g1_spouse" class="readonly" readonly ></div>
-<div><label for="g1_date">Date</label><input type="text" class="datetime" id="g1_date"></div>
-<div><label for="g1_takenby">Taken By</label><select id="g1_takenby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_for">For</label><select id="g1_for"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold</label></div>
-<div><label for="g1_caller">Caller</label><input type="text" id="g1_caller" ></div>
-<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
-<div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone"></div>
-<div><label for="g1_ext">Ext</label><input type="text" id="g1_ext"></div>
-<div><label for="g1_faxnumber">Fax Number</label><input type="text" id="g1_faxnumber"></div>
-<div><label for="g1_emailaddress">Email</label><input type="text" id="g1_emailaddress"></div>
-<div><label for="g1_contactmethod">Contact Methods</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_briefmessage">Brief Message</label><input type="text" id="g1_briefmessage" ></div>
-<div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Needed</label></div>
-<div><input id="g1_returnedcall" type="checkbox"><label for="g1_returnedcall">Returned Call</label></div>
-<div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-<div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-</div>
+	<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
+	<div><label for="g1_date">Date and Time*</label><input type="text" class="datetime" id="g1_date"></div>
+	<div><label for="g1_caller">Caller*</label><input type="text" id="g1_caller" ></div>
+	<div><label for="g1_takenby">Taken By*</label><select id="g1_takenby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_contactmethod">Contact Methods*</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option></select></div>
+	<div><label for="g1_briefmessage">Brief Message*</label><input type="text" id="g1_briefmessage" ></div>
+	
+
+	<div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone"></div>
+	<div><label for="g1_ext">Ext</label><input type="text" id="g1_ext"></div>
+	<div><label for="g1_faxnumber">Fax Number</label><input type="text" id="g1_faxnumber"></div>
+	<div><label for="g1_emailaddress">Email</label><input type="text" id="g1_emailaddress"></div>
+
+    
+ 	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
+    <div><label for="g1_for">For</label><select id="g1_for"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+
+	<div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Needed</label></div>
+	<div><input id="g1_returnedcall" type="checkbox"><label for="g1_returnedcall">Returned Call</label></div>
+	<div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>
+	
+    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+
+	</div>
 </div>
 
 <!--- Start Plugins --->

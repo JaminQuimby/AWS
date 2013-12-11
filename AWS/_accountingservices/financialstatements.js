@@ -41,7 +41,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year';_loadit({"query":query,"list":list});break;
+/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year,g1_credithold';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "FDS_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_datecompleted,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "FDS_SORT_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_datecompleted,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "FDS_CHECKS_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_datecompleted,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -54,6 +54,8 @@ switch(query.COLUMNS[0]){
 /*Group1_10*/case "FDS_ACCTRPT_ASSIGNEDTO":var list='g1_g10_assignedto,g1_g10_completedby,g1_g10_datecompleted,g1_g10_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_11*/case "FDS_SALES_ASSIGNEDTO":var list='g1_g11_assignedto,g1_g11_completedby,g1_g11_datecompleted,g1_g11_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group2*/case "FDSS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
+/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
+
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
