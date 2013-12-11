@@ -52,42 +52,5 @@
 <script type="text/javascript" src="#this.url#/AWS/assets/js/aws.js"></script>
 <link rel="stylesheet" type="text/css" href="#page.module#.css">
 <script type="text/javascript" src="#page.location#.js"></script>
-<script>
-function adjustStyle(width) {
-    width = parseInt(width);
-    if (width < 701) {
-        $("##size-stylesheet").attr("href", "#this.url#/AWS/assets/module/menu/menusmall.css");
-    } else if ((width >= 701) && (width < 900)) {
-        $("##size-stylesheet").attr("href", "#this.url#/AWS/assets/module/menu/menu.css");
-    } else {
-       $("##size-stylesheet").attr("href", "#this.url#/AWS/assets/module/menu/menu.css"); 
-    }
-}
-
-$(function() {
-    adjustStyle($(this).width());
-    $(window).resize(function() {
-        adjustStyle($(this).width());
-    });
-});
-
-</script>
-<cfif url.taskid GT 0>
-<cfquery dbtype="query" name="clientName">SELECT[optionname]FROM[selectClients]WHERE[optionvalue_id]=#url.taskid#</cfquery>
-<script>
-// A $( document ).ready() block.
-$( document ).ready(function() {
-$("##task_id").val('#url.taskid#');	
-_toggle('group1,largeMenu');
-_hide('entrance');
-$("##content").removeClass();
-$("##content").addClass("contentbig");
-_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
-_updateh3("#clientName.optionname#");
-});
-</script>
-<cfdump var="#clientName#">
-</cfif>
-
 </cfoutput>
 </head>

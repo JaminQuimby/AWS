@@ -11,6 +11,19 @@
 <!DOCTYPE html> 
 <html>
 <cfinclude template="../assets/inc/header.cfm">
+<cfif URL.task_id gt 0>
+<cfoutput>
+<script>
+$(document).ready(function(){
+$('##task_id').val('#URL.task_id#');
+_toggle("group1,largeMenu");
+_hide("entrance");$("##content").removeClass();
+$("##content").addClass("contentbig");
+_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
+})
+</script>
+</cfoutput>
+</cfif>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_month">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
