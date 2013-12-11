@@ -1,7 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
-<cfparam name="url.taskid" default="0">
+<cfparam name="url.task_id" default="0">
 <cfparam name="url.nav" default="1">
 <cfset page.module="_accountingservices">
 <cfset page.location="businessformation">
@@ -9,10 +9,6 @@
 <cfset page.title="Business Formation">
 <cfset page.menuLeft="General,Subtask">
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group2">
-<!--- TO DO
-Add Subtasks: 
-	Remove Other Subtask 5 and distribute into Subtask, based on corporate type 
-     --->
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="../assets/inc/header.cfm">
