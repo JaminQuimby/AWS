@@ -141,17 +141,15 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[bfs_id]
-,[bfs_assignedto]
-,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
-,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
-,[bfs_estimatedtime]
 ,[bfs_taskname]
+,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
+,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
+,[bfs_estimatedtime]
+,[bfs_assignedto]
 FROM[businessformation_subtask]
 WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
-
-
 
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
@@ -219,6 +217,7 @@ SELECT[bfs_id]
 ,[bfs_assignedto]
 ,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
 ,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
+,bfs_estimatedtime
 FROM[v_businessformation_subtask]
 WHERE
 [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
@@ -229,7 +228,7 @@ WHERE
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'","BFS_TASKNAME":"'&BFS_TASKNAME&'","BFS_ASSIGNEDTO":"'&BFS_ASSIGNEDTO&'","BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'","BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'"}'>
+<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'","BFS_TASKNAME":"'&BFS_TASKNAME&'","BFS_ASSIGNEDTO":"'&BFS_ASSIGNEDTO&'","BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'","BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'","BFS_ESTIMATEDTIME":"'&BFS_ESTIMATEDTIME&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -434,7 +433,6 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][6]#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#"/>
-
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -453,8 +451,9 @@ SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bfs_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[bfs_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[bfs_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
-,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[bfs_estimatedtime]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[bfs_estimatedtime]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][7]#"/>
+
 WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

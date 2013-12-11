@@ -27,9 +27,10 @@ _grid2=function(){_jGrid({
 	"title":"Business Formation Subtask",
 	"fields":{BFS_ID:{key:true,list:false,edit:false}
 			,BFS_TASKNAME:{title:'Task'}
-			,BFS_DATEINITIATED:{title:'Date Initiated'}
-			,BF_DATECOMPLETED:{title:'Date Completed'}
 			,BFS_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+            ,BFS_DATEINITIATED:{title:'Date Initiated'}
+			,BFS_DATECOMPLETED:{title:'Date Completed'}
+			,BFS_ESTIMATEDTIME:{title:'Estimated Time'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
@@ -140,7 +141,6 @@ $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'","'+
 $("#g2_dateinitiated").val()+'","'+
-$("#g2_completed").val()+'","'+
 $("#g2_esttime").val()+'","'+
 $("#g2_task").val()+'","'+
 '"]]}'
