@@ -203,12 +203,10 @@ WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-
-
-<!--- Asset Spouse --->
-<cfcase value="assetSpouse">
+<!--- Asset Credit Hold --->
+<cfcase value="assetCreditHold">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[client_spouse]
+SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>

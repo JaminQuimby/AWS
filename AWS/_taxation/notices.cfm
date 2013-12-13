@@ -68,7 +68,7 @@ due date for response
 <div id="group1" class="gf-checkbox">
 <h3>Add Notice Matter</h3>
 <div>
-<div><label for="client_id">Client*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
 <div><label for="g1_mattername">Matter Name*</label><input type="text" id="g1_mattername"></div>
 <div><label for="g1_matterstatus">Matter Status*</label><select id="g1_matterstatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

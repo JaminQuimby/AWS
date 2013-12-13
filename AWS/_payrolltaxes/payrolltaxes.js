@@ -40,6 +40,7 @@ switch(query.COLUMNS[0]){
 /*Group1_4*/case "PT_REVIEW_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completedby,g1_g4_completed,g1_g4_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_5*/case "PT_ASSEMBLY_ASSIGNEDTO":var list='g1_g5_assignedto,g1_g5_completedby,g1_g5_completed,g1_g5_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_6*/case "PT_DELIVERY_ASSIGNEDTO":var list='g1_g6_assignedto,g1_g6_completedby,g1_g6_completed,g1_g6_estimatedtime';_loadit({"query":query,"list":list});break;
+/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};

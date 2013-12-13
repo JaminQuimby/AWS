@@ -42,12 +42,11 @@ _loadDataCB=function(query){
 try{
 if(query!=null){
 switch(query.COLUMNS[0]){
-/*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_credithold,g1_duedate,g1_estimatedtime,g1_fees,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated,g1_spouse';_loadit({"query":query,"list":list});break;
+/*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginfo,g1_missinginforeceived,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated';_loadit({"query":query,"list":list});break;
 /*Group2*/case "MCS_ID":var list='subtask1_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
-
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
@@ -55,6 +54,7 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",auto
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""};
 $.extend(true, options, params);//turn options into array
+alert(options["group"]);
 switch(options["group"]){
 
 case'':
@@ -65,16 +65,16 @@ else{jqMessage({message: "You must input all bold fields.",type: "info",autoClos
 break;
 
 
-case'group1':
-var json='{"DATA":[["'+
+case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_assignedto").val()+'","'+
-$("#g1_consultingcategory").val()+'",'+
-$("#g1_credithold").is(':checked')+',"'+
+$("#g1_consultingcategory").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
 $("#g1_fees").val()+'","'+
+$("#g1_missinginfo").val()+'",'+
+$("#g1_missinginforeceived").is(':checked')+',"'+
 $("#g1_paid").val()+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_projectcompleted").val()+'","'+
@@ -83,14 +83,12 @@ $("#g1_status").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
 '"]]}'
-
-if($("#g1_consultingcategory").val()!="" && $("#g1_taskdescription").val()!="" && $("#g1_priority").val()!=""){
+if($("#g1_consultingcategory").val()!="" && $("#g1_taskdescription").val()!=""){
 _saveData({group:"group1","payload":$.parseJSON(json),page:"acctingconsulting"})}
 else{jqMessage({message: "You must enter all required fields.",type: "info",autoClose: true})}
 break;
 
-case'group2':
-var json='{"DATA":[["'+
+case'group2':var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_actualtime").val()+'","'+
@@ -104,7 +102,6 @@ $("#g2_sequence").val()+'","'+
 $("#g2_status").val()+'","'+
 $("#g2_subtask").val()+'","'+
 '"]]}'
-
 if($("#subtask_isLoaded").val()!=0){
 if( $("#g2_subtask").val()!=0){
 	_saveData({group:"group2",payload:$.parseJSON(json),page:"acctingconsulting"})}

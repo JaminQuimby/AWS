@@ -26,6 +26,7 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request w
 {
 switch(query.COLUMNS[0]){
 /*Group1*/case "PA_ID":var list='task_id,client_id,g1_dateofrevocation,g1_datesenttoirs,g1_datesignedbyclient,g1_preparers,g1_status,g1_taxforms,g1_taxmatters,g1_taxyears';_loadit({"query":query,"list":list});break;
+/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};

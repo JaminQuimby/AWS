@@ -54,7 +54,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "TR_ID":var list='task_id,client_id,g1_credithold,g1_currentfees,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_notrequired,g1_priorfees,g1_priority,g1_reason,g1_taxform,g1_taxyear,g1_spouse';_loadit({"query":query,"list":list});break;
+/*Group1*/case "TR_ID":var list='task_id,client_id,g1_credithold,g1_currentfees,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_notrequired,g1_priorfees,g1_priority,g1_reason,g1_taxform,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});break;
 /*Group1_1*/case "TR_1_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completed,g1_g1_duedate,g1_g1_filingdeadline,g1_g1_informationreceived,g1_g1_missinginforeceived,g1_g1_missinginformation,g1_g1_preparedby,g1_g1_readyforreview,g1_g1_reviewassignedto,g1_g1_reviewed,g1_g1_reviewedby,g1_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "TR_2_ASSEMBLERETURN":var list='g1_g2_assemblereturn,g1_g2_contacted,g1_g2_delivered,g1_g2_deliverymethod,g1_g2_emailed,g1_g2_messageleft,g1_g2_missingsignatures,g1_g2_multistatereturn,g1_g2_paymentstatus';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "TR_3_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completed,g1_g3_currentfees,g1_g3_delivered,g1_g3_extended,g1_g3_paymentstatus,g1_g3_pptresttime,g1_g3_priorfees,g1_g3_required,g1_g3_rfr';_loadit({"query":query,"list":list});break;
@@ -65,7 +65,7 @@ switch(query.COLUMNS[0]){
 /*Group2_3*/case "TRST_3_PPTRASSIGNEDTO":var list='g2_g3_assignedto,g2_g3_completed,g2_g3_currentfees,g2_g3_delivered,g2_g3_extended,g2_g3_paymentstatus,g2_g3_priorfees,g2_g3_required,g2_g3_rfr';_loadit({"query":query,"list":list});break;
 /*Group3*/case "TRSC_ID":var list='subtask2_id,g3_assignedto,g3_reviewassignedto,g3_schedule,g3_status';_loadit({"query":query,"list":list});break;
 /*Group3_1*/case "TRSC_1_ASSIGNEDTO":var list='g3_g1_assignedto,g3_g1_completed,g3_g1_duedate,g3_g1_informationreceived,g3_g1_missinginforeceived,g3_g1_missinginformation,g3_g1_preparedby,g3_g1_readyforreview,g3_g1_reviewassignedto,g3_g1_reviewed,g3_g1_reviewedby,g3_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
-/*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
+/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};

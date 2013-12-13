@@ -6,7 +6,6 @@
 <!--- [LOAD FUNCTIONs] --->
 
 <!---
-
 SELECT TOP 1000 [mc_id]
       ,[client_id]
       ,[mc_assignedto]
@@ -23,8 +22,7 @@ SELECT TOP 1000 [mc_id]
       ,[mc_workinitiated]
       ,[mc_credithold]
   FROM [AWS].[dbo].[managementconsulting]
-  
-  
+
 SELECT TOP 1000 [mcs_id]
       ,[mc_id]
       ,[mcs_actualtime]
@@ -52,19 +50,19 @@ SELECT TOP 1000 [mcs_id]
 <cfquery datasource="AWS" name="fQuery">
 SELECT[mc_id]
 ,[client_id]
-,[mc_description]
 ,[mc_assignedto]
-,[mc_status]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
-,[mc_priority]
 ,[mc_esttime]
-,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
-,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
-,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
+,[mc_fees]
 ,[mc_missinginfo]
 ,[mc_missinginforeceived]
-,[mc_fees]
 ,[mc_paid]
+,[mc_priority]
+,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
+,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
+,[mc_status]
+,[mc_description]
+,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
 ,[mc_category]
 ,[mc_credithold]
 FROM[v_managementconsulting]
@@ -88,8 +86,7 @@ SELECT[mcs_id]
 FROM[managementconsulting_subtask]
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 </cfcase>
-
-
+<!---Assest Cateogry --->
 <cfcase value="assetCategory">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[optionDescription]
@@ -115,8 +112,6 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcatch>
 </cftry>
 </cffunction>
-
-
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -191,10 +186,6 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryp
 <cfreturn myResult>
 </cfcase>
 </cfswitch>
-
-
-
-
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
@@ -211,12 +202,9 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryp
 <cfswitch expression="#ARGUMENTS.group#">
 <cfcase value="none">
 </cfcase>
-
-
-
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -228,9 +216,9 @@ INSERT INTO[managementconsulting](
 ,[mc_duedate]
 ,[mc_esttime]
 ,[mc_fees]
-,[mc_paid]
 ,[mc_missinginfo]
 ,[mc_missinginforeceived]
+,[mc_paid]
 ,[mc_priority]
 ,[mc_projectcompleted]
 ,[mc_requestforservice]
@@ -259,7 +247,6 @@ SELECT SCOPE_IDENTITY()AS[mc_id]
 </cfquery>
 <!--- RETURN FDS_ID--->
 <cfreturn '{"id":#fquery.mc_id#,"group":"group2","result":"ok"}'>
-
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -296,7 +283,6 @@ WHERE[mc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cftry>
 </cfif>
 </cfcase>
-
 <!--- Group2 --->
 <cfcase value="group2">
 <!--- if this is a new record, then insert it--->
@@ -331,14 +317,12 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[mcs_id]
 </cfquery>
-
 <cfreturn '{"id":#fquery.mcs_id#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
-
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>

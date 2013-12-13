@@ -115,6 +115,16 @@ FROM[notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
+
+<!--- Asset Credit Hold --->
+<cfcase value="assetCreditHold">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[client_credit_hold]
+FROM[client_listing]
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
