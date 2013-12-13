@@ -39,7 +39,9 @@
 
 <div id="group1"  class="gf-checkbox">
 <h3>Table Maintenance</h3>
-<div></div>
+<div>
+<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
+</div>
 <!--- GROUP1 SUBGROUP1 --->
 <h4 onClick='_loadData({"id":"m_id","group":"group1_1","page":"practicemaintenance"});$("#isLoaded_group1_1").val(1);'>Accounting Software</h4>
 </div>

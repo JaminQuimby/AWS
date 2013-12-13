@@ -59,8 +59,9 @@ articles approved estimated time
 
 --->
 <div id="group1" class="gf-checkbox">
-<h3>General  <span style="float:right; display:block;"><a class="accordianopen">Expand All</a> <a class="accordianclose">Collapse All</a></span></h3>
+<h3>General</h3>
 <div>
+	<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 	<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
 	<div><label for="g1_owners">Owners*</label><input type="text" id="g1_owners"  /></div>

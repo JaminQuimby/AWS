@@ -203,13 +203,15 @@ $.ajax({
 
 $(document).ready(function(){
 $.ajaxSetup({cache:false});//Stop ajax cacheing
-$('.gf-checkbox').accordion({heightStyle:"content", active:false});
+
+
 $.datepicker.setDefaults({
 showOn:"both",
 buttonImageOnly:true,
 buttonImage: "https://"+ window.location.hostname + "/AWS/assets/img/datepicker.gif",
 constrainInput:true
 });
+//$('.gf-checkbox').accordion({heightStyle:"content", active:false});
 $(".datetime").datetimepicker({timeFormat: 'hh:mmtt'});
 $(".date").datepicker();
 $(".time").timepicker();
@@ -217,5 +219,56 @@ $('select').chosen();
 $('.gf-checkbox').hide();
 $('#entrance').show();
 });
+
+// Accordion - Expand All #01
+$(function () {
+    $('.gf-checkbox').accordion({
+        collapsible:true,
+		heightStyle:"content",
+        active:false
+    });
+	$('.gf-checkbox').accordion({active:0});
+		$('.accordianclose').hide();
+    var icons =   $('.gf-checkbox').accordion( "option", "icons" );
+  
+  
+  $('.accordianopen').click(function () {
+        $('.ui-accordion-header').removeClass('ui-corner-all').addClass('ui-accordion-header-active ui-state-active ui-corner-top').attr({
+            'aria-selected': 'true',
+            'tabindex': '0'
+        });
+        $('.ui-accordion-header-icon').removeClass(icons.header).addClass(icons.headerSelected);
+        $('.ui-accordion-content').addClass('ui-accordion-content-active').attr({
+            'aria-expanded': 'true',
+            'aria-hidden': 'false'
+        }).show();
+        $(this).attr("disabled","disabled");
+        $('.accordianclose').removeAttr("disabled");
+		$('.accordianopen').hide();
+		$('.accordianclose').show();
+    });
+  
+   $('.accordianclose').click(function () {
+        $('.ui-accordion-header').removeClass('ui-accordion-header-active ui-state-active ui-corner-top').addClass('ui-corner-all').attr({
+            'aria-selected': 'false',
+            'tabindex': '-1'
+        });
+        $('.ui-accordion-header-icon').removeClass(icons.headerSelected).addClass(icons.header);
+        $('.ui-accordion-content').removeClass('ui-accordion-content-active').attr({
+            'aria-expanded': 'false',
+            'aria-hidden': 'true'
+        }).hide();
+        $(this).attr("disabled","disabled");
+        $('.accordianopen').removeAttr("disabled");
+		$('.accordianopen').show();
+		$('.accordianclose').hide();
+    });
+    $('.ui-accordion-header').click(function () {
+        $('.accordianopen').removeAttr("disabled");
+        $('.accordianclose').removeAttr("disabled");
+        
+    });
+});
+
 
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};

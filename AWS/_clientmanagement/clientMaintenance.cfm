@@ -68,6 +68,7 @@ ACTIVITY (CLIENT DATA)
 <div id="group1" class="gf-checkbox">
 <h3>Client</h3>
 <div>
+<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="g1_name">Client Name</label><input id="g1_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_spouse">Spouse</label><input id="g1_spouse" type="text"/></div>
 <div><label for="g1_salutation">Salutation</label><input id="g1_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>

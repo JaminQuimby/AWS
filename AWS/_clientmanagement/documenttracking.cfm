@@ -50,6 +50,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
+<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="g1_date">Date</label><input type="text" class="date" id="g1_date"></div>
 <div><label for="g1_staff">Staff</label><select id="g1_staff"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_sender">Sender</label><input type="text" id="g1_sender"></div>

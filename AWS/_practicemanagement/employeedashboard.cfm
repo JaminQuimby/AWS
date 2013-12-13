@@ -34,7 +34,9 @@
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
- <h3>Payroll &amp; Taxes</h3><div></div>
+ <h3>Payroll &amp; Taxes</h3><div>
+ <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
+ </div>
 <!--- GROUP 1 SUB 1 PAYROLL CHECKS --->
 	<h4 onClick='_grid1_1();'>Payroll Checks</h4>
 	<div>
