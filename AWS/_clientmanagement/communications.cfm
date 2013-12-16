@@ -29,15 +29,12 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 
-
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="../assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="../assets/module/menu2/menu.cfm"></nav>
-
-
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
@@ -60,25 +57,18 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_takenby">Taken By*</label><select id="g1_takenby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_contactmethod">Contact Methods*</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option></select></div>
 	<div><label for="g1_briefmessage">Brief Message*</label><input type="text" id="g1_briefmessage" ></div>
-	
-
 	<div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone"></div>
 	<div><label for="g1_ext">Ext</label><input type="text" id="g1_ext"></div>
 	<div><label for="g1_faxnumber">Fax Number</label><input type="text" id="g1_faxnumber"></div>
 	<div><label for="g1_emailaddress">Email</label><input type="text" id="g1_emailaddress"></div>
-
-    
- 	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
+  	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
     <div><label for="g1_for">For</label><select id="g1_for"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-
 	<div><input id="g1_responseneeded" type="checkbox"><label for="g1_responseneeded">Response Needed</label></div>
 	<div><input id="g1_returnedcall" type="checkbox"><label for="g1_returnedcall">Returned Call</label></div>
-	<div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>
-	
+	<div><input id="g1_completed" type="checkbox"><label for="g1_completed">Completed</label></div>	
     <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-
 	</div>
 </div>
 

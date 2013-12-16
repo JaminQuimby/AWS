@@ -49,11 +49,12 @@ var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
+	
 case'':
-if($("#client_id").val()!=0){
-_saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+if($("#client_id").val()!="" && $("#g1_taxyear").val()!=0  && $("#g1_period").val()!=0  && $("#g1_state").val()!=0  && $("#g1_task").val()!=0  && $("#g1_form").val()!=0 )
+{
+	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
+else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
 break;
 
 case'group1':var json='{"DATA":[["'+

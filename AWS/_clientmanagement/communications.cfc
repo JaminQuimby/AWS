@@ -5,14 +5,6 @@
 <cfargument name="loadType" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Load Assets --->
-<cfcase value="assetSpouse">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[client_spouse]
-FROM[client_listing]
-WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
 <!--- Load Group1--->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">

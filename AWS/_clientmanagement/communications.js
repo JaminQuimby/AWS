@@ -18,7 +18,7 @@ _grid1=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#task_id").val(record.CO_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"communications"});_loadData({"id":"client_id","group":"assetSpouse","page":"communications"});'
+	"functions":'$("#task_id").val(record.CO_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"communications"});'
 	})};
 
 _loadDataCB=function(query){
@@ -26,8 +26,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "CO_ID":var list='task_id,client_id,g1_briefmessage,g1_caller,g1_completed,g1_contactmethod,g1_credithold,g1_date,g1_duedate,g1_emailaddress,g1_ext,g1_faxnumber,g1_fees,g1_for,g1_paid,g1_responseneeded,g1_returnedcall,g1_takenby,g1_telephone,g1_spouse,g1_credithold';_loadit({"query":query,"list":list});break;
-/*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
+/*Group1*/case "CO_ID":var list='task_id,client_id,g1_briefmessage,g1_caller,g1_completed,g1_contactmethod,g1_credithold,g1_date,g1_duedate,g1_emailaddress,g1_ext,g1_faxnumber,g1_fees,g1_for,g1_paid,g1_responseneeded,g1_returnedcall,g1_takenby,g1_telephone,g1_credithold';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -39,13 +38,15 @@ try{
 $.extend(true, options, params);//turn options into array
 var $client_id=$("#client_id");
 switch(options["group"]){
+	
 case'':
-if($("#client_id").val()!=0){
-_saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})};
+if($("#client_id").val()!="" && $("#g1_date").val()!=0 && $("#g1_caller").val()!="" && $("#g1_takenby").val()!=0  && $("#g1_contactmethod").val()!=0  && $("#g1_briefmessage").val()!="" )
+{
+	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
+else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
 break;
 
+	
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+

@@ -46,6 +46,7 @@ SELECT[cas_id]
 ,[cas_reqestby]
 ,[cas_status]
 ,[cas_taskdesc]
+,[cas_workinitiated]
 FROM[clientadministrativetasks]
 WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -153,6 +154,7 @@ INSERT INTO[clientadministrativetasks](
 ,[cas_status]
 ,[cas_taskdesc]
 ,[cas_priority]
+,[cas_workinitiated]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -168,6 +170,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][12]#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#"/>
+,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[cas_id]
 </cfquery>
@@ -190,6 +193,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[cas_reqestby]=<cfqueryparam value="#j.DATA[1][12]#"/>
 ,[cas_status]=<cfqueryparam value="#j.DATA[1][13]#"/>
 ,[cas_taskdesc]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[cas_workinitiated]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 WHERE[cas_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

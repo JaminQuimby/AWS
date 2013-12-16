@@ -30,7 +30,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Load Group1*/case "CAS_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_completed,g1_daterequested,g1_datestarted,g1_duedate,g1_estimatedtime,g1_instructions,g1_priority,g1_requestedby,g1_status,g1_taskdescription,g1_credithold';_loadit({"query":query,"list":list});break;
+/*Load Group1*/case "CAS_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_completed,g1_daterequested,g1_datestarted,g1_duedate,g1_estimatedtime,g1_instructions,g1_priority,g1_requestedby,g1_status,g1_taskdescription,g1_workinitiated,g1_credithold';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -42,11 +42,12 @@ var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
+	
 case'':
-if($("#client_id").val()!=0){
-_saveDataCB({'group':'group1'});
-jqMessage({message: "Saving.",type: "save",autoClose: true});
-}else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
+if($("#client_id").val()!="" && $("#g1_category").val()!=0 && $("#g1_taskdescription").val()!="")
+{
+	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
+else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
 break;
 
 /*Save Group1*/
@@ -65,6 +66,7 @@ $("#g1_priority").val()+'","'+
 $("#g1_requestedby").val()+'","'+
 $("#g1_status").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
+$("#g1_workinitiated").val()+'","'+
 '"]]}'
 _saveData({"group":"group1","payload":$.parseJSON(json),page:"administrativetasks"});
 break;
