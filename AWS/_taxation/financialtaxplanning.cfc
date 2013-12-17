@@ -4,30 +4,7 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!---
 
-SELECT[ftp_id]
-      ,[client_id]
-      ,[ftp_category]
-      ,[ftp_status]
-      ,[ftp_assignedto]
-      ,[ftp_priority]
-      ,[ftp_requestservice]
-      ,[ftp_duedate]
-      ,[ftp_inforequested]
-      ,[ftp_inforeceived]
-      ,[ftp_infocompiled]
-      ,[ftp_duedate]
-      ,[ftp_missinginfo]
-      ,[ftp_missinginforeceived]
-      ,[ftp_reportcompleted]
-      ,[ftp_finalclientmeeting]
-      ,[ftp_esttime]
-      ,[ftp_fees]
-      ,[ftp_paid]
-  FROM [financialtaxplanning]
-
- --->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -87,6 +64,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="formid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -102,6 +80,11 @@ SELECT[ftp_id]
 ,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id]
+)AS[ftp_categoryTEXT]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id]
+)AS[ftp_statusTEXT]
+
 FROM[v_financialtaxplanning]
 WHERE[ftp_status] != 2 
 <cfif ARGUMENTS.search neq "">
@@ -117,8 +100,8 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"FTP_ID":"'&FTP_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"FTP_STATUS":"'&FTP_STATUS&'"
-								,"FTP_CATEGORY":"'&FTP_CATEGORY&'"
+								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
+								,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
 								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
 								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
 								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
