@@ -15,12 +15,12 @@ _grid1=function(){_jGrid({
 			,FDS_YEAR:{title:'Year',width:'1%'}
 			,FDS_PERIODEND:{title:'Period End',width:'1%'}
 			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
-			,FDS_STATUS:{title:'Status'}
+			,FDS_STATUSTEXT:{title:'Status'}
 			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"5"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"financialstatements"});'
 	})};
 	

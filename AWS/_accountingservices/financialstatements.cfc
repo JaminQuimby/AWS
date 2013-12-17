@@ -4,81 +4,6 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!---
-SELECT
-[fds_id]
-      ,[client_id]
-      ,[fds_year]
-      ,[fds_month]
-      ,[fds_periodend]
-      ,[fds_status]
-      ,[fds_duedate]
-      ,[fds_priority]
-      ,[fds_esttime]
-      ,[fds_missinginfo]
-      ,[fds_missinginforeceived]
-      ,[fds_compilemi]
-      ,[fds_cmireceived]
-      ,[fds_fees]
-      ,[fds_paid]
-      ,[fds_deliverymethod]
-      ,[fds_obtaininfo_assignedto]
-      ,[fds_obtaininfo_datecompleted]
-      ,[fds_obtaininfo_completedby]
-      ,[fds_obtaininfo_esttime]
-      ,[fds_sort_assignedto]
-      ,[fds_sort_datecompleted]
-      ,[fds_sort_completedby]
-      ,[fds_sort_esttime]
-      ,[fds_checks_assignedto]
-      ,[fds_checks_datecompleted]
-      ,[fds_checks_completedby]
-      ,[fds_checks_esttime]
-      ,[fds_sales_assignedto]
-      ,[fds_sales_datecompleted]
-      ,[fds_sales_completedby]
-      ,[fds_sales_esttime]
-      ,[fds_entry_assignedto]
-      ,[fds_entry_datecompleted]
-      ,[fds_entry_completedby]
-      ,[fds_entry_esttime]
-      ,[fds_reconcile_assignedto]
-      ,[fds_reconcile_datecompleted]
-      ,[fds_reconcile_completedby]
-      ,[fds_reconcile_esttime]
-      ,[fds_compile_assignedto]
-      ,[fds_compile_datecompleted]
-      ,[fds_compile_completedby]
-      ,[fds_compile_esttime]
-      ,[fds_review_assignedto]
-      ,[fds_review_datecompleted]
-      ,[fds_review_completedby]
-      ,[fds_review_esttime]
-      ,[fds_assembly_assignedto]
-      ,[fds_assembly_datecompleted]
-      ,[fds_assembly_completedby]
-      ,[fds_assembly_esttime]
-      ,[fds_delivery_assignedto]
-      ,[fds_delivery_datecompleted]
-      ,[fds_delivery_completedby]
-      ,[fds_delivery_esttime]
-      ,[fds_acctrpt_assignedto]
-      ,[fds_acctrpt_datecompleted]
-      ,[fds_acctrpt_completedby]
-      ,[fds_acctrpt_esttime]
-  FROM [financialdatastatus]
-
-SELECT [fdss_id]
-      ,[fds_id]
-      ,[fdss_sequence]
-      ,[fdss_subtask]
-      ,[fdss_status]
-      ,[fdss_assignedto]
-      ,[fdss_duedate]
-      ,[fdss_completed]
-      ,[fdss_notes]
-  FROM [AWS].[dbo].[financialdatastatus_status]
---->
 
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -271,6 +196,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="formid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -289,6 +215,9 @@ SELECT[fds_id]
 ,[fds_status]
 ,[fds_missinginfo]
 ,[fds_compilemi]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id]
+)AS[fds_statusTEXT]
+
 FROM[v_financialDataStatus]
 WHERE[fds_status] != 2 
 AND [fds_status] != 5
@@ -309,7 +238,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FDS_YEAR":"'&FDS_YEAR&'"
 								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
 								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
-								,"FDS_STATUS":"'&FDS_STATUS&'"
+								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
 								}'>
