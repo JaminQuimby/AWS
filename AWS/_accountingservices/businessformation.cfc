@@ -5,54 +5,6 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
-<!---
-,[bf_status]
-,[bf_assignedto]
-,[bf_owners]
-,[bf_priority]
-,CONVERT(VARCHAR(10),[bf_dateinitiated], 101)AS[bf_dateinitiated]
-,CONVERT(VARCHAR(10),[bf_articlessubmitted], 101)AS[bf_articlessubmitted]
-,CONVERT(VARCHAR(10),[bf_articlesapproved], 101)AS[bf_articlesapproved]
-,CONVERT(VARCHAR(10),[bf_tradenamesubmitted], 101)AS[bf_tradenamesubmitted]
-,CONVERT(VARCHAR(10),[bf_tradenamereceived], 101)AS[bf_tradenamereceived]
-,CONVERT(VARCHAR(10),[bf_minutesbylawsdraft], 101)AS[bf_minutesbylawsdraft]
-,CONVERT(VARCHAR(10),[bf_minutesbylawsfinal], 101)AS[bf_minutesbylawsfinal]
-,CONVERT(VARCHAR(10),[bf_tinss4submitted], 101)AS[bf_tinss4submitted]
-,CONVERT(VARCHAR(10),[bf_tinreceived], 101)AS[bf_tinreceived]
-,CONVERT(VARCHAR(10),[bf_poa2848signed], 101)AS[bf_poa2848signed]
-,CONVERT(VARCHAR(10),[bf_statecrasubmitted], 101)AS[bf_statecrasubmitted]
-,CONVERT(VARCHAR(10),[bf_statecrareceived], 101)AS[bf_statecrareceived]
-,CONVERT(VARCHAR(10),[bf_scorp2553submitted], 101)AS[bf_scorp2553submitted]
-,CONVERT(VARCHAR(10),[bf_scorp2553received], 101)AS[bf_scorp2553received]
-,CONVERT(VARCHAR(10),[bf_corp8832submitted], 101)AS[bf_corp8832submitted]
-,CONVERT(VARCHAR(10),[bf_corp8832received], 101)AS[bf_corp8832received]
-,CONVERT(VARCHAR(10),[bf_501c3submitted], 101)AS[bf_501c3submitted]
-,CONVERT(VARCHAR(10),[bf_501creceived], 101)AS[bf_501creceived]
-,CONVERT(VARCHAR(10),[bf_minutescompleted], 101)AS[bf_minutescompleted]
-,CONVERT(VARCHAR(10),[bf_dissolutionrequested], 101)AS[bf_dissolutionrequested]
-,CONVERT(VARCHAR(10),[bf_dissolutionsubmitted], 101)AS[bf_dissolutionsubmitted]
-,CONVERT(VARCHAR(10),[bf_dissolutioncompleted], 101)AS[bf_dissolutioncompleted]
-,CONVERT(VARCHAR(10),[bf_otheractivity], 101)AS[bf_otheractivity]
-,CONVERT(VARCHAR(10),[bf_otherstarted], 101)AS[bf_otherstarted]
-,CONVERT(VARCHAR(10),[bf_othercompleted], 101)AS[bf_othercompleted]
-,CONVERT(VARCHAR(10),[bf_recordbookordered], 101)AS[bf_recordbookordered]
-,CONVERT(VARCHAR(10),[bf_esttime], 101)AS[bf_esttime]
-,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
-,[bf_fees]
-,[bf_paid]
-,[bf_activity]
---->
-
-<!---
-SELECT[bfs_id]
-,[bf_id]
-,[bfs_taskname]
-,[bfs_assignedto]
-,[bfs_dateinitiated]
-,[bfs_datecompleted]
-,[bfs_estimatedtime]
-FROM [businessformation_subtask]
---->
 
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
@@ -189,7 +141,7 @@ SELECT[bf_id]
 ,[client_name]
 ,[bf_owners]
 ,[bf_status]
-,[bf_assignedto]
+,[bf_assignedtoTEXT]
 ,[bf_activity]
 FROM[v_businessformation]
 WHERE[bf_status] != 2 
@@ -208,7 +160,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"BF_OWNERS":"'&BF_OWNERS&'"
 								,"BF_STATUS":"'&BF_STATUS&'"
-								,"BF_ASSIGNEDTO":"'&BF_ASSIGNEDTO&'"
+								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -223,7 +175,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[bfs_id]
 ,[bfs_taskname]
-,[bfs_assignedto]
+,[bfs_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
 ,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
 ,bfs_estimatedtime
@@ -237,7 +189,7 @@ WHERE
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'","BFS_TASKNAME":"'&BFS_TASKNAME&'","BFS_ASSIGNEDTO":"'&BFS_ASSIGNEDTO&'","BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'","BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'","BFS_ESTIMATEDTIME":"'&BFS_ESTIMATEDTIME&'"}'>
+<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'","BFS_TASKNAME":"'&BFS_TASKNAME&'","BFS_ASSIGNEDTOTEXT":"'&BFS_ASSIGNEDTOTEXT&'","BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'","BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'","BFS_ESTIMATEDTIME":"'&BFS_ESTIMATEDTIME&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

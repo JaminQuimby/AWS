@@ -14,7 +14,7 @@ _grid1=function(){_jGrid({
 			,BF_ACTIVITY:{title:'Activity'}
 			,BF_OWNERS:{title:'Owners'}
 			,BF_STATUS:{title:'Status'}
-			,BF_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
@@ -27,7 +27,7 @@ _grid2=function(){_jGrid({
 	"title":"Business Formation Subtask",
 	"fields":{BFS_ID:{key:true,list:false,edit:false}
 			,BFS_TASKNAME:{title:'Task'}
-			,BFS_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,BFS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
             ,BFS_DATEINITIATED:{title:'Date Initiated'}
 			,BFS_DATECOMPLETED:{title:'Date Completed'}
 			,BFS_ESTIMATEDTIME:{title:'Estimated Time'}
