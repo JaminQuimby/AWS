@@ -5,38 +5,6 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
-<!---
-SELECT TOP 1000 [mc_id]
-      ,[client_id]
-      ,[mc_assignedto]
-      ,[mc_category]
-      ,[mc_description]
-      ,[mc_duedate]
-      ,[mc_esttime]
-      ,[mc_fees]
-      ,[mc_paid]
-      ,[mc_priority]
-      ,[mc_projectcompleted]
-      ,[mc_requestforservice]
-      ,[mc_status]
-      ,[mc_workinitiated]
-      ,[mc_credithold]
-  FROM [AWS].[dbo].[managementconsulting]
-
-SELECT TOP 1000 [mcs_id]
-      ,[mc_id]
-      ,[mcs_actualtime]
-      ,[mcs_assignedto]
-      ,[mcs_completed]
-      ,[mcs_dependencies]
-      ,[mcs_duedate]
-      ,[mcs_esttime]
-      ,[mcs_notes]
-      ,[mcs_sequence]
-      ,[mcs_status]
-      ,[mcs_subtask]
-  FROM [AWS].[dbo].[managementconsulting_subtask]
---->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -128,7 +96,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fquery">
 SELECT[mc_id]
-,[mc_assignedto]
+,[mc_assignedtoTEXT]
 ,[client_id]
 ,[client_name]
 ,[mc_categoryTEXT]
@@ -148,7 +116,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","MC_ID":"'&MC_ID&'","MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUS":"'&MC_STATUS&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","MC_ID":"'&MC_ID&'","MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUS":"'&MC_STATUS&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
