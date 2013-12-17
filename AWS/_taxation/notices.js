@@ -12,10 +12,10 @@ _grid1=function(){_jGrid({
 	"fields":{NM_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,NM_NAME:{title:'Matter Name'}
-			,NM_STATUS:{title:'Matter Status'}
+			,NM_STATUSTEXT:{title:'Matter Status'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"8"}',
 	"functions":'$("#task_id").val(record.NM_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"notices"});'
 	})};
 _grid2=function(){_jGrid({
@@ -24,7 +24,7 @@ _grid2=function(){_jGrid({
 	"title":"Notice",
 	"fields":{N_ID:{key:true,list:false,edit:false}
 			,NM_NAME:{title:'Matter'}
-			,N_NOTICESTATUS:{title:'Status'}
+			,N_NOTICESTATUSTEXT:{title:'Status'}
 			,N_1_TAXFORM:{title:'Tax Form'}
 			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,N_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	
@@ -32,7 +32,7 @@ _grid2=function(){_jGrid({
 			,N_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"8"}',
 	"functions":'$("#subtask1_id").val(record.N_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"notices"});'
 	})};
 

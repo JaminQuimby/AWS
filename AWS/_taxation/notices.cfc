@@ -143,6 +143,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="formid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -155,6 +156,8 @@ SELECT[nm_id]
 ,[nm_status]
 ,[client_name]
 ,[client_id]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nm_status]=[optionvalue_id]
+)AS[nm_statusTEXT]
 FROM[v_noticematter]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -170,7 +173,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"NM_NAME":"'&NM_NAME&'"
-								,"NM_STATUS":"'&NM_STATUS&'"
+								,"NM_STATUSTEXT":"'&NM_STATUSTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -191,6 +194,8 @@ SELECT[nm_id]
 ,[n_1_taxform]
 ,[n_1_taxyear]
 ,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_noticestatus]=[optionvalue_id]
+)AS[n_noticestatusTEXT]
 FROM[v_notice]
 WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
@@ -202,7 +207,7 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <c
 <cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
 								,"NM_NAME":"'&NM_NAME&'"
 								,"N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"
-								,"N_NOTICESTATUS":"'&N_NOTICESTATUS&'"
+								,"N_NOTICESTATUSTEXT":"'&N_NOTICESTATUSTEXT&'"
 								,"N_1_TAXFORM":"'&N_1_TAXFORM&'"
 								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
 								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
