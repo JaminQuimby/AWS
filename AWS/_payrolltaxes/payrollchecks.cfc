@@ -4,42 +4,6 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!--- 
-[pc_id]
-      ,[client_id]
-      ,[pc_year]
-      ,[pc_payenddate]
-      ,[pc_paydate]
-      ,[pc_datedue]
-      ,[pc_esttime]
-      ,[pt_altfreq]
-      ,[pc_missinginfo]
-      ,[pc_missinginforeceived]
-      ,[pc_fees]
-      ,[pc_paid]
-      ,[pc_deliverymethod]
-      ,[pc_obtaininfo_assignedto]
-      ,[pc_obtaininfo_datecompleted]
-      ,[pc_obtaininfo_completedby]
-      ,[pc_obtaininfo_esttime]
-      ,[pc_preparation_assignedto]
-      ,[pc_preparation_datecompleted]
-      ,[pc_preparation_completedby]
-      ,[pc_preparation_esttime]
-      ,[pc_review_assignedto]
-      ,[pc_review_datecompleted]
-      ,[pc_review_completedby]
-      ,[pc_review_esttime]
-      ,[pc_assembly_assignedto]
-      ,[pc_assembly_datecompleted]
-      ,[pc_assembly_completedby]
-      ,[pc_assembly_esttime]
-      ,[pc_delivery_assignedto]
-      ,[pc_delivery_datecompleted]
-      ,[pc_delivery_completedby]
-      ,[pc_delivery_esttime]
-  FROM [payrollcheckstatus]
---->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -161,11 +125,11 @@ SELECT[pc_id]
 ,[pc_missinginfo]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
-,[pc_obtaininfo_assignedto]
-,[pc_preparation_assignedto]
-,[pc_review_assignedto]
-,[pc_assembly_assignedto]
-,[pc_delivery_assignedto]
+,[pc_obtaininfo_assignedtoTEXT]
+,[pc_preparation_assignedtoTEXT]
+,[pc_review_assignedtoTEXT]
+,[pc_assembly_assignedtoTEXT]
+,[pc_delivery_assignedtoTEXT]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -189,11 +153,11 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
-								,"PC_OBTAININFO_ASSIGNEDTO":"'&PC_OBTAININFO_ASSIGNEDTO&'"
-								,"PC_PREPARATION_ASSIGNEDTO":"'&PC_PREPARATION_ASSIGNEDTO&'"
-								,"PC_REVIEW_ASSIGNEDTO":"'&PC_REVIEW_ASSIGNEDTO&'"
-								,"PC_ASSEMBLY_ASSIGNEDTO":"'&PC_ASSEMBLY_ASSIGNEDTO&'"
-								,"PC_DELIVERY_ASSIGNEDTO":"'&PC_DELIVERY_ASSIGNEDTO&'"
+								,"PC_OBTAININFO_ASSIGNEDTOTEXT":"'&PC_OBTAININFO_ASSIGNEDTOTEXT&'"
+								,"PC_PREPARATION_ASSIGNEDTOTEXT":"'&PC_PREPARATION_ASSIGNEDTOTEXT&'"
+								,"PC_REVIEW_ASSIGNEDTOTEXT":"'&PC_REVIEW_ASSIGNEDTOTEXT&'"
+								,"PC_ASSEMBLY_ASSIGNEDTOTEXT":"'&PC_ASSEMBLY_ASSIGNEDTOTEXT&'"
+								,"PC_DELIVERY_ASSIGNEDTOTEXT":"'&PC_DELIVERY_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
