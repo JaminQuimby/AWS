@@ -4,48 +4,6 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!--- 
-
-[pt_id]
-      ,[client_id]
-      ,[pt_year]
-      ,[pt_month]
-      ,[pt_duedate]
-      ,[pt_type]
-      ,[pt_lastpay]
-      ,[pt_priority]
-      ,[pt_esttime]
-      ,[pt_missinginfo]
-      ,[pt_missinginforeceived]
-      ,[pt_fees]
-      ,[pt_paid]
-      ,[pt_deliverymethod]
-      ,[pt_obtaininfo_assignedto]
-      ,[pt_obtaininfo_datecomplted]
-      ,[pt_obtaininfo_completedby]
-      ,[pt_obtaininfo_esttime]
-      ,[pt_entry_assignedto]
-      ,[pt_entry_datecompleted]
-      ,[pt_entry_completedby]
-      ,[pt_entry_esttime]
-      ,[pt_rec_assignedto]
-      ,[pt_rec_datecompleted]
-      ,[pt_rec_completedby]
-      ,[pt_rec_esttime]
-      ,[pt_review_assignedto]
-      ,[pt_review_datecompleted]
-      ,[pt_review_completedby]
-      ,[pt_review_esttime]
-      ,[pt_assembly_assignedto]
-      ,[pt_assembly_datecompleted]
-      ,[pt_assembly_completedby]
-      ,[pt_assembly_esttime]
-      ,[pt_delivery_assignedto]
-      ,[pt_delivery_datecompleted]
-      ,[pt_delivery_completedby]
-      ,[pt_delivery_esttime]
-	  
-	  --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
@@ -175,12 +133,12 @@ SELECT[pt_id]
 ,[pt_month]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
 ,[pt_type]
-,[pt_obtaininfo_assignedto]
-,[pt_entry_assignedto]
-,[pt_rec_assignedto]
-,[pt_review_assignedto]
-,[pt_assembly_assignedto]
-,[pt_delivery_assignedto]
+,[pt_obtaininfo_assignedtoTEXT]
+,[pt_entry_assignedtoTEXT]
+,[pt_rec_assignedtoTEXT]
+,[pt_review_assignedtoTEXT]
+,[pt_assembly_assignedtoTEXT]
+,[pt_delivery_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
 ,[pt_missinginfo]
 ,[client_name]
@@ -206,12 +164,12 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PT_TYPE":"'&PT_TYPE&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
-								,"PT_OBTAININFO_ASSIGNEDTO":"'&PT_OBTAININFO_ASSIGNEDTO&'"
-								,"PT_ENTRY_ASSIGNEDTO":"'&PT_ENTRY_ASSIGNEDTO&'"
-								,"PT_REC_ASSIGNEDTO":"'&PT_REC_ASSIGNEDTO&'"
-								,"PT_REVIEW_ASSIGNEDTO":"'&PT_REVIEW_ASSIGNEDTO&'"
-								,"PT_ASSEMBLY_ASSIGNEDTO":"'&PT_ASSEMBLY_ASSIGNEDTO&'"
-								,"PT_DELIVERY_ASSIGNEDTO":"'&PT_DELIVERY_ASSIGNEDTO&'"
+								,"PT_OBTAININFO_ASSIGNEDTOTEXT":"'&PT_OBTAININFO_ASSIGNEDTOTEXT&'"
+								,"PT_ENTRY_ASSIGNEDTOTEXT":"'&PT_ENTRY_ASSIGNEDTOTEXT&'"
+								,"PT_REC_ASSIGNEDTOTEXT":"'&PT_REC_ASSIGNEDTOTEXT&'"
+								,"PT_REVIEW_ASSIGNEDTOTEXT":"'&PT_REVIEW_ASSIGNEDTOTEXT&'"
+								,"PT_ASSEMBLY_ASSIGNEDTOTEXT":"'&PT_ASSEMBLY_ASSIGNEDTOTEXT&'"
+								,"PT_DELIVERY_ASSIGNEDTOTEXT":"'&PT_DELIVERY_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
