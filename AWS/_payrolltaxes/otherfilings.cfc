@@ -4,48 +4,6 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!---
-SELECT TOP 1000 [of_id]
-      ,[client_id]
-      ,[of_taxyear]
-      ,[of_period]
-      ,[of_state]
-      ,[of_task]
-      ,[of_form]
-      ,[of_duedate]
-      ,[of_filingdeadline]
-      ,[of_extensiondeadline]
-      ,[of_extensioncomplted]
-      ,[of_status]
-      ,[of_priority]
-      ,[of_esttime]
-      ,[of_missinginfo]
-      ,[of_missinginforeceived]
-      ,[of_fees]
-      ,[of_paid]
-      ,[of_deliverymethod]
-      ,[of_obtaininfo_assignedto]
-      ,[of_obtaininfo_datecompleted]
-      ,[of_obtaininfo_completedby]
-      ,[of_obtaininfo_esttime]
-      ,[of_preparation_assignedto]
-      ,[of_preparation_datecompleted]
-      ,[of_preparation_completedby]
-      ,[of_preparation_esttime]
-      ,[of_review_assignedto]
-      ,[of_review_datecompleted]
-      ,[of_review_completedby]
-      ,[of_review_esttime]
-      ,[of_assembly_assignedto]
-      ,[of_assembly_datecomplted]
-      ,[of_assembly_compltedby]
-      ,[of_assembly_esttime]
-      ,[of_delivery_assignedto]
-      ,[of_delivery_datecomplted]
-      ,[of_delivery_compltedby]
-      ,[of_delivery_esttime]
-  FROM [otherfilings]
-  --->
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -203,11 +161,11 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"OF_STATE":"'&OF_STATE&'"
 								,"OF_TASK":"'&OF_TASK&'"
 								,"OF_FORM":"'&OF_FORM&'"
-								,"OF_OBTAININFO_ASSIGNEDTO":"'&OF_OBTAININFO_ASSIGNEDTO&'"
-								,"OF_PREPARATION_ASSIGNEDTO":"'&OF_PREPARATION_ASSIGNEDTO&'"
-								,"OF_REVIEW_ASSIGNEDTO":"'&OF_REVIEW_ASSIGNEDTO&'"
-								,"OF_ASSEMBLY_ASSIGNEDTO":"'&OF_ASSEMBLY_ASSIGNEDTO&'"
-								,"OF_DELIVERY_ASSIGNEDTO":"'&OF_DELIVERY_ASSIGNEDTO&'"								
+								,"OF_OBTAININFO_ASSIGNEDTOTEXT":"'&OF_OBTAININFO_ASSIGNEDTOTEXT&'"
+								,"OF_PREPARATION_ASSIGNEDTOTEXT":"'&OF_PREPARATION_ASSIGNEDTOTEXT&'"
+								,"OF_REVIEW_ASSIGNEDTOTEXT":"'&OF_REVIEW_ASSIGNEDTOTEXT&'"
+								,"OF_ASSEMBLY_ASSIGNEDTOTEXT":"'&OF_ASSEMBLY_ASSIGNEDTOTEXT&'"
+								,"OF_DELIVERY_ASSIGNEDTOTEXT":"'&OF_DELIVERY_ASSIGNEDTOTEXT&'"								
 								,"OF_DUEDATE":"'&OF_DUEDATE&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
 								}'>
