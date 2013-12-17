@@ -97,7 +97,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[ftp_id]
 ,[ftp_status]
 ,[ftp_category]
-,[ftp_assignedto]
+,[ftp_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[ftp_duedate], 101)AS[ftp_duedate]
 ,[ftp_missinginfo]
 ,[client_name]
@@ -119,7 +119,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"FTP_STATUS":"'&FTP_STATUS&'"
 								,"FTP_CATEGORY":"'&FTP_CATEGORY&'"
-								,"FTP_ASSIGNEDTO":"'&FTP_ASSIGNEDTO&'"
+								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
 								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
 								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
 								}'>

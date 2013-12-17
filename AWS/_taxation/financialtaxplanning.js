@@ -12,7 +12,7 @@ _group1=function(){}
 			,FTP_STATUS:{title:'Status'}
 			,FTP_DUEDATE:{title:'Due Date',width:'1%'}
 			,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,FTP_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
