@@ -52,6 +52,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="formid" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
@@ -66,6 +67,10 @@ SELECT[pa_id]
 ,[pa_taxmatters]
 ,[client_name]
 ,[client_id]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[pa_status]=[optionvalue_id])AS[pa_statusTEXT]
+,pa_taxformsTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxservices') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxforms)))FOR XML PATH('')),3,1000)
+,pa_taxmattersTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxmatters') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxmatters)))FOR XML PATH('')),3,1000)
+
 FROM[v_powerofattorney]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -81,9 +86,9 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PA_TAXYEARS":"'&PA_TAXYEARS&'"
-								,"PA_TAXFORMS":"'&PA_TAXFORMS&'"
-								,"PA_TAXMATTERS":"'&PA_TAXMATTERS&'"
-								,"PA_STATUS":"'&PA_STATUS&'"
+								,"PA_TAXFORMSTEXT":"'&PA_TAXFORMSTEXT&'"
+								,"PA_TAXMATTERSTEXT":"'&PA_TAXMATTERSTEXT&'"
+								,"PA_STATUSTEXT":"'&PA_STATUSTEXT&'"
 								,"PA_PREPARERS":"'&PA_PREPARERS&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
