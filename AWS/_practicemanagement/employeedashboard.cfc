@@ -294,24 +294,24 @@ SELECT[nm_id]
 ,[n_1_taxyear]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
-,[n_3_missinginfo]
+,[n_missinginfo]
 ,[nm_status]
-,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
-,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
+,CONVERT(VARCHAR(10),[n_1_datenoticerec], 101)AS[n_1_datenoticerec]
+,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
 ,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
 ,[client_name]
 FROM[v_notice]
 WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 AND ([n_noticestatus] !=2 OR [n_noticestatus] !=5)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[n_2_resduedate]
+ORDER BY[n_1_resduedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","NM_NAME":"'&NM_NAME&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'","N_1_TAXFORM":"'&N_1_TAXFORM&'","N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'","N_3_MISSINGINFO":"'&N_3_MISSINGINFO&'","NM_STATUS":"'&NM_STATUS&'","N_2_DATENOTICEREC":"'&N_2_DATENOTICEREC&'","N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'","N_2_RESCOMPLETED":"'&N_2_RESCOMPLETED&'"}'>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","NM_NAME":"'&NM_NAME&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'","N_1_TAXFORM":"'&N_1_TAXFORM&'","N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'","N_MISSINGINFO":"'&N_MISSINGINFO&'","NM_STATUS":"'&NM_STATUS&'","N_1_DATENOTICEREC":"'&N_1_DATENOTICEREC&'","N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'","N_2_RESCOMPLETED":"'&N_2_RESCOMPLETED&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -334,24 +334,24 @@ SELECT[nm_id]
 ,[n_1_taxyear]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
-,[n_3_missinginfo]
+,[n_missinginfo]
 ,[nm_status]
-,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
-,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
+,CONVERT(VARCHAR(10),[n_1_datenoticerec], 101)AS[n_1_datenoticerec]
+,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
 ,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
 ,[client_name]
 FROM[v_notice]
 WHERE[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 AND ([n_noticestatus] !=3 OR [n_noticestatus] !=6)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[n_2_resduedate]
+ORDER BY[n_1_resduedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","NM_NAME":"'&NM_NAME&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'","N_1_TAXFORM":"'&N_1_TAXFORM&'","N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'","N_3_MISSINGINFO":"'&N_3_MISSINGINFO&'","NM_STATUS":"'&NM_STATUS&'","N_2_DATENOTICEREC":"'&N_2_DATENOTICEREC&'","N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'","N_2_RESCOMPLETED":"'&N_2_RESCOMPLETED&'"}'>
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","NM_NAME":"'&NM_NAME&'","N_1_TAXYEAR":"'&N_1_TAXYEAR&'","N_1_TAXFORM":"'&N_1_TAXFORM&'","N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'","N_MISSINGINFO":"'&N_MISSINGINFO&'","NM_STATUS":"'&NM_STATUS&'","N_1_DATENOTICEREC":"'&N_1_DATENOTICEREC&'","N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'","N_2_RESCOMPLETED":"'&N_2_RESCOMPLETED&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

@@ -1,5 +1,3 @@
-
-
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
@@ -34,9 +32,6 @@
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
- <h3>Payroll &amp; Taxes</h3><div>
- <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
- </div>
 <!--- GROUP 1 SUB 1 PAYROLL CHECKS --->
 	<h4 onClick='_grid1_1();'>Payroll Checks</h4>
 	<div>
@@ -69,9 +64,7 @@
 </div>
 
 
-<div id="group2" class="gf-checkbox">
- <h3>Accounting & Consulting</h3><div></div>
-	
+<div id="group2" class="gf-checkbox">	
 	<!--- GROUP 2 SUB 1 Business Formation --->
 	<h4 onClick='_grid2_1();'>Business Formation</h4>
 		<div>
@@ -108,7 +101,6 @@
 
 
 <div id="group3" class="gf-checkbox">
- <h3>Notices</h3><div></div>	
 	<!--- GROUP 3 SUB 1 Notices--->
 	<h4 onClick='_grid3_1();'>Notices</h4>
 		<div>
@@ -132,7 +124,6 @@
 
 
 <div id="group4" class="gf-checkbox">	
- <h3>Taxation</h3><div></div>
 	<!--- GROUP 4 SUB 1 Data Entry--->
 	<h4 onClick='_grid4_1();'>Data Entry</h4>
 		<div>
@@ -195,9 +186,7 @@
 </div>
 
 
-<div id="group5" class="gf-checkbox">
- <h3>Client Management</h3><div></div>
-	
+<div id="group5" class="gf-checkbox">	
 	<!--- GROUP 5 SUB 1 Administrative Tasks --->
 	<h4 onClick='_grid5_1();'>Administrative Tasks</h4>
 		<div>

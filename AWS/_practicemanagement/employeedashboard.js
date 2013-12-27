@@ -7,21 +7,21 @@ Developers:Jamin Quimby
 $(document).ready(function(){
 	jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: true});
 _grid0();
-_group1=function(){}
+_group1=function(){_grid1_1()}
 _group1_1=function(){_grid1_1()};
 _group1_2=function(){_grid1_2()};
 _group1_3=function(){_grid1_3()};
 
-_group2=function(){}
+_group2=function(){_grid2_1()}
 _group2_1=function(){_grid2_1()};
 _group2_2=function(){_grid2_2()};
 _group2_3=function(){_grid2_3()};
 
-_group3=function(){}
+_group3=function(){_grid3_1()}
 _group3_1=function(){_grid3_1()};
 _group3_2=function(){_grid3_2()};
 
-_group4=function(){}
+_group4=function(){_grid4_1()}
 _group4_1=function(){_grid4_1()};
 _group4_2=function(){_grid4_2()};
 _group4_3=function(){_grid4_3()};
@@ -29,7 +29,7 @@ _group4_4=function(){_grid4_4()};
 _group4_5=function(){_grid4_5()};
 _group4_6=function(){_grid4_6()};
 
-_group5=function(){}
+_group5=function(){_grid5_1()}
 _group5_1=function(){_grid5_1()};
 _group5_2=function(){_grid5_2()};
 _group5_3=function(){_grid5_3()};
@@ -171,11 +171,11 @@ _grid3_1=function(){_jGrid({
 			N_1_TAXYEAR:{title:'Tax Year',width:'1%'},
 			N_1_TAXFORM:{title:'Tax Form'},
 			N_1_NOTICENUMBER:{title:'Notice Number',width:'1%'},
-			N_3_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }},
+			N_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }},
 			NM_STATUS:{title:'Notice Status'},
-			N_2_DATENOTICEREC:{title:'Notice Received',width:'1%'},
-			N_2_RESDUEDATE:{title:'Response Due',width:'1%'},
-			N_2_RESCOMPLETED:{title:'Response Submitted',width:'1%'}
+			N_1_DATENOTICEREC:{title:'Notice Received',width:'1%'},
+			N_1_RESDUEDATE:{title:'Response Due',width:'1%'},
+			N_1_RESCOMPLETED:{title:'Response Submitted',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group3_1"}',
@@ -192,11 +192,11 @@ _grid3_2=function(){_jGrid({
 			N_1_TAXYEAR:{title:'Tax Year',width:'1%'},
 			N_1_TAXFORM:{title:'Tax Form'},
 			N_1_NOTICENUMBER:{title:'Notice Number',width:'1%'},
-			N_3_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }},
+			N_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }},
 			NM_STATUS:{title:'Notice Status'},
-			N_2_DATENOTICEREC:{title:'Notice Received',width:'1%'},
-			N_2_RESDUEDATE:{title:'Response Due',width:'1%'},
-			N_2_RESCOMPLETED:{title:'Response Submitted',width:'1%'}
+			N_1_DATENOTICEREC:{title:'Notice Received',width:'1%'},
+			N_1_RESDUEDATE:{title:'Response Due',width:'1%'},
+			N_1_RESCOMPLETED:{title:'Response Submitted',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","userid":'+$("#task_id").val()+',"ID":"0","loadType":"group3_2"}',
