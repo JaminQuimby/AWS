@@ -12,13 +12,13 @@ _grid1=function(){_jGrid({
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
-			,CAS_CATEGORY:{title:'Category'}
+			,CAS_CATEGORYTEXT:{title:'Category'}
 			,CAS_TASKDESC:{title:'Description'}
-			,CAS_STATUS:{title:'Status'}
+			,CAS_STATUSTEXT:{title:'Status'}
 			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
 			},			
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"4"}',
 	"functions":'$("#task_id").val(record.CAS_ID);$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"administrativetasks"});'
 	})};
 
