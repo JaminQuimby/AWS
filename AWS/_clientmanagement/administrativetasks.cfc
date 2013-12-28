@@ -90,6 +90,8 @@ SELECT [cas_id]
 ,[cas_category]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,[cas_status]
+,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
+
 FROM[v_clientadministrativetasks]
 WHERE[cas_status] != 2 
 <cfif ARGUMENTS.search neq "">
@@ -106,7 +108,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_ASSIGNEDTO":"'&CAS_ASSIGNEDTO&'"
+								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
 								,"CAS_CATEGORY":"'&CAS_CATEGORY&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
 								,"CAS_STATUS":"'&CAS_STATUS&'"

@@ -15,7 +15,7 @@ _grid1=function(){_jGrid({
 			,CAS_CATEGORY:{title:'Category'}
 			,CAS_TASKDESC:{title:'Description'}
 			,CAS_STATUS:{title:'Status'}
-			,CAS_ASSIGNEDTO:{title:'Assigned To',width:'1%'}						
+			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
 			},			
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
