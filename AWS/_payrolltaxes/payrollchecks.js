@@ -10,16 +10,17 @@ _grid1=function(){_jGrid({
 	"fields":{PC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PC_YEAR:{title:'Year',width:'1%'}
-			,PC_DATEDUE:{title:'Due Date',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_DATEDUE:{title:'Due Date',width:'1%'}
 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
-			,PC_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%'}
-			,PC_PREPARATION_ASSIGNEDTOTEXT:{title:'Preparation Assigned To',width:'1%'}
-			,PC_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}
-			,PC_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%'}
-			,PC_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%'}
+			,PC_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%',visibility: 'hidden' }
+			,PC_PREPARATION_ASSIGNEDTOTEXT:{title:'Preparation Assigned To',width:'1%',visibility: 'hidden' }
+			,PC_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%',visibility: 'hidden' }
+			,PC_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%',visibility: 'hidden' }
+			,PC_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%',visibility: 'hidden' }
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
