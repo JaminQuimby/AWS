@@ -88,7 +88,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-
+<cfargument name="formid" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 
@@ -102,6 +102,8 @@ SELECT[mc_id]
 ,[mc_categoryTEXT]
 ,[mc_description]
 ,[mc_status]
+,mc_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
+
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
 WHERE[mc_status] != 2 
@@ -116,7 +118,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","MC_ID":"'&MC_ID&'","MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUS":"'&MC_STATUS&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","MC_ID":"'&MC_ID&'","MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUSTEXT":"'&MC_STATUSTEXT&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -139,6 +141,7 @@ SELECT
 ,[mcs_sequence]
 ,[mcs_status]
 ,[mcs_subtask] 
+
 FROM[managementconsulting_subtask]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>

@@ -14,11 +14,11 @@ _grid1=function(){_jGrid({
 			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
 			,MC_DESCRIPTION:{title:'Task Description'}
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
-			,MC_STATUS:{title:'Status'}
+			,MC_STATUSTEXT:{title:'Status'}
 			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"2"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.MC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"acctingconsulting"});'
 	})};
 

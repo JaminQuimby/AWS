@@ -140,6 +140,15 @@ SELECT[of_id]
 ,[of_missinginfo]
 ,[client_name]
 ,[client_id]
+,OF_OBTAININFO_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_obtaininfo_assignedto=user_id))
+,OF_PREPARATION_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_preparation_assignedto=user_id))
+,OF_REVIEW_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_review_assignedto=user_id))
+,OF_ASSEMBLY_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_assembly_assignedto=user_id))
+,OF_DELIVERY_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_delivery_assignedto=user_id))
+,of_taskTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_task]=[optionvalue_id])
+,of_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_task]=[optionvalue_id])
+,of_periodTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
+
 FROM[v_otherfilings]
 WHERE[of_status] != 2 
 AND [of_status] != 5
@@ -157,9 +166,9 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"								
-								,"OF_PERIOD":"'&OF_PERIOD&'"
-								,"OF_STATE":"'&OF_STATE&'"
-								,"OF_TASK":"'&OF_TASK&'"
+								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
+								,"OF_STATETEXT":"'&OF_STATETEXT&'"
+								,"OF_TASKTEXT":"'&OF_TASKTEXT&'"
 								,"OF_FORM":"'&OF_FORM&'"
 								,"OF_OBTAININFO_ASSIGNEDTOTEXT":"'&OF_OBTAININFO_ASSIGNEDTOTEXT&'"
 								,"OF_PREPARATION_ASSIGNEDTOTEXT":"'&OF_PREPARATION_ASSIGNEDTOTEXT&'"

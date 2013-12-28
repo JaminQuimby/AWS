@@ -11,8 +11,8 @@ _grid1=function(){_jGrid({
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,FDS_MONTHTEXT:{title:'Month'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
+			,FDS_MONTHTEXT:{title:'Month'}
 			,FDS_PERIODEND:{title:'Period End',width:'1%'}
 			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
 			,FDS_STATUSTEXT:{title:'Status'}

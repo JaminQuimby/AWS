@@ -10,20 +10,22 @@ _grid1=function(){_jGrid({
 	"title":"Other Filings",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,OF_PERIOD:{title:'Period'}
-			,OF_STATE:{title:'State'}
-			,OF_TASK:{title:'Type'}
+			,OF_TAXYEAR:{title:'Tax Year'}
+			,OF_PERIODTEXT:{title:'Period'}
+			,OF_STATETEXT:{title:'State'}
+			,OF_TASKTEXT:{title:'Type'}
 			,OF_FORM:{title:'Form',width:'1%'}
-			,OF_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Informtaion Assigned To',width:'1%'}
-			,OF_PREPARATION_ASSIGNEDTOTEXT:{title:'Preparation Assigned To',width:'1%'}
-			,OF_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}
-			,OF_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%'}
-			,OF_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%'}						
 			,OF_DUEDATE:{title:'Date Due',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
-	},
+			,OF_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Informtaion Assigned To',width:'1%',visibility:"hidden"}
+			,OF_PREPARATION_ASSIGNEDTOTEXT:{title:'Preparation Assigned To',width:'1%',visibility:"hidden"}
+			,OF_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%',visibility:"hidden"}
+			,OF_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%',visibility:"hidden"}
+			,OF_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%',visibility:"hidden"}						
+			
+				},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"11"}',
 	"functions":'$("#task_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"otherfilings"});'
 })};
 

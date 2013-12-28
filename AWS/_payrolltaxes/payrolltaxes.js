@@ -15,12 +15,13 @@ _grid1=function(){_jGrid({
 			,PT_TYPE:{title:'Return Type'}
 			,PT_DUEDATE:{title:'Date Due',width:'1%'}
 			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,PT_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%'}
-			,PT_ENTRY_ASSIGNEDTOTEXT:{title:'Entry Assigned To',width:'1%'}
-			,PT_REC_ASSIGNEDTOTEXT:{title:'Reconciliation Assigned To',width:'1%'}
-			,PT_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}
-			,PT_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%'}
-			,PT_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%'}
+	
+			,PT_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%',visibility: 'hidden'}
+			,PT_ENTRY_ASSIGNEDTOTEXT:{title:'Entry Assigned To',width:'1%',visibility: 'hidden'}
+			,PT_REC_ASSIGNEDTOTEXT:{title:'Reconciliation Assigned To',width:'1%',visibility: 'hidden'}
+			,PT_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%',visibility: 'hidden'}
+			,PT_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%',visibility: 'hidden'}
+			,PT_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%',visibility: 'hidden'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
