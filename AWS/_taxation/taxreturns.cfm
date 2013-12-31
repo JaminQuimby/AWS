@@ -82,7 +82,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_g1_dropoffappointment">Drop Off Appointment</label><input type="text" class="datetime" id="g1_g1_dropoffappointment" ></div>
 	<div><label for="g1_g1_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g1_dropoffappointmentlength" ></div>
 	<div><label for="g1_g1_dropoffappointmentwith">Appointment With</label><select id="g1_g1_dropoffappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><input id="g1_g1_whileyouwaitappt" type="checkbox"><label for="g1_g1_whileyouwaitappt">While You Wait Appt</label></div>
+	<div><input id="g1_g1_whileyouwaitappt" type="checkbox"><label for="g1_g1_whileyouwaitappt">While You Wait Appointment</label></div>
 	<div><label for="g1_g1_pickupappointment">Pick Up Appointment</label><input type="text" class="datetime" id="g1_g1_pickupappointment" ></div>
 	<div><label for="g1_g1_pickupappointmentlength">Appointment Length</label><input type="text" id="g1_g1_pickupappointmentlength" ></div>
 	<div><label for="g1_g1_pickupappointmentwith">Appointment With</label><select id="g1_g1_pickupappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -116,9 +116,14 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 	<div><input id="g1_g4_required" type="checkbox"><label for="g1_g4_required">PPTR Required</label></div>
 	<div><label for="g1_g4_extended">PPTR Extension Completed</label><input type="text" class="date" id="g1_g4_extended" ></div>
+	<div><label for="g1_g4_extensionrequested">PPTR Extension Requested</label><input type="text" class="date" id="g1_g4_extensionrequested" ></div>
 	<div><label for="g1_g4_assignedto">PPTR Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_g4_rfr">PPTR RFR</label><input type="text" class="date" id="g1_g4_rfr" ></div>
-	<div><label for="g1_g4_completed">PPTR Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
+	<div><label for="g1_g4_rfr">PPTR Ready For Review</label><input type="text" class="date" id="g1_g4_rfr" ></div>
+    <div><label for="g1_g4_completedby">PPTR Completed By</label><select id="g1_g4_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="g1_g4_reviewassigned">PPTR Review Assigned To</label><select id="g1_g4_reviewassigned"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><input id="g1_g4_reviewed" type="checkbox"><label for="g1_g4_reviewed">PPTR Reviewed</label></div>
+    <div><label for="g1_g4_reviewedby">PPTR Reviewed By</label><select id="g1_g4_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="g1_g4_completed">PPTR Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
 	<div><label for="g1_g4_delivered">PPTR Delivered</label><input type="text" class="date" id="g1_g4_delivered" ></div>
 	<div><label for="g1_g4_currentfees">PPTR Current Fees</label><input type="text" id="g1_g4_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_g4_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g4_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>

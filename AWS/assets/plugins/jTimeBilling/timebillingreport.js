@@ -236,12 +236,12 @@ _grid9=function(){_jGrid({
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Tax Year',width:'1%'},
 			TR_TAXFORM:{title:'Tax Form'},
-			TR_1_COMPLETED:{title:'Completed',width:'1%'},
-			TR_2_DELIVERED:{title:'Delivered',width:'1%'},
-			TR_1_PREPAREDBY:{title:'Prepared By',width:'1%'},
+			TR_2_COMPLETED:{title:'Completed',width:'1%'},
+			TR_3_DELIVERED:{title:'Delivered',width:'1%'},
+			TR_2_PREPAREDBY:{title:'Prepared By',width:'1%'},
 			TR_CURRENTFEES:{title:'Fees'},
-			TR_2_PAYMENTSTATUS:{title:'Payment Status'},
-			TR_3_MULTISTATERETURN:{title:'Multi State Return',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			TR_PAID:{title:'Payment Status'},
+			TR_4_MULTISTATERETURN:{title:'Multi State Return',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g9_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group9"}',
@@ -256,11 +256,11 @@ _grid10=function(){_jGrid({
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Tax Year',width:'1%'},
 			TR_TAXFORM:{title:'Tax Form'},
-			TR_3_COMPLETED:{title:'Completed',width:'1%'},
-			TR_3_CURRENTFEES:{title:'Current Fees'},		
-			TR_3_PAYMENTSTATUS:{title:'Payment Status'},
-			TR_3_DELIVERED:{title:'Delivered',width:'1%'},
-			TR_3_MULTISTATERETURN:{title:'Multi State Return',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			TR_4_COMPLETED:{title:'Completed',width:'1%'},
+			TR_4_CURRENTFEES:{title:'Current Fees'},		
+			TR_4_PAID:{title:'Payment Status'},
+			TR_4_DELIVERED:{title:'Delivered',width:'1%'},
+			TR_4_MULTISTATERETURN:{title:'Multi State Return',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g10_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group10"}',
@@ -280,7 +280,7 @@ _grid11=function(){_jGrid({
 			TRST_2_DELIVERED:{title:'Delivered',width:'1%'},
 			TRST_1_PREPAREDBY:{title:'Prepared By',width:'1%'},
 			TRST_2_CURRENTFEES:{title:'Fees'},
-			TRST_2_PAYMENTSTATUS:{title:'Payment Status'}
+			TRST_2_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g11_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group11"}',
@@ -300,7 +300,7 @@ _grid12=function(){_jGrid({
 			TRST_STATE:{title:'State'},
 			TRST_3_PPTRCOMPLETED:{title:'Completed',width:'1%'},
 			TRST_3_PPTRCURRENTFEES:{title:'Current Fees'},
-			TRST_3_PAYMENTSTATUS:{title:'Payment Status'},
+			TRST_3_PAID:{title:'Payment Status'},
 			TRST_3_PPTRDELIVERED:{title:'Delivered',width:'1%'}			
 			},
 	"method":"f_lookupData",

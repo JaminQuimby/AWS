@@ -6,6 +6,7 @@ Developers:Jamin Quimby
 
 $(document).ready(function(){
 	jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: true});
+
 _grid0();
 _group1=function(){_grid1_1()}
 _group1_1=function(){_grid1_1()};
@@ -39,7 +40,7 @@ _grid0=function(){_jGrid({
 	"grid":"grid0",
 	"url":"employeedashboard.cfc",
 	"title":"Employee Dashboard",
-"fields":{SI_ID:{key:true,list:false,edit:false},
+	"fields":{SI_ID:{key:true,list:false,edit:false},
 			NAME:{title:'Employee Name'},
 			},
 	"method":"f_lookupData",

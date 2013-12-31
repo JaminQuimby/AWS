@@ -183,7 +183,7 @@ ORDER BY[of_duedate]
 								,"OF_DELIVERY_DATECOMPLETED":"'&OF_DELIVERY_DATECOMPLETED&'"
 								,"OF_FEES":"'&OF_FEES&'"
 								,"OF_ESTTIME":"'&OF_ESTTIME&'"
-								,"OF_PAYMENTSTATUS":"'&OF_PAYMENTSTATUS&'"
+								,"OF_PAID":"'&OF_PAID&'"
 								}'>                              
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -528,16 +528,16 @@ AND ([n_1_paid] = '6' OR [n_1_paid] IS NULL OR [n_1_paid] = '0')
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
-,[tr_1_preparedby]
-,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
-,CONVERT(VARCHAR(10),[tr_2_delivered], 101)AS[tr_2_delivered]
+,[tr_2_preparedby]
+,CONVERT(VARCHAR(10),[tr_2_completed], 101)AS[tr_2_completed]
+,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
 ,[tr_currentfees]
-,[tr_2_paid]
-,[tr_2_multistatereturn]
+,[tr_paid]
+,[tr_3_multistatereturn]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
-WHERE([tr_2_paid]IS NULL OR [tr_2_paid] = '6' OR [tr_2_paid] = '0')
+WHERE([tr_paid]IS NULL OR [tr_paid] = '6' OR [tr_paid] = '0')
 <cfif ARGUMENTS.search neq "">AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -550,12 +550,12 @@ WHERE([tr_2_paid]IS NULL OR [tr_2_paid] = '6' OR [tr_2_paid] = '0')
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"							
-								,"TR_1_PREPAREDBY":"'&TR_1_PREPAREDBY&'"								
-								,"TR_1_COMPLETED":"'&TR_1_COMPLETED&'"
-								,"TR_2_DELIVERED":"'&TR_2_DELIVERED&'"
+								,"TR_2_PREPAREDBY":"'&TR_2_PREPAREDBY&'"								
+								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
+								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
-								,"TR_2_PAYMENTSTATUS":"'&TR_2_PAYMENTSTATUS&'"
-								,"TR_2_MULTISTATERETURN":"'&TR_2_MULTISTATERETURN&'"
+								,"TR_PAID":"'&TR_PAID&'"
+								,"TR_3_MULTISTATERETURN":"'&TR_3_MULTISTATERETURN&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -576,17 +576,17 @@ WHERE([tr_2_paid]IS NULL OR [tr_2_paid] = '6' OR [tr_2_paid] = '0')
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_3_completed], 101)AS[tr_3_completed]
-,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
-,[tr_3_currentfees]
-,[tr_3_paid]
-,[tr_2_multistatereturn]
+,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_completed]
+,CONVERT(VARCHAR(10),[tr_4_delivered], 101)AS[tr_4_delivered]
+,[tr_4_currentfees]
+,[tr_4_paid]
+,[tr_3_multistatereturn]
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-AND ([tr_3_paid]IS NULL OR[tr_3_paid] = '6' OR[tr_3_paid] = '0')
+AND ([tr_4_paid]IS NULL OR[tr_4_paid] = '6' OR[tr_4_paid] = '0')
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -599,11 +599,11 @@ AND ([tr_3_paid]IS NULL OR[tr_3_paid] = '6' OR[tr_3_paid] = '0')
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"							
-								,"TR_3_COMPLETED":"'&TR_3_COMPLETED&'"								
-								,"TR_3_CURRENTFEES":"'&TR_3_CURRENTFEES&'"
-								,"TR_3_PAYMENTSTATUS":"'&TR_3_PAYMENTSTATUS&'"
-								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
-								,"TR_2_MULTISTATERETURN":"'&TR_2_MULTISTATERETURN&'"
+								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"								
+								,"TR_4_CURRENTFEES":"'&TR_4_CURRENTFEES&'"
+								,"TR_4_PAID":"'&TR_4_PAID&'"
+								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
+								,"TR_3_MULTISTATERETURN":"'&TR_3_MULTISTATERETURN&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -656,7 +656,7 @@ AND ([trst_2_paid]IS NULL OR [trst_2_paid] = '6' OR [trst_2_paid] = '0')
 								,"TRST_2_DELIVERED":"'&TRST_2_DELIVERED&'"								
 								,"TRST_1_PREPAREDBY":"'&TRST_1_PREPAREDBY&'"
 								,"TRST_2_CURRENTFEES":"'&TRST_2_CURRENTFEES&'"
-								,"TRST_2_PAYMENTSTATUS":"'&TRST_2_PAYMENTSTATUS&'"
+								,"TRST_3_PAID":"'&TRST_3_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -706,7 +706,7 @@ AND ([trst_3_paymentstatus] IS NULL OR [trst_3_paymentstatus] ='6' OR [trst_3_pa
 								,"TRST_STATE":"'&TRST_STATE&'"
 								,"TRST_3_PPTRCOMPLETED":"'&TRST_3_PPTRCOMPLETED&'"							
 								,"TRST_3_PPTRCURRENTFEES":"'&TRST_3_PPTRCURRENTFEES&'"
-								,"TRST_3_PAYMENTSTATUS":"'&TRST_3_PAYMENTSTATUS&'"
+								,"TRST_3_PAID":"'&TRST_3_PAID&'"
 								,"TRST_3_PPTRDELIVERED":"'&TRST_3_PPTRDELIVERED&'"								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>

@@ -108,7 +108,7 @@ SELECT CONVERT(CHAR(10),[tr_1_dropoffappointment], 101)+' '+RIGHT(CONVERT(VARCHA
 ,CONVERT(CHAR(10),[tr_1_pickupappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_1_pickupappointment, 100),7)AS[tr_1_pickupappointment]
 ,[tr_1_pickupappointmentlength]
 ,[tr_1_pickupappointmentwith]
-,[tr_1_whileyouwaitappt] 
+,[tr_1_whileyouwaitappt]
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -148,19 +148,19 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fQuery">
 SELECT[tr_4_assignedto] 
 ,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_completed]
+,[tr_4_completedby] 
 ,[tr_4_currentfees]
-,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_delivered]
-,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_extended] 
+,CONVERT(VARCHAR(10),[tr_4_delivered], 101)AS[tr_4_delivered]
+,CONVERT(VARCHAR(10),[tr_4_extended], 101)AS[tr_4_extended]
+,CONVERT(VARCHAR(10),[tr_4_extensionrequested], 101)AS[tr_4_extensionrequested] 
 ,[tr_4_paid] 
 ,[tr_4_pptresttime] 
 ,[tr_4_priorfees] 
 ,[tr_4_required] 
-,[tr_4_rfr] 
-,[tr_4_extensionrequested] 
-,[tr_4_completedby] 
 ,[tr_4_reviewassigned]
-,[tr_4_reviewed] 
+,CONVERT(VARCHAR(10),[tr_4_reviewed], 101)AS[tr_4_reviewed] 
 ,[tr_4_reviewedby]
+,[tr_4_rfr] 
 FROM[taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -549,24 +549,25 @@ WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfcase>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][12])><cfset j.DATA[1][12]=1><cfelse><cfset j.DATA[1][12]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][14])><cfset j.DATA[1][14]=1><cfelse><cfset j.DATA[1][14]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS]
 SET[tr_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_4_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_4_currentfees]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[tr_4_delivered]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[tr_4_extended]=<cfqueryparam value="#j.DATA[1][6]#"  null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[tr_4_paid]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[tr_4_pptresttime]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[tr_4_priorfees]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[tr_4_required]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[tr_4_rfr]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[tr_4_extensionrequested]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[tr_4_completedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[tr_4_reviewassigned]=<cfqueryparam value="#j.DATA[1][14]#"/>
-,[tr_4_reviewed]=<cfqueryparam value="#j.DATA[1][15]#"/>
-,[tr_4_reviewedby]=<cfqueryparam value="#j.DATA[1][16]#"/>
+,[tr_4_completedby]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[tr_4_currentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[tr_4_delivered]=<cfqueryparam value="#j.DATA[1][6]#"  null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[tr_4_extended]=<cfqueryparam value="#j.DATA[1][7]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[tr_4_extensionrequested]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[tr_4_paid]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tr_4_pptresttime]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[tr_4_priorfees]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[tr_4_required]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tr_4_reviewassigned]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[tr_4_reviewed]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[tr_4_reviewedby]=<cfqueryparam value="#j.DATA[1][15]#"/>
+,[tr_4_rfr]=<cfqueryparam value="#j.DATA[1][16]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

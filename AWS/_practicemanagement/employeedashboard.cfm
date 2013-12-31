@@ -34,7 +34,7 @@
 <div id="group1" class="gf-checkbox">
 <!--- GROUP 1 SUB 1 PAYROLL CHECKS --->
 	<h4 onClick='_grid1_1();'>Payroll Checks</h4>
-	<div>
+	<div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 		<div><label for="g1_1_filter">Filter</label><input id="g1_1_filter" onBlur="_grid1_1();" onKeyPress="if(event.keyCode==13){_grid1_1();}"/></div>	
 		<div class="tblGrid" id="grid1_1"></div>
 		<div class="buttonbox">
