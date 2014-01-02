@@ -34,7 +34,7 @@ ORDER BY[file_name]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'","FILE_NAME":"'&FILE_NAME&'","FILE_DESCRIPTION":"'&FILE_DESCRIPTION&'","FILE_YEAR":"'&FILE_YEAR&'","FILE_MONTH":"'&FILE_MONTH&'","FILE_DAY":"'&FILE_DAY&'"}'>
+<cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'","FILE_NAME":"'&FILE_NAME&'","FILE_DESCRIPTION":"'&FILE_DESCRIPTION&'","FILE_YEAR":"'&FILE_YEAR&'","FILE_MONTH":"'&FILE_MONTH&'","FILE_DAY":"'&FILE_DAY&'","FILE_SAVEDNAME":"'&FILE_SAVEDNAME&'","FILE_TYPE":"'&FILE_TYPE&'","FILE_SUBTYPE":"'&FILE_SUBTYPE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -66,8 +66,9 @@ SELECT
 ,[file_year]
 ,[file_month]
 ,[file_day]
+
       <!---
-      ,[file_savedname]
+     ,[file_savedname] 
       ,[file_size]
       ,[file_type]
       ,[file_timestamp]

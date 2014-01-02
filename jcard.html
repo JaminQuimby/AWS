@@ -1,0 +1,34 @@
+
+
+<html>
+
+<head>
+
+<title>
+j
+</title>
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" media="screen" />
+<script src="//code.jquery.com/jquery-1.9.1.js" ></script> 
+<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js" ></script>
+<script src="jcard.js" ></script> 
+</head>
+<script>
+m1=function( data ) {
+var items = [];
+$.each( data, function( key, val ) {
+items.push( "<li id='" + key + "'>" + val + "</li>" );
+});
+$( "<ul/>", {
+"class": "my-new-list",
+html: items.join( "" )
+}).appendTo( "body" );
+};
+</script>
+<body onLoad="m1(jcard1)">
+
+
+
+
+
+</body>
+</html>

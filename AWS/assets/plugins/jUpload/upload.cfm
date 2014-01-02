@@ -68,7 +68,11 @@ _grid100=function(){
 	"grid":"grid100",
 	"url":"/AWS/assets/plugins/jUpload/upload.cfc",
 	"title":"Files",
-	"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
+	"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_SAVEDNAME:{list:true,edit:false,title:'',width: '1%',display: function (data1) {
+                        var $img = $('<img  src="https://cj.qutera.com/AWS/assets/img/cloud-download.png"  title="Download" height="16"/>');
+						$img.click(function () {
+    						window.location.href = '//cj.qutera.com/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'';
+						});return $img;}} ,FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g100_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","loadType":"group100","clientid":'+$("##client_id").val()+'}',
 	"functions":'$("##file_id").val(record.FILE_ID);$("##isLoaded_group100").val(1);_loadData({"id":"file_id","group":"group100","page":"upload","plugin":"group100"});$("##group100").accordion({active:1});'
@@ -105,24 +109,3 @@ _grid100=function(){
 <div id="uploader"><p>You browser doesn't have Flash or HTML5 support.</p></div>	
 </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
