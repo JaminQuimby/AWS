@@ -91,7 +91,6 @@ FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
-
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
 <cfquery datasource="AWS" name="fQuery">
@@ -100,10 +99,28 @@ FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+<!--- Asset GUI Completed Tasks--->
+<cfcase value="assetCompTask">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[of_obtaininfo_datecompleted]=CONVERT(VARCHAR(10),of_obtaininfo_datecompleted,101)
+,[of_obtaininfo_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(of_obtaininfo_completedby=[user_id]))
+,[of_preparation_datecompleted]=CONVERT(VARCHAR(10),of_preparation_datecompleted,101)
+,[of_preparation_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(of_preparation_completedby=[user_id]))
+,[of_review_datecompleted]=CONVERT(VARCHAR(10),of_review_datecompleted,101)
+,[of_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(of_review_completedby=[user_id]))
+,[of_assembly_datecompleted]=CONVERT(VARCHAR(10),of_assembly_datecompleted,101)
+,[of_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(of_assembly_completedby=[user_id]))
+,[of_delivery_datecompleted]=CONVERT(VARCHAR(10),of_delivery_datecompleted,101)
+,[of_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(of_delivery_completedby=[user_id]))
+FROM[otherfilings]
+WHERE[OF_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
+
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
-<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"COLUMNS":["ERROR","ID","MESSAGE"],"DATA":["#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
