@@ -294,7 +294,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-
+<cfargument name="formid" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP TAX RETURNS --->
@@ -304,9 +304,11 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
+,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[tr_duedate], 101)AS[tr_duedate]
 ,[tr_missinginfo]
 ,[tr_4_assignedto]
+,tr_4_assignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
@@ -329,10 +331,10 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_DUEDATE":"'&TR_DUEDATE&'"
 								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
-								,"TR_4_ASSIGNEDTO":"'&TR_4_ASSIGNEDTO&'"
+								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
