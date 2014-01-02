@@ -1,5 +1,5 @@
 <cfparam name="page.type" default="">
-<cfset page.cache.users=CreateTimeSpan(0,0,0,0)>
+<cfset page.cache.users=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.options=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.clients=CreateTimeSpan(0,0,25,0)>
 <cfquery name="selectOptions" cachedWithin="#page.cache.options#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE([form_id]='#page.formid#'OR[form_id]='0')AND([optionGroup]='#page.formid#'OR[optionGroup]='0')</cfquery>
