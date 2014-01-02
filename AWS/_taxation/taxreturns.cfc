@@ -92,6 +92,7 @@ SELECT[TR_ID]
 ,[tr_priorfees]
 ,[tr_priority]
 ,[tr_reason]
+,[tr_state]
 ,[tr_taxform]
 ,[tr_taxyear]
 ,[tr_credithold]
@@ -226,7 +227,7 @@ SELECT[trst_3_pptrassignedto]
 ,[trst_3_pptrcurrentfees]
 ,CONVERT(VARCHAR(10),[trst_3_pptrdelivered], 101)AS[trst_3_pptrdelivered]
 ,CONVERT(VARCHAR(10),[trst_3_pptrextended], 101)AS[trst_3_pptrextended]
-,[trst_3_paymentstatus]
+,[trst_3_paid]
 ,[trst_3_pptrpriorfees]
 ,[trst_3_pptrrequired]
 ,CONVERT(VARCHAR(10),[trst_3_pptrrfr], 101)AS[trst_3_pptrrfr]
@@ -313,10 +314,9 @@ SELECT[tr_id]
 ,[client_id]
 FROM[v_taxreturns]
 WHERE [tr_taxyear] IS NOT NULL
-
-<!---[tr_2_informationreceived] IS NOT NULL
+AND [tr_2_informationreceived] IS NOT NULL
 AND [tr_4_delivered] IS NULL
-AND [tr_notrequired] = 0--->
+AND [tr_notrequired] = 0
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
@@ -443,6 +443,7 @@ INSERT INTO[TAXRETURNS](
 ,[tr_priorfees]
 ,[tr_priority]
 ,[tr_reason]
+,[tr_state]
 ,[tr_taxform]
 ,[tr_taxyear]
 )
@@ -464,6 +465,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][16]#"/>
 ,<cfqueryparam value="#j.DATA[1][17]#"/>
 ,<cfqueryparam value="#j.DATA[1][18]#"/>
+,<cfqueryparam value="#j.DATA[1][19]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -494,8 +496,9 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_priorfees]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,[tr_priority]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,[tr_reason]=<cfqueryparam value="#j.DATA[1][16]#"/>
-,[tr_taxform]=<cfqueryparam value="#j.DATA[1][17]#"/>
-,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][18]#"/>
+,[tr_state]=<cfqueryparam value="#j.DATA[1][17]#"/>
+,[tr_taxform]=<cfqueryparam value="#j.DATA[1][18]#"/>
+,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][19]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
@@ -703,7 +706,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_3_pptrcurrentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trst_3_pptrdelivered]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_3_pptrextended]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[trst_3_paymentstatus]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trst_3_paid]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[trst_3_pptrpriorfees]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[trst_3_pptrrequired]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[trst_3_pptrrfr]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>

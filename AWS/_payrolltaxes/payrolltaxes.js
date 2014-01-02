@@ -15,7 +15,6 @@ _grid1=function(){_jGrid({
 			,PT_TYPE:{title:'Return Type'}
 			,PT_DUEDATE:{title:'Date Due',width:'1%'}
 			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-	
 			,PT_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%',visibility: 'hidden'}
 			,PT_ENTRY_ASSIGNEDTOTEXT:{title:'Entry Assigned To',width:'1%',visibility: 'hidden'}
 			,PT_REC_ASSIGNEDTOTEXT:{title:'Reconciliation Assigned To',width:'1%',visibility: 'hidden'}

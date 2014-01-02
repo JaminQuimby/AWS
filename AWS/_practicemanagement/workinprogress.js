@@ -16,6 +16,7 @@ _group9=function(){_grid9()}
 _group10=function(){_grid10()}
 _group11=function(){_grid11()}
 _group12=function(){_grid12()}
+_group13=function(){_grid2()}
 });
 
 /*
@@ -150,11 +151,11 @@ _grid7=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,NM_NAME:{title:'Matter Name'}
 			,N_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
-			,N_3_MISSINGINFO:{title:'Missing Information Compiled',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,N_MISSINGINFO:{title:'Missing Information Compiled',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,NM_STATUS:{title:'Notice Status'}
 			,N_PRIORITY:{title:'Priority'}
 			,N_ASSIGNEDTO:{title:'Assigned To'}
-			,N_2_RESDUEDATE:{title:'Response Due'}
+			,N_1_RESDUEDATE:{title:'Response Due'}
 			,N_ESTTIME:{title:'Estimated Time'}
 			,N_2_REVREQUIRED:{title:'Review Required'}
 			,N_2_REVASSIGNEDTO:{title:'Review Assigned To'}
@@ -238,18 +239,18 @@ _grid11=function(){_jGrid({
 	"title":"Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,TR_1_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
-			,TR_1_COMPLETED:{title:'Completed',width:'1%'}
-			,TR_1_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
+			,TR_2_COMPLETED:{title:'Completed',width:'1%'}
+			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,TR_TAXFORM:{title:'Tax Form',width:'1%'}
 			,TR_PRIORITY:{title:'Priority',width:'1%'}
-			,TR_1_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
-			,TR_1_DUEDATE:{title:'Due Date',width:'1%'}
+			,TR_2_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,TR_DUEDATE:{title:'Due Date',width:'1%'}
 			,TR_ESTTIME:{title:'Estimated Time',width:'1%'}
-			,TR_3_REQUIRED:{title:'PPTR Required',width:'1%'}
-			,TR_3_RFR:{title:'Ready For Review',width:'1%'}
-			,TR_3_ASSIGNEDTO:{title:'PPTR Assigned To',width:'1%'}		
+			,TR_4_REQUIRED:{title:'PPTR Required',width:'1%'}
+			,TR_4_RFR:{title:'Ready For Review',width:'1%'}
+			,TR_4_ASSIGNEDTO:{title:'PPTR Assigned To',width:'1%'}		
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g11_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group11"}',
@@ -264,15 +265,15 @@ _grid12=function(){_jGrid({
 	"title":"Personal Property Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,TR_3_EXTENDED:{title:'PPTR Extended',width:'1%'}
-			,TR_3_COMPLETED:{title:'Completed',width:'1%'}
+			,TR_4_EXTENDED:{title:'PPTR Extended',width:'1%'}
+			,TR_4_COMPLETED:{title:'Completed',width:'1%'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
 			,TR_TAXFORM:{title:'Form'}
 			,TR_PRIORITY:{title:'Information Received',width:'1%'}
-			,TR_3_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
-			,TR_3_PPTRESTTIME:{title:'Estimated Time',width:'1%'}
-			,TR_3_RFR:{title:'Ready For Review',width:'1%'}
-			,TR_3_DELIVERED:{title:'Delivered',width:'1%'}
+			,TR_4_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,TR_4_PPTRESTTIME:{title:'Estimated Time',width:'1%'}
+			,TR_4_RFR:{title:'Ready For Review',width:'1%'}
+			,TR_4_DELIVERED:{title:'Delivered',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g12_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group12"}',

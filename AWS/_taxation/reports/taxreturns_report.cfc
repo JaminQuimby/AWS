@@ -18,6 +18,7 @@
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
+,[tr_state]
 ,CONVERT(VARCHAR(10),[tr_2_informationreceived], 101)AS[tr_2_informationreceived]
 ,[tr_2_assignedto]
 ,[tr_priorfees]

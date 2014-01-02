@@ -79,14 +79,14 @@ _grid3=function(){_jGrid({
 			,OF_FORM:{title:'Form',width:'1%'}
 			,OF_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,OF_MIRECEIVED:{title:'Missing Information Received',width:'1%'}
+			,OF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,OF_PREPARATION_DATECOMPLETED:{title:'Preparation',width:'1%'}
 			,OF_REVIEW_DATECOMPLETED:{title:'Review',width:'1%'}
 			,OF_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'1%'}
 			,OF_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'1%'}
 			,OF_FEES:{title:'Fees'}
 			,OF_ESTTIME:{title:'Estimated Time'}
-			,OF_PAYMENTSTATUS:{title:'Payment Status'}
+			,OF_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3"}',
@@ -219,8 +219,8 @@ _grid8=function(){_jGrid({
 			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,N_1_TAXFORM:{title:'Tax Form'}
 			,N_1_NOTICENUMBER:{title:'Notice Number'}
-			,N_1_FEES:{title:'Fees'}
-			,N_1_PAID:{title:'Payment Status'}
+			,N_FEES:{title:'Fees'}
+			,N_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g8_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group8"}',
@@ -300,7 +300,7 @@ _grid12=function(){_jGrid({
 			TRST_STATE:{title:'State'},
 			TRST_3_PPTRCOMPLETED:{title:'Completed',width:'1%'},
 			TRST_3_PPTRCURRENTFEES:{title:'Current Fees'},
-			TRST_3_PAID:{title:'Payment Status'},
+			TRST_2_PAID:{title:'Payment Status'},
 			TRST_3_PPTRDELIVERED:{title:'Delivered',width:'1%'}			
 			},
 	"method":"f_lookupData",

@@ -300,11 +300,11 @@ SELECT[nm_id]
 ,[client_name]
 ,[nm_name]
 ,CONVERT(VARCHAR(10),[n_1_noticedate], 101)AS[n_1_noticedate]
-,[n_3_missinginfo]
+,[n_missinginfo]
 ,[nm_status]
 ,[n_priority]
 ,[n_assignedto]
-,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
+,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
 ,[n_esttime]
 ,[n_2_revrequired]
 ,[n_2_revassignedto]
@@ -322,11 +322,11 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"NM_NAME":"'&NM_NAME&'"
 								,"N_1_NOTICEDATE":"'&N_1_NOTICEDATE&'"
-								,"N_3_MISSINGINFO":"'&N_3_MISSINGINFO&'"
+								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
 								,"NM_STATUS":"'&NM_STATUS&'"
 								,"N_PRIORITY":"'&N_PRIORITY&'"
 								,"N_ASSIGNEDTO":"'&N_ASSIGNEDTO&'"
-								,"N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'"
+								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
 								,"N_ESTTIME":"'&N_ESTTIME&'"
 								,"N_2_REVREQUIRED":"'&N_2_REVREQUIRED&'"
 								,"N_2_REVASSIGNEDTO":"'&N_2_REVASSIGNEDTO&'"
@@ -494,21 +494,21 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 SELECT[tr_id]
 ,[client_id]
 ,[client_name]
-,CONVERT(VARCHAR(10),[tr_1_informationreceived], 101)AS[tr_1_informationreceived]
-,CONVERT(VARCHAR(10),[tr_1_completed], 101)AS[tr_1_completed]
-,[tr_1_missinginfo]
+,CONVERT(VARCHAR(10),[tr_2_informationreceived], 101)AS[tr_2_informationreceived]
+,CONVERT(VARCHAR(10),[tr_2_completed], 101)AS[tr_2_completed]
+,[tr_missinginfo]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[tr_priority]
-,[tr_1_assignedto]
-,CONVERT(VARCHAR(10),[tr_1_duedate], 101)AS[tr_1_duedate]
+,[tr_2_assignedto]
+,CONVERT(VARCHAR(10),[tr_duedate], 101)AS[tr_duedate]
 ,[tr_esttime]
-,[tr_3_required]
-,CONVERT(VARCHAR(10),[tr_3_rfr], 101)AS[tr_3_rfr]
-,[tr_3_assignedto] 
+,[tr_4_required]
+,CONVERT(VARCHAR(10),[tr_4_rfr], 101)AS[tr_4_rfr]
+,[tr_4_assignedto] 
 FROM[v_taxreturns]
-WHERE[tr_1_informationreceived] IS NOT NULL
- AND [tr_2_delivered] IS NULL
+WHERE[tr_2_informationreceived] IS NOT NULL
+ AND [tr_3_delivered] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
@@ -520,18 +520,18 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"TR_1_INFORMATIONRECEIVED":"'&TR_1_INFORMATIONRECEIVED&'"
-								,"TR_1_COMPLETED":"'&TR_1_COMPLETED&'"
-								,"TR_1_MISSINGINFO":"'&TR_1_MISSINGINFO&'"
+								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
+								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
+								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TR_PRIORITY":"'&TR_PRIORITY&'"
-								,"TR_1_ASSIGNEDTO":"'&TR_1_ASSIGNEDTO&'"
-								,"TR_1_DUEDATE":"'&TR_1_DUEDATE&'"
+								,"TR_2_ASSIGNEDTO":"'&TR_2_ASSIGNEDTO&'"
+								,"TR_DUEDATE":"'&TR_DUEDATE&'"
 								,"TR_ESTTIME":"'&TR_ESTTIME&'"
-								,"TR_3_REQUIRED":"'&TR_3_REQUIRED&'"
-								,"TR_3_RFR":"'&TR_3_RFR&'"
-								,"TR_3_ASSIGNEDTO":"'&TR_3_ASSIGNEDTO&'"
+								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"
+								,"TR_4_RFR":"'&TR_4_RFR&'"
+								,"TR_4_ASSIGNEDTO":"'&TR_4_ASSIGNEDTO&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -551,20 +551,20 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 SELECT[tr_id]
 ,[client_id]
 ,[client_name]
-,CONVERT(VARCHAR(10),[tr_3_extended], 101)AS[tr_3_extended]
-,CONVERT(VARCHAR(10),[tr_3_completed], 101)AS[tr_3_completed]
+,CONVERT(VARCHAR(10),[tr_4_extended], 101)AS[tr_4_extended]
+,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_completed]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[tr_priority]
-,[tr_3_assignedto]
-,[tr_3_pptresttime]
-,CONVERT(VARCHAR(10),[tr_3_rfr], 101)AS[tr_3_rfr]
-,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
+,[tr_4_assignedto]
+,[tr_4_pptresttime]
+,CONVERT(VARCHAR(10),[tr_4_rfr], 101)AS[tr_4_rfr]
+,CONVERT(VARCHAR(10),[tr_4_delivered], 101)AS[tr_4_delivered]
 FROM[v_taxreturns]
-WHERE datepart(year,[tr_1_informationreceived]) = datepart(year, getdate())
+WHERE datepart(year,[tr_2_informationreceived]) = datepart(year, getdate())
 AND [tr_taxyear] = DATEADD(year,-1,getdate())
-AND[tr_3_required] = '1'
-AND [tr_2_delivered] IS NULL
+AND[tr_4_required] = '1'
+AND [tr_3_delivered] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
@@ -576,15 +576,15 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"TR_3_EXTENDED":"'&TR_3_EXTENDED&'"
-								,"TR_3_COMPLETED":"'&TR_3_COMPLETED&'"
+								,"TR_4_EXTENDED":"'&TR_4_EXTENDED&'"
+								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TR_PRIORITY":"'&TR_PRIORITY&'"
-								,"TR_3_ASSIGNEDTO":"'&TR_3_ASSIGNEDTO&'"
-								,"TR_3_PPTRESTTIME":"'&TR_3_PPTRESTTIME&'"
-								,"TR_3_RFR":"'&TR_3_RFR&'"
-								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
+								,"TR_4_ASSIGNEDTO":"'&TR_4_ASSIGNEDTO&'"
+								,"TR_4_PPTRESTTIME":"'&TR_4_PPTRESTTIME&'"
+								,"TR_4_RFR":"'&TR_4_RFR&'"
+								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

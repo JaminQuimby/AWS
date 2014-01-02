@@ -176,7 +176,7 @@ ORDER BY[of_duedate]
 								,"OF_FORM":"'&OF_FORM&'"
 								,"OF_OBTAININFO_DATECOMPLETED":"'&OF_OBTAININFO_DATECOMPLETED&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
-								,"OF_MIRECEIVED":"'&OF_MIRECEIVED&'"
+								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"
 								,"OF_PREPARATION_DATECOMPLETED":"'&OF_PREPARATION_DATECOMPLETED&'"
 								,"OF_REVIEW_DATECOMPLETED":"'&OF_REVIEW_DATECOMPLETED&'"
 								,"OF_ASSEMBLY_DATECOMPLETED":"'&OF_ASSEMBLY_DATECOMPLETED&'"
@@ -474,18 +474,18 @@ SELECT[nm_id]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
 ,[n_noticestatus]
-,[n_3_missinginfo]
-,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
-,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
+,[n_missinginfo]
+,CONVERT(VARCHAR(10),[n_1_datenoticerec], 101)AS[n_1_datenoticerec]
+,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
 ,CONVERT(VARCHAR(10),[n_2_ressubmited], 101)AS[n_2_ressubmited]
 ,[n_2_revrequired]   
-,[n_1_fees]
-,[n_1_paid]
+,[n_fees]
+,[n_paid]
 ,[client_name]
 ,[client_id]
 FROM[v_notice]
 WHERE[n_2_ressubmited] IS NOT NULL
-AND ([n_1_paid] = '6' OR [n_1_paid] IS NULL OR [n_1_paid] = '0') 
+AND ([n_paid] = '6' OR [n_paid] IS NULL OR [n_paid] = '0') 
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -502,13 +502,13 @@ AND ([n_1_paid] = '6' OR [n_1_paid] IS NULL OR [n_1_paid] = '0')
  								,"N_1_TAXFORM":"'&N_1_TAXFORM&'"
  								,"N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'"
  								,"N_NOTICESTATUS":"'&N_NOTICESTATUS&'"
- 								,"N_3_MISSINGINFO":"'&N_3_MISSINGINFO&'"
- 								,"N_2_DATENOTICEREC":"'&N_2_DATENOTICEREC&'"
- 								,"N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'"
+ 								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
+ 								,"N_1_DATENOTICEREC":"'&N_1_DATENOTICEREC&'"
+ 								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
  								,"N_2_RESSUBMITED":"'&N_2_RESSUBMITED&'"
  								,"N_2_REVREQUIRED":"'&N_2_REVREQUIRED&'"
- 								,"N_1_FEES":"'&N_1_FEES&'"
- 								,"N_1_PAID":"'&N_1_PAID&'"
+ 								,"N_FEES":"'&N_FEES&'"
+ 								,"N_PAID":"'&N_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -656,7 +656,7 @@ AND ([trst_2_paid]IS NULL OR [trst_2_paid] = '6' OR [trst_2_paid] = '0')
 								,"TRST_2_DELIVERED":"'&TRST_2_DELIVERED&'"								
 								,"TRST_1_PREPAREDBY":"'&TRST_1_PREPAREDBY&'"
 								,"TRST_2_CURRENTFEES":"'&TRST_2_CURRENTFEES&'"
-								,"TRST_3_PAID":"'&TRST_3_PAID&'"
+								,"TRST_2_PAID":"'&TRST_2_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -681,7 +681,7 @@ SELECT[trst_id]
 ,[trst_state]
 ,CONVERT(VARCHAR(10),[trst_3_pptrcompleted], 101)AS[trst_3_pptrcompleted]
 ,[trst_3_pptrcurrentfees]
-,[trst_3_paymentstatus]
+,[trst_3_paid]
 ,CONVERT(VARCHAR(10),[trst_3_pptrdelivered], 101)AS[trst_3_pptrdelivered]
 ,[client_name]
 ,[client_id]
@@ -689,7 +689,7 @@ FROM[v_taxreturns_state]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 AND[trst_1_completed] IS NOT NULL
-AND ([trst_3_paymentstatus] IS NULL OR [trst_3_paymentstatus] ='6' OR [trst_3_paymentstatus] ='0') 
+AND ([trst_3_paid] IS NULL OR [trst_3_paid] ='6' OR [trst_3_paid] ='0') 
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>

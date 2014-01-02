@@ -5,7 +5,7 @@
 <cfset page.location="workinprogress">
 <cfset page.formid=11>
 <cfset page.title="Work in Progress">
-<cfset page.menuLeft="Total Time,Administrative Tasks,Business Formation,Financial &amp; Tax Planning,Financial Statements,Accounting &amp; Consulting Tasks,Notice Matters,Other Filings,Payroll Checks,Payroll Taxes,Tax Returns,Personal Property Tax Returns">
+<cfset page.menuLeft="Total Time,Administrative Tasks,Business Formation,Financial &amp; Tax Planning,Financial Statements,Accounting &amp; Consulting Tasks,Notice Matters,Other Filings,Payroll Checks,Payroll Taxes,Tax Returns,Personal Property Tax Returns,All Modules">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
 <!DOCTYPE html> 
@@ -116,6 +116,14 @@
 	<div>
 	<div><label for="g12_filter">Filter</label><input id="g12_filter" onBlur="_grid12();" onKeyPress="if(event.keyCode==13){_grid12();}"/></div>
 	<div class="tblGrid" id="grid12"></div>
+	</div>
+  </div>
+   
+  <div id="group13" class="gf-checkbox">
+  <h3>All Modules</h3>
+	<div>
+	<div><label for="g13_filter">Filter</label><input id="g13_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
+	<div class="tblGrid" id="grid2"></div>
 	</div>
   </div>
   
