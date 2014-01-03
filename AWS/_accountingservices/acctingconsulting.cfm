@@ -61,7 +61,7 @@ missinginforeceived
 --->
 
 <div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switch">Credit Hold*</label></div>
+<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb">Credit Hold*</label></div>
 <div><label for="g1_consultingcategory">Consulting Category*</label><select id="g1_consultingcategory" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_consultingcategory','group':'assetCategory','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="q_global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taskdescription">Task Description*</label><textarea  id="g1_taskdescription" cols="4" rows="4"  maxlength="1000" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" ></textarea></div>
 <div><label for="g1_assignedto">Assigned To</label><select  id="g1_assignedto" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

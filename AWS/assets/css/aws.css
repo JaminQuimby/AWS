@@ -132,13 +132,13 @@ opacity: 0;
 :root input[type="checkbox"].ios-switch + div {
 display: inline-block;
 vertical-align: middle;
-width: 3em; height: 1em;
+width: 3em; 
+height: 1em;
 border: 1px solid rgba(0,0,0,.3);
 border-radius: 999px;
 margin-right: 0.5em;
 background: white;
-background-image: linear-gradient(rgba(0,0,0,.1), transparent),
-linear-gradient(90deg, hsl(135, 69%, 46%) 50%, transparent 50%);
+background-image: linear-gradient(rgba(0,0,0,.1), transparent),linear-gradient(90deg, hsl(135, 69%, 46%) 50%, transparent 50%);
 background-size: 200% 100%;
 background-position: 100% 0;
 background-origin: border-box;
@@ -146,9 +146,8 @@ background-clip: border-box;
 overflow: hidden;
 transition-duration: .4s;
 transition-property: padding, width, background-position, text-indent;
-box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset,
-0 .45em 0 .1em rgba(0,0,0,.05) inset;
 font-size: 200%;
+padding-bottom: 1em;
 }
 
 :root input[type="checkbox"].ios-switch:checked + div {
@@ -160,15 +159,15 @@ background-position: 0 0;
 :root input[type="checkbox"].ios-switch + div:before {
 content: 'Yes';
 float: left;
-width: 1.65em; height: 1.65em;
+width: 1.8em; height: 1.8em;
 margin: -.1em;
 border: 1px solid rgba(0,0,0,.35);
 border-radius: inherit;
 background: white;
 background-image: linear-gradient(rgba(0,0,0,.2), transparent);
-/*box-shadow: 0 .1em .1em .1em hsla(0,0%,100%,.8) inset,0 0 .5em rgba(0,0,0,.3);*/
+box-shadow: 0 .1em .1em .1em hsla(0,0%,100%,.8) inset,0 0 .5em rgba(0,0,0,.3);
 color: white;
-text-shadow: 0 -1px 1px rgba(0,0,0,.3);
+/*text-shadow: 0 -1px 1px rgba(0,0,0,.3);*/
 text-indent: -2.5em;
 }
 
@@ -204,10 +203,11 @@ opacity: 0;
 :root input[type="checkbox"].ios-switchb + div {
 display: inline-block;
 vertical-align: middle;
-width: 3em; height: 1em;
+width: 3em; 
+height: 1em;
 border: 1px solid rgba(0,0,0,.3);
 border-radius: 999px;
-margin: 0 .5em;
+margin-right: 0.5em;
 background: white;
 background-image: linear-gradient(rgba(0,0,0,.1), transparent),
 linear-gradient(90deg, hsl(7, 100%, 50%) 50%, transparent 50%);
@@ -220,20 +220,18 @@ transition-duration: .4s;
 transition-property: padding, width, background-position, text-indent;
 /*box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset,0 .45em 0 .1em rgba(0,0,0,.05) inset;*/
 font-size: 200%;
+padding-bottom:1em;
 }
 
 :root input[type="checkbox"].ios-switchb:checked + div {
 padding-left: 2em; 
-/*width: 1em;*/
 background-position: 0 0;
- padding-bottom: 1em;
 }
 
 :root input[type="checkbox"].ios-switchb + div:before {
 content: 'Yes';
 float: left;
 width: 1.65em; height: 1.65em;
-margin: -.1em;
 border: 1px solid rgba(0,0,0,.35);
 border-radius: inherit;
 background: white;

@@ -55,7 +55,7 @@ add Work Initiated
 	<div>
 		<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 		<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-        <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switch">Credit Hold*</label></div>
+        <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb">Credit Hold*</label></div>
 		<div><label for="g1_category">Category*</label><select id="g1_category" data-placeholder="Select a Category."><option value="0">&nbsp;</option><cfoutput query="global_admintaskcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_taskdescription">Task Description*</label><textarea id="g1_taskdescription" maxlength="1000" ></textarea></div>
 		<div><label for="g1_instructions">Instructions</label><textarea id="g1_instructions" maxlength="1000" ></textarea></div>
