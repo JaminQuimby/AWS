@@ -52,15 +52,15 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <h3>General</h3>
 <div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
+<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switch">Credit Hold*</label></div>
 <div><label for="g1_year">Year*</label><input type="text" id="g1_year" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_payenddate">Pay End Date*</label><input type="text" class="date" id="g1_payenddate"></div>
 <div><label for="g1_paydate">Pay Date*</label><input type="text" class="date" id="g1_paydate"></div>
-<div><input id="g1_altfrequency" type="checkbox"><label for="g1_altfrequency">Alt Frequency</strong></label></div>
+<div><label for="g1_altfrequency"><input id="g1_altfrequency" type="checkbox" class="ios-switch">Alt Frequency</strong></label></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 <div><label for="g1_priority">Priority</label><input type="text"  id="g1_priority" ></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_estimatedtime" ></div>
-<div><input id="g1_missinginformation" type="checkbox"><label for="g1_missinginformation">Missing Information</label></div>
+<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"></option><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

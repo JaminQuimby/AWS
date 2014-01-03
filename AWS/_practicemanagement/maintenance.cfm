@@ -212,7 +212,7 @@
 <div>
 <div><label for="g3_name">Name</label><input type="text" id="g3_name" ></div>
 <div><label for="g3_spouse">Spouse</label><input type="text" id="g3_spouse" ></div>
-<div><input id="g3_active" type="checkbox"><label for="g3_active">Active</label></div>
+<div><label for="g3_active"><input id="g3_active" type="checkbox" class="ios-switch">Active</label></div>
 <div><label for="g3_initials">Initials</label><input type="text" id="g3_initials" ></div>
 <div><label for="g3_birthday">Birthday</label><input type="text" class="date" id="g3_birthday" ></div>
 <div><label for="g3_address">Address</label><input type="text" id="g3_address" ></div>
@@ -275,5 +275,3 @@
 <cfinclude template="../assets/inc/footer.cfm" />
 </body>
 </html>
-
-

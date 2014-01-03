@@ -122,22 +122,150 @@ tr{vertical-align:top;}
 ._practicemanagement li{border-color:#333;}
 ._practicemanagement li a{color:#000;}
 
-/*RADIO BUTTONS AND CHECK BOXES*/
-.gf-form label{font:normal normal 11px/13px Arial, Sans-serif;color:#000;cursor:pointer;}/* = common styles */
-.gf-form label,.gf-checkbox input[type="checkbox"] + label::before,.gf-radio input[type="radio"] + label::before{vertical-align:middle;}
-.gf-checkbox input[type="checkbox"],.gf-radio input[type="radio"]{position:absolute;opacity:0;}/* = hide the checkboxes and radios */
-.gf-checkbox input[type="checkbox"] + label::before,.gf-radio input[type="radio"] + label::before{content:"";display:inline-block;width:13px;height:13px;line-height:13px;margin:0 8px 0 0;background:url("../img/sprite-checkbox.png") no-repeat 0 0;vertical-align:middle;}/* = we use generated content to create a placeholder for the checkbox and the radio */
-.gf-form input[type="checkbox"]:disabled + label,.gf-form input[type="radio"]:disabled + label{opacity:.5;cursor:default;/* or cursor:no-drop */}/* = disabled checkbox or radio */
-.gf-checkbox input[type="checkbox"]:not(:checked):hover + label::before{background-position:0 -13px;}/* = hover checkbox (unselected state only) */
-.gf-checkbox input[type="checkbox"]:checked + label::before{background-position:0 -26px;}/* = selected checkbox */
-.gf-radio input[type="radio"] + label::before{background-position:-13px 0;}/* = normal state radio */
-.gf-radio input[type="radio"]:hover + label::before{background-position:-13px -13px;}/* = radio hover (unselected state only) */
-.gf-radio input[type="radio"]:checked + label::before{background-position:-13px -26px;}/* = selected radio */
-.gf-form input[type="checkbox"]:focus + label,.gf-form input[type="radio"]:focus + label{outline:dotted 1px;}/* =focused checkbox or radio | by not adding color to the value we force the use of system's default focus color "invert" */
+.ios-switchb{ font-size:16px;}
 
-/* older versions of internet explorer do not support either generated content, so we display the system checkboxes and radio buttons */
-@media \0screen {.gf-checkbox input[type="checkbox"],
-.gf-radio input[type="radio"] 
-{position:static;}
+:root input[type="checkbox"] { /* :root here acting as a filter for older browsers */
+position: absolute;
+opacity: 0;
 }
 
+:root input[type="checkbox"].ios-switch + div {
+display: inline-block;
+vertical-align: middle;
+width: 3em; height: 1em;
+border: 1px solid rgba(0,0,0,.3);
+border-radius: 999px;
+margin-right: 0.5em;
+background: white;
+background-image: linear-gradient(rgba(0,0,0,.1), transparent),
+linear-gradient(90deg, hsl(135, 69%, 46%) 50%, transparent 50%);
+background-size: 200% 100%;
+background-position: 100% 0;
+background-origin: border-box;
+background-clip: border-box;
+overflow: hidden;
+transition-duration: .4s;
+transition-property: padding, width, background-position, text-indent;
+box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset,
+0 .45em 0 .1em rgba(0,0,0,.05) inset;
+font-size: 200%;
+}
+
+:root input[type="checkbox"].ios-switch:checked + div {
+padding-left: 2em;
+background-position: 0 0;
+ padding-bottom: 1em;
+}
+
+:root input[type="checkbox"].ios-switch + div:before {
+content: 'Yes';
+float: left;
+width: 1.65em; height: 1.65em;
+margin: -.1em;
+border: 1px solid rgba(0,0,0,.35);
+border-radius: inherit;
+background: white;
+background-image: linear-gradient(rgba(0,0,0,.2), transparent);
+/*box-shadow: 0 .1em .1em .1em hsla(0,0%,100%,.8) inset,0 0 .5em rgba(0,0,0,.3);*/
+color: white;
+text-shadow: 0 -1px 1px rgba(0,0,0,.3);
+text-indent: -2.5em;
+}
+
+:root input[type="checkbox"].ios-switch:active + div:before {
+background-color: #eee;
+}
+
+:root input[type="checkbox"].ios-switch:focus + div {
+box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset,
+0 .45em 0 .1em rgba(0,0,0,.05) inset,
+0 0 .4em 1px rgba(255,0,0,.5);
+}
+
+:root input[type="checkbox"].ios-switch + div:before,
+:root input[type="checkbox"].ios-switch + div:after {
+font: bold 60%/1.9 sans-serif;
+text-transform: uppercase;
+}
+
+:root input[type="checkbox"].ios-switch + div:after {
+content: 'No';
+float: left;
+text-indent: .5em;
+color: rgba(0,0,0,.45);
+text-shadow: none;
+
+}
+:root input[type="checkbox"] { /* :root here acting as a filter for older browsers */
+position: absolute;
+opacity: 0;
+}
+
+:root input[type="checkbox"].ios-switchb + div {
+display: inline-block;
+vertical-align: middle;
+width: 3em; height: 1em;
+border: 1px solid rgba(0,0,0,.3);
+border-radius: 999px;
+margin: 0 .5em;
+background: white;
+background-image: linear-gradient(rgba(0,0,0,.1), transparent),
+linear-gradient(90deg, hsl(7, 100%, 50%) 50%, transparent 50%);
+background-size: 200% 100%;
+background-position: 100% 0;
+background-origin: border-box;
+background-clip: border-box;
+overflow: hidden;
+transition-duration: .4s;
+transition-property: padding, width, background-position, text-indent;
+/*box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset,0 .45em 0 .1em rgba(0,0,0,.05) inset;*/
+font-size: 200%;
+}
+
+:root input[type="checkbox"].ios-switchb:checked + div {
+padding-left: 2em; 
+/*width: 1em;*/
+background-position: 0 0;
+ padding-bottom: 1em;
+}
+
+:root input[type="checkbox"].ios-switchb + div:before {
+content: 'Yes';
+float: left;
+width: 1.65em; height: 1.65em;
+margin: -.1em;
+border: 1px solid rgba(0,0,0,.35);
+border-radius: inherit;
+background: white;
+background-image: linear-gradient(rgba(0,0,0,.2), transparent);
+  box-shadow: 0 .1em .1em .1em hsla(0,0%,100%,.8) inset,0 0 .5em rgba(0,0,0,.3);
+color: white;
+text-shadow: 0 -1px 1px rgba(0,0,0,.3);
+text-indent: -2.5em;
+}
+
+:root input[type="checkbox"].ios-switchb:active + div:before {
+background-color: #eee;
+}
+
+:root input[type="checkbox"].ios-switchb:focus + div {
+/*
+box-shadow: 0 .1em .1em rgba(0,0,0,.2) inset,
+0 .45em 0 .1em rgba(0,0,0,.05) inset,
+0 0 .4em 1px rgba(255,0,0,.5);
+*/
+}
+
+:root input[type="checkbox"].ios-switchb + div:before,
+:root input[type="checkbox"].ios-switchb + div:after {
+font: bold 60%/1.9 sans-serif;
+text-transform: uppercase;
+}
+
+:root input[type="checkbox"].ios-switchb + div:after {
+content: 'No';
+float: left;
+text-indent: .5em;
+color: rgba(0,0,0,.45);
+text-shadow: none;
+}

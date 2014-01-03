@@ -69,7 +69,7 @@ due date for response
 <h3>Add Notice Matter</h3>
 <div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
+<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switch">Credit Hold*</label></div>
 <div><label for="g1_mattername">Matter Name*</label><input type="text" id="g1_mattername"></div>
 <div><label for="g1_matterstatus">Matter Status*</label><select id="g1_matterstatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <!-- <div style="margin-top:5px;"><a href="#" class="button optional" onClick="_grid1();_toggle('entrance2');_hide('entrance,group2,group3');">Add Notice</a></div> -->
@@ -92,11 +92,8 @@ due date for response
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_priority">Priority</label><input type="text" id="g2_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g2_estimatedtime">Estimated Time</label><input type="text" id="g2_estimatedtime" ></div>
-
-
-<div><input id="g2_missinginformation" type="checkbox"><label for="g2_missinginformation">Missing Information</label></div>
+<div><label for="g2_missinginformation"><input id="g2_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g2_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_missinginforeceived" ></div>
-
 <div><label for="g2_fees">Fees</label><input type="text" id="g2_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g2_deliverymethod">Delivery Method</label><select id="g2_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_paid">Paid</label><select id="g2_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -119,11 +116,9 @@ due date for response
 <div>
 <div><label for="g2_2_responsecompleted">Response Completed</label><input type="text" class="date" id="g2_2_responsecompleted"></div>
 <div><label for="g2_2_responsecompletedby">Response Completed By</label><select id="g2_2_responsecompletedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-
-<div><input id="g2_2_reviewrequired" type="checkbox"><label for="g2_2_reviewrequired">Review Required</label></div>
+<div><label for="g2_2_reviewrequired"><input id="g2_2_reviewrequired" type="checkbox" class="ios-switch">Review Required</label></div>
 <div><label for="g2_2_reviewassignedto">Review Assigned To</label><select id="g2_2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_2_reviewcompleted">Review Completed</label><input type="text" class="date" id="g2_2_reviewcompleted"></div>
-
 <div><label for="g2_2_responsesubmitted">Response Submitted</label><input type="text" class="date" id="g2_2_responsesubmitted"></div>
 <div><label for="g2_2_irsstateresponserecieved">IRS/State Response Recieved</label><input type="text" class="date" id="g2_2_irsstateresponserecieved"></div>
 </div>

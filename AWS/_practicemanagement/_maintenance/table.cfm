@@ -14,7 +14,6 @@
 <cfquery name="optionGroup" cachedWithin="#page.cache.users#" datasource="AWS">SELECT[form_id]AS[optionvalue_id],[formName]AS[optionname]FROM[ctrl_forms]ORDER BY[formName]</cfquery>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
-
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="../../assets/inc/pagemenu.cfm">
@@ -59,10 +58,7 @@
 <div><label for="opt_FilingDeadline">Filing Deadline</label><input type="text" id="opt_FilingDeadline"></div>
 <div><label for="opt_ExtensionDeadline">Extension Deadline</label><input type="text" id="opt_ExtensionDeadline"></div>
 </div>
-
 <div><label for="g2_optionDescription">Option Description</label><textarea  id="g2_optionDescription" cols="4" rows="4"></textarea></div>
-
-
 </div>
 </div>
 <!--- Start Plugins --->

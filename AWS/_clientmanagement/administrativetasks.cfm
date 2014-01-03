@@ -55,7 +55,7 @@ add Work Initiated
 	<div>
 		<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 		<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><input id="g1_credithold" type="checkbox"><label for="g1_credithold">Credit Hold*</label></div>
+        <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switch">Credit Hold*</label></div>
 		<div><label for="g1_category">Category*</label><select id="g1_category" data-placeholder="Select a Category."><option value="0">&nbsp;</option><cfoutput query="global_admintaskcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_taskdescription">Task Description*</label><textarea id="g1_taskdescription" maxlength="1000" ></textarea></div>
 		<div><label for="g1_instructions">Instructions</label><textarea id="g1_instructions" maxlength="1000" ></textarea></div>
@@ -63,21 +63,16 @@ add Work Initiated
 		<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"/></div>
 		<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" id="g1_estimatedtime" /></div>
 		<div><label for="g1_daterequested">Date Requested</label><input type="text" class="date" id="g1_daterequested" /></div>
-
 		<div><label for="g1_completed">Completed</label><input type="text" class="date" id="g1_completed" /></div>
 		<div><label for="g1_workinitiated">Work Initiated</label><input type="text" class="date" id="g1_workinitiated" /></div>
         <div><label for="g1_requestedby">Requested By</label><select id="g1_requestedby" data-placeholder="Requested By."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		
         <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"  multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_datestarted">Date Started</label><input type="text" class="date"id="g1_datestarted" /></div>
 	</div>
 </div>
-
-
 <!--- Start Plugins --->
 <cfinclude template="../assets/plugins/plugins.cfm">
-
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>

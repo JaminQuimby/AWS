@@ -15,8 +15,6 @@
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
-
-
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="../assets/inc/pagemenu.cfm">
@@ -42,7 +40,7 @@
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="g1_name">Name</label><input type="text" id="g1_name" class="readonly" readonly></div>
 <div><label for="g1_initials">Initials</label><input type="text" id="g1_initials"></div>
-<div><input id="g1_active" type="checkbox"><label for="g1_active">Active</label></div>
+<div><label for="g1_active"><input id="g1_active" type="checkbox" class="ios-switch">Active</label></div>
 <div><label for="g1_address">Address</label><input type="text" id="g1_address"></div>
 <div><label for="g1_city">City</label><input type="text" id="g1_city"></div>
 <div><label for="g1_state">State</label><select id="g1_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -66,14 +64,9 @@
 <div><label for="g1_contactphone">Emergency Phone</label><input type="text" id="g1_contactphone"></div>
 </div>
 </div>
-
-
 <!--- Start Plugins --->
 <cfinclude template="../assets/plugins/plugins.cfm">
-
 <!--- FIELD DATA --->
-
-
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>

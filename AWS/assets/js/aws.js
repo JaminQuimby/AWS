@@ -269,6 +269,9 @@ $(function () {
         
     });
 });
-
+$(document).ready(function(){
+	
+$( "<div class='switch'></div>" ).insertAfter( ".ios-switch,.ios-switchb" );
+});
 
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};
