@@ -105,8 +105,10 @@ SELECT[pc_obtaininfo_datecompleted]=CONVERT(VARCHAR(10),pc_obtaininfo_datecomple
 ,[pc_preparation_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pc_preparation_completedby=[user_id]))
 ,[pc_review_datecompleted]=CONVERT(VARCHAR(10),pc_review_datecompleted,101)
 ,[pc_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pc_review_completedby=[user_id]))
-,[pc_delivery_datecompleted]=CONVERT(VARCHAR(10),pc_delivery_datecompleted,101)
+,[pc_assembly_datecompleted]=CONVERT(VARCHAR(10),pc_assembly_datecompleted,101)
 ,[pc_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pc_assembly_completedby=[user_id]))
+,[pc_delivery_datecompleted]=CONVERT(VARCHAR(10),pc_delivery_datecompleted,101)
+,[pc_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pc_delivery_completedby=[user_id]))
 FROM[payrollcheckstatus]
 WHERE[PC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>

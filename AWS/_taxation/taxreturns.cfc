@@ -92,7 +92,6 @@ SELECT[TR_ID]
 ,[tr_priorfees]
 ,[tr_priority]
 ,[tr_reason]
-,[tr_state]
 ,[tr_taxform]
 ,[tr_taxyear]
 ,[tr_credithold]
@@ -443,7 +442,6 @@ INSERT INTO[TAXRETURNS](
 ,[tr_priorfees]
 ,[tr_priority]
 ,[tr_reason]
-,[tr_state]
 ,[tr_taxform]
 ,[tr_taxyear]
 )
@@ -465,7 +463,6 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][16]#"/>
 ,<cfqueryparam value="#j.DATA[1][17]#"/>
 ,<cfqueryparam value="#j.DATA[1][18]#"/>
-,<cfqueryparam value="#j.DATA[1][19]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -496,9 +493,8 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_priorfees]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,[tr_priority]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,[tr_reason]=<cfqueryparam value="#j.DATA[1][16]#"/>
-,[tr_state]=<cfqueryparam value="#j.DATA[1][17]#"/>
-,[tr_taxform]=<cfqueryparam value="#j.DATA[1][18]#"/>
-,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][19]#"/>
+,[tr_taxform]=<cfqueryparam value="#j.DATA[1][17]#"/>
+,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][18]#"/>
 WHERE[TR_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

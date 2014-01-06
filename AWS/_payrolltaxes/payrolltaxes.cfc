@@ -24,6 +24,7 @@ SELECT[PT_ID]
  ,[pt_month]
  ,[pt_paid]
  ,[pt_priority]
+ ,[pt_state]
  ,[pt_type]
  ,[pt_year]
 FROM[payrolltaxes]
@@ -105,6 +106,29 @@ FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
+
+<!--- Asset GUI Completed Tasks--->
+<cfcase value="assetCompTask">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[pt_obtaininfo_datecompleted]=CONVERT(VARCHAR(10),pt_obtaininfo_datecompleted,101)
+,[pt_obtaininfo_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_obtaininfo_completedby=[user_id]))
+,[pt_entry_datecompleted]=CONVERT(VARCHAR(10),pt_entry_datecompleted,101)
+,[pt_entry_completedbyyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_entry_completedby=[user_id]))
+,[pt_rec_datecompleted]=CONVERT(VARCHAR(10),pt_rec_datecompleted,101)
+,[pt_rec_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_rec_completedby=[user_id]))
+,[pt_review_datecompleted]=CONVERT(VARCHAR(10),pt_review_datecompleted,101)
+,[pt_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_review_completedby=[user_id]))
+,[pt_assembly_datecompleted]=CONVERT(VARCHAR(10),pt_assembly_datecompleted,101)
+,[pt_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_assembly_completedby=[user_id]))
+,[pt_delivery_datecompleted]=CONVERT(VARCHAR(10),pt_delivery_datecompleted,101)
+,[pt_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_delivery_completedby=[user_id]))
+FROM[payrolltaxes]
+WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
+
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
@@ -213,6 +237,7 @@ INSERT INTO[payrolltaxes](
 ,[pt_month]
 ,[pt_paid]
 ,[pt_priority]
+,[pt_state]
 ,[pt_type]
 ,[pt_year]
 )
@@ -230,6 +255,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][12]#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#"/>
+,<cfqueryparam value="#j.DATA[1][15]#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -256,8 +282,9 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_month]=<cfqueryparam value="#j.DATA[1][10]#"/>
 ,[pt_paid]=<cfqueryparam value="#j.DATA[1][11]#"/>
 ,[pt_priority]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[pt_type]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[pt_year]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[pt_state]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[pt_type]=<cfqueryparam value="#j.DATA[1][14]#"/>
+,[pt_year]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 WHERE[PT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
