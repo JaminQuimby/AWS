@@ -6,6 +6,11 @@ highlight = light up current selected vertical tab; varibales on
 isit = regexp validation of a string
 updateh3 = updates <h3> elements with a msg contined in brakets. Example <h3>Client</h3> when you run updateh3("Qutera") it will become <h3>Client [Qutera]</h3>  
 */
+String.prototype.replaceAll = function (find, replace){var str = this; return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace)};
+String.prototype.has = function(text) { return this.toLowerCase().indexOf("" + text.toLowerCase() + "") != -1; };
+String.prototype.insert = function (index, string) { if (index > 0) return this.substring(0, index) + string + this.substring(index, this.length); else return string + this;};
+String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
+
 /*jtable Helper Object*/
 _jGrid=function(params){
 	var options={
@@ -182,6 +187,7 @@ case"ip6":re=/^(?:(?:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-
 case"hex":re=/^#?([a-f0-9]{6}|[a-f0-9]{3})$/;if(is.match(re)){return true;}else{return false;}break;
 case"html":re=/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/;if(is.match(re)){return true;}else{return false;}break;
 case"image":re=/.*(\.[Jj][Pp][Gg]|\.[Gg][Ii][Ff]|\.[Jj][Pp][Ee][Gg]|\.[Pp][Nn][Gg])/;if(is.match(re)){return true;}else{return false;}break;
+case"boolean":re=/^True|^False|^true|^false|^yes|^no|^1|^0/;if(is.match(re)){return true;}else{return false;}break;
 default:return false;
 }}
 
