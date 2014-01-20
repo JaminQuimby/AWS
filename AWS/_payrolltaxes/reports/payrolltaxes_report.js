@@ -11,6 +11,7 @@ _grid1=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_DUEDATE:{title:'Due Date',width:'1%'}
 			,PT_TYPE:{title:'Type'}
+			,PT_STATE:{title:'State'}
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTH:{title:'Month'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
