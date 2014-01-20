@@ -7,96 +7,64 @@ _group1=function(){_grid1()}
  
 _grid1=function(){
 
-	
+var config = [
+{"name":"datedue","type":"date","value":""}
+,{"name":"year","type":"date","value":""}
+,{"name":"payenddate","type":"date","value":""}
+,{"name":"missinginfo","type":"boolean","value":""}
+,{"name":"obtaininfo_datecompleted","type":"date","value":""}
+,{"name":"assembly_datecompleted","type":"date","value":""}
+,{"name":"delivery_datecompleted","type":"date","value":""}
+,{"name":"fees","type":"text","value":""}
+,{"name":"paid","type":"text","value":""}
+];
 
 
-
-_toSearch=function(data,options){
+_toSearch=function(data,config,options){
 try{
+//Build Default Options if none provided	
+if( $.type( options ) === "undefined"){
+var list='"search":""';
+$.each(config, function(i){
+list=list+',"'+config[i].name+'":""';
+switch(config[i].type){
+case'date':list=list+',"'+config[i].name+'_less":""';list=list+',"'+config[i].name+'_more":""';break;
+default:}
+options = '{'+list+'}'})}
+//Build json data string
 var json=data;
+//Escape unecessary chars
 json=json.escapeIt(json); //Escape
-
-//Search features
-json=json.replaceAll('datedue<', '","datedue_less":"').replaceAll('datedue>', '","datedue_more":"').replaceAll('datedue:', '","datedue":"');
-json=json.replaceAll('year<', '","year_less":"').replaceAll('year>', '","year_more":"').replaceAll('year:', '","year":"');
-json=json.replaceAll('payenddate<', '","payenddate_less":"').replaceAll('payenddate>', '","payenddate_more":"').replaceAll('payenddate:', '","payenddate":"');
-json=json.replaceAll('paydate<', '","paydate_less":"').replaceAll('paydate>', '","paydate_more":"').replaceAll('paydate:', '","paydate":"');
-json=json.replaceAll('missinginfo:', '","missinginfo":"');
-json=json.replaceAll('obtaininfo_datecompleted<', '","obtaininfo_datecompleted_less":"').replaceAll('obtaininfo_datecompleted>', '","obtaininfo_datecompleted_more":"').replaceAll('obtaininfo_datecompleted:', '","obtaininfo_datecompleted":"');
-json=json.replaceAll('assembly_datecompleted<', '","assembly_datecompleted_less":"').replaceAll('assembly_datecompleted>', '","assembly_datecompleted_more":"').replaceAll('assembly_datecompleted:', '","assembly_datecompleted":"');
-json=json.replaceAll('delivery_datecompleted<', '","delivery_datecompleted_less":"').replaceAll('delivery_datecompleted>', '","delivery_datecompleted_more":"').replaceAll('delivery_datecompleted:', '","delivery_datecompleted":"');
-json=json.replaceAll('fees<', '","fees_less":"').replaceAll('fees>', '","fees__more":"').replaceAll('fees:', '","fees_":"');
-json=json.replaceAll('paid:', '","paid":"');
-
+//expand options search types
+$.each(config, function(i){
+json=json.replaceAll(config[i].name+':', '","'+config[i].name+'":"');	
+switch(config[i].type){
+case'date':
+json=json.replaceAll(config[i].name+'<', '","'+config[i].name+'_less":"')
+json=json.replaceAll(config[i].name+'>', '","'+config[i].name+'_more":"')
+break;
+default:
+//  code to be executed if n is different from case 1 and 2
+}});
+//remove unecessary whitespace
 json=json.replaceAll(' "', '"').replaceAll('" ', '"'); //Trim
+//format json structure
 jdata='{"Search":"' +  json  + '"}';
-	
-
 var params = $.parseJSON(jdata);
-
-//Custom Options
-var options = {
-	datedue:""
-		,datedue_less:""
-		,datedue_more:""
-	,year:""
-	,payenddate:""
-		,payenddate_less:""
-		,payenddate_more:""
-	,paydate:""
-		,paydate_less:""
-		,paydate_more:""
-	,missinginfo:""
-	,obtaininfo_datecompleted:""
-		,obtaininfo_datecompleted_less:""
-		,obtaininfo_datecompleted_more:""
-	,assembly_datecompleted:""
-		,assembly_datecompleted_less:""
-		,assembly_datecompleted_more:""
-	,delivery_datecompleted:""
-		,delivery_datecompleted_less:""
-		,delivery_datecompleted_more:""
-	,fees:""
-	,paid:""};
-
 $.extend(true, options, params);
-//Fist validation
-
-
-if(!_isIt('date',options['datedue'])){options['datedue']=""}
-if(!_isIt('date',options['datedue_less'])){options['datedue_less']=""}
-if(!_isIt('date',options['datedue_more'])){options['datedue_more']=""}
-
-if(!_isIt('date',options['year'])){options['year']=""}
-
-if(!_isIt('date',options['payenddate'])){options['payenddate']=""}
-if(!_isIt('date',options['payenddate_less'])){options['payenddate_less']=""}
-if(!_isIt('date',options['payenddate_more'])){options['payenddate_more']=""}
-
-if(!_isIt('boolean',options['missinginfo'])){options['missinginfo']=""}
-if(!_isIt('date',options['obtaininfo_datecompleted'])){options['obtaininfo_datecompleted']=""}
-if(!_isIt('date',options['obtaininfo_datecompleted_less'])){options['obtaininfo_datecompleted_less']=""}
-if(!_isIt('date',options['obtaininfo_datecompleted_more'])){options['obtaininfo_datecompleted_more']=""}
-
-if(!_isIt('date',options['assembly_datecompleted'])){options['assembly_datecompleted']=""}
-if(!_isIt('date',options['assembly_datecompleted_less'])){options['assembly_datecompleted_less']=""}
-if(!_isIt('date',options['assembly_datecompleted_more'])){options['assembly_datecompleted_more']=""}
-
-if(!_isIt('date',options['delivery_datecompleted'])){options['delivery_datecompleted']=""}
-if(!_isIt('date',options['delivery_datecompleted_less'])){options['delivery_datecompleted_less']=""}
-if(!_isIt('date',options['delivery_datecompleted_more'])){options['delivery_datecompleted_more']=""}
-if(!_isIt('numeric',options['fees'])){options['fees']=""}
-
-/**/
-//if(!_isIt('date',options['paid'])){options['paid']=""}
-
-
-//alert(options)
-
+//remove junk data to avoid unecessary error prompts from server
+$.each(config, function(i){
+switch(config[i].type){
+case'date':
+if(!_isIt('date',options[config[i].name])){options[config[i].name]=""}
+if(!_isIt('date',options[config[i].name+'_less'])){options[config[i].name+'_less']=""}
+if(!_isIt('date',options[config[i].name+'_more'])){options[config[i].name+'_more']=""}
+break;
+case'boolean':if(!_isIt('boolean',options['missinginfo'])){options['missinginfo']=""}break;
+case'text': break;
+}});
+//Return formated data
 return JSON.stringify(options);
-
-
-
 
 }
 catch (err) {
@@ -125,7 +93,6 @@ catch (err) {
 			,PC_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
-	
-	"arguments":'{"search":"'+_toSearch($("#g0_filter").val())+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
+	"arguments":'{"search":"'+_toSearch($("#g0_filter").val(),config)+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollchecks.cfm?task_id="+record.PC_ID+"&nav=0","_blank")'
 	})};
