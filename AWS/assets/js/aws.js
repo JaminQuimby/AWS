@@ -8,8 +8,134 @@ updateh3 = updates <h3> elements with a msg contined in brakets. Example <h3>Cli
 */
 String.prototype.replaceAll = function (find, replace){var str = this; return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace)};
 String.prototype.has = function(text) { return this.toLowerCase().indexOf("" + text.toLowerCase() + "") != -1; };
-String.prototype.insert = function (index, string) { if (index > 0) return this.substring(0, index) + string + this.substring(index, this.length); else return string + this;};
+String.prototype.insert = function (index, string) {if (index > 0) return this.substring(0, index) + string + this.substring(index, this.length); else return string + this;};
+Array.prototype.removeValue = function(name, value){var array = $.map(this, function(v,i){return v[name] === value ? null : v;});this.length = 0;this.push.apply(this, array);}
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
+
+
+_toReport=function(data,config){
+//Build Report Groups
+//Build a basic json object
+	var jgroup = $.parseJSON('{"build":[]}');
+//split human grouped input
+	group = data.split(')');
+$.each(group, function(i){	
+//FIRST GROUP
+if(group[i]!=''){
+	if(!group[i].match(/(and\s*\()|(or\s*\()/gi)){		
+	var a=group[i].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+	jgroup.build.push($.parseJSON('{"t":"NONE","g":['+JSON.stringify(_toBuild(a.replace(/\s*\(\s*/,''),config))+']}'))}			
+//AND GROUP
+	if(group[i].match(/\band\s*\(/gi)){
+	//Remove AND and trim whitespace
+	var b=group[i].replace(/\band\s*\(/gi, '').replace(/^\s\s*/, '').replace(/\s\s*$/, '')
+	jgroup.build.push($.parseJSON('{"t":"AND","g":['+JSON.stringify(_toBuild(b.replace(/\s*\(\s*/,''),config))+']}'))}	
+//OR GROUP
+	if(group[i].match(/\bor\s*\(/gi)){
+	var c=group[i].replace(/\bor\s*\(/gi, '').replace(/^\s\s*/, '').replace(/\s\s*$/, '')
+	jgroup.build.push($.parseJSON('{"t":"OR","g":['+JSON.stringify(_toBuild(c.replace(/\s*\(\s*/,''),config))+']}'))}
+}})
+return JSON.stringify(jgroup);
+
+	}
+
+
+_toBuild=function(data,config,options){
+try{
+
+//Build Default Options if none provided	
+if( $.type( options ) === "undefined"){
+	
+var list='"search":""';
+$.each(config, function(i){
+list=list+',"'+config[i].n+'":""';
+switch(config[i].t){
+case'date':list=list+',"'+config[i].n+'_less":""';list=list+',"'+config[i].n+'_more":""';break;
+case'numeric':list=list+',"'+config[i].n+'_less":""';list=list+',"'+config[i].n+'_more":""';break;
+default:}
+options = '{'+list+'}'})
+}
+
+//Build json data string
+var json=data;
+//Escape unecessary chars
+json=json.escapeIt(json); //Escape
+//expand options search types
+
+
+$.each(config, function(i){
+json=json.replaceAll(config[i].n+':', '","'+config[i].n+'":"');
+switch(config[i].t){
+case'date':
+json=json.replaceAll(config[i].n+'<', '","'+config[i].n+'_less":"').replaceAll(config[i].n+'>', '","'+config[i].n+'_more":"');
+break;
+case'numeric':
+json=json.replaceAll(config[i].n+'<', '","'+config[i].n+'_less":"').replaceAll(config[i].n+'>', '","'+config[i].n+'_more":"');
+break;
+default:
+//  code to be executed if n is different from case 1 and 2
+
+
+}
+
+
+});
+//remove unecessary whitespace
+json=json.replaceAll(' "', '"').replaceAll('" ', '"'); //Trim
+
+//format json structure
+jdata='{"search":"' +  json  + '"}';
+
+var params = $.parseJSON(jdata);
+
+options = $.parseJSON(options);
+
+$.extend(true, options, params);
+//remove junk data to avoid unecessary error prompts from server
+$.each(config, function(i){
+switch(config[i].t){
+case'date':
+if(!_isIt('date',options[config[i].n])){if(!_isIt('none',options[config[i].n])){options[config[i].n]=""}}
+if(!_isIt('date',options[config[i].n+'_less'])){options[config[i].n+'_less']=""}
+if(!_isIt('date',options[config[i].n+'_more'])){options[config[i].n+'_more']=""}
+
+break;
+case'numeric':
+if(!_isIt('numeric',options[config[i].n])){if(!_isIt('none',options[config[i].n])){options[config[i].n]=""}}
+if(!_isIt('numeric',options[config[i].n+'_less'])){options[config[i].n+'_less']=""}
+if(!_isIt('numeric',options[config[i].n+'_more'])){options[config[i].n+'_more']=""}
+break;
+case'boolean':if(!_isIt('boolean',options[config[i].n])){options[config[i].n]=""}break;
+case'text': break;
+default: 
+}
+
+//options.[config[i].n].removeValue(, '');
+//options.[config[i].n+'_less'].removeValue(, '');
+//options.[config[i].n+'_more'].removeValue(, '');
+
+});
+
+	
+var xgroup = $.parseJSON('[]');
+
+
+
+$.each(options, function(i){
+	
+if(options[i]!=""){
+
+xgroup.push($.parseJSON('{"n":"'+i+'","v":"'+options[i]+'"}'));
+
+	}
+});
+
+return xgroup;
+}
+catch (err) {
+  return '{"n":"search","v":'+data+'}';
+}}
+
 
 /*jtable Helper Object*/
 _jGrid=function(params){
@@ -188,6 +314,7 @@ case"hex":re=/^#?([a-f0-9]{6}|[a-f0-9]{3})$/;if(is.match(re)){return true;}else{
 case"html":re=/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/;if(is.match(re)){return true;}else{return false;}break;
 case"image":re=/.*(\.[Jj][Pp][Gg]|\.[Gg][Ii][Ff]|\.[Jj][Pp][Ee][Gg]|\.[Pp][Nn][Gg])/;if(is.match(re)){return true;}else{return false;}break;
 case"boolean":re=/^True|^False|^true|^false|^yes|^no|^1|^0/;if(is.match(re)){return true;}else{return false;}break;
+case"none":re=/^none|^None|^null|^Null|^empty|^Empty|^0/;if(is.match(re)){return true;}else{return false;}break;
 default:return false;
 }}
 
