@@ -124,9 +124,9 @@ var xgroup = $.parseJSON('[]');
 $.each(options, function(i){
 	
 if(options[i]!=""){
-
+$.each(config, function(i){
 xgroup.push($.parseJSON('{"n":"'+i+'","v":"'+options[i]+'"}'));
-
+})
 	}
 });
 
