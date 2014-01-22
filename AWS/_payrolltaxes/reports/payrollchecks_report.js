@@ -8,6 +8,7 @@ _group1=function(){_grid1()}
 _grid1=function(){
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var grid1_config = [
 {"n":"search","type":"text","v":""}
 ,{"n":"altfreq","t":"boolean","v":""}
@@ -44,6 +45,8 @@ var grid1_config = [
 ,{"n":"year","t":"numeric","v":""}
 ];
 =======
+=======
+>>>>>>> 11cc8cac59cb80c2ef6f955de8efff87ab9ebfd3
 var config = [
 {"name":"datedue","type":"date","value":""}
 ,{"name":"year","type":"date","value":""}
@@ -132,7 +135,11 @@ catch (err) {
 			},
 	"method":"f_lookupData",
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"10"}',
+=======
+	"arguments":'{"search":"'+_toSearch($("#g0_filter").val(),config)+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
+>>>>>>> 11cc8cac59cb80c2ef6f955de8efff87ab9ebfd3
 =======
 	"arguments":'{"search":"'+_toSearch($("#g0_filter").val(),config)+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
 >>>>>>> 11cc8cac59cb80c2ef6f955de8efff87ab9ebfd3
