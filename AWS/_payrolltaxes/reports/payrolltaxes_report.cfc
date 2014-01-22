@@ -62,6 +62,7 @@
 SELECT[pt_id]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
 ,[pt_type]
+,[pt_state]
 ,[pt_year]
 ,[pt_month]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
@@ -93,6 +94,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
 								,"PT_TYPE":"'&PT_TYPE&'"
+								,"PT_STATE":"'&PT_STATE&'"
 								,"PT_YEAR":"'&PT_YEAR&'"
 								,"PT_MONTH":"'&PT_MONTH&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"

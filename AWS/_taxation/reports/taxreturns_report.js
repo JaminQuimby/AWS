@@ -13,7 +13,6 @@ _grid1=function(){_jGrid({
 			,CLIENT_TYPE:{title:'Client Type'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
 			,TR_TAXFORM:{title:'Form'}
-			,TR_STATE:{title:'State'}			
 			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
 			,TR_2_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
 			,TR_PRIORFEES:{title:'Prior Fees'}

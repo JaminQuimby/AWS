@@ -18,7 +18,6 @@
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
-,[tr_state]
 ,CONVERT(VARCHAR(10),[tr_2_informationreceived], 101)AS[tr_2_informationreceived]
 ,[tr_2_assignedto]
 ,[tr_priorfees]
@@ -76,7 +75,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
 								,"TR_EXTENSIONREQUESTED":"'&TR_EXTENSIONREQUESTED&'"
 								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
-								
 								,"TR_3_MISSINGSIGNATURES":"'&TR_3_MISSINGSIGNATURES&'"
 								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"
 								,"TR_3_CONTACTED":"'&TR_3_CONTACTED&'"
