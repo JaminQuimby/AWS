@@ -16,7 +16,7 @@ String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\
 _toReport=function(data,config){
 //Build Report Groups
 //Build a basic json object
-	var jgroup = $.parseJSON('{"build":[]}');
+	var jgroup = $.parseJSON('{"b":[]}');
 //split human grouped input
 	group = data.split(')');
 $.each(group, function(i){	
@@ -24,16 +24,16 @@ $.each(group, function(i){
 if(group[i]!=''){
 	if(!group[i].match(/(and\s*\()|(or\s*\()/gi)){		
 	var a=group[i].replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-	jgroup.build.push($.parseJSON('{"t":"NONE","g":['+JSON.stringify(_toBuild(a.replace(/\s*\(\s*/,''),config))+']}'))}			
+	jgroup.b.push($.parseJSON('{"t":"NONE","g":'+JSON.stringify(_toBuild(a.replace(/\s*\(\s*/,''),config))+'}'))}			
 //AND GROUP
 	if(group[i].match(/\band\s*\(/gi)){
 	//Remove AND and trim whitespace
 	var b=group[i].replace(/\band\s*\(/gi, '').replace(/^\s\s*/, '').replace(/\s\s*$/, '')
-	jgroup.build.push($.parseJSON('{"t":"AND","g":['+JSON.stringify(_toBuild(b.replace(/\s*\(\s*/,''),config))+']}'))}	
+	jgroup.b.push($.parseJSON('{"t":"AND","g":'+JSON.stringify(_toBuild(b.replace(/\s*\(\s*/,''),config))+'}'))}	
 //OR GROUP
 	if(group[i].match(/\bor\s*\(/gi)){
 	var c=group[i].replace(/\bor\s*\(/gi, '').replace(/^\s\s*/, '').replace(/\s\s*$/, '')
-	jgroup.build.push($.parseJSON('{"t":"OR","g":['+JSON.stringify(_toBuild(c.replace(/\s*\(\s*/,''),config))+']}'))}
+	jgroup.b.push($.parseJSON('{"t":"OR","g":'+JSON.stringify(_toBuild(c.replace(/\s*\(\s*/,''),config))+'}'))}
 }})
 return JSON.stringify(jgroup);
 
@@ -87,7 +87,7 @@ json=json.replaceAll(' "', '"').replaceAll('" ', '"'); //Trim
 jdata='{"search":"' +  json  + '"}';
 
 var params = $.parseJSON(jdata);
-
+	
 options = $.parseJSON(options);
 
 $.extend(true, options, params);
@@ -98,7 +98,6 @@ case'date':
 if(!_isIt('date',options[config[i].n])){if(!_isIt('none',options[config[i].n])){options[config[i].n]=""}}
 if(!_isIt('date',options[config[i].n+'_less'])){options[config[i].n+'_less']=""}
 if(!_isIt('date',options[config[i].n+'_more'])){options[config[i].n+'_more']=""}
-
 break;
 case'numeric':
 if(!_isIt('numeric',options[config[i].n])){if(!_isIt('none',options[config[i].n])){options[config[i].n]=""}}
@@ -120,12 +119,16 @@ default:
 var xgroup = $.parseJSON('[]');
 
 
-
 $.each(options, function(i){
-	
+
 if(options[i]!=""){
-$.each(config, function(i){
-xgroup.push($.parseJSON('{"n":"'+i+'","v":"'+options[i]+'"}'));
+	
+$.each(config, function(c){
+	if(config[c].n === i){
+
+xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i]+'"}'));
+	}
+
 })
 	}
 });
