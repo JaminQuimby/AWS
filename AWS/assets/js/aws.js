@@ -122,8 +122,9 @@ var xgroup = $.parseJSON('[]');
 $.each(options, function(i){
 
 if(options[i]!=""){
-	
+
 $.each(config, function(c){
+		alert(i)
 	if(config[c].n === i){
 
 xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i]+'"}'));
