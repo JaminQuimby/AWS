@@ -3,7 +3,26 @@ _grid1()
 _group1=function(){_grid1()}
 });
  
-_grid1=function(){_jGrid({
+_grid1=function(){
+var grid1_config = [
+{"n":"search","type":"text","v":""} 
+,{"n":"assignedto","t":"numeric","v":""}
+,{"n":"category","t":"numeric","v":""}
+,{"n":"description","t":"text","v":""}
+,{"n":"duedate","t":"date","v":""}
+,{"n":"esttime","t":"numeric","v":""}
+,{"n":"fees","t":"numeric","v":""}
+,{"n":"missinginfo","t":"boolean","v":""}
+,{"n":"missinginforeceived","t":"date","v":""}
+,{"n":"paid","t":"numeric","v":""}
+,{"n":"priority","t":"numeric","v":""}
+,{"n":"projectcompleted","t":"date","v":""}
+,{"n":"requestforservice","t":"date","v":""}
+,{"n":"status","t":"numeric","v":""}
+,{"n":"workinitiated","t":"date","v":""}
+];
+
+	_jGrid({
 	"grid":"grid1",
 	"url":"acctingconsulting_report.cfc",
 	"title":"Accounting &amp; Consulting",
@@ -22,7 +41,6 @@ _grid1=function(){_jGrid({
 			,MC_PAID:{title:'Payment Status'}
 			},
  	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
-//	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+$("#task_id").val();'
+	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"2"}',
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID+"&nav=0","_blank")'
 	})};

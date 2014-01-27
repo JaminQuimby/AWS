@@ -1,42 +1,5 @@
 <cfcomponent output="true">
 
-<!--- 
-[pc_id],[client_id]
-      ,[pc_year]
-      ,[pc_payenddate]
-      ,[pc_paydate]
-      ,[pc_datedue]
-      ,[pc_esttime]
-      ,[pt_altfreq]
-      ,[pc_missinginfo]
-      ,[pc_missinginforeceived]
-      ,[pc_fees]
-      ,[pc_paid]
-      ,[pc_deliverymethod]
-      ,[pc_obtaininfo_assignedto]
-      ,[pc_obtaininfo_datecompleted]
-      ,[pc_obtaininfo_completedby]
-      ,[pc_obtaininfo_esttime]
-      ,[pc_preparation_assignedto]
-      ,[pc_preparation_datecompleted]
-      ,[pc_preparation_completedby]
-      ,[pc_preparation_esttime]
-      ,[pc_review_assignedto]
-      ,[pc_review_datecompleted]
-      ,[pc_review_completedby]
-      ,[pc_review_esttime]
-      ,[pc_assembly_assignedto]
-      ,[pc_assembly_datecompleted]
-      ,[pc_assembly_completedby]
-      ,[pc_assembly_esttime]
-      ,[pc_delivery_assignedto]
-      ,[pc_delivery_datecompleted]
-      ,[pc_delivery_completedby]
-      ,[pc_delivery_esttime]
-  FROM [payrollcheckstatus]
---->
-
-
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
@@ -52,15 +15,6 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
-<!---
-
-
-      ,[pc_obtaininfo_assignedtoTEXT]
-      ,[pc_preparation_assignedtoTEXT]
-      ,[pc_review_assignedtoTEXT]
-      ,[pc_assembly_assignedtoTEXT]
-      ,[pc_delivery_assignedtoTEXT]
---->
 
 <cfquery datasource="AWS" name="fquery">
 SELECT
@@ -82,43 +36,47 @@ SELECT
 FROM[v_payrollcheckstatus]
 
 <cfset sqllist = "pc_year,pc_payenddate,pc_paydate,pc_datedue,pc_esttime,pt_altfreq,pc_missinginfo,pc_missinginforeceived,pc_fees,pc_paid,pc_deliverymethod,pc_obtaininfo_assignedto,pc_obtaininfo_datecompleted,pc_obtaininfo_completedby,pc_obtaininfo_esttime,pc_preparation_assignedto,pc_preparation_datecompleted,pc_preparation_completedby,pc_preparation_esttime,pc_review_assignedto,pc_review_datecompleted,pc_review_completedby,pc_review_esttime,pc_assembly_assignedto,pc_assembly_datecompleted,pc_assembly_completedby,pc_assembly_esttime,pc_delivery_assignedto,pc_delivery_datecompleted,pc_delivery_completedby,pc_delivery_esttime">
+<cfset key="pc_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
-
 <cfif ArrayLen(data.b) gt 0>
-
-WHERE 1=1 
+WHERE(1)=(1)
 <cfloop array="#data.b#" index="i">
 	<cfif #i.t# eq "NONE">AND((1)=(1)
 		<cfloop array="#i.g#" index="g">
 			<cfloop list="#sqllist#" index="list">
-				<cfif ListContains('pc_'&g.n&',pc_'&g.n&'_less'&',pc_'&g.n&'_more' , list)>
-                
-                	<cfif list eq 'pc_'&g.n>
-                	AND[#list#]='#g.v#'
-                	</cfif>
-                    <cfif list eq 'pc_'&g.n&'_less'>
-                	AND[#list#]<='#g.v#'
-                	</cfif>
-                    <cfif list eq 'pc_'&g.n&'_more'>
-                	AND[#list#]>='#g.v#'
-                	</cfif>
-                
-                
-				</cfif>
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "AND">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "OR">OR((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
 			</cfloop>
 		</cfloop>)
 	</cfif>
 </cfloop>
+</cfif>
+</cfif>
 
 
-</cfif>
-</cfif>
-<!--- <cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
---->
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

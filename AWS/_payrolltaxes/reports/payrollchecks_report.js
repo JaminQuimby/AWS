@@ -23,8 +23,8 @@ var grid1_config = [
 ,{"n":"delivery_esttime","t":"numeric","v":""}
 ,{"n":"esttime","t":"date","v":""}
 ,{"n":"fees","t":"numeric","v":""}
-,{"n":"missinginfo","t":"date","v":""}
-,{"n":"missinginforeceived","t":"boolean","v":""}
+,{"n":"missinginfo","t":"boolean","v":""}
+,{"n":"missinginforeceived","t":"date","v":""}
 ,{"n":"obtaininfo_assignedto","t":"date","v":""}
 ,{"n":"obtaininfo_datecompleted","t":"date","v":""}
 ,{"n":"obtaininfo_completedby","t":"date","v":""}
