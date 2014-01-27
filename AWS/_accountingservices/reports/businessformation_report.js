@@ -3,7 +3,38 @@ _grid1()
 _group1=function(){_grid1()}
 });
  
-_grid1=function(){_jGrid({
+_grid1=function(){
+var grid1_config = [
+{"n":"search","type":"text","v":""}    
+,{"n":"activity","t":"text","v":""}
+,{"n":"articlesapproved","t":"date","v":""}
+,{"n":"articlessubmitted","t":"date","v":""}
+,{"n":"assignedto","t":"numeric","v":""}
+,{"n":"businessreceived","t":"date","v":""}
+,{"n":"businesssubmitted","t":"date","v":""}
+,{"n":"businesstype","t":"text","v":""}
+,{"n":"dateinitiated","t":"date","v":""}
+,{"n":"dissolutioncompleted","t":"date","v":""}
+,{"n":"dissolutionrequested","t":"date","v":""}
+,{"n":"dissolutionsubmitted","t":"date","v":""}
+,{"n":"duedate","t":"date","v":""}
+,{"n":"esttime","t":"numeric","v":""}
+,{"n":"fees","t":"numeric","v":""}
+,{"n":"minutesbylawsdraft","t":"date","v":""}
+,{"n":"minutesbylawsfinal","t":"date","v":""}
+,{"n":"minutescompleted","t":"date","v":""}
+,{"n":"otheractivity","t":"date","v":""}
+,{"n":"othercomplete","t":"date","v":""}
+,{"n":"otherstarted","t":"date","v":""}
+,{"n":"owners","t":"text","v":""}
+,{"n":"paid","t":"numeric","v":""}
+,{"n":"priority","t":"numeric","v":""}
+,{"n":"status","t":"numeric","v":""}
+,{"n":"tradenamereceived","t":"date","v":""}
+,{"n":"tradenamesubmitted","t":"date","v":""}
+];
+ 
+	_jGrid({
 	"grid":"grid1",
 	"url":"businessformation_report.cfc",
 	"title":"Business Formation",
