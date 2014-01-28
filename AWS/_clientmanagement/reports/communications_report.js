@@ -4,7 +4,28 @@ _group1=function(){_grid1()}
 _group2=function(){_grid2()}
 });
  
-_grid1=function(){_jGrid({
+_grid1=function(){
+var grid1_config = [
+{"n":"search","type":"text","v":""}    
+,{"n":"briefmessage","t":"text","v":""}
+,{"n":"caller","t":"text","v":""}
+,{"n":"completed","t":"boolean","v":""}
+,{"n":"contactmethod","t":"text","v":""}
+,{"n":"date","t":"date","v":""}
+,{"n":"duedate","t":"date","v":""}
+,{"n":"emailaddress","t":"text","v":""}
+,{"n":"ext","t":"numeric","v":""}
+,{"n":"faxnumber","t":"text","v":""}
+,{"n":"fees","t":"numeric","v":""}
+,{"n":"for","t":"numeric","v":""}
+,{"n":"paid","t":"numeric","v":""}
+,{"n":"responseneeded","t":"boolean","v":""}
+,{"n":"returncall","t":"boolean","v":""}
+,{"n":"takenby","t":"numeric","v":""}
+,{"n":"telephone","t":"numeric","v":""}
+];
+ 
+	_jGrid({
 	"grid":"grid1",
 	"url":"Communications_report.cfc",
 	"title":"Communications Report",
@@ -24,7 +45,7 @@ _grid1=function(){_jGrid({
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			},
  	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
+	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"10"}',
 	"functions":''
 	})};
 	

@@ -3,8 +3,34 @@ _grid1()
 _group1=function(){_grid1()}
 _group2=function(){_grid2()}
 });
+
+_grid1=function(){
+var grid1_config = [
+{"n":"search","type":"text","v":""}    
+,{"n":"active","t":"boolean","v":""}
+,{"n":"credit_hold","t":"boolean","v":""}
+,{"n":"disregard","t":"boolean","v":""}
+,{"n":"group","t":"text","v":""}
+,{"n":"name","t":"text","v":""}
+,{"n":"notes","t":"text","v":""}
+,{"n":"personal_property","t":"boolean","v":""}
+,{"n":"referred_by","t":"text","v":""}
+,{"n":"relations","t":"text","v":""}
+,{"n":"salutation","t":"text","v":""}
+,{"n":"schedule_c","t":"boolean","v":""}
+,{"n":"schedule_e","t":"boolean","v":""}
+,{"n":"since","t":"date","v":""}
+,{"n":"spouse","t":"text","v":""}
+,{"n":"statelabel1","t":"text","v":""}
+,{"n":"statelabel2","t":"text","v":""}
+,{"n":"statelabel3","t":"text","v":""}
+,{"n":"statelabel4","t":"text","v":""}
+,{"n":"trade_name","t":"text","v":""}
+,{"n":"type","t":"numeric","v":""}
+
+];
  
-_grid1=function(){_jGrid({
+	_jGrid({
 	"grid":"grid1",
 	"url":"clientmaintenance_report.cfc",
 	"title":"Client Maintenance Report",	
@@ -27,7 +53,33 @@ _grid1=function(){_jGrid({
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/clientmaintenance.cfm?task_id="+record.CLIENT_ID+"&nav=0","_blank")'
 	})};  
 	
-_grid2=function(){_jGrid({
+_grid2=function(){
+var grid2_config = [
+{"n":"search","type":"text","v":""}    
+,{"n":"type","t":"numeric","v":""}
+,{"n":"name","t":"text","v":""}
+,{"n":"address1","t":"text","v":""}
+,{"n":"address2","t":"text","v":""}
+,{"n":"city","t":"text","v":""}
+,{"n":"state","t":"numeric","v":""}
+,{"n":"zip","t":"numeric","v":""}
+,{"n":"phone1","t":"text","v":""}
+,{"n":"phone2","t":"text","v":""}
+,{"n":"phone3","t":"text","v":""}
+,{"n":"phone4","t":"text","v":""}
+,{"n":"phone5","t":"text","v":""}
+,{"n":"email1","t":"text","v":""}
+,{"n":"email2","t":"text","v":""}
+,{"n":"website","t":"text","v":""}
+,{"n":"effectivedate","t":"date","v":""}
+,{"n":"acctsoftwareupdate","t":"boolean","v":""}
+,{"n":"taxupdate","t":"boolean","v":""}
+,{"n":"customLabel","t":"text","v":""}
+,{"n":"customValue","t":"boolean","v":""}
+
+];
+ 
+	_jGrid({
 	"grid":"grid2",
 	"url":"clientmaintenance_report.cfc",
 	"title":"Client Contacts Report",	

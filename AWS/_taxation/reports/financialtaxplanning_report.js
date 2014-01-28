@@ -3,7 +3,30 @@ _grid1()
 _group1=function(){_grid1()}
 });
  
-_grid1=function(){_jGrid({
+ 
+_grid1=function(){
+var grid1_config = [
+{"n":"search","type":"text","v":""}    
+,{"n":"assignedto","t":"numeric","v":""}
+,{"n":"category","t":"numeric","v":""}
+,{"n":"duedate","t":"date","v":""}
+,{"n":"esttime","t":"numeric","v":""}
+,{"n":"fees","t":"numeric","v":""}
+,{"n":"finalclientmeeting","t":"date","v":""}
+,{"n":"infocompiled","t":"date","v":""}
+,{"n":"inforeceived","t":"date","v":""}
+,{"n":"inforequested","t":"date","v":""}
+,{"n":"missinginfo","t":"boolean","v":""}
+,{"n":"missinginforeceived","t":"date","v":""}
+,{"n":"paid","t":"numeric","v":""}
+,{"n":"priority","t":"numeric","v":""}
+,{"n":"reportcompleted","t":"date","v":""}
+,{"n":"requestservice","t":"date","v":""}
+,{"n":"status","t":"numeric","v":""}
+
+];
+ 
+	_jGrid({
 	"grid":"grid1",
 	"url":"financialtaxplanning_report.cfc",
 	"title":"Financial Tax Planning",
@@ -25,7 +48,7 @@ _grid1=function(){_jGrid({
 			,FTP_PAID:{title:'Payment Status'}
 			},
  	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
+	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"9"}',
 	//"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/financialtaxplanning.cfm?task_id="+record.FTP_ID'
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/financialtaxplanning.cfm?task_id="+record.FTP_ID+"&nav=0","_blank")'
 	})};

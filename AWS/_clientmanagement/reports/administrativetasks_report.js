@@ -3,7 +3,26 @@ _grid1()
 _group1=function(){_grid1()}
 });
  
-_grid1=function(){_jGrid({
+
+ 
+_grid1=function(){
+var grid1_config = [
+{"n":"search","type":"text","v":""}    
+,{"n":"assignedto","t":"numeric","v":""}
+,{"n":"category","t":"numeric","v":""}
+,{"n":"completed","t":"date","v":""}
+,{"n":"datereqested","t":"date","v":""}
+,{"n":"datestarted","t":"date","v":""}
+,{"n":"duedate","t":"date","v":""}
+,{"n":"esttime","t":"numeric","v":""}
+,{"n":"instructions","t":"text","v":""}
+,{"n":"priority","t":"numeric","v":""}
+,{"n":"reqestby","t":"numeric","v":""}
+,{"n":"status","t":"numeric","v":""}
+,{"n":"taskdesc","t":"text","v":""}
+];
+ 
+	_jGrid({
 	"grid":"grid1",
 	"url":"administrativetasks_report.cfc",
 	"title":"Administrative Tasks Report",

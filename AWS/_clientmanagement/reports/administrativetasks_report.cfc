@@ -44,10 +44,49 @@ SELECT[cas_id]
 ,[client_name]
 ,[client_id]
 FROM[v_clientadministrativetasks]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+
+<cfset sqllist = "cas_assignedto,cas_category,cas_completed,cas_datereqested,cas_datestarted,cas_duedate,cas_esttime,cas_instructions,cas_priority,cas_reqestby,cas_status,cas_taskdesc">
+<cfset key="cas_">
+<cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
+<cfset data=#ARGUMENTS.search#>
+<cfif ArrayLen(data.b) gt 0>
+WHERE(1)=(1)
+<cfloop array="#data.b#" index="i">
+	<cfif #i.t# eq "NONE">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "AND">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "OR">OR((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+</cfloop>
 </cfif>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfif>
+
+
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

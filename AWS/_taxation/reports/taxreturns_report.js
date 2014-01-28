@@ -4,7 +4,70 @@ _group1=function(){_grid1()}
 _group2=function(){_grid2()}
 });
  
-_grid1=function(){_jGrid({
+ 
+_grid1=function(){
+var grid1_config = [
+{"n":"search","type":"text","v":""}    
+
+
+
+,{"n":"currentfees","t":"numeric","v":""}
+,{"n":"esttime","t":"numeric","v":""}
+,{"n":"extensiondone","t":"date","v":""}
+,{"n":"extensionrequested","t":"date","v":""}
+,{"n":"notrequired","t":"boolean","v":""}
+,{"n":"priority","t":"numeric","v":""}
+,{"n":"priorfees","t":"numeric","v":""}
+,{"n":"taxform","t":"numeric","v":""}
+,{"n":"taxyear","t":"numeric","v":""}
+,{"n":"duedate","t":"date","v":""}
+,{"n":"filingdeadline","t":"date","v":""}
+,{"n":"missinginfo","t":"boolean","v":""}
+,{"n":"missinginforeceived","t":"date","v":""}
+,{"n":"deliverymethod","t":"numeric","v":""}
+,{"n":"paid","t":"numeric","v":""}
+,{"n":"reason","t":"text","v":""}
+,{"n":"1_dropoffappointment","t":"date","v":""}
+,{"n":"1_dropoffappointmentlength","t":"numeric","v":""}
+,{"n":"1_dropoffappointmentwith","t":"numeric","v":""}
+,{"n":"1_whileyouwaitappt","t":"date","v":""}
+,{"n":"1_pickupappointment","t":"date","v":""}
+,{"n":"1_pickupappointmentlength","t":"numeric","v":""}
+,{"n":"1_pickupappointmentwith","t":"numeric","v":""}
+,{"n":"2_assignedto","t":"numeric","v":""}
+,{"n":"2_completed","t":"date","v":""}
+,{"n":"2_informationreceived","t":"date","v":""}
+,{"n":"2_preparedby","t":"numeric","v":""}
+,{"n":"2_readyforreview","t":"date","v":""}
+,{"n":"2_reviewassignedto","t":"numeric","v":""}
+,{"n":"2_reviewed","t":"date","v":""}
+,{"n":"2_reviewedby","t":"numeric","v":""}
+,{"n":"2_reviewedwithnotes","t":"date","v":""}
+,{"n":"3_assemblereturn","t":"date","v":""}
+,{"n":"3_contacted","t":"date","v":""}
+,{"n":"3_delivered","t":"date","v":""}
+,{"n":"3_emailed","t":"boolean","v":""}
+,{"n":"3_messageleft","t":"boolean","v":""}
+,{"n":"3_missingsignatures","t":"boolean","v":""}
+,{"n":"3_multistatereturn","t":"boolean","v":""}
+,{"n":"4_assignedto","t":"numeric","v":""}
+,{"n":"4_completed","t":"date","v":""}
+,{"n":"4_currentfees","t":"numeric","v":""}
+,{"n":"4_delivered","t":"date","v":""}
+,{"n":"4_extended","t":"date","v":""}
+,{"n":"4_paid","t":"numeric","v":""}
+,{"n":"4_pptresttime","t":"numeric","v":""}
+,{"n":"4_priorfees","t":"numeric","v":""}
+,{"n":"4_required","t":"boolean","v":""}
+,{"n":"4_rfr","t":"date","v":""}
+,{"n":"4_extensionrequested","t":"date","v":""}
+,{"n":"4_completedby","t":"numeric","v":""}
+,{"n":"4_reviewassigned","t":"numeric","v":""}
+,{"n":"4_reviewed","t":"date","v":""}
+,{"n":"4_reviewedby","t":"numeric","v":""}
+];
+ 
+	_jGrid({
 	"grid":"grid1",
 	"url":"taxreturns_report.cfc",
 	"title":"Tax Returns",
@@ -42,7 +105,7 @@ _grid1=function(){_jGrid({
 			,TR_PAID:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0"}',
+"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"6"}',
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID+"&nav=0","_blank")'
 	})};
 
