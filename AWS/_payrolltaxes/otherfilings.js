@@ -22,8 +22,7 @@ _grid1=function(){_jGrid({
 			,OF_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%',visibility:"hidden"}
 			,OF_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%',visibility:"hidden"}
 			,OF_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%',visibility:"hidden"}						
-			
-				},
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"11"}',
 	"functions":'$("#task_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"otherfilings"});_loadData({"id":"task_id","group":"assetCompTask","page":"otherfilings"});'

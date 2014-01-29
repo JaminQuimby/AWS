@@ -8,9 +8,6 @@ _group2=function(){_grid2()}
 _grid1=function(){
 var grid1_config = [
 {"n":"search","type":"text","v":""}    
-
-
-
 ,{"n":"currentfees","t":"numeric","v":""}
 ,{"n":"esttime","t":"numeric","v":""}
 ,{"n":"extensiondone","t":"date","v":""}
