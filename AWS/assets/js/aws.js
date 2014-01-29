@@ -42,98 +42,69 @@ return JSON.stringify(jgroup);
 
 _toBuild=function(data,config,options){
 try{
-
 //Build Default Options if none provided	
 if( $.type( options ) === "undefined"){
-	
 var list='"search":""';
 $.each(config, function(i){
 list=list+',"'+config[i].n+'":""';
-switch(config[i].t){
-case'date':list=list+',"'+config[i].n+'_less":""';list=list+',"'+config[i].n+'_more":""';break;
-case'numeric':list=list+',"'+config[i].n+'_less":""';list=list+',"'+config[i].n+'_more":""';break;
-default:}
-options = '{'+list+'}'})
+list=list+',"'+config[i].n+'_less":""';
+list=list+',"'+config[i].n+'_more":""';
+list=list+',"'+config[i].n+'_not":""';
+options='{'+list+'}'})
 }
-
 //Build json data string
 var json=data;
+
+json=json.replaceAll('#employee', '10000');
+
 //Escape unecessary chars
 json=json.escapeIt(json); //Escape
 //expand options search types
-
-
 $.each(config, function(i){
 json=json.replaceAll(config[i].n+':', '","'+config[i].n+'":"');
-switch(config[i].t){
-case'date':
 json=json.replaceAll(config[i].n+'<', '","'+config[i].n+'_less":"').replaceAll(config[i].n+'>', '","'+config[i].n+'_more":"');
-break;
-case'numeric':
-json=json.replaceAll(config[i].n+'<', '","'+config[i].n+'_less":"').replaceAll(config[i].n+'>', '","'+config[i].n+'_more":"');
-break;
-default:
-//  code to be executed if n is different from case 1 and 2
-
-
-}
-
+json=json.replaceAll(config[i].n+'!', '","'+config[i].n+'_not":"');
 
 });
 //remove unecessary whitespace
 json=json.replaceAll(' "', '"').replaceAll('" ', '"'); //Trim
-
 //format json structure
 jdata='{"search":"' +  json  + '"}';
-
 var params = $.parseJSON(jdata);
-	
 options = $.parseJSON(options);
-
 $.extend(true, options, params);
-//remove junk data to avoid unecessary error prompts from server
-$.each(config, function(i){
-switch(config[i].t){
-case'date':
-if(!_isIt('date',options[config[i].n])){if(!_isIt('none',options[config[i].n])){options[config[i].n]=""}}
-if(!_isIt('date',options[config[i].n+'_less'])){options[config[i].n+'_less']=""}
-if(!_isIt('date',options[config[i].n+'_more'])){options[config[i].n+'_more']=""}
-break;
-case'numeric':
-if(!_isIt('numeric',options[config[i].n])){if(!_isIt('none',options[config[i].n])){options[config[i].n]=""}}
-if(!_isIt('numeric',options[config[i].n+'_less'])){options[config[i].n+'_less']=""}
-if(!_isIt('numeric',options[config[i].n+'_more'])){options[config[i].n+'_more']=""}
-break;
-case'boolean':if(!_isIt('boolean',options[config[i].n])){options[config[i].n]=""}break;
-case'text': break;
-default: 
-}
-
-//options.[config[i].n].removeValue(, '');
-//options.[config[i].n+'_less'].removeValue(, '');
-//options.[config[i].n+'_more'].removeValue(, '');
-
-});
-
-	
 var xgroup = $.parseJSON('[]');
-
-
-$.each(options, function(i){
-
-if(options[i]!=""){
-
-$.each(config, function(c){
-		alert(i)
-	if(config[c].n === i){
-
-xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i]+'"}'));
-	}
-
-})
-	}
-});
-
+$.each(options, function (i) {
+    if (options[i] != "") {
+        $.each(config,function(c){
+		
+		if(config[c].n===i||config[c].n+'_less'===i||config[c].n+'_more'===i||config[c].n+'_not'===i){
+		if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
+		  
+		  switch(config[c].t){
+                case'date':
+					if(_isIt('date',options[i])){
+					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
+					}
+					break;
+					
+                case'numeric':
+					if(_isIt('numeric',options[i])){
+					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
+					}
+					break;
+					
+				case'boolean':
+					if(_isIt('boolean',options[i])){
+						if(options[i].match(/^True|^False|^true|^yes|^1/)){
+					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"1"}'))
+					}else{
+					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"0"}'))
+					}}
+					break;
+					
+				default:xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
+}}})}});
 return xgroup;
 }
 catch (err) {

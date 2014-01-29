@@ -1,5 +1,6 @@
 <cfparam name="page.trackers" default="">
 <cfparam name="page.menuLeft" default="">
+<cfparam name="page.menuLeft_report" default="">
 <cfparam name="page.formid" default="0">
 <cfparam name="url.debug" default="false">
 
@@ -16,8 +17,13 @@
 <cfset i="0">
 <cfoutput>
 <cfloop list="#page.menuLeft#"  index="name">
-<cfset i=i+1><li ><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();">#name#</a></li>
+<cfset i=i+1><li ><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="$('.gf-checkbox').hide();$('##group#i#').show();_highlight(this);_group#i#();$('##g0_filter').val('');">#name#</a></li>
 </cfloop>
+<cfif page.menuLeft_report neq "">
+<cfloop query="#selectReports#">
+<cfset i=i+1><li ><a href="##" #IIF( i eq 1, DE("class='highlight'"), DE("") )# onclick="_highlight(this);$('##g0_filter').val('#report_query#');_grid1();">#report_name#</a></li>
+</cfloop>
+</cfif>
 <cfinclude template="/assets/plugins/menu.cfm">
 </ul>
 </cfoutput>
