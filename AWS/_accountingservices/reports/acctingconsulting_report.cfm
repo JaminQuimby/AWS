@@ -6,6 +6,7 @@
 <cfset page.formid=2>
 <cfset page.title="Accounting &amp; Consulting">
 <cfset page.menuLeft="General">
+<cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">

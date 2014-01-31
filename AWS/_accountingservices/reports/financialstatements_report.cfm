@@ -6,6 +6,7 @@
 <cfset page.formid=5>
 <cfset page.title="Financial Statements Report">
 <cfset page.menuLeft="Financial Statement Status, Financial Data Status">
+<cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">

@@ -6,6 +6,7 @@
 <cfset page.formid=4>  
 <cfset page.title="Communications Report">
 <cfset page.menuLeft="General,Responses">
+<cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id,client_id">
 <cfset page.plugins.disable="ALL">

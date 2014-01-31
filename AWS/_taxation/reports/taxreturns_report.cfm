@@ -7,6 +7,7 @@
 <cfset page.formid=6>
 <cfset page.title="Tax Returns Report">
 <cfset page.menuLeft="General,State Returns">
+<cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id,subtask1_id,subtask2_id">
 <cfset page.plugins.disable="ALL">

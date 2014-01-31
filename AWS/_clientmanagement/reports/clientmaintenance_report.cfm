@@ -7,6 +7,7 @@
 <cfset page.formid=1>
 <cfset page.title="Client Maintenance Report">
 <cfset page.menuLeft="General,Contacts">
+<cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">

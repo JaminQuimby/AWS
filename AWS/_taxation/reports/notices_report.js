@@ -3,23 +3,24 @@ _grid1()
 _group1=function(){_grid1()}
 });
 
- 
-
 _grid1=function(){
 var grid1_config = [
 {"n":"search","type":"text","v":""}    
 ,{"n":"assignedto","t":"numeric","v":""}
+,{"n":"deliverymethod","t":"numeric","v":""}
+,{"n":"fees","t":"numeric","v":""}
 ,{"n":"esttime","t":"numeric","v":""}
+,{"n":"missinginfo","t":"boolean","v":""}
+,{"n":"missinginforeceived","t":"date","v":""}
 ,{"n":"noticestatus","t":"numeric","v":""}
+,{"n":"paid","t":"numeric","v":""}
 ,{"n":"priority","t":"numeric","v":""}
-,{"n":"1_fees","t":"numeric","v":""}
+,{"n":"1_datenoticerec","t":"date","v":""}
 ,{"n":"1_methodreceived","t":"numeric","v":""}
 ,{"n":"1_noticenumber","t":"numeric","v":""}
 ,{"n":"1_noticedate","t":"date","v":""}
-,{"n":"1_paid","t":"numeric","v":""}
 ,{"n":"1_taxform","t":"numeric","v":""}
 ,{"n":"1_taxyear","t":"numeric","v":""}
-,{"n":"2_datenoticerec","t":"date","v":""}
 ,{"n":"2_irsstateresponse","t":"date","v":""}
 ,{"n":"2_rescompleted","t":"date","v":""}
 ,{"n":"2_rescompletedby","t":"numeric","v":""}
@@ -28,8 +29,7 @@ var grid1_config = [
 ,{"n":"2_revcompleted","t":"date","v":""}
 ,{"n":"2_revrequired","t":"boolean","v":""}
 ,{"n":"2_ressubmited","t":"date","v":""}
-,{"n":"3_missinginfo","t":"boolean","v":""}
-,{"n":"3_missinginforeceived","t":"date","v":""}
+
 
 
 ];
@@ -45,7 +45,7 @@ var grid1_config = [
 			,N_1_TAXFORM:{title:'Tax Form'}
 			,N_1_NOTICENUMBER:{title:'Notice Number'}
 			,N_NOTICESTATUS:{title:'Notice Status'}
-			,N_3_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,N_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,N_2_DATENOTICEREC:{title:'Date Notice Received',width:'1%'}
 			,N_2_RESDUEDATE:{title:'Response Due Date',width:'1%'}
 			,N_2_RESSUBMITED:{title:'Response Submitted',width:'1%'}

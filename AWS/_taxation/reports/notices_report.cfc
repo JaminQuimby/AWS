@@ -10,29 +10,29 @@ FROM [noticematter]
 
 GROUP2 LEVEL2  
 SELECT[n_id]
-      ,[n_id]
       ,[n_assignedto]
+      ,[n_deliverymethod]
+	  ,[n_fees]
+      ,[n_missinginfo]
+      ,[n_missinginforeceived]
       ,[n_noticestatus]
+      ,[n_paid]
       ,[n_priority]
       ,[n_esttime]
+      ,[n_1_datenoticerec]
       ,[n_1_noticenumber]
       ,[n_1_noticedate]
       ,[n_1_taxform]
       ,[n_1_taxyear]
       ,[n_1_methodreceived]
-      ,[n_1_fees]
-      ,[n_1_paid]
-      ,[n_2_datenoticerec]
-      ,[n_2_resduedate]
       ,[n_2_rescompleted]
       ,[n_2_rescompletedby]
+      ,[n_1_resduedate]
       ,[n_2_revrequired]
       ,[n_2_revassignedto]
       ,[n_2_revcompleted]
       ,[n_2_ressubmited]
       ,[n_2_irsstateresponse]
-      ,[n_3_missinginfo]
-      ,[n_3_missinginforeceived]
   FROM[notice]
   
 --->
@@ -60,18 +60,18 @@ SELECT[nm_id]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
 ,[n_noticestatus]
-,[n_3_missinginfo]
-,CONVERT(VARCHAR(10),[n_2_datenoticerec], 101)AS[n_2_datenoticerec]
-,CONVERT(VARCHAR(10),[n_2_resduedate], 101)AS[n_2_resduedate]
+,[n_missinginfo]
+,CONVERT(VARCHAR(10),[n_1_datenoticerec], 101)AS[n_1_datenoticerec]
+,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
 ,CONVERT(VARCHAR(10),[n_2_ressubmited], 101)AS[n_2_ressubmited]
 ,[n_2_revrequired]   
-,[n_1_fees]
-,[n_1_paid]
+,[n_fees]
+,[n_paid]
 ,[client_name]
 ,[client_id]
 FROM[v_notice]
     
-<cfset sqllist = "n_assignedto,n_noticestatus,n_priority,n_esttime,n_1_noticenumber,n_1_noticedate,n_1_taxform,n_1_taxyear,n_1_methodreceived,n_1_fees,n_1_paid,n_2_datenoticerec,n_2_resduedate,n_2_rescompleted,n_2_rescompletedby,n_2_revrequired,n_2_revassignedto,n_2_revcompleted,n_2_ressubmited,n_2_irsstateresponse,n_3_missinginfo,n_3_missinginforeceived">
+<cfset sqllist = "n_assignedto,n_deliverymethod,n_esttime,n_fees,n_missinginfo,n_missinginforeceived,n_noticestatus,n_paid,n_priority,n_1_datenoticerec,n_1_methodreceived,n_1_noticenumber,n_1_noticedate,n_1_taxform,n_1_taxyear,n_2_rescompleted,n_2_rescompletedby,n_1_resduedate,n_2_irsstateresponse,n_2_revassignedto,n_2_revcompleted,n_2_ressubmited,n_2_revrequired">
 <cfset key="n_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
@@ -127,7 +127,7 @@ WHERE(1)=(1)
  								,"N_1_TAXFORM":"'&N_1_TAXFORM&'"
  								,"N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'"
  								,"N_NOTICESTATUS":"'&N_NOTICESTATUS&'"
- 								,"N_3_MISSINGINFO":"'&N_3_MISSINGINFO&'"
+ 								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
  								,"N_2_DATENOTICEREC":"'&N_2_DATENOTICEREC&'"
  								,"N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'"
  								,"N_2_RESSUBMITED":"'&N_2_RESSUBMITED&'"
