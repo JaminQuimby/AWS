@@ -8,7 +8,7 @@ _group1=function(){_grid1()}
 _grid1=function(){
 
 var grid1_config = [
-{"n":"search","type":"text","v":""}
+{"n":"search","t":"text","v":""}
 ,{"n":"altfreq","t":"boolean","v":""}
 ,{"n":"assembly_assignedto","t":"date","v":""}
 ,{"n":"assembly_datecompleted","t":"date","v":""}
@@ -41,7 +41,9 @@ var grid1_config = [
 ,{"n":"review_completedby","t":"date","v":""}
 ,{"n":"review_esttime","t":"numeric","v":""}
 ,{"n":"year","t":"numeric","v":""}
-];
+];$.each(grid1_config, function(idx, obj) {$('.search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
+
+
 	_jGrid({
 	"grid":"grid1",
 	"url":"payrollchecks_report.cfc",

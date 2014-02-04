@@ -32,7 +32,7 @@ var grid1_config = [
 
 
 
-];
+];$.each(grid1_config, function(idx, obj) {$('.search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
  
 	_jGrid({
 	"grid":"grid1",

@@ -17,7 +17,7 @@ var grid1_config = [
 ,{"n":"taxmatters","t":"text","v":""}
 ,{"n":"taxyears","t":"text","v":""}
 
-];
+];$.each(grid1_config, function(idx, obj) {$('.search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
  
 	_jGrid({
 	"grid":"grid1",

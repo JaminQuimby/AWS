@@ -109,7 +109,7 @@ tr{vertical-align:top;}
 #smallMenu h1{ font-size:1em; padding:0px; height:36px;}
 /*Large Right Side Menu*/
 #largeMenu{width:300px;height:100%;position:fixed;z-index:10}
-#largeMenu h1{border-bottom: 1px solid #BBBBBB;height: 36px;line-height: 36px; padding-bottom: 0;padding-left: 0;padding-right: 0;text-align: center; background:#EFEFEF;}
+#largeMenu h1{border-bottom: 1px solid #BBBBBB;height: 42px;line-height:42px; padding-bottom: 0;padding-left: 0;padding-right: 0;text-align: center; background:#EFEFEF;}
 #largeMenu h1 a{ font-size: 14px;}
 #largeMenu li{list-style-type:none;background-color:#FFF;color:#069;}
 #largeMenu li:hover{background-color:#efefef;}
@@ -133,6 +133,92 @@ tr{vertical-align:top;}
 /*Practice Management*/
 ._practicemanagement{background-color:#A6A6A6;border-bottom-color:#333;color:#fff;}
 ._practicemanagement li{border-color:#333;}
+
+/*Search*/
+.search-bar{
+background-color: #E9E9E9;
+background-repeat: repeat-x;
+border-bottom-left-radius: 4px;
+border-color: #B7B7B7;
+border-image: none;
+border-style: solid none solid solid;
+border-top-left-radius: 4px;
+border-width: 1px medium 1px 1px;
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+color: #333333;
+display: inline-block;
+height: 46px;
+padding: 4px;
+text-shadow: none;
+width: 410px;
+vertical-align:top;
+}
+
+.search-btn{
+border-radius: 0 4px 4px 0;
+border-right: 1px solid #AAAAAA;
+display: inline-block;
+padding: 4px;
+width: 40px;
+}
+.search-tog{
+background: none repeat scroll 0 0 #FF0000;
+display:none;
+height: 0px;
+width:0px;
+left: 8px;
+background:#060;
+}
+.search-togcan{
+background: none repeat scroll 0 0 #FFFFFF;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+border-color: #B7B7B7;
+border-style: solid;
+border-width: 1px;
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+height: 200px;
+margin-top: -2px;
+position: absolute;
+width: 450px;
+z-index: 999;
+overflow:hidden;
+		}
+		
+.search-togcan ul{
+height: 167px;
+overflow: auto;
+padding: 15px;
+list-style-type:none;
+}
+	
+.search-togbtn{
+background: none repeat scroll 0 0 #E9E9E9;
+border-bottom: 1px solid #AAAAAA;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+border-left: 1px solid #AAAAAA;
+border-right: 1px solid #AAAAAA;
+cursor: pointer;
+display: block;
+font-size: 9px;
+font-weight: bold;
+height: 15px;
+left: 8px;
+padding-left: 7px;
+position: relative;
+top: -1px;
+width: 25px;
+}
+.search-togfooter{
+    background-color: #E9E9E9;
+    border-top: 1px solid #808080;
+    cursor: pointer;
+    font-size: 9px;
+    font-weight: bold;
+    height: 22px;
+    margin-left: -10px;
+    padding-left: 20px;}
 
 
 /*RADIO BUTTONS AND CHECK BOXES*/

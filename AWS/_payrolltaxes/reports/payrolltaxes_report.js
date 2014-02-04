@@ -43,7 +43,7 @@ var grid1_config = [
 ,{"n":"delivery_datecompleted","t":"date","v":""}
 ,{"n":"delivery_completedby","t":"numeric","v":""}
 ,{"n":"delivery_esttime","t":"numeric","v":""}
-];
+];$.each(grid1_config, function(idx, obj) {$('#group1 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
 
 	_jGrid({
 	"grid":"grid1",
