@@ -765,7 +765,7 @@ SELECT[dt_id]
 ,[client_name]
 ,[client_id]
 ,STUFF((SELECT','+[si_initials] 
-FROM[staffinitials] 
+FROM[v_staffinitials] 
 WHERE(','+[v_documenttracking].[dt_assignedto]
 LIKE'%,'+CONVERT(VARCHAR(12),[user_id])+'%'  )
 FOR XML PATH('')),1,1,'') AS 'dt_assignedtoTEXT' 

@@ -111,7 +111,7 @@ WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[staffinitials](
+INSERT INTO[v_staffinitials](
 [si_active]
 ,[si_address]
 ,[si_birthday]
@@ -174,7 +174,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[staffinitials]
+UPDATE[v_staffinitials]
 SET[si_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[si_address]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[si_birthday]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>

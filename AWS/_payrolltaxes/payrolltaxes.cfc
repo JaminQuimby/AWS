@@ -112,17 +112,17 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="assetCompTask">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[pt_obtaininfo_datecompleted]=CONVERT(VARCHAR(10),pt_obtaininfo_datecompleted,101)
-,[pt_obtaininfo_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_obtaininfo_completedby=[user_id]))
+,[pt_obtaininfo_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_obtaininfo_completedby=[user_id]))
 ,[pt_entry_datecompleted]=CONVERT(VARCHAR(10),pt_entry_datecompleted,101)
-,[pt_entry_completedbyyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_entry_completedby=[user_id]))
+,[pt_entry_completedbyyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_entry_completedby=[user_id]))
 ,[pt_rec_datecompleted]=CONVERT(VARCHAR(10),pt_rec_datecompleted,101)
-,[pt_rec_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_rec_completedby=[user_id]))
+,[pt_rec_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_rec_completedby=[user_id]))
 ,[pt_review_datecompleted]=CONVERT(VARCHAR(10),pt_review_datecompleted,101)
-,[pt_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_review_completedby=[user_id]))
+,[pt_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_review_completedby=[user_id]))
 ,[pt_assembly_datecompleted]=CONVERT(VARCHAR(10),pt_assembly_datecompleted,101)
-,[pt_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_assembly_completedby=[user_id]))
+,[pt_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_assembly_completedby=[user_id]))
 ,[pt_delivery_datecompleted]=CONVERT(VARCHAR(10),pt_delivery_datecompleted,101)
-,[pt_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[staffinitials]WHERE(pt_delivery_completedby=[user_id]))
+,[pt_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_delivery_completedby=[user_id]))
 FROM[payrolltaxes]
 WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
