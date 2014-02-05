@@ -48,7 +48,7 @@ var grid1_config = [
 			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 				"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group0"}',
+	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0""ID":"'+$("#client_id").val()+'","loadType":"group0","formid":"1"}',
 //	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/clientmaintenance.cfm?task_id="+$("#task_id").val();'
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/clientmaintenance.cfm?task_id="+record.CLIENT_ID+"&nav=0","_blank")'
 	})};  
@@ -101,7 +101,7 @@ var grid2_config = [
 			,CONTACT_EMAIL2:{title:'Email 2'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":'+_toReport($("#g2_filter").val(),grid2_config)+',"orderBy":"0","row":"0""ID":"'+$("#client_id").val()+'","loadType":"group2","formid":"1"}',
 	"functions":''
 	})}; 
 	 

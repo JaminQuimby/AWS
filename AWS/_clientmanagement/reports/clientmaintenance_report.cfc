@@ -177,8 +177,7 @@ SELECT[client_id]
 ,[contact_phone5]
 ,[contact_email1]
 ,[contact_email2]
- FROM[v_client_contact]
- 
+FROM[v_client_contact]
 
 <cfset sqllist = "contact_type,contact_name,contact_address1,contact_address2,contact_city,contact_state,contact_zip,contact_phone1,contact_phone2,contact_phone3,contact_phone4,contact_phone5,contact_email1,contact_email2,contact_website,contact_effectivedate,contact_acctsoftwareupdate,contact_taxupdate,contact_customLabel,contact_customValue">
 <cfset key="contact_">

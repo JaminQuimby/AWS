@@ -128,12 +128,12 @@ WHERE(1)=(1)
  								,"N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'"
  								,"N_NOTICESTATUS":"'&N_NOTICESTATUS&'"
  								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
- 								,"N_2_DATENOTICEREC":"'&N_2_DATENOTICEREC&'"
- 								,"N_2_RESDUEDATE":"'&N_2_RESDUEDATE&'"
+ 								,"N_1_DATENOTICEREC":"'&N_1_DATENOTICEREC&'"
+ 								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
  								,"N_2_RESSUBMITED":"'&N_2_RESSUBMITED&'"
  								,"N_2_REVREQUIRED":"'&N_2_REVREQUIRED&'"
- 								,"N_1_FEES":"'&N_1_FEES&'"
- 								,"N_1_PAID":"'&N_1_PAID&'"
+ 								,"N_FEES":"'&N_FEES&'"
+ 								,"N_PAID":"'&N_PAID&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
