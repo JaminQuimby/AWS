@@ -3,7 +3,7 @@
 <cfheader name="Expires" value="0"/>
 <cfset page.module="_clientmanagement">
 <cfset page.location="communications_report">
-<cfset page.formid=4>  
+<cfset page.formid=12>  
 <cfset page.title="Communications Report">
 <cfset page.menuLeft="General,Responses">
 <cfset page.menuLeft_report="Yes">
