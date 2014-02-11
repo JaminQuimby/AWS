@@ -122,8 +122,6 @@ SET[m_accountingservices]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[m_maintenance]=<cfqueryparam value="#j.DATA[1][5]#"/>
 ,[m_payrolltaxes]=<cfqueryparam value="#j.DATA[1][6]#"/>
 ,[m_taxation]=<cfqueryparam value="#j.DATA[1][7]#"/>
-
-
 WHERE[user_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

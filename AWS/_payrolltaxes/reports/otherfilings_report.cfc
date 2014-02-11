@@ -63,9 +63,9 @@ SELECT TOP 1000 [of_id]
 SELECT[of_id]
 ,CONVERT(VARCHAR(8),[of_duedate], 1)AS[of_duedate]
 ,[of_taxyear]
-,[of_period]
-,[of_state]
-,[of_form]
+,[of_periodTEXT]
+,[of_stateTEXT]
+,[of_formTEXT]
 ,CONVERT(VARCHAR(8),[of_obtaininfo_datecompleted], 1)AS[of_obtaininfo_datecompleted]
 ,[of_missinginfo]
 ,CONVERT(VARCHAR(8),[of_missinginforeceived], 1)AS[of_missinginforeceived]      
@@ -75,7 +75,7 @@ SELECT[of_id]
 ,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1)AS[of_delivery_datecompleted]
 ,[of_fees]
 ,[of_esttime]
-,[of_paid]  
+,[of_paidTEXT]  
 ,[client_name]
 ,[client_id]
 FROM[v_otherfilings]
@@ -132,9 +132,9 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"OF_DUEDATE":"'&OF_DUEDATE&'"
 								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"
-								,"OF_PERIOD":"'&OF_PERIOD&'"
-								,"OF_STATE":"'&OF_STATE&'"
-								,"OF_FORM":"'&OF_FORM&'"
+								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
+								,"OF_STATETEXT":"'&OF_STATETEXT&'"
+								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
 								,"OF_OBTAININFO_DATECOMPLETED":"'&OF_OBTAININFO_DATECOMPLETED&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
 								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"
@@ -144,7 +144,7 @@ WHERE(1)=(1)
 								,"OF_DELIVERY_DATECOMPLETED":"'&OF_DELIVERY_DATECOMPLETED&'"
 								,"OF_FEES":"'&OF_FEES&'"
 								,"OF_ESTTIME":"'&OF_ESTTIME&'"
-								,"OF_PAID":"'&OF_PAID&'"
+								,"OF_PAIDTEXT":"'&OF_PAIDTEXT&'"
 								}'>                              
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

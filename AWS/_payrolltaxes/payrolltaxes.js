@@ -10,9 +10,9 @@ _grid1=function(){_jGrid({
 	"fields":{PT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_YEAR:{title:'Year',width:'1%'}
-			,PT_MONTH:{title:'Period'}
+			,PT_MONTHTEXT:{title:'Period'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
-			,PT_TYPE:{title:'Return Type'}
+			,PT_TYPETEXT:{title:'Return Type'}
 			,PT_DUEDATE:{title:'Date Due',width:'1%'}
 			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,PT_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%',visibility: 'hidden'}

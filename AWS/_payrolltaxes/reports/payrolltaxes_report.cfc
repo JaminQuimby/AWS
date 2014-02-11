@@ -61,10 +61,10 @@
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,CONVERT(VARCHAR(8),[pt_duedate], 1)AS[pt_duedate]
-,[pt_type]
-,[pt_state]
+,[pt_typeTEXT]
+,[pt_stateTEXT]
 ,[pt_year]
-,[pt_month]
+,[pt_monthTEXT]
 ,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
 ,CONVERT(VARCHAR(8),[pt_obtaininfo_datecompleted], 1)AS[pt_obtaininfo_datecompleted]
 ,[pt_missinginfo]
@@ -75,7 +75,7 @@ SELECT[pt_id]
 ,CONVERT(VARCHAR(8),[pt_assembly_datecompleted], 1)AS[pt_assembly_datecompleted]
 ,CONVERT(VARCHAR(8),[pt_delivery_datecompleted], 1)AS[pt_delivery_datecompleted]
 ,[pt_fees]
-,[pt_paid]      
+,[pt_paidTEXT]      
 ,[client_name]
 ,[client_id]
 FROM[v_payrolltaxes]
@@ -134,10 +134,10 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
-								,"PT_TYPE":"'&PT_TYPE&'"
-								,"PT_STATE":"'&PT_STATE&'"
+								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
+								,"PT_STATETEXT":"'&PT_STATETEXT&'"
 								,"PT_YEAR":"'&PT_YEAR&'"
-								,"PT_MONTH":"'&PT_MONTH&'"
+								,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_OBTAININFO_DATECOMPLETED":"'&PT_OBTAININFO_DATECOMPLETED&'"
 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
@@ -148,7 +148,7 @@ WHERE(1)=(1)
 								,"PT_ASSEMBLY_DATECOMPLETED":"'&PT_ASSEMBLY_DATECOMPLETED&'"
 								,"PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"
 								,"PT_FEES":"'&PT_FEES&'"
-								,"PT_PAID":"'&PT_PAID&'"
+								,"PT_PAIDTEXT":"'&PT_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -53,9 +53,9 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_DUEDATE:{title:'Due Date',width:'1%'}
 			,OF_TAXYEAR:{title:'Year',width:'1%'}
-			,OF_PERIOD:{title:'Period'}
-			,OF_STATE:{title:'State'}
-			,OF_FORM:{title:'Form',width:'1%'}
+			,OF_PERIODTEXT:{title:'Period'}
+			,OF_STATETEXT:{title:'State'}
+			,OF_FORMTEXT:{title:'Form',width:'1%'}
 			,OF_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Info',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,OF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
@@ -65,7 +65,7 @@ var grid1_config = [
 			,OF_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'1%'}
 			,OF_FEES:{title:'Fees'}
 			,OF_ESTTIME:{title:'Estimated Time'}
-			,OF_PAID:{title:'Payment Status'}
+			,OF_PAIDTEXT:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"11"}',

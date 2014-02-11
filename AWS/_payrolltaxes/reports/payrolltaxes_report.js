@@ -52,10 +52,10 @@ var grid1_config = [
 	"fields":{PT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_DUEDATE:{title:'Due Date',width:'1%'}
-			,PT_TYPE:{title:'Type'}
-			,PT_STATE:{title:'State'}
+			,PT_TYPETEXT:{title:'Type'}
+			,PT_STATETEXT:{title:'State'}
 			,PT_YEAR:{title:'Year',width:'1%'}
-			,PT_MONTH:{title:'Month'}
+			,PT_MONTHTEXT:{title:'Month'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 			,PT_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'}
 			,PT_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
@@ -66,7 +66,7 @@ var grid1_config = [
 			,PT_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'1%'}
 			,PT_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'1%'}
 			,PT_FEES:{title:'Fees'}
-			,PT_PAID:{title:'Payment Status'}
+			,PT_PAIDTEXT:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"13"}',

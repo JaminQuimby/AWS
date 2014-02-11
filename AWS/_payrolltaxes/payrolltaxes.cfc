@@ -154,9 +154,9 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
-,[pt_month]
+,[pt_monthTEXT]
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
-,[pt_type]
+,[pt_typeTEXT]
 ,[pt_obtaininfo_assignedtoTEXT]
 ,[pt_entry_assignedtoTEXT]
 ,[pt_rec_assignedtoTEXT]
@@ -183,9 +183,9 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PT_YEAR":"'&PT_YEAR&'"
-								,"PT_MONTH":"'&PT_MONTH&'"
+								,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
-								,"PT_TYPE":"'&PT_TYPE&'"
+								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
 								,"PT_OBTAININFO_ASSIGNEDTOTEXT":"'&PT_OBTAININFO_ASSIGNEDTOTEXT&'"

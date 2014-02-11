@@ -103,16 +103,16 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="assetCompTask">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[of_obtaininfo_datecompleted]=CONVERT(VARCHAR(10),of_obtaininfo_datecompleted,101)
-,[of_obtaininfo_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_obtaininfo_completedby=[user_id]))
+,[of_obtaininfo_completedbyTEXT]
 ,[of_preparation_datecompleted]=CONVERT(VARCHAR(10),of_preparation_datecompleted,101)
-,[of_preparation_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_preparation_completedby=[user_id]))
+,[of_preparation_completedbyTEXT]
 ,[of_review_datecompleted]=CONVERT(VARCHAR(10),of_review_datecompleted,101)
-,[of_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_review_completedby=[user_id]))
+,[of_review_completedbyTEXT]
 ,[of_assembly_datecompleted]=CONVERT(VARCHAR(10),of_assembly_datecompleted,101)
-,[of_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_assembly_completedby=[user_id]))
+,[of_assembly_completedbyTEXT]
 ,[of_delivery_datecompleted]=CONVERT(VARCHAR(10),of_delivery_datecompleted,101)
-,[of_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_delivery_completedby=[user_id]))
-FROM[otherfilings]
+,[of_delivery_completedbyTEXT]
+FROM[v_otherfilings]
 WHERE[OF_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -157,14 +157,14 @@ SELECT[of_id]
 ,[of_missinginfo]
 ,[client_name]
 ,[client_id]
-,OF_OBTAININFO_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_obtaininfo_assignedto=user_id))
-,OF_PREPARATION_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_preparation_assignedto=user_id))
-,OF_REVIEW_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_review_assignedto=user_id))
-,OF_ASSEMBLY_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_assembly_assignedto=user_id))
-,OF_DELIVERY_ASSIGNEDTOTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(of_delivery_assignedto=user_id))
-,of_taskTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_task]=[optionvalue_id])
-,of_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_task]=[optionvalue_id])
-,of_periodTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
+,OF_OBTAININFO_ASSIGNEDTOTEXT
+,OF_PREPARATION_ASSIGNEDTOTEXT
+,OF_REVIEW_ASSIGNEDTOTEXT
+,OF_ASSEMBLY_ASSIGNEDTOTEXT
+,OF_DELIVERY_ASSIGNEDTOTEXT
+,of_taskTEXT
+,of_stateTEXT
+,of_periodTEXT
 
 FROM[v_otherfilings]
 WHERE[of_status] != 2 
