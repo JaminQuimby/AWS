@@ -11,7 +11,14 @@ String.prototype.has = function(text) { return this.toLowerCase().indexOf("" + t
 String.prototype.insert = function (index, string) {if (index > 0) return this.substring(0, index) + string + this.substring(index, this.length); else return string + this;};
 Array.prototype.removeValue = function(name, value){var array = $.map(this, function(v,i){return v[name] === value ? null : v;});this.length = 0;this.push.apply(this, array);}
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
-
+Date.prototype.mmddyyyy = function() {         
+                                
+        var yyyy = this.getFullYear().toString();                                    
+        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based         
+        var dd  = this.getDate().toString();             
+                            
+        return  (mm[1]?mm:"0"+mm[0]) + '/' + (dd[1]?dd:"0"+dd[0]) + '/' + yyyy;
+   };  
 
 _toReport=function(data,config){
 //Build Report Groups
@@ -41,6 +48,7 @@ return JSON.stringify(jgroup);
 
 
 _toBuild=function(data,config,options){
+	
 try{
 //Build Default Options if none provided	
 if( $.type( options ) === "undefined"){
@@ -52,20 +60,31 @@ list=list+',"'+config[i].n+'_more":""';
 list=list+',"'+config[i].n+'_not":""';
 options='{'+list+'}'})
 }
+
+
 //Build json data string
 var json=data;
 
-json=json.replaceAll('#employee', '10000');
+$.each(config, function(i){
+json=json.replaceAll('#EMPLOYEE', '10000');
+json=json.replaceAll('#TODAY', new Date().mmddyyyy());
+
+});
 
 //Escape unecessary chars
 json=json.escapeIt(json); //Escape
+
 //expand options search types
+
 $.each(config, function(i){
+
 json=json.replaceAll(config[i].n+':', '","'+config[i].n+'":"');
 json=json.replaceAll(config[i].n+'<', '","'+config[i].n+'_less":"').replaceAll(config[i].n+'>', '","'+config[i].n+'_more":"');
 json=json.replaceAll(config[i].n+'!', '","'+config[i].n+'_not":"');
 
 });
+
+
 //remove unecessary whitespace
 json=json.replaceAll(' "', '"').replaceAll('" ', '"'); //Trim
 //format json structure
@@ -79,19 +98,25 @@ $.each(options, function (i) {
         $.each(config,function(c){
 		
 		if(config[c].n===i||config[c].n+'_less'===i||config[c].n+'_more'===i||config[c].n+'_not'===i){
-		if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
-		  
+		
+		
+		 
 		  switch(config[c].t){
                 case'date':
 					if(_isIt('date',options[i])){
 					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
-					}
+					}else{
+						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
+						}
+					
 					break;
 					
                 case'numeric':
 					if(_isIt('numeric',options[i])){
 					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
-					}
+					}else{
+						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
+						}
 					break;
 					
 				case'boolean':
@@ -101,10 +126,19 @@ $.each(options, function (i) {
 					}else{
 					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"0"}'))
 					}}
+					
+					else{
+						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
+						}
 					break;
 					
-				default:xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
+				default:
+				xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))		
+					
+				
 }}})}});
+
+
 return xgroup;
 }
 catch (err) {
