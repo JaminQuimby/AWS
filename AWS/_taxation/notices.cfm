@@ -9,6 +9,7 @@
 <cfset page.title="Notices">
 <cfset page.menuLeft="General,Notice">
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3">
+<cfset page.footer="1">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="/assets/inc/header.cfm">

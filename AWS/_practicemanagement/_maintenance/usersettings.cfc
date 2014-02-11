@@ -17,8 +17,9 @@ SELECT[user_id]
       ,[m_payrolltaxes]
       ,[m_accountingservices]
       ,[m_taxation]
-      ,[m_practicemanagement]
+      ,[m_clientmanagement]
       ,[g_delete]
+      ,[m_maintenance]
 FROM[v_staffinitials]
 WHERE[user_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -51,8 +52,9 @@ SELECT[user_id]
       ,[m_payrolltaxes]
       ,[m_accountingservices]
       ,[m_taxation]
-      ,[m_practicemanagement]
+      ,[m_clientmanagement]
       ,[g_delete]
+      ,[m_maintenance]
 FROM[v_staffinitials]
 
 <cfif ARGUMENTS.search neq "">
@@ -72,7 +74,8 @@ AND[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"M_PAYROLLTAXES":"'&M_PAYROLLTAXES&'"
 								,"M_ACCOUNTINGSERVICES":"'&M_ACCOUNTINGSERVICES&'"
 								,"M_TAXATION":"'&M_TAXATION&'"
-								,"M_PRACTICEMANAGEMENT":"'&M_PRACTICEMANAGEMENT&'"
+								,"M_CLIENTMANAGEMENT":"'&M_CLIENTMANAGEMENT&'"
+								,"M_MAINTENANCE":"'&M_MAINTENANCE&'"
 								,"G_DELETE":"'&G_DELETE&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -100,7 +103,7 @@ AND[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <!--- Group1 --->
 <cfcase value="group1">
-
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][2])><cfset j.DATA[1][2]=1><cfelse><cfset j.DATA[1][2]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][4])><cfset j.DATA[1][4]=1><cfelse><cfset j.DATA[1][4]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
@@ -112,16 +115,18 @@ AND[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif #j.DATA[1][1]# neq "0">
 
 <cfquery name="fquery" datasource="AWS">
-UPDATE[v_staffinitials]
-SET[m_payrolltaxes]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[m_accountingservices]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[m_taxation]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[m_practicemanagement]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[g_delete]=<cfqueryparam value="#j.DATA[1][6]#"/>
+UPDATE[staffinitials]
+SET[m_accountingservices]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[m_clientmanagement]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[g_delete]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[m_maintenance]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[m_payrolltaxes]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[m_taxation]=<cfqueryparam value="#j.DATA[1][7]#"/>
+
+
 WHERE[user_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group1","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 
 </cfif>
 

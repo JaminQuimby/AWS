@@ -22,7 +22,7 @@ _group101=function(){_grid101()}
 _grid101=function(){
 	_jGrid({
 	"grid":"grid101",
-	"url":"/AWS/assets/plugins/jComment/comment.cfc",
+	"url":"#this.url#/AWS/assets/plugins/jComment/comment.cfc",
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date',width:'1%'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",

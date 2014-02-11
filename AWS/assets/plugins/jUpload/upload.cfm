@@ -6,7 +6,7 @@ $("##uploader").pluploadQueue({
 // General settings
 preinit:_FileUploadedCB,
 runtimes:'html5,flash',
-url:'/AWS/assets/plugins/jUpload/upload.cfc?method=upload',
+url:'#this.url#/AWS/assets/plugins/jUpload/upload.cfc?method=upload',
 max_file_size:'10mb',
 chunk_size:'1mb',
 unique_names:true,

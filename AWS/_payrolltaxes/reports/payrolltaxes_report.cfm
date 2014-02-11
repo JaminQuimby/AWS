@@ -11,6 +11,7 @@
 <cfset page.type="report">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
+<cfset page.footer="0">
 <!DOCTYPE html> 
 
 <html xmlns="http://www.w3.org/1999/xhtml">

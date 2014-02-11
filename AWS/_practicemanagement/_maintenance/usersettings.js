@@ -14,7 +14,8 @@ _grid1=function(){_jGrid({
 			,M_PAYROLLTAXES:{title:'Payroll Taxes'}
 			,M_ACCOUNTINGSERVICES:{title:'Accounting Services'}
 			,M_TAXATION:{title:'Taxation'}
-			,M_PRACTICEMANAGEMENT:{title:'Practice Management'}
+			,M_CLIENTMANAGEMENT:{title:'Client Management'}
+			,M_MAINTENANCE:{title:'Maintenance'}
 			,G_DELETE:{title:'Delete'}
 			},
 	"method":"f_lookupData",
@@ -29,7 +30,7 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request w
 else{
 switch(query.COLUMNS[0]){
 
-/*Group1*/case "USER_ID":var list='task_id,g1_payrolltaxes,g1_accountingservices,g1_taxation,g1_practicemanagement,g1_delete';_loadit({"query":query,"list":list});break;
+/*Group1*/case "USER_ID":var list='task_id,g1_payrolltaxes,g1_accountingservices,g1_taxation,g1_clientmanagement,g1_delete,g1_maintenance';_loadit({"query":query,"list":list});break;
 
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -49,11 +50,13 @@ else{jqMessage({message: "You must input all bold fields.",type: "info",autoClos
 break;
 
 case'group1':var json='{"DATA":[["'+
-$("#task_id").is(':checked')+',"'+
-$("#g1_payrolltaxes").is(':checked')+',"'+
-$("#g1_accountingservices").is(':checked')+',"'+
-$("#g1_practicemanagement").is(':checked')+',"'+
-$("#g1_delete").is(':checked')+',"'+
+$("#task_id").val()+'",'+
+$("#g1_accountingservices").is(':checked')+','+
+$("#g1_clientmanagement").is(':checked')+','+
+$("#g1_delete").is(':checked')+','+
+$("#g1_maintenance").is(':checked')+','+
+$("#g1_payrolltaxes").is(':checked')+','+
+$("#g1_taxation").is(':checked')+',"'+
 '"]]}'
 _saveData({group:"group1","payload":$.parseJSON(json),page:"usersettings"});
 break;

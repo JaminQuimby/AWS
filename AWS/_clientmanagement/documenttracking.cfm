@@ -10,6 +10,7 @@
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id,file_id">
 <cfset page.plugins.disable="102">
+<cfset page.footer="1">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="/assets/inc/header.cfm">

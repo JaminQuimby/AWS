@@ -2,7 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfparam name="url.task_id" default="0">
-<cfparam name="url.nav" default="1">
+<cfparam name="url.nav" default="0">
 <cfset page.module="_maintenance">
 <cfset page.location="usersettings">
 <cfset page.formid=0>
@@ -10,6 +10,7 @@
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
+
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="/assets/inc/header.cfm">
@@ -53,11 +54,14 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<h3>General</h3>
 	<div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
+
+
 <div><label for="g1_payrolltaxes"><input id="g1_payrolltaxes" type="checkbox" class="ios-switch">Payroll Taxes</label></div>
 <div><label for="g1_accountingservices"><input id="g1_accountingservices" type="checkbox" class="ios-switch">Accounting Services</label></div>
 <div><label for="g1_taxation"><input id="g1_taxation" type="checkbox" class="ios-switch">Taxation</label></div>
-<div><label for="g1_practicemanagement"><input id="g1_practicemanagement" type="checkbox" class="ios-switch">Practice Management</label></div>
+<div><label for="g1_clientmanagement"><input id="g1_clientmanagement" type="checkbox" class="ios-switch">Client Management</label></div>
 
+<div><label for="g1_maintenance"><input id="g1_maintenance" type="checkbox" class="ios-switch">Maintenance</label></div>
 <div><label for="g1_delete"><input id="g1_delete" type="checkbox" class="ios-switch">Delete Rights</label></div>
 </div>
 
@@ -66,13 +70,11 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 
 <!--- Start Plugins --->
 <cfinclude template="/assets/plugins/plugins.cfm">
-
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>
-</div>
-</div>
 <!---Start of footer--->
+
 <cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>
