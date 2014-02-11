@@ -19,20 +19,19 @@
 SELECT[mc_id]
 ,[client_id]
 ,[mc_assignedto]
+,[mc_category]
+,[mc_description]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 ,[mc_esttime]
 ,[mc_fees]
 ,[mc_missinginfo]
-,[mc_missinginforeceived]
+,CONVERT(VARCHAR(10),[mc_missinginforeceived], 101)AS[mc_missinginforeceived]
 ,[mc_paid]
 ,[mc_priority]
 ,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
 ,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
 ,[mc_status]
-,[mc_description]
 ,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
-,[mc_category]
-,[mc_credithold]
 FROM[v_managementconsulting]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -175,10 +174,11 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryp
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[managementconsulting](
 [client_id]
@@ -227,6 +227,7 @@ SELECT SCOPE_IDENTITY()AS[mc_id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[managementconsulting]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>

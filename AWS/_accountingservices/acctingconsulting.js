@@ -42,7 +42,7 @@ _loadDataCB=function(query){
 try{
 if(query!=null){
 switch(query.COLUMNS[0]){
-/*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginfo,g1_missinginforeceived,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_taskdescription,g1_workinitiated';_loadit({"query":query,"list":list});break;
+/*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_taskdescription,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginfo,g1_missinginforeceived,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_workinitiated';_loadit({"query":query,"list":list});break;
 /*Group2*/case "MCS_ID":var list='subtask1_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
 /*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
 /*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
@@ -72,9 +72,9 @@ $("#g1_assignedto").val()+'","'+
 $("#g1_consultingcategory").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_fees").val()+'","'+
-$("#g1_missinginfo").val()+'",'+
-$("#g1_missinginforeceived").is(':checked')+',"'+
+$("#g1_fees").val()+'",'+
+$("#g1_missinginfo").is(':checked')+',"'+
+$("#g1_missinginforeceived").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_projectcompleted").val()+'","'+
