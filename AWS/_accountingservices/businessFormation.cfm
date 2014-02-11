@@ -11,7 +11,7 @@
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group2">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<cfinclude template="../assets/inc/header.cfm">
+<cfinclude template="/assets/inc/header.cfm">
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
@@ -32,10 +32,10 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery dbtype="query" name="global_businesstype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_businesstype'</cfquery>
 <body>
 <!--- Load Left Menus --->
-<cfinclude template="../assets/inc/pagemenu.cfm">
+<cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 <!--- ENTRANCE --->
 <div id="entrance"class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput><div>
@@ -143,11 +143,11 @@ articles approved estimated time
 	</div>
 </div>
 <!--- Start Plugins --->
-<cfinclude template="../assets/plugins/plugins.cfm">
+<cfinclude template="/assets/plugins/plugins.cfm">
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>
 <!---Start of footer--->
-<cfinclude template="../assets/inc/footer.cfm" />
+<cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

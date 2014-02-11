@@ -10,17 +10,17 @@
 <cfset page.plugins.disable="100,101">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<cfinclude template="../assets/inc/header.cfm">
+<cfinclude template="/assets/inc/header.cfm">
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <body>
 <!--- Load Left Menus --->
-<cfinclude template="../assets/inc/pagemenu.cfm">
+<cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 
 <!---TRACKERS--->
 
@@ -65,12 +65,12 @@
 </div>
 </div>
 <!--- Start Plugins --->
-<cfinclude template="../assets/plugins/plugins.cfm">
+<cfinclude template="/assets/plugins/plugins.cfm">
 <!--- FIELD DATA --->
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>
 <!---Start of footer--->
-<cfinclude template="../assets/inc/footer.cfm" />
+<cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

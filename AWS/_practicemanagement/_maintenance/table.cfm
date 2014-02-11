@@ -10,16 +10,16 @@
 <cfset page.plugins.disable="ALL">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<cfinclude template="../../assets/inc/header.cfm">
+<cfinclude template="/assets/inc/header.cfm">
 <cfquery name="optionGroup" cachedWithin="#page.cache.users#" datasource="AWS">SELECT[form_id]AS[optionvalue_id],[formName]AS[optionname]FROM[ctrl_forms]ORDER BY[formName]</cfquery>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <body>
 <!--- Load Left Menus --->
-<cfinclude template="../../assets/inc/pagemenu.cfm">
+<cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../../assets/module/menu2/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 <!--- ENTRANCE --->
 <div id="entrance"class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput><div>
@@ -62,11 +62,11 @@
 </div>
 </div>
 <!--- Start Plugins --->
-<cfinclude template="../../assets/plugins/plugins.cfm">
+<cfinclude template="/assets/plugins/plugins.cfm">
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>
 <!---Start of footer--->
-<cfinclude template="../../assets/inc/footer.cfm" />
+<cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

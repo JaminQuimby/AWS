@@ -10,15 +10,15 @@
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<cfinclude template="../../inc/header.cfm">
+<cfinclude template="/inc/header.cfm">
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8,group9,group10,group11,group12,group13'); ">
 <!--- Load Left Menus --->
-<cfinclude template="../../inc/pagemenu.cfm">
+<cfinclude template="/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../../module/menu/menu.cfm"></nav>
+<cfinclude template="/module/menu/menu.cfm"></nav>
 
 
  <div id="group1" class="gf-checkbox">
@@ -143,12 +143,12 @@
  
 
 <!--- Start Plugins --->
-<cfinclude template="../../plugins/plugins.cfm">
+<cfinclude template="/plugins/plugins.cfm">
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>
 <!---Start of footer--->
-<cfinclude template="../../inc/footer.cfm" />
+<cfinclude template="/inc/footer.cfm" />
 </body>
 </html>

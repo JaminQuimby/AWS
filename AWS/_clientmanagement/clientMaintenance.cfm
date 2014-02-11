@@ -12,7 +12,7 @@
 <cfset page.plugins.disable="102">
 <!DOCTYPE html> 
 <html>
-<cfinclude template="../assets/inc/header.cfm">
+<cfinclude template="/assets/inc/header.cfm">
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
@@ -49,10 +49,10 @@ ACTIVITY (CLIENT DATA)
 
 <body>
 <!--- Load Left Menus --->
-<cfinclude template="../assets/inc/pagemenu.cfm">
+<cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 <!--- ENTRANCE --->
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
@@ -291,9 +291,9 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 <!--- Start Plugins --->
-<cfinclude template="../assets/plugins/plugins.cfm">
+<cfinclude template="/assets/plugins/plugins.cfm">
 </div>
 <!---Start of footer--->
-<cfinclude template="../assets/inc/footer.cfm" />
+<cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

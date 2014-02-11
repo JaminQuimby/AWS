@@ -7,8 +7,8 @@ _group1=function(){_grid1()}
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
-	"url":"profile.cfc",
-	"title":"Profile Security",
+	"url":"usersettings.cfc",
+	"title":"User Security",
 	"fields":{USER_ID:{key:true,list:false,edit:false}
 			,NAME:{title:'User'}
 			,M_PAYROLLTAXES:{title:'Payroll Taxes'}
@@ -19,7 +19,7 @@ _grid1=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
-	"functions":'$("#task_id").val(record.USER_ID);_updateh3(record.NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"profile"});'
+	"functions":'$("#task_id").val(record.USER_ID);_updateh3(record.NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"usersettings"});'
 	})};
 	
 	
@@ -55,7 +55,7 @@ $("#g1_accountingservices").is(':checked')+',"'+
 $("#g1_practicemanagement").is(':checked')+',"'+
 $("#g1_delete").is(':checked')+',"'+
 '"]]}'
-_saveData({group:"group1","payload":$.parseJSON(json),page:"profile"});
+_saveData({group:"group1","payload":$.parseJSON(json),page:"usersettings"});
 break;
 
 
@@ -65,5 +65,5 @@ break;
 /*Other Events*/
 case'error':jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-default:jqMessage({message: "A exception in profile.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
+default:jqMessage({message: "A exception in usersettings.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
 catch(err){alert(err)}};

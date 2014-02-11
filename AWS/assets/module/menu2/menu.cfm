@@ -129,6 +129,9 @@
 			<ul>
 		    <li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/table.cfm">Table Maintenance</a></li>
        		<li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/historical.cfm">Historical Data</a></li>
+            <cfif Session.user.role eq 1>
+            <li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/usersettings.cfm">User Settings</a></li>
+            </cfif>
 			</ul>
 		</div>
    

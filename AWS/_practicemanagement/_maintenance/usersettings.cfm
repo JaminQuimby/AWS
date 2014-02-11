@@ -3,16 +3,16 @@
 <cfheader name="Expires" value="0"/>
 <cfparam name="url.task_id" default="0">
 <cfparam name="url.nav" default="1">
-<cfset page.module="_security">
-<cfset page.location="profile">
+<cfset page.module="_maintenance">
+<cfset page.location="usersettings">
 <cfset page.formid=0>
-<cfset page.title="Profile Security">
+<cfset page.title="User Settings">
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<cfinclude template="../assets/inc/header.cfm">
+<cfinclude template="/assets/inc/header.cfm">
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
@@ -30,10 +30,10 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery datasource="AWS" name="global_users">SELECT[user_id]AS[optionvalue_id],[name]AS[optionname]FROM[v_staffinitials]ORDER BY[name]</cfquery>
 <body>
 <!--- Load Left Menus --->
-<cfinclude template="../assets/inc/pagemenu.cfm">
+<cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 
 
 <!--- ENTRANCE --->
@@ -65,7 +65,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 
 
 <!--- Start Plugins --->
-<cfinclude template="../assets/plugins/plugins.cfm">
+<cfinclude template="/assets/plugins/plugins.cfm">
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
@@ -73,6 +73,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 </div>
 <!---Start of footer--->
-<cfinclude template="../assets/inc/footer.cfm" />
+<cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

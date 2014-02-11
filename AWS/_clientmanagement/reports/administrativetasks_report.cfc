@@ -33,12 +33,12 @@
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[cas_id]
-,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
+,CONVERT(VARCHAR(8),[cas_duedate], 1)AS[cas_duedate]
 ,[cas_priority]
 ,[cas_assignedto]
 ,[cas_status]
-,CONVERT(VARCHAR(10),[cas_datereqested], 101)AS[cas_datereqested]
-,CONVERT(VARCHAR(10),[cas_completed], 101)AS[cas_completed]
+,CONVERT(VARCHAR(8),[cas_datereqested], 1)AS[cas_datereqested]
+,CONVERT(VARCHAR(8),[cas_completed], 1)AS[cas_completed]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,CASE WHEN LEN([cas_instructions]) >= 101 THEN SUBSTRING([cas_instructions],0,100) +  '...' ELSE [cas_instructions] END AS[cas_instructions]
 ,[client_name]

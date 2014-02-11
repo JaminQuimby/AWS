@@ -28,9 +28,9 @@ var grid1_config = [
 	"title":"Accounting &amp; Consulting",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,MC_CATEGORY:{title:'Consulting Category'}
-			,MC_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
-			,MC_STATUS:{title:'Status'}
+			,MC_CATEGORYTEXT:{title:'Consulting Category'}
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			,MC_STATUSTEXT:{title:'Status'}
 			,MC_DESCRIPTION:{title:'Description'}
 			,MC_REQUESTFORSERVICE:{title:'Request For Service',width:'1%'}
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
@@ -38,7 +38,7 @@ var grid1_config = [
 			,MC_PROJECTCOMPLETED:{title:'Project Completed',width:'1%'}
 			,MC_ESTTIME:{title:'Estimated Time'}
 			,MC_FEES:{title:'Fees'}
-			,MC_PAID:{title:'Payment Status'}
+			,MC_PAIDTEXT:{title:'Payment Status'}
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"2"}',

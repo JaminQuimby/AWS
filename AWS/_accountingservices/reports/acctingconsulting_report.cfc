@@ -50,17 +50,18 @@ SELECT TOP 1000 [mcs_id]
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[mc_id]
-,[mc_category]
-,[mc_assignedto]
+,[mc_categoryTEXT]
+,[mc_assignedtoTEXT]
+,[mc_statusTEXT]
 ,[mc_status]
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
-,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
-,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
-,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
-,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
+,CONVERT(VARCHAR(8),[mc_requestforservice], 1)AS[mc_requestforservice]
+,CONVERT(VARCHAR(8),[mc_duedate], 1)AS[mc_duedate]
+,CONVERT(VARCHAR(8),[mc_workinitiated], 1)AS[mc_workinitiated]
+,CONVERT(VARCHAR(8),[mc_projectcompleted], 1)AS[mc_projectcompleted]
 ,[mc_esttime]
 ,[mc_fees]
-,[mc_paid]    
+,[mc_paidTEXT]    
 ,[client_name]
 ,[client_id]
 FROM[v_managementconsulting]
@@ -117,9 +118,9 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"MC_CATEGORY":"'&MC_CATEGORY&'"
-								,"MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'"
-								,"MC_STATUS":"'&MC_STATUS&'"
+								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
 								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
@@ -127,7 +128,7 @@ WHERE(1)=(1)
 								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
 								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_FEES":"'&MC_FEES&'"
-								,"MC_PAID":"'&MC_PAID&'"	
+								,"MC_PAIDTEXT":"'&MC_PAIDTEXT&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

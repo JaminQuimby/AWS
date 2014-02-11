@@ -11,7 +11,7 @@
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group1_6,isLoaded_group1_7,isLoaded_group1_8,isLoaded_group1_9,isLoaded_group1_10,isLoaded_group1_11,isLoaded_group2">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<cfinclude template="../assets/inc/header.cfm">
+<cfinclude template="/assets/inc/header.cfm">
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
@@ -33,10 +33,10 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery dbtype="query" name="global_financialstatmentsubtask">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_financialstatmentsubtask'</cfquery>
 <body>
 <!--- Load Left Menus --->
-<cfinclude template="../assets/inc/pagemenu.cfm">
+<cfinclude template="/assets/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../assets/module/menu2/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 
 
 <!--- ENTRANCE --->
@@ -176,7 +176,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!--- Start Plugins --->
-<cfinclude template="../assets/plugins/plugins.cfm">
+<cfinclude template="/assets/plugins/plugins.cfm">
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
@@ -184,6 +184,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 </div>
 <!---Start of footer--->
-<cfinclude template="../assets/inc/footer.cfm" />
+<cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

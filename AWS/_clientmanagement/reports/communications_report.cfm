@@ -14,14 +14,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
-<cfinclude template="../../assets/inc/header.cfm">
-<cfinclude template="../../assets/inc/pagemenu.cfm">
+<cfinclude template="/assets/inc/header.cfm">
+<cfinclude template="/assets/inc/pagemenu.cfm">
 
 
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu'); ">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="../../assets/module/menu2/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 
  <div id="group1" class="gf-checkbox">
 	<cfoutput><h3>#page.title# Search</h3></cfoutput>
@@ -40,12 +40,12 @@
  </div>
 
 <!--- Start Plugins --->
-<cfinclude template="../../assets/plugins/plugins.cfm">
+<cfinclude template="/assets/plugins/plugins.cfm">
 
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>
 <!---Start of footer--->
-<cfinclude template="../../assets/inc/footer.cfm" />
+<cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

@@ -7,8 +7,6 @@
 	<cfset this.sessiontimeout=createTimeSpan( 0, 0, 29, 59 ) />
     <cfset this.name="AWS" />
     <cfset this.sessionmanagement=true />
-    
-  
 	<cfset this.path=getDirectoryFromPath(getCurrentTemplatePath())/> 
     <cfset this.mappings[ "/assets" ] = "#this.path#AWS/assets/" />
     <cfset this.url="https://"&CGI.SERVER_NAME />
@@ -67,7 +65,7 @@
 <cfif isDefined("FORM.J_USERNAME") and  isDefined("FORM.J_PASSWORD")>
 <cfif FORM.J_USERNAME IS "" OR FORM.J_PASSWORD IS ""> 
 <cfoutput><h2>You must enter text in both the User Name and Password fields.</h2></cfoutput>
-<cfinclude template="assets/module/login/loginform.cfm">
+<cfinclude template="/assets/module/login/loginform.cfm">
 <cfabort>
 <cfelse> 
 <cfquery name="loginQuery" dataSource="AWS" cachedwithin="#CreateTimeSpan(0, 0, 28, 0)#">
@@ -95,7 +93,7 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 
 
  <cfif NOT isDefined('Session.user.ID')>     
-<cfinclude template="assets/module/login/loginform.cfm">
+<cfinclude template="/assets/module/login/loginform.cfm">
 <cfabort>
 </cfif>
            
