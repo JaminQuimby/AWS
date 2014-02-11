@@ -28,7 +28,7 @@ var grid1_config = [
 ,{"n":"trade_name","t":"text","v":""}
 ,{"n":"type","t":"numeric","v":""}
 
-];$.each(grid1_config, function(idx, obj) {$('.search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
+];$.each(grid1_config, function(idx, obj) {$('#group0 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
  
 	_jGrid({
 	"grid":"grid1",
@@ -48,7 +48,7 @@ var grid1_config = [
 			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 				"method":"f_lookupData",
-	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0""ID":"'+$("#client_id").val()+'","loadType":"group0","formid":"1"}',
+	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group0","formid":"1"}',
 //	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/clientmaintenance.cfm?task_id="+$("#task_id").val();'
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/clientmaintenance.cfm?task_id="+record.CLIENT_ID+"&nav=0","_blank")'
 	})};  
@@ -77,7 +77,7 @@ var grid2_config = [
 ,{"n":"customLabel","t":"text","v":""}
 ,{"n":"customValue","t":"boolean","v":""}
 
-];
+];$.each(grid2_config, function(idx, obj) {$('#group2 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
  
 	_jGrid({
 	"grid":"grid2",
@@ -101,7 +101,7 @@ var grid2_config = [
 			,CONTACT_EMAIL2:{title:'Email 2'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":'+_toReport($("#g2_filter").val(),grid2_config)+',"orderBy":"0","row":"0""ID":"'+$("#client_id").val()+'","loadType":"group2","formid":"1"}',
+	"arguments":'{"search":'+_toReport($("#g2_filter").val(),grid2_config)+',"orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group2","formid":"1"}',
 	"functions":''
 	})}; 
 	 
