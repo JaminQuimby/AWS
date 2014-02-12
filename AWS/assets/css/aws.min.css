@@ -1,0 +1,108 @@
+div.autosuggestcontainer .yui-ac-shadow{margin:1px}
+div.autosuggestcontainer li{color:#333}
+#Searchloadingicon{display:none}
+.x-grid3-hd-inner{background-image:none;height:40px;padding-top:20px}
+.x-grid3-row{height:30px;padding-top:2px}
+.cfdebug{margin-left:360px;margin-top:100px}
+.ui-accordion .ui-accordion-header{margin-top:0;padding:10px 10px 10px 2.2em}
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default{background:#EFEFEF;border:1px solid #fff;border-bottom:1px solid #D3D3D3}
+.ui-datepicker-trigger{height:20px;left:-24px;position:relative;top:5px}
+.ui-accordion .ui-accordion-content{overflow:inherit}
+.ui-widget-content{border:none}
+*{border:none;border-collapse:collapse;font-family:"Lucida Sans Unicode","Lucida Grande",tahoma,Verdana,sans-serif;font-size:12px;margin:0;padding:0}
+.chzn-container a{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:36px}
+.chzn-container-multi ul{border:1px solid #AAA;border-radius:5px 5px 5px 5px;box-shadow:0 0 3px #FFF inset, 0 1px 1px rgba(0,0,0,0.1)}
+.chzn-container-single .chzn-single{height:30px}
+.chzn-container-multi .chzn-choices li.search-field .default{min-height:36px!important}
+html,body{position:relative;height:auto;min-height:100%}
+a{font-size:13px;color:#000;text-decoration:none}
+form{display:inline}
+footer{position:fixed;bottom:0;width:100%;height:42px;background:#F8F8F8;color:#000;padding-left:34px;border-top-style:solid;border-top-color:#E1E1DC;border-top-width:1px}
+footer div{font-size:12px;padding-top:2px;display:inline-block;min-width:200px}
+header{height:34px;background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;width:100%;opacity:0.9}
+h1{font-weight:400}
+h3{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:400;min-width:400px;margin-bottom:35px;color:#666;padding:10px}
+h4{font-size:1em;font-weight:400;min-width:400px;margin-top:35px;color:#666;padding:10px}
+input{border:1px solid #AAA;border-radius:5px 5px 5px 5px;box-shadow:0 0 3px #FFF inset, 0 1px 1px rgba(0,0,0,0.1);width:400px;height:36px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:0 0 0 8px}
+input:focus{color:#0088CE;box-shadow:0 0 0 2px rgba(0,136,206,0.5)}
+input[type=button]{background:#FF0;width:165px}
+input[type=submit]{width:165px;-moz-border-bottom-colors:none;-moz-border-left-colors:none;-moz-border-right-colors:none;-moz-border-top-colors:none;background:0 repeat scroll 0 0 transparent;border-image:none;color:#000!important;text-shadow:0 -1px 0 #dddf42;border-style:solid;border-width:1px}
+input[type=checkbox]{width:10px}
+.readonly{background-color:#dedede}
+label{display:block;font-size:.8em;margin-top:4px;width:400px;white-space:nowrap}
+legend{background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;font-size:1em;font-weight:700;height:40px;min-width:400px;padding:10px}
+nav{background-color:#F8F8F8;border-bottom:1px solid #E1E1DC;border-right:1px solid #E1E1DC}
+select{border-radius:2px 2px 2px 2px;min-height:30px;width:400px;border:solid 1px #666}
+textarea{border:1px solid #AAA;border-radius:5px 5px 5px 5px;box-shadow:0 0 3px #FFF inset, 0 1px 1px rgba(0,0,0,0.1);min-width:400px;font-size:1em;min-height:300px;padding:6px}
+.bordered{border:1px solid #CCC;border-radius:6px 6px 6px 6px;box-shadow:0 1px 1px #CCC;margin-top:25px}
+.bordered tr:nth-child(odd){background-color:#EFEFEF}
+.bordered tr:hover{background:none repeat scroll 0 0 #FBF8E9;transition:all .1s ease-in-out 0}
+.bordered td,.bordered th{border-top:1px solid #CCC;text-align:left;font-size:12px;padding:4px}
+.bordered th{background-color:#DCE9F9;border-top:medium none;color:#666;border-left:1px solid #999;padding:7px 10px}
+.bordered td:first-child,.bordered th:first-child{border-left:medium none}
+.bordered th:first-child{border-radius:6px 0 0 0}
+.bordered th:last-child{border-radius:0 6px 0 0}
+.bordered th:only-child{border-radius:6px 6px 0 0}
+.bordered td:not(:last-of-type):not(:first-of-type):not(:nth-child(2)){text-align:center}
+.bordered tr{height:34px}
+.bordered tr:last-child td:first-child{border-radius:0 0 0 6px}
+.bordered tr:last-child td:last-child{border-radius:0 0 6px 0}
+.bordered thead{border-bottom:#FFF 1px solid}
+.bordered tfoot tr td{margin:7px 10px}
+.bordered tfoot tr a{background-color:#FF0;cursor:pointer;border:1px solid #999;color:#000;font-size:1em;text-decoration:none;font-weight:400;padding:3px 10px}
+.button{cursor:pointer;background:none repeat scroll 0 0 #FF0;border:1px solid #999;border-radius:2px 2px 2px 2px;display:inline-block;text-align:center;white-space:nowrap;text-decoration:none;min-width:165px;font-size:1em;padding:4px}
+.optional{background-color:#D3D3D3}
+.buttonbox{margin-top:5px;white-space:nowrap;min-width:300px;display:inline-block}
+.contentbig{vertical-align:top;padding-left:300px;margin-bottom:42px}
+.contentsmall{vertical-align:top;padding-left:39px}
+.customlabel{height:20px;margin-left:-5px;width:379px}
+.help{display:inline-block;font-size:12px;height:30px;line-height:30px;padding-left:10px}
+.smallMenuIcon li{border:1px solid #CCC;height:34px;width:34px;cursor:pointer;margin:2px 2px 4px}
+#topMenu{display:block;height:41px}
+.menus{height:100%;display:inline-block;vertical-align:top;position:fixed;left:0;top:0}
+.tblGrid{margin-top:20px}
+#entrance{margin-bottom:32px}
+#smallMenu{width:38px;height:100%;float:left;margin-right:45px;position:fixed}
+#smallMenu h1{font-size:1em;height:36px;padding:0}
+#largeMenu{width:300px;height:100%;position:fixed}
+#largeMenu h1{border-bottom:1px solid #BBB;text-align:center;background:#EFEFEF;padding:.7em 2em}
+#largeMenu h1 a{font-size:14px}
+#largeMenu li{list-style-type:none;background-color:#FFF;color:#069}
+#largeMenu li:hover{background-color:#efefef}
+#largeMenu li a{display:block;overflow:hidden;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;padding:9px 52px 9px 13px}
+#largeMenu li a:hover{color:#999}
+#largeMenu .smallMenuIcon li{display:inline-block}
+._payrolltaxes{background-color:#F60000;border-bottom-color:#600;color:#fff}
+._payrolltaxes li{border-color:#600}
+._accountingservices{background-color:#370EE4;border-bottom-color:#003;color:#fff}
+._accountingservices li{border-color:#003}
+._taxation{background-color:#F3AE03;border-bottom-color:#F90;color:#fff}
+._taxation li{border-color:#F90}
+._clientmanagement{background-color:#247639;border-bottom-color:#030;color:#fff}
+._clientmanagement li{border-color:#030}
+._practicemanagement{background-color:#A6A6A6;border-bottom-color:#333;color:#fff}
+._practicemanagement li{border-color:#333}
+.search-bar{background-color:#E9E9E9;background-repeat:repeat-x;border-bottom-left-radius:4px;border-image:none;border-top-left-radius:4px;box-shadow:0 1px 1px rgba(0,0,0,0.08);color:#333;display:inline-block;height:46px;text-shadow:none;width:410px;vertical-align:top;border-color:#B7B7B7;border-style:solid none solid solid;border-width:1px medium 1px 1px;padding:4px}
+.search-btn{border-radius:0 4px 4px 0;border-right:1px solid #AAA;display:inline-block;width:40px;padding:4px}
+.search-tog{display:none;height:0;width:0;left:8px;background:#060}
+.search-togcan{background:none repeat scroll 0 0 #FFF;border-bottom-left-radius:10px;border-bottom-right-radius:10px;box-shadow:0 1px 1px rgba(0,0,0,0.08);height:200px;margin-top:-2px;position:absolute;width:450px;z-index:999;overflow:hidden;border-color:#B7B7B7;border-style:solid;border-width:1px}
+.search-togcan ul{height:167px;overflow:auto;list-style-type:none;padding:15px}
+.search-togbtn{background:none repeat scroll 0 0 #E9E9E9;border-bottom:1px solid #AAA;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-left:1px solid #AAA;border-right:1px solid #AAA;cursor:pointer;display:block;font-size:9px;font-weight:700;height:15px;left:8px;padding-left:7px;position:relative;top:-1px;width:25px}
+.search-togfooter{background-color:#E9E9E9;border-top:1px solid gray;cursor:pointer;font-size:9px;font-weight:700;height:22px;margin-left:-10px;padding-left:20px}
+:root input[type=checkbox]{position:absolute;opacity:0}
+:root input[type=checkbox].ios-switch + div{display:inline-block;vertical-align:middle;width:3em;height:1em;border:1px solid rgba(0,0,0,.3);border-radius:999px;margin-right:.5em;background:#FFF;background-image:linear-gradient(rgba(0,0,0,.1), transparent),linear-gradient(90deg,hsl(135,69%,46%) 50% transparent 50%;background-size:200% 100%;background-position:100% 0;background-origin:border-box;background-clip:border-box;overflow:hidden;transition-duration:.4s;transition-property:padding, width, background-position, text-indent;font-size:200%;padding-bottom:1em}
+:root input[type=checkbox].ios-switch:checked + div{padding-left:2em;background-position:0 0;padding-bottom:1em}
+:root input[type=checkbox].ios-switch + div:before{content:'Yes';float:left;width:1.8em;height:1.8em;border:1px solid rgba(0,0,0,.35);border-radius:inherit;background:#FFF;background-image:linear-gradient(rgba(0,0,0,.2), transparent);box-shadow:0 .1em .1em .1em hsla(0,0%,100%,.8) inset,0 0 .5em rgba(0,0,0,.3);color:#FFF;text-indent:-2.5em;margin:-.1em}
+:root input[type=checkbox].ios-switch:focus + div{box-shadow:0 .1em .1em rgba(0,0,0,.2) inset, 0 .45em 0 .1em rgba(0,0,0,.05) inset, 0 0 .4em 1px rgba(255,0,0,.5)}
+:root input[type=checkbox].ios-switchb + div{display:inline-block;vertical-align:middle;width:3em;height:1em;border:1px solid rgba(0,0,0,.3);border-radius:999px;margin-right:.5em;background:#FFF;background-image:linear-gradient(rgba(0,0,0,.1), transparent), linear-gradient(90deg,hsl(7,100%,50%) 50% transparent 50%;background-size:200% 100%;background-position:100% 0;background-origin:border-box;background-clip:border-box;overflow:hidden;transition-duration:.4s;transition-property:padding, width, background-position, text-indent;font-size:200%;padding-bottom:1em}
+:root input[type=checkbox].ios-switchb:checked + div{padding-left:2em;background-position:0 0}
+:root input[type=checkbox].ios-switchb + div:before{content:'Yes';float:left;width:1.65em;height:1.65em;border:1px solid rgba(0,0,0,.35);border-radius:inherit;background:#FFF;background-image:linear-gradient(rgba(0,0,0,.2), transparent);box-shadow:0 .1em .1em .1em hsla(0,0%,100%,.8) inset,0 0 .5em rgba(0,0,0,.3);color:#FFF;text-shadow:0 -1px 1px rgba(0,0,0,.3);text-indent:-2.5em}
+.x-grid3-header,td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc .x-grid3-hd-inner,td.x-grid3-hd-menu-open .x-grid3-hd-inner{background-image:none;border-bottom:1px solid #999}
+.ui-corner-all,.ui-corner-bottom,.ui-corner-right,.ui-corner-br,.ui-corner-all,.ui-corner-top,.ui-corner-right,.ui-corner-tr,.ui-corner-all,.ui-corner-top,.ui-corner-left,.ui-corner-tl{border-radius:0}
+h1,h2,h3,h4,h5,h6,.ios-switchb{font-size:16px}
+td,tr{vertical-align:top}
+._payrolltaxes li a,._accountingservices li a,._clientmanagement li a{color:#fff}
+._taxation li a,._practicemanagement li a{color:#000}
+:root input[type=checkbox].ios-switch:active + div:before,:root input[type=checkbox].ios-switchb:active + div:before{background-color:#eee}
+:root input[type=checkbox].ios-switch + div:before,:root input[type=checkbox].ios-switch + div:after,:root input[type=checkbox].ios-switchb + div:before,:root input[type=checkbox].ios-switchb + div:after{font:bold 60%/1.9 sans-serif;text-transform:uppercase}
+:root input[type=checkbox].ios-switch + div:after,:root input[type=checkbox].ios-switchb + div:after{content:'No';float:left;text-indent:.5em;color:rgba(0,0,0,.45);text-shadow:none}

@@ -32,8 +32,8 @@
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jqvalid/jqvalid.css">
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css">
 <cfswitch expression="#page.type#">
-<cfcase value="report"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/report.css"/></cfcase>
-<cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/aws.css"/></cfdefaultcase>
+<cfcase value="report"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/report.min.css"/></cfcase>
+<cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/aws.min.css"/></cfdefaultcase>
 </cfswitch>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
