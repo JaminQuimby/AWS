@@ -42,16 +42,16 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,NM_NAME:{title:'Matter Name'}
 			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
-			,N_1_TAXFORM:{title:'Tax Form'}
-			,N_1_NOTICENUMBER:{title:'Notice Number'}
-			,N_NOTICESTATUS:{title:'Notice Status'}
+			,N_1_TAXFORMTEXT:{title:'Tax Form'}
+			,N_1_NOTICENUMBERTEXT:{title:'Notice Number'}
+			,N_NOTICESTATUSTEXT:{title:'Notice Status'}
 			,N_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,N_1_DATENOTICEREC:{title:'Date Notice Received',width:'1%'}
 			,N_1_RESDUEDATE:{title:'Response Due Date',width:'1%'}
 			,N_2_RESSUBMITED:{title:'Response Submitted',width:'1%'}
 			,N_2_REVREQUIRED:{title:'Review Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,N_FEES:{title:'Fees'}
-			,N_PAID:{title:'Payment Status'}
+			,N_PAIDTEXT:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"8"}',

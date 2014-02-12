@@ -77,7 +77,7 @@ articles approved estimated time
 	<div><label for="g1_extensiondeadline" >Extension Deadline</label><input type="text" id="g1_extensiondeadline" class="date"/></div>
 	<div><label for="g1_extensionrequested" >Extension Requested</label><input type="text" id="g1_extensionrequested" class="date"/></div>
 	<div><label for="g1_extensioncompleted" >Extension Completed</label><input type="text" id="g1_extensioncompleted" class="date"/></div>
-	<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>>
+	<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
     <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 	<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

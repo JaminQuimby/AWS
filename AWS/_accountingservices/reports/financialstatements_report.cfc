@@ -82,7 +82,7 @@ SELECT [fdss_id]
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-
+<cfargument name="formid" type="string" required="no">
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 1 Entrance --->
@@ -93,19 +93,20 @@ SELECT [fdss_id]
 SELECT[fds_id]
 ,[fds_year]
 ,[fds_month]
+,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,CONVERT(VARCHAR(10),fds_obtaininfo_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedto) AS [fds_obtaininfo]
-,CONVERT(VARCHAR(10),[fds_sort_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedto) AS [fds_sort]
-,CONVERT(VARCHAR(10),[fds_checks_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedto) AS [fds_checks]
-,CONVERT(VARCHAR(10),[fds_sales_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedto) AS [fds_sales]
-,CONVERT(VARCHAR(10),[fds_entry_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedto) AS [fds_entry]
-,CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedto) AS [fds_reconcile]
-,CONVERT(VARCHAR(10),[fds_compile_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedto) AS [fds_compile]
-,CONVERT(VARCHAR(10),[fds_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedto) AS [fds_review]
-,CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedto) AS [fds_assembly]
-,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedto) AS [fds_delivery]
-,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedto) AS [fds_acctrpt]
+,CONVERT(VARCHAR(10),fds_obtaininfo_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedtoTEXT) AS [fds_obtaininfo]
+,CONVERT(VARCHAR(10),[fds_sort_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedtoTEXT) AS [fds_sort]
+,CONVERT(VARCHAR(10),[fds_checks_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedtoTEXT) AS [fds_checks]
+,CONVERT(VARCHAR(10),[fds_sales_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedtoTEXT) AS [fds_sales]
+,CONVERT(VARCHAR(10),[fds_entry_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedtoTEXT) AS [fds_entry]
+,CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedtoTEXT) AS [fds_reconcile]
+,CONVERT(VARCHAR(10),[fds_compile_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedtoTEXT) AS [fds_compile]
+,CONVERT(VARCHAR(10),[fds_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedtoTEXT) AS [fds_review]
+,CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedtoTEXT) AS [fds_assembly]
+,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedtoTEXT) AS [fds_delivery]
+,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedtoTEXT) AS [fds_acctrpt]
 ,[fds_fees]
 ,[fds_paid]
 ,[client_name]
@@ -164,7 +165,7 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"FDS_YEAR":"'&FDS_YEAR&'"
-								,"FDS_MONTH":"'&FDS_MONTH&'"
+								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
 								,"FDS_OBTAININFO":"'&FDS_OBTAININFO&'"
@@ -201,23 +202,24 @@ SELECT[fdss_id]
 ,[fds_id]
 ,[fds_year]
 ,[fds_month]
+,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,COALESCE(CONVERT(VARCHAR(10),fds_obtaininfo_datecompleted, 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedto) AS [fds_obtaininfo]
-,COALESCE(CONVERT(VARCHAR(10),[fds_sort_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedto) AS [fds_sort]
-,COALESCE(CONVERT(VARCHAR(10),[fds_checks_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedto) AS [fds_checks]
-,COALESCE(CONVERT(VARCHAR(10),[fds_sales_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedto) AS [fds_sales]
-,COALESCE(CONVERT(VARCHAR(10),[fds_entry_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedto) AS [fds_entry]
-,COALESCE(CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedto) AS [fds_reconcile]
-,COALESCE(CONVERT(VARCHAR(10),[fds_compile_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedto) AS [fds_compile]
-,COALESCE(CONVERT(VARCHAR(10),[fds_review_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedto) AS [fds_review]
-,COALESCE(CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedto) AS [fds_assembly]
-,COALESCE(CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedto) AS [fds_delivery]
-,COALESCE(CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedto) AS [fds_acctrpt]
+,COALESCE(CONVERT(VARCHAR(10),fds_obtaininfo_datecompleted, 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedtoTEXT) AS [fds_obtaininfo]
+,COALESCE(CONVERT(VARCHAR(10),[fds_sort_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedtoTEXT) AS [fds_sort]
+,COALESCE(CONVERT(VARCHAR(10),[fds_checks_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedtoTEXT) AS [fds_checks]
+,COALESCE(CONVERT(VARCHAR(10),[fds_sales_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedtoTEXT) AS [fds_sales]
+,COALESCE(CONVERT(VARCHAR(10),[fds_entry_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedtoTEXT) AS [fds_entry]
+,COALESCE(CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedtoTEXT) AS [fds_reconcile]
+,COALESCE(CONVERT(VARCHAR(10),[fds_compile_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedtoTEXT) AS [fds_compile]
+,COALESCE(CONVERT(VARCHAR(10),[fds_review_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedtoTEXT) AS [fds_review]
+,COALESCE(CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedtoTEXT) AS [fds_assembly]
+,COALESCE(CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedtoTEXT) AS [fds_delivery]
+,COALESCE(CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 1), '') + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedtoTEXT) AS [fds_acctrpt]
 ,[fds_fees]
 ,[fds_paid]
-,[fdss_subtask]
-,[fdss_status]
+,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
+,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_financialdatastatus_subtask]
@@ -235,7 +237,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"FDS_YEAR":"'&FDS_YEAR&'"
-								,"FDS_MONTH":"'&FDS_MONTH&'"
+								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
 								,"FDS_OBTAININFO":"'&FDS_OBTAININFO&'"
@@ -249,8 +251,8 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FDS_ASSEMBLY":"'&FDS_ASSEMBLY&'"
 								,"FDS_DELIVERY":"'&FDS_DELIVERY&'"
 								,"FDS_ACCTRPT":"'&FDS_ACCTRPT&'"
-								,"FDSS_SUBTASK":"'&FDSS_SUBTASK&'"
-								,"FDSS_STATUS":"'&FDSS_STATUS&'"
+								,"FDSS_SUBTASKTEXT":"'&FDSS_SUBTASKTEXT&'"
+								,"FDSS_STATUSTEXT":"'&FDSS_STATUSTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

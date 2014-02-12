@@ -41,8 +41,8 @@ SELECT TOP 1000 [mcs_id]
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
-<cfargument name="clientid" type="string" required="no">
-
+<cfargument name="clientid" type="numeric" required="no">
+<cfargument name="formid" type="numeric" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -50,9 +50,9 @@ SELECT TOP 1000 [mcs_id]
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[mc_id]
-,[mc_categoryTEXT]
+,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_assignedtoTEXT]
-,[mc_statusTEXT]
+,mc_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,[mc_status]
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 ,CONVERT(VARCHAR(8),[mc_requestforservice], 1)AS[mc_requestforservice]
@@ -61,12 +61,10 @@ SELECT[mc_id]
 ,CONVERT(VARCHAR(8),[mc_projectcompleted], 1)AS[mc_projectcompleted]
 ,[mc_esttime]
 ,[mc_fees]
-,[mc_paidTEXT]    
+,[mc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[mc_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_managementconsulting]
-
-
 <cfset sqllist = "mc_assignedto,mc_category,mc_description,mc_duedate,mc_esttime,mc_fees,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_workinitiated">
 <cfset key="mc_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>

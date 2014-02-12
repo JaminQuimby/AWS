@@ -98,11 +98,10 @@ SELECT[mc_id]
 ,[mc_assignedtoTEXT]
 ,[client_id]
 ,[client_name]
-,[mc_categoryTEXT]
+,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_description]
 ,[mc_status]
 ,mc_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
-
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
 WHERE[mc_status] != 2 
@@ -140,7 +139,6 @@ SELECT
 ,[mcs_sequence]
 ,[mcs_status]
 ,[mcs_subtask] 
-
 FROM[managementconsulting_subtask]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>

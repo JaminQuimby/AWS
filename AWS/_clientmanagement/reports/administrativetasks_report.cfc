@@ -35,8 +35,9 @@
 SELECT[cas_id]
 ,CONVERT(VARCHAR(8),[cas_duedate], 1)AS[cas_duedate]
 ,[cas_priority]
-,[cas_assignedto]
-,[cas_status]
+,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
+,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
+,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[cas_datereqested], 1)AS[cas_datereqested]
 ,CONVERT(VARCHAR(8),[cas_completed], 1)AS[cas_completed]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
@@ -98,8 +99,8 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
 								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_ASSIGNEDTO":"'&CAS_ASSIGNEDTO&'"
-								,"CAS_STATUS":"'&CAS_STATUS&'"
+								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
+								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
 								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"
 								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"

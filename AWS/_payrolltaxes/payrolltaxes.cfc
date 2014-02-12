@@ -112,18 +112,18 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="assetCompTask">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[pt_obtaininfo_datecompleted]=CONVERT(VARCHAR(10),pt_obtaininfo_datecompleted,101)
-,[pt_obtaininfo_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_obtaininfo_completedby=[user_id]))
+,[pt_obtaininfo_completedbyTEXT]
 ,[pt_entry_datecompleted]=CONVERT(VARCHAR(10),pt_entry_datecompleted,101)
-,[pt_entry_completedbyyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_entry_completedby=[user_id]))
+,[pt_entry_completedbyTEXT]
 ,[pt_rec_datecompleted]=CONVERT(VARCHAR(10),pt_rec_datecompleted,101)
-,[pt_rec_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_rec_completedby=[user_id]))
+,[pt_rec_completedbyTEXT]
 ,[pt_review_datecompleted]=CONVERT(VARCHAR(10),pt_review_datecompleted,101)
-,[pt_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_review_completedby=[user_id]))
+,[pt_review_completedbyTEXT]
 ,[pt_assembly_datecompleted]=CONVERT(VARCHAR(10),pt_assembly_datecompleted,101)
-,[pt_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_assembly_completedby=[user_id]))
+,[pt_assembly_completedbyTEXT]
 ,[pt_delivery_datecompleted]=CONVERT(VARCHAR(10),pt_delivery_datecompleted,101)
-,[pt_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pt_delivery_completedby=[user_id]))
-FROM[payrolltaxes]
+,[pt_delivery_completedbyTEXT]
+FROM[v_payrolltaxes]
 WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -146,7 +146,7 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-
+<cfargument name="form_id" type="string" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 0 Entrance --->
@@ -154,9 +154,9 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
-,[pt_monthTEXT]
+,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
-,[pt_typeTEXT]
+,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
 ,[pt_obtaininfo_assignedtoTEXT]
 ,[pt_entry_assignedtoTEXT]
 ,[pt_rec_assignedtoTEXT]

@@ -100,16 +100,16 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="assetCompTask">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[pc_obtaininfo_datecompleted]=CONVERT(VARCHAR(10),pc_obtaininfo_datecompleted,101)
-,[pc_obtaininfo_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pc_obtaininfo_completedby=[user_id]))
+,[pc_obtaininfo_completedbyTEXT]
 ,[pc_preparation_datecompleted]=CONVERT(VARCHAR(10),pc_preparation_datecompleted,101)
-,[pc_preparation_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pc_preparation_completedby=[user_id]))
+,[pc_preparation_completedbyTEXT]
 ,[pc_review_datecompleted]=CONVERT(VARCHAR(10),pc_review_datecompleted,101)
-,[pc_review_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pc_review_completedby=[user_id]))
+,[pc_review_completedbyTEXT]
 ,[pc_assembly_datecompleted]=CONVERT(VARCHAR(10),pc_assembly_datecompleted,101)
-,[pc_assembly_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pc_assembly_completedby=[user_id]))
+,[pc_assembly_completedbyTEXT]
 ,[pc_delivery_datecompleted]=CONVERT(VARCHAR(10),pc_delivery_datecompleted,101)
-,[pc_delivery_completedbyTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(pc_delivery_completedby=[user_id]))
-FROM[payrollcheckstatus]
+,[pc_delivery_completedbyTEXT]
+FROM[v_payrollcheckstatus]
 WHERE[PC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>

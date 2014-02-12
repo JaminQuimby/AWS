@@ -40,10 +40,10 @@ var grid1_config = [
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,BF_STATUS:{title:'Status',width:'1%'}
-			,BF_ASSIGNEDTO:{title:'Assignedto',width:'1%'}
+			,BF_STATUSTEXT:{title:'Status',width:'1%'}
+			,BF_ASSIGNEDTOTEXT:{title:'Assignedto',width:'1%'}
  			,BF_DATEINITIATED:{title:'Date Initiated',width:'1%'}
- 			,BF_BUSINESSTYPE:{title:'Business Type',width:'1%'}
+ 			,BF_BUSINESSTYPETEXT:{title:'Business Type',width:'1%'}
  			,BF_BUSINESSSUBMITTED:{title:'Form Submitted',width:'1%'}
  			,BF_BUSINESSRECEIVED:{title:'Form Received',width:'1%'}
 			,BF_ARTICLESSUBMITTED:{title:'Article Submitted',width:'1%'}
@@ -61,7 +61,7 @@ var grid1_config = [
 			,BF_OTHERCOMPLETED:{title:'Other Completed',width:'1%'}
 			,BF_RECORDBOOKORDERED:{title:'Record Book Ordered',width:'1%'}
   			,BF_FEES:{title:'Fees'}
-			,BF_PAID:{title:'Payment Status'}
+			,BF_PAIDTEXT:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"3"}',

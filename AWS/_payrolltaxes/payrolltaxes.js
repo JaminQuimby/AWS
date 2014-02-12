@@ -23,8 +23,8 @@ _grid1=function(){_jGrid({
 			,PT_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%',visibility: 'hidden'}
 		},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
-	"functions":'$("#task_id").val(record.PT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrolltaxes"});_loadData({"id":"task_id","group":"assetCompTask","page":"payrolltaxes"});'
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"13"}',
+	"functions":'$("#task_id").val(record.PT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrolltaxes"});_loadData({"id":"task_id","group":"assetCompTask","page":"payrolltaxes","formid":"13"});'
 	})};
 
 

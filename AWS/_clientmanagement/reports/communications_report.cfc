@@ -50,7 +50,7 @@ SELECT[co_id]
 <cfquery datasource="AWS" name="fquery">
 SELECT[co_id]
 ,[co_caller]
-,[co_for]
+,[co_forTEXT]
 ,[co_fees]
 ,[co_paid]
 ,CONVERT(CHAR(8),[co_date], 1)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
@@ -117,7 +117,7 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CO_CALLER":"'&CO_CALLER&'"
-								,"CO_FOR":"'&CO_FOR&'"
+								,"CO_FORTEXT":"'&CO_FORTEXT&'"
 								,"CO_FEES":"'&CO_FEES&'"
 								,"CO_PAID":"'&CO_PAID&'"
 								,"CO_DATE":"'&CO_DATE&'"

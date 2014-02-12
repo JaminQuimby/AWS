@@ -79,7 +79,7 @@ SELECT[n_id]
       ,[n_esttime]
       ,[n_fees]
       ,[n_missinginfo]
-      ,CONVERT(VARCHAR(10),[n_missinginforeceived], 101)AS[n_missinginforeceived]
+      ,CONVERT(VARCHAR(10),[n_missinginforeceived], 1)AS[n_missinginforeceived]
       ,[n_noticestatus]
       ,[n_paid]
       ,[n_priority]
@@ -90,11 +90,11 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub1 --->
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT ,CONVERT(VARCHAR(10),[n_1_noticedate], 101)AS[n_1_datenoticerec]
+SELECT ,CONVERT(VARCHAR(10),[n_1_noticedate], 1)AS[n_1_datenoticerec]
 	   ,[n_1_methodreceived]
-	   ,CONVERT(VARCHAR(10),[n_1_noticedate], 101)AS[n_1_noticedate]
+	   ,CONVERT(VARCHAR(10),[n_1_noticedate], 1)AS[n_1_noticedate]
 	   ,[n_1_noticenumber]
-	   ,CONVERT(VARCHAR(10),[n_1_noticedate], 101)AS[n_1_resduedate]
+	   ,CONVERT(VARCHAR(10),[n_1_noticedate], 1)AS[n_1_resduedate]
 	   ,[n_1_taxform]
 	   ,[n_1_taxyear]
 FROM[notice]
@@ -104,13 +104,13 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub2 --->
 <cfcase value="group2_2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[n_2_irsstateresponse], 101)AS[n_2_irsstateresponse]
-	  ,CONVERT(VARCHAR(10),[n_2_rescompleted], 101)AS[n_2_rescompleted]
+SELECT CONVERT(VARCHAR(10),[n_2_irsstateresponse], 1)AS[n_2_irsstateresponse]
+	  ,CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted]
 	  ,[n_2_rescompletedby]
- 	  ,CONVERT(VARCHAR(10),[n_2_ressubmited], 101)AS[n_2_ressubmited]      
+ 	  ,CONVERT(VARCHAR(10),[n_2_ressubmited], 1)AS[n_2_ressubmited]      
 	  ,[n_2_revassignedto]
-	  ,CONVERT(VARCHAR(10),[n_2_revcompleted], 101)AS[n_2_revcompleted]
-	  ,CONVERT(VARCHAR(10),[n_2_revrequired], 101)AS[n_2_revrequired]  
+	  ,CONVERT(VARCHAR(10),[n_2_revcompleted], 1)AS[n_2_revcompleted]
+	  ,CONVERT(VARCHAR(10),[n_2_revrequired], 1)AS[n_2_revrequired]  
 FROM[notice]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -156,8 +156,8 @@ SELECT[nm_id]
 ,[nm_status]
 ,[client_name]
 ,[client_id]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nm_status]=[optionvalue_id]
-)AS[nm_statusTEXT]
+,[nm_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nm_status]=[optionvalue_id]
+)
 FROM[v_noticematter]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -193,9 +193,8 @@ SELECT[nm_id]
 ,[n_1_noticenumber]
 ,[n_1_taxform]
 ,[n_1_taxyear]
-,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_noticestatus]=[optionvalue_id]
-)AS[n_noticestatusTEXT]
+,CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate]
+,[n_noticestatusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_noticestatus]=[optionvalue_id])
 FROM[v_notice]
 WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>

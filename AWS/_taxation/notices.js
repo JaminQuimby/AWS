@@ -25,7 +25,7 @@ _grid2=function(){_jGrid({
 	"fields":{N_ID:{key:true,list:false,edit:false}
 			,NM_NAME:{title:'Matter'}
 			,N_NOTICESTATUSTEXT:{title:'Status'}
-			,N_1_TAXFORM:{title:'Tax Form'}
+			,N_1_TAXFORMTEXT:{title:'Tax Form'}
 			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,N_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	
 			,N_1_NOTICENUMBER:{title:'Notice Number',width:'1%'}

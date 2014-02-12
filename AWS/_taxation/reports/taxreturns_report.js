@@ -69,11 +69,11 @@ var grid1_config = [
 	"title":"Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_TYPE:{title:'Client Type'}
+			,CLIENT_TYPETEXT:{title:'Client Type'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
-			,TR_TAXFORM:{title:'Form'}
+			,TR_TAXFORMTEXT:{title:'Form'}
 			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
-			,TR_2_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			,TR_PRIORFEES:{title:'Prior Fees'}
 			,TR_1_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
 			,TR_1_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
@@ -98,7 +98,7 @@ var grid1_config = [
 			,TR_4_DELIVERED:{title:'PPTR Delivered',width:'1%'}	
 			,TR_4_CURRENTFEES:{title:'PPTR Current Fees'}
 			,TR_CURRENTFEES:{title:'Current Fees'}
-			,TR_PAID:{title:'Payment Status'}
+			,TR_PAIDTEXT:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"6"}',
@@ -111,11 +111,11 @@ _grid2=function(){_jGrid({
 	"title":"State Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_TYPE:{title:'Client Type'}
+			,CLIENT_TYPETEXT:{title:'Client Type'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
-			,TR_TAXFORM:{title:'Form'}
+			,TR_TAXFORMTEXT:{title:'Form'}
 			,TR_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
-			,TR_2_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			,TR_PRIORFEES:{title:'Prior Fees'}
 			,TR_1_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
 			,TR_1_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
@@ -143,7 +143,7 @@ _grid2=function(){_jGrid({
 			,TRST_COMPLETED:{title:'State Return Completed',width:'1%'}	
 			,TR_3_CURRENTFEES:{title:'PPTR Current Fees'}
 			,TR_CURRENTFEES:{title:'Current Fees'}
-			,TR_PAID:{title:'Payment Status'}
+			,TR_PAIDTEXT:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',

@@ -9,7 +9,7 @@
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-
+<cfargument name="formid" type="string" required="no">
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 1 Entrance --->
@@ -17,9 +17,9 @@
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[bf_id]
-,[bf_assignedto]
-,[bf_status]
-,[bf_businesstype]
+,[bf_assignedtoTEXT]
+,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
+,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[bf_businesssubmitted], 1)AS[bf_businesssubmitted]
 ,CONVERT(VARCHAR(8),[bf_businessreceived], 1)AS[bf_businessreceived]
 ,CONVERT(VARCHAR(8),[bf_dateinitiated], 1)AS[bf_dateinitiated]
@@ -38,7 +38,7 @@ SELECT[bf_id]
 ,CONVERT(VARCHAR(8),[bf_othercompleted], 1)AS[bf_othercompleted]
 ,CONVERT(VARCHAR(8),[bf_recordbookordered], 1)AS[bf_recordbookordered]
 ,[bf_fees]
-,[bf_paid]
+,[bf_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[bf_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_businessformation]
@@ -94,11 +94,11 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"BF_ASSIGNEDTO":"'&BF_ASSIGNEDTO&'"
-								,"BF_BUSINESSTYPE":"'&BF_BUSINESSTYPE&'"
+								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
+								,"BF_BUSINESSTYPETEXT":"'&BF_BUSINESSTYPETEXT&'"
 								,"BF_BUSINESSSUBMITTED":"'&BF_BUSINESSSUBMITTED&'"
 								,"BF_BUSINESSRECEIVED":"'&BF_BUSINESSRECEIVED&'"
-								,"BF_STATUS":"'&BF_STATUS&'"
+								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
 								,"BF_DATEINITIATED":"'&BF_DATEINITIATED&'"
 								,"BF_ARTICLESSUBMITTED":"'&BF_ARTICLESSUBMITTED&'"
 								,"BF_ARTICLESAPPROVED":"'&BF_ARTICLESAPPROVED&'"
@@ -115,7 +115,7 @@ WHERE(1)=(1)
 								,"BF_OTHERCOMPLETED":"'&BF_OTHERCOMPLETED&'"
 								,"BF_RECORDBOOKORDERED":"'&BF_RECORDBOOKORDERED&'"
 								,"BF_FEES":"'&BF_FEES&'"
-								,"BF_PAID":"'&BF_PAID&'"
+								,"BF_PAIDTEXT":"'&BF_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

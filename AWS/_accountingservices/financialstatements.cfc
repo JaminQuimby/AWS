@@ -195,8 +195,8 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
-<cfargument name="clientid" type="string" required="no">
-<cfargument name="formid" type="string" required="no">
+<cfargument name="clientid" type="numeric" required="no">
+<cfargument name="formid" type="numeric" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -210,14 +210,12 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend]
 ,[fds_month]
 ,[fds_year]
-,[fds_monthTEXT]
+,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
 ,[fds_status]
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id]
-)AS[fds_statusTEXT]
-
+,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
 FROM[v_financialDataStatus]
 WHERE[fds_status] != 2 
 AND [fds_status] != 5

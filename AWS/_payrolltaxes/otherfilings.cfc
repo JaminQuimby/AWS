@@ -133,8 +133,8 @@ WHERE[OF_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
-<cfargument name="clientid" type="string" required="no">
-
+<cfargument name="clientid" type="numeric" required="no">
+<cfargument name="formid" type="numeric" required="no">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Other Filings --->
@@ -157,14 +157,16 @@ SELECT[of_id]
 ,[of_missinginfo]
 ,[client_name]
 ,[client_id]
-,OF_OBTAININFO_ASSIGNEDTOTEXT
-,OF_PREPARATION_ASSIGNEDTOTEXT
-,OF_REVIEW_ASSIGNEDTOTEXT
-,OF_ASSEMBLY_ASSIGNEDTOTEXT
-,OF_DELIVERY_ASSIGNEDTOTEXT
-,of_taskTEXT
-,of_stateTEXT
-,of_periodTEXT
+,[of_obtaininfo_assignedtotext]
+,[of_preparation_assignedtotext]
+,[of_review_assignedtotext]
+,[of_assembly_assignedtotext]
+,[of_delivery_assignedtotext]
+
+,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
+,[of_taskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_task]=[optionvalue_id])
+,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
+,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
 
 FROM[v_otherfilings]
 WHERE[of_status] != 2 
@@ -186,7 +188,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
 								,"OF_STATETEXT":"'&OF_STATETEXT&'"
 								,"OF_TASKTEXT":"'&OF_TASKTEXT&'"
-								,"OF_FORM":"'&OF_FORM&'"
+								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
 								,"OF_OBTAININFO_ASSIGNEDTOTEXT":"'&OF_OBTAININFO_ASSIGNEDTOTEXT&'"
 								,"OF_PREPARATION_ASSIGNEDTOTEXT":"'&OF_PREPARATION_ASSIGNEDTOTEXT&'"
 								,"OF_REVIEW_ASSIGNEDTOTEXT":"'&OF_REVIEW_ASSIGNEDTOTEXT&'"

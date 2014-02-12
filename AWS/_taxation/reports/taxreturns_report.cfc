@@ -6,8 +6,8 @@
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
-<cfargument name="clientid" type="string" required="no">
-
+<cfargument name="clientid" type="numeric" required="no">
+<cfargument name="formid" type="numeric" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -17,40 +17,38 @@
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
-,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_2_informationreceived], 101)AS[tr_2_informationreceived]
-,[tr_2_assignedto]
+,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+,CONVERT(VARCHAR(8),[tr_2_informationreceived], 1)AS[tr_2_informationreceived]
+,[tr_2_assignedtoTEXT]
 ,[tr_priorfees]
-,CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 101)AS[tr_1_dropoffappointment]
-,CONVERT(VARCHAR(10),[tr_1_pickupappointment], 101)AS[tr_1_pickupappointment]
+,CONVERT(VARCHAR(8),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment]
+,CONVERT(VARCHAR(8),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment]
 ,[tr_missinginfo]
-,CONVERT(VARCHAR(10),[tr_missinginforeceived], 101)AS[tr_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_duedate], 101)AS[tr_duedate]
-,CONVERT(VARCHAR(10),[tr_2_readyforreview], 101)AS[tr_2_readyforreview]
-,CONVERT(VARCHAR(10),[tr_extensionrequested], 101)AS[tr_extensionrequested]
-,CONVERT(VARCHAR(10),[tr_extensiondone], 101)AS[tr_extensiondone]
+,CONVERT(VARCHAR(8),[tr_missinginforeceived], 1)AS[tr_missinginforeceived]
+,CONVERT(VARCHAR(8),[tr_duedate], 1)AS[tr_duedate]
+,CONVERT(VARCHAR(8),[tr_2_readyforreview], 1)AS[tr_2_readyforreview]
+,CONVERT(VARCHAR(8),[tr_extensionrequested], 1)AS[tr_extensionrequested]
+,CONVERT(VARCHAR(8),[tr_extensiondone], 1)AS[tr_extensiondone]
 ,[tr_3_missingsignatures]
-,CONVERT(VARCHAR(10),[tr_3_assemblereturn], 101)AS[tr_3_assemblereturn]
-,CONVERT(VARCHAR(10),[tr_3_contacted], 101)AS[tr_3_contacted]
+,CONVERT(VARCHAR(8),[tr_3_assemblereturn], 1)AS[tr_3_assemblereturn]
+,CONVERT(VARCHAR(8),[tr_3_contacted], 1)AS[tr_3_contacted]
 ,[tr_2_preparedby]
-,CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 101)AS[tr_2_reviewedwithnotes]
-,CONVERT(VARCHAR(10),[tr_2_completed], 101)AS[tr_2_completed]
-,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
-,CONVERT(VARCHAR(10),[tr_filingdeadline], 101)AS[tr_filingdeadline]
+,CONVERT(VARCHAR(8),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]
+,CONVERT(VARCHAR(8),[tr_2_completed], 1)AS[tr_2_completed]
+,CONVERT(VARCHAR(8),[tr_3_delivered], 1)AS[tr_3_delivered]
+,CONVERT(VARCHAR(8),[tr_filingdeadline], 1)AS[tr_filingdeadline]
 ,[tr_4_required]
-,CONVERT(VARCHAR(10),[tr_4_extended], 101)AS[tr_4_extended]
-,CONVERT(VARCHAR(10),[tr_4_rfr], 101)AS[tr_4_rfr]
-,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_completed]
-,CONVERT(VARCHAR(10),[tr_4_delivered], 101)AS[tr_4_delivered]
+,CONVERT(VARCHAR(8),[tr_4_extended], 1)AS[tr_4_extended]
+,CONVERT(VARCHAR(8),[tr_4_rfr], 1)AS[tr_4_rfr]
+,CONVERT(VARCHAR(8),[tr_4_completed], 1)AS[tr_4_completed]
+,CONVERT(VARCHAR(8),[tr_4_delivered], 1)AS[tr_4_delivered]
 ,[tr_4_currentfees]
 ,[tr_currentfees]
-,[tr_paid]
-,[client_type]
+,[tr_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[tr_paid]=[optionvalue_id])
+,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[client_type]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
-
-    
 <cfset sqllist = "tr_currentfees,tr_esttime,tr_extensiondone,tr_extensionrequested,tr_notrequired,tr_priority,tr_priorfees,tr_taxform,tr_taxyear,tr_duedate,tr_filingdeadline,tr_missinginfo,tr_missinginforeceived,tr_deliverymethod,tr_paid,tr_reason,tr_1_dropoffappointment,tr_1_dropoffappointmentlength,tr_1_dropoffappointmentwith,tr_1_whileyouwaitappt,tr_1_pickupappointment,tr_1_pickupappointmentlength,tr_1_pickupappointmentwith,tr_2_assignedto,tr_2_completed,tr_2_informationreceived,tr_2_preparedby,tr_2_readyforreview,tr_2_reviewassignedto,tr_2_reviewed,tr_2_reviewedby,tr_2_reviewedwithnotes,tr_3_assemblereturn,tr_3_contacted,tr_3_delivered,tr_3_emailed,tr_3_messageleft,tr_3_missingsignatures,tr_3_multistatereturn,tr_4_assignedto,tr_4_completed,tr_4_currentfees,tr_4_delivered,tr_4_extended,tr_4_paid,tr_4_pptresttime,tr_4_priorfees,tr_4_required,tr_4_rfr,tr_4_extensionrequested,tr_4_completedby,tr_4_reviewassigned,tr_4_reviewed,tr_4_reviewedby">
 <cfset key="tr_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
@@ -101,10 +99,11 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
-								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
-								,"TR_2_ASSIGNEDTO":"'&TR_2_ASSIGNEDTO&'"
+								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
 								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
 								,"TR_1_DROPOFFAPPOINTMENT":"'&TR_1_DROPOFFAPPOINTMENT&'"
 								,"TR_1_PICKUPAPPOINTMENT":"'&TR_1_PICKUPAPPOINTMENT&'"
@@ -129,7 +128,7 @@ WHERE(1)=(1)
 								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
 								,"TR_4_CURRENTFEES":"'&TR_4_CURRENTFEES&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
-								,"TR_PAID":"'&TR_PAID&'"
+								,"TR_PAIDTEXT":"'&TR_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -149,38 +148,38 @@ WHERE(1)=(1)
 SELECT[trst_id]
 ,[tr_id]
 ,[tr_taxyear]
-,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_2_informationreceived], 101)AS[tr_2_informationreceived]
-,[tr_2_assignedto]
+,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+,CONVERT(VARCHAR(8),[tr_2_informationreceived], 1)AS[tr_2_informationreceived]
+,[tr_2_assignedtoTEXT]
 ,[tr_priorfees]
-,CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 101)AS[tr_1_dropoffappointment]
-,CONVERT(VARCHAR(10),[tr_1_pickupappointment], 101)AS[tr_1_pickupappointment]
+,CONVERT(VARCHAR(8),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment]
+,CONVERT(VARCHAR(8),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment]
 ,[tr_missinginfo]
-,CONVERT(VARCHAR(10),[tr_missinginforeceived], 101)AS[tr_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_duedate], 101)AS[tr_duedate]
-,CONVERT(VARCHAR(10),[tr_2_readyforreview], 101)AS[tr_2_readyforreview]
-,CONVERT(VARCHAR(10),[tr_extensionrequested], 101)AS[tr_extensionrequested]
-,CONVERT(VARCHAR(10),[tr_extensiondone], 101)AS[tr_extensiondone]
+,CONVERT(VARCHAR(8),[tr_missinginforeceived], 1)AS[tr_missinginforeceived]
+,CONVERT(VARCHAR(8),[tr_duedate], 1)AS[tr_duedate]
+,CONVERT(VARCHAR(8),[tr_2_readyforreview], 1)AS[tr_2_readyforreview]
+,CONVERT(VARCHAR(8),[tr_extensionrequested], 1)AS[tr_extensionrequested]
+,CONVERT(VARCHAR(8),[tr_extensiondone], 1)AS[tr_extensiondone]
 ,[tr_3_missingsignatures]
-,CONVERT(VARCHAR(10),[tr_3_assemblereturn], 101)AS[tr_3_assemblereturn]
-,CONVERT(VARCHAR(10),[tr_3_contacted], 101)AS[tr_3_contacted]
+,CONVERT(VARCHAR(8),[tr_3_assemblereturn], 1)AS[tr_3_assemblereturn]
+,CONVERT(VARCHAR(8),[tr_3_contacted], 1)AS[tr_3_contacted]
 ,[tr_2_preparedby]
-,CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 101)AS[tr_2_reviewedwithnotes]
-,CONVERT(VARCHAR(10),[tr_2_completed], 101)AS[tr_2_completed]
-,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]
-,CONVERT(VARCHAR(10),[tr_filingdeadline], 101)AS[tr_filingdeadline]
+,CONVERT(VARCHAR(8),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]
+,CONVERT(VARCHAR(8),[tr_2_completed], 1)AS[tr_2_completed]
+,CONVERT(VARCHAR(8),[tr_3_delivered], 1)AS[tr_3_delivered]
+,CONVERT(VARCHAR(8),[tr_filingdeadline], 1)AS[tr_filingdeadline]
 ,[tr_4_required]
-,CONVERT(VARCHAR(10),[tr_4_extended], 101)AS[tr_4_extended]
-,CONVERT(VARCHAR(10),[tr_4_rfr], 101)AS[tr_4_rfr]
-,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_completed]
-,CONVERT(VARCHAR(10),[tr_4_delivered], 101)AS[tr_4_delivered]
+,CONVERT(VARCHAR(8),[tr_4_extended], 1)AS[tr_4_extended]
+,CONVERT(VARCHAR(8),[tr_4_rfr], 1)AS[tr_4_rfr]
+,CONVERT(VARCHAR(8),[tr_4_completed], 1)AS[tr_4_completed]
+,CONVERT(VARCHAR(8),[tr_4_delivered], 1)AS[tr_4_delivered]
 ,[tr_4_currentfees]
 ,[trst_state]
 ,[trst_primary]
-,CONVERT(VARCHAR(10),[trst_completed], 101)AS[trst_completed]
+,CONVERT(VARCHAR(8),[trst_completed], 1)AS[trst_completed]
 ,[tr_currentfees]
-,[tr_paid]
-,[client_type]
+,[tr_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[tr_paid]=[optionvalue_id])
+,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[client_type]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_TAXRETURNS_STATE]
@@ -197,10 +196,11 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
-								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
-								,"TR_2_ASSIGNEDTO":"'&TR_2_ASSIGNEDTO&'"
+								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
 								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
 								,"TR_1_DROPOFFAPPOINTMENT":"'&TR_1_DROPOFFAPPOINTMENT&'"
 								,"TR_1_PICKUPAPPOINTMENT":"'&TR_1_PICKUPAPPOINTMENT&'"

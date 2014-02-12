@@ -26,8 +26,8 @@ var grid1_config = [
 	"fields":{PA_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PA_TAXYEARS:{title:'Tax Years'}
-			,PA_TAXFORMS:{title:'Tax Forms'}
-			,PA_PREPARERS:{title:'Preparers'}
+			,PA_TAXFORMSTEXT:{title:'Tax Forms'}
+			,PA_PREPARERSTEXT:{title:'Preparers'}
 			,PA_DATESIGNEDBYCLIENT:{title:'Date Signed',width:'1%'}
 			,PA_DATESENTTOIRS:{title:'Date Sent',width:'1%'}
 			},

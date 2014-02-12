@@ -14,7 +14,7 @@ _grid1=function(){_jGrid({
 			,OF_PERIODTEXT:{title:'Period'}
 			,OF_STATETEXT:{title:'State'}
 			,OF_TASKTEXT:{title:'Type'}
-			,OF_FORM:{title:'Form',width:'1%'}
+			,OF_FORMTEXT:{title:'Form',width:'1%'}
 			,OF_DUEDATE:{title:'Date Due',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
 			,OF_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Informtaion Assigned To',width:'1%',visibility:"hidden"}

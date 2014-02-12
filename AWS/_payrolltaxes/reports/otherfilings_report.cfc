@@ -63,9 +63,10 @@ SELECT TOP 1000 [of_id]
 SELECT[of_id]
 ,CONVERT(VARCHAR(8),[of_duedate], 1)AS[of_duedate]
 ,[of_taxyear]
-,[of_periodTEXT]
-,[of_stateTEXT]
-,[of_formTEXT]
+,[of_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[of_paid]=[optionvalue_id])
+,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
+,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
+,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[of_obtaininfo_datecompleted], 1)AS[of_obtaininfo_datecompleted]
 ,[of_missinginfo]
 ,CONVERT(VARCHAR(8),[of_missinginforeceived], 1)AS[of_missinginforeceived]      
@@ -75,11 +76,9 @@ SELECT[of_id]
 ,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1)AS[of_delivery_datecompleted]
 ,[of_fees]
 ,[of_esttime]
-,[of_paidTEXT]  
 ,[client_name]
 ,[client_id]
 FROM[v_otherfilings]
-
 <cfset sqllist = "of_taxyear,of_period,of_state,of_task,of_form,of_duedate,of_filingdeadline,of_extensiondeadline,of_extensioncompleted,of_status,of_priority,of_esttime,of_missinginfo,of_missinginforeceived,of_fees,of_paid,of_deliverymethod,of_obtaininfo_assignedto,of_obtaininfo_datecompleted,of_obtaininfo_completedby,of_obtaininfo_esttime,of_preparation_assignedto,of_preparation_datecompleted,of_preparation_completedby,of_preparation_esttime,of_review_assignedto,of_review_datecompleted,of_review_completedby,of_review_esttime,of_assembly_assignedto,of_assembly_datecompleted,of_assembly_completedby,of_assembly_esttime,of_delivery_assignedto,of_delivery_datecompleted,of_delivery_completedby,of_delivery_esttime">
 <cfset key="of_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>

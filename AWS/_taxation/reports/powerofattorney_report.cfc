@@ -23,8 +23,8 @@ FROM[powerofattorney]
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
-<cfargument name="clientid" type="string" required="no">
-
+<cfargument name="clientid" type="numeric" required="no">
+<cfargument name="formid" type="numeric" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -34,9 +34,17 @@ FROM[powerofattorney]
 SELECT[pa_id]
 ,[pa_taxyears]
 ,[pa_taxforms]
+
+,pa_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[pa_status]=[optionvalue_id])
+,pa_taxformsTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxservices') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxforms)))FOR XML PATH('')),3,1000)
+,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
+
+
 ,[pa_preparers]
-,CONVERT(VARCHAR(10),[pa_datesignedbyclient], 101)AS[pa_datesignedbyclient]
-,CONVERT(VARCHAR(10),[pa_datesenttoirs], 101)AS[pa_datesenttoirs]
+,CONVERT(VARCHAR(10),[pa_datesignedbyclient], 1)AS[pa_datesignedbyclient]
+,CONVERT(VARCHAR(10),[pa_datesenttoirs], 1)AS[pa_datesenttoirs]
+
+
 ,[client_name]
 ,[client_id]
 FROM[v_powerofattorney]
@@ -94,8 +102,8 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PA_TAXYEARS":"'&PA_TAXYEARS&'"
-								,"PA_TAXFORMS":"'&PA_TAXFORMS&'"
-								,"PA_PREPARERS":"'&PA_PREPARERS&'"
+								,"PA_TAXFORMSTEXT":"'&PA_TAXFORMSTEXT&'"
+								,"PA_PREPARERSTEXT":"'&PA_PREPARERSTEXT&'"
 								,"PA_DATESIGNEDBYCLIENT":"'&PA_DATESIGNEDBYCLIENT&'"
 								,"PA_DATESENTTOIRS":"'&PA_DATESENTTOIRS&'"
 								}'>

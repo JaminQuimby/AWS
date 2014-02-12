@@ -70,7 +70,7 @@ var grid1_config = [
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
-			,FDS_MONTH:{title:'Month'}
+			,FDS_MONTHTEXT:{title:'Month'}
 			,FDS_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_COMPILEMI:{title:'Compile Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_OBTAININFO:{title:'Info',width:'1%'}
@@ -98,7 +98,7 @@ _grid2=function(){_jGrid({
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
-			,FDS_MONTH:{title:'Month'}
+			,FDS_MONTHTEXT:{title:'Month'}
 			,FDS_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_COMPILEMI:{title:'Compile Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_OBTAININFO:{title:'Info',width:'1%'}
@@ -112,10 +112,10 @@ _grid2=function(){_jGrid({
 			,FDS_ASSEMBLY:{title:'Assembled',width:'1%'}
 			,FDS_DELIVERY:{title:'Delivered',width:'1%'}
 			,FDS_ACCTRPT:{title:'Report',width:'1%'}
-			,FDSS_SUBTASK:{title:'Subtask',width:'1%'}
-			,FDSS_STATUS:{title:'Status',width:'1%'}
+			,FDSS_SUBTASKTEXT:{title:'Subtask',width:'1%'}
+			,FDSS_STATUSTEXT:{title:'Status',width:'1%'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"5"}',
 	"functions":''
 	})};

@@ -51,8 +51,8 @@
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
-<cfargument name="clientid" type="string" required="no">
-
+<cfargument name="clientid" type="numeric" required="no">
+<cfargument name="formid" type="numeric" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -61,10 +61,11 @@
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,CONVERT(VARCHAR(8),[pt_duedate], 1)AS[pt_duedate]
-,[pt_typeTEXT]
-,[pt_stateTEXT]
+,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
+,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
+,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
+,[pt_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_paid]=[optionvalue_id])
 ,[pt_year]
-,[pt_monthTEXT]
 ,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
 ,CONVERT(VARCHAR(8),[pt_obtaininfo_datecompleted], 1)AS[pt_obtaininfo_datecompleted]
 ,[pt_missinginfo]
@@ -75,7 +76,6 @@ SELECT[pt_id]
 ,CONVERT(VARCHAR(8),[pt_assembly_datecompleted], 1)AS[pt_assembly_datecompleted]
 ,CONVERT(VARCHAR(8),[pt_delivery_datecompleted], 1)AS[pt_delivery_datecompleted]
 ,[pt_fees]
-,[pt_paidTEXT]      
 ,[client_name]
 ,[client_id]
 FROM[v_payrolltaxes]
