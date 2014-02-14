@@ -1,4 +1,6 @@
 /* General Demo Style */
+
+/*
 @import url(//fonts.googleapis.com/css?family=Lato:300,400,700);
 
 @font-face {
@@ -11,6 +13,8 @@
 	font-weight: normal;
 	font-style: normal;
 }
+*/
+
 
 body, html { font-size: 100%; 	padding: 0; margin: 0;}
 

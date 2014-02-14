@@ -12,7 +12,7 @@ if($('#jqMessage').length){$('#jqMessage').remove()};
         'type' : 'success', // type of info message error/success/info/warning
         'message': '', // message to dispaly
         'description' :"",//Details {"Description":"Hello World This is the details about my error message","Link":"google.com"}
-		'buttons':[] // Pass it a json array for buttons [{"name":"Save","function":"alert('Saved')"},{"name":"Exit","function":"alert('Exit')"}]
+		'buttons':[] // Pass it a json array for buttons [{"name":"Save","function":"alert('Saved')","class":"optional"},{"name":"Exit","function":"alert('Exit')","class":"optional"}]
 
 	}; 
     // Extending array from params
@@ -75,10 +75,12 @@ _closeNotification=function(duration,msgbx){
 _addButtons=function(buttons){
 container='<div class="jqButtonBox">';
 for(var key in eval(buttons)){
-   if(buttons.hasOwnProperty(key)){
-	container+='<a href="#" onclick="'+buttons[key].function+'">'+buttons[key].name+'</a>'}}
-	container+='</div>';
-	return container;
+if(buttons.hasOwnProperty(key)){if( buttons[key].name !=''){
+if(buttons[key].class !=''){ cl='class="'+buttons[key].class+'"' }
+	container+='<a '+cl+' onclick="'+buttons[key].function+'">'+buttons[key].name+'</a>'
+}}};
+container+='</div>'; 
+return container;
 }
 
 //Add Details

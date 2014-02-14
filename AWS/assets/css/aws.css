@@ -32,7 +32,7 @@ h1,h2,h3,h4,h5,h6{font-size:16px;}
 /* CSS ELEMENT MOD*/
 a{font-size:13px;color:#000;text-decoration: none;}
 form{display:inline;}
-footer{position:fixed;bottom:0;width:100%;height:42px;background:#F8F8F8;color:#000;padding-left:34px;border-top-style:solid;border-top-color:#E1E1DC;border-top-width:1px;}
+footer{position:fixed;bottom:0;width:100%;height:42px;background:#F8F8F8;color:#000;padding-left:39px;border-top-style:solid;border-top-color:#E1E1DC;border-top-width:1px;}
 footer div{font-size:12px;padding-top:2px; display:inline-block; min-width:200px;}
 header{height:34px;background-color:#EFEFEF;border-bottom:1px solid #E1E1DC;width:100%;opacity:0.9;}
 h1{font-weight:normal;}
@@ -71,9 +71,10 @@ tr{vertical-align:top;}
 .bordered tfoot{}
 .bordered tfoot tr td{margin:7px 10px;}
 .bordered tfoot tr a{background-color:#FFFF00; cursor:pointer;border:1px solid #999999;color:#000000;font-size:1em;padding:3px 10px;text-decoration:none; font-weight:normal;}
-.button{cursor:pointer;background:none repeat scroll 0 0 #FFFF00;border:1px solid #999999;border-radius:2px 2px 2px 2px;display:inline-block;padding:4px;text-align:center;white-space:nowrap;text-decoration:none;min-width:165px;font-size:1em;}
+.button{ cursor:pointer;background:none repeat scroll 0 0 #FFFF00;border:1px solid #999999;border-radius:2px 2px 2px 2px;display:inline-block;padding:4px;text-align:center;white-space:nowrap;text-decoration:none;min-width:125px;font-size:1em;}
 .optional{background-color:#D3D3D3;}
-.buttonbox{margin-top:5px;white-space:nowrap; min-width:300px; display:inline-block;}/*the box that contains buttons for actions like save and cancel*/
+.warning{ background-color:#F00; color:#FFF}
+.buttonbox{height: 35px;margin-top:5px;white-space:nowrap; min-width:300px; display:inline-block;}/*the box that contains buttons for actions like save and cancel*/
 .contentbig{vertical-align:top;padding-left:300px;margin-bottom: 42px;}/*padding-top:36px;Changes the content box to render along side a big right side menu*/
 .contentsmall{vertical-align:top;padding-left:39px;}/*padding-top:36px; changes the content box to render along side a small right side menu*/
 .customlabel{height:20px;margin-left:-5px;width:379px}/*Customlabels - would be used for text elements that modify a custom label*/

@@ -1,3 +1,4 @@
+<cfheader name="Access-Control-Allow-Origin" value="*">
 <cfparam name="page.type" default="">
 <cfset page.cache.users=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.options=CreateTimeSpan(0,0,25,0)>
@@ -31,9 +32,12 @@
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jqMessage/jqMessage.css">
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jqvalid/jqvalid.css">
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css">
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css"/>
+
+
 <cfswitch expression="#page.type#">
-<cfcase value="report"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/report.min.css"/></cfcase>
-<cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/aws.min.css"/></cfdefaultcase>
+<cfcase value="report"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/report.css"/></cfcase>
+<cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/aws.css"/></cfdefaultcase>
 </cfswitch>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -47,7 +51,7 @@
 <script type="text/javascript" src="#this.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/module/jtable/jquery.jtable.min.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/module/chosen/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="#this.url#/AWS/assets/module/jqMessage/jqmessage.jquery.min.js"></script>
+<script type="text/javascript" src="#this.url#/AWS/assets/module/jqMessage/jqmessage.jquery.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/module/jqValid/jqValid.jquery.js"></script>
 <script language="javascript"  src="#this.url#/AWS/assets/plugins/pluginsjs.cfm?id=#createUuid()#"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.full.js"></script>

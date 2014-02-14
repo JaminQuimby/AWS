@@ -20,10 +20,13 @@ SELECT[m_payrolltaxes],[m_accountingservices],[m_taxation],[m_clientmanagement],
 <cfif page.footer eq 1>
 <footer id="footer">
 <div class="buttonbox">
+<div >
 <cfoutput>
-<a href="##" onclick="_saveData();" class="button">Save</a> | <a href="#this.url##CGI.SCRIPT_NAME#">Cancel</a>
+<a href="##" onclick="_saveData();" class="button">Save</a> <a class="button optional" href="#this.url##CGI.SCRIPT_NAME#">Cancel</a>
 </cfoutput>
 </div>
-<div><div id="progressbar"></div></div>
+
+
+</div>
 </footer>
 </cfif>
