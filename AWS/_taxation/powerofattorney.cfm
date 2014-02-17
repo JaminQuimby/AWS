@@ -54,7 +54,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <h3>Add A New Power Of Attorney</h3>
 <div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb">Credit Hold*</label></div>
+<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold*</label></div>
 <div><label for="g1_taxyears">Tax Years*</label><select  id="g1_taxyears" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taxforms">Tax Forms*</label><select  id="g1_taxforms" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taxmatters">Tax Matters*</label><select  id="g1_taxmatters" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_taxmatters"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

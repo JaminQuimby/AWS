@@ -53,8 +53,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'client_id','group':'assetCreditHold','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb">Credit Hold*</label></div>
+<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold*</label></div>
 <div><label for="g1_year">Year*</label><input type="text" id="g1_year" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g1_payenddate">Pay End Date*</label><input type="text" class="date" id="g1_payenddate"></div>
 <div><label for="g1_paydate">Pay Date*</label><input type="text" class="date" id="g1_paydate"></div>

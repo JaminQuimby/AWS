@@ -26,15 +26,18 @@ _grid1=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"11"}',
-	"functions":'$("#task_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"otherfilings"});_loadData({"id":"task_id","group":"assetCompTask","page":"otherfilings"});'
+	"functions":'$("#task_id").val(record.OF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"otherfilings"});'
 })};
-
+_loadAssets=function(){
+_loadData({"id":"client_id","group":"assetCreditHold","page":"otherfilings"});
+_loadData({"id":"task_id","group":"assetCompTask","page":"otherfilings"});
+	}
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_task,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});break;
+/*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_task,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_loadAssets();break;
 /*Group1_1*/case "OF_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "OF_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "OF_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
