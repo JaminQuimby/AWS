@@ -61,7 +61,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_paydate">Pay Date*</label><input type="text" class="date" id="g1_paydate"></div>
 <div><label for="g1_altfrequency"><input id="g1_altfrequency" type="checkbox" class="ios-switch">Alt Frequency</strong></label></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
-<div><label for="g1_priority">Priority</label><input type="text"  id="g1_priority" ></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_estimatedtime" ></div>
 <div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>

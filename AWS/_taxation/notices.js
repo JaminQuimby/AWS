@@ -56,7 +56,6 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",auto
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 $.extend(true, options, params);
-alert(options["group"])
 switch(options["group"]){
 
 case'':
