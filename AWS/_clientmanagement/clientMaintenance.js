@@ -261,7 +261,11 @@ $("#cl_fieldid").val()+'","'+
 $("#g1_g2_fieldname").val()+'","'+
 $("#g1_g2_fieldvalue").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"clientmaintenance"})}
+if($("#isLoaded_group1_2").val()!=0){
+	if($("#g1_g2_fieldname").val()!=''||$("#g1_g2_fieldvalue").val()!=''){
+	_saveData({group:"group1_2","payload":$.parseJSON(json),page:"clientmaintenance"});
+	}else{_saveDataCB({'group':'group2_1'})}
+	}
 else{_saveDataCB({'group':'group2_1'})}
 break;
 

@@ -17,6 +17,7 @@
 <!--- Load Select Options for each dropdown--->
 <!--- IN HEADER <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery> --->
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
+<cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
 
 <cfif URL.task_id gt 0>
 <cfoutput>
@@ -55,7 +56,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold*</label></div>
-<div><label for="g1_year">Year*</label><input type="text" id="g1_year" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g1_year">Year*</label><select  id="g1_year"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_payenddate">Pay End Date*</label><input type="text" class="date" id="g1_payenddate"></div>
 <div><label for="g1_paydate">Pay Date*</label><input type="text" class="date" id="g1_paydate"></div>
 <div><label for="g1_altfrequency"><input id="g1_altfrequency" type="checkbox" class="ios-switch">Alt Frequency</strong></label></div>
