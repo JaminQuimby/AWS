@@ -7,9 +7,7 @@ myWindow = ColdFusion.MessageBox.getMessageBoxObject('noticeConfirm');
 }
 /*noticeAlert Callbackhandler*/   
 noticeConfirmCB = function(btn){ if(btn=='yes'){window.resetTimer();window.focus();self.close();};if(btn=='no'){alert('no');};};
-
 noticeConfirmCB = function(btn){ if(btn=='yes'){window.resetTimer();window.focus();self.close();alert('hello2')};if(btn=='no'){alert('no');};};
-
 
 if (document.getElementsByTagName("*")){
 window.captureEvents(Event.MOUSEMOVE);}

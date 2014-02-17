@@ -117,11 +117,11 @@ AND[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[staffinitials]
 SET[m_accountingservices]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[m_clientmanagement]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[g_delete]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[m_maintenance]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[m_payrolltaxes]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[m_taxation]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[m_clientmanagement]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[g_delete]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[m_maintenance]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[m_payrolltaxes]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[m_taxation]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 WHERE[user_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

@@ -22,5 +22,5 @@ switch(options['group']){
 case"group0":_saveDataCB({'group':'saved'});break;
 <cfloop index="i" list="#session.user.plugins#"><cfif !ListContains(#page.plugins.disable#,#i#)>case"group#i#":_pluginSaveData#i#();break;</cfif></cfloop>
 case"subgroup0":eval("_pluginSaveData"+options['subgroup']+"()"); break;
-default:alert('Plugin data could not be saved for group' + options['group']);break;}};
+default:console.log('Plugin data does not need to be saved for group' + options['group']);break;}};
 </cfoutput>

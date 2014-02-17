@@ -95,13 +95,13 @@ INSERT INTO[ctrl_selectoptions]([selectName_id],[optionValue_id],[optionName],[o
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,#pquery.OPTIONCOUNT#
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[select_id]
 </cfquery>
@@ -117,13 +117,13 @@ SELECT SCOPE_IDENTITY()AS[select_id]
 <cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[ctrl_selectoptions]
-SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[optionGroup]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[option_1]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[option_2]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[option_3]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[option_4]=<cfqueryparam value="#j.DATA[1][10]#"/>
+SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[optionGroup]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[option_1]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[option_2]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[option_3]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[option_4]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 WHERE[select_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

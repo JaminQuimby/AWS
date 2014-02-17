@@ -233,16 +233,16 @@ INSERT INTO[BUSINESSFORMATION](
 ,[bf_status]
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfquery>
@@ -259,16 +259,16 @@ SELECT SCOPE_IDENTITY()AS[bf_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[BUSINESSFORMATION]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[bf_activity]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[bf_activity]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[bf_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[bf_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[bf_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[bf_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[bf_owners]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[bf_paid]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[bf_owners]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[bf_paid]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[bf_priority]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[bf_status]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[bf_status]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
@@ -390,11 +390,11 @@ INSERT INTO[businessformation_subtask]([bf_id]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#" />
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -410,11 +410,11 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[businessformation_subtask]
 SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[bfs_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[bfs_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[bfs_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[bfs_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
-,[bfs_estimatedtime]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[bfs_estimatedtime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 
 WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>

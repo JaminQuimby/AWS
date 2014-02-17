@@ -73,9 +73,9 @@ INSERT INTO[comments](
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#Session.user.id#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[comment_id]

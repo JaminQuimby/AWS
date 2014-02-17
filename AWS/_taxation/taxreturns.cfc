@@ -385,21 +385,21 @@ INSERT INTO[taxreturns](
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
-,<cfqueryparam value="#j.DATA[1][13]#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][16]#"/>
-,<cfqueryparam value="#j.DATA[1][17]#"/>
-,<cfqueryparam value="#j.DATA[1][18]#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -417,21 +417,21 @@ SELECT SCOPE_IDENTITY()AS[id]
 UPDATE[taxreturns]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_currentfees]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_deliverymethod]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[tr_deliverymethod]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[tr_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tr_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[tr_extensiondone]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[tr_extensionrequested]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[tr_filingdeadline]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[tr_missinginfo]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[tr_missinginfo]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[tr_missinginforeceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[tr_notrequired]=<cfqueryparam value="#j.DATA[1][12]#"/>
-,[tr_paid] =<cfqueryparam value="#j.DATA[1][13]#"/>
+,[tr_notrequired]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tr_paid] =<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[tr_priorfees]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,[tr_priority]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[tr_reason]=<cfqueryparam value="#j.DATA[1][16]#"/>
-,[tr_taxform]=<cfqueryparam value="#j.DATA[1][17]#"/>
-,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][18]#"/>
+,[tr_reason]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[tr_taxform]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
+,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
 WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
@@ -443,11 +443,11 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 UPDATE[taxreturns]
 SET[tr_1_dropoffappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][2],'YYYY-MM-DD')# #timeFormat(j.DATA[1][2],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[tr_1_dropoffappointmentlength]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_1_dropoffappointmentwith]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[tr_1_dropoffappointmentwith]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[tr_1_pickupappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][5],'YYYY-MM-DD')# #timeFormat(j.DATA[1][5],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tr_1_pickupappointmentlength]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[tr_1_pickupappointmentwith]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[tr_1_whileyouwaitappt]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[tr_1_pickupappointmentwith]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[tr_1_whileyouwaitappt]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -458,13 +458,13 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[taxreturns]
 SET[tr_2_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[tr_2_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[tr_2_completed]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[tr_2_informationreceived]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[tr_2_preparedby]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[tr_2_preparedby]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tr_2_readyforreview]=<cfqueryparam value="#j.DATA[1][6]#"  null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[tr_2_reviewassignedto]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[tr_2_reviewassignedto]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[tr_2_reviewed]=<cfqueryparam value="#j.DATA[1][8]#"  null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[tr_2_reviewedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tr_2_reviewedby]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[tr_2_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][10]#"  null="#LEN(j.DATA[1][10]) eq 0#"/>
 WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
@@ -499,19 +499,19 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 UPDATE[taxreturns]
 SET[tr_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_4_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tr_4_completedby]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[tr_4_completedby]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[tr_4_currentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tr_4_delivered]=<cfqueryparam value="#j.DATA[1][6]#"  null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[tr_4_extended]=<cfqueryparam value="#j.DATA[1][7]#"  null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[tr_4_extensionrequested]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[tr_4_paid]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[tr_4_extensionrequested]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[tr_4_paid]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[tr_4_pptresttime]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[tr_4_priorfees]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[tr_4_required]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[tr_4_reviewassigned]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[tr_4_reviewed]=<cfqueryparam value="#j.DATA[1][14]#"/>
-,[tr_4_reviewedby]=<cfqueryparam value="#j.DATA[1][15]#"/>
-,[tr_4_rfr]=<cfqueryparam value="#j.DATA[1][16]#"/>
+,[tr_4_reviewassigned]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[tr_4_reviewed]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[tr_4_reviewedby]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[tr_4_rfr]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -533,12 +533,12 @@ INSERT INTO[taxreturns_state]([tr_id]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#" />
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -549,12 +549,12 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[taxreturns_state]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[trst_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[trst_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[trst_completed]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
-,[trst_primary]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[trst_reviewassignedto]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[trst_state]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[trst_status]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trst_primary]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[trst_reviewassignedto]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[trst_state]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[trst_status]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>
@@ -573,17 +573,17 @@ WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[trst_1_assignedto]= <cfqueryparam value="#j.DATA[1][3]#"/>
+,[trst_1_assignedto]= <cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[trst_1_completed]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[trst_1_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trst_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[trst_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[trst_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[trst_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[trst_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[trst_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[trst_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[trst_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[trst_1_reviewed]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[trst_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[trst_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[trst_1_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
@@ -609,13 +609,13 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_2_contacted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[trst_2_currentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trst_2_delivered]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[trst_2_deliverymethod]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[trst_2_emailed]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[trst_2_messageleft]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[trst_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[trst_2_paid]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[trst_2_deliverymethod]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[trst_2_emailed]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[trst_2_messageleft]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[trst_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[trst_2_paid]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[trst_2_priorfees]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[trst_2_requiredforms]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[trst_2_requiredforms]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
@@ -634,14 +634,14 @@ WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[trst_3_pptrassignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[trst_3_pptrassignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[trst_3_pptrcompleted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[trst_3_pptrcurrentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trst_3_pptrdelivered]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_3_pptrextended]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[trst_3_paid]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[trst_3_paid]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[trst_3_pptrpriorfees]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[trst_3_pptrrequired]=<cfqueryparam value="#j.DATA[1][10]#"/>
+,[trst_3_pptrrequired]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[trst_3_pptrrfr]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
@@ -666,10 +666,10 @@ INSERT INTO[TAXRETURNS_SCHEDULE]([tr_id]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -679,10 +679,10 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS_SCHEDULE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[trsc_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[trsc_reviewassignedto]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[trsc_schedule]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[trsc_status]=<cfqueryparam value="#j.DATA[1][6]#"/>
+,[trsc_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[trsc_reviewassignedto]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[trsc_schedule]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[trsc_status]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 WHERE[TRSC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group3_1","result":"ok"}'>
@@ -694,17 +694,17 @@ WHERE[TRSC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[TAXRETURNS_SCHEDULE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[trsc_1_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[trsc_1_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[trsc_1_completed]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[trsc_1_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[trsc_1_informationreceived]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trsc_1_missinginforeceived]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[trsc_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[trsc_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[trsc_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[trsc_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#"/>
+,[trsc_1_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[trsc_1_preparedby]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[trsc_1_readyforreview]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[trsc_1_reviewassignedto]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[trsc_1_reviewed]=<cfqueryparam value="#j.DATA[1][12]#"  null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[trsc_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#"/>
+,[trsc_1_reviewedby]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[trsc_1_reviewedwithnotes]=<cfqueryparam value="#j.DATA[1][14]#"  null="#LEN(j.DATA[1][14]) eq 0#"/>
 WHERE[trsc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>

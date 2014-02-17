@@ -308,19 +308,19 @@ INSERT INTO[financialdatastatus](
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][14]#"/>
-,<cfqueryparam value="#j.DATA[1][15]#"/>
-,<cfqueryparam value="#j.DATA[1][16]#"  null="#LEN(j.DATA[1][16]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -339,19 +339,19 @@ SELECT SCOPE_IDENTITY()AS[id]
 UPDATE[financialdatastatus]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_cmireceived]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[fds_compilemi]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[fds_deliverymethod]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[fds_compilemi]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[fds_deliverymethod]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[fds_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[fds_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[fds_fees]=<cfqueryparam value="#j.DATA[1][8]#"  null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[fds_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[fds_missinginfo]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[fds_month]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[fds_paid]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[fds_missinginfo]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[fds_month]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[fds_paid]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[fds_periodend]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[fds_priority]=<cfqueryparam value="#j.DATA[1][14]#"/>
-,[fds_status]=<cfqueryparam value="#j.DATA[1][15]#"/>
-,[fds_year]=<cfqueryparam value="#j.DATA[1][16]#"  null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[fds_priority]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[fds_status]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[fds_year]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
@@ -363,7 +363,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_obtaininfo_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_obtaininfo_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -382,7 +382,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_sort_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_sort_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_sort_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_sort_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_sort_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -402,7 +402,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_checks_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_checks_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_checks_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_checks_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_checks_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -422,7 +422,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_sales_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_sales_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_sales_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_sales_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_sales_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -442,7 +442,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_entry_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_entry_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_entry_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_entry_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_entry_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -462,7 +462,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_reconcile_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_reconcile_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_reconcile_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_reconcile_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_reconcile_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -482,7 +482,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_compile_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_compile_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_compile_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_compile_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_compile_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -502,7 +502,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_review_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_review_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -522,7 +522,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_assembly_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_assembly_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -542,7 +542,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_delivery_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_delivery_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_delivery_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_delivery_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_delivery_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -562,7 +562,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[fds_acctrpt_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fds_acctrpt_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fds_acctrpt_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_acctrpt_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_acctrpt_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -592,13 +592,13 @@ INSERT INTO[financialdatastatus_subtask]([fds_id]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#" />
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -614,13 +614,13 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus_subtask]
 SET[fds_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fdss_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[fdss_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fdss_completed]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fdss_duedate]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
-,[fdss_notes]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[fdss_sequence]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[fdss_notes]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[fdss_sequence]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

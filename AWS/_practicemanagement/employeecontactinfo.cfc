@@ -138,28 +138,28 @@ INSERT INTO[v_staffinitials](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
-,<cfqueryparam value="#j.DATA[1][13]#"/>
-,<cfqueryparam value="#j.DATA[1][14]#"/>
-,<cfqueryparam value="#j.DATA[1][15]#"/>
-,<cfqueryparam value="#j.DATA[1][16]#"/>
-,<cfqueryparam value="#j.DATA[1][17]#"/>
-,<cfqueryparam value="#j.DATA[1][18]#"/>
-,<cfqueryparam value="#j.DATA[1][19]#"/>
-,<cfqueryparam value="#j.DATA[1][20]#"/>
-,<cfqueryparam value="#j.DATA[1][21]#"/>
-,<cfqueryparam value="#j.DATA[1][22]#"/>
-,<cfqueryparam value="#j.DATA[1][23]#"/>
-,<cfqueryparam value="#j.DATA[1][24]#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][21]#" null="#LEN(j.DATA[1][21]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][22]#" null="#LEN(j.DATA[1][22]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][23]#" null="#LEN(j.DATA[1][23]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][24]#" null="#LEN(j.DATA[1][24]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -176,28 +176,28 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[v_staffinitials]
 SET[si_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[si_address]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[si_address]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[si_birthday]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[si_cafnum]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[si_childname1]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[si_childname2]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[si_childname3]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[si_city]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[si_contactphone]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[si_email1]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[si_email2]=<cfqueryparam value="#j.DATA[1][12]#"/>  
-,[si_emergencycontact]=<cfqueryparam value="#j.DATA[1][13]#"/>
-,[si_ext]=<cfqueryparam value="#j.DATA[1][14]#"/>
-,[si_initials]=<cfqueryparam value="#j.DATA[1][15]#"/>
-,[si_phone1]=<cfqueryparam value="#j.DATA[1][16]#"/>
-,[si_phone2]=<cfqueryparam value="#j.DATA[1][17]#"/>
-,[si_phone3]=<cfqueryparam value="#j.DATA[1][18]#"/>
-,[si_ptin]=<cfqueryparam value="#j.DATA[1][19]#"/>
-,[si_relationship]=<cfqueryparam value="#j.DATA[1][20]#"/>
-,[si_spousename]=<cfqueryparam value="#j.DATA[1][21]#"/>
-,[si_state]=<cfqueryparam value="#j.DATA[1][22]#"/>
-,[si_website1]=<cfqueryparam value="#j.DATA[1][23]#"/>
-,[si_zip]=<cfqueryparam value="#j.DATA[1][24]#"/>
+,[si_cafnum]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[si_childname1]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[si_childname2]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[si_childname3]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[si_city]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[si_contactphone]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[si_email1]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[si_email2]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>  
+,[si_emergencycontact]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[si_ext]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[si_initials]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[si_phone1]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[si_phone2]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
+,[si_phone3]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+,[si_ptin]=<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
+,[si_relationship]=<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0#"/>
+,[si_spousename]=<cfqueryparam value="#j.DATA[1][21]#" null="#LEN(j.DATA[1][21]) eq 0#"/>
+,[si_state]=<cfqueryparam value="#j.DATA[1][22]#" null="#LEN(j.DATA[1][22]) eq 0#"/>
+,[si_website1]=<cfqueryparam value="#j.DATA[1][23]#" null="#LEN(j.DATA[1][23]) eq 0#"/>
+,[si_zip]=<cfqueryparam value="#j.DATA[1][24]#" null="#LEN(j.DATA[1][24]) eq 0#"/>
 WHERE[USER_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>

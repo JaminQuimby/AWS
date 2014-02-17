@@ -101,11 +101,11 @@ WHERE[file_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[ctrl_files]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[file_day]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[file_description]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[file_month]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[file_name]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[file_year]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[file_day]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[file_description]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[file_month]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[file_name]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[file_year]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 WHERE[FILE_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 

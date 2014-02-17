@@ -248,8 +248,8 @@ INSERT INTO[noticematter](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[nm_id]
 </cfquery>
@@ -262,8 +262,8 @@ SELECT SCOPE_IDENTITY()AS[nm_id]
 UPDATE[noticematter]
 SET
 [client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[nm_name]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[nm_status]=<cfqueryparam value="#j.DATA[1][4]#"/>
+,[nm_name]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[nm_status]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 WHERE[nm_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 </cfif>
@@ -288,13 +288,13 @@ INSERT INTO[notice](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" NULL="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" NULL="#LEN(j.DATA[1][11]) eq 0#"/>
 
@@ -312,13 +312,13 @@ SELECT SCOPE_IDENTITY()AS[n_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[notice]
 SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[n_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[n_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[n_deliverymethod]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[n_esttime]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[n_fees]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
-,[n_missinginfo]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[n_missinginfo]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[n_missinginforeceived]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
-,[n_noticestatus]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[n_noticestatus]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[n_paid]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[n_priority]=<cfqueryparam value="#j.DATA[1][11]#" NULL="#LEN(j.DATA[1][11]) eq 0#"/>
 WHERE[n_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -331,11 +331,11 @@ WHERE[n_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
  <cfquery name="fquery" datasource="AWS">
 UPDATE[notice]
 SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[n_1_noticenumber]=<cfqueryparam value="#j.DATA[1][3]#"/>
+,[n_1_noticenumber]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[n_1_noticedate]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
-,[n_1_taxyear]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[n_1_taxform]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[n_1_methodreceived]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[n_1_taxyear]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[n_1_taxform]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[n_1_methodreceived]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[n_1_datenoticerec]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[n_1_resduedate]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
@@ -351,11 +351,11 @@ UPDATE[notice]
 SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[n_2_irsstateresponse]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[n_2_rescompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
-,[n_2_rescompletedby]=<cfqueryparam value="#j.DATA[1][5]#"/>
+,[n_2_rescompletedby]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[n_2_ressubmited]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
-,[n_2_revassignedto]=<cfqueryparam value="#j.DATA[1][7]#"/>
+,[n_2_revassignedto]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[n_2_revcompleted]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
-,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][9]#"/>
+,[n_2_revrequired]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

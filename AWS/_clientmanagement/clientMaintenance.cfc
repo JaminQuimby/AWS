@@ -545,16 +545,16 @@ INSERT INTO[client_listing](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>)
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>)
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#fquery.client_id#,"group":"group1_2","result":"ok"}'>
@@ -569,16 +569,16 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[client_listing]
 SET[client_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[client_credit_hold]=<cfqueryparam value="#j.DATA[1][3]#"/>
-,[client_group]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[client_name]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[client_notes]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[client_referred_by]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[client_salutation]=<cfqueryparam value="#j.DATA[1][8]#"/>
+,[client_credit_hold]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[client_group]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[client_name]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[client_notes]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[client_referred_by]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[client_salutation]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[client_since]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[client_spouse]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[client_trade_name]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[client_type]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[client_spouse]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[client_trade_name]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[client_type]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
@@ -604,8 +604,8 @@ INSERT INTO[ctrl_customfields](
 VALUES(
 <cfqueryparam value="1">
 ,<cfqueryparam value="#j.DATA[1][1]#">
-,<cfqueryparam value="#j.DATA[1][3]#">
-,<cfqueryparam value="#j.DATA[1][4]#">
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[field_id]
 </cfquery>
@@ -614,8 +614,8 @@ SELECT SCOPE_IDENTITY()AS[field_id]
 <cfif j.DATA[1][2] neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[ctrl_customfields]
-SET[field_name]=<cfqueryparam value="#j.DATA[1][3]#">
-,[field_value]=<cfqueryparam value="#j.DATA[1][4]#">
+SET[field_name]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[field_value]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 WHERE[field_id]=<cfqueryparam value="#j.DATA[1][2]#">
 </cfquery>
 </cfif>
@@ -641,11 +641,11 @@ INSERT INTO[client_listing](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_2","result":"ok"}'>
@@ -654,11 +654,11 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
 SET[client_tax_services]=<cfqueryparam value="#j.DATA[1][2]#"/> 
-,[client_form_type]=<cfqueryparam value="#j.DATA[1][3]#"/> 
-,[client_schedule_c]=<cfqueryparam value="#j.DATA[1][4]#"/> 
-,[client_schedule_e]=<cfqueryparam value="#j.DATA[1][5]#"/> 
-,[client_disregard]=<cfqueryparam value="#j.DATA[1][6]#"/> 
-,[client_personal_property]=<cfqueryparam value="#j.DATA[1][7]#"/> 
+,[client_form_type]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[client_schedule_c]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[client_schedule_e]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[client_disregard]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[client_personal_property]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_2","result":"ok"}'>
@@ -686,13 +686,13 @@ INSERT INTO[client_listing](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
@@ -707,13 +707,13 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[client_listing]
 SET[client_payroll_prep]=<cfqueryparam value="#j.DATA[1][2]#"/> 
-,[client_payroll_freq]=<cfqueryparam value="#j.DATA[1][3]#"/> 
-,[client_payroll_services]=<cfqueryparam value="#j.DATA[1][4]#"/> 
-,[client_pr_tax_deposit_schedule]=<cfqueryparam value="#j.DATA[1][5]#"/> 
-,[client_1099_preperation]=<cfqueryparam value="#j.DATA[1][6]#"/> 
-,[client_ein]=<cfqueryparam value="#j.DATA[1][7]#"/> 
-,[client_pin]=<cfqueryparam value="#j.DATA[1][8]#"/> 
-,[client_password]=<cfqueryparam value="#j.DATA[1][9]#"/> 
+,[client_payroll_freq]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[client_payroll_services]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[client_pr_tax_deposit_schedule]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[client_1099_preperation]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[client_ein]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[client_pin]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[client_password]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_3","result":"ok"}'>
@@ -749,16 +749,16 @@ INSERT INTO[client_listing](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#"/>
-,<cfqueryparam value="#j.DATA[1][4]#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#"/>
-,<cfqueryparam value="#j.DATA[1][7]#"/>
-,<cfqueryparam value="#j.DATA[1][8]#"/>
-,<cfqueryparam value="#j.DATA[1][9]#"/>
-,<cfqueryparam value="#j.DATA[1][10]#"/>
-,<cfqueryparam value="#j.DATA[1][11]#"/>
-,<cfqueryparam value="#j.DATA[1][12]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
@@ -767,16 +767,16 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[CLIENT_LISTING]
 SET[client_accounting_services]=<cfqueryparam value="#j.DATA[1][2]#"/> 
-,[client_bookkeeping]=<cfqueryparam value="#j.DATA[1][3]#"/> 
-,[client_compilation]=<cfqueryparam value="#j.DATA[1][4]#"/>
-,[client_review]=<cfqueryparam value="#j.DATA[1][5]#"/> 
-,[client_audit]=<cfqueryparam value="#j.DATA[1][6]#"/>
-,[client_fs_frequency]=<cfqueryparam value="#j.DATA[1][7]#"/>
-,[client_fiscal_year_end]=<cfqueryparam value="#j.DATA[1][8]#"/>
-,[client_software]=<cfqueryparam value="#j.DATA[1][9]#"/>
-,[client_version]=<cfqueryparam value="#j.DATA[1][10]#"/>
-,[client_username]=<cfqueryparam value="#j.DATA[1][11]#"/>
-,[client_password2]=<cfqueryparam value="#j.DATA[1][12]#"/>
+,[client_bookkeeping]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[client_compilation]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[client_review]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[client_audit]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[client_fs_frequency]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[client_fiscal_year_end]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[client_software]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[client_version]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[client_username]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[client_password2]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group3","result":"ok"}'>
@@ -817,26 +817,26 @@ INSERT INTO[client_contact](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#">
-,<cfqueryparam value="#j.DATA[1][3]#">
-,<cfqueryparam value="#j.DATA[1][4]#">
-,<cfqueryparam value="#j.DATA[1][5]#">
-,<cfqueryparam value="#j.DATA[1][6]#">
-,<cfqueryparam value="#j.DATA[1][7]#">
-,<cfqueryparam value="#j.DATA[1][8]#">
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#">
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#">
-,<cfqueryparam value="#j.DATA[1][10]#">
-,<cfqueryparam value="#j.DATA[1][11]#">
-,<cfqueryparam value="#j.DATA[1][12]#">
-,<cfqueryparam value="#j.DATA[1][13]#">
-,<cfqueryparam value="#j.DATA[1][14]#">
-,<cfqueryparam value="#j.DATA[1][15]#">
-,<cfqueryparam value="#j.DATA[1][16]#">
-,<cfqueryparam value="#j.DATA[1][17]#">
-,<cfqueryparam value="#j.DATA[1][18]#">
-,<cfqueryparam value="#j.DATA[1][19]#">
-,<cfqueryparam value="#j.DATA[1][20]#">
-,<cfqueryparam value="#j.DATA[1][21]#">
-,<cfqueryparam value="#j.DATA[1][22]#">
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][21]#" null="#LEN(j.DATA[1][21]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][22]#" null="#LEN(j.DATA[1][22]) eq 0#">
 )
 SELECT SCOPE_IDENTITY()AS[contact_id]
 </cfquery>
@@ -850,17 +850,17 @@ SELECT SCOPE_IDENTITY()AS[contact_id]
 <cfif j.DATA[1][1] neq "0">
 <cfquery name="fquery" datasource="AWS">
 UPDATE[client_contact]
-SET[contact_acctsoftwareupdate]=<cfqueryparam value="#j.DATA[1][3]#">
-,[contact_address1]=<cfqueryparam value="#j.DATA[1][4]#">
-,[contact_address2]=<cfqueryparam value="#j.DATA[1][5]#">
-,[contact_city]=<cfqueryparam value="#j.DATA[1][6]#">
-,[contact_customLabel]=<cfqueryparam value="#j.DATA[1][7]#">
-,[contact_customValue]=<cfqueryparam value="#j.DATA[1][8]#">
+SET[contact_acctsoftwareupdate]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#">
+,[contact_address1]= <cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[contact_address2]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[contact_city]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[contact_customLabel]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[contact_customValue]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[contact_effectivedate]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#">
-,[contact_email1]=<cfqueryparam value="#j.DATA[1][10]#">
-,[contact_email2]=<cfqueryparam value="#j.DATA[1][11]#">
-,[contact_name]=<cfqueryparam value="#j.DATA[1][12]#">
-,[contact_phone1]=<cfqueryparam value="#j.DATA[1][13]#">
+,[contact_email1]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[contact_email2]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[contact_name]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[contact_phone1]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[contact_phone2]=<cfqueryparam value="#j.DATA[1][14]#">
 ,[contact_phone3]=<cfqueryparam value="#j.DATA[1][15]#">
 ,[contact_phone4]=<cfqueryparam value="#j.DATA[1][16]#">
@@ -907,17 +907,17 @@ INSERT INTO[client_state](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#">
-,<cfqueryparam value="#j.DATA[1][3]#">
-,<cfqueryparam value="#j.DATA[1][4]#">
-,<cfqueryparam value="#j.DATA[1][5]#">
-,<cfqueryparam value="#j.DATA[1][6]#">
-,<cfqueryparam value="#j.DATA[1][7]#">
-,<cfqueryparam value="#j.DATA[1][8]#">
-,<cfqueryparam value="#j.DATA[1][9]#">
-,<cfqueryparam value="#j.DATA[1][10]#">
-,<cfqueryparam value="#j.DATA[1][11]#">
-,<cfqueryparam value="#j.DATA[1][12]#">
-,<cfqueryparam value="#j.DATA[1][13]#">
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+, <cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[si_id]
 </cfquery>
@@ -932,17 +932,17 @@ SELECT SCOPE_IDENTITY()AS[si_id]
 <cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[client_state]
-SET[si_employees]=<cfqueryparam value="#j.DATA[1][3]#">
-,[si_nexus]=<cfqueryparam value="#j.DATA[1][4]#">
-,[si_property]=<cfqueryparam value="#j.DATA[1][5]#">
-,[si_reason]=<cfqueryparam value="#j.DATA[1][6]#">
-,[si_registered]=<cfqueryparam value="#j.DATA[1][7]#">
-,[si_revenue]=<cfqueryparam value="#j.DATA[1][8]#">
-,[si_state]=<cfqueryparam value="#j.DATA[1][9]#">
-,[si_misc1]=<cfqueryparam value="#j.DATA[1][10]#">
-,[si_misc2]=<cfqueryparam value="#j.DATA[1][11]#">
-,[si_misc3]=<cfqueryparam value="#j.DATA[1][12]#">
-,[si_misc4]=<cfqueryparam value="#j.DATA[1][13]#">
+SET[si_employees]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[si_nexus]= <cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[si_property]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[si_reason]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[si_registered]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[si_revenue]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[si_state]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[si_misc1]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[si_misc2]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[si_misc3]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[si_misc4]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 WHERE[si_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group5_1","result":"ok"}'>
@@ -967,9 +967,9 @@ INSERT INTO[client_listing](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#">
-,<cfqueryparam value="#j.DATA[1][3]#">
-,<cfqueryparam value="#j.DATA[1][4]#">
-,<cfqueryparam value="#j.DATA[1][5]#">
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+, <cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[client_id]
 </cfquery>
@@ -984,9 +984,9 @@ SELECT SCOPE_IDENTITY()AS[client_id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[client_listing]
 SET[client_statelabel1]=<cfqueryparam value="#j.DATA[1][2]#">
-,[client_statelabel2]=<cfqueryparam value="#j.DATA[1][3]#">
-,[client_statelabel3]=<cfqueryparam value="#j.DATA[1][4]#">
-,[client_statelabel4]=<cfqueryparam value="#j.DATA[1][5]#">
+,[client_statelabel2]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[client_statelabel3]= <cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[client_statelabel4]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfquery>
 </cfif>
