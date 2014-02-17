@@ -20,12 +20,12 @@ _group1=function(){}
 	"functions":'$("#task_id").val(record.FTP_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"financialtaxplanning"});'
 	})};
 	
-
+_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"financialtaxplanning"});_loadData({"id":"task_id","group":"assetCompTask","page":"financialtaxplanning"});}
 _loadDataCB=function(query){
 try{
 if(query==null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else{
 switch(query.COLUMNS[0]){
-case "FTP_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_duedate,g1_estimatedtime,g1_fees,g1_finalclientmeeting,g1_informationcompiled,g1_informationreceived,g1_informationrequested,g1_missinginformation,g1_missinginforeceived,g1_paid,g1_priority,g1_reportcompleted,g1_requestforservices,g1_status';_loadit({"query":query,"list":list});break;
+case "FTP_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_duedate,g1_estimatedtime,g1_fees,g1_finalclientmeeting,g1_informationcompiled,g1_informationreceived,g1_informationrequested,g1_missinginformation,g1_missinginforeceived,g1_paid,g1_priority,g1_reportcompleted,g1_requestforservices,g1_status';_loadit({"query":query,"list":list});_loadAssets();break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}

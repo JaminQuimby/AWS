@@ -28,11 +28,7 @@ _grid1=function(){_jGrid({
 	"functions":'$("#task_id").val(record.PT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrolltaxes"});'
 	})};
 
-_loadAssets=function(){
-_loadData({"id":"client_id","group":"assetCreditHold","page":"payrolltaxes"});
-_loadData({"id":"task_id","group":"assetCompTask","page":"payrolltaxes"});
-	}
-	
+_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"payrolltaxes"});_loadData({"id":"task_id","group":"assetCompTask","page":"payrolltaxes"});}
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}

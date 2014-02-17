@@ -116,7 +116,6 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
 <cfquery datasource="AWS" name="fQuery">
@@ -133,7 +132,6 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcatch>
 </cftry>
 </cffunction>
-
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
