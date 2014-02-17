@@ -223,7 +223,12 @@ _loadData=function(params){
 var options={"id":"","group":"","page":"","plugin":""}
 try{$.extend(true, options, params);
 if(options["plugin"]!=""){options["url"]= _pluginURL(options["plugin"]);}else{options["url"]=""};
-$.ajax({type:'GET',url:options["url"]+options["page"]+'.cfc?method=f_loadData',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"id":$('#'+options["id"]).val(),"loadType":options["group"]})}
+if($('#'+options["id"]).is("select")){
+var i=$('#'+options["id"]+' option:selected').val();
+	}else{
+var i=$('#'+options["id"]).val();		
+		}
+$.ajax({type:'GET',url:options["url"]+options["page"]+'.cfc?method=f_loadData',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"id":i,"loadType":options["group"]})}
 ,success:function(json){
 	_loadDataCB($.parseJSON(json))
 	}

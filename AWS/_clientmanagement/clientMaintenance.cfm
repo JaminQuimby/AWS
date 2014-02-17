@@ -78,7 +78,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g1_trade_name">Trade Name</label><input id="g1_trade_name" type="text" /></div>
 <div><label for="g1_referred_by">Referred By</label><input id="g1_referred_by"  type="text"/></div>
 <div><label for="g1_active"><input id="g1_active" type="checkbox" class="ios-switch">Active</label></div>
-<div><label for="g1_credit_hold"><input id="g1_credit_hold" type="checkbox" class="ios-switch">Credit Hold</label></div>
+<div><label for="g1_credit_hold"><input id="g1_credit_hold" type="checkbox" class="ios-switchb">Credit Hold</label></div>
 <div><label for="g1_notes">Notes</label><textarea id="g1_notes" cols="4" rows="4" ></textarea></div>
 </div>
 

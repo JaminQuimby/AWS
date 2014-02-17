@@ -117,9 +117,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- GROUP1 SUBGROUP4 --->
 <h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)'>Personal Property Tax</h4>
 <div>
-	<div><input id="g1_g4_required" type="checkbox"><label for="g1_g4_required">PPTR Required</label></div>
-
-	
+	<div><label for="g1_g4_required"><input id="g1_g4_required" type="checkbox" class="ios-switch">PPTR Required</label></div>
     <div><label for="g1_g4_extended">PPTR Extension Completed</label><input type="text" class="date" id="g1_g4_extended" ></div>
 	<div><label for="g1_g4_extensionrequested">PPTR Extension Requested</label><input type="text" class="date" id="g1_g4_extensionrequested" ></div>
 	<div><label for="g1_g4_assignedto">PPTR Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -142,9 +140,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
-</div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a></div>
 </div>
 <h3 onClick='_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});$("#isLoaded_group2").val(1);'>Add States</h3>
 <div>
@@ -207,9 +203,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
-<div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a>
-</div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a></div>
 </div>
 <h4 onClick='_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});$("#isLoaded_group3").val(1);'>Add Schedule</h4>
 <div>
