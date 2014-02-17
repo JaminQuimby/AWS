@@ -31,7 +31,7 @@ SELECT[client_id]
 	,[client_statelabel3]
 	,[client_statelabel4]
 	,[client_relations]
-FROM[client_listing]
+FROM[v_client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -56,7 +56,7 @@ SELECT[client_tax_services]
 	,[client_schedule_e]
 	,[client_disregard]
 	,[client_personal_property]
-FROM[client_listing]
+FROM[v_client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -73,7 +73,7 @@ SELECT[client_payroll_prep]
 	,[client_ein]
 	,[client_pin]
 	,[client_password]
-FROM[client_listing]
+FROM[v_client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -93,7 +93,7 @@ SELECT[client_accounting_services]
 	,[client_version]
 	,[client_username]
 	,[client_password2]
-FROM[client_listing]
+FROM[v_client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -124,7 +124,7 @@ SELECT[contact_id]
 ,[contact_type]
 ,[contact_website]
 ,[contact_zip]
-FROM[client_contact]
+FROM[v_client_contact]
 WHERE[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -146,7 +146,7 @@ SELECT[si_id]
     ,[si_misc2]
     ,[si_misc3]
     ,[si_misc4]
-FROM[client_state]
+FROM[v_client_state]
 WHERE[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -158,7 +158,7 @@ SELECT[client_statelabel1]
 	,[client_statelabel2]
     ,[client_statelabel3]
     ,[client_statelabel4]
-FROM[client_listing]
+FROM[v_client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -168,7 +168,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group6">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[client_relations]
-FROM[client_listing]
+FROM[v_client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
@@ -1010,6 +1010,28 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfcatch>
 </cftry>
 </cfif>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group0">
+<cfquery datasource="AWS" name="fQuery">
+update[client_listing]
+SET[client_active]=0
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

@@ -21,6 +21,7 @@
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
+
 $(document).ready(function(){
 $('##task_id').val('#URL.task_id#');
 _toggle("group1,largeMenu");

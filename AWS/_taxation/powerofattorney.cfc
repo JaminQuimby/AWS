@@ -119,7 +119,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[POWEROFATTORNEY](
+INSERT INTO[powerofattorney](
 [client_id]
  ,[pa_dateofrevocation]
  ,[pa_datesenttoirs]
@@ -154,7 +154,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[POWEROFATTORNEY]
+UPDATE[powerofattorney]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pa_dateofrevocation]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[pa_datesenttoirs]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -164,9 +164,31 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pa_taxforms]=<cfqueryparam value="#j.DATA[1][8]#"/>
 ,[pa_taxmatters]=<cfqueryparam value="#j.DATA[1][9]#"/>
 ,[pa_taxyears]=<cfqueryparam value="#j.DATA[1][10]#"/>
-WHERE[PA_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[pa_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group0">
+<cfquery datasource="AWS" name="fQuery">
+UPDATE[powerofattorney]
+SET[pa_active]=0
+WHERE[pa_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

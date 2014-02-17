@@ -137,7 +137,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cftry>
 
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[FINANCIALTAXPLANNING](
+INSERT INTO[financialtaxplanning](
 [client_id]
  ,[ftp_assignedto]
  ,[ftp_category]
@@ -189,7 +189,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[FINANCIALTAXPLANNING]
+UPDATE[financialtaxplanning]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
  ,[ftp_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
  ,[ftp_category]=<cfqueryparam value="#j.DATA[1][4]#"/>
@@ -207,9 +207,32 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
  ,[ftp_reportcompleted]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
  ,[ftp_requestservice]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
  ,[ftp_status]=<cfqueryparam value="#j.DATA[1][18]#"/>
-WHERE[FTP_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[ftp_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group0">
+<cfquery datasource="AWS" name="fQuery">
+update[financialtaxplanning]
+SET[ftp_active]=0
+WHERE[ftp_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

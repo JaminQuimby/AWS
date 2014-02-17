@@ -52,8 +52,8 @@ _grid1_1=function(){_jGrid({
 	"grid":"grid1_1",
 	"url":"employeedashboard.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false},
-			CLIENT_ID:{list:false,edit:false},
+	"fields":{PC_ID:{key:true,list:false,edit:false}
+			,CLIENT_ID:{list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
 			PC_YEAR:{title:'Year',width:'1%'},
 			PC_PAYENDDATE:{title:'Pay End',width:'1%'},

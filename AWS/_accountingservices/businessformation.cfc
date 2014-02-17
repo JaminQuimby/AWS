@@ -434,4 +434,35 @@ WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfcatch>
 </cftry>
 </cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group1">
+<cfquery datasource="AWS" name="fQuery">
+update[businessformation]
+SET[bf_active]=0
+WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
+</cfcase>
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fQuery">
+update[businessformation_subtask]
+SET[bfs_active]=0
+WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group2","result":"ok"}'>
+</cfcase>
+
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
 </cfcomponent>

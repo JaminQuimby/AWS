@@ -271,7 +271,7 @@ WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group1_1">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLCHECKSTATUS]
+UPDATE[payrollcheckstatus]
 SET[pc_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[pc_obtaininfo_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -290,7 +290,7 @@ WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group1_2">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLCHECKSTATUS]
+UPDATE[payrollcheckstatus]
 SET[pc_preparation_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_preparation_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[pc_preparation_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -309,7 +309,7 @@ WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group1_3">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLCHECKSTATUS]
+UPDATE[payrollcheckstatus]
 SET[pc_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[pc_review_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -328,7 +328,7 @@ WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group1_4">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLCHECKSTATUS]
+UPDATE[payrollcheckstatus]
 SET[pc_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[pc_assembly_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -347,7 +347,7 @@ WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group1_5">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[PAYROLLCHECKSTATUS]
+UPDATE[payrollcheckstatus]
 SET[pc_delivery_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_delivery_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[pc_delivery_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -361,6 +361,28 @@ WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group0">
+<cfquery datasource="AWS" name="fQuery">
+update[payrollcheckstatus]
+SET[pc_active]=0
+WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

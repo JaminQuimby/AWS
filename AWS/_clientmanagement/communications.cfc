@@ -74,9 +74,8 @@ SELECT[co_id]
 ,[client_name]
 ,[client_id]
 FROM[v_communications]
-WHERE[co_telephone] = 0 
 <cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -128,7 +127,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[COMMUNICATIONS](
+INSERT INTO[communications](
 [client_id]
 ,[co_briefmessage]
 ,[co_caller]
@@ -181,7 +180,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[COMMUNICATIONS]
+UPDATE[communications]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[co_briefmessage]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[co_caller]=<cfqueryparam value="#j.DATA[1][4]#"/>
@@ -200,7 +199,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[co_returncall]=<cfqueryparam value="#j.DATA[1][17]#"/>
 ,[co_takenby]=<cfqueryparam value="#j.DATA[1][18]#"/>
 ,[co_telephone]=<cfqueryparam value="#j.DATA[1][19]#"/>
-WHERE[CO_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[co_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>
 </cfcase>
@@ -212,5 +211,26 @@ WHERE[CO_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfcatch>
 </cftry>
 </cffunction>
-</cfcomponent>
 
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group0">
+<cfquery datasource="AWS" name="fQuery">
+update[communications]
+SET[co_active]=0
+WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+</cfcomponent>

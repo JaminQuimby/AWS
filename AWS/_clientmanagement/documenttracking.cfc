@@ -167,9 +167,31 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[dt_routing]=<cfqueryparam value="#j.DATA[1][6]#"/>
 ,[dt_sender]=<cfqueryparam value="#j.DATA[1][7]#"/>
 ,[dt_staff]=<cfqueryparam value="#j.DATA[1][8]#"/>
-WHERE[DT_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[dt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group0">
+<cfquery datasource="AWS" name="fQuery">
+update[documenttracking]
+SET[dt_active]=0
+WHERE[dt_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

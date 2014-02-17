@@ -298,19 +298,19 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_status]=<cfqueryparam value="#j.DATA[1][17]#"/>
 ,[of_task]=<cfqueryparam value="#j.DATA[1][18]#"/>
 ,[of_taxyear]=<cfqueryparam value="#j.DATA[1][19]#"/>
-WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
 </cfcase>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[OTHERFILINGS]
+UPDATE[otherfilings]
 SET[of_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_obtaininfo_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[of_obtaininfo_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
@@ -323,7 +323,7 @@ SET[of_preparation_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_preparation_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_preparation_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[of_preparation_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_3","result":"ok"}'>
@@ -331,12 +331,12 @@ WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[OTHERFILINGS]
+UPDATE[otherfilings]
 SET[of_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_review_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[of_review_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_4","result":"ok"}'>
@@ -344,27 +344,49 @@ WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[OTHERFILINGS]
+UPDATE[otherfilings]
 SET[of_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_assembly_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[of_assembly_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_5","result":"ok"}'>
 </cfcase>
 <cfcase value="group1_5">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[OTHERFILINGS]
+UPDATE[otherfilings]
 SET[of_delivery_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_delivery_completedby]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[of_delivery_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[of_delivery_esttime]=<cfqueryparam value="#j.DATA[1][5]#"  null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[OF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group0">
+<cfquery datasource="AWS" name="fQuery">
+update[otherfilings]
+SET[of_active]=0
+WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

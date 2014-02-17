@@ -11,14 +11,7 @@ String.prototype.has = function(text) { return this.toLowerCase().indexOf("" + t
 String.prototype.insert = function (index, string) {if (index > 0) return this.substring(0, index) + string + this.substring(index, this.length); else return string + this;};
 Array.prototype.removeValue = function(name, value){var array = $.map(this, function(v,i){return v[name] === value ? null : v;});this.length = 0;this.push.apply(this, array);}
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
-Date.prototype.mmddyyyy = function() {         
-                                
-        var yyyy = this.getFullYear().toString();                                    
-        var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based         
-        var dd  = this.getDate().toString();             
-                            
-        return  (mm[1]?mm:"0"+mm[0]) + '/' + (dd[1]?dd:"0"+dd[0]) + '/' + yyyy;
-   };  
+Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:"0"+mm[0])+'/'+(dd[1]?dd:"0"+dd[0])+'/'+yyyy};
 
 _toReport=function(data,config){
 //Build Report Groups
@@ -291,6 +284,37 @@ try{if(options['query'].DATA!=""){
 if(document.getElementById(list[i]).getAttribute("onblur")!=null){document.getElementById(list[i]).onblur()}}}}
 catch(err){jqMessage({message: "Error in js._loadit: "+err,type: "error",autoClose: false})}};
 
+_removeData=function(params){
+var options={
+	"group":"",
+	"page":"",
+	"id":"",
+	"plugin":""
+	}
+try{	
+$.extend(true, options, params);//turn options into array
+
+if(options["plugin"]!=""){options["url"]= _pluginURL(options["plugin"])}else{options["url"]=""};
+$.ajax({
+  type: 'GET',
+  url:options["url"]+options["page"]+'.cfc?method=f_removeData',
+  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"id":options["id"]})
+  },
+  success:function(json){_removeDataCB($.parseJSON(json))},   // successful request; do something with the data
+  error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
+});
+
+}
+catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
+}
+_removeDataCB=function(params){
+var options={"id":"","group":"","result":"fail"}
+$.extend(true, options, params);
+if(options["result"]=="ok"){
+	jqMessage({"type":"destroy"});
+	jqMessage({message: "The task has been removed.",type: "success",autoClose: true,duration: 5});
+	}
+	}
 _toggle=function(list){try{var arr=list.split(",");for(var i=0;i<arr.length;i++){var el=document.getElementById(arr[i]);el.style.display=(el.style.display!="none"?"none":"");}}catch(error){ jqMessage({message: "Error in js._toggle: "+error,type: "error",autoClose: false})}};
 _hide=function(list){var arr=list.split(",");for(var i=0;i<arr.length;i++){document.getElementById(arr[i]).style.display="none";}};
 _highlight=function(on){var lis=on.parentNode.parentNode.getElementsByTagName("li");for (var i=0;i<lis.length;++i){lis[i].firstChild.className=lis[i].firstChild.className.replace(/\bhighlight\b/g,"");if(on==lis[i].firstChild){lis[i].firstChild.className ="highlight"}}};

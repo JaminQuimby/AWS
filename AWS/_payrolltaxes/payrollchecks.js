@@ -2,26 +2,16 @@ $(document).ready(function(){
 _grid1();
 _group1=function(){}
 });
- 
-_grid1=function(){_jGrid({
+
+
+_grid1=function(){
+	_jGrid({
 	"grid":"grid1",
 	"url":"payrollchecks.cfc",
 	"title":"Payroll Checks",
 	"fields":{
-		
-		
-TestColumn: {
-    title: 'Test',  
-	display: function (data1) {
-                        var $img = $('<i class="fa fa-trash-o"></i>'); 
-						$img.click(function () {
-    						window.location.href = '//'+ window.location.hostname + '/';
-						});
-						return $img;}}
-						
-						,
-		
 		PC_ID:{key:true,list:false,edit:false}
+,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PC_ID+"',page:'payrollchecks',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PC_YEAR:{title:'Year',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
@@ -147,5 +137,3 @@ case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
 default:jqMessage({message: "A exception in payrollchecks.js in group "+options["group"]+" json: "+json+"  id: "+options["id"],type: "error",autoClose: false,duration: 5});break;}}
 catch(err){alert(err)}};
-
-_removeData=function(){}

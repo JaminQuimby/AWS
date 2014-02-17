@@ -18,7 +18,7 @@
 <cfinclude template="/inc/pagemenu.cfm">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
-<cfinclude template="/module/menu/menu.cfm"></nav>
+<cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 
 
  <div id="group1" class="gf-checkbox">

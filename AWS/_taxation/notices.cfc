@@ -243,7 +243,7 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <c
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[NOTICEMATTER](
+INSERT INTO[noticematter](
 [client_id]
 ,[nm_name]
 ,[nm_status]
@@ -261,7 +261,7 @@ SELECT SCOPE_IDENTITY()AS[nm_id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[NOTICEMATTER]
+UPDATE[noticematter]
 SET
 [client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[nm_name]=<cfqueryparam value="#j.DATA[1][3]#"/>
@@ -276,7 +276,7 @@ WHERE[nm_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[NOTICE](
+INSERT INTO[notice](
 [nm_id]
 ,[n_assignedto]
 ,[n_deliverymethod]
@@ -312,7 +312,7 @@ SELECT SCOPE_IDENTITY()AS[n_id]
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="AWS">
-UPDATE[NOTICE]
+UPDATE[notice]
 SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[n_assignedto]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[n_deliverymethod]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -331,7 +331,7 @@ WHERE[n_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group2 Subgroup1 --->
 <cfcase value="group2_1">
  <cfquery name="fquery" datasource="AWS">
-UPDATE[NOTICE]
+UPDATE[notice]
 SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[n_1_noticenumber]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[n_1_noticedate]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -349,7 +349,7 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_2">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
-UPDATE[NOTICE]  
+UPDATE[notice]  
 SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[n_2_irsstateresponse]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[n_2_rescompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -367,6 +367,36 @@ WHERE[N_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcatch>
 <!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group1">
+<cfquery datasource="AWS" name="fQuery">
+update[noticematter]
+SET[nm_active]=0
+WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
+</cfcase>
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fQuery">
+update[notice]
+SET[n_active]=0
+WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
+</cfcase>
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cffunction>
