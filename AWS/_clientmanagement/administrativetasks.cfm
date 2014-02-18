@@ -44,7 +44,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,group2');">Add</a>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <!--- Group 1 --->
@@ -55,10 +55,10 @@ add Work Initiated
 	<h3>General</h3>
 	<div>
 		<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-		<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-        <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold*</label></div>
-		<div><label for="g1_category">Category*</label><select id="g1_category" data-placeholder="Select a Category."><option value="0">&nbsp;</option><cfoutput query="global_admintaskcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><label for="g1_taskdescription">Task Description*</label><textarea id="g1_taskdescription" maxlength="1000" ></textarea></div>
+		<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Clients</label><select id="client_id" disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+        <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
+		<div><label for="g1_category"><i class="fa fa-lock link" onClick="_schk('g1_category')"></i> Category</label><select id="g1_category"  disabled="disabled"data-placeholder="Select a Category."><option value="0">&nbsp;</option><cfoutput query="global_admintaskcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+		<div><label for="g1_taskdescription"><i class="fa fa-lock link" onClick="_schk('g1_taskdescription')"></i> Task Description</label><textarea id="g1_taskdescription" disabled="disabled" maxlength="1000" ></textarea></div>
 		<div><label for="g1_instructions">Instructions</label><textarea id="g1_instructions" maxlength="1000" ></textarea></div>
 		<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" /></div>
 		<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"/></div>

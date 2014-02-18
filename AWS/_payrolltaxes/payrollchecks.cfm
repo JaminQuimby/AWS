@@ -25,7 +25,7 @@
 
 $(document).ready(function(){
 $('##task_id').val('#URL.task_id#');
-_toggle("group1,largeMenu");
+_toggle("group1");
 _hide("entrance");$("##content").removeClass();
 $("##content").addClass("contentbig");
 _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
@@ -49,16 +49,16 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');">Add</a></div></div></div>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<div><label for="client_id">Clients*</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold*</label></div>
-<div><label for="g1_year">Year*</label><select  id="g1_year"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_payenddate">Pay End Date*</label><input type="text" class="date" id="g1_payenddate"></div>
-<div><label for="g1_paydate">Pay Date*</label><input type="text" class="date" id="g1_paydate"></div>
+<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Clients</label><select id="client_id" disabled="disable" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_credithold"><input id="g1_credithold" disabled="disable" type="checkbox" class="ios-switchb" d>Credit Hold</label></div>
+<div><label for="g1_year"><i class="fa fa-lock link" onClick="_schk('g1_year')"></i> Year</label><select id="g1_year" disabled="disable"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_payenddate"><i class="fa fa-lock link" onClick="_schk('g1_payenddate')"></i> Pay End Date</label><input type="text" class="date" id="g1_payenddate" disabled="disable" ></div>
+<div><label for="g1_paydate"><i class="fa fa-lock link" onClick="_schk('g1_paydate')"></i> Pay Date</label><input type="text" class="date" id="g1_paydate" disabled="disable"></div>
 <div><label for="g1_altfrequency"><input id="g1_altfrequency" type="checkbox" class="ios-switch">Alt Frequency</strong></label></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text"  id="g1_estimatedtime" ></div>

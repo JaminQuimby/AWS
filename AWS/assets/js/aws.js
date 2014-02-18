@@ -13,6 +13,20 @@ Array.prototype.removeValue = function(name, value){var array = $.map(this, func
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
 Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:"0"+mm[0])+'/'+(dd[1]?dd:"0"+dd[0])+'/'+yyyy};
 
+_addNewTask=function(){
+if($('#task_id').val()==0){
+	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
+	 $('label').siblings(':disabled').prop('disabled', false).trigger("liszt:updated");
+	 $('label').siblings(':disabled').prop('disabled', false);	 
+}}
+_schk=function(i){
+if(user["role"]==1){
+if($('#'+i).is(":disabled")){
+	$('label[for="'+i+'"] i').removeClass('fa-lock').addClass('fa-unlock');
+	if($('#'+i).is('select')){
+	$('#'+i).prop("disabled", false).trigger("liszt:updated");
+	}else{$('#'+i).prop("disabled", false);}
+}}}
 _toReport=function(data,config){
 //Build Report Groups
 //Build a basic json object

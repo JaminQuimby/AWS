@@ -37,7 +37,10 @@ _grid2=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#subtask1_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"financialstatements"});'
 	})};
-	
+_loadAssets=function(){
+_loadData({"id":"client_id","group":"assetCreditHold","page":"financialstatements"});
+_loadData({"id":"task_id","group":"assetCompTask","page":"financialstatements"});
+	}
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}

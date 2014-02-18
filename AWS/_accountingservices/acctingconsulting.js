@@ -39,7 +39,10 @@ _grid2=function(){_jGrid({
 	"functions":'$(".trackers #subtask1_id").val(record.MCS_ID);_loadData({"id":"subtask1_id","group":"group2","page":"acctingconsulting"});$("#group2").accordion({active:1});;'
 	})};
 	
-
+_loadAssets=function(){
+_loadData({"id":"client_id","group":"assetCreditHold","page":"acctingconsulting"});
+_loadData({"id":"task_id","group":"assetCompTask","page":"acctingconsulting"});
+	}
 _loadDataCB=function(query){
 try{
 if(query!=null){

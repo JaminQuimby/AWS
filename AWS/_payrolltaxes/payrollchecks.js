@@ -3,7 +3,6 @@ _grid1();
 _group1=function(){}
 });
 
-
 _grid1=function(){
 	_jGrid({
 	"grid":"grid1",
@@ -32,7 +31,7 @@ _grid1=function(){
 
 _loadAssets=function(){
 _loadData({"id":"client_id","group":"assetCreditHold","page":"payrollchecks"});
-_loadData({"id":"task_id","group":"assetCompTask","page":"payrollchecks"});
+//_loadData({"id":"task_id","group":"assetCompTask","page":"payrollchecks"});
 	}
 _loadDataCB=function(query){
 try{
