@@ -25,7 +25,7 @@ _grid1=function(){_jGrid({
 
 
 //Load Data call Back
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"administrativetasks"});_loadData({"id":"task_id","group":"assetCompTask","page":"administrativetasks"});}
+_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"administrativetasks"});}
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
 try{

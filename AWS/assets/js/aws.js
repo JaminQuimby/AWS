@@ -13,6 +13,63 @@ Array.prototype.removeValue = function(name, value){var array = $.map(this, func
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
 Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:"0"+mm[0])+'/'+(dd[1]?dd:"0"+dd[0])+'/'+yyyy};
 
+
+
+$(document).ready(function () {
+_toCSV=function($table, filename) {
+
+        var $rows = $table.find('tr:has(td)'),
+
+            // Temporary delimiter characters unlikely to be typed by keyboard
+            // This is to avoid accidentally splitting the actual contents
+            tmpColDelim = String.fromCharCode(11), // vertical tab character
+            tmpRowDelim = String.fromCharCode(0), // null character
+
+            // actual delimiter characters for CSV format
+            colDelim = '","',
+            rowDelim = '"\r\n"',
+
+            // Grab text from table into CSV formatted string
+            csv = '"' + $rows.map(function (i, row) {
+                var $row = $(row),
+                    $cols = $row.find('td');
+
+                return $cols.map(function (j, col) {
+                    var $col = $(col),
+                        text = $col.text();
+
+                    return text.replace('"', '""'); // escape double quotes
+
+                }).get().join(tmpColDelim);
+
+            }).get().join(tmpRowDelim)
+                .split(tmpRowDelim).join(rowDelim)
+                .split(tmpColDelim).join(colDelim) + '"',
+
+            // Data URI
+            csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+			window.location="data:application/csv;charset=utf-8," + encodeURIComponent(csv)
+
+        $(this)
+            .attr({
+            'download': filename,
+                'href': csvData,
+                'target': '_blank'
+        });
+		
+    }
+
+    // This must be a hyperlink
+    $(".export").on('click', function (event) {
+        // CSV
+        _toCSV.apply(this, [$('#'+$table+'>table'), 'export.csv']);
+        
+        // IF CSV, don't do event.preventDefault() or return false
+        // We actually need this to be a typical hyperlink
+    });
+});
+
+
 _addNewTask=function(){
 if($('#task_id').val()==0){
 	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
@@ -163,6 +220,7 @@ _jGrid=function(params){
 		"functions":"", //on click function
 		"url":"",//&argumentCollection=
 		"method":""//&method=
+	
 	}
 	$.extend(true, options, params);
 	var grid=$("#"+options['grid']);
@@ -171,6 +229,15 @@ $(grid).jtable('destroy');
 $(grid).jtable({
 	ajaxSettings:{ type:'GET', cache:false },
 	title:options['title'],
+			toolbar: {
+    items: [{
+        icon: ' ',
+        text: 'Export to Excel',
+        click: function () {
+         _toCSV($('#'+options['grid']+' table'), 'export.csv');
+        }
+    }]
+},
 	selecting:true,
 	actions:{
 	listAction:options['url']+"?returnFormat=json&method="+options['method']+"&argumentCollection="+options['arguments'],
