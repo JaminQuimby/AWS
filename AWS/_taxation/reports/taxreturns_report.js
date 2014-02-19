@@ -62,7 +62,7 @@ var grid1_config = [
 ,{"n":"4_reviewassigned","t":"numeric","v":""}
 ,{"n":"4_reviewed","t":"date","v":""}
 ,{"n":"4_reviewedby","t":"numeric","v":""}
-]; $.each(grid1_config, function(idx, obj) {$('#group0 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
+]; $.each(grid1_config, function(idx, obj) {$('#group1 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
 	_jGrid({
 	"grid":"grid1",
 	"url":"taxreturns_report.cfc",

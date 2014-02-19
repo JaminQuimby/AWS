@@ -46,7 +46,8 @@ var grid1_config = [
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"10"}',
-	"functions":''
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID+"&nav=0","_blank")'
+
 	})};
 	
 	_grid2=function(){_jGrid({
@@ -60,6 +61,5 @@ var grid1_config = [
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","formid":"4","clientid":"'+$("#client_id").val()+'","taskid":"'+$("#task_id").val()+'","loadType":"group2"}',
-//	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID'
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID+"&nav=0","_blank")'
 	})};
