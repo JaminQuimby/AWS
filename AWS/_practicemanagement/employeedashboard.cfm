@@ -37,8 +37,7 @@
 	<div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 		<div class="tblGrid" id="grid1_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm'">Add</a></cfoutput>
-		</div>
+			</div>
     </div>
 
 <!--- GROUP 1 SUB 2 PAYROLL TAXES --->
@@ -46,7 +45,6 @@
 	<div>
 		<div class="tblGrid" id="grid1_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -55,7 +53,6 @@
 		<div>
 		<div class="tblGrid" id="grid1_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/otherfilings.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>
@@ -67,7 +64,7 @@
 		<div>
 		<div class="tblGrid" id="grid2_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/businessformation.cfm'">Add</a></cfoutput>
+
 		</div>
 	</div>
 
@@ -76,8 +73,7 @@
 		<div>
 		<div class="tblGrid" id="grid2_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
-		</div>
+</div>
 	</div>
 
 
@@ -87,7 +83,6 @@
 		<div>
 		<div class="tblGrid" id="grid2_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>
@@ -100,7 +95,6 @@
 		<div>
 		<div class="tblGrid" id="grid3_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -109,7 +103,6 @@
 		<div>
 		<div class="tblGrid" id="grid3_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/notices.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>
@@ -121,7 +114,6 @@
 		<div>
 		<div class="tblGrid" id="grid4_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -130,7 +122,6 @@
 		<div>
 		<div class="tblGrid" id="grid4_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -139,7 +130,6 @@
 		<div>
 		<div class="tblGrid" id="grid4_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -148,7 +138,6 @@
 		<div>
 		<div class="tblGrid" id="grid4_4"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -157,7 +146,6 @@
 		<div>
 		<div class="tblGrid" id="grid4_5"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -166,7 +154,6 @@
 		<div>
 		<div class="tblGrid" id="grid4_6"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/financialtaxplanning.cfm'">Add</a></cfoutput>
 		</div>        
 	</div>
 </div>
@@ -178,7 +165,6 @@
 		<div>
 		<div class="tblGrid" id="grid5_1"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_clientmanagement/administrativetasks.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -187,7 +173,6 @@
 		<div>
 		<div class="tblGrid" id="grid5_2"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 
@@ -196,7 +181,6 @@
 		<div>
 		<div class="tblGrid" id="grid5_3"></div>
 		<div class="buttonbox">
-		<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
 		</div>
 	</div>
 </div>

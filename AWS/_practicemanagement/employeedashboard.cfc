@@ -268,9 +268,8 @@ ORDER BY[fds_duedate]</cfquery>
 <cfcase value="group3_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND([n_noticestatus]!=2 OR [n_noticestatus]!=5)
-<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]
+WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> AND[n_noticestatus]!=2
 ORDER BY[n_1_resduedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -294,9 +293,8 @@ ORDER BY[n_1_resduedate]</cfquery>
 <cfcase value="group3_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]WHERE[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND([n_noticestatus]!=3 OR [n_noticestatus]!=6)
-<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]
+WHERE ([nm_status]!=<cfqueryparam value="2"/>AND[n_2_revrequired]=<cfqueryparam value="True"/>AND[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
 ORDER BY[n_1_resduedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
