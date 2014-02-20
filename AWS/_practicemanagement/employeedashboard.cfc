@@ -1,6 +1,6 @@
 <cfcomponent output="true">
 <!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- [LOOKUP FUNCTIONS] --->
+<!--- [LOOKUP FUNCTIONS]--->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
 <cfargument name="orderBy" type="any" required="no">
@@ -15,9 +15,7 @@
 <!--- LOOKUP EMPLOYEES --->
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
-SELECT[user_id],[name]
-FROM[v_staffinitials]
-WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+SELECT[user_id],[name]FROM[v_staffinitials]WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -38,27 +36,16 @@ WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcase value="group1_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[pc_id]
-,[pc_year]
-,CONVERT(VARCHAR(10),[pc_payenddate], 1)AS[pc_payenddate]
-,CONVERT(VARCHAR(10),[pc_paydate], 1)AS[pc_paydate]
-,CONVERT(VARCHAR(10),[pc_datedue], 1)AS[pc_datedue]
-,CONVERT(VARCHAR(10),[pc_obtaininfo_datecompleted], 1)AS[pc_obtaininfo_datecompleted]
-,[pc_missinginfo]
-,[client_name]
-,[client_id]
-FROM[v_payrollcheckstatus]
-WHERE([pc_delivery_completedby] IS NULL)
-AND([pc_datedue] < DATEADD(day, 14, GETDATE())OR [pc_datedue] > GETDATE()OR [pc_datedue] IS NULL)
-AND([pc_delivery_completedby] IS NULL AND [pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-OR	[pc_delivery_completedby] IS NOT NULL AND [pc_delivery_datecompleted] IS NULL AND [pc_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-OR	[pc_delivery_datecompleted] IS NOT NULL AND [pc_review_datecompleted] IS NULL AND [pc_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-OR	[pc_review_datecompleted] IS NOT NULL AND [pc_assembly_datecompleted] IS NULL AND [pc_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-OR	[pc_assembly_datecompleted] IS NOT NULL AND [pc_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+SELECT[pc_id],[pc_year],CONVERT(VARCHAR(10),[pc_payenddate], 1)AS[pc_payenddate],CONVERT(VARCHAR(10),[pc_paydate], 1)AS[pc_paydate],CONVERT(VARCHAR(10),[pc_datedue], 1)AS[pc_datedue],CONVERT(VARCHAR(10),[pc_obtaininfo_datecompleted], 1)AS[pc_obtaininfo_datecompleted],[pc_missinginfo],[client_name],[client_id]FROM[v_payrollcheckstatus]WHERE([pc_delivery_completedby]IS NULL)
+AND([pc_datedue]< DATEADD(day, 14, GETDATE())OR [pc_datedue]> GETDATE()OR [pc_datedue]IS NULL)
+AND([pc_delivery_completedby]IS NULL AND [pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR	[pc_delivery_completedby]IS NOT NULL AND [pc_delivery_datecompleted]IS NULL AND [pc_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR	[pc_delivery_datecompleted]IS NOT NULL AND [pc_review_datecompleted]IS NULL AND [pc_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR	[pc_review_datecompleted]IS NOT NULL AND [pc_assembly_datecompleted]IS NULL AND [pc_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+OR	[pc_assembly_datecompleted]IS NOT NULL AND [pc_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 )
 
-ORDER BY[pc_datedue]
-</cfquery>
+ORDER BY[pc_datedue]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -81,32 +68,19 @@ ORDER BY[pc_datedue]
 <cfcase value="group1_2">
 <cfoutput>
 <cfquery datasource="AWS" name="fquery">
-SELECT[pt_id]
-,[pt_year]
-,[pt_month]
-,[pt_type]
-,[pt_paid]
-,CONVERT(VARCHAR(10),[pt_lastpay], 1)AS[pt_lastpay]
-,CONVERT(VARCHAR(10),[pt_duedate], 1)AS[pt_duedate]
-,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 1)AS[pt_delivery_datecompleted]
-,[client_name]
-,[client_id]
-,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
+SELECT[pt_id],[pt_year],[pt_month],[pt_type],[pt_paid],CONVERT(VARCHAR(10),[pt_lastpay], 1)AS[pt_lastpay],CONVERT(VARCHAR(10),[pt_duedate], 1)AS[pt_duedate],CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 1)AS[pt_delivery_datecompleted],[client_name],[client_id],[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 
-FROM[v_payrolltaxes]
+FROM[v_payrolltaxes]WHERE( [pt_delivery_datecompleted]IS NULL )
+AND([pt_duedate]< DATEADD(day, 14, GETDATE())OR [pt_duedate]> GETDATE()OR [pt_duedate]IS NULL)
+AND([pt_obtaininfo_datecompleted]IS NULL AND [pt_delivery_datecompleted]IS NULL AND[pt_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
+OR([pt_obtaininfo_datecompleted]IS NOT NULL AND [pt_entry_datecompleted]IS NULL AND[pt_rec_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
+OR([pt_entry_datecompleted]IS NOT NULL AND [pt_rec_datecompleted]IS NULL AND [pt_rec_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
+OR([pt_rec_datecompleted]IS NOT NULL AND [pt_review_datecompleted]IS NULL AND [pt_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>) 
+OR([pt_review_datecompleted]IS NOT NULL AND [pt_assembly_datecompleted]IS NULL AND [pt_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
+OR([pt_assembly_datecompleted]IS NOT NULL AND [pt_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)  
 
-WHERE  ( [pt_delivery_datecompleted] IS NULL )
-AND([pt_duedate] < DATEADD(day, 14, GETDATE())OR [pt_duedate] > GETDATE()OR [pt_duedate] IS NULL)
-AND([pt_obtaininfo_datecompleted] IS NULL AND [pt_delivery_datecompleted] IS NULL AND[pt_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
-OR ([pt_obtaininfo_datecompleted] IS NOT NULL AND [pt_entry_datecompleted] IS NULL AND[pt_rec_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
-OR ([pt_entry_datecompleted] IS NOT NULL AND [pt_rec_datecompleted] IS NULL AND [pt_rec_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
-OR ([pt_rec_datecompleted] IS NOT NULL AND [pt_review_datecompleted] IS NULL AND [pt_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>) 
-OR ([pt_review_datecompleted] IS NOT NULL AND [pt_assembly_datecompleted] IS NULL AND [pt_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
-OR ([pt_assembly_datecompleted] IS NOT NULL AND [pt_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)  
-
-ORDER BY[pt_duedate]
-</cfquery>
+ORDER BY[pt_duedate]</cfquery>
 </cfoutput>
 <cfset myResult="">
 <cfset queryResult="">
@@ -125,54 +99,35 @@ ORDER BY[pt_duedate]
 <cfcase value="group1_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[of_id]
-,[of_taxyear]
-,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
+SELECT[of_id],[of_taxyear],[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_taskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_task]=[optionvalue_id])
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
-,[of_state]
-,[of_task]
-,[of_form]
-
-
-,[of_status]
-,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
-,CONVERT(VARCHAR(10),[of_duedate], 1)AS[of_duedate]
-,[of_missinginfo]
-,[client_name]
-
-FROM[v_otherfilings]
-WHERE  (
-([of_status]<> <cfqueryparam value="2"/>  AND[of_status]<> <cfqueryparam value="3"/> OR [of_status]IS NULL)
+,[of_state],[of_task],[of_form],[of_status],[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
+,CONVERT(VARCHAR(10),[of_duedate], 1)AS[of_duedate],[of_missinginfo],[client_name]FROM[v_otherfilings]WHERE(([of_status]!= <cfqueryparam value="2"/>  AND[of_status]!= <cfqueryparam value="3"/> OR [of_status]IS NULL)
 AND[of_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 AND[of_obtaininfo_datecompleted]IS NULL)
 
-OR(
-([of_status]<> <cfqueryparam value="2"/>  AND  [of_status]<> <cfqueryparam value="3"/> OR [of_status] IS NULL)
-AND [of_preparation_assignedto] =<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [of_obtaininfo_datecompleted] IS NOT NULL 
-AND [of_preparation_datecompleted] IS NULL)
+OR(([of_status]!= <cfqueryparam value="2"/>  AND  [of_status]!= <cfqueryparam value="3"/> OR [of_status]IS NULL)
+AND [of_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [of_obtaininfo_datecompleted]IS NOT NULL 
+AND [of_preparation_datecompleted]IS NULL)
 
-OR ( 
-([of_status]<> <cfqueryparam value="2"/> AND  [of_status]<> <cfqueryparam value="3"/> OR [of_status] IS NULL)
-AND [of_review_assignedto] =<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [of_preparation_datecompleted]  IS NOT NULL 
+OR(([of_status]!= <cfqueryparam value="2"/> AND  [of_status]!= <cfqueryparam value="3"/> OR [of_status]IS NULL)
+AND [of_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [of_preparation_datecompleted]IS NOT NULL 
 AND [of_review_datecompleted]IS NULL)
 
-OR (
-([of_status]<> <cfqueryparam value="2"/> AND[of_status]<> <cfqueryparam value="3"/> OR [of_status] IS NULL)
-AND [of_assembly_assignedto] =<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [of_review_datecompleted] IS NOT NULL 
-AND [of_assembly_datecompleted] IS NULL)
+OR(([of_status]!= <cfqueryparam value="2"/> AND[of_status]!= <cfqueryparam value="3"/> OR [of_status]IS NULL)
+AND [of_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [of_review_datecompleted]IS NOT NULL 
+AND [of_assembly_datecompleted]IS NULL)
 
-OR (
-([of_status]<> <cfqueryparam value="2"/>  AND [of_status]<> <cfqueryparam value="3"/> OR [of_status] IS NULL )
-AND [of_delivery_assignedto] =<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [of_assembly_datecompleted] IS NOT NULL
-AND [of_delivery_datecompleted] IS NULL)
+OR(([of_status]!= <cfqueryparam value="2"/>  AND [of_status]!= <cfqueryparam value="3"/> OR [of_status]IS NULL )
+AND [of_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [of_assembly_datecompleted]IS NOT NULL
+AND [of_delivery_datecompleted]IS NULL)
 
-ORDER BY[of_duedate]
-</cfquery>
+ORDER BY[of_duedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -195,20 +150,10 @@ ORDER BY[of_duedate]
 <cfcase value="group2_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[bf_id]
-,[client_id]
-,[client_name]
-,[bf_activity]
-,[bf_status]
-,CONVERT(VARCHAR(10),[bf_duedate], 1)AS[bf_duedate]
-,[bf_fees]
-,[bf_paid]
-,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
-FROM[v_businessformation]
-WHERE[bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND ([bf_status] !=3 OR [bf_status] !=6 )
-ORDER BY[bf_duedate]
-</cfquery>
+SELECT[bf_id],[client_id],[client_name],[bf_activity],[bf_status],CONVERT(VARCHAR(10),[bf_duedate], 1)AS[bf_duedate],[bf_fees],[bf_paid],[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
+FROM[v_businessformation]WHERE[bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND([bf_status]!=3 OR [bf_status]!=6 )
+ORDER BY[bf_duedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -231,21 +176,13 @@ ORDER BY[bf_duedate]
 <cfcase value="group2_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[mc_id]
-,[client_id]
-,[client_name]
-,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
+SELECT[mc_id],[client_id],[client_name],[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
-,[mc_description]
-,[mc_status]
-,CONVERT(VARCHAR(10),[mc_duedate], 1)AS[mc_duedate]
-FROM[v_managementconsulting]
-WHERE[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+,[mc_description],[mc_status],CONVERT(VARCHAR(10),[mc_duedate], 1)AS[mc_duedate]FROM[v_managementconsulting]WHERE[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR [mcs_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> 
-AND ([mc_status] !=2 OR [mc_status] !=5)
+AND([mc_status]!=2 OR [mc_status]!=5)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[mc_duedate]
-</cfquery>
+ORDER BY[mc_duedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -267,36 +204,48 @@ ORDER BY[mc_duedate]
 <cfcase value="group2_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[fds_id]
-,[client_id]
-,[client_name]
-,[fds_month]
-,[fds_year]
-,[fds_monthTEXT]
-,[fds_missinginfo]
-,CONVERT(VARCHAR(10),[fds_missinginforeceived], 1)AS[fds_missinginforeceived]
-,[fds_compilemi]
-,CONVERT(VARCHAR(10),[fds_cmireceived], 1)AS[fds_cmireceived]
-,CONVERT(VARCHAR(10),[fds_duedate], 1)AS[fds_duedate]
-FROM[v_financialDataStatus]
-WHERE([fds_acctrpt_datecompleted] IS NULL)
-AND(
- ([fds_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_obtaininfo_datecompleted] IS NULL )
-OR ([fds_sort_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_sort_datecompleted] IS NULL)
-OR ([fds_checks_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_checks_datecompleted] IS NULL)
-OR ([fds_sales_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_sales_datecompleted] IS NULL)
-OR ([fds_entry_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_entry_datecompleted] IS NULL)
-OR ([fds_reconcile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_reconcile_datecompleted] IS NULL)
-OR ([fds_compile_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_compile_datecompleted] IS NULL)
-OR ([fds_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_review_datecompleted] IS NULL)
-OR ([fds_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_assembly_datecompleted] IS NULL)
-OR ([fds_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  AND [fds_delivery_datecompleted] IS NULL)
-OR ([fds_acctrpt_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>  )
-)
-AND ([fds_status] !=2 OR [fds_status] !=5)
-<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[fds_duedate]
-</cfquery>
+SELECT[fds_id],[client_id],[client_name],[fds_month],[fds_year],[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+,[fds_missinginfo],CONVERT(VARCHAR(8),[fds_missinginforeceived], 1)AS[fds_missinginforeceived],[fds_compilemi],CONVERT(VARCHAR(8),[fds_cmireceived], 1)AS[fds_cmireceived],CONVERT(VARCHAR(8),[fds_duedate], 1)AS[fds_duedate]FROM[v_financialDataStatus]WHERE([fds_obtaininfo_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_obtaininfo_datecompleted]IS NULL
+AND[fds_delivery_datecompleted]IS NULL
+AND(fds_status != <cfqueryparam value="2"/> AND[fds_status]!= <cfqueryparam value="3"/> OR fds_status IS NULL))
+OR([fds_sort_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_obtaininfo_datecompleted]IS NOT NULL
+AND[fds_sort_datecompleted]IS NULL
+AND fds_delivery_datecompleted IS NULL)
+OR([fds_checks_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_sort_datecompleted]IS NOT NULL
+AND[fds_checks_assignedto]IS NULL
+AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_sales_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_checks_assignedto]IS NOT NULL
+AND[fds_sales_datecompleted]IS NULL
+AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_entry_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_sales_datecompleted]IS NOT NULL
+AND[fds_entry_datecompleted]IS NULL
+AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_reconcile_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_entry_datecompleted]IS NOT NULL
+AND[fds_reconcile_datecompleted]IS NULL
+AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_compile_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_reconcile_datecompleted]IS NOT NULL
+AND[fds_compile_datecompleted]IS NULL
+AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_review_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_compile_datecompleted]IS NOT NULL
+AND[fds_review_datecompleted]IS NULL
+AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_assembly_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_review_datecompleted]IS NOT NULL
+AND[fds_assembly_datecompleted]IS NULL
+AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_delivery_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>
+AND[fds_assembly_datecompleted]IS NOT NULL AND[fds_delivery_datecompleted]IS NULL)
+OR([fds_acctrpt_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/>AND[fds_review_datecompleted]IS NOT NULL)
+           
+ORDER BY[fds_duedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -319,24 +268,10 @@ ORDER BY[fds_duedate]
 <cfcase value="group3_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[nm_id]
-,[n_id]
-,[nm_name]
-,[n_1_taxyear]
-,[n_1_taxform]
-,[n_1_noticenumber]
-,[n_missinginfo]
-,[nm_status]
-,CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec]
-,CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate]
-,CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted]
-,[client_name]
-FROM[v_notice]
-WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND ([n_noticestatus] !=2 OR [n_noticestatus] !=5)
+SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND([n_noticestatus]!=2 OR [n_noticestatus]!=5)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[n_1_resduedate]
-</cfquery>
+ORDER BY[n_1_resduedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -359,24 +294,10 @@ ORDER BY[n_1_resduedate]
 <cfcase value="group3_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[nm_id]
-,[n_id]
-,[nm_name]
-,[n_1_taxyear]
-,[n_1_taxform]
-,[n_1_noticenumber]
-,[n_missinginfo]
-,[nm_status]
-,CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec]
-,CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate]
-,CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted]
-,[client_name]
-FROM[v_notice]
-WHERE[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND ([n_noticestatus] !=3 OR [n_noticestatus] !=6)
+SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]WHERE[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND([n_noticestatus]!=3 OR [n_noticestatus]!=6)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[n_1_resduedate]
-</cfquery>
+ORDER BY[n_1_resduedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -398,25 +319,12 @@ ORDER BY[n_1_resduedate]
 <cfcase value="group4_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[tr_id]
-,[client_id]
-,[client_name]
-,[tr_taxyear]
-,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_2_informationreceived]
-,[tr_priorfees]
-,CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment]
-,CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment]
-,CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived]
-,CONVERT(VARCHAR(10),[tr_duedate], 1)AS[tr_duedate]
-,CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]
-FROM[v_taxreturns]
-WHERE[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [tr_2_informationreceived] IS NOT NULL
+SELECT[tr_id],[client_id],[client_name],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_2_informationreceived],[tr_priorfees],CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment],CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment],CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived],CONVERT(VARCHAR(10),[tr_duedate], 1)AS[tr_duedate],CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]FROM[v_taxreturns]WHERE[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [tr_2_informationreceived]IS NOT NULL
 AND [tr_missinginfo]='0'
 AND [tr_notrequired]='0'
-AND [tr_2_completed] IS NULL
-AND [tr_2_reviewedwithnotes] IS NOT NULL
+AND [tr_2_completed]IS NULL
+AND [tr_2_reviewedwithnotes]IS NOT NULL
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_duedate]</cfif>
 </cfquery>
@@ -452,16 +360,8 @@ AND [tr_2_reviewedwithnotes] IS NOT NULL
 <cfcase value="group4_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[tr_id]
-,[tr_taxyear]
-,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_2_informationreceived]
-,CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived]
-,[client_name]
-,[client_id]
-FROM[v_taxreturns]
-WHERE [tr_missinginfo]='1'
-AND [tr_2_informationreceived] IS NOT NULL
+SELECT[tr_id],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_2_informationreceived],CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived],[client_name],[client_id]FROM[v_taxreturns]WHERE [tr_missinginfo]='1'
+AND [tr_2_informationreceived]IS NOT NULL
 AND [tr_notrequired]='0'
 AND [tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
@@ -496,26 +396,10 @@ AND [tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfcase value="group4_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[tr_id]
-,[client_id]
-,[client_name]
-,[tr_taxyear]
-,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_1_informationreceived]
-,CONVERT(VARCHAR(10),[tr_duedate], 1)AS[tr_duedate]
-,CONVERT(VARCHAR(10),[tr_2_readyforreview], 1)AS[tr_2_readyforreview]
-,CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment]
-,CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment]
-,[tr_missinginfo]
-,CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]
-,CONVERT(VARCHAR(10),[tr_2_completed], 1)AS[tr_2_completed]
-,CONVERT(VARCHAR(10),[tr_3_delivered], 1)AS[tr_3_delivered]
-,[tr_paid]
-FROM[v_taxreturns]
-WHERE[tr_2_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [tr_2_readyforreview] IS NOT NULL
-AND [tr_2_informationreceived] IS NOT NULL
-AND [tr_2_completed] IS NULL
+SELECT[tr_id],[client_id],[client_name],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_1_informationreceived],CONVERT(VARCHAR(10),[tr_duedate], 1)AS[tr_duedate],CONVERT(VARCHAR(10),[tr_2_readyforreview], 1)AS[tr_2_readyforreview],CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment],CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment],[tr_missinginfo],CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes],CONVERT(VARCHAR(10),[tr_2_completed], 1)AS[tr_2_completed],CONVERT(VARCHAR(10),[tr_3_delivered], 1)AS[tr_3_delivered],[tr_paid]FROM[v_taxreturns]WHERE[tr_2_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [tr_2_readyforreview]IS NOT NULL
+AND [tr_2_informationreceived]IS NOT NULL
+AND [tr_2_completed]IS NULL
 AND [tr_notrequired]='0'
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_duedate]</cfif>
@@ -555,25 +439,11 @@ AND [tr_notrequired]='0'
 <cfcase value="group4_4">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[tr_id]
-,[client_id]
-,[client_name]
-,[tr_taxyear]
-,[tr_taxform]
-,CONVERT(VARCHAR(10),[tr_2_completed], 1)AS[tr_2_completed]
-,[tr_currentfees]
-,CONVERT(VARCHAR(10),[tr_3_assemblereturn], 1)AS[tr_3_assemblereturn]
-,CONVERT(VARCHAR(10),[tr_3_contacted], 1)AS[tr_3_contacted]
-,CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment]
-,CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment]
-,CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived]
-,[tr_paid]
-FROM[v_taxreturns]
-WHERE[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [tr_2_informationreceived] IS NOT NULL
-AND [tr_2_completed] IS NOT NULL
+SELECT[tr_id],[client_id],[client_name],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(10),[tr_2_completed], 1)AS[tr_2_completed],[tr_currentfees],CONVERT(VARCHAR(10),[tr_3_assemblereturn], 1)AS[tr_3_assemblereturn],CONVERT(VARCHAR(10),[tr_3_contacted], 1)AS[tr_3_contacted],CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment],CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment],CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived],[tr_paid]FROM[v_taxreturns]WHERE[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [tr_2_informationreceived]IS NOT NULL
+AND [tr_2_completed]IS NOT NULL
 AND [tr_notrequired]='0'
-AND [tr_3_delivered] IS NULL
+AND [tr_3_delivered]IS NULL
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_duedate]</cfif>
 </cfquery>
@@ -609,20 +479,9 @@ AND [tr_3_delivered] IS NULL
 <cfcase value="group4_5">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[trst_id]
-,[tr_id]
-,[client_name]
-,[tr_taxyear]
-,[tr_taxform]
-,[trst_state]
-,CONVERT(VARCHAR(10),[trst_1_informationreceived], 1)AS[trst_1_informationreceived]
-,CONVERT(VARCHAR(10),[trst_1_duedate], 1)AS[trst_1_duedate]
-,CONVERT(VARCHAR(10),[trst_1_missinginforeceived], 1)AS[trst_1_missinginforeceived]
-,CONVERT(VARCHAR(10),[trst_1_readyforreview], 1)AS[trst_1_readyforreview]
-FROM[v_TAXRETURNS_STATE]
-WHERE [trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+SELECT[trst_id],[tr_id],[client_name],[tr_taxyear],[tr_taxform],[trst_state],CONVERT(VARCHAR(10),[trst_1_informationreceived], 1)AS[trst_1_informationreceived],CONVERT(VARCHAR(10),[trst_1_duedate], 1)AS[trst_1_duedate],CONVERT(VARCHAR(10),[trst_1_missinginforeceived], 1)AS[trst_1_missinginforeceived],CONVERT(VARCHAR(10),[trst_1_readyforreview], 1)AS[trst_1_readyforreview]FROM[v_TAXRETURNS_STATE]WHERE [trst_reviewassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR [trst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND ([trst_status] != '2' OR [trst_status] != '5')
+AND([trst_status]!= '2' OR [trst_status]!= '5')
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[tr_duedate]</cfif>
 </cfquery>
@@ -655,18 +514,8 @@ AND ([trst_status] != '2' OR [trst_status] != '5')
 <cfcase value="group4_6">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[ftp_id]
-,[client_name]
-,[client_id]
-,[ftp_category]
-,CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice]
-,CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate]
-,CONVERT(VARCHAR(10),[ftp_inforeceived], 1)AS[ftp_inforeceived]
-,[ftp_missinginfo]
-,[ftp_status]
-FROM[v_financialtaxplanning]
-WHERE[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
-AND [ftp_status] != '2'
+SELECT[ftp_id],[client_name],[client_id],[ftp_category],CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice],CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate],CONVERT(VARCHAR(10),[ftp_inforeceived], 1)AS[ftp_inforeceived],[ftp_missinginfo],[ftp_status]FROM[v_financialtaxplanning]WHERE[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+AND [ftp_status]!= '2'
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -692,15 +541,7 @@ AND [ftp_status] != '2'
 <cfcase value="group5_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT [cas_id]
-,[client_id]
-,[client_name]
-,CONVERT(VARCHAR(10),[cas_duedate], 1)AS[cas_duedate]
-,[cas_priority]
-,[cas_status]
-,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
-FROM[v_clientadministrativetasks]
-WHERE[cas_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+SELECT [cas_id],[client_id],[client_name],CONVERT(VARCHAR(10),[cas_duedate], 1)AS[cas_duedate],[cas_priority],[cas_status],CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc]END AS[cas_taskdesc]FROM[v_clientadministrativetasks]WHERE[cas_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfquery>
 <cfset myResult="">
@@ -731,22 +572,7 @@ WHERE[cas_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 <cfcase value="group5_2">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[co_id]
-,[client_name]
-,[client_id]
-,[co_caller]
-,[co_credithold]
-,[co_fees]
-,[co_paid]
-,CONVERT(CHAR(10),[co_date], 1)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
-,[co_telephone]
-,[co_ext]
-,[co_emailaddress]
-,[co_responseneeded]
-,[co_returncall]
-,[co_briefmessage]
-FROM[v_communications]
-WHERE[co_for]=<cfqueryparam value="#ARGUMENTS.userid#"/>
+SELECT[co_id],[client_name],[client_id],[co_caller],[co_credithold],[co_fees],[co_paid],CONVERT(CHAR(10),[co_date], 1)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date],[co_telephone],[co_ext],[co_emailaddress],[co_responseneeded],[co_returncall],[co_briefmessage]FROM[v_communications]WHERE[co_for]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 And[co_completed]='0'
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -786,22 +612,9 @@ And[co_completed]='0'
 <cfcase value="group5_3">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[dt_id]
-,[dt_sender]
-,CASE WHEN LEN([dt_description]) >= 101 THEN SUBSTRING([dt_description],0,100) +  '...' ELSE [dt_description] END AS[dt_description]
-,CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing] END AS[dt_routing]
-,CONVERT(VARCHAR(10),[dt_date], 1)AS[dt_date]
-,[dt_delivery]
-,[dt_staffTEXT]
-,[client_name]
-,[client_id]
-,STUFF((SELECT','+[si_initials] 
-FROM[v_staffinitials] 
-WHERE(','+[v_documenttracking].[dt_assignedto]
-LIKE'%,'+CONVERT(VARCHAR(12),[user_id])+'%'  )
+SELECT[dt_id],[dt_sender],CASE WHEN LEN([dt_description]) >= 101 THEN SUBSTRING([dt_description],0,100) +  '...' ELSE [dt_description]END AS[dt_description],CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing]END AS[dt_routing],CONVERT(VARCHAR(10),[dt_date], 1)AS[dt_date],[dt_delivery],[dt_staffTEXT],[client_name],[client_id],STUFF((SELECT','+[si_initials]FROM[v_staffinitials]WHERE(','+[v_documenttracking].[dt_assignedto]LIKE'%,'+CONVERT(VARCHAR(12),[user_id])+'%'  )
 FOR XML PATH('')),1,1,'') AS 'dt_assignedtoTEXT' 
-FROM[v_documenttracking]
-WHERE(','+[dt_assignedto]LIKE'%,'+CONVERT(VARCHAR(12),<cfqueryparam value="#ARGUMENTS.userid#"/>)+'%')
+FROM[v_documenttracking]WHERE(','+[dt_assignedto]LIKE'%,'+CONVERT(VARCHAR(12),<cfqueryparam value="#ARGUMENTS.userid#"/>)+'%')
 
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
