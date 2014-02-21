@@ -481,7 +481,7 @@ ORDER BY[tr_duedate]
 <cftry>
 <cfquery datasource="AWS" name="fquery">
 SELECT[ftp_id],[client_name],[client_id],[ftp_category],CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice],CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate],CONVERT(VARCHAR(10),[ftp_inforeceived], 1)AS[ftp_inforeceived],[ftp_missinginfo],[ftp_status]
-,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+,ftp_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[ftp_taxform]=[optionvalue_id])
 FROM[v_financialtaxplanning]
 WHERE[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 AND [ftp_status]!= '2'
