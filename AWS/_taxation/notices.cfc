@@ -191,6 +191,8 @@ SELECT[nm_id]
 ,[n_1_noticenumber]
 ,[n_1_taxform]
 ,[n_1_taxyear]
+,[n_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[n_1_taxform]=[optionvalue_id])
+
 ,CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate]
 ,[n_noticestatusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_noticestatus]=[optionvalue_id])
 FROM[v_notice]
@@ -205,7 +207,7 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <c
 								,"NM_NAME":"'&NM_NAME&'"
 								,"N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"
 								,"N_NOTICESTATUSTEXT":"'&N_NOTICESTATUSTEXT&'"
-								,"N_1_TAXFORM":"'&N_1_TAXFORM&'"
+								,"N_1_TAXFORMTEXT":"'&N_1_TAXFORMTEXT&'"
 								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
 								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
 								,"N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'"

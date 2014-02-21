@@ -98,7 +98,7 @@ tr{vertical-align:top;}
 #largeMenu h1 a{ font-size: 14px;}
 #largeMenu li{list-style-type:none;background-color:#FFF;color:#069;}
 #largeMenu li:hover{background-color:#efefef;}
-#largeMenu li a{display:block;overflow:hidden;padding:9px 52px 9px 13px;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;	cursor:pointer;}
+#largeMenu li a{display:block;overflow:hidden;  padding: 10px 52px 11px 13px;text-decoration:none;text-overflow:ellipsis;white-space:nowrap;	cursor:pointer;}
 #largeMenu li a:hover{color:#999;}
 #largeMenu .smallMenuIcon li{display:inline-block;}
 

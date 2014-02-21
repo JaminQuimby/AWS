@@ -55,9 +55,9 @@ var grid1_config = [
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
 			,PC_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,PC_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'1%'}
-			,PC_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'1%'}
-			,PC_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'1%'}
+			,PC_OBTAININFO:{title:'Information Received',width:'1%'}
+			,PC_ASSEMBLY:{title:'Assembled',width:'1%'}
+			,PC_DELIVERY:{title:'Delivered',width:'1%'}
 			,PC_FEES:{title:'Fees'}
 			,PC_PAIDTEXT:{title:'Payment Status'}
 			},

@@ -27,8 +27,7 @@ var grid1_config = [
 ,{"n":"statelabel4","t":"text","v":""}
 ,{"n":"trade_name","t":"text","v":""}
 ,{"n":"type","t":"numeric","v":""}
-
-];$.each(grid1_config, function(idx, obj) {$('#group0 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
+];$.each(grid1_config, function(idx, obj) {$('#group1 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
  
 	_jGrid({
 	"grid":"grid1",

@@ -3,13 +3,13 @@
 <file name="financialtaxplanning.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371385925867435" remote="130371386070000000" />
 <file name="financialtaxplanning.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130371719551421964" remote="130371719620000000" />
 <file name="financialtaxplanning.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371284876597747" remote="130371364090000000" />
-<file name="notices.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371424159584278" remote="130371424240000000" />
-<file name="notices.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130371727751400976" remote="130371727820000000" />
-<file name="notices.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371345090691797" remote="130371345160000000" />
+<file name="notices.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130374263913008157" remote="130374264010000000" />
+<file name="notices.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130374254163670527" remote="130374254290000000" />
+<file name="notices.js" server="https://ftp.awensa.com/MS/MS0213/" local="130374263996692944" remote="130374264090000000" />
 <file name="powerofattorney.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371392572117579" remote="130371392670000000" />
 <file name="powerofattorney.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130371726903312468" remote="130371726990000000" />
 <file name="powerofattorney.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371294304436989" remote="130371364040000000" />
 <file name="taxreturns.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371344939763164" remote="130371345010000000" />
 <file name="taxreturns.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130371728682164212" remote="130371728780000000" />
-<file name="taxreturns.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371424346174951" remote="130371424420000000" />
+<file name="taxreturns.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130373918050007835" remote="130373918170000000" />
 </dwsync>

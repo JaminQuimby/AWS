@@ -21,8 +21,11 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(8),[tr_2_informationreceived], 1)AS[tr_2_informationreceived]
 ,[tr_2_assignedtoTEXT]
 ,[tr_priorfees]
-,CONVERT(VARCHAR(8),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment]
-,CONVERT(VARCHAR(8),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment]
+
+,CONVERT(VARCHAR(8),tr_1_dropoffappointment, 1) + '<br />' + CONVERT(VARCHAR(5),tr_1_dropoffappointmentwithTEXT) AS [dropoffappointment]
+,CONVERT(VARCHAR(8),tr_1_pickupappointment, 1) + '<br />' + CONVERT(VARCHAR(5),tr_1_pickupappointmentwithTEXT) AS [pickupappointment]
+
+
 ,[tr_missinginfo]
 ,CONVERT(VARCHAR(8),[tr_missinginforeceived], 1)AS[tr_missinginforeceived]
 ,CONVERT(VARCHAR(8),[tr_duedate], 1)AS[tr_duedate]
@@ -32,7 +35,7 @@ SELECT[tr_id]
 ,[tr_3_missingsignatures]
 ,CONVERT(VARCHAR(8),[tr_3_assemblereturn], 1)AS[tr_3_assemblereturn]
 ,CONVERT(VARCHAR(8),[tr_3_contacted], 1)AS[tr_3_contacted]
-,[tr_2_preparedby]
+,[tr_2_preparedby],[tr_2_preparedbyTEXT]
 ,CONVERT(VARCHAR(8),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]
 ,CONVERT(VARCHAR(8),[tr_2_completed], 1)AS[tr_2_completed]
 ,CONVERT(VARCHAR(8),[tr_3_delivered], 1)AS[tr_3_delivered]
@@ -45,7 +48,6 @@ SELECT[tr_id]
 ,[tr_4_currentfees]
 ,[tr_currentfees]
 ,[tr_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[tr_paid]=[optionvalue_id])
-,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[client_type]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_taxreturns]
@@ -99,14 +101,17 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
 								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
-								,"TR_1_DROPOFFAPPOINTMENT":"'&TR_1_DROPOFFAPPOINTMENT&'"
-								,"TR_1_PICKUPAPPOINTMENT":"'&TR_1_PICKUPAPPOINTMENT&'"
+								
+								
+								,"DROPOFFAPPOINTMENT":"'&DROPOFFAPPOINTMENT&'"
+								,"PICKUPAPPOINTMENT":"'&PICKUPAPPOINTMENT&'"
+								
+								
 								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
 								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
 								,"TR_DUEDATE":"'&TR_DUEDATE&'"
@@ -116,7 +121,9 @@ WHERE(1)=(1)
 								,"TR_3_MISSINGSIGNATURES":"'&TR_3_MISSINGSIGNATURES&'"
 								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"
 								,"TR_3_CONTACTED":"'&TR_3_CONTACTED&'"
-								,"TR_2_PREPAREDBY":"'&TR_2_PREPAREDBY&'"
+								
+								,"TR_2_PREPAREDBYTEXT":"'&TR_2_PREPAREDBYTEXT&'"
+								
 								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
 								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"

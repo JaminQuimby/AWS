@@ -26,9 +26,9 @@ SELECT
 ,CONVERT(VARCHAR(8),[pc_paydate], 1)AS[pc_paydate] 
 ,CONVERT(VARCHAR(8),[pc_datedue], 1)AS[pc_datedue]
 ,[pc_missinginfo] 
-,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1)AS[pc_obtaininfo_datecompleted]
-,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1)AS[pc_assembly_datecompleted]
-,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1)AS[pc_delivery_datecompleted]
+,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
+,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
+,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
 ,[pc_fees]
 ,[pc_paid]
 ,[pc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pc_paid]=[optionvalue_id])
@@ -91,9 +91,9 @@ WHERE(1)=(1)
 								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
-								,"PC_OBTAININFO_DATECOMPLETED":"'&PC_OBTAININFO_DATECOMPLETED&'"
-								,"PC_ASSEMBLY_DATECOMPLETED":"'&PC_ASSEMBLY_DATECOMPLETED&'"
-								,"PC_DELIVERY_DATECOMPLETED":"'&PC_DELIVERY_DATECOMPLETED&'"
+								,"PC_OBTAININFO":"'&PC_OBTAININFO&'"
+								,"PC_ASSEMBLY":"'&PC_ASSEMBLY&'"
+								,"PC_DELIVERY":"'&PC_DELIVERY&'"
 								,"PC_FEES":"'&PC_FEES&'"
 								,"PC_PAIDTEXT":"'&PC_PAIDTEXT&'"
 								}'>

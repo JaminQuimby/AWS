@@ -70,6 +70,7 @@ $("#g1_status").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
 '"]]}'
+
 _saveData({"group":"group1","payload":$.parseJSON(json),page:"administrativetasks"});
 break;
 /*Start Saving Plugins*/

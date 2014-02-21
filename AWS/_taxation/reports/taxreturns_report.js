@@ -69,14 +69,13 @@ var grid1_config = [
 	"title":"Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_TYPETEXT:{title:'Client Type'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
 			,TR_TAXFORMTEXT:{title:'Form'}
 			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
 			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			,TR_PRIORFEES:{title:'Prior Fees'}
-			,TR_1_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
-			,TR_1_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
+			,DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
+			,PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
 			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,TR_DUEDATE:{title:'Due Date',width:'1%'}
@@ -86,7 +85,7 @@ var grid1_config = [
 			,TR_3_MISSINGSIGNATURES:{title:'Missing Signatures',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
 			,TR_3_CONTACTED:{title:'Contacted',width:'1%'}
-			,TR_2_PREPAREDBY:{title:'Prepared By',width:'1%'}
+			,TR_2_PREPAREDBYTEXT:{title:'Prepared By',width:'1%'}
 			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}
 			,TR_3_DELIVERED:{title:'Delivered',width:'1%'}

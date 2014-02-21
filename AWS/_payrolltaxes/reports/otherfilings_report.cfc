@@ -67,13 +67,13 @@ SELECT[of_id]
 ,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 ,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
-,CONVERT(VARCHAR(8),[of_obtaininfo_datecompleted], 1)AS[of_obtaininfo_datecompleted]
 ,[of_missinginfo]
-,CONVERT(VARCHAR(8),[of_missinginforeceived], 1)AS[of_missinginforeceived]      
-,CONVERT(VARCHAR(8),[of_preparation_datecompleted], 1)AS[of_preparation_datecompleted]
-,CONVERT(VARCHAR(8),[of_review_datecompleted], 1)AS[of_review_datecompleted]
-,CONVERT(VARCHAR(8),[of_assembly_datecompleted], 1)AS[of_assembly_datecompleted]
-,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1)AS[of_delivery_datecompleted]
+,CONVERT(VARCHAR(8),[of_missinginforeceived], 1)AS[of_missinginforeceived]
+,CONVERT(VARCHAR(8),of_obtaininfo_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),of_obtaininfo_assignedtoTEXT) AS [of_obtaininfo]
+,CONVERT(VARCHAR(8),of_preparation_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),of_preparation_assignedtoTEXT) AS [of_preparation]
+,CONVERT(VARCHAR(8),[of_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_review_assignedtoTEXT) AS [of_review]
+,CONVERT(VARCHAR(8),[of_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_assembly_assignedtoTEXT) AS [of_assembly]
+,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_delivery_assignedtoTEXT) AS [of_delivery]
 ,[of_fees]
 ,[of_esttime]
 ,[client_name]
@@ -134,13 +134,13 @@ WHERE(1)=(1)
 								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
 								,"OF_STATETEXT":"'&OF_STATETEXT&'"
 								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
-								,"OF_OBTAININFO_DATECOMPLETED":"'&OF_OBTAININFO_DATECOMPLETED&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
 								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"
-								,"OF_PREPARATION_DATECOMPLETED":"'&OF_PREPARATION_DATECOMPLETED&'"
-								,"OF_REVIEW_DATECOMPLETED":"'&OF_REVIEW_DATECOMPLETED&'"
-								,"OF_ASSEMBLY_DATECOMPLETED":"'&OF_ASSEMBLY_DATECOMPLETED&'"
-								,"OF_DELIVERY_DATECOMPLETED":"'&OF_DELIVERY_DATECOMPLETED&'"
+								,"OF_OBTAININFO":"'&OF_OBTAININFO&'"
+								,"OF_PREPARATION":"'&OF_PREPARATION&'"
+								,"OF_REVIEW":"'&OF_REVIEW&'"
+								,"OF_ASSEMBLY":"'&OF_ASSEMBLY&'"
+								,"OF_DELIVERY":"'&OF_DELIVERY&'"
 								,"OF_FEES":"'&OF_FEES&'"
 								,"OF_ESTTIME":"'&OF_ESTTIME&'"
 								,"OF_PAIDTEXT":"'&OF_PAIDTEXT&'"
