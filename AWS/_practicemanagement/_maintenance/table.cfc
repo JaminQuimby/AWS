@@ -14,14 +14,16 @@
 SELECT[selectName_id],[selectLabel],[selectDescription]
 FROM[ctrl_selectnames]
 WHERE[selectName_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+ORDER BY[selectLabel]
 </cfquery>
 </cfcase>
 <!--- Load Group2--->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[select_id],[optionName],[optionDescription],[optionGroup],[option_1],[option_2],[option_3],[option_4]
+SELECT[select_id],[optionName],[optionDescription],[optionGroup],[optionHide],[option_1],[option_2],[option_3],[option_4]
 FROM[ctrl_selectoptions]
 WHERE[select_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+ORDER BY [optionName]
 </cfquery>
 </cfcase>
 </cfswitch>
@@ -42,6 +44,7 @@ WHERE[select_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[selectName_id],[selectName],[selectLabel],[selectDescription],[selectUsedIn],[form_id]
 FROM[ctrl_selectnames]
 WHERE[selectName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+ORDER BY[selectName]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -57,16 +60,19 @@ WHERE[selectName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!---  LOOKUP GROUP2 --->
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
-SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroupTEXT]
+SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription]
+,[optionGroupTEXT]=(SELECT TOP(1)[formName]FROM[ctrl_forms]WHERE[form_id]=[optionGroup])
+,[optionHideTEXT]=(SELECT TOP(1)[formName]FROM[ctrl_forms]WHERE[form_id]=[optionHide])
 FROM[v_selectoptions]
 WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
+ORDER BY[optionName]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"SELECT_ID":"'&SELECT_ID&'","OPTIONNAME":"'&OPTIONNAME&'","OPTIONGROUPTEXT":"'&OPTIONGROUPTEXT&'","OPTIONDESCRIPTION":"'&OPTIONDESCRIPTION&'"}'>
+<cfset queryResult=queryResult&'{"SELECT_ID":"'&SELECT_ID&'","OPTIONNAME":"'&OPTIONNAME&'","OPTIONGROUPTEXT":"'&OPTIONGROUPTEXT&'","OPTIONHIDETEXT":"'&OPTIONHIDETEXT&'","OPTIONDESCRIPTION":"'&OPTIONDESCRIPTION&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -91,7 +97,7 @@ WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT COUNT(*)+1 AS [OPTIONCOUNT]FROM[ctrl_selectoptions]WHERE[selectName_id]=<cfqueryparam value=" #j.DATA[1][2]#"/>
 </cfquery>
 <cfquery name="fquery" datasource="AWS">
-INSERT INTO[ctrl_selectoptions]([selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroup],[option_1],[option_2],[option_3],[option_4])
+INSERT INTO[ctrl_selectoptions]([selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroup],[optionHide],[option_1],[option_2],[option_3],[option_4])
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,#pquery.OPTIONCOUNT#
@@ -102,6 +108,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[select_id]
 </cfquery>
@@ -112,7 +119,21 @@ SELECT SCOPE_IDENTITY()AS[select_id]
 </cfcatch>
 </cftry>
 </cfif>
+<!---4
 
+$("#subtask1_id").val()+'","'+
+$("#task_id").val()+'","'+
+'ROWCOUNT'+'","'+
+$("#g2_optionName").val()+'","'+
+$("#g2_optionDescription").val()+'","'+
+$("#g2_optionGroup").val()+'","'+
+
+(($("#task_id").val() == '10' )?
+$("#opt_State").val()+'","'+
+$("#opt_FilingDeadline").val()+'","'+
+$("#opt_ExtensionDeadline").val()+'","'
+:one=1)+
+--->
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
@@ -120,10 +141,11 @@ UPDATE[ctrl_selectoptions]
 SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[optionGroup]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[option_1]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[option_2]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[option_3]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[option_4]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[optionHide]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+<cfif isDefined(j.DATA[1][8])>,[option_1]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/></cfif>
+<cfif isDefined(j.DATA[1][9])>,[option_2]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/></cfif>
+<cfif isDefined(j.DATA[1][10])>,[option_3]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/></cfif>
+<cfif isDefined(j.DATA[1][11])>,[option_4]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/></cfif>
 WHERE[select_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

@@ -23,7 +23,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"table.cfc",
 	"title":"Select Options",
-	"fields":{SELECT_ID:{key:true,list:false,edit:false},OPTIONNAME:{title:'Option Name'},OPTIONGROUPTEXT:{title:'Option Group'},OPTIONDESCRIPTION:{title:'Option Description'}},
+	"fields":{SELECT_ID:{key:true,list:false,edit:false},OPTIONNAME:{title:'Option Name'},OPTIONGROUPTEXT:{title:'Form Specific'},OPTIONHIDETEXT:{title:'Hide From'},OPTIONDESCRIPTION:{title:'Option Description'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$(".trackers #subtask1_id").val(record.SELECT_ID);_loadData({"id":"subtask1_id","group":"group2","page":"table"});$("#group2").accordion({active:1});'
@@ -36,7 +36,7 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request w
 else{
 switch(query.COLUMNS[0]){
 /*Group1*/case "SELECTNAME_ID":var list='task_id,g1_selectLabel,g1_selectDescription';_loadit({"query":query,"list":list,"page":"table"});break;
-/*Group2*/case "SELECT_ID":var list='subtask1_id,g2_optionName,g2_optionDescription,g2_optionGroup';
+/*Group2*/case "SELECT_ID":var list='subtask1_id,g2_optionName,g2_optionDescription,g2_optionGroup,g2_optionHide';
 //Load Options
 //Other Filing Types
 if($("#task_id").val() == '10'){
@@ -60,15 +60,17 @@ $("#task_id").val()+'","'+
 $("#g2_optionName").val()+'","'+
 $("#g2_optionDescription").val()+'","'+
 $("#g2_optionGroup").val()+'","'+
+$("#g2_optionHide").val()+'","'+
 
-//Save Options
-//Other Filing Types
 (($("#task_id").val() == '10' )?
 $("#opt_State").val()+'","'+
 $("#opt_FilingDeadline").val()+'","'+
 $("#opt_ExtensionDeadline").val()+'","'
 :one=1)+
 
+'","'+
+'","'+
+'","'+
 '"]]}'
 _saveData({group:"group1",payload:$.parseJSON(json),page:"table"});
 break;

@@ -50,6 +50,8 @@
 <h4 onClick='$("#isLoaded_group2").val(1);'>Option</h4>
 <div>
 <div><label for="g2_optionGroup">Form Specific</label><select id="g2_optionGroup"></option><option value="0">&nbsp;</option><cfoutput query="optionGroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_optionHide">Hide On</label><select id="g2_optionHide"></option><option value="0">&nbsp;</option><cfoutput query="optionGroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+
 <div><label for="g2_optionName">Option Name</label><input type="text" id="g2_optionName"></div>
 <!--- OPTIONS --->
 <!--- Other Filings --->
