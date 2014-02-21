@@ -8,11 +8,26 @@
 <cfset page.menuLeft="Payroll & Taxes,Accounting Services,Notices,Taxation,Client Management">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
+
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="/assets/inc/header.cfm">
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 
+<cfif URL.task_id gt 0>
+<cfoutput>
+<script>
+
+$(document).ready(function(){
+$('##task_id').val('#URL.task_id#');
+_toggle("group1,largeMenu");
+_hide("entrance");$("##content").removeClass();
+$("##content").addClass("contentbig");
+_group1();
+})
+</script>
+</cfoutput>
+</cfif>
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -34,7 +49,7 @@
 <div id="group1" class="gf-checkbox">
 <!--- GROUP 1 SUB 1 PAYROLL CHECKS --->
 	<h4 onClick='_grid1_1();'>Payroll Checks</h4>
-	<div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
+	<div><div style="float:right; display:block;"></div>
 		<div class="tblGrid" id="grid1_1"></div>
 		<div class="buttonbox">
 			</div>
