@@ -69,7 +69,7 @@ due date for response
 <div id="group1" class="gf-checkbox">
 <h3>Add Notice Matter</h3>
 <div><div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Clients</label><select id="client_id"  disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id"  disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
 <div><label for="g1_mattername"><i class="fa fa-lock link" onClick="_schk('g1_mattername')"></i> Matter Name</label><input type="text" id="g1_mattername" disabled="disabled"> </div>
 <div><label for="g1_matterstatus"><i class="fa fa-lock link" onClick="_schk('g1_matterstatus')"></i> Matter Status</label><select id="g1_matterstatus" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
