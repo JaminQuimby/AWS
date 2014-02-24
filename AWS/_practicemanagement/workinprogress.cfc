@@ -41,6 +41,85 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="userid" type="string" required="no">
 
 <cfswitch expression="#ARGUMENTS.loadType#">
+<!--- TOTAL TIME --->
+<cfcase value="group1">
+<cfquery datasource="AWS" name="aquery">
+SELECT'Administrative Tasks'AS[name],SUM(cas_esttime)AS[total_time],'1'AS[orderit]
+FROM[clientadministrativetasks]
+WHERE[cas_status]!='2'AND([cas_duedate]IS NULL /*AND[cas_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT'Business Formation'AS[name],SUM(bf_esttime)AS[total_time],'1'AS[orderit]
+FROM[businessformation]
+WHERE[bf_status]!='2'
+
+UNION
+SELECT'Financial & Tax Planning'AS[name],SUM(ftp_esttime)AS[total_time],'1'AS[orderit]
+FROM[financialtaxplanning]
+WHERE[ftp_status]!='2'AND([ftp_duedate]IS NULL /*AND[ftp_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT'Financial Statements'AS[name],SUM(fds_esttime)AS[total_time],'1'AS[orderit]
+FROM[financialdatastatus] 
+WHERE[fds_status]!='2'AND([fds_duedate]IS NULL /*AND[fds_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT 'Accounting and Consulting'AS[name], SUM(mc_esttime)AS[total_time],'1'AS[orderit]
+FROM  [managementconsulting]
+WHERE[mc_status]!='2'AND([mc_duedate]IS NULL /*AND[mc_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT'Notices'AS[name], SUM(n_esttime)AS[total_time],'1'AS[orderit]
+FROM[notice]
+WHERE[n_status]!='2'AND([n_1_resduedate]IS NULL /*AND[n_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT'Other Filings'AS[name], SUM(of_esttime)AS[total_time],'1'AS[orderit]
+FROM[otherfilings]
+WHERE[of_status]!='2'AND([of_duedate]IS NULL /*AND[of_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT'Payroll Checks'AS[name], SUM(pc_esttime)AS[total_time],'1'AS[orderit]
+FROM[payrollcheckstatus]
+WHERE[pc_delivery_completedby]IS NOT NULL AND([pc_datedue]IS NULL /*AND[pc_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT'Payroll Taxes'AS[name], SUM(pt_esttime)AS[total_time],'1'AS[orderit]
+FROM[payrolltaxes] 
+WHERE[pt_delivery_datecompleted]IS NOT NULL AND([pt_duedate]IS NULL /*AND[pt_duedate] GT FORM ELEMENT*/)
+
+UNION
+SELECT'Tax Returns'AS[name], SUM(tr_esttime)AS[total_time],'1'AS[orderit]
+FROM[taxreturns]
+WHERE[tr_2_informationreceived]IS NOT NULL AND([tr_duedate]IS NULL /*AND[tr_duedate] GT FORM ELEMENT*/)
+</cfquery>
+
+<cfquery dbtype="query" name="fquery">
+SELECT[name],[total_time],[orderit]FROM[aquery]
+UNION
+SELECT'<b style=''font-weight: bold;''>Total</b>'AS[name], SUM(total_time)AS[total_time],'2'AS[orderit]
+FROM[aquery]
+ORDER BY[orderit]
+
+</cfquery>
+
+
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{
+								"NAME":"'&NAME&'"
+								,"TOTAL_TIME":"'&TOTAL_TIME&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cfcase>
+
+
 <!--- LOOKUP Administrative Tasks --->
 <cfcase value="group2">
 <cftry>
