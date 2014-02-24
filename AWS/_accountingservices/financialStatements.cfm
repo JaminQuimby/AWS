@@ -77,7 +77,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
     
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"financialstatements"});$("#isLoaded_group1_1").val(1);'>Obtain Info</h4>   
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"financialstatements"});$("#isLoaded_group1_1").val(1);'>Obtain Information</h4>   
 	<div>
 		<div><label for="g1_g1_assignedto">Assigned to</label><select id="g1_g1_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g1_datecompleted">Date Completed</label><input type="text" id="g1_g1_datecompleted" class="date"/></div>
@@ -112,14 +112,14 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 		<div><label for="g1_g5_completedby">Competed By</label><select id="g1_g5_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" id="g1_g5_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_6","page":"financialstatements"});$("#isLoaded_group1_6").val(1);'>Bank Reconcile</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_6","page":"financialstatements"});$("#isLoaded_group1_6").val(1);'>Bank Reconciliation</h4>
 	<div>
 		<div><label for="g1_g6_assignedto">Assigned to</label><select id="g1_g6_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g6_datecompleted">Date Completed</label><input type="text" id="g1_g6_datecompleted" class="date"/></div>
 		<div><label for="g1_g6_completedby">Competed By</label><select id="g1_g6_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g6_estimatedtime">Estimated Time</label><input type="text" id="g1_g6_estimatedtime"/></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_7","page":"financialstatements"});$("#isLoaded_group1_7").val(1);'>Compile</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_7","page":"financialstatements"});$("#isLoaded_group1_7").val(1);'>Complications</h4>
 	<div>
 		<div><label for="g1_g7_assignedto">Assigned to</label><select id="g1_g7_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g7_datecompleted">Date Completed</label><input type="text" id="g1_g7_datecompleted" class="date"/></div>
@@ -147,7 +147,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 		<div><label for="g1_g10_completedby">Competed By</label><select id="g1_g10_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g10_estimatedtime">Estimated Time</label><input type="text" id="g1_g10_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);'>Accountant's Rpt</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);'>Accountant's Report</h4>
 	<div>
 		<div><label for="g1_g11_assignedto">Assigned to</label><select id="g1_g11_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g11_datecompleted">Date Completed</label><input type="text" id="g1_g11_datecompleted" class="date"/></div>

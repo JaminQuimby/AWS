@@ -473,7 +473,7 @@ SELECT[nm_id]
 ,[n_1_taxyear]
 ,[n_1_taxform]
 ,[n_1_noticenumber]
-,[n_noticestatus]
+,[n_status]
 ,[n_missinginfo]
 ,CONVERT(VARCHAR(10),[n_1_datenoticerec], 101)AS[n_1_datenoticerec]
 ,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
@@ -501,7 +501,7 @@ AND ([n_paid] = '6' OR [n_paid] IS NULL OR [n_paid] = '0')
  								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
  								,"N_1_TAXFORM":"'&N_1_TAXFORM&'"
  								,"N_1_NOTICENUMBER":"'&N_1_NOTICENUMBER&'"
- 								,"N_NOTICESTATUS":"'&N_NOTICESTATUS&'"
+ 								,"N_STATUS":"'&N_STATUS&'"
  								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
  								,"N_1_DATENOTICEREC":"'&N_1_DATENOTICEREC&'"
  								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"

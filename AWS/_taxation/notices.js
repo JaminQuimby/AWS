@@ -26,7 +26,7 @@ _grid2=function(){_jGrid({
 	"fields":{N_ID:{key:true,list:false,edit:false}
 ,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,NM_NAME:{title:'Notice'}
-			,N_NOTICESTATUSTEXT:{title:'Status'}
+			,N_STATUSTEXT:{title:'Status'}
 			,N_1_TAXFORMTEXT:{title:'Tax Form'}
 			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,N_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	

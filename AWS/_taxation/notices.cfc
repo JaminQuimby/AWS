@@ -21,7 +21,7 @@ GROUP2 LEVEL2
 SELECT[n_id]
       ,[n_id]
       ,[n_assignedto]
-      ,[n_noticestatus]
+      ,[n_status]
       ,[n_priority]
       ,[n_esttime]
       ,[n_1_noticenumber]
@@ -80,7 +80,7 @@ SELECT[n_id]
       ,[n_fees]
       ,[n_missinginfo]
       ,CONVERT(VARCHAR(10),[n_missinginforeceived], 1)AS[n_missinginforeceived]
-      ,[n_noticestatus]
+      ,[n_status]
       ,[n_paid]
       ,[n_priority]
 FROM[notice]
@@ -187,14 +187,14 @@ SELECT[nm_id]
 ,[n_id]
 ,[nm_name]
 ,[n_assignedtoTEXT]
-,[n_noticestatus]
+,[n_status]
 ,[n_1_noticenumber]
 ,[n_1_taxform]
 ,[n_1_taxyear]
 ,[n_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[n_1_taxform]=[optionvalue_id])
 
 ,CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate]
-,[n_noticestatusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_noticestatus]=[optionvalue_id])
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 FROM[v_notice]
 WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfquery>
@@ -206,7 +206,7 @@ WHERE[nm_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[n_assignedtoTEXT]LIKE <c
 <cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
 								,"NM_NAME":"'&NM_NAME&'"
 								,"N_ASSIGNEDTOTEXT":"'&N_ASSIGNEDTOTEXT&'"
-								,"N_NOTICESTATUSTEXT":"'&N_NOTICESTATUSTEXT&'"
+								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
 								,"N_1_TAXFORMTEXT":"'&N_1_TAXFORMTEXT&'"
 								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
 								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
@@ -284,7 +284,7 @@ INSERT INTO[notice](
 ,[n_fees]
 ,[n_missinginfo]
 ,[n_missinginforeceived]
-,[n_noticestatus]
+,[n_status]
 ,[n_paid]
 ,[n_priority]
 )
@@ -320,7 +320,7 @@ SET[nm_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[n_fees]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[n_missinginfo]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[n_missinginforeceived]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
-,[n_noticestatus]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[n_status]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[n_paid]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[n_priority]=<cfqueryparam value="#j.DATA[1][11]#" NULL="#LEN(j.DATA[1][11]) eq 0#"/>
 WHERE[n_id]=<cfqueryparam value="#j.DATA[1][1]#"/>

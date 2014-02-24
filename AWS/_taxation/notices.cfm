@@ -97,7 +97,7 @@ due date for response
 <div><label for="g2_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_missinginforeceived" ></div>
 <div><label for="g2_fees">Fees</label><input type="text" id="g2_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 <div><label for="g2_deliverymethod">Delivery Method</label><select id="g2_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_paid">Paid</label><select id="g2_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_paid">Payment Status</label><select id="g2_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 
 </div>
 <!--- GROUP 2_1 --->

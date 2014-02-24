@@ -15,7 +15,7 @@ SELECT[n_id]
 	  ,[n_fees]
       ,[n_missinginfo]
       ,[n_missinginforeceived]
-      ,[n_noticestatus]
+      ,[n_status]
       ,[n_paid]
       ,[n_priority]
       ,[n_esttime]
@@ -67,7 +67,7 @@ SELECT[nm_id]
 ,[n_2_revrequired]   
 ,[n_fees]
 
-,[n_noticestatusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_noticestatus]=[optionvalue_id])
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[n_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[n_1_noticenumber]=[optionvalue_id])
 ,[n_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[n_1_taxform]=[optionvalue_id])
 ,[n_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[n_paid]=[optionvalue_id])
@@ -77,7 +77,7 @@ SELECT[nm_id]
 ,[client_id]
 FROM[v_notice]
     
-<cfset sqllist = "n_assignedto,n_deliverymethod,n_esttime,n_fees,n_missinginfo,n_missinginforeceived,n_noticestatus,n_paid,n_priority,n_1_datenoticerec,n_1_methodreceived,n_1_noticenumber,n_1_noticedate,n_1_taxform,n_1_taxyear,n_2_rescompleted,n_2_rescompletedby,n_1_resduedate,n_2_irsstateresponse,n_2_revassignedto,n_2_revcompleted,n_2_ressubmited,n_2_revrequired">
+<cfset sqllist = "n_assignedto,n_deliverymethod,n_esttime,n_fees,n_missinginfo,n_missinginforeceived,n_status,n_paid,n_priority,n_1_datenoticerec,n_1_methodreceived,n_1_noticenumber,n_1_noticedate,n_1_taxform,n_1_taxyear,n_2_rescompleted,n_2_rescompletedby,n_1_resduedate,n_2_irsstateresponse,n_2_revassignedto,n_2_revcompleted,n_2_ressubmited,n_2_revrequired">
 <cfset key="n_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
@@ -132,7 +132,7 @@ WHERE(1)=(1)
  								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
  								,"N_1_TAXFORMTEXT":"'&N_1_TAXFORMTEXT&'"
  								,"N_1_NOTICENUMBERTEXT":"'&N_1_NOTICENUMBERTEXT&'"
- 								,"N_NOTICESTATUSTEXT":"'&N_NOTICESTATUSTEXT&'"
+ 								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
  								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
  								,"N_1_DATENOTICEREC":"'&N_1_DATENOTICEREC&'"
  								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"

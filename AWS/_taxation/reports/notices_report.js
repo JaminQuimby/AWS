@@ -44,7 +44,7 @@ var grid1_config = [
 			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,N_1_TAXFORMTEXT:{title:'Tax Form'}
 			,N_1_NOTICENUMBERTEXT:{title:'Notice Number'}
-			,N_NOTICESTATUSTEXT:{title:'Notice Status'}
+			,N_STATUSTEXT:{title:'Notice Status'}
 			,N_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,N_1_DATENOTICEREC:{title:'Date Notice Received',width:'1%'}
 			,N_1_RESDUEDATE:{title:'Response Due Date',width:'1%'}
