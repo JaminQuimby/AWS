@@ -5,7 +5,7 @@
 <cfset page.location="notices_report">
 <cfset page.formid=8>
 <cfset page.title="Notices Report">
-<cfset page.menuLeft="General">
+<cfset page.menuLeft="All Data">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id,subtask1_id">

@@ -5,7 +5,7 @@
 <cfset page.location="payrollchecks_report">
 <cfset page.formid=10>
 <cfset page.title="Payroll Checks">
-<cfset page.menuLeft="General">
+<cfset page.menuLeft="All Data">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">

@@ -5,7 +5,7 @@
 <cfset page.location="communications_report">
 <cfset page.formid=12>  
 <cfset page.title="Communications Report">
-<cfset page.menuLeft="General,Responses">
+<cfset page.menuLeft="All Data,Responses">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id,client_id">

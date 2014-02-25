@@ -5,7 +5,7 @@
 <cfset page.location="financialtaxplanning_report">
 <cfset page.formid=9>
 <cfset page.title="Financial Tax Planning Report">
-<cfset page.menuLeft="General">
+<cfset page.menuLeft="All Data">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">

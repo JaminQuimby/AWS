@@ -5,7 +5,7 @@
 <cfset page.location="powerofattorney_report">
 <cfset page.formid=7>
 <cfset page.title="Power of Attorney Report">
-<cfset page.menuLeft="General">
+<cfset page.menuLeft="All Data">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">

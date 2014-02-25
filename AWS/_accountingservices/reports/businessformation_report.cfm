@@ -5,7 +5,7 @@
 <cfset page.location="businessformation_report">
 <cfset page.formid=3>
 <cfset page.title="Business Formation Report">
-<cfset page.menuLeft="General">
+<cfset page.menuLeft="All Data">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">

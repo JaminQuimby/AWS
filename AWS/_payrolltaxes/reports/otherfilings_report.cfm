@@ -5,7 +5,7 @@
 <cfset page.location="otherfilings_report">
 <cfset page.formid=11>
 <cfset page.title="Other Filings">
-<cfset page.menuLeft="General">
+<cfset page.menuLeft="All Data">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">
 <cfset page.trackers="task_id">

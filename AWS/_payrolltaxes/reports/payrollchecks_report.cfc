@@ -24,8 +24,9 @@ SELECT
 ,[pc_year]
 ,CONVERT(VARCHAR(8),[pc_payenddate], 1)AS[pc_payenddate]
 ,CONVERT(VARCHAR(8),[pc_paydate], 1)AS[pc_paydate] 
-,CONVERT(VARCHAR(8),[pc_datedue], 1)AS[pc_datedue]
+,CONVERT(VARCHAR(8),[pc_missinginforeceived], 1)AS[pc_missinginforeceived]
 ,[pc_missinginfo] 
+,CONVERT(VARCHAR(8),[pc_datedue], 1)AS[pc_datedue]
 ,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
 ,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
 ,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
@@ -87,10 +88,11 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PC_YEAR":"'&PC_YEAR&'"
-								,"PC_DATEDUE":"'&PC_DATEDUE&'"
 								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
+								,"PC_DATEDUE":"'&PC_DATEDUE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
+								,"PC_MISSINGINFORECEIVED":"'&PC_MISSINGINFORECEIVED&'"
 								,"PC_OBTAININFO":"'&PC_OBTAININFO&'"
 								,"PC_ASSEMBLY":"'&PC_ASSEMBLY&'"
 								,"PC_DELIVERY":"'&PC_DELIVERY&'"
