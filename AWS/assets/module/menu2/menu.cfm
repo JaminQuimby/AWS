@@ -97,7 +97,7 @@
 			<ul>
 			<li><a href="#this.url#/AWS/_clientmanagement/administrativetasks.cfm">Administrative Tasks</a></li>
       		<li><a href="#this.url#/AWS/_clientmanagement/clientmaintenance.cfm">Client Maintenance</a></li>
-      		<li><a href="#this.url#/AWS/_clientmanagement/communications.cfm">Communication</a></li>
+      		<li><a href="#this.url#/AWS/_clientmanagement/communications.cfm">Communications</a></li>
       		<li><a href="#this.url#/AWS/_clientmanagement/documenttracking.cfm">Document Tracking Log</a></li>
 			</ul>
 		</div>

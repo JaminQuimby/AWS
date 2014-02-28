@@ -12,10 +12,11 @@ _grid1=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTHTEXT:{title:'Period'}
+			,PT_STATETEXT:{title:'State'}
+			,PT_TYPETEXT:{title:'Return Type'}	
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
-			,PT_TYPETEXT:{title:'Return Type'}
-			,PT_DUEDATE:{title:'Date Due',width:'1%'}
 			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,PT_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%',visibility: 'hidden'}
 			,PT_ENTRY_ASSIGNEDTOTEXT:{title:'Entry Assigned To',width:'1%',visibility: 'hidden'}
 			,PT_REC_ASSIGNEDTOTEXT:{title:'Reconciliation Assigned To',width:'1%',visibility: 'hidden'}

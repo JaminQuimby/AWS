@@ -3,8 +3,6 @@ _grid1()
 _group1=function(){_grid1()}
 });
  
-
- 
 _grid1=function(){
 var grid1_config = [
 {"n":"search","type":"text","v":""}    
@@ -28,14 +26,15 @@ var grid1_config = [
 	"title":"Administrative Tasks Report",
 	"fields":{CAS_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CAS_DUEDATE:{title:'Due Date'}
-			,CAS_PRIORITY:{title:'Priority'}
-			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			,CAS_STATUSTEXT:{title:'Status',width:'1%'}
-			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}
-			,CAS_COMPLETED:{title:'Completed'}
+			,CAS_CATEGORYTEXT:{title:'Category'}
 			,CAS_TASKDESC:{title:'Description'}
 			,CAS_INSTRUCTIONS:{title:'Instructions'}
+			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
+			,CAS_STATUSTEXT:{title:'Status',width:'1%'}
+			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}
+			,CAS_DATESTARTED:{title:'Date Started',width:'1%'}
+ 			,CAS_COMPLETED:{title:'Completed',width:'1%'}
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"4"}',

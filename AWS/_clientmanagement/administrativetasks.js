@@ -12,11 +12,12 @@ _grid1=function(){_jGrid({
 	,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CAS_ID+"',page:'administrativetasks',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
 			,CAS_CATEGORYTEXT:{title:'Category'}
 			,CAS_TASKDESC:{title:'Description'}
+			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
 			,CAS_STATUSTEXT:{title:'Status'}
 			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
+			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}					
 			},			
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"4"}',

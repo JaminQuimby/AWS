@@ -15,8 +15,7 @@
       ,[cas_status]
       ,[cas_taskdesc]
   FROM [AWS].[dbo].[clientadministrativetasks]
-	  
-	  --->
+  --->
 
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -34,11 +33,11 @@
 <cfquery datasource="AWS" name="fquery">
 SELECT[cas_id]
 ,CONVERT(VARCHAR(8),[cas_duedate], 1)AS[cas_duedate]
-,[cas_priority]
 ,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
 ,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
 ,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[cas_datereqested], 1)AS[cas_datereqested]
+,CONVERT(VARCHAR(8),[cas_datestarted], 1)AS[cas_datestarted]
 ,CONVERT(VARCHAR(8),[cas_completed], 1)AS[cas_completed]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,CASE WHEN LEN([cas_instructions]) >= 101 THEN SUBSTRING([cas_instructions],0,100) +  '...' ELSE [cas_instructions] END AS[cas_instructions]
@@ -87,7 +86,6 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
-
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -97,14 +95,16 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
-								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
-								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"
-								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"
+								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
 								,"CAS_INSTRUCTIONS":"'&CAS_INSTRUCTIONS&'"
+								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
+								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
+								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
+								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"
+								,"CAS_DATESTARTED":"'&CAS_DATESTARTED&'"
+								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"	
+
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

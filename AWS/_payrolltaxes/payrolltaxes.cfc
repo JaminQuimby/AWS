@@ -154,6 +154,7 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
+,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_month]=[optionvalue_id])
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
 ,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
@@ -184,16 +185,17 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PT_YEAR":"'&PT_YEAR&'"
 								,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
-								,"PT_LASTPAY":"'&PT_LASTPAY&'"
+								,"PT_STATETEXT":"'&PT_STATETEXT&'"
 								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
-								,"PT_DUEDATE":"'&PT_DUEDATE&'"
-								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
+								,"PT_LASTPAY":"'&PT_LASTPAY&'"
+ 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
+ 								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
 								,"PT_OBTAININFO_ASSIGNEDTOTEXT":"'&PT_OBTAININFO_ASSIGNEDTOTEXT&'"
 								,"PT_ENTRY_ASSIGNEDTOTEXT":"'&PT_ENTRY_ASSIGNEDTOTEXT&'"
 								,"PT_REC_ASSIGNEDTOTEXT":"'&PT_REC_ASSIGNEDTOTEXT&'"
 								,"PT_REVIEW_ASSIGNEDTOTEXT":"'&PT_REVIEW_ASSIGNEDTOTEXT&'"
 								,"PT_ASSEMBLY_ASSIGNEDTOTEXT":"'&PT_ASSEMBLY_ASSIGNEDTOTEXT&'"
-								,"PT_DELIVERY_ASSIGNEDTOTEXT":"'&PT_DELIVERY_ASSIGNEDTOTEXT&'"
+								,"PT_DELIVERY_ASSIGNEDTOTEXT":"'&PT_DELIVERY_ASSIGNEDTOTEXT&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
