@@ -16,7 +16,7 @@
 SELECT[PC_ID]
 ,[client_id]
 ,[pc_altfreq]
-,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
+,CONVERT(VARCHAR(10),[pc_duedate], 101)AS[pc_duedate]
 ,[pc_deliverymethod]
 ,[pc_esttime]
 ,[pc_fees]
@@ -141,7 +141,7 @@ WHERE[PC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
-,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
+,CONVERT(VARCHAR(10),[pc_duedate], 101)AS[pc_duedate]
 ,[pc_missinginfo]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
@@ -168,7 +168,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PC_YEAR":"'&PC_YEAR&'"
-								,"PC_DATEDUE":"'&PC_DATEDUE&'"
+								,"PC_DUEDATE":"'&PC_DUEDATE&'"
 								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
@@ -212,7 +212,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 INSERT INTO[payrollcheckstatus](
 [client_id]
 ,[pc_altfreq]
-,[pc_datedue]
+,[pc_duedate]
 ,[pc_deliverymethod]
 ,[pc_esttime]
 ,[pc_fees]
@@ -253,7 +253,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 UPDATE[payrollcheckstatus]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_altfreq]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[pc_datedue]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[pc_duedate]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[pc_deliverymethod]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[pc_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[pc_fees]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>

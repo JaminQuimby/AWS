@@ -51,10 +51,11 @@ var grid1_config = [
 	"title":"Other Filings Status",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,OF_DUEDATE:{title:'Due Date',width:'1%'}
 			,OF_TAXYEAR:{title:'Year',width:'1%'}
-			,OF_PERIODTEXT:{title:'Period'}
 			,OF_STATETEXT:{title:'State'}
+			
+			,OF_DUEDATE:{title:'Due Date',width:'1%'}
+			,OF_PERIODTEXT:{title:'Period'}
 			,OF_FORMTEXT:{title:'Form',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Info',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,OF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}

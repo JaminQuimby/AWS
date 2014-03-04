@@ -1,5 +1,4 @@
 $(document).ready(function(){
-jqMessage({message: "Actively being changed by: Raymond Smith. Please do not add data to the database for this module.",type: "information",autoClose: false});
 
 _grid1();
 _group1=function(){}

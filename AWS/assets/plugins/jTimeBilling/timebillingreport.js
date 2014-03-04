@@ -21,7 +21,7 @@ _grid1=function(){_jGrid({
 	"title":"Payroll Checks",
 	"fields":{PC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,PC_DATEDUE:{title:'Due Date',width:'1%'}
+			,PC_DUEDATE:{title:'Due Date',width:'1%'}
 			,PC_YEAR:{title:'Year',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}

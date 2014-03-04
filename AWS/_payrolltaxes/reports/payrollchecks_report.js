@@ -53,7 +53,7 @@ var grid1_config = [
 			,PC_YEAR:{title:'Year',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
-			,PC_DATEDUE:{title:'Due Date',width:'1%'}
+			,PC_DUEDATE:{title:'Due Date',width:'1%'}
 			,PC_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,PC_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}
 			,PC_OBTAININFO:{title:'Information Received',width:'1%'}

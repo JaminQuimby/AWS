@@ -60,7 +60,6 @@
 <cfcase value="group0">
 <cfquery datasource="AWS" name="fquery">
 SELECT[pt_id]
-,CONVERT(VARCHAR(8),[pt_duedate], 1)AS[pt_duedate]
 ,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
 ,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
@@ -133,15 +132,14 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"PT_DUEDATE":"'&PT_DUEDATE&'"
-								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
-								,"PT_STATETEXT":"'&PT_STATETEXT&'"
 								,"PT_YEAR":"'&PT_YEAR&'"
 								,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
+								,"PT_STATETEXT":"'&PT_STATETEXT&'"
+								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
-								,"PT_OBTAININFO":"'&PT_OBTAININFO&'"
 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
 								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
+								,"PT_OBTAININFO":"'&PT_OBTAININFO&'"
 								,"PT_ENTRY":"'&PT_ENTRY&'"
 								,"PT_REC":"'&PT_REC&'"
 								,"PT_REVIEW":"'&PT_REVIEW&'"
@@ -149,6 +147,7 @@ WHERE(1)=(1)
 								,"PT_DELIVERY":"'&PT_DELIVERY&'"
 								,"PT_FEES":"'&PT_FEES&'"
 								,"PT_PAIDTEXT":"'&PT_PAIDTEXT&'"
+			
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

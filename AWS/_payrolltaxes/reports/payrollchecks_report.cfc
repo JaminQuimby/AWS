@@ -26,7 +26,7 @@ SELECT
 ,CONVERT(VARCHAR(8),[pc_paydate], 1)AS[pc_paydate] 
 ,CONVERT(VARCHAR(8),[pc_missinginforeceived], 1)AS[pc_missinginforeceived]
 ,[pc_missinginfo] 
-,CONVERT(VARCHAR(8),[pc_datedue], 1)AS[pc_datedue]
+,CONVERT(VARCHAR(8),[pc_duedate], 1)AS[pc_duedate]
 ,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
 ,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
 ,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
@@ -36,7 +36,7 @@ SELECT
 
 FROM[v_payrollcheckstatus]
 
-<cfset sqllist = "pc_year,pc_payenddate,pc_paydate,pc_datedue,pc_esttime,pt_altfreq,pc_missinginfo,pc_missinginforeceived,pc_fees,pc_paid,pc_deliverymethod,pc_obtaininfo_assignedto,pc_obtaininfo_datecompleted,pc_obtaininfo_completedby,pc_obtaininfo_esttime,pc_preparation_assignedto,pc_preparation_datecompleted,pc_preparation_completedby,pc_preparation_esttime,pc_review_assignedto,pc_review_datecompleted,pc_review_completedby,pc_review_esttime,pc_assembly_assignedto,pc_assembly_datecompleted,pc_assembly_completedby,pc_assembly_esttime,pc_delivery_assignedto,pc_delivery_datecompleted,pc_delivery_completedby,pc_delivery_esttime">
+<cfset sqllist = "pc_year,pc_payenddate,pc_paydate,pc_duedate,pc_esttime,pt_altfreq,pc_missinginfo,pc_missinginforeceived,pc_fees,pc_paid,pc_deliverymethod,pc_obtaininfo_assignedto,pc_obtaininfo_datecompleted,pc_obtaininfo_completedby,pc_obtaininfo_esttime,pc_preparation_assignedto,pc_preparation_datecompleted,pc_preparation_completedby,pc_preparation_esttime,pc_review_assignedto,pc_review_datecompleted,pc_review_completedby,pc_review_esttime,pc_assembly_assignedto,pc_assembly_datecompleted,pc_assembly_completedby,pc_assembly_esttime,pc_delivery_assignedto,pc_delivery_datecompleted,pc_delivery_completedby,pc_delivery_esttime">
 <cfset key="pc_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
@@ -90,7 +90,7 @@ WHERE(1)=(1)
 								,"PC_YEAR":"'&PC_YEAR&'"
 								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
-								,"PC_DATEDUE":"'&PC_DATEDUE&'"
+								,"PC_DUEDATE":"'&PC_DUEDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								,"PC_MISSINGINFORECEIVED":"'&PC_MISSINGINFORECEIVED&'"
 								,"PC_OBTAININFO":"'&PC_OBTAININFO&'"

@@ -36,8 +36,8 @@ SELECT[user_id],[name]FROM[v_staffinitials]WHERE[name]LIKE <cfqueryparam value="
 <cfcase value="group1_1">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[pc_id],[pc_year],CONVERT(VARCHAR(10),[pc_payenddate], 1)AS[pc_payenddate],CONVERT(VARCHAR(10),[pc_paydate], 1)AS[pc_paydate],CONVERT(VARCHAR(10),[pc_datedue], 1)AS[pc_datedue],CONVERT(VARCHAR(10),[pc_obtaininfo_datecompleted], 1)AS[pc_obtaininfo_datecompleted],[pc_missinginfo],[client_name],[client_id]FROM[v_payrollcheckstatus]WHERE([pc_delivery_completedby]IS NULL)
-AND([pc_datedue]< DATEADD(day, 14, GETDATE())OR [pc_datedue]> GETDATE()OR [pc_datedue]IS NULL)
+SELECT[pc_id],[pc_year],CONVERT(VARCHAR(10),[pc_payenddate], 1)AS[pc_payenddate],CONVERT(VARCHAR(10),[pc_paydate], 1)AS[pc_paydate],CONVERT(VARCHAR(10),[pc_duedate], 1)AS[pc_duedate],CONVERT(VARCHAR(10),[pc_obtaininfo_datecompleted], 1)AS[pc_obtaininfo_datecompleted],[pc_missinginfo],[client_name],[client_id]FROM[v_payrollcheckstatus]WHERE([pc_delivery_completedby]IS NULL)
+AND([pc_duedate]< DATEADD(day, 14, GETDATE())OR [pc_duedate]> GETDATE()OR [pc_duedate]IS NULL)
 AND([pc_delivery_completedby]IS NULL AND [pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR	[pc_delivery_completedby]IS NOT NULL AND [pc_delivery_datecompleted]IS NULL AND [pc_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 OR	[pc_delivery_datecompleted]IS NOT NULL AND [pc_review_datecompleted]IS NULL AND [pc_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
@@ -45,13 +45,13 @@ OR	[pc_review_datecompleted]IS NOT NULL AND [pc_assembly_datecompleted]IS NULL A
 OR	[pc_assembly_datecompleted]IS NOT NULL AND [pc_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 )
 
-ORDER BY[pc_datedue]</cfquery>
+ORDER BY[pc_duedate]</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PC_YEAR":"'&PC_YEAR&'","PC_PAYENDDATE":"'&PC_PAYENDDATE&'","PC_PAYDATE":"'&PC_PAYDATE&'","PC_DATEDUE":"'&PC_DATEDUE&'","PC_OBTAININFO_DATECOMPLETED":"'&PC_OBTAININFO_DATECOMPLETED&'","PC_MISSINGINFO":"'&PC_MISSINGINFO&'"}'>
+<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PC_YEAR":"'&PC_YEAR&'","PC_PAYENDDATE":"'&PC_PAYENDDATE&'","PC_PAYDATE":"'&PC_PAYDATE&'","PC_DUEDATE":"'&PC_DUEDATE&'","PC_OBTAININFO_DATECOMPLETED":"'&PC_OBTAININFO_DATECOMPLETED&'","PC_MISSINGINFO":"'&PC_MISSINGINFO&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

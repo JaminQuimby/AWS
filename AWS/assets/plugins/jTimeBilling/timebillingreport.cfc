@@ -21,7 +21,7 @@ SELECT[pc_id]
 ,[pc_year]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate] 
-,CONVERT(VARCHAR(10),[pc_datedue], 101)AS[pc_datedue]
+,CONVERT(VARCHAR(10),[pc_duedate], 101)AS[pc_duedate]
 ,[pc_missinginfo] 
 ,CONVERT(VARCHAR(10),[pc_obtaininfo_datecompleted], 101)AS[pc_obtaininfo_datecompleted]
 ,CONVERT(VARCHAR(10),[pc_assembly_datecompleted], 101)AS[pc_assembly_datecompleted]
@@ -34,7 +34,7 @@ FROM[v_payrollcheckstatus]
 WHERE ([pc_delivery_datecompleted] IS NULL)
 AND ([pc_paid] = '6' OR [pc_paid] IS NULL OR [pc_paid] = '0' )
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-ORDER BY[pc_datedue]
+ORDER BY[pc_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -45,7 +45,7 @@ ORDER BY[pc_datedue]
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PC_YEAR":"'&PC_YEAR&'"
-								,"PC_DATEDUE":"'&PC_DATEDUE&'"
+								,"PC_DUEDATE":"'&PC_DUEDATE&'"
 								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"

@@ -14,7 +14,7 @@ _grid1=function(){_jGrid({
 			,OF_TAXYEAR:{title:'Tax Year'}
 			,OF_PERIODTEXT:{title:'Period'}
 			,OF_STATETEXT:{title:'State'}
-			,OF_TASKTEXT:{title:'Type'}
+			,OF_TYPETEXT:{title:'Type'}
 			,OF_FORMTEXT:{title:'Form',width:'1%'}
 			,OF_DUEDATE:{title:'Date Due',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
@@ -37,7 +37,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_task,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_type,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_loadAssets();break;
 /*Group1_1*/case "OF_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "OF_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "OF_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -57,7 +57,7 @@ $.extend(true, options, params);//turn options into array
 switch(options["group"]){
 	
 case'':
-if($("#client_id").val()!="" && $("#g1_taxyear").val()!=0  && $("#g1_period").val()!=0  && $("#g1_state").val()!=0  && $("#g1_task").val()!=0  && $("#g1_form").val()!=0 )
+if($("#client_id").val()!="" && $("#g1_taxyear").val()!=0  && $("#g1_period").val()!=0  && $("#g1_state").val()!=0  && $("#g1_type").val()!=0  && $("#g1_form").val()!=0 )
 {
 	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
 else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
@@ -81,7 +81,7 @@ $("#g1_period").val()+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_state").val()+'","'+
 $("#g1_status").val()+'","'+
-$("#g1_task").val()+'","'+
+$("#g1_type").val()+'","'+
 $("#g1_taxyear").val()+'","'+
 '"]]}'
 _saveData({group:"group1","payload":$.parseJSON(json),page:"otherfilings"});
