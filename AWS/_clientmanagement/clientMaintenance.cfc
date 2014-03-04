@@ -14,7 +14,8 @@
 <!--- Load Group1--->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT[client_id]
+SELECT TOP(1)
+[client_id]
 	,[client_active]
 	,[client_credit_hold]
 	,[client_group]
