@@ -67,6 +67,8 @@ SELECT[of_id]
 ,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 ,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
+,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
+
 ,[of_missinginfo]
 ,CONVERT(VARCHAR(8),[of_missinginforeceived], 1)AS[of_missinginforeceived]
 ,CONVERT(VARCHAR(8),of_obtaininfo_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),of_obtaininfo_assignedtoTEXT) AS [of_obtaininfo]
@@ -128,12 +130,15 @@ WHERE(1)=(1)
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"OF_DUEDATE":"'&OF_DUEDATE&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"	
 								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"
 								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
 								,"OF_STATETEXT":"'&OF_STATETEXT&'"
+								,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
 								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
+								,"OF_DUEDATE":"'&OF_DUEDATE&'"		
+								,"OF_FILINGDEADLINE":"'&OF_FILINGDEADLINE&'"			
+								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
 								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"
 								,"OF_OBTAININFO":"'&OF_OBTAININFO&'"
@@ -142,8 +147,7 @@ WHERE(1)=(1)
 								,"OF_ASSEMBLY":"'&OF_ASSEMBLY&'"
 								,"OF_DELIVERY":"'&OF_DELIVERY&'"
 								,"OF_FEES":"'&OF_FEES&'"
-								,"OF_ESTTIME":"'&OF_ESTTIME&'"
-								,"OF_PAIDTEXT":"'&OF_PAIDTEXT&'"
+ 								,"OF_PAIDTEXT":"'&OF_PAIDTEXT&'"
 								}'>                              
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

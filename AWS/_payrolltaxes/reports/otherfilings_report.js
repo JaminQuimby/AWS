@@ -52,11 +52,13 @@ var grid1_config = [
 	"fields":{OF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Year',width:'1%'}
-			,OF_STATETEXT:{title:'State'}
-			
-			,OF_DUEDATE:{title:'Due Date',width:'1%'}
 			,OF_PERIODTEXT:{title:'Period'}
-			,OF_FORMTEXT:{title:'Form',width:'1%'}
+			,OF_STATETEXT:{title:'State'}
+			,OF_TYPETEXT:{title:'Type'}
+			,OF_FORMTEXT:{title:'Form',width:'1%'}			
+			,OF_DUEDATE:{title:'Due Date',width:'1%'}
+			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
+			,OF_STATUSTEXT:{title:'Status'}
 			,OF_MISSINGINFO:{title:'Missing Info',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,OF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,OF_OBTAININFO:{title:'Information Received',width:'1%'}
@@ -65,7 +67,6 @@ var grid1_config = [
 			,OF_ASSEMBLY:{title:'Assembled',width:'1%'}
 			,OF_DELIVERY:{title:'Delivered',width:'1%'}
 			,OF_FEES:{title:'Fees'}
-			,OF_ESTTIME:{title:'Estimated Time'}
 			,OF_PAIDTEXT:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
