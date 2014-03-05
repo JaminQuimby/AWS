@@ -89,8 +89,8 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PA_TAXYEARS":"'&PA_TAXYEARS&'"
 								,"PA_TAXFORMSTEXT":"'&PA_TAXFORMSTEXT&'"
 								,"PA_TAXMATTERSTEXT":"'&PA_TAXMATTERSTEXT&'"
-								,"PA_STATUSTEXT":"'&PA_STATUSTEXT&'"
 								,"PA_PREPARERSTEXT":"'&PA_PREPARERSTEXT&'"
+								,"PA_STATUSTEXT":"'&PA_STATUSTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

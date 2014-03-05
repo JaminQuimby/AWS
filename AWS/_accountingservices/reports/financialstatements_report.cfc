@@ -108,7 +108,7 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(8),[fds_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedtoTEXT) AS [fds_delivery]
 ,CONVERT(VARCHAR(8),[fds_acctrpt_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedtoTEXT) AS [fds_acctrpt]
 ,FORMAT(fds_fees, 'C', 'en-us')AS[fds_fees]
-,[fds_paid]
+,[fds_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[fds_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_financialdatastatus]
@@ -180,7 +180,7 @@ WHERE(1)=(1)
 								,"FDS_DELIVERY":"'&FDS_DELIVERY&'"
 								,"FDS_ACCTRPT":"'&FDS_ACCTRPT&'"
 								,"FDS_FEES":"'&FDS_FEES&'"
-								,"FDS_PAID":"'&FDS_PAID&'"
+								,"FDS_PAIDTEXT":"'&FDS_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
