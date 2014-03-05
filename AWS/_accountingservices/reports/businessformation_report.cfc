@@ -37,7 +37,7 @@ SELECT[bf_id]
 ,CONVERT(VARCHAR(8),[bf_otherstarted], 1)AS[bf_otherstarted]
 ,CONVERT(VARCHAR(8),[bf_othercompleted], 1)AS[bf_othercompleted]
 ,CONVERT(VARCHAR(8),[bf_recordbookordered], 1)AS[bf_recordbookordered]
-,[bf_fees]
+,FORMAT(bf_fees, 'C', 'en-us')AS[bf_fees]
 ,[bf_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[bf_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]

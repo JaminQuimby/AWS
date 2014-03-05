@@ -30,7 +30,7 @@ SELECT
 ,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
 ,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
 ,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
-,[pc_fees]
+,FORMAT(pc_fees, 'C', 'en-us')AS[pc_fees]
 ,[pc_paid]
 ,[pc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pc_paid]=[optionvalue_id])
 

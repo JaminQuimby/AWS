@@ -54,7 +54,7 @@ SELECT[ftp_id]
 ,CONVERT(VARCHAR(10),[ftp_missinginforeceived], 1)AS[ftp_missinginforeceived]
 ,CONVERT(VARCHAR(10),[ftp_reportcompleted], 1)AS[ftp_reportcompleted]
 ,CONVERT(VARCHAR(10),[ftp_finalclientmeeting], 1)AS[ftp_finalclientmeeting]
-,[ftp_fees]
+,FORMAT(ftp_fees, 'C', 'en-us')AS[ftp_fees]
 ,[ftp_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[ftp_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]

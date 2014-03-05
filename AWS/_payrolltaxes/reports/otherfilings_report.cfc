@@ -68,7 +68,6 @@ SELECT[of_id]
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 ,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
 ,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
-
 ,[of_missinginfo]
 ,CONVERT(VARCHAR(8),[of_missinginforeceived], 1)AS[of_missinginforeceived]
 ,CONVERT(VARCHAR(8),of_obtaininfo_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),of_obtaininfo_assignedtoTEXT) AS [of_obtaininfo]
@@ -76,7 +75,7 @@ SELECT[of_id]
 ,CONVERT(VARCHAR(8),[of_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_review_assignedtoTEXT) AS [of_review]
 ,CONVERT(VARCHAR(8),[of_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_assembly_assignedtoTEXT) AS [of_assembly]
 ,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_delivery_assignedtoTEXT) AS [of_delivery]
-,[of_fees]
+,FORMAT(of_fees, 'C', 'en-us')AS[of_fees]
 ,[of_esttime]
 ,[client_name]
 ,[client_id]

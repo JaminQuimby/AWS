@@ -99,10 +99,11 @@ _grid100=function(){
 <h4 onClick='_loadData({"id":"file_id","group":"group100","page":"upload",plugin:"group100"});$("#isLoaded_group100").val(1);'>File Meta Data</h4>
 <div><div><label for="g100_name">Name</label><input type="text" id="g100_name"></div>
 <div><label for="g100_description">Description</label><select id="g100_description" ><option value="0">&nbsp;</option><cfoutput query="plugin_documents"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g100_year">Year</label><input type="text" id="g100_year"></div>
-<div><label for="g100_month">Month</label><input type="text" id="g100_month"></div>
-<div><label for="g100_day">Day</label><input type="text" id="g100_day"></div>
-
+<cfoutput>
+<div><label for="g100_year">Year</label><input type="text" id="g100_year" value="#Year(Now())#"></div>
+<div><label for="g100_month">Month</label><input type="text" id="g100_month" value="#Month(Now())#"></div>
+<div><label for="g100_day">Day</label><input type="text" id="g100_day" value="#Day(Now())#"></div>
+</cfoutput>
 </div>
 <h4>Upload Files</h4>
 <div>

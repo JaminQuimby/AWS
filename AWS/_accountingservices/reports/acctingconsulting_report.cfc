@@ -60,7 +60,7 @@ SELECT[mc_id]
 ,CONVERT(VARCHAR(8),[mc_workinitiated], 1)AS[mc_workinitiated]
 ,CONVERT(VARCHAR(8),[mc_projectcompleted], 1)AS[mc_projectcompleted]
 ,[mc_esttime]
-,[mc_fees]
+,FORMAT(mc_fees, 'C', 'en-us')AS[mc_fees]
 ,[mc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[mc_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]

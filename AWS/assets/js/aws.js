@@ -354,7 +354,9 @@ try{if(options['query'].DATA!=""){
 				$("#"+list[i]+' option').each(function(index){
 					if(options['query'].DATA[0][i]==$(this).val()){
 						$(this).attr('selected', true);
-	}}).trigger("liszt:updated");break;
+	}})
+	$('#'+list[i]).trigger("liszt:updated");
+	break;
 				case"select-multiple":
 				var str=options['query'].DATA[0][i]+",";
 				if(str!=null){
@@ -363,7 +365,10 @@ try{if(options['query'].DATA!=""){
 					for(var i=0;i<sstr.length;i++){
 						if(sstr[i]==$(this).val()){
 							$(this).attr('selected', true);
-	}}}).trigger("liszt:updated");}break;
+	}}})
+	$('#'+list[i]).trigger("liszt:updated");
+	}
+	break;
 				case undefined:/*Detection for undefined objects such as <LABEL>*/
 				$("#"+list[i]).html(options['query'].DATA[0][i]);break;
 				default:$("#"+list[i]).val(options['query'].DATA[0][i])}
@@ -461,6 +466,7 @@ $.datepicker.setDefaults({
 showOn:"both",
 buttonImageOnly:true,
 buttonImage: "https://"+ window.location.hostname + "/AWS/assets/img/datepicker.gif",
+showButtonPanel: true,
 constrainInput:true
 });
 //$('.gf-checkbox').accordion({heightStyle:"content", active:false});

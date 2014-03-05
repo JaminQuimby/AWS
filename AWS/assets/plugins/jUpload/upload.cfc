@@ -157,7 +157,9 @@ INSERT INTO[ctrl_files]
 ,[client_id]
 ,[task_id]
 ,[user_id]
-
+,[file_year]
+,[file_month]
+,[file_day]
 )
 VALUES(
 <cfqueryparam value="#result.clientFile#"/>
@@ -170,7 +172,9 @@ VALUES(
 ,<cfqueryparam value="#arguments.CLIENTID#"/>
 ,<cfqueryparam value="#arguments.TASKID#"/>
 ,<cfqueryparam value="#arguments.USERID#"/>
-
+,<cfqueryparam value="#Year(Now())#"/>
+,<cfqueryparam value="#Month(Now())#"/>
+,<cfqueryparam value="#Day(Now())#"/>
 )
 </cfquery>
 </cfoutput>

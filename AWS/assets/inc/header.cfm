@@ -39,9 +39,13 @@
 <cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/aws.css"/></cfdefaultcase>
 </cfswitch>
 <link rel="stylesheet" type="text/css" href="#page.module#.css">
-
+<!---
 <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+--->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
 <script>
 user = {"id":"","name":"","email":"","role":"","organization":"","g_delete":"0","g_payrolltaxes":"0","g_accountingservices":"0","g_taxation":"0","g_clientmanagement":"0","g_maintenance":"0"};
 params={"id":"#Session.user.id#","name":"#Session.user.name#","email":"#Session.user.email#","role":"#Session.user.role#","organization":"#Session.user.organization#","g_delete":"#selectRoles.g_delete#","g_payrolltaxes":"#selectRoles.m_payrolltaxes#","g_accountingservices":"#selectRoles.m_accountingservices#","g_taxation":"#selectRoles.m_taxation#","g_clientmanagement":"#selectRoles.m_clientmanagement#","g_maintenance":"#selectRoles.m_maintenance#"};
