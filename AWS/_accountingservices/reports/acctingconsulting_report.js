@@ -29,14 +29,13 @@ var grid1_config = [
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
-			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			,MC_STATUSTEXT:{title:'Status'}
 			,MC_DESCRIPTION:{title:'Description'}
-			,MC_REQUESTFORSERVICE:{title:'Request For Service',width:'1%'}
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
+			,MC_STATUSTEXT:{title:'Status'}
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			,MC_REQUESTFORSERVICE:{title:'Request For Service',width:'1%'}
 			,MC_WORKINITIATED:{title:'Work Initiated',width:'1%'}
 			,MC_PROJECTCOMPLETED:{title:'Project Completed',width:'1%'}
-			,MC_ESTTIME:{title:'Estimated Time'}
 			,MC_FEES:{title:'Fees'}
 			,MC_PAIDTEXT:{title:'Payment Status'}
 			},

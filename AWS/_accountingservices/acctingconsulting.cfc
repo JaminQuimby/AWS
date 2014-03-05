@@ -101,7 +101,7 @@ SELECT[mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_description]
 ,[mc_status]
-,mc_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
+,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
 WHERE[mc_status] != 2 
@@ -116,7 +116,15 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","MC_ID":"'&MC_ID&'","MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUSTEXT":"'&MC_STATUSTEXT&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
+								,"MC_ID":"'&MC_ID&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
+								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'",
+								"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -129,15 +137,10 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT
 [mc_id]
 ,[mcs_id]
-,[mcs_actualtime]
 ,[mcs_assignedto]
-,[mcs_completed]
-,[mcs_dependencies]
 ,[mcs_duedate]
-,[mcs_esttime]
-,CASE WHEN LEN([mcs_notes]) >= 101 THEN SUBSTRING([mcs_notes],0,100) +  '...' ELSE [mcs_notes] END AS[mcs_notes]
 ,[mcs_sequence]
-,[mcs_status]
+,[mcs_status]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
 ,[mcs_subtask] 
 FROM[managementconsulting_subtask]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -147,7 +150,13 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryp
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'","MCS_SUBTASK":"'&MCS_SUBTASK&'","MCS_NOTES":"'&MCS_NOTES&'","MCS_STATUS":"'&MCS_STATUS&'","MCS_DEPENDENCIES":"'&MCS_DEPENDENCIES&'"}'>
+<cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'"
+								,"MCS_SEQUENCE":"'&MCS_SEQUENCE&'"
+								,"MCS_SUBTASK":"'&MCS_SUBTASK&'"
+ 								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
+								,"MCS_DUEDATE":"'&MCS_DUEDATE&'"
+								,"MCS_ASSIGNEDTO":"'&MCS_ASSIGNEDTO&'"
+ 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

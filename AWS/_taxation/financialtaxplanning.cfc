@@ -77,6 +77,7 @@ SELECT[ftp_id]
 ,[ftp_category]
 ,[ftp_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate]
+,CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice]
 ,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]
@@ -100,10 +101,11 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"FTP_ID":"'&FTP_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
 								,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
-								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
 								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
+								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
+								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
+								,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
 								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
