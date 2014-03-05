@@ -105,8 +105,8 @@
 			<h4>Reporting</h4>
 			<ul>
 			<li><a href="#this.url#/AWS/_clientmanagement/reports/administrativetasks_report.cfm">Administrative Tasks</a></li>
+            <li><a href="#this.url#/AWS/_clientmanagement/reports/clientmaintenance_report.cfm">Client Maintenance</a></li>
        		<li><a href="#this.url#/AWS/_clientmanagement/reports/communications_report.cfm">Communications</a></li>
-       		<li><a href="#this.url#/AWS/_clientmanagement/reports/clientmaintenance_report.cfm">Client Maintenance</a></li>
 			</ul>
 		</div>
 		</div><!-- /cbp-hrsub-inner -->

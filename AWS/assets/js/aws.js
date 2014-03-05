@@ -463,7 +463,7 @@ $.ajaxSetup({cache:false});//Stop ajax cacheing
 
 
 $.datepicker.setDefaults({
-showOn:"both",
+showOn:"button",
 buttonImageOnly:true,
 buttonImage: "https://"+ window.location.hostname + "/AWS/assets/img/datepicker.gif",
 showButtonPanel: true,

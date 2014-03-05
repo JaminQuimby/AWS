@@ -82,8 +82,8 @@
 <div>
 <div><label for="g1_g7_consultingcategory">Consulting Category</label><input type="text" id="g1_g7_consultingcategory" ></div>
 <div><label for="g1_g7_description">Description</label><input type="text" id="g1_g7_description" ></div>
-<div><label for="g1_g7_priority">Priority</label><input type="text" id="g1_g7_priority" ></div>
-<div><label for="g1_g7_estimatedtime">Estimated Time</label><input type="text" id="g1_g7_estimatedtime" ></div>
+<div><label for="g1_g7_priority">Priority</label><input type="text" placeholder="0" id="g1_g7_priority" ></div>
+<div><label for="g1_g7_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g7_estimatedtime" ></div>
 </div>
 <!--- GROUP1 SUBGROUP8 --->
 <h4 onClick='_loadData({"id":"m_id","group":"group1_8","page":"practicemaintenance"});$("#isLoaded_group1_8").val(1);'>Accounting &amp; Consulting Groups</h4>
