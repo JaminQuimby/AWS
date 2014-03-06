@@ -214,6 +214,17 @@ SELECT[fds_id]
 ,[fds_missinginfo]
 ,[fds_compilemi]
 ,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
+,CONVERT(VARCHAR(10),[fds_obtaininfo_datecompleted], 101)AS[fds_obtaininfo_datecompleted]
+,CONVERT(VARCHAR(10),[fds_sort_datecompleted], 101)AS[fds_sort_datecompleted]
+,CONVERT(VARCHAR(10),[fds_checks_datecompleted], 101)AS[fds_checks_datecompleted]
+,CONVERT(VARCHAR(10),[fds_sales_datecompleted], 101)AS[fds_sales_datecompleted]
+,CONVERT(VARCHAR(10),[fds_entry_datecompleted], 101)AS[fds_entry_datecompleted]
+,CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 101)AS[fds_reconcile_datecompleted]
+,CONVERT(VARCHAR(10),[fds_compile_datecompleted], 101)AS[fds_compile_datecompleted]
+,CONVERT(VARCHAR(10),[fds_review_datecompleted], 101)AS[fds_review_datecompleted]
+,CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 101)AS[fds_assembly_datecompleted]
+,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101)AS[fds_delivery_datecompleted]
+,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101)AS[fds_acctrpt_datecompleted]
 FROM[v_financialDataStatus]
 WHERE[fds_status] != 2 
 AND [fds_status] != 5
@@ -236,7 +247,18 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
 								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
-								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
+								,"FDS_OBTAININFO_DATECOMPLETED":"'&FDS_OBTAININFO_DATECOMPLETED&'"
+								,"FDS_SORT_DATECOMPLETED":"'&FDS_SORT_DATECOMPLETED&'"
+								,"FDS_CHECKS_DATECOMPLETED":"'&FDS_CHECKS_DATECOMPLETED&'"
+								,"FDS_SALES_DATECOMPLETED":"'&FDS_SALES_DATECOMPLETED&'"
+								,"FDS_ENTRY_DATECOMPLETED":"'&FDS_ENTRY_DATECOMPLETED&'"
+								,"FDS_RECONCILE_DATECOMPLETED":"'&FDS_RECONCILE_DATECOMPLETED&'"
+								,"FDS_COMPILE_DATECOMPLETED":"'&FDS_COMPILE_DATECOMPLETED&'"
+								,"FDS_REVIEW_DATECOMPLETED":"'&FDS_REVIEW_DATECOMPLETED&'"
+								,"FDS_ASSEMBLY_DATECOMPLETED":"'&FDS_ASSEMBLY_DATECOMPLETED&'"
+								,"FDS_DELIVERY_DATECOMPLETED":"'&FDS_DELIVERY_DATECOMPLETED&'"
+								,"FDS_ACCTRPT_DATECOMPLETED":"'&FDS_ACCTRPT_DATECOMPLETED&'"
+
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

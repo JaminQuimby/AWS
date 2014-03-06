@@ -27,9 +27,12 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,PA_TAXYEARS:{title:'Tax Years'}
 			,PA_TAXFORMSTEXT:{title:'Tax Forms'}
-			,PA_PREPARERSTEXT:{title:'Preparers'}
+			,PA_TAXMATTERSTEXT:{title:'Tax Matters'}
+			,PA_PREPARERSTEXT:{title:'Preparers',width:'1%'}
+			,PA_STATUSTEXT:{title:'Status'}			
 			,PA_DATESIGNEDBYCLIENT:{title:'Date Signed',width:'1%'}
 			,PA_DATESENTTOIRS:{title:'Date Sent',width:'1%'}
+			,PA_DATEOFREVOCATION:{title:'Date of revocation',width:'1%'}		
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"7"}',

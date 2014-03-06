@@ -7,7 +7,7 @@ _group2=function(){_grid2()}
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"notices.cfc",
-	"title":"Notice Matter",
+	"title":"Notice Matters",
 	"fields":{NM_ID:{key:true,list:false,edit:false}
 ,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.NM_ID+"',page:'notices',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -21,7 +21,7 @@ _grid1=function(){_jGrid({
 _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"notices.cfc",
-	"title":"Notice",
+	"title":"Notices",
 	"fields":{N_ID:{key:true,list:false,edit:false}
 ,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,NM_NAME:{title:'Notice'}

@@ -70,7 +70,10 @@ var grid1_config = [
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
-			,FDS_MONTHTEXT:{title:'Month'}
+			,FDS_MONTHTEXT:{title:'Period'}
+			,FDS_PERIODEND:{title:'Period End',width:'1%'}
+			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
+			,FDS_STATUSTEXT:{title:'Status'}
 			,FDS_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_COMPILEMI:{title:'Compile Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_OBTAININFO:{title:'Info',width:'1%'}
@@ -84,6 +87,8 @@ var grid1_config = [
 			,FDS_ASSEMBLY:{title:'Assembled',width:'1%'}
 			,FDS_DELIVERY:{title:'Delivered',width:'1%'}
 			,FDS_ACCTRPT:{title:'Report',width:'1%'}
+			,FDS_FEES:{title:'Fees'}
+			,FDS_PAIDTEXT:{title:'Paid'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"5"}',

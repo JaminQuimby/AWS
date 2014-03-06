@@ -13,12 +13,25 @@ _grid1=function(){_jGrid({
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
-			,FDS_MONTHTEXT:{title:'Month'}
+			,FDS_MONTHTEXT:{title:'Period'}
 			,FDS_PERIODEND:{title:'Period End',width:'1%'}
 			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
 			,FDS_STATUSTEXT:{title:'Status'}
 			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_OBTAININFO_DATECOMPLETED:{title:'Information',width:'1%'}
+			,FDS_SORT_DATECOMPLETED:{title:'Sort',width:'1%'}
+			,FDS_CHECKS_DATECOMPLETED:{title:'Checks',width:'1%'}
+			,FDS_SALES_DATECOMPLETED:{title:'Sales',width:'1%'}
+			,FDS_ENTRY_DATECOMPLETED:{title:'Entry',width:'1%'}
+			,FDS_RECONCILE_DATECOMPLETED:{title:'Reconciliation',width:'1%'}
+			,FDS_COMPILE_DATECOMPLETED:{title:'Compilation',width:'1%'}
+			,FDS_REVIEW_DATECOMPLETED:{title:'Review',width:'1%'}
+			,FDS_ASSEMBLY_DATECOMPLETED:{title:'Assembly',width:'1%'}
+			,FDS_DELIVERY_DATECOMPLETED:{title:'Delivery',width:'1%'}
+			,FDS_ACCTRPT_DATECOMPLETED:{title:'Report',width:'1%'}
+ 
+
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"5"}',
@@ -34,7 +47,7 @@ _grid2=function(){_jGrid({
 			,fdss_subtaskTEXT:{title:'Subtask'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"5"}',
 	"functions":'$("#subtask1_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"financialstatements"});'
 	})};
 _loadAssets=function(){

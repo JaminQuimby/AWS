@@ -12,8 +12,8 @@ _group1=function(){}
 			,PA_TAXYEARS:{title:'Tax Years'}
 			,PA_TAXFORMSTEXT:{title:'Tax Forms'}
 			,PA_TAXMATTERSTEXT:{title:'Tax Matters'}
-			,PA_STATUSTEXT:{title:'Status'}
 			,PA_PREPARERSTEXT:{title:'Preparers',width:'1%'}
+			,PA_STATUSTEXT:{title:'Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"7"}',
