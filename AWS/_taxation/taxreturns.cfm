@@ -51,7 +51,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3');_addNewTask();">Add</a>
+<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["g2_status"],"DATA":[[4]]},"list":"g2_status","page":"taxreturns"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2,group3");_addNewTask();'>Add</a>
 </div></div></div>
 <!--- GROUP1 --->
 <div id="group1" class="gf-checkbox">
@@ -66,14 +66,14 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
 	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 	<div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline"></div>
-	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime" ></div>
+	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" placeholder="0"  class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_esttime">Estimated Time</label><input type="text" placeholder="0" id="g1_esttime" ></div>
 	<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
     <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 	<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
 	<div><label for="g1_extensiondone">Extension Completed</label><input type="text" class="date" id="g1_extensiondone" ></div>
-	<div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
