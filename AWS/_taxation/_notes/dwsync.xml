@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<<<<<<< HEAD
 <file name="financialtaxplanning.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371385925867435" remote="130371386070000000" />
 <file name="financialtaxplanning.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130385261588179590" remote="130385261650000000" />
 <file name="financialtaxplanning.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371284876597747" remote="130371364090000000" />
@@ -11,20 +10,6 @@
 <file name="powerofattorney.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130385266521361752" remote="130385266620000000" />
 <file name="powerofattorney.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371294304436989" remote="130371364040000000" />
 <file name="taxreturns.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371344939763164" remote="130371345010000000" />
-<file name="taxreturns.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130385272111031463" remote="130385272180000000" />
+<file name="taxreturns.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130386093741868909" remote="130386093810000000" />
 <file name="taxreturns.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130373918050007835" remote="130373918170000000" />
-=======
-<file name="financialtaxplanning.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371385925867435" remote="130371386070000000" Dst="-1" />
-<file name="financialtaxplanning.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130385185171928831" remote="130385185220000000" Dst="-1" />
-<file name="financialtaxplanning.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371284876597747" remote="130371364090000000" Dst="-1" />
-<file name="notices.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130374263913008157" remote="130374264010000000" Dst="-1" />
-<file name="notices.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130385185105405026" remote="130385185170000000" Dst="-1" />
-<file name="notices.js" server="https://ftp.awensa.com/MS/MS0213/" local="130385249411105029" remote="130385249850000000" Dst="1" />
-<file name="powerofattorney.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130385250285775057" remote="130385250730000000" Dst="1" />
-<file name="powerofattorney.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130371726903312468" remote="130371726990000000" Dst="-1" />
-<file name="powerofattorney.js" server="https://ftp.awensa.com/MS/MS0213/" local="130385250305626192" remote="130385250680000000" Dst="1" />
-<file name="taxreturns.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371344939763164" remote="130371345010000000" Dst="-1" />
-<file name="taxreturns.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130371728682164212" remote="130371728780000000" Dst="-1" />
-<file name="taxreturns.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130373918050007835" remote="130373918170000000" Dst="-1" />
->>>>>>> 6b730fc11e1bab890c352ab0f17590603431f57b
 </dwsync>

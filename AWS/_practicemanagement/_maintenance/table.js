@@ -1,12 +1,16 @@
 $(document).ready(function(){
 _grid1(jqMessage({message:"Changes to select boxes effects the dropdown select options for your entire company.",type: "warning",autoClose: false}));
 _group1=function(){}
-_group2=function(){_grid2();}
+_group2=function(){_grid2();_clearfields();}
 });
+
 $('#opt_OtherFilings').hide();
+$('#opt_TaxReturnsSchedule').hide();
+
 _options=function(id){
 	switch(id){
 	case'10':$('#opt_OtherFilings').show(); break; 
+	case'35':$('#opt_TaxReturnsSchedule').show(); break;
 	}};
 	
 _grid1=function(){_jGrid({
@@ -42,7 +46,15 @@ switch(query.COLUMNS[0]){
 if($("#task_id").val() == '10'){
 var list=list+',opt_State,opt_FilingDeadline,opt_ExtensionDeadline';	
 	}
+	
+if($("#task_id").val() == '35'){
+var list=list+',opt_Form';	
+alert(list)
+	}	
+	
 _loadit({"query":query,"list":list,"page":"table"});break;
+
+
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
@@ -66,7 +78,11 @@ $("#g2_optionHide").val()+'","'+
 $("#opt_State").val()+'","'+
 $("#opt_FilingDeadline").val()+'","'+
 $("#opt_ExtensionDeadline").val()+'","'
-:one=1)+
+:one='')+
+
+(($("#task_id").val() == '35' )?
+$("#opt_Form").val()+'","'
+:one='')+
 
 '","'+
 '","'+

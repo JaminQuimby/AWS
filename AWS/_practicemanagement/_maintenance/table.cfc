@@ -119,21 +119,8 @@ SELECT SCOPE_IDENTITY()AS[select_id]
 </cfcatch>
 </cftry>
 </cfif>
-<!---4
 
-$("#subtask1_id").val()+'","'+
-$("#task_id").val()+'","'+
-'ROWCOUNT'+'","'+
-$("#g2_optionName").val()+'","'+
-$("#g2_optionDescription").val()+'","'+
-$("#g2_optionGroup").val()+'","'+
 
-(($("#task_id").val() == '10' )?
-$("#opt_State").val()+'","'+
-$("#opt_FilingDeadline").val()+'","'+
-$("#opt_ExtensionDeadline").val()+'","'
-:one=1)+
---->
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
@@ -142,10 +129,10 @@ SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq
 ,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[optionGroup]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[optionHide]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-<cfif isDefined(j.DATA[1][8])>,[option_1]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/></cfif>
-<cfif isDefined(j.DATA[1][9])>,[option_2]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/></cfif>
-<cfif isDefined(j.DATA[1][10])>,[option_3]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/></cfif>
-<cfif isDefined(j.DATA[1][11])>,[option_4]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/></cfif>
+,[option_1]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[option_2]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[option_3]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[option_4]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 WHERE[select_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
