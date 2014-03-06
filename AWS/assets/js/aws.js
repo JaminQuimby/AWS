@@ -442,6 +442,17 @@ case"none":re=/^none|^None|^null|^Null|^empty|^Empty|^0/;if(is.match(re)){return
 default:return false;
 }}
 
+_clearfields=function(params){
+	var options = {
+	"sel":"",
+	"list":"",
+	}
+	$.extend(true, options, params);//turn options into array
+	var list=options['list'].split(',');//Split List
+	var sel=options['sel'].split(',');//Split List
+		for(var i=0;i<list.length;i++){$('#'+list[i]).val('');}
+		for(var i=0;i<sel.length;i++){$('#'+sel[i]).val('').trigger("liszt:updated");} 
+	}
 	
 _loadSelect=function(params){
 var options={"selectName":"","selectObject":"","page":""}

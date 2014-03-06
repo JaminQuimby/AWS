@@ -1,7 +1,9 @@
 $(document).ready(function(){
 _grid1();
 _group1=function(){}
-_group2=function(){_grid2()}
+_group2=function(){_grid2();_clearfields({"list":"subtask1_id,g2_completed,g2_duedate,g2_notes,g2_sequence","sel":"g2_assignedto,g2_status,g2_subtask,g2_dependencies"})}
+
+
 });
 
 _grid1=function(){_jGrid({
@@ -73,7 +75,7 @@ switch(query.COLUMNS[0]){
 /*Group1_11*/case "FDS_ACCTRPT_ASSIGNEDTO":var list='g1_g11_assignedto,g1_g11_completedby,g1_g11_datecompleted,g1_g11_estimatedtime';_loadit({"query":query,"list":list});break;
 
 
-/*Group2*/case "FDSS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
+/*Group2*/case "FDSS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask,g2_dependencies';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
@@ -245,6 +247,7 @@ $("#g2_notes").val()+'","'+
 $("#g2_sequence").val()+'","'+
 $("#g2_status").val()+'","'+
 $("#g2_subtask").val()+'","'+
+$("#g2_dependencies").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"financialstatements"})}
 else{_saveDataCB({'group':'plugins'})}

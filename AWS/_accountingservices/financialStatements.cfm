@@ -158,9 +158,9 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 
 <!--- SubTasks Group --->
 <div id="group2" class="gf-checkbox" >
-	<h3 onClick="_grid2();">Subtasks</h3>
+	<h3 onClick="_group2();">Subtasks</h3>
 	<div>
-    	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
+    	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_group2();" onKeyPress="if(event.keyCode==13){_group2();}"/></div>
 		<div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox">
 		<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
@@ -171,7 +171,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
     	<div><label for="g2_subtask">SubTask</label><select id="g2_subtask" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g2_sequence">Sequence</label><input type="text" id="g2_sequence"  /></div>
 		<div><label for="g2_status">Status</label><select id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    	<div><label for="g2_dependencies">Dependencies</label><select id="g2_dependencies" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>		
+        <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date"/></div>
 		<div><label for="g2_completed">Completed</label><input type="text" id="g2_completed"  class="date" /></div>
 		<div><label for="g2_notes">Notes</label><textarea id="g2_notes" cols="4" rows="4"  maxlength="1000" ></textarea></div>
