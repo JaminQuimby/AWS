@@ -40,7 +40,7 @@
 </div>
 <!--- OPTIONS --->
 <div id="group2" class="gf-checkbox">
-<h3 onClick="_group2()">Select Options</h3>
+<h3 onClick="_group2();">Select Options</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_group2();"/></div>
 <div class="tblGrid" id="grid2"></div>

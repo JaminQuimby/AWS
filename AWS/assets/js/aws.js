@@ -73,7 +73,7 @@ _toCSV=function($table, filename) {
 _addNewTask=function(){
 if($('#task_id').val()==0){
 	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
-	 $('label').siblings(':disabled').prop('disabled', false).trigger("liszt:updated");
+	 $('label').siblings(':disabled').prop('disabled', false).trigger("chosen:updated");
 	 $('label').siblings(':disabled').prop('disabled', false);	 
 }}
 _schk=function(i){
@@ -81,7 +81,7 @@ if(user["role"]==1){
 if($('#'+i).is(":disabled")){
 	$('label[for="'+i+'"] i').removeClass('fa-lock').addClass('fa-unlock');
 	if($('#'+i).is('select')){
-	$('#'+i).prop("disabled", false).trigger("liszt:updated");
+	$('#'+i).prop("disabled", false).trigger("chosen:updated");
 	}else{$('#'+i).prop("disabled", false);}
 }}}
 _toReport=function(data,config){
@@ -353,9 +353,10 @@ try{if(options['query'].DATA!=""){
 				case"select-one":
 				$("#"+list[i]+' option').each(function(index){
 					if(options['query'].DATA[0][i]==$(this).val()){
-						$(this).attr('selected', true);
+						$(this).attr('selected', true)
+						$(this).prop('selected', true);
 	}})
-	$('#'+list[i]).trigger("liszt:updated");
+	$('#'+list[i]).trigger("chosen:updated");
 	break;
 				case"select-multiple":
 				var str=options['query'].DATA[0][i]+",";
@@ -365,8 +366,9 @@ try{if(options['query'].DATA!=""){
 					for(var i=0;i<sstr.length;i++){
 						if(sstr[i]==$(this).val()){
 							$(this).attr('selected', true);
+							$(this).prop('selected', true);
 	}}})
-	$('#'+list[i]).trigger("liszt:updated");
+	$('#'+list[i]).trigger("chosen:updated");
 	}
 	break;
 				case undefined:/*Detection for undefined objects such as <LABEL>*/
@@ -451,7 +453,14 @@ _clearfields=function(params){
 	var list=options['list'].split(',');//Split List
 	var sel=options['sel'].split(',');//Split List
 		for(var i=0;i<list.length;i++){$('#'+list[i]).val('');}
-		for(var i=0;i<sel.length;i++){$('#'+sel[i]).val('').trigger("liszt:updated");} 
+		for(var i=0;i<sel.length;i++){
+			
+$('#'+sel[i]).find('option').prop('selected',false)
+$('#'+sel[i]).each(function(){
+$('#'+sel[i]+' option').removeAttr("selected"); });
+
+			
+			} 
 	}
 	
 _loadSelect=function(params){

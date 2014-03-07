@@ -199,11 +199,11 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 
 <!--- Group3 --->
 <div id="group3" class="gf-checkbox">
-<h3 onClick="_grid3();">Schedule</h3>
+<h3 onClick="_group3();">Schedule</h3>
 <div>
 <div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
-<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a></div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"g3_schedule","selectObject":"","page":"taxreturns"});'>Add</a></div>
 </div>
 <h4 onClick='_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});$("#isLoaded_group3").val(1);'>Add Schedule</h4>
 <div>

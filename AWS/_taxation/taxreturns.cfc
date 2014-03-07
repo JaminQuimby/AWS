@@ -5,6 +5,21 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
+<cffunction name="f_loadSelect" access="remote" output="false">
+<cfargument name="selectName" type="string" required="yes">
+<cfquery dbtype="query" name="fquery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxreturnschedule'</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="data">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
+
 
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 _grid1(jqMessage({message:"Changes to select boxes effects the dropdown select options for your entire company.",type: "warning",autoClose: false}));
 _group1=function(){}
-_group2=function(){_grid2();_clearfields();}
+_group2=function(){_clearfields({"sel":"opt_Form,g2_optionGroup,g2_optionHide","list":"g2_optionName,g2_optionDescription"});_grid2();}
 });
 
 $('#opt_OtherFilings').hide();
@@ -48,8 +48,7 @@ var list=list+',opt_State,opt_FilingDeadline,opt_ExtensionDeadline';
 	}
 	
 if($("#task_id").val() == '35'){
-var list=list+',opt_Form';	
-alert(list)
+var list=list+',opt_Form';
 	}	
 	
 _loadit({"query":query,"list":list,"page":"table"});break;
