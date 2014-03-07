@@ -145,11 +145,11 @@ SELECT[pc_id]
 ,[pc_missinginfo]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
-,[pc_obtaininfo_assignedtoTEXT]
-,[pc_preparation_assignedtoTEXT]
-,[pc_review_assignedtoTEXT]
-,[pc_assembly_assignedtoTEXT]
-,[pc_delivery_assignedtoTEXT]
+,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
+,CONVERT(VARCHAR(8),[pc_preparation_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_preparation_assignedtoTEXT]) AS [pc_preparation]
+,CONVERT(VARCHAR(8),[pc_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_review_assignedtoTEXT]) AS [pc_review]
+,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
+,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -173,11 +173,11 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
-								,"PC_OBTAININFO_ASSIGNEDTOTEXT":"'&PC_OBTAININFO_ASSIGNEDTOTEXT&'"
-								,"PC_PREPARATION_ASSIGNEDTOTEXT":"'&PC_PREPARATION_ASSIGNEDTOTEXT&'"
-								,"PC_REVIEW_ASSIGNEDTOTEXT":"'&PC_REVIEW_ASSIGNEDTOTEXT&'"
-								,"PC_ASSEMBLY_ASSIGNEDTOTEXT":"'&PC_ASSEMBLY_ASSIGNEDTOTEXT&'"
-								,"PC_DELIVERY_ASSIGNEDTOTEXT":"'&PC_DELIVERY_ASSIGNEDTOTEXT&'"
+								,"PC_OBTAININFO":"'&PC_OBTAININFO&'"
+								,"PC_PREPARATION":"'&PC_PREPARATION&'"
+								,"PC_REVIEW":"'&PC_REVIEW&'"
+								,"PC_ASSEMBLY":"'&PC_ASSEMBLY&'"
+								,"PC_DELIVERY":"'&PC_DELIVERY&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

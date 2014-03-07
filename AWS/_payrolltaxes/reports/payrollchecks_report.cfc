@@ -28,6 +28,8 @@ SELECT
 ,[pc_missinginfo] 
 ,CONVERT(VARCHAR(8),[pc_duedate], 1)AS[pc_duedate]
 ,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
+,CONVERT(VARCHAR(8),[pc_preparation_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_preparation_assignedtoTEXT]) AS [pc_preparation]
+,CONVERT(VARCHAR(8),[pc_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_review_assignedtoTEXT]) AS [pc_review]
 ,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
 ,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
 ,FORMAT(pc_fees, 'C', 'en-us')AS[pc_fees]
@@ -94,6 +96,8 @@ WHERE(1)=(1)
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								,"PC_MISSINGINFORECEIVED":"'&PC_MISSINGINFORECEIVED&'"
 								,"PC_OBTAININFO":"'&PC_OBTAININFO&'"
+								,"PC_PREPARATION":"'&PC_PREPARATION&'"
+								,"PC_REVIEW":"'&PC_REVIEW&'"
 								,"PC_ASSEMBLY":"'&PC_ASSEMBLY&'"
 								,"PC_DELIVERY":"'&PC_DELIVERY&'"
 								,"PC_FEES":"'&PC_FEES&'"

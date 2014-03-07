@@ -21,19 +21,17 @@ _grid1=function(){_jGrid({
 			,FDS_STATUSTEXT:{title:'Status'}
 			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FDS_OBTAININFO_DATECOMPLETED:{title:'Information',width:'1%'}
-			,FDS_SORT_DATECOMPLETED:{title:'Sort',width:'1%'}
-			,FDS_CHECKS_DATECOMPLETED:{title:'Checks',width:'1%'}
-			,FDS_SALES_DATECOMPLETED:{title:'Sales',width:'1%'}
-			,FDS_ENTRY_DATECOMPLETED:{title:'Entry',width:'1%'}
-			,FDS_RECONCILE_DATECOMPLETED:{title:'Reconciliation',width:'1%'}
-			,FDS_COMPILE_DATECOMPLETED:{title:'Compilation',width:'1%'}
-			,FDS_REVIEW_DATECOMPLETED:{title:'Review',width:'1%'}
-			,FDS_ASSEMBLY_DATECOMPLETED:{title:'Assembly',width:'1%'}
-			,FDS_DELIVERY_DATECOMPLETED:{title:'Delivery',width:'1%'}
-			,FDS_ACCTRPT_DATECOMPLETED:{title:'Report',width:'1%'}
- 
-
+			,FDS_OBTAININFO:{title:'Info',width:'1%'}
+			,FDS_SORT:{title:'Sort',width:'1%'}
+			,FDS_CHECKS:{title:'Checks',width:'1%'}
+			,FDS_SALES:{title:'Sales',width:'1%'}
+			,FDS_ENTRY:{title:'Entry',width:'1%'}
+			,FDS_RECONCILE:{title:'Reconciliation',width:'1%'}
+			,FDS_COMPILE:{title:'Compiliation',width:'1%'}
+			,FDS_REVIEW:{title:'Review',width:'1%'}
+			,FDS_ASSEMBLY:{title:'Assembly ',width:'1%'}
+			,FDS_DELIVERY:{title:'Delivery',width:'1%'}
+			,FDS_ACCTRPT:{title:'Report',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"5"}',
@@ -46,7 +44,11 @@ _grid2=function(){_jGrid({
 	"title":"Subtasks",
 	"fields":{FDSS_ID:{key:true,list:false,edit:false}
 ,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDSS_ID+"',page:'financialstatements',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,fdss_subtaskTEXT:{title:'Subtask'}
+			,FDSS_SEQUENCE:{title:'Sequence'}
+			,FDSS_SUBTASKTEXT:{title:'Subtask'}
+			,FDSS_DUEDATE:{title:'Due Date'}
+			,FDSS_STATUS:{title:'Status'}
+			,FDSS_ASSIGNEDTO:{title:'Assigned To'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"5"}',

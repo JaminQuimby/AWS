@@ -63,6 +63,7 @@ SELECT TOP 1000 [of_id]
 SELECT[of_id]
 ,CONVERT(VARCHAR(8),[of_duedate], 1)AS[of_duedate]
 ,[of_taxyear]
+,[of_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_type]=[optionvalue_id])
 ,[of_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[of_paid]=[optionvalue_id])
 ,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
@@ -76,6 +77,7 @@ SELECT[of_id]
 ,CONVERT(VARCHAR(8),[of_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_assembly_assignedtoTEXT) AS [of_assembly]
 ,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_delivery_assignedtoTEXT) AS [of_delivery]
 ,FORMAT(of_fees, 'C', 'en-us')AS[of_fees]
+,[of_filingdeadline]
 ,[of_esttime]
 ,[client_name]
 ,[client_id]
