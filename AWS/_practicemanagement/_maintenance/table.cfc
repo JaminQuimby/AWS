@@ -44,7 +44,7 @@ ORDER BY [optionName]
 SELECT[selectName_id],[selectName],[selectLabel],[selectDescription],[selectUsedIn],[form_id]
 FROM[ctrl_selectnames]
 WHERE[selectName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-ORDER BY[selectName]
+ORDER BY[selectLabel]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

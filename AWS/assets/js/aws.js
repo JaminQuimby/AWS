@@ -464,18 +464,20 @@ $('#'+sel[i]+' option').removeAttr("selected"); });
 	}
 	
 _loadSelect=function(params){
-var options={"selectName":"","selectObject":"","page":""}
+var options={"selectName":"","selectObject":"","option1":"","page":""}
 $.extend(true, options, params);//turn options into array
 $.ajax({
   type: 'GET',
   url: options['page']+'.cfc?method=f_loadSelect',
-  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName']})
+  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName'],"option1":options['option1']})
   },
  success:function(json){
  var j=$.parseJSON(json),items='';
       for(var i=0;i<j.Records.length;i++){
         items+='<option value="'+ j.Records[i].optionvalue_id+'">'+j.Records[i].optionname+'</option>';
-      }$("select#"+options['selectObject']).html(items)},
+      }$("select#"+options['selectObject']).html(items)
+	  $("select#"+options['selectObject']).trigger("chosen:updated");
+	  },
   error:function(data){errorHandle($.parseJSON(data))}})};
 
 $(document).ready(function(){

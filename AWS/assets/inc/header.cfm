@@ -1,6 +1,6 @@
 <cfheader name="Access-Control-Allow-Origin" value="*">
 <cfparam name="page.type" default="">
-<cfset page.cache.users=CreateTimeSpan(0,0,25,0)>
+<cfset page.cache.users=CreateTimeSpan(0,0,0,0)>
 <cfset page.cache.options=CreateTimeSpan(0,0,0,0)>
 <cfset page.cache.clients=CreateTimeSpan(0,0,0,0)>
 <cfset page.cache.roles=CreateTimeSpan(0,0,25,0)>

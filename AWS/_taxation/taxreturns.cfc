@@ -5,20 +5,35 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
-<cffunction name="f_loadSelect" access="remote" output="false">
-<cfargument name="selectName" type="string" required="yes">
-<cfquery dbtype="query" name="fquery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxreturnschedule'</cfquery>
+
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="6">
+<cfargument name="option1" type="string" default="6">
+
+<cfquery datasource="AWS" name="fquery" >
+SELECT[optionvalue_id],[optionname]
+FROM[v_selectOptions]
+WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND([optionHide]!='#ARGUMENTS.formid#'OR[optionHide]IS NULL)AND[selectName]='#ARGUMENTS.selectName#'
+AND[option_1]='#ARGUMENTS.option1#'
+</cfquery>
+
+
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
-<cfloop query="data">
+<cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+
+
 </cffunction>
+
 
 
 <!--- LOAD DATA --->
@@ -129,6 +144,16 @@ SELECT[trst_id]
 ,[trst_reviewassignedto]
 ,[trst_state]
 ,[trst_status]
+,[trst_requiredforms]
+FROM[v_taxreturns_state]
+WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
+<!--- Load Group 2 State--->
+<cfcase value="group2_state">
+<cfquery datasource="AWS" name="fQuery">
+SELECT[trst_state]
 FROM[v_taxreturns_state]
 WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -167,7 +192,7 @@ SELECT  CONVERT(VARCHAR(10),[trst_2_assemblereturn], 101)AS[trst_2_assembleretur
 ,[trst_2_missingsignatures]
 ,[trst_2_paid]
 ,[trst_2_priorfees]
-,[trst_2_requiredforms]
+
 FROM[v_taxreturns_state]
 WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -567,6 +592,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_reviewassignedto]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_state]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[trst_status]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[trst_requiredforms]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>
@@ -627,7 +653,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[trst_2_paid]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[trst_2_priorfees]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[trst_2_requiredforms]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

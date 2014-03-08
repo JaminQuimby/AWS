@@ -3,6 +3,18 @@ _grid1();
 _group1=function(){}
 _group2=function(){_grid2()}
 _group3=function(){_grid3()}
+
+$( document ).ajaxComplete(function( event, xhr, settings ) {
+if(typeof $.parseJSON(xhr.responseText ).COLUMNS != "undefined"){
+if($.parseJSON(xhr.responseText ).COLUMNS.toString()=='TRST_STATE'){
+	_loadSelect({'selectName':'global_taxreturnsstateforms','selectObject':'g2_requiredforms','option1':$('#g2_state').val(),'page':'taxreturns'});
+	_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});
+	
+
+}
+
+}
+});
 });
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -34,7 +46,7 @@ _grid2=function(){_jGrid({
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"6"}',
-	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});'
+	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2_state","page":"taxreturns"});'
 	})};
 	
 _grid3=function(){_jGrid({
@@ -62,9 +74,10 @@ switch(query.COLUMNS[0]){
 /*Group1_2*/case "TR_2_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completed,g1_g2_informationreceived,g1_g2_preparedby,g1_g2_readyforreview,g1_g2_reviewassignedto,g1_g2_reviewed,g1_g2_reviewedby,g1_g2_reviewedwithnotes';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "TR_3_ASSEMBLERETURN":var list='g1_g3_assemblereturn,g1_g3_contacted,g1_g3_delivered,g1_g3_emailed,g1_g3_messageleft,g1_g3_missingsignatures,g1_g3_multistatereturn';_loadit({"query":query,"list":list});break;
 /*Group1_4*/case "TR_4_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completed,g1_g4_completedby,g1_g4_currentfees,g1_g4_delivered,g1_g4_extended,g1_g4_extensionrequested,g1_g4_paymentstatus,g1_g4_pptresttime,g1_g4_priorfees,g1_g4_required,g1_g4_reviewassigned,g1_g4_reviewed,g1_g4_reviewedby,g1_g4_rfr';_loadit({"query":query,"list":list});break;
-/*Group2*/case "TRST_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_primary,g2_reviewassignedto,g2_state,g2_status';_loadit({"query":query,"list":list});break;
+/*Group2*/case "TRST_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_primary,g2_reviewassignedto,g2_state,g2_status,g2_requiredforms';_loadit({"query":query,"list":list});break;
+/*Group2 State*/case"TRST_STATE":var list='g2_state'; _loadit({"query":query,"list":list});break;
 /*Group2_1*/case "TRST_1_ASSIGNEDTO":var list='g2_g1_assignedto,g2_g1_completed,g2_g1_duedate,g2_g1_informationreceived,g2_g1_missinginforeceived,g2_g1_missinginformation,g2_g1_preparedby,g2_g1_readyforreview,g2_g1_reviewassignedto,g2_g1_reviewed,g2_g1_reviewedby,g2_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
-/*Group2_2*/case "TRST_2_ASSEMBLERETURN":var list='g2_g2_assemblereturn,g2_g2_contacted,g2_g2_currentfees,g2_g2_delivered,g2_g2_deliverymethod,g2_g2_emailed,g2_g2_messageleft,g2_g2_missingsignatures,g2_g2_paymentstatus,g2_g2_priorfees,g2_g2_requiredforms';_loadit({"query":query,"list":list});break;
+/*Group2_2*/case "TRST_2_ASSEMBLERETURN":var list='g2_g2_assemblereturn,g2_g2_contacted,g2_g2_currentfees,g2_g2_delivered,g2_g2_deliverymethod,g2_g2_emailed,g2_g2_messageleft,g2_g2_missingsignatures,g2_g2_paymentstatus,g2_g2_priorfees';_loadit({"query":query,"list":list});break;
 /*Group2_3*/case "TRST_3_PPTRASSIGNEDTO":var list='g2_g3_assignedto,g2_g3_completed,g2_g3_currentfees,g2_g3_delivered,g2_g3_extended,g2_g3_paymentstatus,g2_g3_priorfees,g2_g3_required,g2_g3_rfr';_loadit({"query":query,"list":list});break;
 /*Group3*/case "TRSC_ID":var list='subtask2_id,g3_assignedto,g3_reviewassignedto,g3_schedule,g3_status';_loadit({"query":query,"list":list});break;
 /*Group3_1*/case "TRSC_1_ASSIGNEDTO":var list='g3_g1_assignedto,g3_g1_completed,g3_g1_duedate,g3_g1_informationreceived,g3_g1_missinginforeceived,g3_g1_missinginformation,g3_g1_preparedby,g3_g1_readyforreview,g3_g1_reviewassignedto,g3_g1_reviewed,g3_g1_reviewedby,g3_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
@@ -183,6 +196,7 @@ $("#g2_primary").is(':checked')+',"'+
 $("#g2_reviewassignedto").val()+'","'+
 $("#g2_state").val()+'","'+
 $("#g2_status").val()+'","'+
+$("#g2_requiredforms").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2").val()!=0){
 if($("#g2_state").val()==0){jqMessage({message: "You must choose a state.",type: "info",autoClose: true})}
@@ -225,7 +239,7 @@ $("#g2_g2_messageleft").is(':checked')+','+
 $("#g2_g2_missingsignatures").is(':checked')+',"'+
 $("#g2_g2_paymentstatus").val()+'","'+
 $("#g2_g2_priorfees").val()+'","'+
-$("#g2_g2_requiredforms").val()+'","'+
+
 '"]]}'
 if($("#isLoaded_group2_2").val()!=0){_saveData({group:"group2_2","payload":$.parseJSON(json),page:"taxreturns"})}
 else{_saveDataCB({'group':'group2_3'})};
