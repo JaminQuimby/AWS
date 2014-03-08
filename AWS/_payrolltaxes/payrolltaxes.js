@@ -17,12 +17,12 @@ _grid1=function(){_jGrid({
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,PT_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Information Assigned To',width:'1%',visibility: 'hidden'}
-			,PT_ENTRY_ASSIGNEDTOTEXT:{title:'Entry Assigned To',width:'1%',visibility: 'hidden'}
-			,PT_REC_ASSIGNEDTOTEXT:{title:'Reconciliation Assigned To',width:'1%',visibility: 'hidden'}
-			,PT_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%',visibility: 'hidden'}
-			,PT_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%',visibility: 'hidden'}
-			,PT_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%',visibility: 'hidden'}
+			,PT_OBTAININFO:{title:'Information',width:'1%'}
+			,PT_ENTRY:{title:'Entry',width:'1%'}
+			,PT_REC:{title:'Reconciliation',width:'1%'}
+			,PT_REVIEW:{title:'Review',width:'1%'}
+			,PT_ASSEMBLY:{title:'Assembled',width:'1%'}
+			,PT_DELIVERY:{title:'Delivery',width:'1%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"13"}',

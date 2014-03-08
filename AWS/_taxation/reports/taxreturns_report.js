@@ -145,7 +145,7 @@ _grid2=function(){_jGrid({
 			,TR_PAIDTEXT:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"6"}',
 	"functions":''
 	})};
 

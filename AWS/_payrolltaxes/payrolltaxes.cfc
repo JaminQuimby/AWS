@@ -159,12 +159,13 @@ SELECT[pt_id]
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
 ,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
-,[pt_obtaininfo_assignedtoTEXT]
-,[pt_entry_assignedtoTEXT]
-,[pt_rec_assignedtoTEXT]
-,[pt_review_assignedtoTEXT]
-,[pt_assembly_assignedtoTEXT]
-,[pt_delivery_assignedtoTEXT]
+,CONVERT(VARCHAR(8),[pt_missinginforeceived], 1)AS[pt_missinginforeceived]
+,CONVERT(VARCHAR(8),pt_obtaininfo_datecompleted,1)+'<br />'+CONVERT(VARCHAR(5),pt_obtaininfo_assignedtoTEXT) AS [pt_obtaininfo]
+,CONVERT(VARCHAR(8),pt_entry_datecompleted,1)+'<br />'+CONVERT(VARCHAR(5),pt_entry_assignedtoTEXT) AS [pt_entry]
+,CONVERT(VARCHAR(8),pt_rec_datecompleted,1)+'<br />'+CONVERT(VARCHAR(5),pt_rec_assignedtoTEXT) AS [pt_rec]
+,CONVERT(VARCHAR(8),[pt_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),pt_review_assignedtoTEXT) AS [pt_review]
+,CONVERT(VARCHAR(8),[pt_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),pt_assembly_assignedtoTEXT) AS [pt_assembly]
+,CONVERT(VARCHAR(8),[pt_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),pt_delivery_assignedtoTEXT) AS [pt_delivery]
 ,CONVERT(VARCHAR(8),[pt_missinginforeceived], 1)AS[pt_missinginforeceived]
 ,[pt_missinginfo]
 ,[client_name]
@@ -191,12 +192,12 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
  								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
  								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
-								,"PT_OBTAININFO_ASSIGNEDTOTEXT":"'&PT_OBTAININFO_ASSIGNEDTOTEXT&'"
-								,"PT_ENTRY_ASSIGNEDTOTEXT":"'&PT_ENTRY_ASSIGNEDTOTEXT&'"
-								,"PT_REC_ASSIGNEDTOTEXT":"'&PT_REC_ASSIGNEDTOTEXT&'"
-								,"PT_REVIEW_ASSIGNEDTOTEXT":"'&PT_REVIEW_ASSIGNEDTOTEXT&'"
-								,"PT_ASSEMBLY_ASSIGNEDTOTEXT":"'&PT_ASSEMBLY_ASSIGNEDTOTEXT&'"
-								,"PT_DELIVERY_ASSIGNEDTOTEXT":"'&PT_DELIVERY_ASSIGNEDTOTEXT&'"	
+								,"PT_OBTAININFO":"'&PT_OBTAININFO&'"
+								,"PT_ENTRY":"'&PT_ENTRY&'"
+								,"PT_REC":"'&PT_REC&'"
+								,"PT_REVIEW":"'&PT_REVIEW&'"
+								,"PT_ASSEMBLY":"'&PT_ASSEMBLY&'"
+								,"PT_DELIVERY":"'&PT_DELIVERY&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

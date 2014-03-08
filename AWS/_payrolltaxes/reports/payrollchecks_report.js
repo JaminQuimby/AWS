@@ -57,6 +57,8 @@ var grid1_config = [
 			,PC_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,PC_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}
 			,PC_OBTAININFO:{title:'Information Received',width:'1%'}
+			,PC_PREPARATION:{title:'Preparation',width:'1%'}
+			,PC_REVIEW:{title:'Review',width:'1%'}
 			,PC_ASSEMBLY:{title:'Assembled',width:'1%'}
 			,PC_DELIVERY:{title:'Delivered',width:'1%'}
 			,PC_FEES:{title:'Fees'}
