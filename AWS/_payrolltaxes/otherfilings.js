@@ -17,12 +17,18 @@ _grid1=function(){_jGrid({
 			,OF_TYPETEXT:{title:'Type'}
 			,OF_FORMTEXT:{title:'Form',width:'1%'}
 			,OF_DUEDATE:{title:'Date Due',width:'1%'}
+
+			,OF_STATUSTEXT:{title:'Status'}
+			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
+			,OF_MISSINGINFO:{title:'Missing Information',width:'1%'}
+			,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}				
+								
 			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
-			,OF_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Informtaion Assigned To',width:'1%',visibility:"hidden"}
-			,OF_PREPARATION_ASSIGNEDTOTEXT:{title:'Preparation Assigned To',width:'1%',visibility:"hidden"}
-			,OF_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%',visibility:"hidden"}
-			,OF_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%',visibility:"hidden"}
-			,OF_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%',visibility:"hidden"}						
+			,OF_OBTAININFO:{title:'Obtain Informtaion',width:'1%'}
+			,OF_PREPARATION:{title:'Preparation',width:'1%'}
+			,OF_REVIEW:{title:'Review',width:'1%'}
+			,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,OF_DELIVERY:{title:'Delivery',width:'1%'}						
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"11"}',

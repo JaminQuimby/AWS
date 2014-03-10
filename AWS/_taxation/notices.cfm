@@ -7,7 +7,7 @@
 <cfset page.location="notices">
 <cfset page.formid=8>
 <cfset page.title="Notices">
-<cfset page.menuLeft="General,Notice">
+<cfset page.menuLeft="Matter Detail,Notice">
 <cfset page.trackers="task_id,subtask1_id,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3">
 <cfset page.footer="1">
 <!DOCTYPE html> 
@@ -72,13 +72,13 @@ due date for response
 <div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id"  disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
 <div><label for="g1_mattername"><i class="fa fa-lock link" onClick="_schk('g1_mattername')"></i> Matter Name</label><input type="text" id="g1_mattername" disabled="disabled"> </div>
-<div><label for="g1_matterstatus"><i class="fa fa-lock link" onClick="_schk('g1_matterstatus')"></i> Matter Status</label><select id="g1_matterstatus" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_matterstatus"><i onClick="_schk('g1_matterstatus')"></i> Matter Status</label><select id="g1_matterstatus" ><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <!-- <div style="margin-top:5px;"><a href="#" class="button optional" onClick="_grid1();_toggle('entrance2');_hide('entrance,group2,group3');">Add Notice</a></div> -->
 </div>
 </div>
 
 <div id="group2" class="gf-checkbox">
-<h3 onClick="_grid2();">Notice</h3>
+<h3 onClick="_grid2();">Notices</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>

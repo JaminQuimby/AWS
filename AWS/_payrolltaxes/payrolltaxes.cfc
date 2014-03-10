@@ -155,7 +155,7 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[pt_id]
 ,[pt_year]
 ,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
-
+,CONVERT(VARCHAR(8),[pt_duedate], 1)AS[pt_duedate]
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
 ,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
@@ -190,6 +190,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PT_STATETEXT":"'&PT_STATETEXT&'"
 								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
+								,"PT_DUEDATE":"'&PT_DUEDATE&'"
  								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
  								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
 								,"PT_OBTAININFO":"'&PT_OBTAININFO&'"
