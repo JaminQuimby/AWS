@@ -41,13 +41,17 @@ _grid2=function(){_jGrid({
 	"fields":{TRST_ID:{key:true,list:false,edit:false}
 ,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRST_ID+"',page:'taxreturns',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,TRST_STATETEXT:{title:'State'}
-			,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,TRST_PRIMARY:{title:'Primary'}
 			,TRST_STATUSTEXT:{title:'Status'}
+			,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,TRST_1_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}
+			
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"6"}',
 	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2_state","page":"taxreturns"});'
 	})};
+	
 	
 _grid3=function(){_jGrid({
 	"grid":"grid3",
@@ -57,10 +61,12 @@ _grid3=function(){_jGrid({
 ,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRSC_ID+"',page:'taxreturns',group:'group3'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,TRSC_SCHEDULETEXT:{title:'Schedule'}
 			,TRSC_STATUSTEXT:{title:'Status'}
-			,TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}},
+			,TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,TRSC_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}},
+			
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3","formid":"6"}',
-	"functions":'$("#subtask2_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});'
+	"functions":'$("#subtask2_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"});_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});'
 	})};
 
 _loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"taxreturns"});}

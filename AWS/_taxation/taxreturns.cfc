@@ -321,12 +321,14 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fquery">
 SELECT[tr_id]
-	  ,[trst_id]
-,trst_assignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_assignedto=user_id))
-      ,[trst_state]
+,[trst_id]
 ,trst_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[trst_state]=[optionvalue_id])
-      ,[trst_status]
+,[trst_primary]
 ,trst_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[trst_status]=[optionvalue_id])     
+,trst_assignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_assignedto=user_id))
+,trst_1_reviewassignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_1_reviewassignedto=user_id))
+,[trst_1_completed]
+
 FROM[v_taxreturns_state]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trst_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trst_status]</cfif>
@@ -338,8 +340,11 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trst_status]LIKE <cfquer
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"TRST_ID":"'&TRST_ID&'"
 								,"TRST_STATETEXT":"'&TRST_STATETEXT&'"
+								,"TRST_PRIMARY":"'&TRST_PRIMARY&'"
 								,"TRST_STATUSTEXT":"'&TRST_STATUSTEXT&'"
 								,"TRST_ASSIGNEDTOTEXT":"'&TRST_ASSIGNEDTOTEXT&'"
+								,"TRST_1_REVIEWASSIGNEDTOTEXT":"'&TRST_1_REVIEWASSIGNEDTOTEXT&'"
+								,"TRST_1_COMPLETED":"'&TRST_1_COMPLETED&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -353,9 +358,10 @@ SELECT[tr_id]
 	  ,[trsc_id]
 ,trsc_assignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trsc_assignedto=user_id))
       ,[trsc_schedule]
-,trsc_scheduleTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_timespans'AND[trsc_schedule]=[optionvalue_id])     
+,trsc_scheduleTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxreturnschedule'AND[trsc_schedule]=[optionvalue_id])     
       ,[trsc_status]
 ,trsc_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[trsc_status]=[optionvalue_id])     
+,trsc_reviewassignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trsc_reviewassignedto=user_id))
 FROM[v_taxreturns_schedule]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trsc_status]</cfif>
@@ -369,6 +375,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trsc_status]LIKE <cfquer
 								,"TRSC_SCHEDULETEXT":"'&TRSC_SCHEDULETEXT&'"
 								,"TRSC_STATUSTEXT":"'&TRSC_STATUSTEXT&'"
 								,"TRSC_ASSIGNEDTOTEXT":"'&TRSC_ASSIGNEDTOTEXT&'"
+								,"TRSC_REVIEWASSIGNEDTOTEXT":"'&TRSC_REVIEWASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
