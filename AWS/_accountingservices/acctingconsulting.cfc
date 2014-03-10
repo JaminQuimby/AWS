@@ -329,6 +329,51 @@ WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfif>
 
 </cfcase>
+
+
+
+<!--- Group2 Duplicate --->
+<cfcase value="group2_duplicate">
+<!--- if this is a new record, then insert it--->
+<cfif j.DATA[1][1] eq "0">
+<cftry>
+<cfquery name="fquery" datasource="AWS">
+
+
+<cfset indexNumber=0>
+
+SELECT dropdown values for g2_acctgroup [1][3] *****************************************
+<cfloop index="i" list="#j.DATA[1][3]#">
+<cfset indexNumber = indexNumber + 1 >
+INSERT INTO[managementconsulting_subtask](
+[mc_id]
+,[mcs_sequence] 
+,[mcs_subtask] 
+,[mcs_status]
+)
+VALUES(
+<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
+	,<cfqueryparam value="#indexNumber#"/>
+,<cfqueryparam value="#i#"/>
+,<cfqueryparam value="4"/>
+)
+
+</cfloop>
+
+
+SELECT SCOPE_IDENTITY()AS[mcs_id]
+</cfquery>
+<cfreturn '{"id":#fquery.mcs_id#,"group":"saved","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cfif>
+
+
+</cfcase>
+
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->

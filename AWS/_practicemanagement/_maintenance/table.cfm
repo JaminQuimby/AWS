@@ -15,6 +15,7 @@
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
+<cfquery dbtype="query" name="global_acctsubtasks">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctsubtasks'</cfquery>
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -55,7 +56,10 @@
 
 <div><label for="g2_optionName">Option Name</label><input type="text" id="g2_optionName"></div>
 <!--- OPTIONS --->
-<!--- Other Filings --->
+<div id="opt_AcctConGroups" style="display:none">
+<div><label for="opt_AcctConGroups_Subtasks">Subtasks</label><select id="opt_AcctConGroups_Subtasks" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+</div>
+<!--- Other Filings Forms & Tax Return Forms--->
 <div id="opt_OtherFilings" style="display:none">
 <div><label for="opt_State">State</label><select id="opt_State"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="opt_FilingDeadline">Filing Deadline</label><input type="text" id="opt_FilingDeadline"></div>
@@ -66,6 +70,8 @@
 <div><label for="opt_Form">Form</label><select id="opt_Form"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 
+
+<!--- END Options --->
 <div><label for="g2_optionDescription">Option Description</label><textarea  id="g2_optionDescription" cols="4" rows="4"></textarea></div>
 </div>
 </div>

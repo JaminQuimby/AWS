@@ -114,6 +114,22 @@ if( $("#g2_subtask").val()!=0){
 else{jqMessage({message: "You must select a subtask.",type: "info",autoClose: true})}}
 else{_saveDataCB({'group':'plugins'})}
 break;
+
+case'group2_duplicate':var json='{"DATA":[["'+
+$("#subtask1_id").val()+'","'+
+$("#task_id").val()+'","'+
+$("#g2_acctgroup").val()+'","'+
+
+'"]]}'
+if($("#task_isLoaded").val()!=0){
+
+	_saveData({group:"group2_duplicate",payload:$.parseJSON(json),page:"acctingconsulting"})}
+	
+	
+else{jqMessage({message: "You must select a task.",type: "info",autoClose: true})}
+
+break;
+
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/

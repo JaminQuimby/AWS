@@ -6,12 +6,15 @@ _group2=function(){_clearfields({"sel":"opt_Form,g2_optionGroup,g2_optionHide","
 
 $('#opt_OtherFilings').hide();
 $('#opt_TaxReturnsSchedule').hide();
+$('#opt_AcctConGroups').hide();
+
 
 _options=function(id){
 	switch(id){
 	case'10':$('#opt_OtherFilings').show(); break; 
 	case'36':$('#opt_OtherFilings').show(); break; 
 	case'35':$('#opt_TaxReturnsSchedule').show(); break;
+	case'37':$('#opt_AcctConGroups').show(); break;
 	}};
 	
 _grid1=function(){_jGrid({
@@ -52,6 +55,10 @@ if($("#task_id").val() == '35'){
 var list=list+',opt_Form';
 	}	
 	
+if($("#task_id").val() == '37'){
+var list=list+',opt_AcctConGroups_Subtasks';
+	}	
+	
 _loadit({"query":query,"list":list,"page":"table"});break;
 
 
@@ -82,6 +89,10 @@ $("#opt_ExtensionDeadline").val()+'","'
 
 (($("#task_id").val() == '35' )?
 $("#opt_Form").val()+'","'
+:one='')+
+
+(($("#task_id").val() == '37' )?
+$("#opt_AcctConGroups_Subtasks").val()+'","'
 :one='')+
 
 '","'+

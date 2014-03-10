@@ -31,7 +31,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- IN HEADER <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery> --->
 <cfquery dbtype="query" name="global_consultingcategory">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_consultingcategory'</cfquery>
 <cfquery dbtype="query" name="global_subtask">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctsubtasks'</cfquery>
-
+<cfquery dbtype="query" name="global_acctgroup">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctgroup'</cfquery>
 
 <body>
 <!--- Load Left Menus and trackers --->
@@ -86,6 +86,9 @@ missinginforeceived
 <h3 onClick="_grid2">Subtasks</h3>
 <div>
     	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
+        <div><label for="g2_acctgroup">Group</label><select id="g2_acctgroup"><option value="0">&nbsp;</option><cfoutput query="global_acctgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select>
+        <a href="#" class="button optional" onClick='_saveDataCB({"group":"group2_duplicate"});'>Duplicate Group</a>
+        </div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#subtask_isLoaded").val(1);'>Add</a>
