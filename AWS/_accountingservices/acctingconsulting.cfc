@@ -140,10 +140,11 @@ SELECT
 ,[mcs_assignedto]
 ,[mcs_duedate]
 ,[mcs_sequence]
-,[mcs_status]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
-,[mcs_subtask] 
+,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
+,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
 FROM[managementconsulting_subtask]
-WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND ([mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>OR[mcs_notes]IS NULL)
+ORDER BY [mcs_sequence]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -152,7 +153,7 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[mcs_notes]LIKE <cfqueryp
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'"
 								,"MCS_SEQUENCE":"'&MCS_SEQUENCE&'"
-								,"MCS_SUBTASK":"'&MCS_SUBTASK&'"
+								,"MCS_SUBTASKTEXT":"'&MCS_SUBTASKTEXT&'"
  								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
 								,"MCS_DUEDATE":"'&MCS_DUEDATE&'"
 								,"MCS_ASSIGNEDTO":"'&MCS_ASSIGNEDTO&'"
@@ -337,30 +338,16 @@ WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
+
+<cfquery name="aquery" datasource="AWS">
+SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='37'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
+</cfquery>
 <cfquery name="fquery" datasource="AWS">
-
-
 <cfset indexNumber=0>
-
-SELECT dropdown values for g2_acctgroup [1][3] *****************************************
-<cfloop index="i" list="#j.DATA[1][3]#">
+<cfloop index="i" list="#aquery.option_1#">
 <cfset indexNumber = indexNumber + 1 >
-INSERT INTO[managementconsulting_subtask](
-[mc_id]
-,[mcs_sequence] 
-,[mcs_subtask] 
-,[mcs_status]
-)
-VALUES(
-<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
-	,<cfqueryparam value="#indexNumber#"/>
-,<cfqueryparam value="#i#"/>
-,<cfqueryparam value="4"/>
-)
-
+INSERT INTO[managementconsulting_subtask]([mc_id],[mcs_sequence],[mcs_subtask],[mcs_status])VALUES(<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>,<cfqueryparam value="#indexNumber#"/>,<cfqueryparam value="#i#"/>,<cfqueryparam value="4"/>)
 </cfloop>
-
-
 SELECT SCOPE_IDENTITY()AS[mcs_id]
 </cfquery>
 <cfreturn '{"id":#fquery.mcs_id#,"group":"saved","result":"ok"}'>

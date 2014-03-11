@@ -30,7 +30,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <!--- IN HEADER <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery> --->
 <cfquery dbtype="query" name="global_consultingcategory">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_consultingcategory'</cfquery>
-<cfquery dbtype="query" name="global_subtask">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctsubtasks'</cfquery>
+<cfquery dbtype="query" name="global_acctsubtasks">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctsubtasks'</cfquery>
 <cfquery dbtype="query" name="global_acctgroup">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctgroup'</cfquery>
 
 <body>
@@ -87,7 +87,7 @@ missinginforeceived
 <div>
     	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
         <div><label for="g2_acctgroup">Group</label><select id="g2_acctgroup"><option value="0">&nbsp;</option><cfoutput query="global_acctgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select>
-        <a href="#" class="button optional" onClick='_saveDataCB({"group":"group2_duplicate"});'>Duplicate Group</a>
+        <a href="#" class="button optional" onClick='jqMessage({message: "Warning: Would you like to import the selected group?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_duplicate\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})'>Duplicate Group</a>
         </div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
@@ -97,12 +97,12 @@ missinginforeceived
 <h4 onClick='_loadData({"id":"task_id","group":"group2","page":"acctingconsulting"});$("#subtask_isLoaded").val(1);'>Add Subtask</h4>
 <div>
 <div><label for="g2_sequence">Sequence</label><input type="text" id="g2_sequence" ></div>
-<div><label for="g2_subtask">Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="global_subtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_subtask">Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_status">Status</label><select  id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date" ></div>
 <div><label for="g2_completed">Completed</label><input type="text" id="g2_completed" class="date" ></div>
-<div><label for="g2_dependancy">Dependencies</label><select  id="g2_dependancy" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_subtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_dependancy">Dependencies</label><select  id="g2_dependancy" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g2_estimatedtime" ></div>
 <div><label for="g2_actualtime">Actual Time</label><input type="text" id="g2_actualtime"></div>
 <div><label for="g2_note">Notes</label><textarea  id="g2_note" cols="4" rows="4"  maxlength="1000" ></textarea></div>

@@ -23,25 +23,25 @@ Developer: Jamin Quimby
 		 z-index:9000;
 }
 /*Message Colors for Info*/
-.info{	 background-color: #4ea5cd;
-		 border-color: #3b8eb5;
+.info{	 background-color: #4ea5cd !important;
+		 border-color: #3b8eb5 !important;
 }
 /*Message Colors for Error*/
-.error{	 background-color: #de4343;
-		 border-color: #c43d3d;
+.error{	 background-color: #de4343 !important;
+		 border-color: #c43d3d !important;
 }
 /*Message Colors for Warning*/
-.warning{background-color: #eaaf51;
-		 border-color: #d99a36;
+.warning{background-color: #eaaf51 !important;
+		 border-color: #d99a36  !important;
 }
 /*Message Colors for Success*/
-.success{background-color: #61b832;
-		 border-color: #55a12c;
+.success{background-color: #61b832 !important;
+		 border-color: #55a12c !important;
 }
 /*Message Colors for Save*/
 .save{
-	background-color:#CCC;
-	border-color:#999;
+	background-color:#CCC !important;
+	border-color:#999 !important;
 	}
 /*Image Save Icon*/	
 .jqImgSave{
