@@ -20,6 +20,9 @@ SELECT[bf_id]
 ,[client_id]
 ,[bf_activity]
 ,[bf_assignedto]
+,CONVERT(VARCHAR(10),[bf_businessreceived], 101)AS[bf_businessreceived]
+,CONVERT(VARCHAR(10),[bf_businesssubmitted], 101)AS[bf_businesssubmitted]
+,[bf_businesstype]
 ,CONVERT(VARCHAR(10),[bf_dateinitiated], 101)AS[bf_dateinitiated]
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 ,[bf_esttime]
@@ -78,10 +81,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_5--->
 <cfcase value="group1_5">
 <cfquery datasource="AWS" name="fQuery">
-SELECT [bf_businesstype]
-,CONVERT(VARCHAR(10),[bf_businessreceived], 101)AS[bf_businessreceived]
-,CONVERT(VARCHAR(10),[bf_businesssubmitted], 101)AS[bf_businesssubmitted]
-,CONVERT(VARCHAR(10),[bf_otheractivity], 101)AS[bf_otheractivity]
+SELECT CONVERT(VARCHAR(10),[bf_otheractivity], 101)AS[bf_otheractivity]
 ,CONVERT(VARCHAR(10),[bf_othercompleted], 101)AS[bf_othercompleted]
 ,CONVERT(VARCHAR(10),[bf_otherstarted], 101)AS[bf_otherstarted]
 FROM[businessformation]
@@ -141,6 +141,8 @@ SELECT[bf_id]
 ,[client_name]
 ,[bf_owners]
 ,[bf_status]
+,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
+,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_assignedtoTEXT]
 ,[bf_activity]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
@@ -159,10 +161,12 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
 								,"BF_OWNERS":"'&BF_OWNERS&'"
+								,"BF_BUSINESSTYPETEXT":"'&BF_BUSINESSTYPETEXT&'"
+								,"BF_DUEDATE":"'&BF_DUEDATE&'"								
 								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
 								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
-								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -223,6 +227,9 @@ INSERT INTO[BUSINESSFORMATION](
 [client_id]
 ,[bf_activity]
 ,[bf_assignedto]
+,[bf_businesstype]
+,[bf_businessreceived]
+,[bf_businesssubmitted]
 ,[bf_dateinitiated]
 ,[bf_duedate]
 ,[bf_esttime]
@@ -243,6 +250,9 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfquery>
@@ -261,14 +271,17 @@ UPDATE[BUSINESSFORMATION]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bf_activity]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[bf_assignedto]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[bf_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[bf_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[bf_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[bf_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[bf_owners]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[bf_paid]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[bf_priority]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[bf_status]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[bf_businesstype]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[bf_businessreceived]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[bf_businesssubmitted]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[bf_dateinitiated]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[bf_duedate]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[bf_esttime]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[bf_fees]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[bf_owners]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[bf_paid]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[bf_priority]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[bf_status]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
@@ -359,12 +372,9 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[BUSINESSFORMATION]
-SET[bf_businesstype]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[bf_businessreceived]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[bf_businesssubmitted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[bf_otheractivity]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[bf_othercompleted]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[bf_otherstarted]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+SET [bf_otheractivity]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
+,[bf_othercompleted]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[bf_otherstarted]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

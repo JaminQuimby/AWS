@@ -155,13 +155,21 @@ SELECT[of_id]
 ,[of_delivery_assignedto]
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
 ,[of_missinginfo]
+,CONVERT(VARCHAR(10),[of_missinginforeceived], 101)AS[of_missinginforeceived]
+,CONVERT(VARCHAR(10),[of_filingdeadline], 101)AS[of_filingdeadline]
 ,[client_name]
 ,[client_id]
-,[of_obtaininfo_assignedtotext]
-,[of_preparation_assignedtotext]
-,[of_review_assignedtotext]
-,[of_assembly_assignedtotext]
-,[of_delivery_assignedtotext]
+
+
+,CONVERT(VARCHAR(8),[of_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_obtaininfo_assignedtoTEXT) AS [of_obtaininfo]
+ 
+ 
+,CONVERT(VARCHAR(8),[of_preparation_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_preparation_assignedtoTEXT) AS [of_preparation]
+,CONVERT(VARCHAR(8),[of_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_review_assignedtoTEXT) AS [of_review]
+,CONVERT(VARCHAR(8),[of_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_assembly_assignedtoTEXT) AS [of_assembly]
+,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_delivery_assignedtoTEXT) AS [of_delivery]
+ 
+,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
 
 ,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_type]=[optionvalue_id])
@@ -189,13 +197,17 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"OF_STATETEXT":"'&OF_STATETEXT&'"
 								,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
 								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
-								,"OF_OBTAININFO_ASSIGNEDTOTEXT":"'&OF_OBTAININFO_ASSIGNEDTOTEXT&'"
-								,"OF_PREPARATION_ASSIGNEDTOTEXT":"'&OF_PREPARATION_ASSIGNEDTOTEXT&'"
-								,"OF_REVIEW_ASSIGNEDTOTEXT":"'&OF_REVIEW_ASSIGNEDTOTEXT&'"
-								,"OF_ASSEMBLY_ASSIGNEDTOTEXT":"'&OF_ASSEMBLY_ASSIGNEDTOTEXT&'"
-								,"OF_DELIVERY_ASSIGNEDTOTEXT":"'&OF_DELIVERY_ASSIGNEDTOTEXT&'"								
-								,"OF_DUEDATE":"'&OF_DUEDATE&'"
-								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
+								,"OF_DUEDATE":"'&OF_DUEDATE&'"						
+								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
+								,"OF_FILINGDEADLINE":"'&OF_FILINGDEADLINE&'"
+ 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
+ 								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"
+								
+								,"OF_OBTAININFO":"'&OF_OBTAININFO&'"
+								,"OF_PREPARATION":"'&OF_PREPARATION&'"
+								,"OF_REVIEW":"'&OF_REVIEW&'"
+								,"OF_ASSEMBLY":"'&OF_ASSEMBLY&'"
+								,"OF_DELIVERY":"'&OF_DELIVERY&'"								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
