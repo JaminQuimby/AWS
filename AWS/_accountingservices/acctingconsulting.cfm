@@ -83,15 +83,15 @@ missinginforeceived
 </div>
 <!--- Subtask --->
 <div id="group2" class="gf-checkbox">
-<h3 onClick="_grid2">Subtasks</h3>
+<h3 onClick="_grid2()">Subtasks</h3>
 <div>
     	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
         <div><label for="g2_acctgroup">Group</label><select id="g2_acctgroup"><option value="0">&nbsp;</option><cfoutput query="global_acctgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select>
-        <a href="#" class="button optional" onClick='jqMessage({message: "Warning: Would you like to import the selected group?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_duplicate\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})'>Duplicate Group</a>
+        <a href="#" class="button optional" onClick='jqMessage({message: "Warning: Would you like to import the selected group?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_duplicate\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})'>Duplicate</a>
         </div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#subtask_isLoaded").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='_group2({open:true})'>Add</a>
 </div>
 </div>
 <h4 onClick='_loadData({"id":"task_id","group":"group2","page":"acctingconsulting"});$("#subtask_isLoaded").val(1);'>Add Subtask</h4>

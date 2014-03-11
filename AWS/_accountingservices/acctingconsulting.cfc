@@ -32,7 +32,7 @@ SELECT[mc_id]
 ,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
 ,[mc_status]
 ,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
-FROM[v_managementconsulting]
+FROM[managementconsulting]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 
@@ -142,7 +142,7 @@ SELECT
 ,[mcs_sequence]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
 ,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
-FROM[managementconsulting_subtask]
+FROM[v_managementconsulting_subtask]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND ([mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>OR[mcs_notes]IS NULL)
 ORDER BY [mcs_sequence]
 </cfquery>
@@ -359,6 +359,37 @@ SELECT SCOPE_IDENTITY()AS[mcs_id]
 </cfif>
 
 
+</cfcase>
+
+</cfswitch>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group1">
+<cfquery datasource="AWS" name="fQuery">
+update[managementconsulting]
+SET[mc_active]=0
+WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
+</cfcase>
+<cfcase value="group2">
+<cfquery datasource="AWS" name="fQuery">
+update[managementconsulting_subtask]
+SET[mcs_active]=0
+WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group2","result":"ok"}'>
 </cfcase>
 
 </cfswitch>

@@ -1,7 +1,40 @@
 $(document).ready(function(){
 _grid1();
-_group1=function(){}
-_group2=function(){_grid2()}
+_group1=function(params){
+var options = {'open':false}; 
+$.extend(true, options, params);
+_grid1();
+if(options['open']==true){
+_toggle("group1,largeMenu");
+_hide("entrance");
+$("#content").removeClass().addClass("contentbig");
+$("#group1").accordion({active:0});
+ }
+if(options['open']==false){ 
+_toggle("entrance,smallMenu");
+_hide("group1,largeMenu");
+$("#content").removeClass().addClass("contentsmall");
+ $("#group1").accordion({active:0});
+
+ }
+}
+
+
+_group2=function(params){
+var options = {'open':false}; 
+$.extend(true, options, params);  
+_grid2();
+if(options['open']==true){
+ $("#subtask_isLoaded").val(1);
+ $("#group2").accordion({active:1});
+ }
+if(options['open']==false){ 
+ $("#group2").accordion({active:0});
+ }
+
+}
+
+
 });
   
 _grid1=function(){_jGrid({
@@ -9,7 +42,7 @@ _grid1=function(){_jGrid({
 	"url":"acctingconsulting.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_group1();","class":"button"},{"name":"no","on_click":"_group1()","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
@@ -28,7 +61,7 @@ _grid2=function(){_jGrid({
 	"url":"acctingconsulting.cfc",
 	"title":"Subtasks",
 	"fields":{MCS_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'});_group2()","class":"button"},{"name":"no","on_click":"_group2()","class":"button"}], autoClose: false})});return $img}}
 			
 			,MCS_SEQUENCE:{title:'Sequence',width:'1%'}
 			,MCS_SUBTASKTEXT:{title:'Subtask'}
@@ -94,7 +127,9 @@ _saveData({group:"group1","payload":$.parseJSON(json),page:"acctingconsulting"})
 else{jqMessage({message: "You must enter all required fields.",type: "info",autoClose: true})}
 break;
 
-case'group2':var json='{"DATA":[["'+
+case'group2':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_actualtime").val()+'","'+
