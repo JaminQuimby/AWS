@@ -286,10 +286,18 @@ SELECT[tr_id]
 ,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[tr_duedate], 101)AS[tr_duedate]
 ,[tr_missinginfo]
+,[tr_2_informationreceived]
 ,[tr_4_assignedto]
 ,tr_4_assignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[client_name]
 ,[client_id]
+,CONVERT(VARCHAR(10),[tr_missinginforeceived], 101)AS[tr_missinginforeceived]
+,CONVERT(VARCHAR(10),[tr_2_readyforreview], 101)AS[tr_2_readyforreview]
+,[tr_2_reviewassignedto] 
+,CONVERT(VARCHAR(10),[tr_2_reviewed], 101)AS[tr_2_reviewed]
+,CONVERT(VARCHAR(10),[tr_2_completed], 101)AS[tr_2_completed]
+,CONVERT(VARCHAR(10),[tr_3_assemblereturn], 101)AS[tr_3_assemblereturn]
+
 FROM[v_taxreturns]
 
 <cfif ARGUMENTS.search neq "">
@@ -308,8 +316,14 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_DUEDATE":"'&TR_DUEDATE&'"
-								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
+								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
+								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
+								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
+								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
+								,"TR_2_REVIEWASSIGNEDTO":"'&TR_2_REVIEWASSIGNEDTO&'"
+								,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
+								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

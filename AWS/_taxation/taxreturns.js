@@ -26,8 +26,15 @@ _grid1=function(){_jGrid({
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
 			,TR_DUEDATE:{title:'Due Date',width:'1%'}
+			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
 			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}			
+			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
+			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
+			,TR_2_REVIEWASSIGNEDTO:{title:'Review Assigned To',width:'1%'}		
+			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}		
+			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
+			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}		
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"6"}',
