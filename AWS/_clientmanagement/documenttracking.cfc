@@ -32,8 +32,6 @@ SELECT
 <cfquery datasource="AWS" name="fQuery">
 SELECT[DT_ID]
  ,[client_id]
-<!--- ,[form_id]
- ,[file_id]--->
  ,[dt_assignedto]
 ,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
  ,[dt_description]
@@ -73,6 +71,9 @@ SELECT[dt_id]
 ,[dt_sender]
 ,CASE WHEN LEN([dt_description]) >= 101 THEN SUBSTRING([dt_description],0,100) +  '...' ELSE [dt_description] END AS[dt_description]
 ,[dt_assignedto]
+,[dt_staff]
+,[dt_routing]
+,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
 ,CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing] END AS[dt_routing]
 ,[client_name]
 ,[client_id]
@@ -92,7 +93,16 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"DT_ID":"'&DT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","DT_SENDER":"'&DT_SENDER&'","DT_ASSIGNEDTOTEXT":"'&DT_ASSIGNEDTOTEXT&'","DT_ROUTING":"'&DT_ROUTING&'","DT_DESCRIPTION":"'&DT_DESCRIPTION&'"}'>
+<cfset queryResult=queryResult&'{"DT_ID":"'&DT_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"DT_DATE":"'&DT_DATE&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"DT_SENDER":"'&DT_SENDER&'"
+								,"DT_STAFF":"'&DT_STAFF&'"
+								,"DT_ASSIGNEDTOTEXT":"'&DT_ASSIGNEDTOTEXT&'"
+								,"DT_DESCRIPTION":"'&DT_DESCRIPTION&'"
+								,"DT_ROUTING":"'&DT_ROUTING&'" 
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -126,8 +136,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery name="fquery" datasource="AWS">
 INSERT INTO[documenttracking](
 [client_id]
-<!---,[form_id]
-,[file_id]--->
 ,[dt_assignedto]
 ,[dt_date]
 ,[dt_description]
@@ -159,8 +167,6 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[documenttracking]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-<!---,[form_id]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[file_id]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>--->
 ,[dt_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[dt_date]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[dt_description]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>

@@ -12,10 +12,12 @@ _grid1=function(){_jGrid({
 	"fields":{DT_ID:{key:true,list:false,edit:false}
 ,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.DT_ID+"',page:'documenttracking',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
+			,DT_DATE:{title:'Date',width:'1%'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,DT_SENDER:{title:'Sender'}
-			,DT_DESCRIPTION:{title:'Description'}
+			,DT_STAFF:{title:'Received By'}
 			,DT_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			,DT_DESCRIPTION:{title:'Description'}
 			,DT_ROUTING:{title:'Routing'}
 	},
 	"method":"f_lookupData",
@@ -49,8 +51,6 @@ break;
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
-/*$("#form_id").val()+'","'+
-$("#file_id").val()+'","'+*/
 $("#g1_assignedto").val()+'","'+
 $("#g1_date").val()+'","'+
 $("#g1_description").val()+'","'+

@@ -53,13 +53,13 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="g1_date">Date</label><input type="text" class="date" id="g1_date"></div>
-<div><label for="g1_staff">Staff</label><select id="g1_staff"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_sender">Sender</label><input type="text" id="g1_sender"></div>
 <div><label for="client_id">Client</label><select id="client_id"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_sender">Sender</label><input type="text" id="g1_sender"></div>
+<div><label for="g1_staff">Received By</label><select id="g1_staff"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"  multiple="multiple" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <!---<div><label for="form_id" style="display:none">Module</label><select id="form_id" style="display:none"><option value="0" style="display:none">&nbsp;</option></select></div>
 <div><label for="file_id" style="visibility:hidden">File</label><select id="file_id" style="visibility:hidden"><option value="0" style="visibility:hidden">&nbsp;</option></select></div>--->
 <div><label for="g1_description">Description</label><textarea id="g1_description" cols="4" rows="4"  maxlength="1000" ></textarea></div>
-<div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"  multiple="multiple" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_routing">Routing</label><textarea id="g1_routing" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 </div>
 </div>

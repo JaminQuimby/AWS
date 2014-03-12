@@ -16,7 +16,7 @@ _grid1=function(){_jGrid({
 			,CO_DUEDATE:{title:'Due Date',width:'1%'}
 			,CO_FORTEXT:{title:'For',width:'1%'}
 			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,CO_RETURNCALL:{title:'Returned Call'}			
+			,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			},
 	"method":"f_lookupData",
@@ -41,6 +41,7 @@ var options={"id":"","group":"","subgroup":"","result":""}
 try{
 $.extend(true, options, params);//turn options into array
 var $client_id=$("#client_id");
+alert(options["group"]);
 switch(options["group"]){
 	
 case'':
@@ -57,7 +58,7 @@ $("#client_id").val()+'","'+
 $("#g1_briefmessage").val()+'","'+
 $("#g1_caller").val()+'",'+
 $("#g1_completed").is(':checked')+','+
-$("#g1_contactmethod").is(':checked')+','+
+$("#g1_contactmethod").val()+',"'+
 $("#g1_date").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_emailaddress").val()+'","'+
