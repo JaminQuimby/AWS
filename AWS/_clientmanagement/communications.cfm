@@ -29,7 +29,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
-
+<cfquery dbtype="query" name="global_comcontactmethods">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_comcontactmethods'</cfquery>
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -56,7 +56,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_date"><i class="fa fa-lock link" onClick="_schk('g1_date')"></i> Date and Time</label><input type="text" class="datetime" id="g1_date"></div>
 	<div><label for="g1_caller"><i class="fa fa-lock link" onClick="_schk('g1_caller')"></i> Caller</label><input type="text" id="g1_caller" ></div>
 	<div><label for="g1_takenby"><i class="fa fa-lock link" onClick="_schk('g1_takenby')"></i> Taken By</label><select id="g1_takenby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_contactmethod"><i class="fa fa-lock link" onClick="_schk('g1_contactmethod')"></i> Contact Methods</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option></select></div>
+	<div><label for="g1_contactmethod"><i class="fa fa-lock link" onClick="_schk('g1_contactmethod')"></i> Contact Methods</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_comcontactmethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_briefmessage"><i class="fa fa-lock link" onClick="_schk('g1_briefmessage')"></i> Brief Message</label><input type="text" id="g1_briefmessage" ></div>
 	<div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone"></div>
 	<div><label for="g1_ext">Ext</label><input type="text" id="g1_ext"></div>
