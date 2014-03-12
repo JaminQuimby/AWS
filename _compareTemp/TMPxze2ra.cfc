@@ -5,35 +5,6 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 <!--- LOAD DATA --->
-
-
-<!--- LOAD SELECT BOXES --->
-<cffunction name="f_loadSelect" access="remote" output="true">
-<cfargument name="selectName" type="string">
-<cfargument name="formid" type="string" default="11">
-<cfargument name="option1" type="string" default="">
-
-<cfquery datasource="AWS" name="fquery" >
-SELECT[optionvalue_id],[optionname]
-FROM[v_selectOptions]
-WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND([optionHide]!='#ARGUMENTS.formid#'OR[optionHide]IS NULL)AND[selectName]='#ARGUMENTS.selectName#'
-AND[option_1]='#ARGUMENTS.option1#'
-</cfquery>
-
-
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
-<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cffunction>
-
-
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
@@ -65,16 +36,6 @@ FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
-
-<!--- Load Group 1 State--->
-<cfcase value="group1_state">
-<cfquery datasource="AWS" name="fQuery">
-SELECT[of_state]
-FROM[v_otherfilings]
-WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-
 <!--- Load Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfquery datasource="AWS" name="fQuery">

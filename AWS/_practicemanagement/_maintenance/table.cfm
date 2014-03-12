@@ -59,12 +59,13 @@
 <div id="opt_AcctConGroups" style="display:none">
 <div><label for="opt_AcctConGroups_Subtasks">Subtasks</label><select id="opt_AcctConGroups_Subtasks" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
-<!--- Other Filings Forms & Tax Return Forms--->
+<!--- Other Filings Forms & Tax Return Forms & --->
 <div id="opt_OtherFilings" style="display:none">
 <div><label for="opt_State">State</label><select id="opt_State"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="opt_FilingDeadline">Filing Deadline</label><input type="text" id="opt_FilingDeadline"></div>
 <div><label for="opt_ExtensionDeadline">Extension Deadline</label><input type="text" id="opt_ExtensionDeadline"></div>
 </div>
+
 <!--- Tax Returns Schedules --->
 <div id="opt_TaxReturnsSchedule" style="display:none">
 <div><label for="opt_Form">Form</label><select id="opt_Form"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

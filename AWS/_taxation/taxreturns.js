@@ -9,8 +9,6 @@ if(typeof $.parseJSON(xhr.responseText ).COLUMNS != "undefined"){
 if($.parseJSON(xhr.responseText ).COLUMNS.toString()=='TRST_STATE'){
 	_loadSelect({'selectName':'global_taxreturnsstateforms','selectObject':'g2_requiredforms','option1':$('#g2_state').val(),'page':'taxreturns'});
 	_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});
-	
-
 }
 
 }
