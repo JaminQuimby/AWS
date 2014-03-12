@@ -1,16 +1,24 @@
+
 $(document).ready(function(){
 _grid1();
-_group1=function(){}
 
-
-
-$( document ).ajaxComplete(function( event, xhr, settings ) {
-if(typeof $.parseJSON(xhr.responseText ).COLUMNS != "undefined"){
-if($.parseJSON(xhr.responseText ).COLUMNS.toString()=='TRST_STATE'){
-	_loadSelect({'selectName':'global_otherfilingsforms','selectObject':'g1_form','option1':$('#g1_state').val(),'page':'otherfilings'});
-	_loadData({"id":"subtask1_id","group":"group2","page":"otherfilings"});
-}}
-});
+_group1=function(params){
+var options = {'open':false}; 
+$.extend(true, options, params);
+_grid1();
+if(options['open']==true){
+_toggle("group1,largeMenu");
+_hide("entrance");
+$("#content").removeClass().addClass("contentbig");
+$("#group1").accordion({active:0});
+ }
+if(options['open']==false){ 
+_toggle("entrance,smallMenu");
+_hide("group1,largeMenu");
+$("#content").removeClass().addClass("contentsmall");
+ $("#group1").accordion({active:0});
+}
+}
 });
 
 
@@ -21,7 +29,7 @@ _grid1=function(){_jGrid({
 	"url":"otherfilings.cfc",
 	"title":"Other Filings",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
-			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.OF_ID+"',page:'otherfilings',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.OF_ID+"',page:'otherfilings',group:'group0'});_group1();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year'}
 			,OF_PERIODTEXT:{title:'Period'}
@@ -55,7 +63,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1_State*/case"TRST_STATE":var list='g1_state'; _loadit({"query":query,"list":list});break;
+/*Group1_State*/case"OF_STATE":var list='g1_state'; _loadit({"query":query,"list":list});_loadSelect({'selectName':'global_otherfilingsforms','selectObject':'g1_form','option1':$('#g1_state').val(),'page':'otherfilings'});_loadData({"id":"task_id","group":"group1","page":"otherfilings"});break;
 /*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_type,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_loadAssets();break;
 /*Group1_1*/case "OF_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "OF_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -66,7 +74,7 @@ switch(query.COLUMNS[0]){
 /*assetCompTask*/case "OF_OBTAININFO_DATECOMPLETED":var list='g1_g1_head1,g1_g1_head2,g1_g2_head1,g1_g2_head2,g1_g3_head1,g1_g3_head2,g1_g4_head1,g1_g4_head2,g1_g5_head1,g1_g5_head2';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
-catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
+catch(err){jqMessage({message: "Error in js._loadData: "+err +' For:'+query.COLUMNS[0],"type":"error",autoClose: false})}};
 
 /*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){

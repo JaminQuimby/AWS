@@ -14,10 +14,12 @@
 <cfargument name="option1" type="string" default="">
 
 <cfquery datasource="AWS" name="fquery" >
+SELECT '0'AS[optionvalue_id],'&nbsp 'AS[optionname]UNION
 SELECT[optionvalue_id],[optionname]
 FROM[v_selectOptions]
 WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND([optionHide]!='#ARGUMENTS.formid#'OR[optionHide]IS NULL)AND[selectName]='#ARGUMENTS.selectName#'
 AND[option_1]='#ARGUMENTS.option1#'
+
 </cfquery>
 
 
