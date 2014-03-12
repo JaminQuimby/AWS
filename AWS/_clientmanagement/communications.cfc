@@ -87,11 +87,13 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CO_FORTEXT":"'&CO_FORTEXT&'"
-								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
 								,"CO_CALLER":"'&CO_CALLER&'"
+								,"CO_DATE":"'&CO_DATE&'"
 								,"CO_DUEDATE":"'&CO_DUEDATE&'"
+								,"CO_FORTEXT":"'&CO_FORTEXT&'"
 								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
+								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
+								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
