@@ -71,6 +71,10 @@
 <div><label for="opt_Form">Form</label><select id="opt_Form"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 
+<!--- Global State --->
+<div id="opt_globalState" style="display:none">
+<div><label for="opt_stateAbbreviations">Abbreviation</label><input type="text" id="opt_stateAbbreviations"></div>
+</div>
 
 <!--- END Options --->
 <div><label for="g2_optionDescription">Option Description</label><textarea  id="g2_optionDescription" cols="4" rows="4"></textarea></div>

@@ -33,7 +33,11 @@ g5_g1_label3.change(function(){g5_value3.html($(this).val())});
 g5_g1_label4.change(function(){g5_value4.html($(this).val())});
 };
 _group6=function(){_grid6()}});
-_group6_1=function(){$('#isLoaded_group6').val(1);_loadData({'id':'client_id','group':'group6','page':'clientmaintenance'})};
+_group6_1=function(){$('#isLoaded_group6').val(1);_loadData({'id':'client_id','group':'group6','page':'clientmaintenance'})
+
+
+
+};
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -75,7 +79,7 @@ _grid3=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3","clientid":'+$("#client_id").val()+'}',
-	"functions":'$("#co_id").val(record.CONTACT_ID);_loadData({"id":"co_id","group":"group3","page":"clientmaintenance"});$("#group3").accordion({active:1});'
+	"functions":'$("#co_id").val(record.CONTACT_ID);$("#isLoaded_group3").val(1);_loadData({"id":"co_id","group":"group3","page":"clientmaintenance"});$("#group3").accordion({active:1});'
 	})};
 	
 _grid4_1=function(){_jGrid({
@@ -263,8 +267,7 @@ if($("#isLoaded_group1_2").val()!=0){
 	if($("#g1_g2_fieldname").val()!=''||$("#g1_g2_fieldvalue").val()!=''){
 	_saveData({group:"group1_2","payload":$.parseJSON(json),page:"clientmaintenance"});
 	}else{_saveDataCB({'group':'group2_1'})}
-	}
-else{_saveDataCB({'group':'group2_1'})}
+}else{_saveDataCB({'group':'group2_1'})}
 break;
 
 case'group2_1':var json='{"DATA":[["'+
@@ -326,11 +329,11 @@ $("#g3_effectivedate").val()+'","'+
 $("#g3_email1").val()+'","'+
 $("#g3_email2").val()+'","'+
 $("#g3_name").val()+'","'+
-$("#g3_phone1").val()+'","'+
-$("#g3_phone2").val()+'","'+
-$("#g3_phone3").val()+'","'+
-$("#g3_phone4").val()+'","'+
-$("#g3_phone5").val()+'","'+
+$("#g3_phone1").val().replace(/[^0-9\.]/g, '')+'","'+
+$("#g3_phone2").val().replace(/[^0-9\.]/g, '')+'","'+
+$("#g3_phone3").val().replace(/[^0-9\.]/g, '')+'","'+
+$("#g3_phone4").val().replace(/[^0-9\.]/g, '')+'","'+
+$("#g3_phone5").val().replace(/[^0-9\.]/g, '')+'","'+
 $("#g3_state").val()+'",'+
 $("#g3_taxupdate").is(':checked')+',"'+
 $("#g3_type").val()+'","'+

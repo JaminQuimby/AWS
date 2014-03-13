@@ -111,15 +111,15 @@ SELECT[contact_id]
 ,[contact_city]
 ,[contact_customLabel]
 ,[contact_customValue]
-,[contact_effectivedate]
+,[contact_effectivedate]=FORMAT(contact_effectivedate,'d','#Session.localization.language#')
 ,[contact_email1]
 ,[contact_email2]
 ,[contact_name]
-,[contact_phone1]
-,[contact_phone2]
-,[contact_phone3]
-,[contact_phone4]
-,[contact_phone5]
+,[contact_phone1]=FORMAT(contact_phone1,'#Session.localization.formatphone#')
+,[contact_phone2]=FORMAT(contact_phone2,'#Session.localization.formatphone#')
+,[contact_phone3]=FORMAT(contact_phone3,'#Session.localization.formatphone#')
+,[contact_phone4]=FORMAT(contact_phone4,'#Session.localization.formatphone#')
+,[contact_phone5]=FORMAT(contact_phone5,'#Session.localization.formatphone#')
 ,[contact_state]
 ,[contact_taxupdate]
 ,[contact_type]
@@ -204,7 +204,7 @@ SELECT[client_id]
 ,[client_salutation]
 ,CONVERT(VARCHAR(10),[client_since], 101)AS[client_since]
 ,[client_type]
-,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[client_type]=[optionvalue_id])
+,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 FROM[v_client_listing]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -254,7 +254,7 @@ AND[field_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[contact_id]
 ,[contact_name]
-,[contact_phone1]
+,[contact_phone1]=FORMAT(contact_phone1,'#Session.localization.formatphone#')
 ,[contact_email1]
 FROM[client_contact]
 WHERE
@@ -630,8 +630,9 @@ SET[field_name]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq
 ,[field_value]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 WHERE[field_id]=<cfqueryparam value="#j.DATA[1][2]#">
 </cfquery>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>
 </cfif>
-<cfreturn '{"id":#fquery.id#,"group":"group2_1","result":"ok"}'>
+
 </cfcase>
 
 <!--- Taxes --->
@@ -852,7 +853,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[contact_id]
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group5","result":"ok"}'>
+<cfreturn '{"id":#fquery.contact_id#,"group":"group5","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -873,19 +874,19 @@ SET[contact_acctsoftwareupdate]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(
 ,[contact_email2]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[contact_name]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[contact_phone1]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[contact_phone2]=<cfqueryparam value="#j.DATA[1][14]#">
-,[contact_phone3]=<cfqueryparam value="#j.DATA[1][15]#">
-,[contact_phone4]=<cfqueryparam value="#j.DATA[1][16]#">
-,[contact_phone5]=<cfqueryparam value="#j.DATA[1][17]#">
-,[contact_state]=<cfqueryparam value="#j.DATA[1][18]#">
-,[contact_taxupdate]=<cfqueryparam value="#j.DATA[1][19]#">
-,[contact_type]=<cfqueryparam value="#j.DATA[1][20]#">
-,[contact_website]=<cfqueryparam value="#j.DATA[1][21]#">
-,[contact_zip]=<cfqueryparam value="#j.DATA[1][22]#">
-WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][1]#">
+,[contact_phone2]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[contact_phone3]=<cfqueryparam value="#j.DATA[1][15]#"null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[contact_phone4]=<cfqueryparam value="#j.DATA[1][16]#"null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[contact_phone5]=<cfqueryparam value="#j.DATA[1][17]#"null="#LEN(j.DATA[1][17]) eq 0#"/>
+,[contact_state]=<cfqueryparam value="#j.DATA[1][18]#"null="#LEN(j.DATA[1][18]) eq 0#"/>
+,[contact_taxupdate]=<cfqueryparam value="#j.DATA[1][19]#"null="#LEN(j.DATA[1][19]) eq 0#"/>
+,[contact_type]=<cfqueryparam value="#j.DATA[1][20]#"null="#LEN(j.DATA[1][20]) eq 0#"/>
+,[contact_website]=<cfqueryparam value="#j.DATA[1][21]#"null="#LEN(j.DATA[1][21]) eq 0#"/>
+,[contact_zip]=<cfqueryparam value="#j.DATA[1][22]#"null="#LEN(j.DATA[1][22]) eq 0#"/>
+WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-</cfif>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group5","result":"ok"}'>
+</cfif>
 </cfcase>
 
 

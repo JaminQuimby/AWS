@@ -5,7 +5,7 @@
 <cfset page.cache.clients=CreateTimeSpan(0,0,0,0)>
 <cfset page.cache.roles=CreateTimeSpan(0,0,25,0)>
 <cfset page.cache.reports=CreateTimeSpan(0,0,25,0)>
-<cfquery name="selectOptions" cachedWithin="#page.cache.options#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[optionDescription]FROM[v_selectOptions]WHERE([form_id]='#page.formid#'OR[form_id]='0')AND([optionGroup]='#page.formid#'OR[optionGroup]='0')AND([optionHide]!='#page.formid#'OR[optionHide]IS NULL)</cfquery>
+<cfquery name="selectOptions" cachedWithin="#page.cache.options#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[option_1],[optionDescription]FROM[v_selectOptions]WHERE([form_id]='#page.formid#'OR[form_id]='0')AND([optionGroup]='#page.formid#'OR[optionGroup]='0')AND([optionHide]!='#page.formid#'OR[optionHide]IS NULL)</cfquery>
 <cfquery name="selectClients" cachedWithin="#page.cache.clients#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#page.cache.users#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 <cfquery name="selectReports" cachedWithin="#page.cache.reports#" datasource="AWS">SELECT[report_name],[report_description],[report_query],[report_fields]FROM[ctrl_reports]WHERE[form_id]='#page.formid#'AND([user_id]=0)ORDER BY[report_name]</cfquery>
@@ -61,6 +61,7 @@ $.extend(true, user, params);
 <script type="text/javascript" src="#this.url#/AWS/assets/module/chosen/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/module/jqMessage/jqmessage.jquery.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/module/jqValid/jqValid.jquery.js"></script>
+<script type="text/javascript" src="#this.url#/AWS/assets/module/jquery-mask-plugin-master/jquery.mask.min.js"></script>
 <script language="javascript"  src="#this.url#/AWS/assets/plugins/pluginsjs.cfm?id=#createUuid()#"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.full.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>

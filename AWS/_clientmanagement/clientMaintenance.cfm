@@ -30,9 +30,10 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_month">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
+<cfquery dbtype="query" name="global_stateabbreviation">SELECT[optionvalue_id],[option_1],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
 <cfquery dbtype="query" name="global_otherfilingtype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_otherfilingtype'</cfquery>
-<cfquery dbtype="query" name="global_businesstype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_businesstype'</cfquery>
+<cfquery dbtype="query" name="global_clienttype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_clienttype'</cfquery>
 <cfquery dbtype="query" name="global_timespans">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_timespans'</cfquery>
 <cfquery dbtype="query" name="global_software">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_software'</cfquery>
 <cfquery dbtype="query" name="global_contacttype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_contacttype'</cfquery>
@@ -73,7 +74,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g1_name"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Client Name</label><input id="g1_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_spouse">Spouse</label><input id="g1_spouse" type="text"/></div>
 <div><label for="g1_salutation">Salutation</label><input id="g1_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g1_type">Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..." onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="global_businesstype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_type">Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..." onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="global_clienttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_since">Client Since</label><input id="g1_since" type="text" class="valid_off date" onChange="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});" onBlur="jqValid({'type':'date','object':this,'message':'Date format should be MM/DD/YYYY'});"/></div>
 <div><label for="g1_trade_name">Trade Name</label><input id="g1_trade_name" type="text" /></div>
 <div><label for="g1_referred_by">Referred By</label><input id="g1_referred_by"  type="text"/></div>
@@ -87,7 +88,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div><label for="g1_g1_filter">Filter</label><input id="g1_g1_filter" onBlur="_grid1_1();" onKeyPress="if(event.keyCode==13){_grid1_1();}"/></div>
 <div id="grid1_1" class="tblGrid"></div>
-<a href="#" class="button optional" onClick='$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);'>Add</a>
 </div>
 
 <!---Group 1 Sub 2--->
@@ -156,7 +157,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);$("#co_id").val(0);'>Add</a>
 </div>
 </div>
 <h4 onclick="_group3();">Contact</h4>
@@ -166,13 +167,13 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_address1">Street #1</label><input id="g3_address1" type="text"/></div>
 <div><label for="g3_address2">Street #2</label><input id="g3_address2" type="text"/></div>
 <div><label for="g3_city">City</label><input id="g3_city" type="text" /></div>
-<div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_stateabbreviation"><option value="#optionvalue_id#">#option_1#</option></cfoutput></select></div>
 <div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="5" required id="g3_zip" /></div>
-<div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel"/></div>
-<div><label for="g3_phone2">Phone 2</label><input id="g3_phone2" type="tel"/></div>
-<div><label for="g3_phone3">Mobile</label><input id="g3_phone3" type="tel"/></div>
-<div><label for="g3_phone4">Pager</label><input id="g3_phone4" type="tel"/></div>
-<div><label for="g3_phone5">Fax</label><input id="g3_phone5" type="tel"/></div>
+<div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone2">Phone 2</label><input id="g3_phone2" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone3">Mobile</label><input id="g3_phone3" type="tel" class="phone"    onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone4">Pager</label><input id="g3_phone4" type="tel" class="phone"     onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone5">Fax</label><input id="g3_phone5" type="tel" class="phone"       onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_email1">Email 1</label><input id="g3_email1" type="email"/></div>
 <div><label for="g3_email2">Email 2</label><input id="g3_email2" type="email"/></div>
 <div><label for="g3_website">Website</label><input type="url" id="g3_website" /></div>

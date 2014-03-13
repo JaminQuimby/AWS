@@ -12,6 +12,15 @@ String.prototype.insert = function (index, string) {if (index > 0) return this.s
 Array.prototype.removeValue = function(name, value){var array = $.map(this, function(v,i){return v[name] === value ? null : v;});this.length = 0;this.push.apply(this, array);}
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
 Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:"0"+mm[0])+'/'+(dd[1]?dd:"0"+dd[0])+'/'+yyyy};
+//Localisation 
+
+
+  $(function() {
+    $('.date').mask('00/00/0000');
+    $('.time').mask('00:00:00');
+    $('.date_time').mask('00/00/0000 00:00:00');
+    $('.phone').mask('(000)000-0000');
+  });
 
 
 

@@ -7,13 +7,14 @@ _group2=function(){_clearfields({"sel":"opt_Form,g2_optionGroup,g2_optionHide","
 $('#opt_OtherFilings').hide();
 $('#opt_TaxReturnsSchedule').hide();
 $('#opt_AcctConGroups').hide();
-
+$('#opt_globalState').hide();
 
 _options=function(id){
 	switch(id){
+	case'9':$('#opt_globalState').show(); break; 
 	case'34':$('#opt_OtherFilings').show(); break; 
-	case'36':$('#opt_OtherFilings').show(); break; 
 	case'35':$('#opt_TaxReturnsSchedule').show(); break;
+	case'36':$('#opt_OtherFilings').show(); break; 
 	case'37':$('#opt_AcctConGroups').show(); break;
 	}};
 	
@@ -46,7 +47,11 @@ switch(query.COLUMNS[0]){
 /*Group1*/case "SELECTNAME_ID":var list='task_id,g1_selectLabel,g1_selectDescription';_loadit({"query":query,"list":list,"page":"table"});break;
 /*Group2*/case "SELECT_ID":var list='subtask1_id,g2_optionName,g2_optionDescription,g2_optionGroup,g2_optionHide';
 //Load Options
-//Other Filing Types
+
+if($("#task_id").val() == '9'){
+var list=list+',opt_stateAbbreviations';
+	}	
+
 if($("#task_id").val() == '34' || $("#task_id").val() =='36'){
 var list=list+',opt_State,opt_FilingDeadline,opt_ExtensionDeadline';	
 	}
@@ -80,6 +85,10 @@ $("#g2_optionName").val()+'","'+
 $("#g2_optionDescription").val()+'","'+
 $("#g2_optionGroup").val()+'","'+
 $("#g2_optionHide").val()+'","'+
+
+(($("#task_id").val() == '9' || $("#task_id").val() == '36'  )?
+$("#opt_stateAbbreviations").val()+'","'
+:one='')+
 
 (($("#task_id").val() == '34' || $("#task_id").val() == '36'  )?
 $("#opt_State").val()+'","'+
