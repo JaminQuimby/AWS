@@ -17,7 +17,9 @@ jqMessage Required
 <div class="buttonbox">
 <div >
 <cfoutput>
-<a href="##" onclick="_saveData();" class="button">Save</a> <a class="button optional" href="#this.url##CGI.SCRIPT_NAME#">Cancel</a>
+<a href="##" onclick="_saveData();" class="button">Save</a> 
+<a class="button optional" onclick='jqMessage({message: "Are you sure you wish to close this task? Any unsaved data will be lost. ",type: "warning",autoClose: false,buttons:[{"name":"save","on_click":"_saveData();","class":"button"},{"name":"close","on_click":" window.location = \"#this.url##CGI.SCRIPT_NAME#\" ","class":"button"}]});' >Close</a> 
+<a class="button optional" onclick='window.location = "#this.url#/AWS/_clientmanagement/clientmaintenance.cfm?task_id=" + $("##client_id").val() ' style='background-color: ##247639; color:##FFF;'  >Client Maintenance</a>
 </cfoutput>
 </div>
 </div>

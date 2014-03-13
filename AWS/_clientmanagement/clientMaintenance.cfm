@@ -63,7 +63,7 @@ ACTIVITY (CLIENT DATA)
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8');_addNewTask();">Add</a>
+<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_addNewTask();_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6');">Add</a>
 </div></div></div>
 
 <!---Group 1 --->
@@ -71,7 +71,7 @@ ACTIVITY (CLIENT DATA)
 <h3>Client</h3>
 <div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<div><label for="g1_name"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Client Name</label><input id="g1_name" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
+<div><label for="g1_name"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Client Name</label><input id="g1_name" disabled="disabled" type="text" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" onChange='_duplicateCheck({"check":"g1_name","loadType":"clientName","page":"clientmaintenance"});'/></div>
 <div><label for="g1_spouse">Spouse</label><input id="g1_spouse" type="text"/></div>
 <div><label for="g1_salutation">Salutation</label><input id="g1_salutation" type="text" class="valid_off" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_type">Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..." onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="global_clienttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

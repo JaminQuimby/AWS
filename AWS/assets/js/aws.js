@@ -78,7 +78,26 @@ _toCSV=function($table, filename) {
     });
 });
 
+_duplicateCheck=function(params){
+var options={"check":"","loadType":"","page":""}
+$.extend(true, options, params);//turn options into array
+$.ajax({
+  type: 'GET',
+  url: options['page']+'.cfc?method=f_duplicateCheck',
+  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+$('#'+options['check']).val()+"","loadType":options['loadType']})
+  },
+ success:function(json){
 
+
+ var j=$.parseJSON(json);
+if(j.check =="true"){ 
+ jqValid({'type':'','object':$('#'+options['check']),'message':'This value must be unique.'});
+}
+	  },
+  error:function(data){errorHandle($.parseJSON(data))}})
+  
+  }; 
+  
 _addNewTask=function(){
 if($('#task_id').val()==0){
 	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');

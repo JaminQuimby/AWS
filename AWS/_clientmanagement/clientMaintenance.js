@@ -34,10 +34,8 @@ g5_g1_label4.change(function(){g5_value4.html($(this).val())});
 };
 _group6=function(){_grid6()}});
 _group6_1=function(){$('#isLoaded_group6').val(1);_loadData({'id':'client_id','group':'group6','page':'clientmaintenance'})
-
-
-
 };
+
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",

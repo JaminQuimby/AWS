@@ -5,6 +5,31 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 <!--- LOAD DATA --->
+
+
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_duplicateCheck" access="remote" output="true">
+<cfargument name="check" type="string">
+<cfargument name="loadType" type="string">
+
+<cfswitch expression="#ARGUMENTS.loadType#">
+<cfcase value="clientName">
+<cfquery datasource="AWS" name="fquery" >
+SELECT TOP(1)[client_name]AS[check]FROM[client_listing]WHERE[client_name]='#ARGUMENTS.check#'
+</cfquery>
+</cfcase>
+</cfswitch>
+
+<cfif fquery.recordcount eq 1>
+<cfset myResult='{"Result":"OK","check":"true"}'>
+<cfelse>
+<cfset myResult='{"Result":"OK","check":"false"}'>
+</cfif>
+<cfreturn myResult>
+</cffunction>
+
+
+
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
