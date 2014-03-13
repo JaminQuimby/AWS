@@ -18,6 +18,9 @@
 <cfquery datasource="AWS" name="fquery">
 SELECT[bf_id]
 ,[bf_assignedtoTEXT]
+,[bf_activity]
+,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
+,[bf_owners]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,CONVERT(VARCHAR(8),[bf_businesssubmitted], 1)AS[bf_businesssubmitted]
@@ -94,26 +97,16 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
+								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
+								,"BF_OWNERS":"'&BF_OWNERS&'"
 								,"BF_BUSINESSTYPETEXT":"'&BF_BUSINESSTYPETEXT&'"
-								,"BF_BUSINESSSUBMITTED":"'&BF_BUSINESSSUBMITTED&'"
-								,"BF_BUSINESSRECEIVED":"'&BF_BUSINESSRECEIVED&'"
+								,"BF_DUEDATE":"'&BF_DUEDATE&'"
 								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
-								,"BF_DATEINITIATED":"'&BF_DATEINITIATED&'"
-								,"BF_ARTICLESSUBMITTED":"'&BF_ARTICLESSUBMITTED&'"
+								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
 								,"BF_ARTICLESAPPROVED":"'&BF_ARTICLESAPPROVED&'"
-								,"BF_TRADENAMESUBMITTED":"'&BF_TRADENAMESUBMITTED&'"
 								,"BF_TRADENAMERECEIVED":"'&BF_TRADENAMERECEIVED&'"
-								,"BF_MINUTESBYLAWSDRAFT":"'&BF_MINUTESBYLAWSDRAFT&'"
-								,"BF_MINUTESBYLAWSFINAL":"'&BF_MINUTESBYLAWSFINAL&'"
 								,"BF_MINUTESCOMPLETED":"'&BF_MINUTESCOMPLETED&'"
-								,"BF_DISSOLUTIONREQUESTED":"'&BF_DISSOLUTIONREQUESTED&'"
-								,"BF_DISSOLUTIONSUBMITTED":"'&BF_DISSOLUTIONSUBMITTED&'"
-								,"BF_DISSOLUTIONCOMPLETED":"'&BF_DISSOLUTIONCOMPLETED&'"
-								,"BF_OTHERACTIVITY":"'&BF_OTHERACTIVITY&'"
-								,"BF_OTHERSTARTED":"'&BF_OTHERSTARTED&'"
-								,"BF_OTHERCOMPLETED":"'&BF_OTHERCOMPLETED&'"
-								,"BF_RECORDBOOKORDERED":"'&BF_RECORDBOOKORDERED&'"
+								,"BF_DISSOLUTIONCOMPLETED":"'&BF_DISSOLUTIONCOMPLETED&'"						
 								,"BF_FEES":"'&BF_FEES&'"
 								,"BF_PAIDTEXT":"'&BF_PAIDTEXT&'"
 								}'>

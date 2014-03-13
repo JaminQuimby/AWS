@@ -52,7 +52,7 @@ var grid1_config = [
 	"fields":{PT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_YEAR:{title:'Year',width:'1%'}
-			,PT_MONTHTEXT:{title:'Month'}
+			,PT_MONTHTEXT:{title:'Period'}
 			,PT_STATETEXT:{title:'State'}
 			,PT_TYPETEXT:{title:'Type'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}

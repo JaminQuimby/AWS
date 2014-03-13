@@ -71,33 +71,27 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
 			,TR_TAXFORMTEXT:{title:'Form'}
-			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
+			,TR_DUEDATE:{title:'Due Date',width:'1%'}
 			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			,TR_PRIORFEES:{title:'Prior Fees'}
-			,DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
-			,PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
 			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
-			,TR_DUEDATE:{title:'Due Date',width:'1%'}
 			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}
-			,TR_EXTENSIONREQUESTED:{title:'Extension Requested',width:'1%'}
-			,TR_EXTENSIONDONE:{title:'Extension Done',width:'1%'}
-			,TR_3_MISSINGSIGNATURES:{title:'Missing Signatures',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
-			,TR_3_CONTACTED:{title:'Contacted',width:'1%'}
-			,TR_2_PREPAREDBYTEXT:{title:'Prepared By',width:'1%'}
+			,TR_2_REVIEWASSIGNEDTO:{title:'Review Assigned To',width:'1%'}
+			,TR_2_REVIEWED:{title:'Reviewed'}			
 			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}
+			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
+			,TR_3_CONTACTED:{title:'Contacted',width:'1%'}
 			,TR_3_DELIVERED:{title:'Delivered',width:'1%'}
-			,TR_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
-			,TR_4_REQUIRED:{title:'PPTR Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,TR_4_EXTENDED:{title:'PPTR Extended',width:'1%'}
-			,TR_4_RFR:{title:'PPTR Ready For Review',width:'1%'}
-			,TR_4_COMPLETED:{title:'PPTR Completed',width:'1%'}
-			,TR_4_DELIVERED:{title:'PPTR Delivered',width:'1%'}	
-			,TR_4_CURRENTFEES:{title:'PPTR Current Fees'}
+			,TR_DELIVERYMETHOD:{title:'Delivery Method'}
+			,TR_PRIORFEES:{title:'Prior Fees'}
 			,TR_CURRENTFEES:{title:'Current Fees'}
 			,TR_PAIDTEXT:{title:'Payment Status'}
+			,TR_EXTENSIONREQUESTED:{title:'Extension Requested',width:'1%'}
+			,TR_EXTENSIONDONE:{title:'Extension Completed',width:'1%'}
+			,TR_3_MULTISTATERETURN:{title:'Multi-State Return'}
+			,TR_4_REQUIRED:{title:'PPTR Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"6"}',
