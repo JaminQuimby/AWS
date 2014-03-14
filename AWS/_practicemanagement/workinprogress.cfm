@@ -1,6 +1,7 @@
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
+<cfparam name="url.user_id" default="0">
 <cfset page.module="_practicemanagement">
 <cfset page.location="workinprogress">
 <cfset page.formid=11>
@@ -13,6 +14,10 @@
 <!---Head & Supporting Documents--->
 <cfinclude template="/assets/inc/header.cfm">
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
+
+<cfinclude template="/assets/inc/header.cfm">
+
+
 <cfinclude template="/assets/inc/pagemenu.cfm">
 
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8,group9,group10,group11,group12'); ">
@@ -25,10 +30,10 @@
   <div id="group1" class="gf-checkbox">
   <h3 onClick="_grid1();">Total Time</h3>
 	<div>
-	<div><label for="g1_filter">Filter</label><input id="g1_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
-	<div><label for="client_id"> Client</label><select id="client_id" onchange=""><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-    <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
-    <div><label for="g1_assignedto">Employee</label><select id="g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<!---<div><label for="g1_filter">Filter</label><input id="g1_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>--->
+	<div><label for="client_id"> Client</label><select id="client_id" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" onchange="_grid1();"></div>
+    <div><label for="g1_assignedto">Employee</label><select id="g1_assignedto" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div class="tblGrid" id="grid1"></div>
     </div>
 

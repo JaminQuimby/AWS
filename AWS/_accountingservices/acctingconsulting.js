@@ -154,7 +154,6 @@ case'group2_duplicate':var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_acctgroup").val()+'","'+
-
 '"]]}'
 if($("#task_isLoaded").val()!=0){
 

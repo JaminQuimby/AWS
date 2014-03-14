@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	
+
+$('#g1_assignedto').val($('#user_id').val()).trigger('chosen:updated');
+
 	jqMessage({message: "Actively being changed by: Jamin Quimby.",type: "information",autoClose: true});
 /**/
 _grid1();
@@ -26,6 +28,7 @@ _grid1=function(){_jGrid({
 	"title":"Estimated Time",
 	"fields":{
 		NAME:{title:'Module'}
+		,COUNT_ASSIGNED:{title:'Task Assigned'}
 		,TOTAL_TIME:{title:'Estimated Time'}
 			},
 	"method":"f_lookupData",

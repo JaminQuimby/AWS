@@ -228,7 +228,7 @@ SELECT SCOPE_IDENTITY()AS[mc_id]
 <cfreturn '{"id":#fquery.mc_id#,"group":"group2","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# | #arguments.client_id# | #cfcatch.detail#","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cfif>
@@ -258,7 +258,7 @@ WHERE[mc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# | #arguments.client_id# | #cfcatch.detail#","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cfif>
@@ -300,7 +300,7 @@ SELECT SCOPE_IDENTITY()AS[mcs_id]
 <cfreturn '{"id":#fquery.mcs_id#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# | #arguments.client_id# | #cfcatch.detail#","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cfif>
@@ -324,21 +324,17 @@ WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# | #arguments.client_id# | #cfcatch.detail#","result":"error"}'> 
 </cfcatch>
 </cftry>
 </cfif>
-
 </cfcase>
-
 
 
 <!--- Group2 Duplicate --->
 <cfcase value="group2_duplicate">
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
-<cftry>
-
 <cfquery name="aquery" datasource="AWS">
 SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='37'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
 </cfquery>
@@ -351,14 +347,7 @@ INSERT INTO[managementconsulting_subtask]([mc_id],[mcs_sequence],[mcs_subtask],[
 SELECT SCOPE_IDENTITY()AS[mcs_id]
 </cfquery>
 <cfreturn '{"id":#fquery.mcs_id#,"group":"saved","result":"ok"}'>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
-</cfcatch>
-</cftry>
 </cfif>
-
-
 </cfcase>
 
 </cfswitch>

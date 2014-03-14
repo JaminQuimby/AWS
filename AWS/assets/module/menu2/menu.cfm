@@ -19,6 +19,63 @@
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
         </li>
+        
+        
+        <li><a href="##">Practice Management</a>
+		<div class="cbp-hrsub _practicemanagement">
+		<div class="cbp-hrsub-inner"> 
+		<div>
+			<h4>Module</h4>
+			<ul>
+			<li><a href="#this.url#/AWS/_PracticeManagement/workinprogress.cfm">Work in Progress</a></li>
+      		<!---<li><a href="#this.url#/AWS/_PracticeManagement/employeedashboard.cfm">Employee Dashboard</a></li>--->
+      		<li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm">Employee Contact Information</a></li>
+            <li><a href="#this.url#/AWS/assets/plugins/jTimeBilling/timebillingreport.cfm">Time &amp; Billing</a></li>
+			</ul>
+		</div>
+		<div>
+			<h4>AWS Maintenance</h4>
+			<ul>
+		    <li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/table.cfm">Table Maintenance</a></li>
+       		<li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/historical.cfm">Historical Data</a></li>
+            <cfif Session.user.role eq 1>
+            <li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/usersettings.cfm">User Settings</a></li>
+            </cfif>
+			</ul>
+		</div>
+   
+		</div><!-- /cbp-hrsub-inner -->
+		</div><!-- /cbp-hrsub -->
+		</li>
+        
+        <li><a href="##">Client Management</a>
+		<div class="cbp-hrsub _clientmanagement">
+		<div class="cbp-hrsub-inner">
+        <div>
+        	<h4>Module</h4>
+			<ul>
+			<li><a href="#this.url#/AWS/_clientmanagement/administrativetasks.cfm">Administrative Tasks</a></li>
+      		<li><a href="#this.url#/AWS/_clientmanagement/clientmaintenance.cfm">Client Maintenance</a></li>
+      		<li><a href="#this.url#/AWS/_clientmanagement/communications.cfm">Communications</a></li>
+      		<li><a href="#this.url#/AWS/_clientmanagement/documenttracking.cfm">Document Tracking Log</a></li>
+			</ul>
+		</div>
+		<div>
+			<h4>Reporting</h4>
+			<ul>
+			<li><a href="#this.url#/AWS/_clientmanagement/reports/administrativetasks_report.cfm">Administrative Tasks</a></li>
+            <li><a href="#this.url#/AWS/_clientmanagement/reports/clientmaintenance_report.cfm">Client Maintenance</a></li>
+       		<li><a href="#this.url#/AWS/_clientmanagement/reports/communications_report.cfm">Communications</a></li>
+			</ul>
+		</div>
+		</div><!-- /cbp-hrsub-inner -->
+		</div><!-- /cbp-hrsub -->
+		</li>
+        
+	
+        
+        
+        
 	<li><a href="##">Payroll &amp; Taxes</a>
 		<div class="cbp-hrsub _payrolltaxes">
 		<div class="cbp-hrsub-inner"> 
@@ -89,55 +146,8 @@
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
 	</li>
-	<li><a href="##">Client Management</a>
-		<div class="cbp-hrsub _clientmanagement">
-		<div class="cbp-hrsub-inner">
-        <div>
-        	<h4>Module</h4>
-			<ul>
-			<li><a href="#this.url#/AWS/_clientmanagement/administrativetasks.cfm">Administrative Tasks</a></li>
-      		<li><a href="#this.url#/AWS/_clientmanagement/clientmaintenance.cfm">Client Maintenance</a></li>
-      		<li><a href="#this.url#/AWS/_clientmanagement/communications.cfm">Communications</a></li>
-      		<li><a href="#this.url#/AWS/_clientmanagement/documenttracking.cfm">Document Tracking Log</a></li>
-			</ul>
-		</div>
-		<div>
-			<h4>Reporting</h4>
-			<ul>
-			<li><a href="#this.url#/AWS/_clientmanagement/reports/administrativetasks_report.cfm">Administrative Tasks</a></li>
-            <li><a href="#this.url#/AWS/_clientmanagement/reports/clientmaintenance_report.cfm">Client Maintenance</a></li>
-       		<li><a href="#this.url#/AWS/_clientmanagement/reports/communications_report.cfm">Communications</a></li>
-			</ul>
-		</div>
-		</div><!-- /cbp-hrsub-inner -->
-		</div><!-- /cbp-hrsub -->
-		</li>
-		<li><a href="##">Practice Management</a>
-		<div class="cbp-hrsub _practicemanagement">
-		<div class="cbp-hrsub-inner"> 
-		<div>
-			<h4>Module</h4>
-			<ul>
-			<li><a href="#this.url#/AWS/_PracticeManagement/workinprogress.cfm">Work in Progress</a></li>
-      		<li><a href="#this.url#/AWS/_PracticeManagement/employeedashboard.cfm">Employee Dashboard</a></li>
-      		<li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm">Employee Contact Information</a></li>
-            <li><a href="#this.url#/AWS/assets/plugins/jTimeBilling/timebillingreport.cfm">Time &amp; Billing</a></li>
-			</ul>
-		</div>
-		<div>
-			<h4>AWS Maintenance</h4>
-			<ul>
-		    <li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/table.cfm">Table Maintenance</a></li>
-       		<li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/historical.cfm">Historical Data</a></li>
-            <cfif Session.user.role eq 1>
-            <li><a href="#this.url#/AWS/_PracticeManagement/_maintenance/usersettings.cfm">User Settings</a></li>
-            </cfif>
-			</ul>
-		</div>
-   
-		</div><!-- /cbp-hrsub-inner -->
-		</div><!-- /cbp-hrsub -->
-		</li>
+	
+    
 </ul>
 </nav>
 </div>

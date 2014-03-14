@@ -44,27 +44,32 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- TOTAL TIME --->
 <cfcase value="group1">
 <cfquery datasource="AWS" name="aquery">
-SELECT'Administrative Tasks'AS[name],SUM(cas_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Administrative Tasks'AS[name]
+,SUM(cas_esttime)AS[total_time]
+,COUNT(cas_assignedto)AS[count_assigned]
+,'1'AS[orderit]
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL AND[cas_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">AND[cas_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 
 UNION
-SELECT'Business Formation'AS[name],SUM(bf_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Business Formation'AS[name],SUM(bf_esttime)AS[total_time],COUNT(bf_assignedto)AS[count_assigned],'1'AS[orderit]
 FROM[v_businessformation]
 WHERE[bf_status]!='2'
 <cfif ARGUMENTS.userid neq "">AND[bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 
 UNION
-SELECT'Financial & Tax Planning'AS[name],SUM(ftp_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Financial & Tax Planning'AS[name],SUM(ftp_esttime)AS[total_time],COUNT(ftp_assignedto)AS[count_assigned],'1'AS[orderit]
 FROM[v_financialtaxplanning]
 WHERE[ftp_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL AND[ftp_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">AND[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 
 UNION
-SELECT'Financial Statements'AS[name],SUM(fds_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Financial Statements'AS[name],SUM(fds_esttime)AS[total_time]
+,COUNT(fds_obtaininfo_assignedto)+COUNT(fds_sort_assignedto)+COUNT(fds_checks_assignedto)+COUNT(fds_sales_assignedto)+COUNT(fds_entry_assignedto)+COUNT(fds_reconcile_assignedto)+COUNT(fds_compile_assignedto)+COUNT(fds_review_assignedto)+COUNT(fds_assembly_assignedto)+COUNT(fds_delivery_assignedto)AS[count_assigned]
+,'1'AS[orderit]
 FROM[v_financialdatastatus] 
 WHERE[fds_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL AND[fds_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -84,21 +89,27 @@ OR([fds_delivery_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fd
 </cfif>
 
 UNION
-SELECT'Accounting and Consulting'AS[name], SUM(mc_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Accounting and Consulting'AS[name], SUM(mc_esttime)AS[total_time],COUNT(mc_assignedto)AS[count_assigned],'1'AS[orderit]
 FROM[v_managementconsulting]
 WHERE[mc_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL AND[mc_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">AND[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 
 UNION
-SELECT'Notices'AS[name], SUM(n_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Notices'AS[name], SUM(n_esttime)AS[total_time],COUNT(n_assignedto)AS[count_assigned],'1'AS[orderit]
 FROM[v_notice]
 WHERE[n_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([n_1_resduedate]IS NULL AND[n_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">AND[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 
 UNION
-SELECT'Other Filings'AS[name], SUM(of_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Other Filings'AS[name], SUM(of_esttime)AS[total_time]
+,COUNT(of_obtaininfo_assignedto)
++COUNT(of_preparation_assignedto)
++COUNT(of_review_assignedto)
++COUNT(of_assembly_assignedto)
++COUNT(of_delivery_assignedto)AS[count_assigned]
+,'1'AS[orderit]
 FROM[v_otherfilings]
 WHERE[of_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -112,7 +123,12 @@ OR([of_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_ass
 </cfif>
 
 UNION
-SELECT'Payroll Checks'AS[name], SUM(pc_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Payroll Checks'AS[name], SUM(pc_esttime)AS[total_time]
+,COUNT(pc_delivery_datecompleted)
++COUNT(pc_obtaininfo_datecompleted)
++COUNT(pc_review_datecompleted)
++COUNT(pc_assembly_datecompleted)AS[count_assigned]
+,'1'AS[orderit]
 FROM[v_payrollcheckstatus]
 WHERE[pc_delivery_completedby]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL AND[pc_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -124,7 +140,14 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=<cfquerypa
 </cfif>
 
 UNION
-SELECT'Payroll Taxes'AS[name], SUM(pt_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Payroll Taxes'AS[name], SUM(pt_esttime)AS[total_time]
+,COUNT(pt_obtaininfo_assignedto)
++COUNT(pt_entry_assignedto)
++COUNT(pt_rec_assignedto)
++COUNT(pt_review_assignedto)
++COUNT(pt_assembly_assignedto)
++COUNT(pt_delivery_assignedto)AS[count_assigned]
+,'1'AS[orderit]
 FROM[v_payrolltaxes] 
 WHERE([pt_delivery_completedby]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL AND[pt_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -138,7 +161,9 @@ OR([pt_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_ass
 </cfif>
 
 UNION
-SELECT'Tax Returns'AS[name], SUM(tr_esttime)AS[total_time],'1'AS[orderit]
+SELECT'Tax Returns'AS[name], SUM(tr_esttime)AS[total_time]
+,COUNT(tr_2_assignedto)AS[count_assigned]
+,'1'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_2_informationreceived]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL AND[tr_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -149,7 +174,9 @@ AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">
 
 
 UNION
-SELECT'Personal Property Tax Returns'AS[name], SUM(tr_esttime)AS[total_time],'2'AS[orderit]
+SELECT'Personal Property Tax Returns'AS[name], SUM(tr_esttime)AS[total_time]
+,COUNT(tr_4_assignedto)AS[count_assigned]
+,'2'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_4_required]='TRUE'
 AND[tr_4_required]IS NULL
@@ -166,9 +193,9 @@ OR(Year([tr_2_informationreceived])=Year(getdate()))
 
 
 <cfquery dbtype="query" name="fquery">
-SELECT[name],[total_time],[orderit]FROM[aquery]
+SELECT[name],[total_time],[count_assigned],[orderit]FROM[aquery]
 UNION
-SELECT'<b style=''font-weight: bold;''>Total</b>'AS[name], SUM(total_time)AS[total_time],'999'AS[orderit]
+SELECT'<b style=''font-weight: bold;''>Total</b>'AS[name],SUM(total_time)AS[total_time],SUM(count_assigned)[count_assigned],'999'AS[orderit]
 FROM[aquery]
 
 ORDER BY[orderit]
@@ -184,6 +211,7 @@ ORDER BY[orderit]
 <cfset queryResult=queryResult&'{
 								"NAME":"'&NAME&'"
 								,"TOTAL_TIME":"'&TOTAL_TIME&'"
+								,"COUNT_ASSIGNED":"'&COUNT_ASSIGNED&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
