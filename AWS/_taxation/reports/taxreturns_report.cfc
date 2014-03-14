@@ -21,11 +21,10 @@ SELECT[tr_id]
 ,CONVERT(VARCHAR(8),[tr_2_informationreceived], 1)AS[tr_2_informationreceived]
 ,[tr_2_assignedtoTEXT]
 ,[tr_priorfees]
-
-,CONVERT(VARCHAR(8),tr_1_dropoffappointment, 1) + '<br />' + CONVERT(VARCHAR(5),tr_1_dropoffappointmentwithTEXT) AS [dropoffappointment]
-,CONVERT(VARCHAR(8),tr_1_pickupappointment, 1) + '<br />' + CONVERT(VARCHAR(5),tr_1_pickupappointmentwithTEXT) AS [pickupappointment]
-
-
+,[tr_2_reviewassignedto] 
+,CONVERT(VARCHAR(10),[tr_2_reviewed], 101)AS[tr_2_reviewed] 
+,[tr_deliverymethod]
+,[tr_3_multistatereturn]
 ,[tr_missinginfo]
 ,CONVERT(VARCHAR(8),[tr_missinginforeceived], 1)AS[tr_missinginforeceived]
 ,CONVERT(VARCHAR(8),[tr_duedate], 1)AS[tr_duedate]
@@ -103,39 +102,25 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
-								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
-								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
-								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
-								
-								
-								,"DROPOFFAPPOINTMENT":"'&DROPOFFAPPOINTMENT&'"
-								,"PICKUPAPPOINTMENT":"'&PICKUPAPPOINTMENT&'"
-								
-								
-								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
-								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
 								,"TR_DUEDATE":"'&TR_DUEDATE&'"
+								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
+								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
+								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
 								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
-								,"TR_EXTENSIONREQUESTED":"'&TR_EXTENSIONREQUESTED&'"
-								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
-								,"TR_3_MISSINGSIGNATURES":"'&TR_3_MISSINGSIGNATURES&'"
+								,"TR_2_REVIEWASSIGNEDTO":"'&TR_2_REVIEWASSIGNEDTO&'"
+								,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
+								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"
 								,"TR_3_CONTACTED":"'&TR_3_CONTACTED&'"
-								
-								,"TR_2_PREPAREDBYTEXT":"'&TR_2_PREPAREDBYTEXT&'"
-								
-								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
-								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
-								,"TR_FILINGDEADLINE":"'&TR_FILINGDEADLINE&'"
-								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"
-								,"TR_4_EXTENDED":"'&TR_4_EXTENDED&'"
-								,"TR_4_RFR":"'&TR_4_RFR&'"
-								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
-								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
-								,"TR_4_CURRENTFEES":"'&TR_4_CURRENTFEES&'"
+								,"TR_DELIVERYMETHOD":"'&TR_DELIVERYMETHOD&'"
+								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
 								,"TR_PAIDTEXT":"'&TR_PAIDTEXT&'"
+								,"TR_EXTENSIONREQUESTED":"'&TR_EXTENSIONREQUESTED&'"
+								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
+								,"TR_3_MULTISTATERETURN":"'&TR_3_MULTISTATERETURN&'"
+								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"							
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -235,7 +220,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TRST_PRIMARY":"'&TRST_PRIMARY&'"
 								,"TRST_COMPLETED":"'&TRST_COMPLETED&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
-								,"TR_PAID":"'&TR_PAID&'"
+								,"TR_PAIDTEXT":"'&TR_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

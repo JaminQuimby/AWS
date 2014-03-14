@@ -117,17 +117,18 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CO_CALLER":"'&CO_CALLER&'"
-								,"CO_FORTEXT":"'&CO_FORTEXT&'"
-								,"CO_FEES":"'&CO_FEES&'"
-								,"CO_PAID":"'&CO_PAID&'"
 								,"CO_DATE":"'&CO_DATE&'"
-								,"CO_TELEPHONE":"'&CO_TELEPHONE&'"
-								,"CO_EXT":"'&CO_EXT&'"
-								,"CO_EMAILADDRESS":"'&CO_EMAILADDRESS&'"
+								,"CO_FORTEXT":"'&CO_FORTEXT&'"
 								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
 								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
 								,"CO_COMPLETED":"'&CO_COMPLETED&'"
 								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
+								,"CO_TELEPHONE":"'&CO_TELEPHONE&'"
+								,"CO_EXT":"'&CO_EXT&'"
+								,"CO_EMAILADDRESS":"'&CO_EMAILADDRESS&'"
+								,"CO_FEES":"'&CO_FEES&'"
+								,"CO_PAID":"'&CO_PAID&'"					
+							
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

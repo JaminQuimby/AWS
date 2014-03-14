@@ -56,10 +56,8 @@ SELECT[n_id]
 SELECT[nm_id]
 ,[n_id]
 ,[nm_name]
+,[nm_status]
 ,[n_1_taxyear]
-
-
-
 ,[n_missinginfo]
 ,CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec]
 ,CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate]
@@ -70,8 +68,6 @@ SELECT[nm_id]
 ,[n_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[n_1_noticenumber]=[optionvalue_id])
 ,[n_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[n_1_taxform]=[optionvalue_id])
 ,[n_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[n_paid]=[optionvalue_id])
-
-
 ,[client_name]
 ,[client_id]
 FROM[v_notice]
@@ -128,6 +124,7 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
  								,"NM_NAME":"'&NM_NAME&'"
+ 								,"NM_STATUS":"'&NM_STATUS&'"
  								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
  								,"N_1_TAXFORMTEXT":"'&N_1_TAXFORMTEXT&'"
  								,"N_1_NOTICENUMBERTEXT":"'&N_1_NOTICENUMBERTEXT&'"

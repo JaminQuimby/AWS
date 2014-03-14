@@ -73,9 +73,7 @@ FROM[CLIENT_CONTACT]
 SELECT[client_id]
 ,[client_name]
 ,[client_type]
-,[client_trade_name]
 ,[client_active]
-,[client_salutation]
 ,[client_spouse]
 ,[client_credit_hold]
 ,[client_schedule_c]
@@ -134,11 +132,9 @@ WHERE(1)=(1)
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
-								,"CLIENT_TRADE_NAME":"'&CLIENT_TRADE_NAME&'"
-								,"CLIENT_ACTIVE":"'&CLIENT_ACTIVE&'"
-								,"CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'"
 								,"CLIENT_SPOUSE":"'&CLIENT_SPOUSE&'"
+								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
+								,"CLIENT_ACTIVE":"'&CLIENT_ACTIVE&'"
 								,"CLIENT_CREDIT_HOLD":"'&CLIENT_CREDIT_HOLD&'"
 								,"CLIENT_SCHEDULE_C":"'&CLIENT_SCHEDULE_C&'"
 								,"CLIENT_SCHEDULE_E":"'&CLIENT_SCHEDULE_E&'"
@@ -164,7 +160,7 @@ SELECT[client_id]
 ,[client_name]
 ,[contact_id]
 ,[contact_name]
-,[contact_type]
+,[contact_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_contacttype'AND[contact_type]=[optionvalue_id])
 ,[contact_address1]
 ,[contact_address2]
 ,[contact_city]
@@ -230,7 +226,7 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CONTACT_NAME":"'&CONTACT_NAME&'"
-								,"CONTACT_TYPE":"'&CONTACT_TYPE&'"
+								,"CONTACT_TYPETEXT":"'&CONTACT_TYPETEXT&'"
 								,"CONTACT_ADDRESS2":"'&CONTACT_ADDRESS2&'"
 								,"CONTACT_ADDRESS1":"'&CONTACT_ADDRESS1&'"
 								,"CONTACT_CITY":"'&CONTACT_CITY&'"

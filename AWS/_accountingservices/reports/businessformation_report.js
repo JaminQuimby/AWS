@@ -40,26 +40,16 @@ var grid1_config = [
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
+			,BF_ACTIVITY:{title:'Activity'}
+			,BF_OWNERS:{title:'Business Type',width:'1%'}
+ 			,BF_BUSINESSTYPETEXT:{title:'Business Type',width:'1%'}
+			,BF_DUEDATE:{title:'Due Date',width:'1%'}
 			,BF_STATUSTEXT:{title:'Status',width:'1%'}
 			,BF_ASSIGNEDTOTEXT:{title:'Assignedto',width:'1%'}
- 			,BF_DATEINITIATED:{title:'Date Initiated',width:'1%'}
- 			,BF_BUSINESSTYPETEXT:{title:'Business Type',width:'1%'}
- 			,BF_BUSINESSSUBMITTED:{title:'Form Submitted',width:'1%'}
- 			,BF_BUSINESSRECEIVED:{title:'Form Received',width:'1%'}
-			,BF_ARTICLESSUBMITTED:{title:'Article Submitted',width:'1%'}
 			,BF_ARTICLESAPPROVED:{title:'Article Approved',width:'1%'}
-			,BF_TRADENAMESUBMITTED:{title:'Trade Name Submitted',width:'1%'}
 			,BF_TRADENAMERECEIVED:{title:'Trade Name Received',width:'1%'}
-			,BF_MINUTESBYLAWSDRAFT:{title:'Minutes By Laws Draft',width:'1%'}
-			,BF_MINUTESBYLAWSFINAL:{title:'Minutes By Laws Final',width:'1%'}
 			,BF_MINUTESCOMPLETED:{title:'Minutes Completed',width:'1%'}
-			,BF_DISSOLUTIONREQUESTED:{title:'Dissolution Requested',width:'1%',list:false}
-			,BF_DISSOLUTIONSUBMITTED:{title:'Dissolution Submitted',width:'1%',list:false}
 			,BF_DISSOLUTIONCOMPLETED:{title:'Dissolution Completed',width:'1%',list:false}
-			,BF_OTHERACTIVITY:{title:'Other Activity',width:'1%'}
-			,BF_OTHERSTARTED:{title:'Other Started',width:'1%'}
-			,BF_OTHERCOMPLETED:{title:'Other Completed',width:'1%'}
-			,BF_RECORDBOOKORDERED:{title:'Record Book Ordered',width:'1%'}
   			,BF_FEES:{title:'Fees'}
 			,BF_PAIDTEXT:{title:'Payment Status'}
 },

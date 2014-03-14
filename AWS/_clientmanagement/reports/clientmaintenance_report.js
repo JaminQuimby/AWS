@@ -35,15 +35,13 @@ var grid1_config = [
 	"title":"Client Maintenance Report",	
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_TYPE:{title:'Client Type',width:"1%"}
-			,CLIENT_TRADE_NAME:{title:'Trade Name'}
-			,CLIENT_ACTIVE:{title:'Active',width:"1%"}
-			,CLIENT_SALUTATION:{title:'Salutation'}
 			,CLIENT_SPOUSE:{title:'Spouse'}
+			,CLIENT_TYPE:{title:'Client Type',width:"1%"}
+			,CLIENT_ACTIVE:{title:'Active',width:"1%"}
 			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_DISREGARD:{title:'Disregarded',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_DISREGARD:{title:'Disregarded Entity',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 				"method":"f_lookupData",
@@ -85,7 +83,7 @@ var grid2_config = [
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CONTACT_NAME:{title:'Contact'}
-			,CONTACT_TYPE:{title:'Contact Type'}
+			,CONTACT_TYPETEXT:{title:'Contact Type'}
 			,CONTACT_ADDRESS2:{title:'Title'}
 			,CONTACT_ADDRESS1:{title:'Address'}
 			,CONTACT_CITY:{title:'City'}
