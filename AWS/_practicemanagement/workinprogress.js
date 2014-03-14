@@ -2,7 +2,6 @@ $(document).ready(function(){
 
 $('#g1_assignedto').val($('#user_id').val()).trigger('chosen:updated');
 
-	jqMessage({message: "Actively being changed by: Jamin Quimby.",type: "information",autoClose: true});
 /**/
 _grid1();
 _group1=function(){_grid1()}
