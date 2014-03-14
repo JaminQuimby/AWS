@@ -1,8 +1,9 @@
+var debug=false;
+
 $(document).ready(function(){
 _grid1();
 _group1=function(){}
-_group2=function(){_grid2();_clearfields({"list":"subtask1_id,g2_completed,g2_duedate,g2_notes,g2_sequence","sel":"g2_assignedto,g2_status,g2_subtask,g2_dependencies"})}
-
+_group2=function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence","sel":"g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0')}
 
 });
 
@@ -47,8 +48,8 @@ _grid2=function(){_jGrid({
 			,FDSS_SEQUENCE:{title:'Sequence'}
 			,FDSS_SUBTASKTEXT:{title:'Subtask'}
 			,FDSS_DUEDATE:{title:'Due Date'}
-			,FDSS_STATUS:{title:'Status'}
-			,FDSS_ASSIGNEDTO:{title:'Assigned To'}
+			,FDSS_STATUSTEXT:{title:'Status'}
+			,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"5"}',
@@ -116,6 +117,7 @@ $("#g1_status").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
 _saveData({group:"group1","payload":$.parseJSON(json),page:"financialstatements"});
+if(debug){window.console.log('Group 1 - Saving Data');}
 break;
 
 case'group1_1':var json='{"DATA":[["'+
@@ -125,8 +127,13 @@ $("#g1_g1_completedby").val()+'","'+
 $("#g1_g1_datecompleted").val()+'","'+
 $("#g1_g1_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_2'})}
+if($("#isLoaded_group1_1").val()!=0){
+	_saveData({group:"group1_1","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_1 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_2'});
+	if(debug){window.console.log('Group 1_1 - Skipped saving data');}
+	}
 break;
 
 case'group1_2':var json='{"DATA":[["'+
@@ -136,8 +143,13 @@ $("#g1_g2_completedby").val()+'","'+
 $("#g1_g2_datecompleted").val()+'","'+
 $("#g1_g2_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_3'})}
+if($("#isLoaded_group1_2").val()!=0){
+	_saveData({group:"group1_2","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_2 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_3'});
+	if(debug){window.console.log('Group 1_2 - Skipped saving data');}
+	}
 break;
 
 case'group1_3':var json='{"DATA":[["'+
@@ -147,8 +159,13 @@ $("#g1_g3_completedby").val()+'","'+
 $("#g1_g3_datecompleted").val()+'","'+
 $("#g1_g3_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_4'})}
+if($("#isLoaded_group1_3").val()!=0){
+	_saveData({group:"group1_3","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_3 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_4'});
+	if(debug){window.console.log('Group 1_3 - Skipped saving data');}
+	}
 break;
 
 case'group1_4':var json='{"DATA":[["'+
@@ -158,8 +175,13 @@ $("#g1_g4_completedby").val()+'","'+
 $("#g1_g4_datecompleted").val()+'","'+
 $("#g1_g4_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_5'})}
+if($("#isLoaded_group1_4").val()!=0){
+	_saveData({group:"group1_4","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_4 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_5'});
+	if(debug){window.console.log('Group 1_4 - Skipped saving data');}
+	}
 break;
 
 case'group1_5':var json='{"DATA":[["'+
@@ -169,8 +191,13 @@ $("#g1_g5_completedby").val()+'","'+
 $("#g1_g5_datecompleted").val()+'","'+
 $("#g1_g5_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_6'})}
+if($("#isLoaded_group1_5").val()!=0){
+	_saveData({group:"group1_5","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_5 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_6'});
+	if(debug){window.console.log('Group 1_5 - Skipped saving data');}
+	}
 break;
 
 case'group1_6':var json='{"DATA":[["'+
@@ -180,8 +207,13 @@ $("#g1_g6_completedby").val()+'","'+
 $("#g1_g6_datecompleted").val()+'","'+
 $("#g1_g6_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_6").val()!=0){_saveData({group:"group1_6","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_7'})}
+if($("#isLoaded_group1_6").val()!=0){
+	_saveData({group:"group1_6","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_6 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_7'});
+	if(debug){window.console.log('Group 1_6 - Skipped saving data');}
+	}
 break;
 
 case'group1_7':var json='{"DATA":[["'+
@@ -191,8 +223,13 @@ $("#g1_g7_completedby").val()+'","'+
 $("#g1_g7_datecompleted").val()+'","'+
 $("#g1_g7_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_7").val()!=0){_saveData({group:"group1_7","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_8'})}
+if($("#isLoaded_group1_7").val()!=0){
+	_saveData({group:"group1_7","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_7 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_8'});
+	if(debug){window.console.log('Group 1_7 - Skipped saving data');}
+	}
 break;
 
 case'group1_8':var json='{"DATA":[["'+
@@ -202,8 +239,13 @@ $("#g1_g8_completedby").val()+'","'+
 $("#g1_g8_datecompleted").val()+'","'+
 $("#g1_g8_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_8").val()!=0){_saveData({group:"group1_8","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_9'})}
+if($("#isLoaded_group1_8").val()!=0){
+	_saveData({group:"group1_8","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_8 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_9'});
+	if(debug){window.console.log('Group 1_8 - Skipped saving data');}
+	}
 break;
 
 case'group1_9':var json='{"DATA":[["'+
@@ -213,8 +255,13 @@ $("#g1_g9_completedby").val()+'","'+
 $("#g1_g9_datecompleted").val()+'","'+
 $("#g1_g9_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_9").val()!=0){_saveData({group:"group1_9","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_10'})}
+if($("#isLoaded_group1_9").val()!=0){
+	_saveData({group:"group1_9","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_9 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_10'});
+	if(debug){window.console.log('Group 1_9 - Skipped saving data');}
+	}
 break;
 
 case'group1_10':var json='{"DATA":[["'+
@@ -224,8 +271,13 @@ $("#g1_g10_completedby").val()+'","'+
 $("#g1_g10_datecompleted").val()+'","'+
 $("#g1_g10_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_10").val()!=0){_saveData({group:"group1_10","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group1_11'})}
+if($("#isLoaded_group1_10").val()!=0){
+	_saveData({group:"group1_10","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_10 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_11'});
+	if(debug){window.console.log('Group 1_10 - Skipped saving data');}
+	}
 break;
 
 case'group1_11':var json='{"DATA":[["'+
@@ -235,8 +287,13 @@ $("#g1_g11_completedby").val()+'","'+
 $("#g1_g11_datecompleted").val()+'","'+
 $("#g1_g11_estimatedtime").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_11").val()!=0){_saveData({group:"group1_11","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'group2'})}
+if($("#isLoaded_group1_11").val()!=0){
+	_saveData({group:"group1_11","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group 1_11 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group2'});
+	if(debug){window.console.log('Group 1_11 - Skipped saving data');}
+	}
 break;
 
 case'group2':var json='{"DATA":[["'+
@@ -251,15 +308,41 @@ $("#g2_status").val()+'","'+
 $("#g2_subtask").val()+'","'+
 $("#g2_dependencies").val()+'","'+
 '"]]}'
-if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"financialstatements"})}
-else{_saveDataCB({'group':'plugins'})}
+if($("#isLoaded_group2").val()!=0){
+	_saveData({group:"group2","payload":$.parseJSON(json),page:"financialstatements"});
+	if(debug){window.console.log('Group2 - Saving Data');alert('STOP : End of Save')}
+	}else{
+	_saveDataCB({'group':'plugins'});
+	if(debug){window.console.log('Group2 - Skipped saving data');alert('STOP : End of Save')}
+	}
 break;
 
-case"plugins":_pluginSaveData();
+/*Group2_Duplicate*/
+case'group2_duplicate':var json='{"DATA":[["'+
+$("#subtask1_id").val()+'","'+
+$("#task_id").val()+'","'+
+$("#g2_group").val()+'","'+
+'"]]}'
+if($("#task_isLoaded").val()!=0){
+	_saveData({group:"group2_duplicate",payload:$.parseJSON(json),page:"financialstatements"})}
+else{jqMessage({message: "You must select a task.",type: "info",autoClose: true})}
 break;
 
+
+/*Start Saving Plugins*/
+case"plugins":_pluginSaveData({"subgroup":options["subgroup"]})
+	if(debug){window.console.log('Saving Plugins');alert('STOP: Start of Plugins Save')}
+	
+break;
 /*Other Events*/
 case'error':jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-default:jqMessage({message: "A exception in financialstatements.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
+
+default:jqMessage({"message":"A exception in financialstatements.js","description":""+options["group"]+' json: '+json+'  id: '+options["id"]+"" ,"type": "sucess","autoClose": false});
+alert('"message":"A exception in financialstatements.js","description":"'+options["group"]+' json: '+json+'  id: '+options["id"]+'" ,"type": "sucess","autoClose": false')
+break;
+
+}}
+
+
 catch(err){alert(err)}};

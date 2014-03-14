@@ -3,7 +3,7 @@ _grid1(jqMessage({message:"Changes to select boxes effects the dropdown select o
 _group1=function(){}
 _group2=function(){_clearfields({"sel":"opt_Form,g2_optionGroup,g2_optionHide","list":"g2_optionName,g2_optionDescription"});_grid2();}
 });
-
+$('#opt_FinancialStatementGroups').hide();
 $('#opt_OtherFilings').hide();
 $('#opt_TaxReturnsSchedule').hide();
 $('#opt_AcctConGroups').hide();
@@ -11,6 +11,7 @@ $('#opt_globalState').hide();
 
 _options=function(id){
 	switch(id){
+	case'3':$('#opt_FinancialStatementGroups').show(); break; 
 	case'9':$('#opt_globalState').show(); break; 
 	case'34':$('#opt_OtherFilings').show(); break; 
 	case'35':$('#opt_TaxReturnsSchedule').show(); break;
@@ -47,6 +48,10 @@ switch(query.COLUMNS[0]){
 /*Group1*/case "SELECTNAME_ID":var list='task_id,g1_selectLabel,g1_selectDescription';_loadit({"query":query,"list":list,"page":"table"});break;
 /*Group2*/case "SELECT_ID":var list='subtask1_id,g2_optionName,g2_optionDescription,g2_optionGroup,g2_optionHide';
 //Load Options
+
+if($("#task_id").val() == '3'){
+var list=list+',opt_FinancialStatement_Subtasks';
+	}	
 
 if($("#task_id").val() == '9'){
 var list=list+',opt_stateAbbreviations';
@@ -86,7 +91,11 @@ $("#g2_optionDescription").val()+'","'+
 $("#g2_optionGroup").val()+'","'+
 $("#g2_optionHide").val()+'","'+
 
-(($("#task_id").val() == '9' || $("#task_id").val() == '36'  )?
+(($("#task_id").val() == '3'  )?
+$("#opt_FinancialStatement_Subtasks").val()+'","'
+:one='')+
+
+(($("#task_id").val() == '9' )?
 $("#opt_stateAbbreviations").val()+'","'
 :one='')+
 

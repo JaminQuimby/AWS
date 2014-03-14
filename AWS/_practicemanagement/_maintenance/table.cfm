@@ -16,6 +16,8 @@
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
 <cfquery dbtype="query" name="global_acctsubtasks">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctsubtasks'</cfquery>
+<cfquery dbtype="query" name="global_financialstatmentsubtask">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_financialstatmentsubtask'</cfquery>
+
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -56,6 +58,11 @@
 
 <div><label for="g2_optionName">Option Name</label><input type="text" id="g2_optionName"></div>
 <!--- OPTIONS --->
+<!---Financial Statement Group--->
+<div id="opt_FinancialStatementGroups" style="display:none">
+<div><label for="opt_FinancialStatement_Subtasks">Subtasks</label><select id="opt_FinancialStatement_Subtasks" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+</div>
+<!---Accounting & Consulting Group --->
 <div id="opt_AcctConGroups" style="display:none">
 <div><label for="opt_AcctConGroups_Subtasks">Subtasks</label><select id="opt_AcctConGroups_Subtasks" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>

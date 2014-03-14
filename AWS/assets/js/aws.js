@@ -92,7 +92,9 @@ $.ajax({
  var j=$.parseJSON(json);
 if(j.check =="true"){ 
  jqValid({'type':'','object':$('#'+options['check']),'message':'This value must be unique.'});
-}
+ return true
+}else
+return false
 	  },
   error:function(data){errorHandle($.parseJSON(data))}})
   

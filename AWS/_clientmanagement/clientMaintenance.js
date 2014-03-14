@@ -250,8 +250,11 @@ $("#g1_spouse").val()+'","'+
 $("#g1_trade_name").val()+'","'+
 $("#g1_type").val()+'","'+
 '"]]}'
-if($("#g1_name").val()!=""&&$("#g1_salutation").val()!=""&&$("#g1_type").val()!=""&&$("#g1_since").val()!=""){
+
+if($("#g1_name").val()!=""&&$("#g1_salutation").val()!=""&&$("#g1_type").val()!=""&&$("#g1_since").val()!=""&&_duplicateCheck({"check":"g1_name","loadType":"clientName","page":"clientmaintenance"})){
 _saveData({group:"group1",payload:$.parseJSON(json),page:"clientmaintenance"})}
+
+
 else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false})}	
 break;
 

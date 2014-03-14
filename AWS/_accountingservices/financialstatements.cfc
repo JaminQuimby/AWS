@@ -270,12 +270,11 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- Grid 2 --->
 <cfcase value="group2"><cfquery datasource="AWS" name="fquery">
 SELECT[fdss_id]
-,[fdss_subtaskTEXT]
-,[fdss_subtask]
-,[fdss_assignedto]
-,[fdss_duedate]
- [fdss_sequence]
-,[fdss_status]
+,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_status]=[optionvalue_id])
+,[fdss_assignedtoTEXT]
+,[fdss_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#')
+,[fdss_sequence]
+,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]
 FROM[v_financialDataStatus_Subtask]
 WHERE<cfif ARGUMENTS.ID neq "0">[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
@@ -290,8 +289,8 @@ WHERE<cfif ARGUMENTS.ID neq "0">[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> 
 								,"FDSS_SEQUENCE":"'&FDSS_SEQUENCE&'"
 								,"FDSS_SUBTASKTEXT":"'&FDSS_SUBTASKTEXT&'"
 								,"FDSS_DUEDATE":"'&FDSS_DUEDATE&'"
-								,"FDSS_STATUS":"'&FDSS_STATUS&'"
-								,"FDSS_ASSIGNEDTO":"'&FDSS_ASSIGNEDTO&'"
+								,"FDSS_STATUSTEXT":"'&FDSS_STATUSTEXT&'"
+								,"FDSS_ASSIGNEDTOTEXT":"'&FDSS_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -365,12 +364,14 @@ SELECT SCOPE_IDENTITY()AS[id]
 
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
+<cftry>
+
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -390,6 +391,12 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_year]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
+
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfif>
 </cfcase>
 
@@ -408,7 +415,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -427,7 +434,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_3","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -447,7 +454,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_4","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -467,7 +474,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_5","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -487,7 +494,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_6","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -507,7 +514,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_7","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -527,7 +534,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_8","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -547,7 +554,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_9","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -567,7 +574,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_10","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -587,7 +594,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_11","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -601,13 +608,13 @@ SET[fds_acctrpt_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_acctrpt_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[fds_acctrpt_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#"  null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fds_acctrpt_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
+WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfcase>
@@ -643,7 +650,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfreturn '{"id":#fquery.id#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfif>
@@ -665,15 +672,37 @@ WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
 </cfcatch>
 </cftry>
 </cfif>
 </cfcase>
+
+<!--- Group2 Duplicate --->
+<cfcase value="group2_duplicate">
+<!--- if this is a new record, then insert it--->
+<cfif j.DATA[1][1] eq "0">
+<cfquery name="aquery" datasource="AWS">
+SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='3'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
+</cfquery>
+<cfquery name="fquery" datasource="AWS">
+<cfset indexNumber=0>
+<cfloop index="i" list="#aquery.option_1#">
+<cfset indexNumber = indexNumber + 1 >
+INSERT INTO[financialdatastatus_subtask]([fds_id],[fdss_sequence],[fdss_subtask],[fdss_status])VALUES(<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>,<cfqueryparam value="#indexNumber#"/>,<cfqueryparam value="#i#"/>,<cfqueryparam value="4"/>)
+</cfloop>
+SELECT SCOPE_IDENTITY()AS[fds_id]
+</cfquery>
+<cfreturn '{"id":"#fquery.mcs_id#","group":"saved","result":"ok"}'>
+</cfif>
+</cfcase>
+
+
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+<cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
+
 </cfcatch>
 </cftry>
 </cffunction>

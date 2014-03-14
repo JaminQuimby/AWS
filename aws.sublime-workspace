@@ -12,71 +12,40 @@
 	"buffers":
 	[
 		{
-			"contents": "\n_pluginURL=function(params){	\n	switch(params){\n		case\"group100\":\n		return \"https://\"+window.location.hostname+\"/AWS/assets/plugins/jUpload/\";\n		break;\n}\n};\n\n_pluginLoadData=function(params){	\n	switch(params){\n 		case\"GROUP100\":\n		return 'file_id,file_id,g100_name,g100_description,g100_year,g100_month,g100_day';\n		break;\n	}\n};\n\n_pluginSaveData=function(params){	\n\nswitch(params){\ncase\"Plugins\":\n_saveDataCB({'group':'group100'}\nbreak;\n\ncase\"GROUP100\":var json='{\"DATA\":[[\"'+\n$(\"#file_id\").val()+'\",\"'+\n$(\"#client_id\").val()+'\",\"'+\n$(\"#g100_day\").val()+'\",\"'+\n$(\"#g100_description\").val()+'\",\"'+\n$(\"#g100_month\").val()+'\",\"'+\n$(\"#g100_name\").val()+'\",\"'+\n$(\"#g100_year\").val()+'\",\"'+\n'\"]]}'\n\nif($(\"#isLoaded_group100\").val()!=0){\n\n_saveData({payload:$.parseJSON(json),page:\"upload\",\"plugin\":\"group100\"});\n\n}else{jqMessage({message: \"Your data has been saved.\",type: \"success\",autoClose: true});}\n\n	\nreturn 'file_id,file_id,g100_name,g100_description,g100_year,g100_month,g100_day';\n		\n		\n		break;\n	}\n};\n",
-			"file": "/C/Users/DEV/Desktop/Security Package Fix.js",
-			"file_size": 2048,
-			"file_write_time": 130234930444540018,
+			"contents": "<!--- Required for AJAX --->\n<cfheader name=\"Cache-Control\" value=\"no-cache\"/>\n<cfheader name=\"Expires\" value=\"0\"/>\n<cfparam name=\"url.task_id\" default=\"0\">\n<cfparam name=\"url.nav\" default=\"1\">\n<cfset page.module=\"_payrolltaxes\">\n<cfset page.location=\"otherfilings\">\n<cfset page.formid=11>\n<cfset page.title=\"Other Filings\">\n<cfset page.menuLeft=\"General\">\n<cfset page.trackers=\"task_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5\">\n<cfset page.footer=\"1\">\n<!DOCTYPE html> \n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n<cfinclude template=\"/assets/inc/header.cfm\">\n<cfif URL.task_id gt 0>\n<cfoutput>\n<script>\n$(document).ready(function(){\n$('##task_id').val('#URL.task_id#');\n_toggle(\"group1,largeMenu\");\n_hide(\"entrance\");$(\"##content\").removeClass();\n$(\"##content\").addClass(\"contentbig\");\n_loadData({\"id\":\"task_id\",\"group\":\"group1\",\"page\":\"#page.location#\"});\n})\n</script>\n</cfoutput>ST\n</cfif>\n<!--- Load Select Options for each dropdown--->\n<cfquery dbtype=\"query\" name=\"global_status\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>\n<cfquery dbtype=\"query\" name=\"global_paid\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>\n<cfquery dbtype=\"query\" name=\"global_state\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>\n<!---	<cfquery dbtype=\"query\" name=\"global_otherfilingsforms\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_otherfilingsforms'</cfquery> --->\n<cfquery dbtype=\"query\" name=\"global_delivery\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>\n<cfquery dbtype=\"query\" name=\"global_otherfilingtype\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_otherfilingtype'</cfquery>\n<cfquery dbtype=\"query\" name=\"global_month\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>\n<cfquery dbtype=\"query\" name=\"global_years\">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>\n\n\n<body>\n<!--- Load Left Menus --->\n<cfinclude template=\"/assets/inc/pagemenu.cfm\">\n<!---PAGE CONTENTS--->\n<div id=\"content\" class=\"contentsmall\"><nav id=\"topMenu\">\n<cfinclude template=\"/assets/module/menu2/menu.cfm\"></nav>\n\n<!---TRACKERS--->\n\n<!--- ENTRANCE --->\n<div id=\"entrance\" class=\"gf-checkbox\">\n<cfoutput><h3>#page.title# Search</h3></cfoutput>\n<div>\n<div><label for=\"g0_filter\">Filter</label><input id=\"g0_filter\" onBlur=\"_grid1();\"/></div>\n<!--- Entrace Grid --->\n<div class=\"tblGrid\" id=\"grid1\"></div>\n<div class=\"buttonbox\">\n<a href=\"#\" class=\"button optional\" onClick='document.getElementById(\"content\").className=\"contentbig\";_toggle(\"group1,largeMenu\");_loadit({\"query\":{\"COLUMNS\":[\"G1_STATUS\"],\"DATA\":[[4]]},\"list\":\"g1_status\",\"page\":\"otherfilings\"});_hide(\"entrance,smallMenu\");_addNewTask();'>Add</a></div></div></div>\n<!--- FIELD DATA --->\n<div id=\"group1\" class=\"gf-checkbox\">\n<h3>General</h3>\n<div>\n<div style=\"float:right; display:block;\"><a href=\"#\" class=\"accordianopen\">Expand All</a><a class=\"accordianclose\">Collapse All</a></div>\n<div><label for=\"client_id\"><i class=\"fa fa-lock link\" onClick=\"_schk('client_id')\"></i>Client</label><select id=\"client_id\"  disabled=\"disabled\"onchange=\"jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets()\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectClients\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_credithold\"><input id=\"g1_credithold\" type=\"checkbox\" class=\"ios-switchb\" disabled=\"disabled\">Credit Hold</label></div>\n<div><label for=\"g1_taxyear\"><i class=\"fa fa-lock link\" onClick=\"_schk('g1_taxyear')\"></i> Year</label><select  id=\"g1_taxyear\" disabled=\"disabled\"><option value=\"0\">&nbsp;</option><cfoutput query=\"global_years\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_period\"><i class=\"fa fa-lock link\" onClick=\"_schk('g1_period')\"></i> Period</label><select id=\"g1_period\" disabled=\"disabled\"><option value=\"0\">&nbsp;</option><cfoutput query=\"global_month\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_state\"><i class=\"fa fa-lock link\" onClick=\"_schk('g1_state')\"></i> State</label><select id=\"g1_state\" disabled=\"disabled\" onChange=\"_loadSelect({'selectName':'global_otherfilingsforms','selectObject':'g1_form','option1':$('#g1_state').val(),'page':'otherfilings'});\"><option value=\"0\">&nbsp;</option><cfoutput query=\"global_state\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_type\"><i class=\"fa fa-lock link\" onClick=\"_schk('g1_type')\"></i> Type</label><select id=\"g1_type\" disabled=\"disabled\"><option value=\"0\">&nbsp;</option><cfoutput query=\"global_otherfilingtype\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_form\"><i class=\"fa fa-lock link\" onClick=\"_schk('g1_form')\"></i> Form</label><select id=\"g1_form\" disabled=\"disabled\"><option value=\"0\">&nbsp;</option></select></div>\n<div><label for=\"g1_status\">Status</label><select id=\"g1_status\"><option value=\"0\">&nbsp;</option><cfoutput query=\"global_status\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_duedate\">Due Date</label><input type=\"text\" class=\"date\" id=\"g1_duedate\"></div>\n<div><label for=\"g1_filingdeadline\">Filing Deadline</label><input type=\"text\" class=\"date\" id=\"g1_filingdeadline\"></div>\n<div><label for=\"g1_priority\">Priority</label><input type=\"text\" placeholder=\"0\" id=\"g1_priority\" class=\"valid_off\" onblur=\"jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});\"></div>\n<div><label for=\"g1_estimatedtime\">Estimated Time</label><input type=\"text\" placeholder=\"0\" id=\"g1_estimatedtime\" ></div>\n<div><label for=\"g1_extensiondeadline\">Extension Deadline</label><input type=\"text\" class=\"date\" id=\"g1_extensiondeadline\" ></div>\n<div><label for=\"g1_extensioncompleted\">Extension Completed</label><input type=\"text\" class=\"date\" id=\"g1_extensioncompleted\" ></div>\n<div><label for=\"g1_missinginformation\"><input id=\"g1_missinginformation\" type=\"checkbox\" class=\"ios-switch\">Missing Information</label></div>\n<div><label for=\"g1_missinginforeceived\">Missing Info Received</label><input type=\"text\" class=\"date\" id=\"g1_missinginforeceived\" ></div>\n<div><label for=\"g1_fees\">Fees</label><input type=\"text\" placeholder=\"0\" id=\"g1_fees\" class=\"valid_off\" onblur=\"jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});\"></div>\n<div><label for=\"g1_paymentstatus\">Payment Status</label><select id=\"g1_paymentstatus\"><option value=\"0\">&nbsp;</option><cfoutput query=\"global_paid\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_deliverymethod\">Delivery Method</label><select id=\"g1_deliverymethod\"><option value=\"0\">&nbsp;</option><cfoutput query=\"global_delivery\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n</div>\n<!---Subgroup 1--->\n<h4 onClick='_loadData({\"id\":\"task_id\",\"group\":\"group1_1\",\"page\":\"otherfilings\"});$(\"#isLoaded_group1_1\").val(1);'>Obtain Info | <span id=\"g1_g1_head1\"></span> | <span id=\"g1_g1_head2\"></span></h4>\n<div>\n<div><label for=\"g1_g1_assignedto\">Assigned To</label><select id=\"g1_g1_assignedto\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g1_completed\">Completed</label><input type=\"text\" class=\"date\" id=\"g1_g1_completed\" ></div>\n<div><label for=\"g1_g1_completedby\">Completed By</label><select id=\"g1_g1_completedby\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g1_estimatedtime\">Estimated Time</label><input type=\"text\" placeholder=\"0\" id=\"g1_g1_estimatedtime\" ></div>\n</div>\n\n<!---Subgroup 2--->\n<h4 onClick='_loadData({\"id\":\"task_id\",\"group\":\"group1_2\",\"page\":\"otherfilings\"});$(\"#isLoaded_group1_2\").val(1);'>Preparation | <span id=\"g1_g2_head1\"></span> | <span id=\"g1_g2_head2\"></span></h4>\n<div>\n<div><label for=\"g1_g2_assignedto\">Assigned To</label><select id=\"g1_g2_assignedto\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g2_completed\">Completed</label><input type=\"text\" class=\"date\" id=\"g1_g2_completed\" ></div>\n<div><label for=\"g1_g2_completedby\">Completed By</label><select id=\"g1_g2_completedby\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g2_estimatedtime\">Estimated Time</label><input type=\"text\" placeholder=\"0\" id=\"g1_g2_estimatedtime\" ></div>\n</div>\n\n<!---Subgroup 3--->\n<h4 onClick='_loadData({\"id\":\"task_id\",\"group\":\"group1_3\",\"page\":\"otherfilings\"});$(\"#isLoaded_group1_3\").val(1);'>Review | <span id=\"g1_g3_head1\"></span> | <span id=\"g1_g3_head2\"></span></h4>\n<div>\n<div><label for=\"g1_g3_assignedto\">Assigned To</label><select id=\"g1_g3_assignedto\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g3_completed\">Completed</label><input type=\"text\" class=\"date\" id=\"g1_g3_completed\" ></div>\n<div><label for=\"g1_g3_completedby\">Completed By</label><select id=\"g1_g3_completedby\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g3_estimatedtime\">Estimated Time</label><input type=\"text\" placeholder=\"0\" id=\"g1_g3_estimatedtime\" ></div>\n</div>\n\n<!---Subgroup 4--->\n<h4 onClick='_loadData({\"id\":\"task_id\",\"group\":\"group1_4\",\"page\":\"otherfilings\"});$(\"#isLoaded_group1_4\").val(1);'>Assembly | <span id=\"g1_g4_head1\"></span> | <span id=\"g1_g4_head2\"></span></h4>\n<div>\n<div><label for=\"g1_g4_assignedto\">Assigned To</label><select id=\"g1_g4_assignedto\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g4_completed\">Completed</label><input type=\"text\" class=\"date\" id=\"g1_g4_completed\" ></div>\n<div><label for=\"g1_g4_completedby\">Completed By</label><select id=\"g1_g4_completedby\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g4_estimatedtime\">Estimated Time</label><input type=\"text\" placeholder=\"0\" id=\"g1_g4_estimatedtime\" ></div>\n</div>\n\n<!---Subgroup 5--->\n<h4 onClick='_loadData({\"id\":\"task_id\",\"group\":\"group1_5\",\"page\":\"otherfilings\"});$(\"#isLoaded_group1_5\").val(1);'>Delivery | <span id=\"g1_g5_head1\"></span> | <span id=\"g1_g5_head2\"></span></h4>\n<div>\n<div><label for=\"g1_g5_assignedto\">Assigned To</label><select id=\"g1_g5_assignedto\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g5_completed\">Completed</label><input type=\"text\" class=\"date\" id=\"g1_g5_completed\" ></div>\n<div><label for=\"g1_g5_completedby\">Completed By</label><select id=\"g1_g5_completedby\"><option value=\"0\">&nbsp;</option><cfoutput query=\"selectUsers\"><option value=\"#optionvalue_id#\">#optionname#</option></cfoutput></select></div>\n<div><label for=\"g1_g5_estimatedtime\">Estimated Time</label><input type=\"text\" placeholder=\"0\" id=\"g1_g5_estimatedtime\" ></div>\n</div>\n</div>\n\n<!--- Start Plugins --->\n<cfinclude template=\"/assets/plugins/plugins.cfm\">\n\n<!--- END FIELD DATA --->\n<!--- END CONTENTS --->\n</div>\n<!---Start of footer--->\n<cfinclude template=\"/assets/inc/footer.cfm\" />\n</body>\n</html>",
+			"file": "AWS/_payrolltaxes/otherfilings.cfm",
+			"file_size": 12444,
+			"file_write_time": 130390385912817034,
 			"settings":
 			{
-				"buffer_size": 1004,
+				"buffer_size": 12309,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/DEV/Downloads/HauNow 8-2011.rdp",
-			"settings":
-			{
-				"buffer_size": 7045,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPremierGeneral2013.rdp",
-			"settings":
-			{
-				"buffer_size": 7021,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPro2012.rdp",
-			"settings":
-			{
-				"buffer_size": 6981,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/DEV/Desktop/quickbooks_twain_fix.reg",
-			"settings":
-			{
-				"buffer_size": 196,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/DEV/Desktop/test/flexnav-master/index.html",
-			"settings":
-			{
-				"buffer_size": 11034,
-				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 311.0,
 		"selected_items":
 		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
 		],
-		"width": 0.0
+		"width": 416.0
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 126.0,
 		"history":
 		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+			"Install Package \"Theme - Tech 49\"",
+			"Package Control: Install Package",
+			"Emmet",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
 		]
 	},
 	"distraction_free":
@@ -90,6 +59,18 @@
 	},
 	"file_history":
 	[
+		"/C/Program Files/Sublime Text 3/Data/Packages/User/Preferences.sublime-settings",
+		"/C/Program Files/Sublime Text 3/Data/Packages/User/Package Control.sublime-settings",
+		"/C/Program Files/Sublime Text 3/Data/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/otherfilings.js",
+		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/Admin/Documents/GitHub/AWS/aws.sublime-project",
+		"/C/Users/DEV/Desktop/Security Package Fix.js",
+		"/C/Users/DEV/Desktop/quickbooks_twain_fix.reg",
+		"/C/Users/DEV/Desktop/RDP CLIENTS/QBPro2012.rdp",
+		"/C/Users/DEV/Desktop/RDP CLIENTS/QBPremierGeneral2013.rdp",
+		"/C/Users/DEV/Downloads/HauNow 8-2011.rdp",
+		"/C/Users/DEV/Desktop/test/flexnav-master/index.html",
 		"/C/Users/DEV/Documents/LuckaSoft/GitHub/AWS/AWS/_accountingservices/financialreporting.js",
 		"/C/Users/DEV/Documents/LuckaSoft/GitHub/AWS/AWS/_accountingservices/financialstatements.cfc",
 		"/C/Users/DEV/AppData/Roaming/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
@@ -130,170 +111,35 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/DEV/Desktop/Security Package Fix.js",
+					"file": "AWS/_payrolltaxes/otherfilings.cfm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1004,
+						"buffer_size": 12309,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								655,
-								655
+								797,
+								797
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/DEV/Downloads/HauNow 8-2011.rdp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7045,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPremierGeneral2013.rdp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7021,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								538,
-								518
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/Users/DEV/Desktop/RDP CLIENTS/QBPro2012.rdp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6981,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								630,
-								606
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/Users/DEV/Desktop/quickbooks_twain_fix.reg",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 196,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/Users/DEV/Desktop/test/flexnav-master/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 11034,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								644,
-								644
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2850.0,
-						"zoom_level": 1.0
-					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -330,6 +176,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
 	"project": "aws.sublime-project",
 	"replace":
 	{

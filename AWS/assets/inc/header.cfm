@@ -8,7 +8,7 @@
 <cfquery name="selectOptions" cachedWithin="#page.cache.options#" datasource="AWS">SELECT[selectName],[optionvalue_id],[optionname],[option_1],[optionDescription]FROM[v_selectOptions]WHERE([form_id]='#page.formid#'OR[form_id]='0')AND([optionGroup]='#page.formid#'OR[optionGroup]='0')AND([optionHide]!='#page.formid#'OR[optionHide]IS NULL)</cfquery>
 <cfquery name="selectClients" cachedWithin="#page.cache.clients#" datasource="AWS">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
 <cfquery name="selectUsers" cachedWithin="#page.cache.users#" datasource="AWS">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
-<cfquery name="selectReports" cachedWithin="#page.cache.reports#" datasource="AWS">SELECT[report_name],[report_description],[report_query],[report_fields]FROM[ctrl_reports]WHERE[form_id]='#page.formid#'AND([user_id]=0)ORDER BY[report_name]</cfquery>
+<cfquery name="selectReports" cachedWithin="#page.cache.reports#" datasource="AWS">SELECT[report_name],[report_description],[report_query],[report_fields]FROM[ctrl_reports]WHERE[form_id]='#page.formid#'AND([user_id]=0)ORDER BY[report_order]</cfquery>
 <cfquery name="selectRoles"  cachedWithin="#page.cache.roles#" datasource="AWS">SELECT[m_payrolltaxes],[m_accountingservices],[m_taxation],[m_clientmanagement],[m_maintenance],[g_delete]FROM[v_staffinitials]WHERE[user_id]=<cfqueryparam value="#Session.user.id#"/></cfquery>
 
 <!---Required for Time Billing plugin--->
