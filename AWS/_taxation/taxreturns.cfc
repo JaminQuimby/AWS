@@ -344,7 +344,7 @@ SELECT[tr_id]
 ,[trst_1_completed]
 
 FROM[v_taxreturns_state]
-WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trst_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND [trst_status]!=2 AND [trst_status]!=3
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trst_status]</cfif>
 </cfquery>
 <cfset myResult="">

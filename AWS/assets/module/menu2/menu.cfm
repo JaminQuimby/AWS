@@ -129,7 +129,7 @@
 			<h4>Module</h4>
 			<ul>
 			<li><a href="#this.url#/AWS/_taxation/financialtaxplanning.cfm">Financial &amp; Tax Planning</a></li>
-      		<li><a href="#this.url#/AWS/_taxation/notices.cfm">Notice</a></li>
+      		<li><a href="#this.url#/AWS/_taxation/notices.cfm">Notices</a></li>
       		<li><a href="#this.url#/AWS/_taxation/powerofattorney.cfm">Power of Attorney</a></li>
       		<li><a href="#this.url#/AWS/_taxation/taxreturns.cfm">Tax Returns</a></li>
 			</ul>

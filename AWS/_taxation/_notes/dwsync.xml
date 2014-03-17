@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="financialtaxplanning.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371385925867435" remote="130371386070000000" Dst="-1" />
+<file name="financialtaxplanning.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130395588838407130" remote="130395588900000000" Dst="2" />
 <file name="financialtaxplanning.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130385261588179590" remote="130385261650000000" Dst="-1" />
 <file name="financialtaxplanning.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371284876597747" remote="130371364090000000" Dst="-1" />
-<file name="notices.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130374263913008157" remote="130374264010000000" Dst="-1" />
+<file name="notices.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130395601328730976" remote="130395601380000000" Dst="2" />
 <file name="notices.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130395453148886867" remote="130395453200000000" Dst="2" />
 <file name="notices.js" server="https://ftp.awensa.com/MS/MS0213/" local="130374263996692944" remote="130374264090000000" Dst="-1" />
 <file name="powerofattorney.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130371392572117579" remote="130371392670000000" Dst="-1" />
@@ -11,5 +11,5 @@
 <file name="powerofattorney.js" server="https://ftp.awensa.com/MS/MS0213/" local="130371294304436989" remote="130371364040000000" Dst="-1" />
 <file name="taxreturns.js" server="https://ftp.awensa.com/MS/MS0213/" local="130390401534370536" remote="130390401620000000" Dst="-1" />
 <file name="taxreturns.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130389509678154039" remote="130389509770000000" Dst="-1" />
-<file name="taxreturns.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130390401429134517" remote="130390401530000000" Dst="-1" />
+<file name="taxreturns.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130395590925337909" remote="130395591020000000" Dst="2" />
 </dwsync>
