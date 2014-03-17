@@ -103,11 +103,11 @@ due date for response
 <!--- GROUP 2_1 --->
 <h4 onClick='_loadData({"id":"subtask1_id","group":"group2_1","page":"notices"});$("#isLoaded_group2_1").val(1);'>Details</h4>
 <div>
-<div><label for="g2_1_noticenumber">Notice Number*</label><select id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_noticedate">Notice Date*</label><input type="text" class="date" id="g2_1_noticedate"></div>
-<div><label for="g2_1_taxyear">Tax Year*</label><select  id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_taxform">Tax Form*</label><select id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_methodreceived">Method Recieved*</label><select id="g2_1_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_noticenumber"><i class="fa fa-lock link" onClick="_schk('g2_1_noticenumber')"></i> Notice Number</label><select disabled="disabled" id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_noticedate"><i class="fa fa-lock link" onClick="_schk('g2_1_noticedate')"></i> Notice Date</label><input type="text" class="date" id="g2_1_noticedate" disabled="disabled"></div>
+<div><label for="g2_1_taxyear"><i class="fa fa-lock link" onClick="_schk('g2_1_taxyear')"></i> Tax Year</label><select disabled="disabled" id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_taxform"><i class="fa fa-lock link" onClick="_schk('g2_1_taxform')"></i> Tax Form</label><select disabled="disabled" id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_methodreceived"><i class="fa fa-lock link" onClick="_schk('g2_1_noticedate')"></i> Method Recieved</label><select disabled="disabled" id="g2_1_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_datenoticereceived">Date Notice Received</label><input type="text" class="date" id="g2_1_datenoticereceived"></div>
 <div><label for="g2_1_duedateforresponse">Due Date For Response</label><input type="text" class="date" id="g2_1_duedateforresponse"></div>
 
@@ -116,7 +116,7 @@ due date for response
 <h4 onClick='_loadData({"id":"subtask1_id","group":"group2_2","page":"notices"});$("#isLoaded_group2_2").val(1);'>Correspondence</h4>
 <div>
 <div><label for="g2_2_responsecompleted">Response Completed</label><input type="text" class="date" id="g2_2_responsecompleted"></div>
-<div><label for="g2_2_responsecompletedby">Response Completed By</label><select id="g2_2_responsecompletedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_2_responsecompletedby">Completed By</label><select id="g2_2_responsecompletedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_2_reviewrequired"><input id="g2_2_reviewrequired" type="checkbox" class="ios-switch">Review Required</label></div>
 <div><label for="g2_2_reviewassignedto">Review Assigned To</label><select id="g2_2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_2_reviewcompleted">Review Completed</label><input type="text" class="date" id="g2_2_reviewcompleted"></div>
