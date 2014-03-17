@@ -251,11 +251,41 @@ $("#g1_trade_name").val()+'","'+
 $("#g1_type").val()+'","'+
 '"]]}'
 
-if($("#g1_name").val()!=""&&$("#g1_salutation").val()!=""&&$("#g1_type").val()!=""&&$("#g1_since").val()!=""&&_duplicateCheck({"check":"g1_name","loadType":"clientName","page":"clientmaintenance"})){
-_saveData({group:"group1",payload:$.parseJSON(json),page:"clientmaintenance"})}
-
-
-else{jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false})}	
+var valid = true
+if($("#g1_name").val()==""){
+	jqMessage({message: "Missing Name",type: "error",autoClose: false});
+	valid=false
+	}
+else if ($("#g1_salutation").val()==""){
+	jqMessage({message: "Missing Salutation",type: "error",autoClose: false});
+	valid=false
+	}
+else if ($("#g1_type").val()==""){
+	jqMessage({message: "Missing Type",type: "error",autoClose: false});
+	valid=false
+	}
+else if ($("#g1_since").val()==""){
+	jqMessage({message: "Missing Since",type: "error",autoClose: false});
+	valid=false
+	}
+else if (_duplicateCheck({"check":"g1_name","loadType":"clientName","page":"clientmaintenance"})){
+	jqMessage({message: "Client Name Failed Duplicate Check",type: "error",autoClose: false});
+	valid=false
+	}
+else{
+	
+	}	
+	
+if(
+$("#g1_name").val()!=""
+&&$("#g1_salutation").val()!=""
+&&$("#g1_type").val()!=""
+&&$("#g1_since").val()!=""
+&&_duplicateCheck({"check":"g1_name","loadType":"clientName","page":"clientmaintenance"})){
+_saveData({group:"group1",payload:$.parseJSON(json),page:"clientmaintenance"});
+}else{
+	jqMessage({message: "Error in _saveDataCB, Missing Client Information",type: "error",autoClose: false});
+	}	
 break;
 
 case'group1_2':var json='{"DATA":[["'+
