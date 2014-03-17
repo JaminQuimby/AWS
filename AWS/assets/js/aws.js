@@ -438,8 +438,8 @@ if(options["result"]=="ok"){
 	jqMessage({message: "The task has been removed.",type: "success",autoClose: true,duration: 5});
 	}
 	}
-_toggle=function(list){try{var arr=list.split(",");for(var i=0;i<arr.length;i++){var el=document.getElementById(arr[i]);el.style.display=(el.style.display!="none"?"none":"");}}catch(error){ jqMessage({message: "Error in js._toggle: "+error,type: "error",autoClose: false})}};
-_hide=function(list){var arr=list.split(",");for(var i=0;i<arr.length;i++){document.getElementById(arr[i]).style.display="none";}};
+_toggle=function(list){var arr=list.split(",");for(var i=0;i<arr.length;i++){$('#'+arr[i]).toggle();}};
+_hide=function(list){var arr=list.split(",");for(var i=0;i<arr.length;i++){$('#'+arr[i]).hide();}};
 _highlight=function(on){var lis=on.parentNode.parentNode.getElementsByTagName("li");for (var i=0;i<lis.length;++i){lis[i].firstChild.className=lis[i].firstChild.className.replace(/\bhighlight\b/g,"");if(on==lis[i].firstChild){lis[i].firstChild.className ="highlight"}}};
 _updateh3=function(msg){var e=document.getElementsByTagName("h3");for(var i=0;i<e.length;i++){var arr=e[i].innerHTML.split(" [ ");e[i].innerHTML=arr[0]+" [ "+msg+" ]";};}
 
