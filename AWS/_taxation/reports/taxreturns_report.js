@@ -121,7 +121,7 @@ _grid2=function(){_jGrid({
 			,TR_3_MISSINGSIGNATURES:{title:'Missing Signatures',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
 			,TR_3_CONTACTED:{title:'Contacted',width:'1%'}
-			,TR_2_PREPAREDBY:{title:'Prepared By',width:'1%'}
+			,TR_2_PREPAREDBYTEXT:{title:'Prepared By',width:'1%'}
 			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}
 			,TR_3_DELIVERED:{title:'Delivered',width:'1%'}
@@ -131,8 +131,8 @@ _grid2=function(){_jGrid({
 			,TR_4_RFR:{title:'PPTR Ready For Review',width:'1%'}
 			,TR_4_COMPLETED:{title:'PPTR Completed',width:'1%'}
 			,TR_4_DELIVERED:{title:'PPTR Delivered',width:'1%'}	
-			,TRST_STATE:{title:'State'}	
-			,TRST_PRIMARY:{title:'Primary State',width:'1%'}	
+			,TRST_STATETEXT:{title:'State'}	
+			,TRST_PRIMARY:{title:'Primary State',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}	
 			,TRST_COMPLETED:{title:'State Return Completed',width:'1%'}	
 			,TR_3_CURRENTFEES:{title:'PPTR Current Fees'}
 			,TR_CURRENTFEES:{title:'Current Fees'}
