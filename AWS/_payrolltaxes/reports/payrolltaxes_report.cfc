@@ -54,7 +54,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 
 
 <cfset myResult="">
-<cfset queryResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
@@ -86,15 +86,22 @@ SELECT[pt_id]
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 ,[pt_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pt_paid]=[optionvalue_id])
 ,[pt_year]
-,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
-,CONVERT(VARCHAR(8),pt_obtaininfo_datecompleted,1)+'<br />'+CONVERT(VARCHAR(5),pt_obtaininfo_assignedtoTEXT) AS [pt_obtaininfo]
 ,[pt_missinginfo]
-,CONVERT(VARCHAR(8),[pt_missinginforeceived], 1)AS[pt_missinginforeceived]
-,CONVERT(VARCHAR(8),pt_entry_datecompleted,1)+'<br />'+CONVERT(VARCHAR(5),pt_entry_assignedtoTEXT) AS [pt_entry]
-,CONVERT(VARCHAR(8),pt_rec_datecompleted,1)+'<br />'+CONVERT(VARCHAR(5),pt_rec_assignedtoTEXT) AS [pt_rec]
-,CONVERT(VARCHAR(8),[pt_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),pt_review_assignedtoTEXT) AS [pt_review]
-,CONVERT(VARCHAR(8),[pt_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),pt_assembly_assignedtoTEXT) AS [pt_assembly]
-,CONVERT(VARCHAR(8),[pt_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),pt_delivery_assignedtoTEXT) AS [pt_delivery]
+,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#')
+,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#')
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
+,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pt_obtaininfo_assignedtoTEXT]
+,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pt_entry_assignedtoTEXT]
+,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pt_rec_assignedtoTEXT]
+,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pt_review_assignedtoTEXT]
+,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pt_assembly_assignedtoTEXT]
+,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pt_delivery_assignedtoTEXT]
 ,FORMAT(pt_fees, 'C', 'en-us')AS[pt_fees]
 ,[client_name]
 ,[client_id]
@@ -161,15 +168,14 @@ WHERE(1)=(1)
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
 								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
-								,"PT_OBTAININFO":"'&PT_OBTAININFO&'"
-								,"PT_ENTRY":"'&PT_ENTRY&'"
-								,"PT_REC":"'&PT_REC&'"
-								,"PT_REVIEW":"'&PT_REVIEW&'"
-								,"PT_ASSEMBLY":"'&PT_ASSEMBLY&'"
-								,"PT_DELIVERY":"'&PT_DELIVERY&'"
+								,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"
+								,"PT_ENTRY":"'&pt_entry_datecompleted&'<br/>'&pt_entry_assignedtoTEXT&'"
+								,"PT_REC":"'&pt_rec_datecompleted&'<br/>'&pt_rec_assignedtoTEXT&'"
+								,"PT_REVIEW":"'&pt_review_datecompleted&'<br/>'&pt_review_assignedtoTEXT&'"
+								,"PT_ASSEMBLY":"'&pt_assembly_datecompleted&'<br/>'&pt_assembly_assignedtoTEXT&'"
+								,"PT_DELIVERY":"'&pt_delivery_datecompleted&'<br/>'&pt_delivery_assignedtoTEXT&'"
 								,"PT_FEES":"'&PT_FEES&'"
 								,"PT_PAIDTEXT":"'&PT_PAIDTEXT&'"
-			
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

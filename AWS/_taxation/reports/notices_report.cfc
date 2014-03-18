@@ -36,7 +36,28 @@ SELECT[n_id]
   FROM[notice]
   
 --->
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="11">
+<cfargument name="option1" type="string" default="">
 
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+
+
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">
@@ -45,7 +66,7 @@ SELECT[n_id]
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
-
+<cfargument name="formid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -56,14 +77,14 @@ SELECT[n_id]
 SELECT[nm_id]
 ,[n_id]
 ,[nm_name]
-,[nm_status]
+,[nm_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nm_status]=[optionvalue_id])
 ,[n_1_taxyear]
 ,[n_missinginfo]
-,CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec]
-,CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate]
-,CONVERT(VARCHAR(10),[n_2_ressubmited], 1)AS[n_2_ressubmited]
+,[n_1_datenoticerec]=FORMAT(n_1_datenoticerec,'d','#Session.localization.language#')
+,[n_1_resduedate]=FORMAT(n_1_resduedate,'d','#Session.localization.language#')
+,[n_2_ressubmited]=FORMAT(n_2_ressubmited,'d','#Session.localization.language#')
 ,[n_2_revrequired]   
-,FORMAT(n_fees, 'C', 'en-us')AS[n_fees]
+,[n_fees]=FORMAT(n_fees, 'C', '#Session.localization.language#')
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[n_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[n_1_noticenumber]=[optionvalue_id])
 ,[n_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[n_1_taxform]=[optionvalue_id])
@@ -124,7 +145,7 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
  								,"NM_NAME":"'&NM_NAME&'"
- 								,"NM_STATUS":"'&NM_STATUS&'"
+ 								,"NM_STATUSTEXT":"'&NM_STATUSTEXT&'"
  								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
  								,"N_1_TAXFORMTEXT":"'&N_1_TAXFORMTEXT&'"
  								,"N_1_NOTICENUMBERTEXT":"'&N_1_NOTICENUMBERTEXT&'"

@@ -41,7 +41,7 @@ var grid1_config = [
 	"fields":{NM_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,NM_NAME:{title:'Matter Name'}
-			,NM_STATUS:{title:'Matter Status'}
+			,NM_STATUSTEXT:{title:'Matter Status'}
 			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,N_1_TAXFORMTEXT:{title:'Tax Form'}
 			,N_1_NOTICENUMBERTEXT:{title:'Notice Number'}
