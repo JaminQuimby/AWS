@@ -1,6 +1,4 @@
 <!--- Required for AJAX --->
-<cfheader name="Cache-Control" value="no-cache"/>
-<cfheader name="Expires" value="0"/>
 <cfset page.module="_practicemanagement">
 <cfset page.location="employeecontactinfo">
 <cfset page.formid=15>

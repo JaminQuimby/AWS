@@ -1,7 +1,4 @@
 <!--- Required for AJAX --->
-<cfheader name="Cache-Control" value="no-cache"/>
-<cfheader name="Expires" value="0"/>
-<cfparam name="url.task_id" default="0">
 <cfparam name="url.nav" default="1">
 <cfset page.module="_clientmanagement">
 <cfset page.location="clientmaintenance">
@@ -194,7 +191,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_1"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
 </div>
 </div>
 

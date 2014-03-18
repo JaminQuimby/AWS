@@ -1,4 +1,9 @@
 <cfheader name="Access-Control-Allow-Origin" value="*">
+<cfheader name="Cache-Control" value="no-cache"/>
+<cfheader name="Expires" value="0"/>
+<cfparam name="url.nav" default="1">
+<cfparam name="url.task_id" default="0">
+<cfparam name="url.client_id" default="0">
 <cfparam name="page.type" default="">
 <cfset page.cache.users=CreateTimeSpan(0,0,0,0)>
 <cfset page.cache.options=CreateTimeSpan(0,0,0,0)>

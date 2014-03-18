@@ -1,7 +1,4 @@
 <!--- Required for AJAX --->
-<cfheader name="Cache-Control" value="no-cache"/>
-<cfheader name="Expires" value="0"/>
-<cfparam name="url.user_id" default="0">
 <cfset page.module="_practicemanagement">
 <cfset page.location="workinprogress">
 <cfset page.formid=11>
