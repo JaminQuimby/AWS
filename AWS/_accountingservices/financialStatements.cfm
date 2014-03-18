@@ -1,5 +1,4 @@
 <!--- Required for AJAX --->
-<cfparam name="url.nav" default="1">
 <cfset page.module="_accountingservices">
 <cfset page.location="financialstatements">
 <cfset page.formid=5>

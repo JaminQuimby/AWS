@@ -43,9 +43,7 @@ document.getElementById('content').className='contentbig';
 _addNewTask();
 _toggle('group1,largeMenu');
 _hide('entrance,smallMenu,group2,group3,group4,group5,group6');	
-
-
-	}
+}
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",

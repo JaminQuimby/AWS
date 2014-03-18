@@ -1,5 +1,4 @@
 <!--- Required for AJAX --->
-<cfparam name="url.nav" default="1">
 <cfset page.module="_clientmanagement">
 <cfset page.location="clientmaintenance">
 <cfset page.formid=1>

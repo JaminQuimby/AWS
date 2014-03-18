@@ -14,17 +14,46 @@ String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\
 Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:"0"+mm[0])+'/'+(dd[1]?dd:"0"+dd[0])+'/'+yyyy};
 //Localisation 
 
+$(document).ready(function(){
+$.ajaxSetup({cache:false});//Stop ajax cacheing
+$.datepicker.setDefaults({showOn:"button",buttonImageOnly:true,buttonImage:"https://"+window.location.hostname+"/AWS/assets/img/datepicker.gif",showButtonPanel:true,constrainInput:true});
+$(".datetime").datetimepicker({timeFormat: 'hh:mmtt'}).mask('00/00/0000 00:00:00');
+$(".date").datepicker().mask('00/00/0000');
+$(".time").timepicker().mask('00:00:00');
+$('.phone').mask('(000)000-0000');
+$('select').chosen();
+$('.gf-checkbox').hide();
+$('#entrance').show();
+$('.gf-checkbox').accordion({collapsible:true,heightStyle:"content",active:false,active:0});
 
-  $(function() {
-    $('.date').mask('00/00/0000');
-    $('.time').mask('00:00:00');
-    $('.date_time').mask('00/00/0000 00:00:00');
-    $('.phone').mask('(000)000-0000');
-  });
-
-
-
-$(document).ready(function () {
+$('.accordianclose').hide();
+var icons=$('.gf-checkbox').accordion( "option", "icons" );
+$('.accordianopen').click(function(){
+	$('.ui-accordion-header').removeClass('ui-corner-all').addClass('ui-accordion-header-active ui-state-active ui-corner-top').attr({'aria-selected': 'true','tabindex': '0'});
+	$('.ui-accordion-header-icon').removeClass(icons.header).addClass(icons.headerSelected);
+	$('.ui-accordion-content').addClass('ui-accordion-content-active').attr({'aria-expanded': 'true','aria-hidden': 'false'}).show();
+	$(this).attr("disabled","disabled");
+	$('.accordianclose').removeAttr("disabled");
+	$('.accordianopen').hide();
+	$('.accordianclose').show();
+	});
+$('.accordianclose').click(function(){
+	$('.ui-accordion-header').removeClass('ui-accordion-header-active ui-state-active ui-corner-top').addClass('ui-corner-all').attr({'aria-selected': 'false','tabindex': '-1'});
+	$('.ui-accordion-header-icon').removeClass(icons.headerSelected).addClass(icons.header);
+	$('.ui-accordion-content').removeClass('ui-accordion-content-active').attr({'aria-expanded': 'false','aria-hidden': 'true'}).hide();
+	$(this).attr("disabled","disabled");
+	$('.accordianopen').removeAttr("disabled");
+	$('.accordianopen').show();
+	$('.accordianclose').hide();
+	});
+$('.ui-accordion-header').click(function(){
+	$('.accordianopen').removeAttr("disabled");
+	$('.accordianclose').removeAttr("disabled");
+        
+	});
+$( "<div class='switch'></div>" ).insertAfter( ".ios-switch,.ios-switchb" );
+	
+	
 _toCSV=function($table, filename) {
 
         var $rows = $table.find('tr:has(td)'),
@@ -80,35 +109,12 @@ _toCSV=function($table, filename) {
 
 _duplicateCheck=function(params){
 var options={"check":"","loadType":"","page":""},str='';
-$.extend(true, options, params);
-$.each(options['check'], function(idx,obj){
-	str=str+$('#'+obj.item).val();
-	if(idx!= options['check'].length -1 ){str=str+','}
-	});
-$.ajax({
-  type: 'GET'
-  ,async: false
-    ,data: {
-	  "returnFormat":"json"
-	  ,"argumentCollection":JSON.stringify({
-		  "check":""+str+""
-		  ,"loadType":options['loadType']
-		  })
-  }
-  ,url: options['page']+'.cfc?method=f_duplicateCheck'
+$.extend(true,options,params);
+$.each(options['check'],function(idx,obj){str=str+$('#'+obj.item).val();if(idx!= options['check'].length -1 ){str=str+','}});
+$.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+str+"","loadType":options['loadType']})},url: options['page']+'.cfc?method=f_duplicateCheck',success:function(data){j=$.parseJSON(data);str=j.check;},error:function(data){str=false;}
+});return str;}; 
 
-  ,success:function(data){
-		j=$.parseJSON(data);
-		str= j.check;
-	},error:function(data){
-		str= false;
-	}
-})
-
-return str;
-
-}; 
-  
+ 
 _addNewTask=function(){
 if($('#task_id').val()==0){
 	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
@@ -121,8 +127,9 @@ if($('#'+i).is(":disabled")){
 	$('label[for="'+i+'"] i').removeClass('fa-lock').addClass('fa-unlock');
 	if($('#'+i).is('select')){
 	$('#'+i).prop("disabled", false).trigger("chosen:updated");
-	}else{$('#'+i).prop("disabled", false);}
-}}}
+	}else{$('#'+i).prop("disabled", false);}}}}
+	
+
 _toReport=function(data,config){
 //Build Report Groups
 //Build a basic json object
@@ -151,7 +158,6 @@ return JSON.stringify(jgroup);
 
 
 _toBuild=function(data,config,options){
-	
 try{
 //Build Default Options if none provided	
 if( $.type( options ) === "undefined"){
@@ -167,17 +173,26 @@ options='{'+list+'}'})
 
 //Build json data string
 var json=data;
-
 $.each(config, function(i){
-json=json.replaceAll('#EMPLOYEE', '10000');
+	if(json.has('#EMPLOYEE')){
+if($("#filter_username").length == 0) {
+var filename = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1).split(".");
+var sel = $('<select id=\"filter_username\">').appendTo('body');
+_loadSelect({"selectName":"selectUsers","selectObject":"filter_username","page":""+filename[0]+""})     
+sel.hide().change(function() {
+_grid1();
+}).appendTo("#searchOptions").chosen();
+sel.wrap( "<label for='unique1'>Client Name</label><div></div>");
+}}
+json=json.replaceAll('#EMPLOYEE', $('#filter_username').val());
 json=json.replaceAll('#TODAY', new Date().mmddyyyy());
-
 });
 
 //Escape unecessary chars
 json=json.escapeIt(json); //Escape
 
 //expand options search types
+
 
 $.each(config, function(i){
 
@@ -190,6 +205,7 @@ json=json.replaceAll(config[i].n+'!', '","'+config[i].n+'_not":"');
 
 //remove unecessary whitespace
 json=json.replaceAll(' "', '"').replaceAll('" ', '"'); //Trim
+
 //format json structure
 jdata='{"search":"' +  json  + '"}';
 var params = $.parseJSON(jdata);
@@ -261,10 +277,13 @@ _jGrid=function(params){
 		"method":""//&method=
 	
 	}
-	$.extend(true, options, params);
-	var grid=$("#"+options['grid']);
+	$.extend(true,options,params);
+
+var grid=$("#"+options['grid']);
 $(grid).jtable({ajaxSettings:{ type:'GET', cache:false }});
+
 $(grid).jtable('destroy');
+
 $(grid).jtable({
 	ajaxSettings:{ type:'GET', cache:false },
 	title:options['title'],
@@ -356,13 +375,7 @@ $.ajax({type:'GET',url:options["url"]+options["page"]+'.cfc?method=f_loadData',d
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 //Save Data
 _saveData=function(params){
-var options={
-	"group":"",
-	"payload":"",
-	"page":"",
-	"id":"",
-	"plugin":""
-	}
+var options={"group":"","payload":"","page":"","id":"","plugin":""}
 try{	
 $.extend(true, options, params);//turn options into array
 if(options["payload"]!=""||options["payload"]=="undefined"){
@@ -370,19 +383,15 @@ if(options["plugin"]!=""){options["url"]= _pluginURL(options["plugin"]);}else{op
 $.ajax({
   type: 'GET',
   url:options["url"]+options["page"]+'.cfc?method=f_saveData',
-  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"payload":JSON.stringify(options["payload"])})
-  },
-  success:function(json){_saveDataCB($.parseJSON(json))},   // successful request; do something with the data
+  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"payload":JSON.stringify(options["payload"])})}
+  ,success:function(json){_saveDataCB($.parseJSON(json))},   // successful request; do something with the data
   error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
 });}else{_saveDataCB({"id":options["id"],"group":options["group"]});}}
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
 }
 //Load It
 _loadit=function(params){
-	var options = {
-	"query":"",//Returned Ajax Query
-	"list":"", //List of Fields
-	}
+	var options={"query":"","list":""}
 	$.extend(true, options, params);//turn options into array
 	var list=options['list'].split(',');//Split List
 try{if(options['query'].DATA!=""){
@@ -392,8 +401,8 @@ try{if(options['query'].DATA!=""){
 				case"select-one":
 				$("#"+list[i]+' option').each(function(index){
 					if(options['query'].DATA[0][i]==$(this).val()){
-						$(this).attr('selected', true)
-						$(this).prop('selected', true);
+						$(this).attr('selected', true).prop('selected', true);
+						//$(this).prop('selected', true);
 	}})
 	$('#'+list[i]).trigger("chosen:updated");
 	break;
@@ -404,8 +413,8 @@ try{if(options['query'].DATA!=""){
 				$("#"+list[i]+' option').each(function(index){
 					for(var i=0;i<sstr.length;i++){
 						if(sstr[i]==$(this).val()){
-							$(this).attr('selected', true);
-							$(this).prop('selected', true);
+							$(this).attr('selected', true).prop('selected', true);
+							//$(this).prop('selected', true);
 	}}})
 	$('#'+list[i]).trigger("chosen:updated");
 	}
@@ -417,12 +426,7 @@ if(document.getElementById(list[i]).getAttribute("onblur")!=null){document.getEl
 catch(err){jqMessage({message: "Error in js._loadit: "+err,type: "error",autoClose: false})}};
 
 _removeData=function(params){
-var options={
-	"group":"",
-	"page":"",
-	"id":"",
-	"plugin":""
-	}
+var options={"group":"","page":"","id":"","plugin":""}
 try{	
 $.extend(true, options, params);//turn options into array
 
@@ -441,7 +445,7 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",auto
 }
 _removeDataCB=function(params){
 var options={"id":"","group":"","result":"fail"}
-$.extend(true, options, params);
+$.extend(true,options,params);
 if(options["result"]=="ok"){
 	jqMessage({"type":"destroy"});
 	jqMessage({message: "The task has been removed.",type: "success",autoClose: true,duration: 5});
@@ -484,113 +488,28 @@ default:return false;
 }}
 
 _clearfields=function(params){
-	var options = {
-	"sel":"",
-	"list":"",
-	}
-	$.extend(true, options, params);//turn options into array
-	var list=options['list'].split(',');//Split List
-	var sel=options['sel'].split(',');//Split List
+var options={"sel":"","list":""}
+$.extend(true,options,params)
+var list=options['list'].split(','),sel=options['sel'].split(',');
 		for(var i=0;i<list.length;i++){$('#'+list[i]).val('');}
 		for(var i=0;i<sel.length;i++){
 			
-$('#'+sel[i]).find('option').prop('selected',false)
-$('#'+sel[i]).each(function(){
-$('#'+sel[i]+' option').removeAttr("selected"); });
-
-			
-			} 
-	}
+$('#'+sel[i]).find('option').prop('selected',false);
+$('#'+sel[i]).each(function(){$('#'+sel[i]+'option').removeAttr("selected")})
+}}
 	
 _loadSelect=function(params){
 var options={"selectName":"","selectObject":"","option1":"","page":""}
-$.extend(true, options, params);//turn options into array
-$.ajax({
-  type: 'GET',
-  url: options['page']+'.cfc?method=f_loadSelect',
-  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName'],"option1":options['option1']})
-  },
- success:function(json){
+$.extend(true,options,params);
+$.ajax({type:'GET',url:options['page']+'.cfc?method=f_loadSelect',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName'],"option1":options['option1']})}
+,success:function(json){
  var j=$.parseJSON(json),items='';
-      for(var i=0;i<j.Records.length;i++){
-        items+='<option value="'+ j.Records[i].optionvalue_id+'">'+j.Records[i].optionname+'</option>';
-      }$("select#"+options['selectObject']).html(items)
-	  $("select#"+options['selectObject']).trigger("chosen:updated");
+	for(var i=0;i<j.Records.length;i++){items+='<option value="'+ j.Records[i].optionvalue_id+'">'+j.Records[i].optionname+'</option>'}
+	  $("select#"+options['selectObject']).html(items).trigger("chosen:updated");
+	 // $("select#"+options['selectObject']).trigger("chosen:updated");
 	  },
   error:function(data){errorHandle($.parseJSON(data))}})};
 
-$(document).ready(function(){
-$.ajaxSetup({cache:false});//Stop ajax cacheing
 
-
-$.datepicker.setDefaults({
-showOn:"button",
-buttonImageOnly:true,
-buttonImage: "https://"+ window.location.hostname + "/AWS/assets/img/datepicker.gif",
-showButtonPanel: true,
-constrainInput:true
-});
-//$('.gf-checkbox').accordion({heightStyle:"content", active:false});
-$(".datetime").datetimepicker({timeFormat: 'hh:mmtt'});
-$(".date").datepicker();
-$(".time").timepicker();
-$('select').chosen();
-$('.gf-checkbox').hide();
-$('#entrance').show();
-});
-
-// Accordion - Expand All #01
-$(function () {
-    $('.gf-checkbox').accordion({
-        collapsible:true,
-		heightStyle:"content",
-        active:false
-    });
-	$('.gf-checkbox').accordion({active:0});
-		$('.accordianclose').hide();
-    var icons =   $('.gf-checkbox').accordion( "option", "icons" );
-  
-  
-  $('.accordianopen').click(function () {
-        $('.ui-accordion-header').removeClass('ui-corner-all').addClass('ui-accordion-header-active ui-state-active ui-corner-top').attr({
-            'aria-selected': 'true',
-            'tabindex': '0'
-        });
-        $('.ui-accordion-header-icon').removeClass(icons.header).addClass(icons.headerSelected);
-        $('.ui-accordion-content').addClass('ui-accordion-content-active').attr({
-            'aria-expanded': 'true',
-            'aria-hidden': 'false'
-        }).show();
-        $(this).attr("disabled","disabled");
-        $('.accordianclose').removeAttr("disabled");
-		$('.accordianopen').hide();
-		$('.accordianclose').show();
-    });
-  
-   $('.accordianclose').click(function () {
-        $('.ui-accordion-header').removeClass('ui-accordion-header-active ui-state-active ui-corner-top').addClass('ui-corner-all').attr({
-            'aria-selected': 'false',
-            'tabindex': '-1'
-        });
-        $('.ui-accordion-header-icon').removeClass(icons.headerSelected).addClass(icons.header);
-        $('.ui-accordion-content').removeClass('ui-accordion-content-active').attr({
-            'aria-expanded': 'false',
-            'aria-hidden': 'true'
-        }).hide();
-        $(this).attr("disabled","disabled");
-        $('.accordianopen').removeAttr("disabled");
-		$('.accordianopen').show();
-		$('.accordianclose').hide();
-    });
-    $('.ui-accordion-header').click(function () {
-        $('.accordianopen').removeAttr("disabled");
-        $('.accordianclose').removeAttr("disabled");
-        
-    });
-});
-$(document).ready(function(){
-	
-$( "<div class='switch'></div>" ).insertAfter( ".ios-switch,.ios-switchb" );
-});
 
 errorHandle=function(code,msg){jqMessage({message: "General error in from database: "+code+":"+msg,type: "error",autoClose: false});};
