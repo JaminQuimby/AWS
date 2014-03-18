@@ -79,26 +79,35 @@ _toCSV=function($table, filename) {
 });
 
 _duplicateCheck=function(params){
-var options={"check":"","loadType":"","page":""}
-$.extend(true, options, params);//turn options into array
+var options={"check":"","loadType":"","page":""},str='';
+$.extend(true, options, params);
+$.each(options['check'], function(idx,obj){
+	str=str+$('#'+obj.item).val();
+	if(idx!= options['check'].length -1 ){str=str+','}
+	});
 $.ajax({
-  type: 'GET',
-  url: options['page']+'.cfc?method=f_duplicateCheck',
-  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+$('#'+options['check']).val()+"","loadType":options['loadType']})
-  },
- success:function(json){
+  type: 'GET'
+  ,async: false
+    ,data: {
+	  "returnFormat":"json"
+	  ,"argumentCollection":JSON.stringify({
+		  "check":""+str+""
+		  ,"loadType":options['loadType']
+		  })
+  }
+  ,url: options['page']+'.cfc?method=f_duplicateCheck'
 
+  ,success:function(data){
+		j=$.parseJSON(data);
+		str= j.check;
+	},error:function(data){
+		str= false;
+	}
+})
 
- var j=$.parseJSON(json);
-if(j.check =="true"){ 
- jqValid({'type':'','object':$('#'+options['check']),'message':'This value must be unique.'});
- return true
-}else
-return false
-	  },
-  error:function(data){errorHandle($.parseJSON(data))}})
-  
-  }; 
+return str;
+
+}; 
   
 _addNewTask=function(){
 if($('#task_id').val()==0){

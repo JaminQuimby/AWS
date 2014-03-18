@@ -64,7 +64,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year,g1_credithold';_loadit({"query":query,"list":list});break;
+/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year,g1_credithold';_loadit({"query":query,"list":list});_loadAssets();break;
 /*Group1_1*/case "FDS_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_datecompleted,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "FDS_SORT_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_datecompleted,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "FDS_CHECKS_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_datecompleted,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -80,6 +80,7 @@ switch(query.COLUMNS[0]){
 
 /*Group2*/case "FDSS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask,g2_dependencies';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
+/*assetCompTask*/case "FDS_OBTAININFO_DATECOMPLETED":var list='g1_g1_head1,g1_g1_head2,g1_g2_head1,g1_g2_head2,g1_g3_head1,g1_g3_head2,g1_g4_head1,g1_g4_head2,g1_g5_head1,g1_g5_head2,g1_g6_head1,g1_g6_head2,g1_g7_head1,g1_g7_head2,g1_g8_head1,g1_g8_head2,g1_g9_head1,g1_g9_head2,g1_g10_head1,g1_g10_head2,g1_g11_head1,g1_g11_head2';_loadit({"query":query,"list":list});break;
 
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -92,10 +93,33 @@ $.extend(true, options, params);//turn options into array
 
 switch(options["group"]){
 case'':
-if($("#client_id").val()!="" && $("#g1_year").val()!=0 && $("#g1_month").val()!="")
-{
-	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_year").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Year",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Year');}
+	}
+else if ($("#g1_month").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Period",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Month');}
+	}
+else if ($("#g1_periodend").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Period End",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Month');}
+	}
+else if($('#task_id').val()==0){
+	if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_month"},{"item":"g1_periodend"}],"loadType":"group1","page":"financialstatements"})){
+		jqMessage({"type":"destroy"});jqMessage({message: "This task already exsist. Client Name, Year, and Month must be unique.",type: "error",autoClose: false});
+		if(debug){window.console.log('This task already exsist. Client Name, Year, and Month must be unique.');}
+	}}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
+	if(debug){window.console.log('Start Saving Financial Statements');}	
+	}	
 break;
 
 case'group1':var json='{"DATA":[["'+

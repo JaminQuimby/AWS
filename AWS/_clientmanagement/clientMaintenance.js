@@ -268,6 +268,12 @@ if($("#g1_name").val()==""){
 	//$("#g1_name").blur();
 	if(debug){window.console.log('Missing Name');}
 	}
+else if($('#client_id').val()==0){
+	if(_duplicateCheck({"check":[{"item":"g1_name"}],"loadType":"group1","page":"clientmaintenance"})){
+		jqMessage({"type":"destroy"});jqMessage({message: "Duplicate Client Name Found",type: "error",autoClose: false});
+		if(debug){window.console.log('This Client Name already exsists.');}
+		}
+	}
 else if ($("#g1_salutation").val()==""){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Salutation",type: "error",autoClose: false});
 	//$("#g1_salutation").blur();
@@ -283,12 +289,7 @@ else if ($("#g1_since").val()==""){
 	//$("#g1_since").blur();
 	if(debug){window.console.log('Missing Since');}
 	}
-else if (!_duplicateCheck({"check":"g1_name","loadType":"clientName","page":"clientmaintenance"})){
-	
-	jqMessage({"type":"destroy"});jqMessage({message: "Duplicate Client Name Found",type: "error",autoClose: false});
-	if(debug){window.console.log('Duplicate Client Name Found');}
-	
-	}
+
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1",payload:$.parseJSON(json),page:"clientmaintenance"});

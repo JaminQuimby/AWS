@@ -5,6 +5,42 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_duplicateCheck" access="remote" output="true">
+<cfargument name="check" type="string">
+<cfargument name="loadType" type="string">
+
+<cfswitch expression="#ARGUMENTS.loadType#">
+<cfcase value="group1">
+<cfset i=0>
+<!--- Client, Year, Period, Period End--->
+<cfloop list="#ARGUMENTS.check#" index="s" delimiters=",">
+<cfset i=i+1>
+<cfset item[i]=s>
+</cfloop>
+
+<cfquery datasource="AWS" name="fquery" >
+SELECT TOP(1)[client_id]
+FROM[financialdatastatus]
+WHERE[client_id]=<cfqueryparam value="#item[1]#">
+AND[fds_year]=<cfqueryparam value="#item[2]#">
+AND[fds_month]=<cfqueryparam value="#item[3]#">
+AND[fds_periodend]=<cfqueryparam value="#item[4]#">
+</cfquery>
+
+</cfcase>
+</cfswitch>
+
+<cfif fquery.recordcount gt 0>
+<cfset myResult='{"Result":"OK","check":"true"}'>
+<cfelse>
+<cfset myResult='{"Result":"OK","check":"false"}'>
+</cfif>
+<cfreturn myResult>
+
+</cffunction>
+
+
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
@@ -179,6 +215,38 @@ FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
+<!--- Asset GUI Completed Tasks--->
+<cfcase value="assetCompTask">
+<cfquery datasource="AWS" name="fQuery">
+SELECT
+[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'d','en-us')
+,[fds_obtaininfo_assignedtoTEXT]
+,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'d','en-us') 
+,[fds_sort_assignedtoTEXT]
+,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'d','en-us') 
+,[fds_checks_assignedtoTEXT]
+,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'d','en-us') 
+,[fds_sales_assignedtoTEXT]
+,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'d','en-us') 
+,[fds_entry_assignedtoTEXT]
+,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'d','en-us') 
+,[fds_reconcile_assignedtoTEXT]
+,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'d','en-us') 
+,[fds_compile_assignedtoTEXT]
+,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'d','en-us') 
+,[fds_review_assignedtoTEXT]
+,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'d','en-us') 
+,[fds_assembly_assignedtoTEXT]
+,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'d','en-us') 
+,[fds_delivery_assignedtoTEXT]
+,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'d','en-us') 
+,[fds_acctrpt_assignedtoTEXT]
+FROM[v_financialdatastatus]
+WHERE[FDS_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 <cfcatch>
@@ -228,7 +296,7 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(8),[fds_acctrpt_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedtoTEXT) AS [fds_acctrpt]
 FROM[v_financialDataStatus]
 WHERE[fds_status] != 2 
-AND [fds_status] != 5
+AND [fds_status] != 3
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
@@ -277,9 +345,12 @@ SELECT[fdss_id]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]
 FROM[v_financialDataStatus_Subtask]
-WHERE<cfif ARGUMENTS.ID neq "0">[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
+WHERE[fdss_status] != 2 
+AND [fdss_status] != 3
+<cfif ARGUMENTS.ID neq "0">AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
 [fds_id]=<cfqueryparam value="#ARGUMENTS.id#"/>AND[fdss_subtaskTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif></cfquery>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>
+</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>

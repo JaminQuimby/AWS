@@ -2,6 +2,7 @@
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
 <cfparam name="url.task_id" default="0">
+<cfparam name="url.client_id" default="0">
 <cfparam name="url.nav" default="1">
 <cfset page.module="_accountingservices">
 <cfset page.location="financialstatements">
@@ -13,6 +14,7 @@
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="/assets/inc/header.cfm">
+
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
@@ -25,7 +27,23 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 })
 </script>
 </cfoutput>
+<cfelseif URL.task_id eq 0>
+<cfoutput>
+<script>
+$(document).ready(function(){
+$('##task_id').val('#URL.task_id#');
+$('##client_id').val('#URL.client_id#');
+_addNewTask();
+_toggle("group1,largeMenu");
+_hide("entrance");$("##content").removeClass();
+$("##content").addClass("contentbig");
+_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
+})
+</script>
+</cfoutput>
 </cfif>
+
+
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_month">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
@@ -72,82 +90,82 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_mireceived">Missing Information Received</label><input type="text"id="g1_mireceived" class="date"/></div>
 <div><label for="g1_compilemi"><input id="g1_compilemi" type="checkbox" class="ios-switch">Missing Information - Compiled</label></div>
 <div><label for="g1_cmireceived">Missing Information Received - Compiled</label><input type="text" id="g1_cmireceived" class="date"/></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"/></div>
+<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></span></div>
 <div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
     
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"financialstatements"});$("#isLoaded_group1_1").val(1);'>Obtain Information</h4>   
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"financialstatements"});$("#isLoaded_group1_1").val(1);'>Obtain Information | <span id="g1_g1_head1"></span> | <span id="g1_g1_head2"></span></h4>   
 	<div>
 		<div><label for="g1_g1_assignedto">Assigned to</label><select id="g1_g1_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g1_datecompleted">Date Completed</label><input type="text" id="g1_g1_datecompleted" class="date"/></div>
 		<div><label for="g1_g1_completedby">Competed By</label><select id="g1_g1_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g1_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"financialstatements"});$("#isLoaded_group1_2").val(1);'>Sort</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"financialstatements"});$("#isLoaded_group1_2").val(1);'>Sort | <span id="g1_g2_head1"></span> | <span id="g1_g2_head2"></span></h4>
 	<div>
 		<div><label for="g1_g2_assignedto">Assigned to</label><select id="g1_g2_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g2_datecompleted">Date Completed</label><input type="text" id="g1_g2_datecompleted" class="date"/></div>
 		<div><label for="g1_g2_completedby">Competed By</label><select id="g1_g2_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g2_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g2_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"financialstatements"});$("#isLoaded_group1_3").val(1);'>Checks</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"financialstatements"});$("#isLoaded_group1_3").val(1);'>Checks | <span id="g1_g3_head1"></span> | <span id="g1_g3_head2"></span></h4>
 	<div>
 		<div><label for="g1_g3_assignedto">Assigned to</label><select id="g1_g3_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g3_datecompleted">Date Completed</label><input type="text" id="g1_g3_datecompleted" class="date"/></div>
 		<div><label for="g1_g3_completedby">Competed By</label><select id="g1_g3_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g3_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g3_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"financialstatements"});$("#isLoaded_group1_4").val(1);'>Sales</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"financialstatements"});$("#isLoaded_group1_4").val(1);'>Sales | <span id="g1_g4_head1"></span> | <span id="g1_g4_head2"></span></h4>
 	<div>
 		<div><label for="g1_g4_assignedto">Assigned to</label><select id="g1_g4_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g4_datecompleted">Date Completed</label><input type="text" id="g1_g4_datecompleted" class="date"/></div>
 		<div><label for="g1_g4_completedby">Competed By</label><select id="g1_g4_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g4_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g4_estimatedtime" /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"financialstatements"});$("#isLoaded_group1_5").val(1);'>Entry</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"financialstatements"});$("#isLoaded_group1_5").val(1);'>Entry | <span id="g1_g5_head1"></span> | <span id="g1_g5_head2"></span></h4>
 	<div>
 		<div><label for="g1_g5_assignedto">Assigned to</label><select id="g1_g5_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g5_datecompleted">Date Completed</label><input type="text" id="g1_g5_datecompleted" class="date"/></div>
 		<div><label for="g1_g5_completedby">Competed By</label><select id="g1_g5_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g5_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_6","page":"financialstatements"});$("#isLoaded_group1_6").val(1);'>Bank Reconciliation</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_6","page":"financialstatements"});$("#isLoaded_group1_6").val(1);'>Bank Reconciliation | <span id="g1_g6_head1"></span> | <span id="g1_g6_head2"></span></h4>
 	<div>
 		<div><label for="g1_g6_assignedto">Assigned to</label><select id="g1_g6_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g6_datecompleted">Date Completed</label><input type="text" id="g1_g6_datecompleted" class="date"/></div>
 		<div><label for="g1_g6_completedby">Competed By</label><select id="g1_g6_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g6_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g6_estimatedtime"/></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_7","page":"financialstatements"});$("#isLoaded_group1_7").val(1);'>Complications</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_7","page":"financialstatements"});$("#isLoaded_group1_7").val(1);'>Complications | <span id="g1_g7_head1"></span> | <span id="g1_g7_head2"></span></h4>
 	<div>
 		<div><label for="g1_g7_assignedto">Assigned to</label><select id="g1_g7_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g7_datecompleted">Date Completed</label><input type="text" id="g1_g7_datecompleted" class="date"/></div>
 		<div><label for="g1_g7_completedby">Competed By</label><select id="g1_g7_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g7_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g7_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_8","page":"financialstatements"});$("#isLoaded_group1_8").val(1);'>Review</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_8","page":"financialstatements"});$("#isLoaded_group1_8").val(1);'>Review | <span id="g1_g8_head1"></span> | <span id="g1_g8_head2"></span></h4>
 	<div>
 		<div><label for="g1_g8_assignedto">Assigned to</label><select id="g1_g8_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g8_datecompleted">Date Completed</label><input type="text" id="g1_g8_datecompleted" class="date"/></div>
 		<div><label for="g1_g8_completedby">Competed By</label><select id="g1_g8_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g8_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g8_estimatedtime" /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_9","page":"financialstatements"});$("#isLoaded_group1_9").val(1);'>Assembly</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_9","page":"financialstatements"});$("#isLoaded_group1_9").val(1);'>Assembly | <span id="g1_g9_head1"></span> | <span id="g1_g9_head2"></span></h4>
 	<div>
 		<div><label for="g1_g9_assignedto">Assigned to</label><select id="g1_g9_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g9_datecompleted">Date Completed</label><input type="text" id="g1_g9_datecompleted" class="date"/></div>
 		<div><label for="g1_g9_completedby">Competed By</label><select id="g1_g9_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g9_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g9_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_10","page":"financialstatements"});$("#isLoaded_group1_10").val(1);'>Delivery</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_10","page":"financialstatements"});$("#isLoaded_group1_10").val(1);'>Delivery | <span id="g1_g10_head1"></span> | <span id="g1_g10_head2"></span></h4>
 	<div>
 		<div><label for="g1_g10_assignedto">Assigned to</label><select id="g1_g10_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g10_datecompleted">Date Completed</label><input type="text" id="g1_g10_datecompleted"  class="date"/></div>
 		<div><label for="g1_g10_completedby">Competed By</label><select id="g1_g10_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g10_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g10_estimatedtime"  /></div>
 	</div>
-	<h4 onClick='_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);'>Accountant's Report</h4>
+	<h4 onClick='_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);'>Accountant's Report | <span id="g1_g11_head1"></span> | <span id="g1_g11_head2"></span></h4>
 	<div>
 		<div><label for="g1_g11_assignedto">Assigned to</label><select id="g1_g11_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g11_datecompleted">Date Completed</label><input type="text" id="g1_g11_datecompleted" class="date"/></div>

@@ -4,8 +4,6 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!--- LOAD DATA --->
-
 
 <!--- LOAD SELECT BOXES --->
 <cffunction name="f_duplicateCheck" access="remote" output="true">
@@ -13,14 +11,22 @@
 <cfargument name="loadType" type="string">
 
 <cfswitch expression="#ARGUMENTS.loadType#">
-<cfcase value="clientName">
+<cfcase value="group1">
+<cfset i=0>
+<!--- Client_Name --->
+<cfloop list="#ARGUMENTS.check#" index="s" delimiters=",">
+<cfset i=i+1>
+<cfset item[i]=s>
+</cfloop>
+
 <cfquery datasource="AWS" name="fquery" >
-SELECT TOP(1)[client_name]AS[check]FROM[client_listing]WHERE[client_name]='#ARGUMENTS.check#'
+SELECT TOP(1)[client_name]FROM[client_listing]WHERE[client_name]=<cfqueryparam value="#item[1]#">
 </cfquery>
+
 </cfcase>
 </cfswitch>
 
-<cfif fquery.recordcount eq 1>
+<cfif fquery.recordcount gt 0>
 <cfset myResult='{"Result":"OK","check":"true"}'>
 <cfelse>
 <cfset myResult='{"Result":"OK","check":"false"}'>
