@@ -93,11 +93,11 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2">
 <cfquery datasource="AWS" name="fQuery">
 SELECT[bfs_id]
-,[bfs_taskname]
-,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
-,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
-,[bfs_estimatedtime]
 ,[bfs_assignedto]
+,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
+,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
+,[bfs_estimatedtime]
+,[bfs_taskname]
 FROM[businessformation_subtask]
 WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>

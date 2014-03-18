@@ -106,9 +106,11 @@ WHERE(1)=(1)
 								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
+								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
 								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
 								,"TR_2_REVIEWASSIGNEDTO":"'&TR_2_REVIEWASSIGNEDTO&'"
 								,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
+								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
 								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"
 								,"TR_3_CONTACTED":"'&TR_3_CONTACTED&'"
@@ -120,7 +122,7 @@ WHERE(1)=(1)
 								,"TR_EXTENSIONREQUESTED":"'&TR_EXTENSIONREQUESTED&'"
 								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
 								,"TR_3_MULTISTATERETURN":"'&TR_3_MULTISTATERETURN&'"
-								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"							
+								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"															
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -155,7 +157,7 @@ SELECT[trst_id]
 ,[tr_3_missingsignatures]
 ,CONVERT(VARCHAR(8),[tr_3_assemblereturn], 1)AS[tr_3_assemblereturn]
 ,CONVERT(VARCHAR(8),[tr_3_contacted], 1)AS[tr_3_contacted]
-,[tr_2_preparedby]
+,[tr_2_preparedbyTEXT]
 ,CONVERT(VARCHAR(8),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]
 ,CONVERT(VARCHAR(8),[tr_2_completed], 1)AS[tr_2_completed]
 ,CONVERT(VARCHAR(8),[tr_3_delivered], 1)AS[tr_3_delivered]
@@ -166,7 +168,7 @@ SELECT[trst_id]
 ,CONVERT(VARCHAR(8),[tr_4_completed], 1)AS[tr_4_completed]
 ,CONVERT(VARCHAR(8),[tr_4_delivered], 1)AS[tr_4_delivered]
 ,FORMAT(tr_4_currentfees, 'C', 'en-us')AS[tr_4_currentfees]
-,[trst_state]
+,trst_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[trst_state]=[optionvalue_id])
 ,[trst_primary]
 ,CONVERT(VARCHAR(8),[trst_completed], 1)AS[trst_completed]
 ,FORMAT(tr_4_currentfees, 'C', 'en-us')AS[tr_currentfees]
@@ -205,7 +207,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TR_3_MISSINGSIGNATURES":"'&TR_3_MISSINGSIGNATURES&'"
 								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"
 								,"TR_3_CONTACTED":"'&TR_3_CONTACTED&'"
-								,"TR_2_PREPAREDBY":"'&TR_2_PREPAREDBY&'"
+								,"TR_2_PREPAREDBYTEXT":"'&TR_2_PREPAREDBYTEXT&'"
 								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
 								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
@@ -216,7 +218,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
 								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
 								,"TR_4_CURRENTFEES":"'&TR_4_CURRENTFEES&'"
-								,"TRST_STATE":"'&TRST_STATE&'"
+								,"TRST_STATETEXT":"'&TRST_STATETEXT&'"
 								,"TRST_PRIMARY":"'&TRST_PRIMARY&'"
 								,"TRST_COMPLETED":"'&TRST_COMPLETED&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
