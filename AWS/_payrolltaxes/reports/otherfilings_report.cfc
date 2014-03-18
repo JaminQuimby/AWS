@@ -71,11 +71,16 @@ SELECT[of_id]
 ,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
 ,[of_missinginfo]
 ,CONVERT(VARCHAR(8),[of_missinginforeceived], 1)AS[of_missinginforeceived]
-,CONVERT(VARCHAR(8),of_obtaininfo_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),of_obtaininfo_assignedtoTEXT) AS [of_obtaininfo]
-,CONVERT(VARCHAR(8),of_preparation_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),of_preparation_assignedtoTEXT) AS [of_preparation]
-,CONVERT(VARCHAR(8),[of_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_review_assignedtoTEXT) AS [of_review]
-,CONVERT(VARCHAR(8),[of_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_assembly_assignedtoTEXT) AS [of_assembly]
-,CONVERT(VARCHAR(8),[of_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),of_delivery_assignedtoTEXT) AS [of_delivery]
+,[of_obtaininfo_datecompleted]=ISNULL(FORMAT(of_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_obtaininfo_assignedtoTEXT]
+,[of_preparation_datecompleted]=ISNULL(FORMAT(of_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_preparation_assignedtoTEXT]
+,[of_review_datecompleted]=ISNULL(FORMAT(of_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_review_assignedtoTEXT]
+,[of_assembly_datecompleted]=ISNULL(FORMAT(of_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_assembly_assignedtoTEXT]
+,[of_delivery_datecompleted]=ISNULL(FORMAT(of_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_delivery_assignedtoTEXT]
 ,FORMAT(of_fees, 'C', 'en-us')AS[of_fees]
 ,[of_filingdeadline]
 ,[of_esttime]
@@ -142,11 +147,11 @@ WHERE(1)=(1)
 								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
 								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"
-								,"OF_OBTAININFO":"'&OF_OBTAININFO&'"
-								,"OF_PREPARATION":"'&OF_PREPARATION&'"
-								,"OF_REVIEW":"'&OF_REVIEW&'"
-								,"OF_ASSEMBLY":"'&OF_ASSEMBLY&'"
-								,"OF_DELIVERY":"'&OF_DELIVERY&'"
+								,"OF_OBTAININFO":"'&of_obtaininfo_datecompleted&'<br/>'&of_obtaininfo_assignedtoTEXT&'"
+								,"OF_PREPARATION":"'&of_preparation_datecompleted&'<br/>'&of_preparation_assignedtoTEXT&'"
+								,"OF_REVIEW":"'&of_review_datecompleted&'<br/>'&of_review_assignedtoTEXT&'"
+								,"OF_ASSEMBLY":"'&of_assembly_datecompleted&'<br/>'&of_assembly_assignedtoTEXT&'"
+								,"OF_DELIVERY":"'&of_delivery_datecompleted&'<br/>'&of_delivery_assignedtoTEXT&'"
 								,"OF_FEES":"'&OF_FEES&'"
  								,"OF_PAIDTEXT":"'&OF_PAIDTEXT&'"
 								}'>                              

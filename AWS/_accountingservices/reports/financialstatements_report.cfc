@@ -119,17 +119,29 @@ SELECT[fds_id]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,CONVERT(VARCHAR(8),fds_obtaininfo_datecompleted, 1) + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedtoTEXT) AS [fds_obtaininfo]
-,CONVERT(VARCHAR(8),[fds_sort_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedtoTEXT) AS [fds_sort]
-,CONVERT(VARCHAR(8),[fds_checks_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedtoTEXT) AS [fds_checks]
-,CONVERT(VARCHAR(8),[fds_sales_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedtoTEXT) AS [fds_sales]
-,CONVERT(VARCHAR(8),[fds_entry_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedtoTEXT) AS [fds_entry]
-,CONVERT(VARCHAR(8),[fds_reconcile_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedtoTEXT) AS [fds_reconcile]
-,CONVERT(VARCHAR(8),[fds_compile_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedtoTEXT) AS [fds_compile]
-,CONVERT(VARCHAR(8),[fds_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedtoTEXT) AS [fds_review]
-,CONVERT(VARCHAR(8),[fds_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedtoTEXT) AS [fds_assembly]
-,CONVERT(VARCHAR(8),[fds_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedtoTEXT) AS [fds_delivery]
-,CONVERT(VARCHAR(8),[fds_acctrpt_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedtoTEXT) AS [fds_acctrpt]
+
+,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_obtaininfo_assignedtoTEXT]
+,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sort_assignedtoTEXT]
+,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_checks_assignedtoTEXT]
+,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sales_assignedtoTEXT]
+,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_entry_assignedtoTEXT]
+,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_reconcile_assignedtoTEXT]
+,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_compile_assignedtoTEXT]
+,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_review_assignedtoTEXT]
+,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_assembly_assignedtoTEXT]
+,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_delivery_assignedtoTEXT]
+,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_acctrpt_assignedtoTEXT]
 ,FORMAT(fds_fees, 'C', 'en-us')AS[fds_fees]
 ,[fds_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[fds_paid]=[optionvalue_id])
 ,[client_name]
@@ -191,17 +203,20 @@ WHERE(1)=(1)
 								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
-								,"FDS_OBTAININFO":"'&FDS_OBTAININFO&'"
-								,"FDS_SORT":"'&FDS_SORT&'"
-								,"FDS_CHECKS":"'&FDS_CHECKS&'"
-								,"FDS_SALES":"'&FDS_SALES&'"
-								,"FDS_ENTRY":"'&FDS_ENTRY&'"
-								,"FDS_RECONCILE":"'&FDS_RECONCILE&'"
-								,"FDS_COMPILE":"'&FDS_COMPILE&'"
-								,"FDS_REVIEW":"'&FDS_REVIEW&'"
-								,"FDS_ASSEMBLY":"'&FDS_ASSEMBLY&'"
-								,"FDS_DELIVERY":"'&FDS_DELIVERY&'"
-								,"FDS_ACCTRPT":"'&FDS_ACCTRPT&'"
+								
+ 
+								
+								,"FDS_OBTAININFO":"'&fds_obtaininfo_datecompleted&'<br/>'&fds_obtaininfo_assignedtoTEXT&'"
+								,"FDS_SORT":"'&fds_sort_datecompleted&'<br/>'&fds_sort_assignedtoTEXT&'"
+								,"FDS_CHECKS":"'&fds_checks_datecompleted&'<br/>'&fds_checks_assignedtoTEXT&'"
+								,"FDS_SALES":"'&fds_sales_datecompleted&'<br/>'&fds_sales_assignedtoTEXT&'"
+								,"FDS_ENTRY":"'&fds_entry_datecompleted&'<br/>'&fds_entry_assignedtoTEXT&'"
+								,"FDS_RECONCILE":"'&fds_reconcile_datecompleted&'<br/>'&fds_reconcile_assignedtoTEXT&'"
+								,"FDS_COMPILE":"'&fds_compile_datecompleted&'<br/>'&fds_compile_assignedtoTEXT&'"
+								,"FDS_REVIEW":"'&fds_review_datecompleted&'<br/>'&fds_review_assignedtoTEXT&'"
+								,"FDS_ASSEMBLY":"'&fds_assembly_datecompleted&'<br/>'&fds_assembly_assignedtoTEXT&'"
+								,"FDS_DELIVERY":"'&fds_delivery_datecompleted&'<br/>'&fds_delivery_assignedtoTEXT&'"
+								,"FDS_ACCTRPT":"'&fds_acctrpt_datecompleted&'<br/>'&fds_acctrpt_assignedtoTEXT&'"
 								,"FDS_FEES":"'&FDS_FEES&'"
 								,"FDS_PAIDTEXT":"'&FDS_PAIDTEXT&'"
 								}'>

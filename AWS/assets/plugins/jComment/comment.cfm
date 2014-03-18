@@ -15,7 +15,7 @@ _pluginSaveData101=function(){var json='{"DATA":[["'+
 		$("##g101_commentdate").val()+'","'+
 		$("##g101_commenttext").val()+'","'+
 		'"]]}'
-		if($("##isLoaded_group101").val()!=0){_saveData({"group":"group101",payload:$.parseJSON(json),page:"comment",plugin:"group101"})}
+		if($("##isLoaded_group101").val()!=0){_saveData({"group":"group101",payload:$.parseJSON(json),page:"comment",plugin:"group101"});$("##group101").accordion({active:0});_grid101();$("##isLoaded_group101").val(0);}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
 
 _group101=function(){_grid101()}
