@@ -26,7 +26,7 @@
 <div>
 <div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
 <!--- Entrace Grid --->
-<div class="tblGrid" id="grid1"></div>
+<div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
 </div></div></div>

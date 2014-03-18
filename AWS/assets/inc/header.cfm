@@ -4,7 +4,12 @@
 <cfparam name="url.nav" default="1">
 <cfparam name="url.task_id" default="0">
 <cfparam name="url.client_id" default="0">
+<cfparam name="url.debug" default="false">
 <cfparam name="page.type" default="">
+<cfparam name="page.trackers" default="">
+<cfparam name="page.menuLeft" default="">
+<cfparam name="page.menuLeft_report" default="">
+<cfparam name="page.formid" default="0">
 <cfset page.cache.users=CreateTimeSpan(0,0,0,0)>
 <cfset page.cache.options=CreateTimeSpan(0,0,0,0)>
 <cfset page.cache.clients=CreateTimeSpan(0,0,0,0)>

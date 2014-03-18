@@ -38,7 +38,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfoutput><h3>#page.title# Search</h3></cfoutput><div>
 <div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 <!--- Entrace Grid --->
-<div class="tblGrid" id="grid1"></div>
+<div id="g1_searchOptions"></div><div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"businessformation"});_toggle("group1,largeMenu");_hide("entrance");_addNewTask();'>Add</a>
 </div></div></div>
@@ -113,7 +113,7 @@ articles approved estimated time
 	<h3 onClick="_grid2();">Subtasks</h3>
 	<div>
     	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
-		<div class="tblGrid" id="grid2"></div>
+		<div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox">
 		<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
 		</div>

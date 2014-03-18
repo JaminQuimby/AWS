@@ -61,7 +61,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div>
 		<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 		<!--- Entrace Grid --->
-		<div class="tblGrid" id="grid1"></div>
+		<div id="g1_searchOptions"></div><div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 		<div class="buttonbox">
 			<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"financialstatements"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();'>Add</a>
 		</div>
@@ -177,7 +177,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
         <div><label for="g2_group">Group</label><select id="g2_group"><option value="0">&nbsp;</option><cfoutput query="global_financialgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select>
        		 <a href="#" class="button optional" onClick='jqMessage({message: "Warning: Would you like to import the selected group?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_duplicate\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})'>Duplicate</a>
         </div>
-		<div class="tblGrid" id="grid2"></div>
+		<div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox">
 		<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val("0")'>Add</a>
 		</div>

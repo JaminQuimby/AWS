@@ -1,5 +1,3 @@
-var debug=false;
-
 $(document).ready(function(){
 _grid1();
 _group1=function(){}

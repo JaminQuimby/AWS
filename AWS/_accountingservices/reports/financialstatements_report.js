@@ -63,6 +63,8 @@ var grid1_config = [
 ,{"n":"year","t":"numeric","v":""}
 ];$.each(grid1_config, function(idx, obj) {$('.search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
  
+
+ 
 	_jGrid({
 	"grid":"grid1",
 	"url":"financialstatements_report.cfc",
@@ -94,8 +96,11 @@ var grid1_config = [
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"5"}',
 	//"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID'
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID+"&nav=0","_blank")'
-	})};
+	})
 	
+
+	};
+
 _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"financialstatements_report.cfc",

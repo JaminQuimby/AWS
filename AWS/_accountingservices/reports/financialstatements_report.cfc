@@ -77,7 +77,7 @@ SELECT [fdss_id]
 <!--- LOAD SELECT BOXES --->
 <cffunction name="f_loadSelect" access="remote" output="true">
 <cfargument name="selectName" type="string">
-<cfargument name="formid" type="string" default="11">
+<cfargument name="formid" type="string" default="">
 <cfargument name="option1" type="string" default="">
 
 <cfquery datasource="AWS" name="fquery" >

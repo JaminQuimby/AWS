@@ -1,5 +1,29 @@
 <cfcomponent output="true">
 
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+
+
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
+
+
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">

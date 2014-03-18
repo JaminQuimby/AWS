@@ -47,7 +47,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
 <!--- Entrace Grid --->
-<div class="tblGrid" id="grid1"></div>
+<div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
 <a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["g2_status"],"DATA":[[4]]},"list":"g2_status","page":"taxreturns"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2,group3");_addNewTask();'>Add</a>
 </div></div></div>

@@ -1,8 +1,3 @@
-<cfparam name="page.trackers" default="">
-<cfparam name="page.menuLeft" default="">
-<cfparam name="page.menuLeft_report" default="">
-<cfparam name="page.formid" default="0">
-<cfparam name="url.debug" default="false">
 
 <!--- VERTICAL MENUS --->
 <div class="menus">

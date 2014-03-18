@@ -1,11 +1,5 @@
-/*
-Developer: Jamin Quimby
-_toggle = changes the style.display on and off
-hide = will hide a list of objects. requies a csv list of element names
-highlight = light up current selected vertical tab; varibales on
-isit = regexp validation of a string
-updateh3 = updates <h3> elements with a msg contined in brakets. Example <h3>Client</h3> when you run updateh3("Qutera") it will become <h3>Client [Qutera]</h3>  
-*/
+/*Developer: Jamin Quimby*/
+//prototype 
 String.prototype.replaceAll = function (find, replace){var str = this; return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace)};
 String.prototype.has = function(text) { return this.toLowerCase().indexOf("" + text.toLowerCase() + "") != -1; };
 String.prototype.insert = function (index, string) {if (index > 0) return this.substring(0, index) + string + this.substring(index, this.length); else return string + this;};
@@ -13,8 +7,9 @@ Array.prototype.removeValue = function(name, value){var array = $.map(this, func
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
 Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:"0"+mm[0])+'/'+(dd[1]?dd:"0"+dd[0])+'/'+yyyy};
 //Localisation 
-
+var debug=true;
 $(document).ready(function(){
+
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 $.datepicker.setDefaults({showOn:"button",buttonImageOnly:true,buttonImage:"https://"+window.location.hostname+"/AWS/assets/img/datepicker.gif",showButtonPanel:true,constrainInput:true});
 $(".datetime").datetimepicker({timeFormat: 'hh:mmtt'}).mask('00/00/0000 00:00:00');
@@ -175,14 +170,22 @@ options='{'+list+'}'})
 var json=data;
 $.each(config, function(i){
 	if(json.has('#EMPLOYEE')){
+		
 if($("#filter_username").length == 0) {
+if(debug){window.console.log('_toBuild : Element filter_username does not exsist');}
 var filename = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1).split(".");
 var sel = $('<select id=\"filter_username\">').appendTo('body');
-_loadSelect({"selectName":"selectUsers","selectObject":"filter_username","page":""+filename[0]+""})     
+if(debug){window.console.log('_toBuild : Start Load Select '+filename[0]);}
+
+_loadSelect({"selectName":"selectUsers","option1":"","selectObject":"filter_username","page":""+filename[0]+""});
+
 sel.hide().change(function() {
-_grid1();
-}).appendTo("#searchOptions").chosen();
-sel.wrap( "<label for='unique1'>Client Name</label><div></div>");
+if(debug){window.console.log('select onchange load _group1() ');}
+_group1();
+}).appendTo("#g1_searchOptions").chosen();
+if(debug){window.console.log('_toBuild : append and chosen() ')}
+sel.wrap( "<label for='filter_username'>Employee Name</label><div></div>");
+if(debug){window.console.log('_toBuild : Load Select Complete ')}
 }}
 json=json.replaceAll('#EMPLOYEE', $('#filter_username').val());
 json=json.replaceAll('#TODAY', new Date().mmddyyyy());
@@ -274,7 +277,8 @@ _jGrid=function(params){
 		"arguments":"", //ajax json arguments
 		"functions":"", //on click function
 		"url":"",//&argumentCollection=
-		"method":""//&method=
+		"method":"",//&method=
+		"showfields":""
 	
 	}
 	$.extend(true,options,params);
@@ -313,6 +317,12 @@ $(grid).jtable({
                     //No rows selected
                  $('#SelectedRowList').append('No row selected! Select rows to see here...');
 				 }}});
+				 
+//var loadColumns =options['showfields'].split(",");
+//for(var i=0; i<loadColumns.length; i++){
+//$(grid).jtable('changeColumnVisibility',loadColumns[i],'visible')
+//}
+if(debug){window.console.log('_jGrid : load jtable');}
 $(grid).jtable('load')};
 
 _jGridReport=function(params){
@@ -359,6 +369,7 @@ $(grid).jtable('load')};
 
 //Load Data
 _loadData=function(params){
+if(debug){window.console.log('_loadData : Starting');}
 var options={"id":"","group":"","page":"","plugin":""}
 try{$.extend(true, options, params);
 if(options["plugin"]!=""){options["url"]= _pluginURL(options["plugin"]);}else{options["url"]=""};
@@ -499,14 +510,16 @@ $('#'+sel[i]).each(function(){$('#'+sel[i]+'option').removeAttr("selected")})
 }}
 	
 _loadSelect=function(params){
+if(debug){window.console.log('_loadSelect : Starting');}
 var options={"selectName":"","selectObject":"","option1":"","page":""}
 $.extend(true,options,params);
+if(debug){window.console.log('_loadSelect : options '+options["selectName"]+' '+options["selectObject"]+' '+options["option1"]+' '+options["page"]+' ');}
 $.ajax({type:'GET',url:options['page']+'.cfc?method=f_loadSelect',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"selectName":options['selectName'],"option1":options['option1']})}
 ,success:function(json){
  var j=$.parseJSON(json),items='';
 	for(var i=0;i<j.Records.length;i++){items+='<option value="'+ j.Records[i].optionvalue_id+'">'+j.Records[i].optionname+'</option>'}
 	  $("select#"+options['selectObject']).html(items).trigger("chosen:updated");
-	 // $("select#"+options['selectObject']).trigger("chosen:updated");
+	if(debug){window.console.log('_loadSelect : complete');}
 	  },
   error:function(data){errorHandle($.parseJSON(data))}})};
 

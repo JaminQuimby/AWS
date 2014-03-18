@@ -28,7 +28,7 @@
 	<div>
     <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 	<div><label for="g1_filter">Filter</label><input id="g1_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
-	<div class="tblGrid" id="grid1"></div>
+	<div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
     </div>
   </div>
 
