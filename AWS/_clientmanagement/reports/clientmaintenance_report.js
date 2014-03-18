@@ -36,8 +36,8 @@ var grid1_config = [
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CLIENT_SPOUSE:{title:'Spouse'}
-			,CLIENT_TYPE:{title:'Client Type',width:"1%"}
-			,CLIENT_ACTIVE:{title:'Active',width:"1%"}
+			,CLIENT_TYPETEXT:{title:'Client Type',width:"1%"}
+			,CLIENT_ACTIVE:{title:'Active',width:"1%",type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}

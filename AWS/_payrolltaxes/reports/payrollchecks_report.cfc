@@ -12,7 +12,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 
 
 <cfset myResult="">
-<cfset queryResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
@@ -51,11 +51,16 @@ SELECT
 ,CONVERT(VARCHAR(8),[pc_missinginforeceived], 1)AS[pc_missinginforeceived]
 ,[pc_missinginfo] 
 ,CONVERT(VARCHAR(8),[pc_duedate], 1)AS[pc_duedate]
-,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
-,CONVERT(VARCHAR(8),[pc_preparation_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_preparation_assignedtoTEXT]) AS [pc_preparation]
-,CONVERT(VARCHAR(8),[pc_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_review_assignedtoTEXT]) AS [pc_review]
-,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
-,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
+,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_obtaininfo_assignedtoTEXT]
+,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_preparation_assignedtoTEXT]
+,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_review_assignedtoTEXT]
+,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_assembly_assignedtoTEXT]
+,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_delivery_assignedtoTEXT]
 ,FORMAT(pc_fees, 'C', 'en-us')AS[pc_fees]
 ,[pc_paid]
 ,[pc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pc_paid]=[optionvalue_id])
@@ -119,11 +124,11 @@ WHERE(1)=(1)
 								,"PC_DUEDATE":"'&PC_DUEDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								,"PC_MISSINGINFORECEIVED":"'&PC_MISSINGINFORECEIVED&'"
-								,"PC_OBTAININFO":"'&PC_OBTAININFO&'"
-								,"PC_PREPARATION":"'&PC_PREPARATION&'"
-								,"PC_REVIEW":"'&PC_REVIEW&'"
-								,"PC_ASSEMBLY":"'&PC_ASSEMBLY&'"
-								,"PC_DELIVERY":"'&PC_DELIVERY&'"
+								,"PC_OBTAININFO":"'&pc_obtaininfo_datecompleted&'<br/>'&pc_obtaininfo_assignedtoTEXT&'"
+								,"PC_PREPARATION":"'&pc_preparation_datecompleted&'<br/>'&pc_preparation_assignedtoTEXT&'"
+								,"PC_REVIEW":"'&pc_review_datecompleted&'<br/>'&pc_review_assignedtoTEXT&'"
+								,"PC_ASSEMBLY":"'&pc_assembly_datecompleted&'<br/>'&pc_assembly_assignedtoTEXT&'"
+								,"PC_DELIVERY":"'&pc_delivery_datecompleted&'<br/>'&pc_delivery_assignedtoTEXT&'"
 								,"PC_FEES":"'&PC_FEES&'"
 								,"PC_PAIDTEXT":"'&PC_PAIDTEXT&'"
 								}'>

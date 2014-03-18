@@ -15,7 +15,7 @@ var grid1_config = [
 ,{"n":"assembly_completedby","t":"date","v":""}
 ,{"n":"assembly_esttime","t":"numeric","v":""}
 ,{"n":"clientname","t":"date","v":""}
-,{"n":"datedue","t":"date","v":""}
+,{"n":"duedate","t":"date","v":""}
 ,{"n":"deliverymethod","t":"numeric","v":""}
 ,{"n":"delivery_assignedto","t":"numeric","v":""}
 ,{"n":"delivery_datecompleted","t":"date","v":""}

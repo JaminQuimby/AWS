@@ -72,7 +72,8 @@ FROM[CLIENT_CONTACT]
 <cfquery datasource="AWS" name="fquery">
 SELECT[client_id]
 ,[client_name]
-,[client_type]
+	,[client_type]
+,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 ,[client_active]
 ,[client_spouse]
 ,[client_credit_hold]
@@ -133,7 +134,7 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CLIENT_SPOUSE":"'&CLIENT_SPOUSE&'"
-								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
+								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
 								,"CLIENT_ACTIVE":"'&CLIENT_ACTIVE&'"
 								,"CLIENT_CREDIT_HOLD":"'&CLIENT_CREDIT_HOLD&'"
 								,"CLIENT_SCHEDULE_C":"'&CLIENT_SCHEDULE_C&'"

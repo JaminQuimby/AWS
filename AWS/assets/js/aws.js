@@ -225,36 +225,43 @@ $.each(options, function (i) {
 		 
 		  switch(config[c].t){
                 case'date':
-					if(_isIt('date',options[i])){
+				
+					if(_isIt('date',options[i])){if(debug){window.console.log('_toBuild Date: i='+i+' t='+config[c].t+' v='+options[i]);}
 					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
 					}else{
+						if(debug){window.console.log('_toBuild Date None: i='+i+' t='+config[c].t+' v='+options[i]);}
 						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
 						}
 					
 					break;
 					
                 case'numeric':
-					if(_isIt('numeric',options[i])){
+				
+					if(_isIt('numeric',options[i])){if(debug){window.console.log('_toBuild Numeric: i='+i+' t='+config[c].t+' v='+options[i]);}
 					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))
 					}else{
+						if(debug){window.console.log('_toBuild numeric None: i='+i+' t='+config[c].t+' v='+options[i]);}						
 						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
 						}
 					break;
 					
 				case'boolean':
-					if(_isIt('boolean',options[i])){
+			
+					if(_isIt('boolean',options[i])){if(debug){window.console.log('_toBuild Boolean: i='+i+' t='+config[c].t+' v='+options[i]);}
 						if(options[i].match(/^True|^False|^true|^yes|^1/)){
 					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"1"}'))
-					}else{
+					}else{	
 					xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"0"}'))
 					}}
 					
 					else{
+						if(debug){window.console.log('_toBuild Boolean None: i='+i+' t='+config[c].t+' v='+options[i]);}
 						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"null"}'))}
 						}
 					break;
 					
 				default:
+				if(debug){window.console.log('_toBuild Default: i='+i+' t='+config[c].t+' v='+options[i]);}
 				xgroup.push($.parseJSON('{"n":"'+i+'","t":"'+config[c].t+'","v":"'+options[i] +'"}'))		
 					
 				
