@@ -76,7 +76,6 @@ _grid2=function(){_jGrid({
 	
 _loadAssets=function(){
 _loadData({"id":"client_id","group":"assetCreditHold","page":"acctingconsulting"});
-_loadData({"id":"task_id","group":"assetCompTask","page":"acctingconsulting"});
 	}
 _loadDataCB=function(query){
 try{

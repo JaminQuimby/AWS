@@ -56,6 +56,7 @@ var grid1_config = [
 			,PT_STATETEXT:{title:'State'}
 			,PT_TYPETEXT:{title:'Type'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
+			,PT_DUEDATE:{title:'Due Date',width:'1%'}
  			,PT_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,PT_OBTAININFO:{title:'Information Received',width:'1%'}

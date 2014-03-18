@@ -87,7 +87,8 @@ SELECT[ftp_id]
 )AS[ftp_statusTEXT]
 
 FROM[v_financialtaxplanning]
-WHERE[ftp_status] != 2 
+WHERE [ftp_status]!=2 AND [ftp_status]!=3
+
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
