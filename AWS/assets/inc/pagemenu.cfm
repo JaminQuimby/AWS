@@ -2,11 +2,11 @@
 <!--- VERTICAL MENUS --->
 <div class="menus">
 <!--- SMALL MENU ---><cfoutput>
-<nav id="smallMenu" style="display:inherit;">
+<div id="smallMenu" style="display:inherit;">
 
-</nav></cfoutput>
+</div></cfoutput>
 <!--- LARGE MENU --->
-<nav id="largeMenu" style="display:none;">
+<div id="largeMenu" style="display:none;">
 <cfoutput><h1 class="#page.module#"><a href="#this.url##CGI.SCRIPT_NAME#">#page.title#</a></h1></cfoutput>
 <ul id="menuLeft">
 <cfset i="0">
@@ -34,7 +34,7 @@
 </div>
 </cfif>
 
-</nav>
+</div>
 </div>
 <!---cfinclude template="../addins/menu.cfm"--->
 <span class="trackers">

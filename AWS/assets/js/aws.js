@@ -103,11 +103,15 @@ _toCSV=function($table, filename) {
 });
 
 _duplicateCheck=function(params){
+	if(debug){window.console.log('_duplicateCheck Start');}
 var options={"check":"","loadType":"","page":""},str='';
 $.extend(true,options,params);
 $.each(options['check'],function(idx,obj){str=str+$('#'+obj.item).val();if(idx!= options['check'].length -1 ){str=str+','}});
-$.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+str+"","loadType":options['loadType']})},url: options['page']+'.cfc?method=f_duplicateCheck',success:function(data){j=$.parseJSON(data);str=j.check;},error:function(data){str=false;}
-});return str;}; 
+$.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+str+"","loadType":options['loadType']})}
+,url: options['page']+'.cfc?method=f_duplicateCheck'
+,success:function(data){j=$.parseJSON(data);str=j.check;}
+,error:function(data){str=false;}
+});return str; if(debug){window.console.log('_duplicateCheck Return:'+str);}}; 
 
  
 _addNewTask=function(){

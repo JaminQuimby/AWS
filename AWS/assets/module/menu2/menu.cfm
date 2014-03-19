@@ -7,18 +7,9 @@
 <div class="container">
 <div class="main">
 <nav id="cbp-hrmenu" class="cbp-hrmenu">
-<ul>        <li><a href="https://cj.qutera.com/default.cfm">Home</a>
-        <div class="cbp-hrsub _practicemanagement">
-		<div class="cbp-hrsub-inner"> 
-		<div>
-			<h4>#session.user.name#</h4>
-			<ul>
-			<li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="##" onclick="parentNode.submit()">Logout </a></form></li>
-            </ul>
-        </div>
-		</div><!-- /cbp-hrsub-inner -->
-		</div><!-- /cbp-hrsub -->
-        </li>
+<ul>  
+
+      
         
         
         <li><a href="##">Practice Management</a>
@@ -146,7 +137,20 @@
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
 	</li>
-	
+
+      <li><a href="##">#session.user.name#</a>
+        <div class="cbp-hrsub _practicemanagement">
+		<div class="cbp-hrsub-inner"> 
+		<div>
+			
+			<ul>
+            <li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm?userid=#session.user.id#"><h4>About Me</h4></a></li>
+			<li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="##" onclick="parentNode.submit()">Logout </a></form></li>
+            </ul>
+        </div>
+		</div><!-- /cbp-hrsub-inner -->
+		</div><!-- /cbp-hrsub -->
+        </li>
     
 </ul>
 </nav>

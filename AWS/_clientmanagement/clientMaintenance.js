@@ -262,28 +262,22 @@ $("#g1_type").val()+'","'+
 
 if($("#g1_name").val()==""){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Name",type: "error",autoClose: false});
-	//$("#g1_name").blur();
 	if(debug){window.console.log('Missing Name');}
 	}
-else if($('#client_id').val()==0){
-	if(_duplicateCheck({"check":[{"item":"g1_name"}],"loadType":"group1","page":"clientmaintenance"})){
-		jqMessage({"type":"destroy"});jqMessage({message: "Duplicate Client Name Found",type: "error",autoClose: false});
-		if(debug){window.console.log('This Client Name already exsists.');}
-		}
+else if(_duplicateCheck({"check":[{"item":"g1_name"}],"loadType":"group1","page":"clientmaintenance"})==true && $('#client_id').val()==0){
+	jqMessage({"type":"destroy"});jqMessage({message: "Duplicate Client Name Found",type: "error",autoClose: false});
+	if(debug){window.console.log('This Client Name already exsists.');}
 	}
 else if ($("#g1_salutation").val()==""){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Salutation",type: "error",autoClose: false});
-	//$("#g1_salutation").blur();
 	if(debug){window.console.log('Missing Salutation');}
 	}
 else if ($("#g1_type").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Type",type: "error",autoClose: false});
-	//$("#g1_type").blur();
 	if(debug){window.console.log('Missing Type');}
 	}
 else if ($("#g1_since").val()==""){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Since",type: "error",autoClose: false});
-	//$("#g1_since").blur();
 	if(debug){window.console.log('Missing Since');}
 	}
 
@@ -296,7 +290,10 @@ else{
 	
 break;
 
-case'group1_2':var json='{"DATA":[["'+
+case'group1_2':
+$("#client_id").val(options['id'])
+
+var json='{"DATA":[["'+
 $("#client_id").val()+'","'+
 $("#cl_fieldid").val()+'","'+
 $("#g1_g2_fieldname").val()+'","'+
