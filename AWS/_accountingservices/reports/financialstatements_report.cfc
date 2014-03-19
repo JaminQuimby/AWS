@@ -119,6 +119,10 @@ SELECT[fds_id]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo]
 ,[fds_compilemi]
+,[fds_periodend]
+,[fds_duedate]
+,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
+ 
 
 ,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[fds_obtaininfo_assignedtoTEXT]
@@ -201,11 +205,11 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"FDS_YEAR":"'&FDS_YEAR&'"
 								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
+								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
+								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
+								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
-								
- 
-								
 								,"FDS_OBTAININFO":"'&fds_obtaininfo_datecompleted&'<br/>'&fds_obtaininfo_assignedtoTEXT&'"
 								,"FDS_SORT":"'&fds_sort_datecompleted&'<br/>'&fds_sort_assignedtoTEXT&'"
 								,"FDS_CHECKS":"'&fds_checks_datecompleted&'<br/>'&fds_checks_assignedtoTEXT&'"

@@ -93,7 +93,7 @@ var grid2_config = [
 	,BF_STATUS:{title:'Status'}
 	,BF_DUEDATE:{title:'Due Date',width:'1%'}
 	,BF_FEES:{title:'Fees'}
-	,BF_PAID:{title:'Paid'}
+	,BF_PAID:{title:'Payment Status'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g2_filter").val(),grid2_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"3"}',
@@ -131,7 +131,7 @@ var grid3_config = [
 	,CO_CALLER:{title:'Caller'}
 	,CO_CREDITHOLD:{title:'Credit Hold',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 	,CO_FEES:{title:'Fees'}
-	,CO_PAID:{title:'Paid'}
+	,CO_PAID:{title:'Payment Status'}
 	,CO_DATE:{title:'Date &amp; Time'}
 	,CO_TELEPHONE:{title:'Phone'}
 	,CO_EXT:{title:'Ext'}

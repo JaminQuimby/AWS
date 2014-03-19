@@ -10,7 +10,6 @@ SELECT[co_id]
 ,[client_id]
 ,[co_briefmessage]
 ,[co_caller]
-,[co_completed]
 ,[co_contactmethod]
 ,[co_credithold]
 ,CONVERT(CHAR(8),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
@@ -20,6 +19,7 @@ SELECT[co_id]
 ,[co_faxnumber]
 ,[co_fees]
 ,[co_for]
+,[co_status]
 ,[co_paid]
 ,[co_responseneeded]
 ,[co_returncall]
@@ -59,8 +59,9 @@ SELECT[co_id]
 ,[co_emailaddress]
 ,[co_responseneeded]
 ,[co_returncall]
-,[co_completed]
 ,[co_briefmessage]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id]
+)AS[co_statusTEXT]
 ,[client_name]
 ,[client_id]
 FROM[v_communications]
@@ -121,7 +122,7 @@ WHERE(1)=(1)
 								,"CO_FORTEXT":"'&CO_FORTEXT&'"
 								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
 								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
-								,"CO_COMPLETED":"'&CO_COMPLETED&'"
+								,"CO_STATUSTEXT":"'&CO_STATUSTEXT&'"
 								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
 								,"CO_TELEPHONE":"'&CO_TELEPHONE&'"
 								,"CO_EXT":"'&CO_EXT&'"

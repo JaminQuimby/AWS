@@ -12,7 +12,6 @@ SELECT[co_id]
 ,[client_id]
 ,[co_briefmessage]
 ,[co_caller]
-,[co_completed]
 ,[co_contactmethod]
 ,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
 ,CONVERT(VARCHAR(10),[co_duedate], 101)AS[co_duedate]
@@ -22,6 +21,7 @@ SELECT[co_id]
 ,[co_fees]
 ,[co_for]
 ,[co_paid]
+,[co_status]
 ,[co_responseneeded]
 ,[co_returncall]
 ,[co_takenby]
@@ -122,8 +122,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][15])><cfset j.DATA[1][15]=1><cfelse><cfset j.DATA[1][15]=0></cfif>
+ <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][15])><cfset j.DATA[1][15]=1><cfelse><cfset j.DATA[1][15]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][16])><cfset j.DATA[1][16]=1><cfelse><cfset j.DATA[1][16]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
@@ -133,8 +132,7 @@ INSERT INTO[communications](
 [client_id]
 ,[co_briefmessage]
 ,[co_caller]
-,[co_completed]
-,[co_contactmethod]
+ ,[co_contactmethod]
 ,[co_date]
 ,[co_duedate]
 ,[co_emailaddress]
@@ -143,6 +141,7 @@ INSERT INTO[communications](
 ,[co_fees]
 ,[co_for]
 ,[co_paid]
+,[co_status]
 ,[co_responseneeded]
 ,[co_returncall]
 ,[co_takenby]
@@ -152,16 +151,16 @@ VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][5]#"/>
-,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,<cfqueryparam value="#dateFormat(j.DATA[1][7],'YYYY-MM-DD')# #timeFormat(j.DATA[1][7],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][9]#" />
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#dateFormat(j.DATA[1][6],'YYYY-MM-DD')# #timeFormat(j.DATA[1][6],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" />
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][14]#" />
 ,<cfqueryparam value="#j.DATA[1][15]#" />
 ,<cfqueryparam value="#j.DATA[1][16]#" />
 ,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
@@ -184,16 +183,16 @@ UPDATE[communications]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[co_briefmessage]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[co_caller]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[co_completed]=<cfqueryparam value="#j.DATA[1][5]#"/>
-,[co_contactmethod]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[co_date]=<cfqueryparam value="#dateFormat(j.DATA[1][7],'YYYY-MM-DD')# #timeFormat(j.DATA[1][7],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[co_duedate]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[co_emailaddress]=<cfqueryparam value="#j.DATA[1][9]#" />
-,[co_ext]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[co_faxnumber]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[co_fees]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[co_for]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[co_paid]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+ ,[co_contactmethod]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[co_date]=<cfqueryparam value="#dateFormat(j.DATA[1][6],'YYYY-MM-DD')# #timeFormat(j.DATA[1][6],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[co_duedate]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[co_emailaddress]=<cfqueryparam value="#j.DATA[1][8]#" />
+,[co_ext]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[co_faxnumber]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[co_fees]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[co_for]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[co_paid]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[co_status]=<cfqueryparam value="#j.DATA[1][14]#"/>
 ,[co_responseneeded]=<cfqueryparam value="#j.DATA[1][15]#"/>
 ,[co_returncall]=<cfqueryparam value="#j.DATA[1][16]#"/>
 ,[co_takenby]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>

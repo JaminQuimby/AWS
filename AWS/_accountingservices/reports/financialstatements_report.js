@@ -86,11 +86,11 @@ var grid1_config = [
 			,FDS_RECONCILE:{title:'Reconcile',width:'1%'}
 			,FDS_COMPILE:{title:'Compilie',width:'1%'}
 			,FDS_REVIEW:{title:'Review',width:'1%'}
-			,FDS_ASSEMBLY:{title:'Assembled',width:'1%'}
-			,FDS_DELIVERY:{title:'Delivered',width:'1%'}
+			,FDS_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,FDS_DELIVERY:{title:'Delivery',width:'1%'}
 			,FDS_ACCTRPT:{title:'Report',width:'1%'}
 			,FDS_FEES:{title:'Fees'}
-			,FDS_PAIDTEXT:{title:'Paid'}
+			,FDS_PAIDTEXT:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"5"}',

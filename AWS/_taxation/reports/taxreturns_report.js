@@ -77,20 +77,20 @@ var grid1_config = [
 			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}
-			,TR_2_REVIEWASSIGNEDTO:{title:'Review Assigned To',width:'1%'}
+			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}
 			,TR_2_REVIEWED:{title:'Reviewed'}			
 			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}
 			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
 			,TR_3_CONTACTED:{title:'Contacted',width:'1%'}
 			,TR_3_DELIVERED:{title:'Delivered',width:'1%'}
-			,TR_DELIVERYMETHOD:{title:'Delivery Method'}
+			,TR_DELIVERYMETHODTEXT:{title:'Delivery Method'}
 			,TR_PRIORFEES:{title:'Prior Fees'}
 			,TR_CURRENTFEES:{title:'Current Fees'}
 			,TR_PAIDTEXT:{title:'Payment Status'}
 			,TR_EXTENSIONREQUESTED:{title:'Extension Requested',width:'1%'}
 			,TR_EXTENSIONDONE:{title:'Extension Completed',width:'1%'}
-			,TR_3_MULTISTATERETURN:{title:'Multi-State Return'}
+			,TR_3_MULTISTATERETURN:{title:'Multi-State Return',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_4_REQUIRED:{title:'PPTR Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 },
 	"method":"f_lookupData",

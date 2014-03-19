@@ -15,7 +15,7 @@ _grid1=function(){_jGrid({
 			,CO_DATE:{title:'Date and Time'}
 			,CO_DUEDATE:{title:'Due Date',width:'1%'}
 			,CO_FORTEXT:{title:'For',width:'1%'}
-			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RESPONSENEEDED:{title:'Response Required',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			},
@@ -30,7 +30,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "CO_ID":var list='task_id,client_id,g1_briefmessage,g1_caller,g1_completed,g1_contactmethod,g1_date,g1_duedate,g1_emailaddress,g1_ext,g1_faxnumber,g1_fees,g1_for,g1_paid,g1_responseneeded,g1_returnedcall,g1_takenby,g1_telephone';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group1*/case "CO_ID":var list='task_id,client_id,g1_briefmessage,g1_caller,g1_contactmethod,g1_date,g1_duedate,g1_emailaddress,g1_ext,g1_faxnumber,g1_fees,g1_for,g1_paid,g1_status,g1_responseneeded,g1_returnedcall,g1_takenby,g1_telephone';_loadit({"query":query,"list":list});_loadAssets();break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -56,9 +56,8 @@ case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_briefmessage").val()+'","'+
-$("#g1_caller").val()+'",'+
-$("#g1_completed").is(':checked')+','+
-$("#g1_contactmethod").val()+',"'+
+$("#g1_caller").val()+'","'+
+$("#g1_contactmethod").val()+'","'+
 $("#g1_date").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_emailaddress").val()+'","'+
@@ -66,7 +65,8 @@ $("#g1_ext").val()+'","'+
 $("#g1_faxnumber").val()+'","'+
 $("#g1_fees").val()+'","'+
 $("#g1_for").val()+'","'+
-$("#g1_paid").val()+'",'+
+$("#g1_paid").val()+'","'+
+$("#g1_status").val()+'",'+
 $("#g1_responseneeded").is(':checked')+','+
 $("#g1_returnedcall").is(':checked')+',"'+
 $("#g1_takenby").val()+'","'+
