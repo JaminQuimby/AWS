@@ -28,8 +28,7 @@
 <cfoutput><title>#page.title#</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 <link rel="stylesheet" media="all" type="text/css" href="#this.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-timepicker-addon.css" />
-<link rel="stylesheet" id="size-stylesheet"  media='screen and (min-width: 1000px)'  href="#this.url#/AWS/assets/module/menu/menu.css"/>
-<link rel='stylesheet' media='screen and (max-width: 1000px)'  href="#this.url#/AWS/assets/module/menu/menusmall.css" />
+
 <cfswitch expression="#page.module#">
 <cfcase value="_accountingservices"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/blue/jtable.min.css"></cfcase>
 <cfcase value="_clientmanagement"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/green/jtable.min.css"></cfcase>

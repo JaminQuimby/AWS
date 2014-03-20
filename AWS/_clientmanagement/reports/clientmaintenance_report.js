@@ -25,6 +25,7 @@ var grid1_config = [
 ,{"n":"statelabel2","t":"text","v":""}
 ,{"n":"statelabel3","t":"text","v":""}
 ,{"n":"statelabel4","t":"text","v":""}
+,{"n":"tax_services","t":"boolean","v":""}
 ,{"n":"trade_name","t":"text","v":""}
 ,{"n":"type","t":"numeric","v":""}
 ];$.each(grid1_config, function(idx, obj) {$('#group1 .search-togcan div ul').append('<li>'+obj.n+' : '+obj.t+'</li>')});
