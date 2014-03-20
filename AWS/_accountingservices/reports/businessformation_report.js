@@ -41,11 +41,11 @@ var grid1_config = [
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,BF_ACTIVITY:{title:'Activity'}
-			,BF_OWNERS:{title:'Business Type',width:'1%'}
+			,BF_OWNERS:{title:'Owners',width:'1%'}
  			,BF_BUSINESSTYPETEXT:{title:'Business Type',width:'1%'}
 			,BF_DUEDATE:{title:'Due Date',width:'1%'}
 			,BF_STATUSTEXT:{title:'Status',width:'1%'}
-			,BF_ASSIGNEDTOTEXT:{title:'Assignedto',width:'1%'}
+			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			,BF_ARTICLESAPPROVED:{title:'Article Approved',width:'1%'}
 			,BF_TRADENAMERECEIVED:{title:'Trade Name Received',width:'1%'}
 			,BF_MINUTESCOMPLETED:{title:'Minutes Completed',width:'1%'}

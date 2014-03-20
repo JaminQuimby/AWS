@@ -88,7 +88,7 @@ var grid2_config = [
 			,CONTACT_ADDRESS2:{title:'Title'}
 			,CONTACT_ADDRESS1:{title:'Address'}
 			,CONTACT_CITY:{title:'City'}
-			,CONTACT_STATE:{title:'State'}
+			,CONTACT_STATETEXT:{title:'State'}
 			,CONTACT_ZIP:{title:'Zip',width:'1%'}
 			,CONTACT_PHONE1:{title:'Work Phone',width:'1%'}
 			,CONTACT_PHONE2:{title:'Ext',width:'1%'}
