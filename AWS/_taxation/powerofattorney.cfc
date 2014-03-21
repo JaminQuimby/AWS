@@ -132,14 +132,14 @@ INSERT INTO[powerofattorney](
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" NULL="#j.DATA[1][6] eq "null"#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" NULL="#j.DATA[1][8] eq "null"#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" NULL="#j.DATA[1][9] eq "null"#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -156,14 +156,14 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[powerofattorney]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pa_dateofrevocation]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[pa_datesenttoirs]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pa_datesignedbyclient]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[pa_preparers]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[pa_status]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[pa_taxforms]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[pa_taxmatters]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[pa_taxyears]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[pa_dateofrevocation]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
+,[pa_datesenttoirs]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
+,[pa_datesignedbyclient]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
+,[pa_preparers]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#j.DATA[1][10] eq "null"#"/>
+,[pa_status]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
+,[pa_taxforms]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#j.DATA[1][10] eq "null"#"/>
+,[pa_taxmatters]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#j.DATA[1][10] eq "null"#"/>
+,[pa_taxyears]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
 WHERE[pa_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>

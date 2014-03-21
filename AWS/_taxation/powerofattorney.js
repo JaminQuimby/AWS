@@ -20,7 +20,7 @@ _group1=function(){}
 	"functions":'$("#task_id").val(record.PA_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"powerofattorney"});'
 	})};
 
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"powerofattorney"});_loadData({"id":"task_id","group":"assetCompTask","page":"powerofattorney"});}
+_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"powerofattorney"});}
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
@@ -54,23 +54,24 @@ $("#g1_taxmatters").val()+'","'+
 $("#g1_taxyears").val()+'","'+
 '"]]}'
 
+ console.log($("#g1_taxyears").val())
 if($("#client_id").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Client');}
 	}
-else if ($("#g1_taxyears").val()=="0"){
+else if ($("#g1_taxyears").val()==null){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Year",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Tax Year');}
 	}
-else if ($("#g1_taxforms").val()=="0"){
+else if ($("#g1_taxforms").val()==null){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Forms",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Tax Forms');}
 	}
-else if ($("#g1_taxmatters").val()=="0"){
+else if ($("#g1_taxmatters").val()==null){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Matters",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Missing Tax Matters');}
 	}
-else if ($("#g1_preparers").val()=="0"){
+else if ($("#g1_preparers").val()==null){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Preparers",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Preparers');}
 	}

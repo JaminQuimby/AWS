@@ -41,17 +41,8 @@ var options={"id":"","group":"","subgroup":"","result":""}
 try{
 $.extend(true, options, params);//turn options into array
 var $client_id=$("#client_id");
-alert(options["group"]);
-switch(options["group"]){
-	
-case'':
-if($("#client_id").val()!="" && $("#g1_date").val()!=0 && $("#g1_caller").val()!="" && $("#g1_takenby").val()!=0  && $("#g1_contactmethod").val()!=0  && $("#g1_briefmessage").val()!="" )
-{
-	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
-break;
-
-	
+switch(options["group"]){	
+case'':_saveDataCB({'group':'group1'});break;
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
@@ -72,10 +63,41 @@ $("#g1_returnedcall").is(':checked')+',"'+
 $("#g1_takenby").val()+'","'+
 $("#g1_telephone").val()+'","'+
 '"]]}'
-_saveData({group:"group1","payload":$.parseJSON(json),page:"communications"});
+
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_date").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Date and Time",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Date and Time');}
+	}
+else if ($("#g1_caller").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Caller",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Caller');}
+	}
+else if ($("#g1_takenby").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Taken By",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing  Taken By');}
+	}
+else if ($("#g1_contactmethod").val()==null){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Contact method",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Contact method');}
+	}
+else if ($("#g1_briefmessage").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Breif Message",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Breif Message');}
+	}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"communications"});
+	if(debug){window.console.log('Start Saving Other Filings');}	
+	}	
+
 break;
 /*Start Saving Plugins*/
-case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
+case"plugins":$('#task_id').val(options['id']);_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
