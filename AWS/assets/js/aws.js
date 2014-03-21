@@ -118,12 +118,26 @@ $.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":
 });return str; if(debug){window.console.log('_duplicateCheck Return:'+str);}}; 
 
  
-_addNewTask=function(){
+_addNewTask=function(params){
+var options={"new":"task_id"},str='';
+$.extend(true,options,params);
+	
+	
 if($('#task_id').val()==0){
 	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
 	 $('label').siblings(':disabled').prop('disabled', false).trigger("chosen:updated");
 	 $('label').siblings(':disabled').prop('disabled', false);	 
-}}
+}
+else if($('.'+options['new']).val()==0){
+	 $('.'+options['new']+' label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
+	 $('.'+options['new']+' label').siblings(':disabled').prop('disabled', false).trigger("chosen:updated");
+	 $('.'+options['new']+' label').siblings(':disabled').prop('disabled', false);	 
+	}
+
+
+}
+
+
 _schk=function(i){
 if(user["role"]==1){
 if($('#'+i).is(":disabled")){

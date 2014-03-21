@@ -204,7 +204,7 @@ _grid9=function(){_jGrid({
 			,PC_ASSEMBLY_DATECOMPLETED:{title:'Completed',width:'1%'}
 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,PC_PREPARATION_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
-			,PC_DATEDUE:{title:'Date Due',width:'1%'}
+			,PC_DUEDATE:{title:'Date Due',width:'1%'}
 			,PC_ESTTIME:{title:'Estimated Time',width:'1%'}
 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
 			},

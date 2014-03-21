@@ -96,11 +96,11 @@ WHERE[mc_status]!='2'
 <cfif ARGUMENTS.userid neq "">AND[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 
 UNION
-SELECT'Notices'AS[name], SUM(n_esttime)AS[total_time],COUNT(n_assignedto)AS[count_assigned],'1'AS[orderit]
-FROM[v_notice]
-WHERE[n_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([n_1_resduedate]IS NULL AND[n_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+SELECT'Notices'AS[name], SUM(nst_esttime)AS[total_time],COUNT(nst_assignedto)AS[count_assigned],'1'AS[orderit]
+FROM[v_notice_subtask]
+WHERE[nst_status]!='2'
+<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL AND[nst_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND[nst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 
 UNION
 SELECT'Other Filings'AS[name], SUM(of_esttime)AS[total_time]
@@ -490,22 +490,22 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfcase value="group7">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[nm_id]
+SELECT[n_id]
 ,[client_name]
-,[nm_name]
-,CONVERT(VARCHAR(10),[n_1_noticedate], 101)AS[n_1_noticedate]
-,[n_missinginfo]
-,[nm_status]
-,[n_priority]
-,[n_assignedto]
-,CONVERT(VARCHAR(10),[n_1_resduedate], 101)AS[n_1_resduedate]
-,[n_esttime]
-,[n_2_revrequired]
-,[n_2_revassignedto]
-FROM[v_notice]
-WHERE[n_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([n_1_resduedate]IS NULL AND[n_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+,[n_name]
+,CONVERT(VARCHAR(10),[nst_1_noticedate], 101)AS[nst_1_noticedate]
+,[nst_missinginfo]
+,[n_status]
+,[nst_priority]
+,[nst_assignedto]
+,CONVERT(VARCHAR(10),[nst_1_resduedate], 101)AS[nst_1_resduedate]
+,[nst_esttime]
+,[nst_2_revrequired]
+,[nst_2_revassignedto]
+FROM[v_notice_subtask]
+WHERE[nst_status]!='2'
+<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL AND[nst_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND[nst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -628,7 +628,7 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=<cfquerypa
 								,"PC_ASSEMBLY_DATECOMPLETED":"'&PC_ASSEMBLY_DATECOMPLETED&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								,"PC_PREPARATION_ASSIGNEDTO":"'&PC_PREPARATION_ASSIGNEDTO&'"
-								,"PC_DATEDUE":"'&PC_DATEDUE&'"
+								,"PC_DUEDATE":"'&PC_DUEDATE&'"
 								,"PC_ESTTIME":"'&PC_ESTTIME&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								}'>

@@ -39,10 +39,7 @@ $.extend(true, options, params);//turn options into array
 var $client_id=$("#client_id");
 switch(options["group"]){
 
-case'':
-if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
-break;
+case'':_saveDataCB({'group':'group1'});break;
 
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -56,7 +53,33 @@ $("#g1_taxforms").val()+'","'+
 $("#g1_taxmatters").val()+'","'+
 $("#g1_taxyears").val()+'","'+
 '"]]}'
-_saveData({group:"group1",payload:$.parseJSON(json),page:"powerofattorney"});
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_taxyears").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Year",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Tax Year');}
+	}
+else if ($("#g1_taxforms").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Forms",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Tax Forms');}
+	}
+else if ($("#g1_taxmatters").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Matters",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Missing Tax Matters');}
+	}
+else if ($("#g1_preparers").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Preparers",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Preparers');}
+	}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1",payload:$.parseJSON(json),page:"powerofattorney"});
+	if(debug){window.console.log('Start Saving Other Filings');}	
+	}	
+
 break;
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;

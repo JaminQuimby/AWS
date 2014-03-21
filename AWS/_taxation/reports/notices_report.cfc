@@ -74,27 +74,27 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <cfcase value="group0">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[nm_id]
-,[n_id]
-,[nm_name]
-,[nm_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nm_status]=[optionvalue_id])
-,[n_1_taxyear]
-,[n_missinginfo]
-,[n_1_datenoticerec]=FORMAT(n_1_datenoticerec,'d','#Session.localization.language#')
-,[n_1_resduedate]=FORMAT(n_1_resduedate,'d','#Session.localization.language#')
-,[n_2_ressubmited]=FORMAT(n_2_ressubmited,'d','#Session.localization.language#')
-,[n_2_revrequired]   
-,[n_fees]=FORMAT(n_fees, 'C', '#Session.localization.language#')
+SELECT[n_id]
+,[nst_id]
+,[n_name]
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
-,[n_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[n_1_noticenumber]=[optionvalue_id])
-,[n_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[n_1_taxform]=[optionvalue_id])
-,[n_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[n_paid]=[optionvalue_id])
+,[nst_1_taxyear]
+,[nst_missinginfo]
+,[nst_1_datenoticerec]=FORMAT(nst_1_datenoticerec,'d','#Session.localization.language#')
+,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
+,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#')
+,[nst_2_revrequired]   
+,[nst_fees]=FORMAT(nst_fees, 'C', '#Session.localization.language#')
+,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
+,[nst_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[nst_1_noticenumber]=[optionvalue_id])
+,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
+,[nst_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[nst_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
-FROM[v_notice]
+FROM[v_notice_subtask]
     
-<cfset sqllist = "n_assignedto,n_deliverymethod,n_esttime,n_fees,n_missinginfo,n_missinginforeceived,n_status,n_paid,n_priority,n_1_datenoticerec,n_1_methodreceived,n_1_noticenumber,n_1_noticedate,n_1_taxform,n_1_taxyear,n_2_rescompleted,n_2_rescompletedby,n_1_resduedate,n_2_irsstateresponse,n_2_revassignedto,n_2_revcompleted,n_2_ressubmited,n_2_revrequired">
-<cfset key="n_">
+<cfset sqllist = "nst_assignedto,nst_deliverymethod,nst_esttime,nst_fees,nst_missinginfo,nst_missinginforeceived,nst_status,nst_paid,nst_priority,nst_1_datenoticerec,nst_1_methodreceived,nst_1_noticenumber,nst_1_noticedate,nst_1_taxform,nst_1_taxyear,nst_2_rescompleted,nst_2_rescompletedby,nst_1_resduedate,nst_2_irsstateresponse,nst_2_revassignedto,nst_2_revcompleted,nst_2_ressubmited,nst_2_revrequired">
+<cfset key="nst_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
 <cfif ArrayLen(data.b) gt 0>
@@ -141,22 +141,22 @@ WHERE(1)=(1)
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'"
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
- 								,"NM_NAME":"'&NM_NAME&'"
- 								,"NM_STATUSTEXT":"'&NM_STATUSTEXT&'"
- 								,"N_1_TAXYEAR":"'&N_1_TAXYEAR&'"
- 								,"N_1_TAXFORMTEXT":"'&N_1_TAXFORMTEXT&'"
- 								,"N_1_NOTICENUMBERTEXT":"'&N_1_NOTICENUMBERTEXT&'"
+ 								,"N_NAME":"'&N_NAME&'"
  								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
- 								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
- 								,"N_1_DATENOTICEREC":"'&N_1_DATENOTICEREC&'"
- 								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
- 								,"N_2_RESSUBMITED":"'&N_2_RESSUBMITED&'"
- 								,"N_2_REVREQUIRED":"'&N_2_REVREQUIRED&'"
- 								,"N_FEES":"'&N_FEES&'"
- 								,"N_PAIDTEXT":"'&N_PAIDTEXT&'"
+ 								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
+ 								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
+ 								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
+ 								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
+ 								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
+ 								,"NST_1_DATENOTICEREC":"'&NST_1_DATENOTICEREC&'"
+ 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
+ 								,"NST_2_RESSUBMITED":"'&NST_2_RESSUBMITED&'"
+ 								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
+ 								,"NST_FEES":"'&NST_FEES&'"
+ 								,"NST_PAIDTEXT":"'&NST_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

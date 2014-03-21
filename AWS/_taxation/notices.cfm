@@ -79,7 +79,7 @@ due date for response
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_addNewTask({"new":"subtask1_id"});'>Add</a>
 </div>
 </div>
 <h4 onClick='_group2();'>Add Notice</h4>
@@ -98,7 +98,7 @@ due date for response
 </div>
 <!--- GROUP 2_1 --->
 <h4 onClick='_group2_1();'>Details</h4>
-<div>
+<div class="subtask1_id">
 <div><label for="g2_1_noticenumber"><i class="fa fa-lock link" onClick="_schk('g2_1_noticenumber')"></i> Notice Number</label><select disabled="disabled" id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_noticedate"><i class="fa fa-lock link" onClick="_schk('g2_1_noticedate')"></i> Notice Date</label><input type="text" class="date" id="g2_1_noticedate" disabled="disabled"></div>
 <div><label for="g2_1_taxyear"><i class="fa fa-lock link" onClick="_schk('g2_1_taxyear')"></i> Tax Year</label><select disabled="disabled" id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

@@ -6,42 +6,44 @@ $(document).ready(function(){
 
 _grid1();
 _group1		=function(){_grid1();}
-_group2		=function(){_grid2();$("#isLoaded_group2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){	_loadData({"id":"subtask1_id","group":"group2","page":"notices"});_loadit({"query":{"COLUMNS":["g2_noticestatus"],"DATA":[[4]]},"list":"g2_noticestatus","page":"notices"});}}
-_group2_1	=function(){$("#isLoaded_group2_1").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){;_loadData({"id":"subtask1_id","group":"group2_1","page":"notices"});}}
-_group2_2	=function(){$("#isLoaded_group2_2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){_loadData({"id":"subtask2_id","group":"group2_2","page":"notices"});}}
+_group2		=function(){_grid2();$("#isLoaded_group2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){_loadit({"query":{"COLUMNS":["g2_noticestatus"],"DATA":[[4]]},"list":"g2_noticestatus","page":"notices"});}}
+_group2_1	=function(){$("#isLoaded_group2_1").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){ }}
+_group2_2	=function(){$("#isLoaded_group2_2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){ }}
 
 });
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"notices.cfc",
 	"title":"Notice Matters",
-	"fields":{NM_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.NM_ID+"',page:'notices',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+	"fields":{N_ID:{key:true,list:false,edit:false}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.NM_ID+"',page:'notices',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
-			,NM_NAME:{title:'Matter Name'}
-			,NM_STATUSTEXT:{title:'Matter Status'}
+			,N_NAME:{title:'Matter Name'}
+			,N_STATUSTEXT:{title:'Matter Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"8"}',
-	"functions":'$("#task_id").val(record.NM_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"notices"});'
+	"functions":'$("#task_id").val(record.N_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"notices"});'
 	})};
+
+
 _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"notices.cfc",
 	"title":"Notices",
-	"fields":{N_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,NM_NAME:{title:'Notice'}
-			,N_STATUSTEXT:{title:'Status'}
-			,N_1_TAXFORMTEXT:{title:'Tax Form'}
-			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
-			,N_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	
-			,N_1_NOTICENUMBER:{title:'Notice Number',width:'1%'}
-			,N_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+	"fields":{NST_ID:{key:true,list:false,edit:false}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,N_NAME:{title:'Notice'}
+			,NST_STATUSTEXT:{title:'Status'}
+			,NST_1_TAXFORMTEXT:{title:'Tax Form'}
+			,NST_1_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	
+			,NST_1_NOTICENUMBER:{title:'Notice Number',width:'1%'}
+			,NST_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"8"}',
-	"functions":'$("#subtask1_id").val(record.N_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"notices"});'
+	"functions":'$("#subtask1_id").val(record.NST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"notices"});'
 	})};
 
 _loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"notices"});}
@@ -49,8 +51,8 @@ _loadDataCB=function(query){
 		if(debug){window.console.log('_loadDataCB Start - '+query.COLUMNS[0]);}
 
 switch(query.COLUMNS[0]){
-/*Group1*/case "NM_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}					var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});_loadAssets();break;
-/*Group2*/case "N_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}						var list='subtask1_id,g2_assignedto,g2_deliverymethod,g2_estimatedtime,g2_fees,g2_missinginformation,g2_missinginforeceived,g2_noticestatus,g2_paid,g2_priority';_loadit({"query":query,"list":list});break;
+/*Group1*/case "N_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}					var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group2*/case "NST_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}						var list='subtask1_id,g2_assignedto,g2_deliverymethod,g2_estimatedtime,g2_fees,g2_missinginformation,g2_missinginforeceived,g2_noticestatus,g2_paid,g2_priority';_loadit({"query":query,"list":list});break;
 /*Group2_1*/case "N_1_DATENOTICEREC":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}		var list='g2_1_datenoticereceived,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_duedateforresponse,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
 /*Group2_2*/case "N_2_IRSSTATERESPONSE":if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}		var list='g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD": if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}	var list='g1_credithold';_loadit({"query":query,"list":list});break;
@@ -104,7 +106,7 @@ else if ($("#g2_1_methodreceived").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Method Received",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Method Received');}
 	}
-else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g2_1_noticenumber"},{"item":"g2_1_noticedate"},{"item":"g2_1_taxyear"},{"item":"g2_1_taxform"},{"item":"g2_1_duedateforresponse"}],"loadType":"group1","page":"notices"})=='true'&&$('#task_id').val()=='0'){
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g2_1_noticenumber"},{"item":"g2_1_noticedate"},{"item":"g2_1_taxyear"},{"item":"g2_1_taxform"},{"item":"g2_1_duedateforresponse"}],"loadType":"group1","page":"notices"})=='true'&&$('#subtask1_id').val()=='0'){
 	jqMessage({"type":"destroy"});jqMessage({message: "This task is already in the system.",type: "error",autoClose: false});
 	if(debug){window.console.log('This task is already in the system..');}
 	}
@@ -134,7 +136,9 @@ if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJS
 else{_saveDataCB({'group':'group2_1'})};
 break;
 
-case'group2_1':var json='{"DATA":[["'+
+case'group2_1':
+$("#subtask1_id").val(options["id"]);
+var json='{"DATA":[["'+
 //group 2 subgroup 1
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+

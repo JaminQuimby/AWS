@@ -38,26 +38,26 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"notices_report.cfc",
 	"title":"Notices",
-	"fields":{NM_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,NM_NAME:{title:'Matter Name'}
-			,NM_STATUSTEXT:{title:'Matter Status'}
-			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
-			,N_1_TAXFORMTEXT:{title:'Tax Form'}
-			,N_1_NOTICENUMBERTEXT:{title:'Notice Number'}
-			,N_STATUSTEXT:{title:'Notice Status'}
-			,N_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,N_1_DATENOTICEREC:{title:'Date Notice Received',width:'1%'}
-			,N_1_RESDUEDATE:{title:'Response Due Date',width:'1%'}
-			,N_2_RESSUBMITED:{title:'Response Submitted',width:'1%'}
-			,N_2_REVREQUIRED:{title:'Review Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,N_FEES:{title:'Fees'}
-			,N_PAIDTEXT:{title:'Payment Status'}
+			,N_NAME:{title:'Matter Name'}
+			,N_STATUSTEXT:{title:'Matter Status'}
+			,NST_1_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,NST_1_TAXFORMTEXT:{title:'Tax Form'}
+			,NST_1_NOTICENUMBERTEXT:{title:'Notice Number'}
+			,NST_STATUSTEXT:{title:'Notice Status'}
+			,NST_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_1_DATENOTICEREC:{title:'Date Notice Received',width:'1%'}
+			,NST_1_RESDUEDATE:{title:'Response Due Date',width:'1%'}
+			,NST_2_RESSUBMITED:{title:'Response Submitted',width:'1%'}
+			,NST_2_REVREQUIRED:{title:'Review Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_FEES:{title:'Fees'}
+			,NST_PAIDTEXT:{title:'Payment Status'}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"8"}',
-	//"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.NM_ID'
-	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.NM_ID+"&nav=0","_blank")'
+	//"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID+"&nav=0","_blank")'
 	})};
 
 
