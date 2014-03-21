@@ -137,7 +137,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT
 [mc_id]
 ,[mcs_id]
-,[mcs_assignedto]
+,[mcs_assignedtoTEXT]
 ,[mcs_duedate]
 ,[mcs_sequence]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
@@ -156,7 +156,7 @@ ORDER BY [mcs_sequence]
 								,"MCS_SUBTASKTEXT":"'&MCS_SUBTASKTEXT&'"
  								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
 								,"MCS_DUEDATE":"'&MCS_DUEDATE&'"
-								,"MCS_ASSIGNEDTO":"'&MCS_ASSIGNEDTO&'"
+								,"MCS_ASSIGNEDTOTEXT":"'&MCS_ASSIGNEDTOTEXT&'"
  								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
