@@ -6,6 +6,41 @@
 <!--- [LOAD FUNCTIONs] --->
 
 
+<!--- DUPE CHECK --->
+<cffunction name="f_duplicateCheck" access="remote" output="true">
+<cfargument name="check" type="string">
+<cfargument name="loadType" type="string">
+
+<cfswitch expression="#ARGUMENTS.loadType#">
+<cfcase value="group1">
+<cfset i=0>
+<!--- Client, Tax Year, Tax Form --->
+<cfloop list="#ARGUMENTS.check#" index="s" delimiters=",">
+<cfset i=i+1>
+<cfset item[i]=s>
+</cfloop>
+
+<cfquery datasource="AWS" name="fquery" >
+SELECT TOP(1)[client_id]
+FROM[taxreturns]
+WHERE[client_id]=<cfqueryparam value="#item[1]#">
+AND[tr_taxyear]=<cfqueryparam value="#item[2]#">
+AND[tr_taxform]=<cfqueryparam value="#item[3]#">
+</cfquery>
+
+</cfcase>
+</cfswitch>
+
+<cfif fquery.recordcount gt 0>
+<cfset myResult='{"Result":"OK","check":"true"}'>
+<cfelse>
+<cfset myResult='{"Result":"OK","check":"false"}'>
+</cfif>
+<cfreturn myResult>
+
+</cffunction>
+
+
 <!--- LOAD SELECT BOXES --->
 <cffunction name="f_loadSelect" access="remote" output="true">
 <cfargument name="selectName" type="string">
