@@ -130,7 +130,6 @@ else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_taxyear"},{"i
 	jqMessage({"type":"destroy"});jqMessage({message: "Duplicate Client Name Found",type: "error",autoClose: false});
 	if(debug){window.console.log('This Client Name already exsists.');}
 	}
-
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"otherfilings"});

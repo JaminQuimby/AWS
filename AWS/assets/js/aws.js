@@ -384,9 +384,10 @@ $(grid).jtable('load')};
 
 //Load Data
 _loadData=function(params){
-if(debug){window.console.log('_loadData : Starting');}
+if(debug){window.console.log('_loadData - Starting');}
 var options={"id":"","group":"","page":"","plugin":""}
 try{$.extend(true, options, params);
+if(debug){window.console.log('_loadData - id:'+options['id']+' group:'+options['group']+' page:'+options['page']+' plugin:'+options['plugin']+'');}
 if(options["plugin"]!=""){options["url"]= _pluginURL(options["plugin"]);}else{options["url"]=""};
 if($('#'+options["id"]).is("select")){
 var i=$('#'+options["id"]+' option:selected').val();
@@ -398,7 +399,9 @@ $.ajax({type:'GET',url:options["url"]+options["page"]+'.cfc?method=f_loadData',d
 	_loadDataCB($.parseJSON(json))
 	}
 ,error:function(data){errorHandle($.parseJSON(data))}})}
-catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
+catch(err){jqMessage({message: "Error in js._loadData: "+err+' id'+options['id']+' group'+options['group']+' page'+options['page']+' plugin'+options['plugin'],"type":"error",autoClose: false})}};
+
+
 //Save Data
 _saveData=function(params){
 var options={"group":"","payload":"","page":"","id":"","plugin":""}
@@ -413,12 +416,15 @@ $.ajax({
   ,success:function(json){_saveDataCB($.parseJSON(json))},   // successful request; do something with the data
   error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
 });}else{_saveDataCB({"id":options["id"],"group":options["group"]});}}
-catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
+catch(err){
+	if(debug){window.console.log('_SaveData Error'+' group'+options['group']+' payload'+options['payload']+' page'+options['page']+' id'+options['id']+' plugin'+options['plugin']);}
+	jqMessage({message: "Error in js._SaveData: "+err,"type":"error",autoClose: false})}
 }
 //Load It
 _loadit=function(params){
 	var options={"query":"","list":""}
 	$.extend(true, options, params);//turn options into array
+if(debug){window.console.log('_loadit Start - query:'+options['query'].DATA[0]+' list:'+options['list']);}
 	var list=options['list'].split(',');//Split List
 try{if(options['query'].DATA!=""){
 	for(var i=0;i<list.length;i++){
@@ -467,7 +473,7 @@ $.ajax({
 });
 
 }
-catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}
+catch(err){jqMessage({message: "Error in js._loadIt: "+err,"type":"error",autoClose: false})}
 }
 _removeDataCB=function(params){
 var options={"id":"","group":"","result":"fail"}

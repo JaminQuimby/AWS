@@ -5,50 +5,42 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 
-<!--- 
+<!--- DUPE CHECK --->
+<cffunction name="f_duplicateCheck" access="remote" output="true">
+<cfargument name="check" type="string">
+<cfargument name="loadType" type="string">
 
+<cfswitch expression="#ARGUMENTS.loadType#">
+<cfcase value="group1">
+<cfset i=0>
+<!--- Client, Year, Period, Period End--->
+<cfloop list="#ARGUMENTS.check#" index="s" delimiters=",">
+<cfset i=i+1>
+<cfset item[i]=s>
+</cfloop>
 
-GROUP1 LEVEL1
-SELECT[nm_id]
-      ,[client_id]
-      ,[nm_name]
-      ,[nm_status]
-FROM [noticematter]
-  
+<cfquery datasource="AWS" name="fquery" >
+SELECT TOP(1)[client_id]
+FROM[v_notice]
+WHERE[client_id]=<cfqueryparam value="#item[1]#">
+AND[n_1_noticenumber]=<cfqueryparam value="#item[2]#">
+AND[n_1_noticedate]=<cfqueryparam value="#item[3]#">
+AND[n_1_taxyear]=<cfqueryparam value="#item[4]#">
+AND[n_1_taxform]=<cfqueryparam value="#item[5]#">
+AND[n_1_resduedate]=<cfqueryparam value="#item[6]#">
 
+</cfquery>
+</cfcase>
+</cfswitch>
 
-GROUP2 LEVEL2  
-SELECT[n_id]
-      ,[n_id]
-      ,[n_assignedto]
-      ,[n_status]
-      ,[n_priority]
-      ,[n_esttime]
-      ,[n_1_noticenumber]
-      ,[n_1_noticedate]
-      ,[n_1_taxform]
-      ,[n_1_taxyear]
-      ,[n_1_methodreceived]
-      ,[n_1_fees]
-      ,[n_1_paid]
-      ,[n_2_datenoticerec]
-      ,[n_1_noticedate]
-      ,[n_1_noticenumber]
-      ,[n_1_taxform]
-      ,[n_1_taxyear]
-      ,[n_2_resduedate]
-      ,[n_2_rescompleted]
-      ,[n_2_rescompletedby]
-      ,[n_2_revrequired]
-      ,[n_2_revassignedto]
-      ,[n_2_revcompleted]
-      ,[n_2_ressubmited]
-      ,[n_2_irsstateresponse]
-      ,[n_3_missinginfo]
-      ,[n_3_missinginforeceived]
-  FROM[notice]
-  
---->
+<cfif fquery.recordcount gt 0 >
+<cfset myResult='{"Result":"OK","check":"true"}'>
+<cfelse>
+<cfset myResult='{"Result":"OK","check":"false"}'>
+</cfif>
+<cfreturn myResult>
+
+</cffunction>
 
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
@@ -90,7 +82,7 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub1 --->
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT ,CONVERT(VARCHAR(10),[n_1_noticedate], 1)AS[n_1_datenoticerec]
+SELECT CONVERT(VARCHAR(10),[n_1_noticedate], 1)AS[n_1_datenoticerec]
 	   ,[n_1_methodreceived]
 	   ,CONVERT(VARCHAR(10),[n_1_noticedate], 1)AS[n_1_noticedate]
 	   ,[n_1_noticenumber]

@@ -41,7 +41,7 @@ _grid2=function(){_jGrid({
 	"functions":'$("#subtask1_id").val(record.BFS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"businessformation"});'
 	})};
 
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"businessformation"});_loadData({"id":"task_id","group":"assetCompTask","page":"businessformation"});}
+_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"businessformation"});}
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
@@ -63,15 +63,9 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);
-alert(options["group"]);
 switch(options["group"]){
 	
-case'':
-if($("#client_id").val()!="" && $("#g1_owners").val()!=0 && $("#g1_activity").val()!="")
-{
-	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
-break;
+case'':_saveDataCB({'group':'group1'});break;
 
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -89,8 +83,29 @@ $("#g1_owners").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_status").val()+'","'+
-'"]]}'
-_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
+'"]]}';
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_owners").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Owners",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Owners');}
+	}
+else if ($("#g1_activity").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Activity",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Activity');}
+	}
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_owners"},{"item":"g1_activity"}],"loadType":"group1","page":"businessformation"})=='true'&&$('#task_id').val()=='0'){
+	jqMessage({"type":"destroy"});jqMessage({message: "This task already exsists.",type: "error",autoClose: false});
+	if(debug){window.console.log('This task already exsists.');}
+	}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
+	if(debug){window.console.log('Start Saving Other Filings');}	
+	}	
 break;
 
 case'group1_1':var json='{"DATA":[["'+

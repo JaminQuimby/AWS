@@ -95,12 +95,7 @@ var options={"id":"","group":"","subgroup":"","result":""};
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
 
-case'':
-if($("#client_id").val()!="" && $("#g1_consultingcategory").val()!=0 && $("#g1_taskdescription").val()!="")
-{
-	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
-break;
+case'':_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});break;
 
 
 case'group1':var json='{"DATA":[["'+
@@ -121,9 +116,24 @@ $("#g1_status").val()+'","'+
 $("#g1_taskdescription").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
 '"]]}'
-if($("#g1_consultingcategory").val()!="" && $("#g1_taskdescription").val()!=""){
-_saveData({group:"group1","payload":$.parseJSON(json),page:"acctingconsulting"})}
-else{jqMessage({message: "You must enter all required fields.",type: "info",autoClose: true})}
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message:"Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_consultingcategory").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message:"Missing Consulting Category",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Consulting Category');}
+	}
+else if ($("#g1_taskdescription").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message:"Missing Task Description",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Task Description');}
+	}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"acctingconsulting"})
+	if(debug){window.console.log('Start Saving Other Filings');}	
+	}
 break;
 
 case'group2':
@@ -155,12 +165,8 @@ $("#task_id").val()+'","'+
 $("#g2_acctgroup").val()+'","'+
 '"]]}'
 if($("#task_isLoaded").val()!=0){
-
 	_saveData({group:"group2_duplicate",payload:$.parseJSON(json),page:"acctingconsulting"})}
-	
-	
-else{jqMessage({message: "You must select a task.",type: "info",autoClose: true})}
-
+	else{jqMessage({message: "You must select a task.",type: "info",autoClose: true})}
 break;
 
 /*Start Saving Plugins*/

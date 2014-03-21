@@ -1,8 +1,15 @@
+
+
+
+
 $(document).ready(function(){
 
 _grid1();
-_group1=function(){}
-_group2=function(){_grid2()}
+_group1		=function(){_grid1();}
+_group2		=function(){_grid2();$("#isLoaded_group2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){	_loadData({"id":"subtask1_id","group":"group2","page":"notices"});_loadit({"query":{"COLUMNS":["g2_noticestatus"],"DATA":[[4]]},"list":"g2_noticestatus","page":"notices"});}}
+_group2_1	=function(){$("#isLoaded_group2_1").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){;_loadData({"id":"subtask1_id","group":"group2_1","page":"notices"});}}
+_group2_2	=function(){$("#isLoaded_group2_2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){_loadData({"id":"subtask2_id","group":"group2_2","page":"notices"});}}
+
 });
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -37,30 +44,25 @@ _grid2=function(){_jGrid({
 	"functions":'$("#subtask1_id").val(record.N_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"notices"});'
 	})};
 
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"notices"});_loadData({"id":"task_id","group":"assetCompTask","page":"notices"});}
+_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"notices"});}
 _loadDataCB=function(query){
-try{
-if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
-else{
+		if(debug){window.console.log('_loadDataCB Start - '+query.COLUMNS[0]);}
+
 switch(query.COLUMNS[0]){
-/*Group1*/case "NM_ID":var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});_loadAssets();break;
-/*Group2*/case "N_ID":var list='subtask1_id,g2_assignedto,g2_deliverymethod,g2_estimatedtime,g2_fees,g2_missinginformation,g2_missinginforeceived,g2_noticestatus,g2_paid,g2_priority';_loadit({"query":query,"list":list});break;
-/*Group2_1*/case "N_1_DATENOTICEREC":var list='g2_1_datenoticereceived,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_duedateforresponse,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
-/*Group2_2*/case "N_2_IRSSTATERESPONSE":var list='g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
-/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
-default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
-else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
-catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
+/*Group1*/case "NM_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}					var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group2*/case "N_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}						var list='subtask1_id,g2_assignedto,g2_deliverymethod,g2_estimatedtime,g2_fees,g2_missinginformation,g2_missinginforeceived,g2_noticestatus,g2_paid,g2_priority';_loadit({"query":query,"list":list});break;
+/*Group2_1*/case "N_1_DATENOTICEREC":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}		var list='g2_1_datenoticereceived,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_duedateforresponse,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
+/*Group2_2*/case "N_2_IRSSTATERESPONSE":if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}		var list='g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
+/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD": if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}	var list='g1_credithold';_loadit({"query":query,"list":list});break;
+default:if(query!=""){ if(debug){window.console.log('_loadDataCB switch default:'+query.COLUMNS[0]);} var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
+}
+};
 
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 $.extend(true, options, params);
 switch(options["group"]){
-
-case'':
-if($("#client_id").val()!=0 && $("#g1_mattername").val()!="" && $("#g1_matterstatus").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
-break;
+case'':_saveDataCB({'group':'group1'});break;
 
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -68,7 +70,49 @@ $("#client_id").val()+'","'+
 $("#g1_mattername").val()+'","'+
 $("#g1_matterstatus").val()+'","'+
 '"]]}'
-_saveData({group:"group1","payload":$.parseJSON(json),page:"notices"});
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_mattername").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Matter Name",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Matter Name');}
+	}
+else if ($("#g2_1_noticenumber").val()=="0"){
+	$('.gf-checkbox').hide();$('#group2').show();$('#group2').accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Notice Number",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Notice Number');}
+	}
+else if ($("#g2_1_noticedate").val()==""){
+	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Notice Date",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Notice Date');}
+	}
+else if ($("#g2_1_taxyear").val()=="0"){
+	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Year",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Tax Year');}
+	}
+else if ($("#g2_1_taxform").val()=="0"){
+	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Form",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Tax Form');}
+	}
+else if ($("#g2_1_methodreceived").val()=="0"){
+	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Method Received",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Method Received');}
+	}
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g2_1_noticenumber"},{"item":"g2_1_noticedate"},{"item":"g2_1_taxyear"},{"item":"g2_1_taxform"},{"item":"g2_1_duedateforresponse"}],"loadType":"group1","page":"notices"})=='true'&&$('#task_id').val()=='0'){
+	jqMessage({"type":"destroy"});jqMessage({message: "This task is already in the system.",type: "error",autoClose: false});
+	if(debug){window.console.log('This task is already in the system..');}
+	}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"notices"});
+	if(debug){window.console.log('Start Saving Notices');}	
+	}
 break;
 
 case'group2':
