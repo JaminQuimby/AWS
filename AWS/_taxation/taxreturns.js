@@ -29,8 +29,9 @@ _grid1=function(){_jGrid({
 			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
 			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
-			,TR_2_REVIEWASSIGNEDTO:{title:'Review Assigned To',width:'1%'}		
-			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}		
+			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		
+			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
+			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
 			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}		
 			},

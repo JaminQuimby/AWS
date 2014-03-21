@@ -145,6 +145,8 @@ SELECT[contact_id]
 ,[contact_effectivedate]=FORMAT(contact_effectivedate,'d','#Session.localization.language#')
 ,[contact_email1]
 ,[contact_email2]
+,[contact_ext1]
+,[contact_ext2]
 ,[contact_name]
 ,[contact_phone1]=FORMAT(contact_phone1,'#Session.localization.formatphone#')
 ,[contact_phone2]=FORMAT(contact_phone2,'#Session.localization.formatphone#')
@@ -832,7 +834,7 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group3">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][19])><cfset j.DATA[1][19]=1><cfelse><cfset j.DATA[1][19]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][21])><cfset j.DATA[1][21]=1><cfelse><cfset j.DATA[1][21]=0></cfif>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="AWS">
@@ -847,6 +849,8 @@ INSERT INTO[client_contact](
 ,[contact_effectivedate]
 ,[contact_email1]
 ,[contact_email2]
+,[contact_ext1]
+,[contact_ext2]
 ,[contact_name]
 ,[contact_phone1]
 ,[contact_phone2]
@@ -903,17 +907,19 @@ SET[contact_acctsoftwareupdate]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(
 ,[contact_effectivedate]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#">
 ,[contact_email1]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[contact_email2]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[contact_name]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[contact_phone1]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[contact_phone2]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[contact_phone3]=<cfqueryparam value="#j.DATA[1][15]#"null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[contact_phone4]=<cfqueryparam value="#j.DATA[1][16]#"null="#LEN(j.DATA[1][16]) eq 0#"/>
-,[contact_phone5]=<cfqueryparam value="#j.DATA[1][17]#"null="#LEN(j.DATA[1][17]) eq 0#"/>
-,[contact_state]=<cfqueryparam value="#j.DATA[1][18]#"null="#LEN(j.DATA[1][18]) eq 0#"/>
-,[contact_taxupdate]=<cfqueryparam value="#j.DATA[1][19]#"null="#LEN(j.DATA[1][19]) eq 0#"/>
-,[contact_type]=<cfqueryparam value="#j.DATA[1][20]#"null="#LEN(j.DATA[1][20]) eq 0#"/>
-,[contact_website]=<cfqueryparam value="#j.DATA[1][21]#"null="#LEN(j.DATA[1][21]) eq 0#"/>
-,[contact_zip]=<cfqueryparam value="#j.DATA[1][22]#"null="#LEN(j.DATA[1][22]) eq 0#"/>
+,[contact_ext1]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[contact_ext2]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[contact_name]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[contact_phone1]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[contact_phone2]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[contact_phone3]=<cfqueryparam value="#j.DATA[1][17]#"null="#LEN(j.DATA[1][17]) eq 0#"/>
+,[contact_phone4]=<cfqueryparam value="#j.DATA[1][18]#"null="#LEN(j.DATA[1][18]) eq 0#"/>
+,[contact_phone5]=<cfqueryparam value="#j.DATA[1][19]#"null="#LEN(j.DATA[1][19]) eq 0#"/>
+,[contact_state]=<cfqueryparam value="#j.DATA[1][20]#"null="#LEN(j.DATA[1][20]) eq 0#"/>
+,[contact_taxupdate]=<cfqueryparam value="#j.DATA[1][21]#"null="#LEN(j.DATA[1][21]) eq 0#"/>
+,[contact_type]=<cfqueryparam value="#j.DATA[1][22]#"null="#LEN(j.DATA[1][22]) eq 0#"/>
+,[contact_website]=<cfqueryparam value="#j.DATA[1][23]#"null="#LEN(j.DATA[1][23]) eq 0#"/>
+,[contact_zip]=<cfqueryparam value="#j.DATA[1][24]#"null="#LEN(j.DATA[1][24]) eq 0#"/>
 WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group5","result":"ok"}'>

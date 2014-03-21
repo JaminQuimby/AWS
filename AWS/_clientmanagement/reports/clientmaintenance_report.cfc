@@ -165,13 +165,13 @@ SELECT[client_id]
 ,[contact_address1]
 ,[contact_address2]
 ,[contact_city]
-,[contact_state]
+,[contact_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[contact_state]=[optionvalue_id])
 ,[contact_zip]
-,[contact_phone1]
-,[contact_phone2]
-,[contact_phone3]
-,[contact_phone4]
-,[contact_phone5]
+,[contact_phone1]=FORMAT(contact_phone1,'#Session.localization.formatphone#')
+,[contact_phone2]=FORMAT(contact_phone2,'#Session.localization.formatphone#')
+,[contact_phone3]=FORMAT(contact_phone3,'#Session.localization.formatphone#')
+,[contact_phone4]=FORMAT(contact_phone4,'#Session.localization.formatphone#')
+,[contact_phone5]=FORMAT(contact_phone5,'#Session.localization.formatphone#')
 ,[contact_email1]
 ,[contact_email2]
 FROM[v_client_contact]
@@ -231,7 +231,7 @@ WHERE(1)=(1)
 								,"CONTACT_ADDRESS2":"'&CONTACT_ADDRESS2&'"
 								,"CONTACT_ADDRESS1":"'&CONTACT_ADDRESS1&'"
 								,"CONTACT_CITY":"'&CONTACT_CITY&'"
-								,"CONTACT_STATE":"'&CONTACT_STATE&'"
+								,"CONTACT_STATETEXT":"'&CONTACT_STATETEXT&'"
 								,"CONTACT_ZIP":"'&CONTACT_ZIP&'"
 								,"CONTACT_PHONE1":"'&CONTACT_PHONE1&'"
 								,"CONTACT_PHONE2":"'&CONTACT_PHONE2&'"

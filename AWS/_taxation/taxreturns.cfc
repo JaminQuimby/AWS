@@ -293,10 +293,11 @@ SELECT[tr_id]
 ,[client_id]
 ,CONVERT(VARCHAR(10),[tr_missinginforeceived], 101)AS[tr_missinginforeceived]
 ,CONVERT(VARCHAR(10),[tr_2_readyforreview], 101)AS[tr_2_readyforreview]
-,[tr_2_reviewassignedto] 
+,[tr_2_reviewassignedtoTEXT] 
 ,CONVERT(VARCHAR(10),[tr_2_reviewed], 101)AS[tr_2_reviewed]
 ,CONVERT(VARCHAR(10),[tr_2_completed], 101)AS[tr_2_completed]
 ,CONVERT(VARCHAR(10),[tr_3_assemblereturn], 101)AS[tr_3_assemblereturn]
+,CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 101)AS[tr_2_reviewedwithnotes]
 
 FROM[v_taxreturns]
 
@@ -316,13 +317,15 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_DUEDATE":"'&TR_DUEDATE&'"
-								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
+								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
 								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
 								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
-								,"TR_2_REVIEWASSIGNEDTO":"'&TR_2_REVIEWASSIGNEDTO&'"
+								,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
 								,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
+								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
+								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>

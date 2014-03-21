@@ -166,7 +166,9 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_stateabbreviation"><option value="#optionvalue_id#">#option_1#</option></cfoutput></select></div>
 <div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="5" required id="g3_zip" /></div>
 <div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_ext1">Ext 1</label><input type="text" id="g3_ext1" maxlength="5"></div>
 <div><label for="g3_phone2">Phone 2</label><input id="g3_phone2" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_ext2">Ext 2</label><input type="text" id="g3_ext2" maxlength="5"></div>
 <div><label for="g3_phone3">Mobile</label><input id="g3_phone3" type="tel" class="phone"    onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_phone4">Pager</label><input id="g3_phone4" type="tel" class="phone"     onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_phone5">Fax</label><input id="g3_phone5" type="tel" class="phone"       onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>

@@ -66,7 +66,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="AWS" name="fquery">
 SELECT[co_id]
 ,[co_forTEXT]
-,[co_briefmessage]
+,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
 ,[co_caller]
 ,CONVERT(VARCHAR(8),[co_duedate], 1)AS[co_duedate]
 ,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
@@ -132,7 +132,7 @@ INSERT INTO[communications](
 [client_id]
 ,[co_briefmessage]
 ,[co_caller]
- ,[co_contactmethod]
+,[co_contactmethod]
 ,[co_date]
 ,[co_duedate]
 ,[co_emailaddress]
