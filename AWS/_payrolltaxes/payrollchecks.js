@@ -54,10 +54,7 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{$.extend(true, options, params);
 switch(options["group"]){
-case'':
-if($("#client_id").val()!=0 && $("#g1_year").val()!="" && $("#g1_payenddate").val()!=0 && $("#g1_paydate").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
-break;
+case'':_saveDataCB({'group':'group1'});break;
 
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -74,7 +71,31 @@ $("#g1_payenddate").val()+'","'+
 $("#g1_paymentstatus").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
-_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollchecks"});
+
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_year").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Year",type: "error",autoClose: false});if(debug){window.console.log('Missing Year');}
+	}
+else if ($("#g1_payenddate").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Pay End Date",type: "error",autoClose: false});if(debug){window.console.log('Missing  Pay End Date');}
+	}
+else if ($("#g1_paydate").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Pay Date",type: "error",autoClose: false});if(debug){window.console.log('Pay Date');}
+	}
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_payenddate"},{"item":"g1_paydate"},{"item":"g1_altfrequency"}],"loadType":"group1","page":"payrollchecks"})=='true'&&$('#task_id').val()=='0'){
+	jqMessage({"type":"destroy"});jqMessage({message: "This task already exsist.",type: "error",autoClose: false});
+	if(debug){window.console.log('This task already exsist.');}
+	}
+
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollchecks"});
+	if(debug){window.console.log('Start Saving Other Filings');}	
+	}	
+
 break;
 
 case'group1_1':var json='{"DATA":[["'+

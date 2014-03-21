@@ -4,7 +4,43 @@
 <!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
-<!--- LOAD DATA --->
+
+<!--- DUPE CHECK --->
+<cffunction name="f_duplicateCheck" access="remote" output="true">
+<cfargument name="check" type="string">
+<cfargument name="loadType" type="string">
+
+<cfswitch expression="#ARGUMENTS.loadType#">
+<cfcase value="group1">
+<cfset i=0>
+<!--- Client, Year, Period, Period End--->
+<cfloop list="#ARGUMENTS.check#" index="s" delimiters=",">
+<cfset i=i+1>
+<cfset item[i]=s>
+</cfloop>
+
+<cfquery datasource="AWS" name="fquery" >
+SELECT TOP(1)[client_id]
+FROM[otherfilings]
+WHERE[client_id]=<cfqueryparam value="#item[1]#">
+AND[of_taxyear]=<cfqueryparam value="#item[2]#">
+AND[of_period]=<cfqueryparam value="#item[3]#">
+AND[of_state]=<cfqueryparam value="#item[4]#">
+AND[of_type]=<cfqueryparam value="#item[5]#">
+AND[of_form]=<cfqueryparam value="#item[6]#">
+</cfquery>
+
+</cfcase>
+</cfswitch>
+
+<cfif fquery.recordcount gt 0>
+<cfset myResult='{"Result":"OK","check":"true"}'>
+<cfelse>
+<cfset myResult='{"Result":"OK","check":"false"}'>
+</cfif>
+<cfreturn myResult>
+
+</cffunction>
 
 
 <!--- LOAD SELECT BOXES --->

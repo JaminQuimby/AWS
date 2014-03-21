@@ -54,13 +54,7 @@ var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
-case'':
-if($("#client_id").val()!="" && $("#g1_year").val()!="" && $("#g1_month").val()!=0 && $("#g1_lastpay").val()!=0 && $("#g1_type").val()!=0)
-{
-	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
-break;
-
+case'':_saveDataCB({'group':'group1'});break;
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
@@ -78,7 +72,43 @@ $("#g1_state").val()+'","'+
 $("#g1_type").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
-_saveData({group:"group1","payload":$.parseJSON(json),page:"payrolltaxes"});
+
+
+
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_year").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Year",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Year');}
+	}
+else if ($("#g1_month").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Period",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Period');}
+	}
+else if ($("#g1_lastpay").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Last Pay",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing State');}
+	}
+else if ($("#g1_type").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Type",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Type');}
+	}
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_month"},{"item":"g1_lastpay"},{"item":"g1_type"}],"loadType":"group1","page":"payrolltaxes"})=='true'&&$('#task_id').val()=='0'){
+	jqMessage({"type":"destroy"});jqMessage({message: "Duplicate Client Name Found",type: "error",autoClose: false});
+	if(debug){window.console.log('This Client Name already exsists.');}
+	}
+
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"payrolltaxes"});
+	if(debug){window.console.log('Start Saving Other Filings');}	
+	}	
+
+
+
 break;
 
 case'group1_1':var json='{"DATA":[["'+

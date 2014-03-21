@@ -6,6 +6,8 @@ String.prototype.insert = function (index, string) {if (index > 0) return this.s
 Array.prototype.removeValue = function(name, value){var array = $.map(this, function(v,i){return v[name] === value ? null : v;});this.length = 0;this.push.apply(this, array);}
 String.prototype.escapeIt = function(text) {return text.replace(/[-[\]{}()*+?.,\\^$|#"]/g, "\\$&")};
 Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:"0"+mm[0])+'/'+(dd[1]?dd:"0"+dd[0])+'/'+yyyy};
+
+
 //Localisation 
 var debug=true;
 $(document).ready(function(){
@@ -103,10 +105,12 @@ _toCSV=function($table, filename) {
 });
 
 _duplicateCheck=function(params){
-	if(debug){window.console.log('_duplicateCheck Start');}
+if(debug){window.console.log('_duplicateCheck Start');}
 var options={"check":"","loadType":"","page":""},str='';
 $.extend(true,options,params);
-$.each(options['check'],function(idx,obj){str=str+$('#'+obj.item).val();if(idx!= options['check'].length -1 ){str=str+','}});
+$.each(options['check'],function(idx,obj){if($('#'+obj.item).is(':checkbox')){str=str+$('#'+obj.item).is(':checkbox')}else{str=str+$('#'+obj.item).val()}
+if(idx!=options['check'].length -1 ){str=str+','}});
+if(debug){window.console.log('_duplicateCheck Check '+str);}
 $.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+str+"","loadType":options['loadType']})}
 ,url: options['page']+'.cfc?method=f_duplicateCheck'
 ,success:function(data){j=$.parseJSON(data);str=j.check;}
