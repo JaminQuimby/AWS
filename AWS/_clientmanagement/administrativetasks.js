@@ -46,12 +46,7 @@ try{
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
 	
-case'':
-if($("#client_id").val()!="" && $("#g1_category").val()!=0 && $("#g1_taskdescription").val()!="")
-{
-	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must input all bold fields.",type: "info",autoClose: true})};
-break;
+case'':_saveDataCB({'group':'group1'});break;
 
 /*Save Group1*/
 case'group1':var json='{"DATA":[["'+
@@ -72,16 +67,36 @@ $("#g1_taskdescription").val()+'","'+
 $("#g1_workinitiated").val()+'","'+
 '"]]}'
 
-_saveData({"group":"group1","payload":$.parseJSON(json),page:"administrativetasks"});
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_category").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Category",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Category');}
+	}
+else if ($("#g1_taskdescription").val()==""){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Task Description",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing  Task Description');}
+	}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({"group":"group1","payload":$.parseJSON(json),page:"administrativetasks"});
+	if(debug){window.console.log('Start Saving Other Filings');}	
+	}	
+	
+
+
 break;
 /*Start Saving Plugins*/
-case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
+case"plugins":
+$('#task_id').val(options['id']);_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
 default:jqMessage({message: "A exception in administrativetasks.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;
 }
-}catch(err){alert(err)}};
+}catch(err){jqMessage({message: "Error :"+err+" ",type: "Error",autoClose: true});}};
 
 // JavaScript Document// JavaScript Document
