@@ -100,10 +100,7 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",auto
 _saveDataCB=function(params){var options={"id":"","group":"","subgroup":"","result":""};$.extend(true, options, params);var $client_id=$("#client_id");
 switch(options["group"]){
 
-case'':
-if($("#client_id").val()!=0){_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true})}
-else{jqMessage({message: "You must choose a client.",type: "info",autoClose: true})}
-break;
+case'':_saveDataCB({'group':'group1'});break;
 
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -139,6 +136,11 @@ else if ($("#g1_taxform").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message:"Missing Tax Form",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Tax Form');}
 	}
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_taxyear"},{"item":"g1_taxform"}],"loadType":"group1","page":"taxreturns"})=='true'&&$('#task_id').val()=='0'){
+	jqMessage({"type":"destroy"});jqMessage({message: "This task already exsists.",type: "error",autoClose: false});
+	if(debug){window.console.log('This Client Name already exsists.');}
+	}
+	
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"taxreturns"})
@@ -147,7 +149,8 @@ else{
 break;
 
 
-case'group1_1':var json='{"DATA":[["'+
+case'group1_1':$('#task_id').val(options['id']);
+var json='{"DATA":[["'+
 //group 1 subgroup 1
 $("#task_id").val()+'","'+
 $("#g1_g1_dropoffappointment").val()+'","'+

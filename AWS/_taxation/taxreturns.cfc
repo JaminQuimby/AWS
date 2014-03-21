@@ -765,7 +765,7 @@ VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0 or j.DATA[1][5] eq 'null' #"/>
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
@@ -778,7 +778,7 @@ UPDATE[TAXRETURNS_SCHEDULE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trsc_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[trsc_reviewassignedto]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[trsc_schedule]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[trsc_schedule]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0 or j.DATA[1][5] eq 'null' #"/>
 ,[trsc_status]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 WHERE[TRSC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>

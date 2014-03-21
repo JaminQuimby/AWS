@@ -138,7 +138,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>
-<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1); '>Add</a></div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);'>Add</a></div>
 </div>
 <h3 onClick='_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});$("#isLoaded_group2").val(1);'>Add States</h3>
 <div>
@@ -201,7 +201,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
-<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"}); '>Add</a></div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"});$("#subtask2_id").val(0); '>Add</a></div>
 </div>
 <h4 onClick='_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});$("#isLoaded_group3").val(1);'>Add Schedule</h4>
 <div>
