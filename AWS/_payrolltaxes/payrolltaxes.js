@@ -97,7 +97,7 @@ else if ($("#g1_type").val()=="0"){
 	if(debug){window.console.log('Missing Type');}
 	}
 else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_month"},{"item":"g1_lastpay"},{"item":"g1_type"}],"loadType":"group1","page":"payrolltaxes"})=='true'&&$('#task_id').val()=='0'){
-	jqMessage({"type":"destroy"});jqMessage({message: "Duplicate Client Name Found",type: "error",autoClose: false});
+	jqMessage({"type":"destroy"});jqMessage({message: "This Client Name already exsists.",type: "error",autoClose: false});
 	if(debug){window.console.log('This Client Name already exsists.');}
 	}
 

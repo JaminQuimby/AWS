@@ -25,7 +25,7 @@ WHERE[client_id]=<cfqueryparam value="#item[1]#">
 AND[pt_year]=<cfqueryparam value="#item[2]#">
 AND[pt_month]=<cfqueryparam value="#item[3]#">
 AND[pt_lastpay]=<cfqueryparam value="#item[4]#">
-AND[of_type]=<cfqueryparam value="#item[5]#">
+AND[pt_type]=<cfqueryparam value="#item[5]#">
 </cfquery>
 
 </cfcase>
