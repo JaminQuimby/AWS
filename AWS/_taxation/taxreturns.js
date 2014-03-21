@@ -51,8 +51,7 @@ _grid2=function(){_jGrid({
 			,TRST_STATUSTEXT:{title:'Status'}
 			,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
 			,TRST_1_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}
-			
-	},
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"6"}',
 	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2_state","page":"taxreturns"});'
@@ -125,9 +124,28 @@ $("#g1_priority").val()+'","'+
 $("#g1_reason").val()+'","'+
 $("#g1_taxform").val()+'","'+
 $("#g1_taxyear").val()+'","'+
-'"]]}'
-_saveData({group:"group1","payload":$.parseJSON(json),page:"taxreturns"});
+'"]]}' 
+
+
+if($("#client_id").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message:"Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
+	}
+else if ($("#g1_taxyear").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message:"Missing Tax Year",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Tax Year');}
+	}
+else if ($("#g1_taxform").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message:"Missing Tax Form",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Tax Form');}
+	}
+else{
+	jqMessage({message: "Saving.",type: "save",autoClose: true});
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"taxreturns"})
+	if(debug){window.console.log('Start Saving Tax Returns');}	
+	}
 break;
+
 
 case'group1_1':var json='{"DATA":[["'+
 //group 1 subgroup 1

@@ -131,7 +131,7 @@ else if ($("#g1_taskdescription").val()=="0"){
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"acctingconsulting"})
-	if(debug){window.console.log('Start Saving Other Filings');}	
+	if(debug){window.console.log('Start Saving Accounting and Consulting tasks');}	
 	}
 break;
 
