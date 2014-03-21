@@ -87,7 +87,7 @@ missinginforeceived
         </div>
 <div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_group2({open:true});$("#task_id").val(0);'>Add</a>
+<a href="#" class="button optional" onClick='_group2({open:true});$("#subtask1_id").val(0);'>Add</a>
 </div>
 </div>
 <h4 onClick='_loadData({"id":"task_id","group":"group2","page":"acctingconsulting"});$("#subtask_isLoaded").val(1);'>Add Subtask</h4>
