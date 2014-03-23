@@ -43,11 +43,11 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_run.load_group1();"/></div>
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();">Add</a></div></div></div>
+<a href="#" class="button optional" onClick="_run.new_task()">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
@@ -69,7 +69,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"></option><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!---Subgroup 1--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"payrolltaxes"});$("#isLoaded_group1_1").val(1);'>Obtain Info | <span id="g1_g1_head1"></span> | <span id="g1_g1_head2"></span></h4>
+<h4 onClick='_run.load_group1_1()'>Obtain Info | <span id="g1_g1_head1"></span> | <span id="g1_g1_head2"></span></h4>
 <div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
@@ -77,7 +77,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g1_estimatedtime" ></div>
 </div>
 <!---Subgroup 2--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"payrolltaxes"});$("#isLoaded_group1_2").val(1);'>Entry | <span id="g1_g2_head1"></span> | <span id="g1_g2_head2"></span></h4>
+<h4 onClick='_run.load_group1_2();'>Entry | <span id="g1_g2_head1"></span> | <span id="g1_g2_head2"></span></h4>
 <div>
 <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
@@ -85,7 +85,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g2_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g2_estimatedtime" ></div>
 </div>
 <!---Subgroup 3--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"payrolltaxes"});$("#isLoaded_group1_3").val(1);'>Reconciliation | <span id="g1_g3_head1"></span> | <span id="g1_g3_head2"></span></h4>
+<h4 onClick='_run.load_group1_3();'>Reconciliation | <span id="g1_g3_head1"></span> | <span id="g1_g3_head2"></span></h4>
 <div>
 <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_completed">Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
@@ -93,7 +93,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g3_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g3_estimatedtime" ></div>
 </div>
 <!---Subgroup 4--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"payrolltaxes"});$("#isLoaded_group1_4").val(1);'>Review | <span id="g1_g4_head1"></span> | <span id="g1_g4_head2"></span></h4>
+<h4 onClick='_run.load_group1_4();'>Review | <span id="g1_g4_head1"></span> | <span id="g1_g4_head2"></span></h4>
 <div>
 <div><label for="g1_g4_assignedto">Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g4_completed">Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
@@ -101,7 +101,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g4_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g4_estimatedtime" ></div>
 </div>
 <!---Subgroup 5--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"payrolltaxes"});$("#isLoaded_group1_5").val(1);'>Assembly | <span id="g1_g5_head1"></span> | <span id="g1_g5_head2"></span></h4>
+<h4 onClick='_run.load_group1_5();'>Assembly | <span id="g1_g5_head1"></span> | <span id="g1_g5_head2"></span></h4>
 <div>
 <div><label for="g1_g5_assignedto">Assigned To</label><select id="g1_g5_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>
@@ -109,7 +109,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g5_estimatedtime" ></div>
 </div>
 <!---Subgroup 6--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_6","page":"payrolltaxes"});$("#isLoaded_group1_6").val(1);'>Delivery | <span id="g1_g6_head1"></span> | <span id="g1_g6_head2"></span></h4>
+<h4 onClick='_run.load_group1_6();'>Delivery | <span id="g1_g6_head1"></span> | <span id="g1_g6_head2"></span></h4>
 <div>
 <div><label for="g1_g6_assignedto">Assigned To</label><select id="g1_g6_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g6_completed">Completed</label><input type="text" class="date" id="g1_g6_completed" ></div>

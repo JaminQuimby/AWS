@@ -28,12 +28,9 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
-<!---cfquery dbtype="query" name="global_taxreturnschedule">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxreturnschedule'</cfquery--->
 <cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
-<!---cfquery dbtype="query" name="global_taxreturnsstateforms">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxreturnsstateforms'</cfquery--->
 
 <!--- Load Labels --->
-
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -49,7 +46,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["g2_status"],"DATA":[[4]]},"list":"g2_status","page":"taxreturns"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2,group3");_addNewTask();'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_task()'>Add</a>
 </div></div></div>
 <!--- GROUP1 --->
 <div id="group1" class="gf-checkbox">
@@ -76,7 +73,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!--- GROUP1 SUBGROUP1 --->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"taxreturns"});$("#isLoaded_group1_1").val(1)'>Appointment</h4>
+<h4 onClick='_run.load_group1_1()'>Appointment</h4>
 <div>
 	<div><label for="g1_g1_dropoffappointment">Drop Off Appointment</label><input type="text" class="datetime" id="g1_g1_dropoffappointment" ></div>
 	<div><label for="g1_g1_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g1_dropoffappointmentlength" ></div>
@@ -87,7 +84,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_g1_pickupappointmentwith">Appointment With</label><select id="g1_g1_pickupappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!--- GROUP1 SUBGROUP2 --->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"taxreturns"});$("#isLoaded_group1_2").val(1);'>Preparation</h4>
+<h4 onClick='_run.load_group1_2()'>Preparation</h4>
 <div>
 	<div><label for="g1_g2_informationreceived">Information Received</label><input type="text" class="date" id="g1_g2_informationreceived" ></div>
 	<div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -100,7 +97,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
 </div>
 <!--- GROUP1 SUBGROUP3 --->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"taxreturns"});$("#isLoaded_group1_3").val(1)'>Assembly &amp; Delivery</h4>
+<h4 onClick='_run.load_group1_3()'>Assembly &amp; Delivery</h4>
 <div>
 	<div><label for="g1_g3_assemblereturn">Assemble Return</label><input type="text" class="date" id="g1_g3_assemblereturn" ></div>
 	<div><label for="g1_g3_contacted">Contacted</label><input type="text" class="date" id="g1_g3_contacted" ></div>
@@ -113,7 +110,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 
 </div>
 <!--- GROUP1 SUBGROUP4 --->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)'>Personal Property Tax</h4>
+<h4 onClick='_run.load_group1_4()'>Personal Property Tax</h4>
 <div>
 	<div><label for="g1_g4_required"><input id="g1_g4_required" type="checkbox" class="ios-switch">PPTR Required</label></div>
     <div><label for="g1_g4_extended">PPTR Extension Completed</label><input type="text" class="date" id="g1_g4_extended" ></div>
@@ -138,9 +135,9 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>
-<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);'>Add</a></div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='_run.new_task2()'>Add</a></div>
 </div>
-<h3 onClick='_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});$("#isLoaded_group2").val(1);'>Add States</h3>
+<h3 onClick='_run.load_group2()'>Add States</h3>
 <div>
 <div><label for="g2_state">State</label><select id="g2_state" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadSelect({'selectName':'global_taxreturnsstateforms','selectObject':'g2_requiredforms','option1':$('#g2_state').val(),'page':'taxreturns'});"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_requiredforms">Required Forms</label><select  id="g2_requiredforms" multiple="multiple"><option value="0">&nbsp;</option></select></div>
@@ -151,7 +148,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_completed">Completed</label><input type="text" class="date" id="g2_completed" ></div>
 </div>
 <!--- GROUP2 SUBGROUP1 --->
-<h4 onClick='_loadData({"id":"subtask1_id","group":"group2_1","page":"taxreturns"});$("#isLoaded_group2_1").val(1);'>Preparation</h4>
+<h4 onClick='_run.load_group2_1()'>Preparation</h4>
 <div>
 <div><label for="g2_g1_informationreceived">Information Received</label><input type="text" class="date" id="g2_g1_informationreceived" ></div>
 <div><label for="g2_g1_duedate">Due Date</label><input type="text" class="date" id="g2_g1_duedate"></div>
@@ -167,7 +164,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_g1_completed">Completed</label><input type="text" class="date" id="g2_g1_completed" ></div>
 </div>
 <!--- GROUP2 SUBGROUP2 --->
-<h4 onClick='_loadData({"id":"subtask1_id","group":"group2_2","page":"taxreturns"});$("#isLoaded_group2_2").val(1)'>Assembly &amp; Delivery</h4>
+<h4 onClick='_run.load_group2_2()'>Assembly &amp; Delivery</h4>
 <div>
 <div><label for="g2_g2_assemblereturn">Assemble Return</label><input type="text" class="date" id="g2_g2_assemblereturn" ></div>
 <div><label for="g2_g2_contacted">Contacted</label><input type="text" class="date" id="g2_g2_contacted" ></div>
@@ -181,7 +178,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_g2_priorfees">Prior Fees</label><input type="text" id="g2_g2_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 </div>
 <!--- GROUP2 SUBGROUP3 --->
-<h4 onClick='_loadData({"id":"subtask1_id","group":"group2_3","page":"taxreturns"});$("#isLoaded_group2_3").val(1)'>Personal Property Tax</h4>
+<h4 onClick='_run.load_group2_3()'>Personal Property Tax</h4>
 <div>
 <div><label for="g2_g3_required"><input id="g2_g3_required" type="checkbox" class="ios-switch">PPTR Required</label></div>
 <div><label for="g2_g3_assignedto">PPTR Assigned To</label><select id="g2_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -197,13 +194,13 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 
 <!--- Group3 --->
 <div id="group3" class="gf-checkbox">
-<h3 onClick="_group3();">Schedule</h3>
+<h3 onClick="_run.load_group3();">Schedule</h3>
 <div>
 <div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
-<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"});$("#subtask2_id").val(0); '>Add</a></div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='_run.new_task3()'>Add</a></div>
 </div>
-<h4 onClick='_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});$("#isLoaded_group3").val(1);'>Add Schedule</h4>
+<h4 onClick='_run.group3()'>Add Schedule</h4>
 <div>
 <div><label for="g3_schedule">Schedule</label><select id="g3_schedule" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option></select></div>
 <div><label for="g3_status">Status</label><select id="g3_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -211,7 +208,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g3_reviewassignedto">Review Assigned To</label><select id="g3_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 
-<h4 onClick='_loadData({"id":"subtask2_id","group":"group3_1","page":"taxreturns"});$("#isLoaded_group3_1").val(1)'>Preparation</h4>
+<h4 onClick='_run.group3_1()'>Preparation</h4>
 <div>
 <div><label for="g3_g1_informationreceived">Information Received</label><input type="text" class="date" id="g3_g1_informationreceived" ></div>
 <div><label for="g3_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g3_g1_filingdeadline"></div>

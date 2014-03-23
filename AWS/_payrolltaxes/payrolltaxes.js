@@ -1,36 +1,45 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){}
-});
+$(document).ready(function(){_run.load_group1();});
+  
+var _run={
+	new_task:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();}
+	,load_group1:function(){_grid1();}
+	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"payrolltaxes"});$("#isLoaded_group1_1").val(1);}
+	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"payrolltaxes"});$("#isLoaded_group1_2").val(1);}
+	,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"payrolltaxes"});$("#isLoaded_group1_3").val(1);}
+	,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"payrolltaxes"});$("#isLoaded_group1_4").val(1);}
+	,load_group1_5:function(){_loadData({"id":"task_id","group":"group1_5","page":"payrolltaxes"});$("#isLoaded_group1_5").val(1);}
+	,load_group1_6:function(){_loadData({"id":"task_id","group":"group1_6","page":"payrolltaxes"});$("#isLoaded_group1_6").val(1);}
+	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"payrolltaxes"});_loadData({"id":"task_id","group":"assetCompTask","page":"payrolltaxes"});}
+	}
  
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"payrolltaxes.cfc",
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PT_ID+"',page:'payrolltaxes',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_NAME:{title:'Client Name'}
-			,PT_YEAR:{title:'Year',width:'1%'}
-			,PT_MONTHTEXT:{title:'Period'}
-			,PT_STATETEXT:{title:'State'}
-			,PT_TYPETEXT:{title:'Return Type'}	
-			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
-			,PT_DUEDATE:{title:'Due Date',width:'1%'}
-			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,PT_OBTAININFO:{title:'Information',width:'1%'}
-			,PT_ENTRY:{title:'Entry',width:'1%'}
-			,PT_REC:{title:'Reconciliation',width:'1%'}
-			,PT_REVIEW:{title:'Review',width:'1%'}
-			,PT_ASSEMBLY:{title:'Assembled',width:'1%'}
-			,PT_DELIVERY:{title:'Delivery',width:'1%'}
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PT_ID+"',page:'payrolltaxes',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_NAME:{title:'Client Name'}
+		,PT_YEAR:{title:'Year',width:'1%'}
+		,PT_MONTHTEXT:{title:'Period'}
+		,PT_STATETEXT:{title:'State'}
+		,PT_TYPETEXT:{title:'Return Type'}	
+		,PT_LASTPAY:{title:'Last Pay',width:'1%'}
+		,PT_DUEDATE:{title:'Due Date',width:'1%'}
+		,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+		,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+		,PT_OBTAININFO:{title:'Information',width:'1%'}
+		,PT_ENTRY:{title:'Entry',width:'1%'}
+		,PT_REC:{title:'Reconciliation',width:'1%'}
+		,PT_REVIEW:{title:'Review',width:'1%'}
+		,PT_ASSEMBLY:{title:'Assembled',width:'1%'}
+		,PT_DELIVERY:{title:'Delivery',width:'1%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"13"}',
 	"functions":'$("#task_id").val(record.PT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"payrolltaxes"});'
 	})};
 
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"payrolltaxes"});_loadData({"id":"task_id","group":"assetCompTask","page":"payrolltaxes"});}
+
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
@@ -111,7 +120,9 @@ else{
 
 break;
 
-case'group1_1':var json='{"DATA":[["'+
+case'group1_1':
+ $("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+

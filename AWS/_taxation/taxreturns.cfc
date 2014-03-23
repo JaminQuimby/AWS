@@ -593,7 +593,7 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][14])><cfset j.DATA[1][14]=1><cfelse><cfset j.DATA[1][14]=0></cfif>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[taxreturns]
-SET[tr_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
+SET[tr_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[tr_4_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[tr_4_completedby]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[tr_4_currentfees]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
@@ -609,6 +609,8 @@ SET[tr_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_4_reviewedby]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,[tr_4_rfr]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
+
+
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>

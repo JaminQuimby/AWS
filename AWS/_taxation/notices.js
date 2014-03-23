@@ -1,16 +1,16 @@
+$(document).ready(function(){_grid1()});
 
 
+var _run={
+	
+	 new_task1:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();}
+	,new_task2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_addNewTask({"new":"subtask1_id"});}
+	,load_group1:function(){_grid1();}
+	,load_group2:function(){_grid2();$("#isLoaded_group2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){_loadit({"query":{"COLUMNS":["g2_noticestatus"],"DATA":[[4]]},"list":"g2_noticestatus","page":"notices"});}}
+	,load_group2_1:function(){$("#isLoaded_group2_1").val(1);}
+	,load_group2_2:function(){$("#isLoaded_group2_2").val(1);}
+	}
 
-
-$(document).ready(function(){
-
-_grid1();
-_group1		=function(){_grid1();}
-_group2		=function(){_grid2();$("#isLoaded_group2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){_loadit({"query":{"COLUMNS":["g2_noticestatus"],"DATA":[[4]]},"list":"g2_noticestatus","page":"notices"});}}
-_group2_1	=function(){$("#isLoaded_group2_1").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){ }}
-_group2_2	=function(){$("#isLoaded_group2_2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){ }}
-
-});
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"notices.cfc",

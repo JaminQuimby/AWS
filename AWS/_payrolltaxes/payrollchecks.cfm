@@ -18,7 +18,6 @@
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
-
 $(document).ready(function(){
 $('##task_id').val('#URL.task_id#');
 _toggle("group1");
@@ -36,8 +35,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="/assets/module/menu2/menu.cfm"></nav>
-
-
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
@@ -45,7 +42,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();'>Add</a></div></div></div>
+<a href="#" class="button optional" onClick='_run.new_task()'>Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
@@ -65,7 +62,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"></option><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!---Subgroup 1--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"payrollchecks"});$("#isLoaded_group1_1").val(1);'>Obtain Info | <span id="g1_g1_head1"></span> | <span id="g1_g1_head2"></span></h4>
+<h4 onClick='_run.load_group1_1();'>Obtain Info | <span id="g1_g1_head1"></span> | <span id="g1_g1_head2"></span></h4>
 <div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
@@ -74,7 +71,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!---Subgroup 2--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"payrollchecks"});$("#isLoaded_group1_2").val(1);'>Preparation | <span id="g1_g2_head1"></span> | <span id="g1_g2_head2"></span></h4>
+<h4 onClick='_run.load_group1_2();'>Preparation | <span id="g1_g2_head1"></span> | <span id="g1_g2_head2"></span></h4>
 <div>
 <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
@@ -83,7 +80,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!---Subgroup 3--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"payrollchecks"});$("#isLoaded_group1_3").val(1);'>Review | <span id="g1_g3_head1"></span> | <span id="g1_g3_head2"></span></h4>
+<h4 onClick='_run.load_group1_3();'>Review | <span id="g1_g3_head1"></span> | <span id="g1_g3_head2"></span></h4>
 <div>
 <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_completed">Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
@@ -92,7 +89,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!---Subgroup 4--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"payrollchecks"});$("#isLoaded_group1_4").val(1);'>Assembly | <span id="g1_g4_head1"></span> | <span id="g1_g4_head2"></span></h4>
+<h4 onClick='_run.load_group1_4();'>Assembly | <span id="g1_g4_head1"></span> | <span id="g1_g4_head2"></span></h4>
 <div>
 <div><label for="g1_g4_assignedto">Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g4_completed">Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
@@ -101,7 +98,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!---Subgroup 5--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"payrollchecks"});$("#isLoaded_group1_5").val(1);'>Delivery | <span id="g1_g5_head1"></span> | <span id="g1_g5_head2"></span></h4>
+<h4 onClick='_run.load_group1_5();'>Delivery | <span id="g1_g5_head1"></span> | <span id="g1_g5_head2"></span></h4>
 <div>
 <div><label for="g1_g5_assignedto">Assigned To</label><select id="g1_g5_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>
@@ -109,7 +106,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_g5_estimatedtime" ></div>
 </div>
 </div>
-
 
 <!--- Start Plugins --->
 <cfinclude template="/assets/plugins/plugins.cfm">

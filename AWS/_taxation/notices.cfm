@@ -45,21 +45,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_task1()'>Add</a>
 </div></div></div>
-
-<!---Deviations
-deliverymethod
-
-Fields that had to moved to different groups
-Missing Information
-Missing Info Received
-Fees
-Paid
-
-date noticed received
-due date for response
---->
 
 <!--- Group 1--->
 <div id="group1" class="gf-checkbox">
@@ -74,15 +61,15 @@ due date for response
 </div>
 
 <div id="group2" class="gf-checkbox">
-<h3 onClick="_group2();">Notices</h3>
+<h3 onClick="_run.load_group2();">Notices</h3>
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_addNewTask({"new":"subtask1_id"});'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_task2()'>Add</a>
 </div>
 </div>
-<h4 onClick='_group2();'>Add Notice</h4>
+<h4 onClick='_run.load_group2();'>Add Notice</h4>
 <div>
 <div><label for="g2_matter">Matter Name</label><input type="text" id="g2_matter" class="readonly" readonly></div>
 <div><label for="g2_noticestatus">Notice Status</label><select id="g2_noticestatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -97,7 +84,7 @@ due date for response
 
 </div>
 <!--- GROUP 2_1 --->
-<h4 onClick='_group2_1();'>Details</h4>
+<h4 onClick='_run.load_group2_1();'>Details</h4>
 <div class="subtask1_id">
 <div><label for="g2_1_noticenumber"><i class="fa fa-lock link" onClick="_schk('g2_1_noticenumber')"></i> Notice Number</label><select disabled="disabled" id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_noticedate"><i class="fa fa-lock link" onClick="_schk('g2_1_noticedate')"></i> Notice Date</label><input type="text" class="date" id="g2_1_noticedate" disabled="disabled"></div>
@@ -109,7 +96,7 @@ due date for response
 
 </div>
 <!--- GROUP 2_2 --->
-<h4 onClick='_group2_2();'>Correspondence</h4>
+<h4 onClick='_run.load_group2_2();'>Correspondence</h4>
 <div>
 <div><label for="g2_2_responsecompleted">Response Completed</label><input type="text" class="date" id="g2_2_responsecompleted"></div>
 <div><label for="g2_2_responsecompletedby">Completed By</label><select id="g2_2_responsecompletedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

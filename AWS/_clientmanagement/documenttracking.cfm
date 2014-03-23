@@ -42,7 +42,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');">Add</a></div></div></div>
+<a href="#" class="button optional" onClick="_run.new_task();">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
@@ -53,8 +53,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_sender">Sender</label><input type="text" id="g1_sender"></div>
 <div><label for="g1_staff">Received By</label><select id="g1_staff"  onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto"  multiple="multiple" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<!---<div><label for="form_id" style="display:none">Module</label><select id="form_id" style="display:none"><option value="0" style="display:none">&nbsp;</option></select></div>
-<div><label for="file_id" style="visibility:hidden">File</label><select id="file_id" style="visibility:hidden"><option value="0" style="visibility:hidden">&nbsp;</option></select></div>--->
 <div><label for="g1_description">Description</label><textarea id="g1_description" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 <div><label for="g1_routing">Routing</label><textarea id="g1_routing" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 </div>
@@ -62,10 +60,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 
 <!--- Start Plugins --->
 <cfinclude template="/assets/plugins/plugins.cfm">
-
 <!--- FIELD DATA --->
-
-
 <!--- END FIELD DATA --->
 <!--- END CONTENTS --->
 </div>

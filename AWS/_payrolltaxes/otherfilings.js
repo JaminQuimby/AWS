@@ -1,27 +1,17 @@
-
 $(document).ready(function(){
 _grid1();
-
-_group1=function(params){
-var options = {'open':false}; 
-$.extend(true, options, params);
-_grid1();
-if(options['open']==true){
-_toggle("group1,largeMenu");
-_hide("entrance");
-$("#content").removeClass().addClass("contentbig");
-$("#group1").accordion({active:0});
- }
-if(options['open']==false){ 
-_toggle("entrance,smallMenu");
-_hide("group1,largeMenu");
-$("#content").removeClass().addClass("contentsmall");
- $("#group1").accordion({active:0});
-}
-}
 });
 
-
+var _run={
+	 new_task:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"otherfilings"});_hide("entrance,smallMenu");_addNewTask();}
+	,load_group1:function(params){var options={'open':false};$.extend(true, options, params);_grid1();if(options['open']==true){_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass().addClass("contentbig");$("#group1").accordion({active:0});}if(options['open']==false){ _toggle("entrance,smallMenu");_hide("group1,largeMenu");$("#content").removeClass().addClass("contentsmall");$("#group1").accordion({active:0});}}
+	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"otherfilings"});$("#isLoaded_group1_1").val(1);}
+	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"otherfilings"});$("#isLoaded_group1_2").val(1);}
+	,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"otherfilings"});$("#isLoaded_group1_3").val(1);}
+	,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"otherfilings"});$("#isLoaded_group1_4").val(1);}
+	,load_group1_5:function(){_loadData({"id":"task_id","group":"group1_5","page":"otherfilings"});$("#isLoaded_group1_5").val(1);}
+	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"otherfilings"});_loadData({"id":"task_id","group":"assetCompTask","page":"otherfilings"});}
+	}
 
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
@@ -29,7 +19,7 @@ _grid1=function(){_jGrid({
 	"url":"otherfilings.cfc",
 	"title":"Other Filings",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
-			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.OF_ID+"',page:'otherfilings',group:'group0'});_group1();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.OF_ID+"',page:'otherfilings',group:'group0'});_run.load_group1();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year'}
 			,OF_PERIODTEXT:{title:'Period'}
@@ -37,12 +27,10 @@ _grid1=function(){_jGrid({
 			,OF_TYPETEXT:{title:'Type'}
 			,OF_FORMTEXT:{title:'Form',width:'1%'}
 			,OF_DUEDATE:{title:'Date Due',width:'1%'}
-
 			,OF_STATUSTEXT:{title:'Status'}
 			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Information',width:'1%'}
-			,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}				
-								
+			,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}									
 			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
 			,OF_OBTAININFO:{title:'Obtain Informtaion',width:'1%'}
 			,OF_PREPARATION:{title:'Preparation',width:'1%'}
@@ -54,17 +42,14 @@ _grid1=function(){_jGrid({
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"11"}',
 	"functions":'$("#task_id").val(record.OF_ID);_loadData({"id":"task_id","group":"group1_state","page":"otherfilings"});_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");'
 })};
-_loadAssets=function(){
-_loadData({"id":"client_id","group":"assetCreditHold","page":"otherfilings"});
-_loadData({"id":"task_id","group":"assetCompTask","page":"otherfilings"});
-	}
+
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
 /*Group1_State*/case"OF_STATE":var list='g1_state'; _loadit({"query":query,"list":list});_loadSelect({'selectName':'global_otherfilingsforms','selectObject':'g1_form','option1':$('#g1_state').val(),'page':'otherfilings'});_loadData({"id":"task_id","group":"group1","page":"otherfilings"});break;
-/*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_type,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_type,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "OF_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "OF_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "OF_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -136,12 +121,6 @@ else{
 	if(debug){window.console.log('Start Saving Other Filings');}	
 	}	
 	
-
-
-
-
-
-
 
 break;
 case'group1_1':var json='{"DATA":[["'+

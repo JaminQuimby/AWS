@@ -1,60 +1,52 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){};
-_group1_1=function(){_grid1_1()};
-_group2=function(){};
-_group3=function(){_grid3()};
-_group4=function(){};
-_group4_1=function(){_grid4_1()};
-_group4_2=function(){_grid4_2()};
-_group4_3=function(){_grid4_3()};
-_group4_4=function(){_grid4_4()};
-_group4_5=function(){_grid4_5()};
-_group4_6=function(){_grid4_6()};
-_group5=function(){_grid5();_group5_1()};
-_group5_1=function(){
-$('#isLoaded_group5_1').val(1);
-_loadData({'id':'client_id','group':'group5_1','page':'clientmaintenance'});
-var g5_g1_label1=$("#g5_g1_label1");
-var g5_g1_label2=$("#g5_g1_label2");
-var g5_g1_label3=$("#g5_g1_label3");
-var g5_g1_label4=$("#g5_g1_label4");
-var g5_value1=$('label[for="g5_value1"]');
-var g5_value2=$('label[for="g5_value2"]');
-var g5_value3=$('label[for="g5_value3"]');
-var g5_value4=$('label[for="g5_value4"]');
-g5_value1.html(g5_g1_label1.val());
-g5_value2.html(g5_g1_label2.val());
-g5_value3.html(g5_g1_label3.val());
-g5_value4.html(g5_g1_label4.val());
-g5_g1_label1.change(function(){g5_value1.html($(this).val())});
-g5_g1_label2.change(function(){g5_value2.html($(this).val())});
-g5_g1_label3.change(function(){g5_value3.html($(this).val())});
-g5_g1_label4.change(function(){g5_value4.html($(this).val())});
-};
-_group6=function(){_grid6()}});
-_group6_1=function(){$('#isLoaded_group6').val(1);_loadData({'id':'client_id','group':'group6','page':'clientmaintenance'})
-};
+$(document).ready(function(){_grid1()});
 
-_new=function(){
-$("#g1_active").prop('checked', true);
-document.getElementById('content').className='contentbig';
-_addNewTask();
-_toggle('group1,largeMenu');
-_hide('entrance,smallMenu,group2,group3,group4,group5,group6');	
-}
+
+
+var _run={
+	new_task:function(){$("#g1_active").prop('checked',true);document.getElementById('content').className='contentbig';_addNewTask();_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6');}
+	,new_task1_1:function(){$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);}
+	,new_task3:function(){$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);$("#co_id").val(0);}
+	,new_task4_1:function(){}
+	,new_task4_2:function(){}
+	,new_task4_3:function(){}
+	,new_task4_4:function(){}
+	,new_task4_5:function(){}
+	,new_task5:function(){$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);}
+	,new_task6:function(){$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);}
+	,load_group1:function(){}	
+	,load_group1_1:function(){_grid1_1();}
+	,load_group1_2:function(){$('#isLoaded_group1_2').val(1)}
+	,load_group1_3:function(){$('#isLoaded_group1_3').val(1)}
+	,load_group2:function(){}
+	,load_group2_1:function(){_loadData({"id":"client_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);}
+	,load_group2_2:function(){_loadData({"id":"client_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);}
+	,load_group2_3:function(){_loadData({"id":"client_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);}
+	,load_group3:function(){_grid3()}
+	,load_group4:function(){}
+	,load_group4_1:function(){_grid4_1()}
+	,load_group4_2:function(){_grid4_2()}
+	,load_group4_3:function(){_grid4_3()}
+	,load_group4_4:function(){_grid4_4()}	
+	,load_group4_5:function(){_grid4_5()}	
+	,load_group4_6:function(){_grid4_6()}
+	,load_group5:function(){_grid5()}
+	,load_group5_1:function(){$('#isLoaded_group5_1').val(1);_loadData({'id':'client_id','group':'group5_1','page':'clientmaintenance'});
+								var g5_g1_label1=$("#g5_g1_label1"),g5_g1_label2=$("#g5_g1_label2"),g5_g1_label3=$("#g5_g1_label3"),g5_g1_label4=$("#g5_g1_label4"),g5_value1=$('label[for="g5_value1"]'),g5_value2=$('label[for="g5_value2"]'),g5_value3=$('label[for="g5_value3"]'),g5_value4=$('label[for="g5_value4"]');g5_value1.html(g5_g1_label1.val());g5_value2.html(g5_g1_label2.val());g5_value3.html(g5_g1_label3.val());g5_value4.html(g5_g1_label4.val());g5_g1_label1.change(function(){g5_value1.html($(this).val())});g5_g1_label2.change(function(){g5_value2.html($(this).val())});g5_g1_label3.change(function(){g5_value3.html($(this).val())});g5_g1_label4.change(function(){g5_value4.html($(this).val())});g5_value1.change(function(){g5_g1_label1.html($(this).val())});g5_value2.change(function(){g5_g1_label2.html($(this).val())});g5_value3.change(function(){g5_g1_label3.html($(this).val())});g5_value4.change(function(){g5_g1_label4.html($(this).val())});}
+	,load_group6:function(){_grid6()}	
+	,load_group6_1:function(){$('#isLoaded_group6').val(1);_loadData({'id':'client_id','group':'group6','page':'clientmaintenance'})}	
+	}
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"clientMaintenance.cfc",
 	"title":"Clients",
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CLIENT_ID+"',page:'clientmaintenance',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_SALUTATION:{title:'Salutation'}
-			,CLIENT_TYPETEXT:{title:'Type'}
-			,CLIENT_SINCE:{title:'Client Since',width:'1%'}
-			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CLIENT_ID+"',page:'clientmaintenance',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_NAME:{title:'Client Name'}
+		,CLIENT_SALUTATION:{title:'Salutation'}
+		,CLIENT_TYPETEXT:{title:'Type'}
+		,CLIENT_SINCE:{title:'Client Since',width:'1%'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"1"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"client_id","group":"group1","page":"clientmaintenance"});'
@@ -235,7 +227,6 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 switch(options["group"]){
 case'':
 if($("#g1_name").val()!=""){

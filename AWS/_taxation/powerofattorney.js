@@ -1,32 +1,38 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){}
-}); 
+$(document).ready(function(){_grid1()});
+
+
+var _run={
+	new_task:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();}
+	,load_group1:function(){_grid1();}
+	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"powerofattorney"});}
+}
+
+
 	_grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"powerofattorney.cfc",
 	"title":"Power of Attorney",
 	"fields":{PA_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PA_ID+"',page:'powerofattorney',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_NAME:{title:'Client Name'}
-			,PA_TAXYEARS:{title:'Tax Years'}
-			,PA_TAXFORMSTEXT:{title:'Tax Forms'}
-			,PA_TAXMATTERSTEXT:{title:'Tax Matters'}
-			,PA_PREPARERSTEXT:{title:'Preparers',width:'1%'}
-			,PA_STATUSTEXT:{title:'Status'}
-			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PA_ID+"',page:'powerofattorney',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_NAME:{title:'Client Name'}
+		,PA_TAXYEARS:{title:'Tax Years'}
+		,PA_TAXFORMSTEXT:{title:'Tax Forms'}
+		,PA_TAXMATTERSTEXT:{title:'Tax Matters'}
+		,PA_PREPARERSTEXT:{title:'Preparers',width:'1%'}
+		,PA_STATUSTEXT:{title:'Status'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"7"}',
 	"functions":'$("#task_id").val(record.PA_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"powerofattorney"});'
 	})};
 
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"powerofattorney"});}
+
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Group1*/case "PA_ID":var list='task_id,client_id,g1_dateofrevocation,g1_datesenttoirs,g1_datesignedbyclient,g1_preparers,g1_status,g1_taxforms,g1_taxmatters,g1_taxyears';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group1*/case "PA_ID":var list='task_id,client_id,g1_dateofrevocation,g1_datesenttoirs,g1_datesignedbyclient,g1_preparers,g1_status,g1_taxforms,g1_taxmatters,g1_taxyears';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}

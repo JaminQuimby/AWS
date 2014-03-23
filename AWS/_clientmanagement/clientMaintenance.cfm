@@ -55,11 +55,11 @@ ACTIVITY (CLIENT DATA)
 <div id="entrance" class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput>
 <div>
-<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_run.load_group1();" onKeyPress="if(event.keyCode==13){_run.load_group1();}"/></div>
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="_new()">Add</a>
+<a href="#" class="button optional" onClick="_run.new_task()">Add</a>
 </div></div></div>
 
 <!---Group 1 --->
@@ -80,22 +80,22 @@ ACTIVITY (CLIENT DATA)
 </div>
 
 <!---Group 1 Sub 1--->
-<h4 onClick="_grid1_1();">Saved Custom Fields</h4>
+<h4 onClick="_run.load_group1_1();">Saved Custom Fields</h4>
 <div>
-<div><label for="g1_g1_filter">Filter</label><input id="g1_g1_filter" onBlur="_grid1_1();" onKeyPress="if(event.keyCode==13){_grid1_1();}"/></div>
+<div><label for="g1_g1_filter">Filter</label><input id="g1_g1_filter" onBlur="_run.load_group1_1();" onKeyPress="if(event.keyCode==13){_run.load_group1_1();}"/></div>
 <div id="grid1_1" class="tblGrid"></div>
-<a href="#" class="button optional" onClick='$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_task1_1();'>Add</a>
 </div>
 
 <!---Group 1 Sub 2--->
-<h4 onClick="$('#isLoaded_group1_2').val(1)">Custom Fields</h4>
+<h4 onClick="_run.load_group1_2();">Custom Fields</h4>
 <div>
 <div><label for="g1_g2_fieldname">Field Name</label><input id="g1_g2_fieldname" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_g2_fieldvalue">Field Value</label><input id="g1_g2_fieldvalue" type="text" /></div>
 </div>
 
 <!---Group 1 Sub 3--->
-<h4 onClick="$('#isLoaded_group1_3').val(1)">Groups</h4>
+<h4 onClick="_run.load_group1_3();">Groups</h4>
 <div>
 <div><label for="g1_g3_group">Groups</label><select id="g1_g3_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="global_clientgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
@@ -106,7 +106,7 @@ ACTIVITY (CLIENT DATA)
 <h3>Services</h3><div></div>
 
 <!---Group 2 Sub 1--->
-<h4 onClick='_loadData({"id":"client_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);'>Taxes</h4>
+<h4 onClick='_run.load_group2_1();'>Taxes</h4>
 <div>
 <div><label for="g2_g1_taxservices"><input id="g2_g1_taxservices" type="checkbox" class="ios-switch">Tax Services</label></div>
 <div><label for="g2_g1_formtype">Form Type</label><select id="g2_g1_formtype" data-placeholder="Select a Company Type."><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -117,7 +117,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 
 <!---Group 2 Sub 2--->
-<h4 onClick='_loadData({"id":"client_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);'>Payroll</h4>
+<h4 onClick='_run.load_group2_2();'>Payroll</h4>
 <div>
 <div><label for="g2_g2_payrollpreparation"><input id="g2_g2_payrollpreparation" type="checkbox" class="ios-switch">Payroll Preparation</label></div>
 <div><label for="g2_g2_paycheckfrequency">Paycheck Frequency</label><select id="g2_g2_paycheckfrequency" data-placeholder="Select a Paycheck Frequency."><option value="0">&nbsp;</option><cfoutput query="global_timespans"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -130,7 +130,7 @@ ACTIVITY (CLIENT DATA)
 </div>
 
 <!---Group 2 Sub 3--->
-<h4 onClick='_loadData({"id":"client_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);'>Accounting</h4>
+<h4 onClick='_run.load_group2_3();'>Accounting</h4>
 <div>
 <div><label for="g2_g3_accountingServices"><input id="g2_g3_accountingServices" type="checkbox" class="ios-switch">Accounting Services</label></div>
 <div><label for="g2_g3_bookkeeping"><input id="g2_g3_bookkeeping" type="checkbox" class="ios-switch">Bookkeeping</label></div>
@@ -148,15 +148,15 @@ ACTIVITY (CLIENT DATA)
 
 <!--- GROUP 3 --->
 <div id="group3" class="gf-checkbox">
-<h3 onClick="_grid3();">Saved Contacts</h3>
+<h3 onClick="_run.load_group3();">Saved Contacts</h3>
 <div>
-<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
+<div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_run.load_group3();" onKeyPress="if(event.keyCode==13){_run.load_group3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);$("#co_id").val(0);'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_task3()'>Add</a>
 </div>
 </div>
-<h4 onclick="_group3();">Contact</h4>
+<h4 onclick="_run.load_group3();">Contact</h4>
 <div>
 <div><label for="g3_type">Type</label><select id="g3_type"><option value="0">&nbsp;</option><cfoutput query="global_contacttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_name">Contact Name</label><input id="g3_name" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
@@ -178,7 +178,8 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_effectivedate">Effective Date</label><input type="text" id="g3_effectivedate" class="date"/></div>
 <div><label for="g3_acctsoftwareupdate"><input id="g3_acctsoftwareupdate" type="checkbox" class="ios-switch">Updated in accounting software</label></div>
 <div><label for="g3_taxupdate"><input id="g3_taxupdate" type="checkbox" class="ios-switch">Update in tax software</label></div>
-<div><label for="g3_customvalue"><input id="g3_customvalue" type="checkbox" class="ios-switch"><input type="text" id="g3_customlabel" class="customlabel"/></label></div></div>
+<div><label style="float:left;width:70px" ><input id="g3_customvalue" type="checkbox" class="ios-switch" /></label><input type="text" id="g3_customlabel" class="customlabel"/></div>
+</div>
 </div>
 
 <!--- Group 4 --->
@@ -188,70 +189,70 @@ ACTIVITY (CLIENT DATA)
 
 
 <!--- GROUP 4 SUB 1 ADD TO FINANCIAL STATEMENTS --->
-<h4 onClick='_grid4_1();'>Financial Statements</h4>
+<h4 onClick='_run.load_group4_1();'>Financial Statements</h4>
 <div>
 <div class="tblGrid" id="grid4_1"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_task4_1();window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
 </div>
 </div>
 
 <!--- GROUP 4 SUB 2 Accounting &amp; Consulting Tasks --->
-<h4  onClick='_grid4_2();'>Accounting &amp; Consulting Tasks</h4>
+<h4  onClick='_run.load_group4_2();'>Accounting &amp; Consulting Tasks</h4>
 <div>
 <div class="tblGrid" id="grid4_2"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_task4_2();window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
 </div>
 </div>
 
 <!--- GROUP 4 SUB 3 ADD TO PAYROLL CHECKS --->
-<h4 onClick='_grid4_3();'>Payroll Checks</h4>
+<h4 onClick='_run.load_group4_3();'>Payroll Checks</h4>
 <div>
 <div class="tblGrid" id="grid4_3"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_task4_3();window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
 </div>
 </div>
 
 <!--- GROUP 4 SUB 4 ADD TO PAYROLL TAXES --->
-<h4 onClick='_grid4_4();'>Payroll Taxes</h4>
+<h4 onClick='_run.load_group4_4();'>Payroll Taxes</h4>
 <div>
 <div class="tblGrid" id="grid4_4"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_task4_4();window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
 </div>
 </div>
 
 <!--- GROUP 4 SUB 5 ADD TO TAX STATUS LISTING --->
-<h4 onClick='_grid4_5();'>Tax Status Listing</h4>
+<h4 onClick='_run.load_group4_5();'>Tax Status Listing</h4>
 <div>
 <div class="tblGrid" id="grid4_5"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_taxation/taxreturns.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_task4_5();window.location='#this.url#/AWS/_taxation/taxreturns.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
 </div>
 </div>
 
 <!--- GROUP 4 SUB 6 OTHER FILINGS --->
-<h4 onClick='_grid4_6();'>Other Filings</h4>
+<h4 onClick='_run.load_group4_6();'>Other Filings</h4>
 <div>
 <div class="tblGrid" id="grid4_6"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="window.location='#this.url#/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_task4_6();window.location='#this.url#/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
 </div>
 </div>
 </div>
 <!--- GROUP 5--->
 <div id="group5" class="gf-checkbox">
-<h3 onClick="_grid5();">Saved State Information</h3>
+<h3 onClick="_run.load_group5();">Saved State Information</h3>
 <div>
-<div><label for="g5_filter">Filter</label><input id="g5_filter" onBlur="_grid5();" onKeyPress="if(event.keyCode==13){_grid5();}"/></div>
+<div><label for="g5_filter">Filter</label><input id="g5_filter" onBlur="_run.load_group5();" onKeyPress="if(event.keyCode==13){_run.load_group5();}"/></div>
 <div class="tblGrid" id="grid5"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_task5();'>Add</a>
 </div>
 </div>
-<h4 onclick="_group5();">State Information</h4>
+<h4 onclick="_run.load_group5();">State Information</h4>
 <div>
 <div><label for="g5_state">State</label><select id="g5_state" data-placeholder="Select a State."><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g5_revenue"><input id="g5_revenue" type="checkbox" class="ios-switch">Revenue</label></div>
@@ -260,12 +261,13 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g5_nexus"><input id="g5_nexus" type="checkbox" class="ios-switch">NEXUS</label></div>
 <div><label for="g5_reason">Reason</label><input id="g5_reason" /></div>
 <div><label for="g5_registered"><input id="g5_registered" type="checkbox" class="ios-switch">Registered</label></div>
-<div><label for="g5_value1"><input id="g5_value1" type="checkbox" class="ios-switch"></label><label for="g5_value1" id="g5_label1"></label></div>
-<div><label for="g5_value2"><input id="g5_value2" type="checkbox" class="ios-switch"></label><label for="g5_value2" id="g5_label2"></label></div>
-<div><label for="g5_value3"><input id="g5_value3" type="checkbox" class="ios-switch"></label><label for="g5_value3" id="g5_label3"></label></div>
-<div><label for="g5_value4"><input id="g5_value4" type="checkbox" class="ios-switch"></label><label for="g5_value4" id="g5_label4"></label></div>
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value1" type="checkbox" class="ios-switch"></label><label for="g5_value1"style="height:25px;padding:5px"></label></div><!---label for="g5_value1" id="g5_label1"></label--->
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value2" type="checkbox" class="ios-switch"></label><label for="g5_value2"style="height:25px;padding:5px"></label></div><!---label for="g5_value2" id="g5_label2"></label--->
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value3" type="checkbox" class="ios-switch"></label><label for="g5_value3"style="height:25px;padding:5px"></label></div><!---label for="g5_value3" id="g5_label3"></label--->
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value4" type="checkbox" class="ios-switch"></label><label for="g5_value4"style="height:25px;padding:5px"></label></div><!---label for="g5_value4" id="g5_label4"></label--->
 </div>
-<h4 onclick="_group5_1();">State Labels</h4>
+
+<h4 onclick="_run.load_group5_1();">State Labels</h4>
 <div>
 <div><label for="g5_g1_label1">Label 1</label><input type="text" id="g5_g1_label1"/></div>
 <div><label for="g5_g1_label2">Label 2</label><input type="text" id="g5_g1_label2"/></div>
@@ -276,16 +278,16 @@ ACTIVITY (CLIENT DATA)
 
 <!--- GROUP 6 --->
 <div id="group6" class="gf-checkbox" >
-<h3 onClick="_group6()">Related Client Details</h3>
+<h3 onClick="_run.load_group6()">Related Client Details</h3>
 <div>
-<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_grid6();"  onKeyPress="if(event.keyCode==13){_grid6();}"/></div>
+<div><label for="g6_filter">Filter</label><input id="g6_filter" onBlur="_run.new_group6();"  onKeyPress="if(event.keyCode==13){_run.load_group6();}"/></div>
 <!--- SET GRID CONTACTS --->
 <div id="grid6" class="tblGrid"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_task6();'>Add</a>
 </div>
 </div>
-<h4 onclick="_group6_1();">Related Clients</h4>
+<h4 onclick="_run.load_group6_1();">Related Clients</h4>
 <div>
 <div><label for="g6_group">Groups</label><select id="g6_group" multiple="multiple" data-placeholder="Select Some Client Groups."><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>

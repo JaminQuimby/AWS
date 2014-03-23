@@ -1,8 +1,9 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){}
-});
+$(document).ready(function(){_grid1();});
 
+var _run={
+	new_task:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');}
+	,load_group1:function(){}
+	}
 
 /*Define Grid Instances*/   
 _grid1=function(){_jGrid({
@@ -10,15 +11,15 @@ _grid1=function(){_jGrid({
 	"url":"documenttracking.cfc",
 	"title":"Document Tracking",
 	"fields":{DT_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.DT_ID+"',page:'documenttracking',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_ID:{list:false,edit:false}
-			,DT_DATE:{title:'Date',width:'1%'}
-			,CLIENT_NAME:{title:'Client Name'}
-			,DT_SENDER:{title:'Sender'}
-			,DT_STAFF:{title:'Received By'}
-			,DT_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			,DT_DESCRIPTION:{title:'Description'}
-			,DT_ROUTING:{title:'Routing'}
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.DT_ID+"',page:'documenttracking',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_ID:{list:false,edit:false}
+		,DT_DATE:{title:'Date',width:'1%'}
+		,CLIENT_NAME:{title:'Client Name'}
+		,DT_SENDER:{title:'Sender'}
+		,DT_STAFF:{title:'Received By'}
+		,DT_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+		,DT_DESCRIPTION:{title:'Description'}
+		,DT_ROUTING:{title:'Routing'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
@@ -62,7 +63,6 @@ _saveData({group:"group1","payload":$.parseJSON(json),page:"documenttracking"});
 break;
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
-/*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
 default:jqMessage({message: "A exception in documenttracking.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: false,duration: 5});break;}}
