@@ -21,7 +21,7 @@ var grid1_config = [
 ,{"n":"paid","t":"numeric","v":""}
 ,{"n":"deliverymethod","t":"numeric","v":""}
 ,{"n":"obtaininfo_assignedto","t":"numeric","v":""}
-,{"n":"obtaininfo_datecomplted","t":"date","v":""}
+,{"n":"obtaininfo_datecompleted","t":"date","v":""}
 ,{"n":"obtaininfo_completedby","t":"numeric","v":""}
 ,{"n":"obtaininfo_esttime","t":"numeric","v":""}
 ,{"n":"entry_assignedto","t":"numeric","v":""}
