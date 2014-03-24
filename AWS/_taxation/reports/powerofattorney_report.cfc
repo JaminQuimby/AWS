@@ -1,19 +1,24 @@
 <cfcomponent output="true">
 
-<!---
-
-SELECT TOP 1000 [pa_id]
- ,[client_id]
- ,CONVERT(VARCHAR(10),[pa_dateofrevocation], 101)AS[pa_dateofrevocation]
- ,CONVERT(VARCHAR(10),[pa_datesenttoirs], 101)AS[pa_datesenttoirs]
- ,CONVERT(VARCHAR(10),[pa_datesignedbyclient], 101)AS[pa_datesignedbyclient]
- ,[pa_preparers]
- ,[pa_status]
- ,[pa_taxforms]
- ,[pa_taxmatters]
-,[pa_taxyears]
-FROM[powerofattorney]
---->
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 
 
 <!--- [LOOKUP FUNCTIONS] --->

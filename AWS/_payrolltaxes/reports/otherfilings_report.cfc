@@ -1,49 +1,23 @@
 <cfcomponent output="true">
-
-<!---
-SELECT TOP 1000 [of_id]
-      ,[client_id]
-      ,[of_taxyear]
-      ,[of_period]
-      ,[of_state]
-      ,[of_type]
-      ,[of_form]
-      ,[of_duedate]
-      ,[of_filingdeadline]
-      ,[of_extensiondeadline]
-      ,[of_extensioncompleted]
-      ,[of_status]
-      ,[of_priority]
-      ,[of_esttime]
-      ,[of_missinginfo]
-      ,[of_missinginforeceived]
-      ,[of_fees]
-      ,[of_paid]
-      ,[of_deliverymethod]
-      ,[of_obtaininfo_assignedto]
-      ,[of_obtaininfo_datecompleted]
-      ,[of_obtaininfo_completedby]
-      ,[of_obtaininfo_esttime]
-      ,[of_preparation_assignedto]
-      ,[of_preparation_datecompleted]
-      ,[of_preparation_completedby]
-      ,[of_preparation_esttime]
-      ,[of_review_assignedto]
-      ,[of_review_datecompleted]
-      ,[of_review_completedby]
-      ,[of_review_esttime]
-      ,[of_assembly_assignedto]
-      ,[of_assembly_datecompleted]
-      ,[of_assembly_completedby]
-      ,[of_assembly_esttime]
-      ,[of_delivery_assignedto]
-      ,[of_delivery_datecompleted]
-      ,[of_delivery_completedby]
-      ,[of_delivery_esttime]
-  FROM [otherfilings]
-  --->
-
-
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">

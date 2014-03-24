@@ -1,46 +1,24 @@
 <cfcomponent output="true">
 
-<!--- 
-
-[pt_id]
-      ,[client_id]
-      ,[pt_year]
-      ,[pt_month]
-      ,[pt_duedate]
-      ,[pt_type]
-      ,[pt_lastpay]
-      ,[pt_priority]
-      ,[pt_esttime]
-      ,[pt_missinginfo]
-      ,[pt_missinginforeceived]
-      ,[pt_fees]
-      ,[pt_paid]
-      ,[pt_deliverymethod]
-      ,[pt_obtaininfo_assignedto]
-      ,[pt_obtaininfo_datecomplted]
-      ,[pt_obtaininfo_completedby]
-      ,[pt_obtaininfo_esttime]
-      ,[pt_entry_assignedto]
-      ,[pt_entry_datecompleted]
-      ,[pt_entry_completedby]
-      ,[pt_entry_esttime]
-      ,[pt_rec_assignedto]
-      ,[pt_rec_datecompleted]
-      ,[pt_rec_completedby]
-      ,[pt_rec_esttime]
-      ,[pt_review_assignedto]
-      ,[pt_review_datecompleted]
-      ,[pt_review_completedby]
-      ,[pt_review_esttime]
-      ,[pt_assembly_assignedto]
-      ,[pt_assembly_datecompleted]
-      ,[pt_assembly_completedby]
-      ,[pt_assembly_esttime]
-      ,[pt_delivery_assignedto]
-      ,[pt_delivery_datecompleted]
-      ,[pt_delivery_completedby]
-      ,[pt_delivery_esttime]
-	  --->
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 
 <!--- LOAD SELECT BOXES --->
 <cffunction name="f_loadSelect" access="remote" output="true">

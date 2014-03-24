@@ -1,37 +1,23 @@
 <cfcomponent output="true">
-<!---
-SELECT TOP 1000 [mc_id]
-      ,[client_id]
-      ,[mc_assignedto]
-      ,[mc_category]
-      ,[mc_description]
-      ,[mc_duedate]
-      ,[mc_esttime]
-      ,[mc_fees]
-      ,[mc_paid]
-      ,[mc_priority]
-      ,[mc_projectcompleted]
-      ,[mc_requestforservice]
-      ,[mc_status]
-      ,[mc_workinitiated]
-      ,[mc_credithold]
-  FROM [AWS].[dbo].[managementconsulting]
-  
-  
-SELECT TOP 1000 [mcs_id]
-      ,[mc_id]
-      ,[mcs_actualtime]
-      ,[mcs_assignedto]
-      ,[mcs_completed]
-      ,[mcs_dependencies]
-      ,[mcs_duedate]
-      ,[mcs_esttime]
-      ,[mcs_notes]
-      ,[mcs_sequence]
-      ,[mcs_status]
-      ,[mcs_subtask]
-  FROM [AWS].[dbo].[managementconsulting_subtask]
---->
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 
 
 <!--- [LOOKUP FUNCTIONS] --->

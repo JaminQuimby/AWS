@@ -4,12 +4,9 @@
 <cfargument name="selectName" type="string">
 <cfargument name="formid" type="string" default="">
 <cfargument name="option1" type="string" default="">
-
 <cfquery datasource="AWS" name="fquery" >
 SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
 </cfquery>
-
-
 <cfset myResult="">
 <cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
 <cfset queryIndex=0>

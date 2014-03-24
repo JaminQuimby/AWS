@@ -1,41 +1,5 @@
 <cfcomponent output="true">
-<!--- 
-SELECT[nm_id]
-      ,[client_id]
-      ,[nm_name]
-      ,[nm_status]
-FROM [noticematter]
-  
 
-
-GROUP2 LEVEL2  
-SELECT[n_id]
-      ,[n_assignedto]
-      ,[n_deliverymethod]
-	  ,[n_fees]
-      ,[n_missinginfo]
-      ,[n_missinginforeceived]
-      ,[n_status]
-      ,[n_paid]
-      ,[n_priority]
-      ,[n_esttime]
-      ,[n_1_datenoticerec]
-      ,[n_1_noticenumber]
-      ,[n_1_noticedate]
-      ,[n_1_taxform]
-      ,[n_1_taxyear]
-      ,[n_1_methodreceived]
-      ,[n_2_rescompleted]
-      ,[n_2_rescompletedby]
-      ,[n_1_resduedate]
-      ,[n_2_revrequired]
-      ,[n_2_revassignedto]
-      ,[n_2_revcompleted]
-      ,[n_2_ressubmited]
-      ,[n_2_irsstateresponse]
-  FROM[notice]
-  
---->
 <!--- LOAD SELECT BOXES --->
 <cffunction name="f_loadSelect" access="remote" output="true">
 <cfargument name="selectName" type="string">

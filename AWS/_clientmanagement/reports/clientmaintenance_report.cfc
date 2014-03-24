@@ -1,60 +1,23 @@
 <cfcomponent output="true">
-<!--- f_saveData = Insert or Update tables with json data from ajax--->
-<!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
-<!--- f_loadSelect = get select data--->
-<!--- [LOAD FUNCTIONs] --->
-<!---
-SELECT
-[client_id]
-	,[client_active]
-	,[client_credit_hold]
-	,[client_group]
-	,[client_name]
-	,[client_notes]
-	,[client_referred_by]
-	,[client_salutation]
-	,CONVERT(VARCHAR(8),[CLIENT_SINCE], 101)AS[CLIENT_SINCE]
-	,[client_spouse]
-	,[client_trade_name]
-	,[client_type]
-	,[client_statelabel1]
-	,[client_statelabel2]
-	,[client_statelabel3]
-	,[client_statelabel4]
-	,[client_relations]
-	,[client_schedule_c]
-	,[client_schedule_e]
-	,[client_disregard]
-	,[client_personal_property]
-FROM[CLIENT_LISTING]
-
-
-
-	[contact_id]
-	,[contact_type]
-	,[contact_name]
-	,[contact_address1]
-	,[contact_address2]
-	,[contact_city]
-	,[contact_state]
-	,[contact_zip]
-	,[contact_phone1]
-	,[contact_phone2]
-	,[contact_phone3]
-	,[contact_phone4]
-	,[contact_phone5]
-	,[contact_email1]
-	,[contact_email2]
-	,[contact_website]
-	,CONVERT(VARCHAR(8),[contact_effectivedate], 101)AS[contact_effectivedate]
-	,[contact_acctsoftwareupdate]
-	,[contact_taxupdate]
-	,[contact_customLabel]
-	,[contact_customValue]
-FROM[CLIENT_CONTACT]
---->
-
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">

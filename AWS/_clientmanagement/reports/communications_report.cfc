@@ -1,34 +1,23 @@
 <cfcomponent output="true">
-<!--- f_saveData = Insert or Update tables with json data from ajax--->
-<!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
-<!--- f_loadSelect = get select data--->
-<!--- [LOAD FUNCTIONs] --->
-<!---
-
-SELECT[co_id]
-,[client_id]
-,[co_briefmessage]
-,[co_caller]
-,[co_contactmethod]
-,[co_credithold]
-,CONVERT(CHAR(8),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
-,CONVERT(VARCHAR(8),[co_duedate], 101)AS[co_duedate]
-,[co_emailaddress]
-,[co_ext]
-,[co_faxnumber]
-,[co_fees]
-,[co_for]
-,[co_status]
-,[co_paid]
-,[co_responseneeded]
-,[co_returncall]
-,[co_takenby]
-,[co_telephone]
-   FROM [v_communications]
-  
-  
---->
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 
 
 <!--- [LOOKUP FUNCTIONS] --->
