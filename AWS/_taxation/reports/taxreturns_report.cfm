@@ -1,4 +1,3 @@
-
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
@@ -17,19 +16,16 @@
 <!---Head & Supporting Documents--->
 <cfinclude template="/assets/inc/header.cfm">
 <cfinclude template="/assets/inc/pagemenu.cfm">
-
-
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2'); ">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="/assets/module/menu2/menu.cfm"></nav>
 
-<!--- ENTRANCE --->
-  <div id="group1" class="gf-checkbox">
-  <cfoutput><h3>#page.title# Search</h3></cfoutput>
+ <div id="group1" class="gf-checkbox">
+    <cfoutput><h3>#page.title# Search</h3></cfoutput>
 	<div>
-	<div><label for="g0_filter">Filter</label><span class="search-bar"><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></span><span class="search-bar search-btn">&nbsp;</span><div class="search-tog"><div class="search-togcan"><div>Methods:<br/><ul></ul></div><div></div><div class="search-togfooter" onClick="$('#group1 .search-tog').slideToggle('fast');">&and;</div></div></div><span class="search-togbtn" onClick="$('#group1 .search-tog').slideToggle('fast');">&or;</span></div>
-	<div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
+		<div><label for="g0_filter">Filter</label><span class="search-bar"><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></span><span class="search-bar search-btn">&nbsp;</span><div class="search-tog"><div class="search-togcan"><div>Methods:<br/><ul></ul></div><div></div><div class="search-togfooter" onClick="$('#group1 .search-tog').slideToggle('fast');">&and;</div></div></div><span class="search-togbtn" onClick="$('#group1 .search-tog').slideToggle('fast');">&or;</span></div>
+		<div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
     </div>
   </div>
 

@@ -1,7 +1,10 @@
-$(document).ready(function(){
-_grid1()
-_group1=function(){_grid1()}
-});
+$(document).ready(function(){_grid1()});
+
+var _run={
+	  load_group1:function(){_grid1()}
+	 ,load_group2:function(){_grid2()}
+}
+ 
  
 _grid1=function(){
 var grid1_config = [
@@ -38,7 +41,5 @@ var grid1_config = [
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"4"}',
-	//"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.CAS_ID'
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.CAS_ID+"&nav=0","_blank")'
 	})};
-

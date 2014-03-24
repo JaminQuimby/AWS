@@ -1,21 +1,26 @@
 <cfcomponent output="true">
-<!---  Few of mispelled column names
-[cas_id]
-      ,[client_id]
-      ,[cas_assignedto]
-      ,[cas_category]
-      ,[cas_completed]
-      ,[cas_datereqested]
-      ,[cas_datestarted]
-      ,[cas_duedate]
-      ,[cas_esttime]
-      ,[cas_instructions]
-      ,[cas_priority]
-      ,[cas_reqestby]
-      ,[cas_status]
-      ,[cas_taskdesc]
-  FROM [AWS].[dbo].[clientadministrativetasks]
-  --->
+<!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="string" default="">
+
+<cfquery datasource="AWS" name="fquery" >
+SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
+</cfquery>
+
+
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
 
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">

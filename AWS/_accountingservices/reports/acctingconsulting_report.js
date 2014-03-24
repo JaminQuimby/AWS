@@ -1,7 +1,9 @@
-$(document).ready(function(){
-_grid1()
-_group1=function(){_grid1()}
-});
+$(document).ready(function(){_grid1()});
+
+var _run={
+	  load_group1:function(){_grid1()}
+	 ,load_group2:function(){_grid2()}
+}
  
 _grid1=function(){
 var grid1_config = [
