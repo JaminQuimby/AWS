@@ -512,39 +512,24 @@ $.extend({
 });
 
 })(jQuery, this);
+
+
 function _toCSV(){
-    var formData = $('#grid1').serialize();
 
-   $.ajax({
-      url:'../assets/inc/export/excel.cfm',
-      data: formData
-  }); 
+	//alert($('.jtable').serialize())
+	alert($('#'+options['grid']+' table'))
 	
-	
-container ='<div id="preparing-file-modal" title="Preparing report..." style="display: none;">We are preparing your report, please wait...<div class="ui-progressbar-value ui-corner-left ui-corner-right" style="width: 100%; height:22px; margin-top: 20px;"></div></div><div id="error-modal" title="Error" style="display: none;">There was a problem generating your report, please try again.</div>'
- $('body').append(container)
-        var $preparingFileModal = $("#preparing-file-modal");
- 
-         $preparingFileModal.dialog({ modal: true });
- 
-        $.fileDownload($(this).prop('href'), {
-            successCallback: function (url) {
- 
-                $preparingFileModal.dialog('close');
-            },
-            failCallback: function (responseHtml, url) {
- 
-                $preparingFileModal.dialog('close');
-                $("#error-modal").dialog({ modal: true });
-            }
-        });
-        return false; //this is critical to stop the click event which will trigger a normal file download!
+$.fileDownload('../assets/inc/export/excel.cfm', 
+{
+preparingMessageHtml: "We are preparing your report, please wait..."
+,failMessageHtml: "There was a problem generating your report, please try again."
+,data:$('.jtable').serialize()
+})
 
-
+      return false; //this is critical to stop the click event which will trigger a normal file download!
+	  
+	  };
 	
-	
-	
-};
 
  function _toCSV4($table, filename) {
 

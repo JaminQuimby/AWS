@@ -31,7 +31,7 @@
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance');">Add</a>
+<a href="#" class="button optional" onClick="_run.new_group1();">Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
@@ -48,7 +48,7 @@
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_group2();"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group2()'>Add</a>
 </div>
 </div>
 <h4 onClick='$("#isLoaded_group2").val(1);'>Option</h4>
@@ -81,6 +81,11 @@
 <!--- Global State --->
 <div id="opt_globalState" style="display:none">
 <div><label for="opt_stateAbbreviations">Abbreviation</label><input type="text" id="opt_stateAbbreviations"></div>
+</div>
+
+<!--- Notices --->
+<div id="opt_notices" style="display:none">
+<div><label for="opt_noticeInstructions">Notice Instructions</label><input type="text" id="opt_noticeInstructions"></div>
 </div>
 
 <!--- END Options --->

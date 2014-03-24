@@ -1,48 +1,8 @@
-    <!---
-    Create and store the simple HTML data that you want
-    to treat as an Excel file.
-    --->
+<cfparam name="URL.data" default="">
     <cfsavecontent variable="strExcelData">
-     
-    <style type="text/css">
-     
-    td {
-    font-family: "times new roman", verdana ;
-    font-size: 11pt ;
-    }
-     
-    td.header {
-    background-color: yellow ;
-    border-bottom: 0.5pt solid black ;
-    font-weight: bold ;
-    }
-     
-    </style>
-     
-     
-    <table>
-    <tr>
-    <td class="header">Conversational Phrase</td>
-    <td class="header">Daily Count</td>
-    </tr>
-    <tr>
-    <td>Sweet ass sweet!</td>
-    <td>3</td>
-    </tr>
-    <tr>
-    <td>Freakin' Sweet!</td>
-    <td>15</td>
-    </tr>
-    <tr>
-    <td>Heck yeah!</td>
-    <td>5</td>
-    </tr>
-    <tr>
-    <td>Booya Grandma!</td>
-    <td>0</td>
-    </tr>
-    </table>
-     
+    <cfoutput>
+    #URL.data#
+     </cfoutput>
     </cfsavecontent>
      
      

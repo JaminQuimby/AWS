@@ -1,13 +1,20 @@
-$(document).ready(function(){
-_grid1(jqMessage({message:"Changes to select boxes effects the dropdown select options for your entire company.",type: "warning",autoClose: false}));
-_group1=function(){}
-_group2=function(){_clearfields({"sel":"opt_Form,g2_optionGroup,g2_optionHide","list":"g2_optionName,g2_optionDescription"});_grid2();}
-});
+$(document).ready(function(){_grid1();});
+
+var _run={
+	  new_group1:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance');}
+	 ,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);}
+	 ,load_group1:function(){_grid1();jqMessage({message:"Changes to select boxes effects the dropdown select options for your entire company.",type: "warning",autoClose: false})}
+	 ,load_group2:function(){_clearfields({"sel":"opt_Form,g2_optionGroup,g2_optionHide","list":"g2_optionName,g2_optionDescription"});_grid2();}
+	 
+}
+
 $('#opt_FinancialStatementGroups').hide();
 $('#opt_OtherFilings').hide();
 $('#opt_TaxReturnsSchedule').hide();
 $('#opt_AcctConGroups').hide();
 $('#opt_globalState').hide();
+$('#opt_notices').hide();
+
 
 _options=function(id){
 	switch(id){
@@ -17,6 +24,7 @@ _options=function(id){
 	case'35':$('#opt_TaxReturnsSchedule').show(); break;
 	case'36':$('#opt_OtherFilings').show(); break; 
 	case'37':$('#opt_AcctConGroups').show(); break;
+	case'28':$('#opt_notices').show(); break;
 	}};
 	
 _grid1=function(){_jGrid({
@@ -68,7 +76,10 @@ var list=list+',opt_Form';
 if($("#task_id").val() == '37'){
 var list=list+',opt_AcctConGroups_Subtasks';
 	}	
-	
+
+if($("#task_id").val() == '28'){
+var list=list+',opt_noticeInstructions';
+	}	
 _loadit({"query":query,"list":list,"page":"table"});break;
 
 
@@ -111,6 +122,10 @@ $("#opt_Form").val()+'","'
 
 (($("#task_id").val() == '37' )?
 $("#opt_AcctConGroups_Subtasks").val()+'","'
+:one='')+
+
+(($("#task_id").val() == '28' )?
+$("#opt_noticeInstructions").val()+'","'
 :one='')+
 
 '","'+
