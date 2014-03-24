@@ -2,7 +2,7 @@ $(document).ready(function(){_grid1()});
 
 
 var _run={
-	new_task:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();}
+	 new_group1:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();}
 	,load_group1:function(){_grid1();}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"powerofattorney"});}
 }

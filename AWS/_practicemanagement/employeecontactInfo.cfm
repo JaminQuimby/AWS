@@ -30,7 +30,7 @@
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');">Add</a></div></div></div>
+<a href="#" class="button optional" onClick="_run.new_group1()">Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>

@@ -18,7 +18,6 @@
 <cfset i=i+1>
 <cfset item[i]=s>
 </cfloop>
-
 <cfquery datasource="AWS" name="fquery" >
 SELECT TOP(1)[client_id]
 FROM[financialdatastatus]
@@ -27,19 +26,15 @@ AND[fds_year]=<cfqueryparam value="#item[2]#">
 AND[fds_month]=<cfqueryparam value="#item[3]#">
 AND[fds_periodend]=<cfqueryparam value="#item[4]#">
 </cfquery>
-
 </cfcase>
 </cfswitch>
-
 <cfif fquery.recordcount gt 0>
 <cfset myResult='{"Result":"OK","check":"true"}'>
 <cfelse>
 <cfset myResult='{"Result":"OK","check":"false"}'>
 </cfif>
 <cfreturn myResult>
-
 </cffunction>
-
 
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
@@ -347,8 +342,9 @@ SELECT[fdss_id]
 FROM[v_financialDataStatus_Subtask]
 WHERE[fdss_status] != 2 
 AND [fdss_status] != 3
-<cfif ARGUMENTS.ID neq "0">AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
-[fds_id]=<cfqueryparam value="#ARGUMENTS.id#"/>AND[fdss_subtaskTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+AND[fdss_subtaskTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+<cfif ARGUMENTS.ID neq "0">AND[fdss_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfif>
+
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>
 </cfquery>
 <cfset myResult="">

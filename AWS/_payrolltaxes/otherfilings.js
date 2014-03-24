@@ -1,9 +1,7 @@
-$(document).ready(function(){
-_grid1();
-});
+$(document).ready(function(){_grid1();});
 
 var _run={
-	 new_task:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"otherfilings"});_hide("entrance,smallMenu");_addNewTask();}
+	 new_group1:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"otherfilings"});_hide("entrance,smallMenu");_addNewTask();}
 	,load_group1:function(params){var options={'open':false};$.extend(true, options, params);_grid1();if(options['open']==true){_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass().addClass("contentbig");$("#group1").accordion({active:0});}if(options['open']==false){ _toggle("entrance,smallMenu");_hide("group1,largeMenu");$("#content").removeClass().addClass("contentsmall");$("#group1").accordion({active:0});}}
 	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"otherfilings"});$("#isLoaded_group1_1").val(1);}
 	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"otherfilings"});$("#isLoaded_group1_2").val(1);}

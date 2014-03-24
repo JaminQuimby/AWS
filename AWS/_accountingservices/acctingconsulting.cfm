@@ -24,7 +24,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </cfif>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
-<!--- IN HEADER <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery> --->
 <cfquery dbtype="query" name="global_consultingcategory">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_consultingcategory'</cfquery>
 <cfquery dbtype="query" name="global_acctsubtasks">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctsubtasks'</cfquery>
 <cfquery dbtype="query" name="global_acctgroup">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_acctgroup'</cfquery>
@@ -44,7 +43,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"acctingconsulting"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 
@@ -53,13 +52,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <h3>General</h3>
 <div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<!---Developer Note:[Table Management Consulting Tasks]--->
-<!--- Missing fields
-missinginformation
-missinginforeceived
---->
-
-<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id" disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id" disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
 <div><label for="g1_consultingcategory"><i class="fa fa-lock link" onClick="_schk('g1_consultingcategory')"></i> Consulting Category</label><select id="g1_consultingcategory" disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadData({'id':'g1_consultingcategory','group':'assetCategory','page':'acctingconsulting'});"><option value="0">&nbsp;</option><cfoutput query="global_consultingcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_taskdescription"><i class="fa fa-lock link" onClick="_schk('g1_taskdescription')"></i> Task Description</label><textarea  id="g1_taskdescription" disabled="disabled" cols="4" rows="4"  maxlength="1000" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" ></textarea></div>
@@ -87,10 +80,10 @@ missinginforeceived
         </div>
 <div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_group2({open:true});$("#subtask1_id").val(0);'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group2();'>Add</a>
 </div>
 </div>
-<h4 onClick='_loadData({"id":"task_id","group":"group2","page":"acctingconsulting"});$("#subtask_isLoaded").val(1);'>Add Subtask</h4>
+<h4 onClick='_run.load_group2();'>Add Subtask</h4>
 <div>
 <div><label for="g2_sequence">Sequence</label><input type="text" id="g2_sequence" ></div>
 <div><label for="g2_subtask">Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

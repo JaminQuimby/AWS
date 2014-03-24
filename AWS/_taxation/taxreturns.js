@@ -7,9 +7,9 @@ if($.parseJSON(xhr.responseText ).COLUMNS.toString()=='TRST_STATE'){
 }}});
 
 var _run={
-	new_task:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["g2_status"],"DATA":[[4]]},"list":"g2_status","page":"taxreturns"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2,group3");_addNewTask();}
-	,new_task2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);}
-	,new_task3:function(){$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"});$("#subtask2_id").val(0)}
+	 new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["g2_status"],"DATA":[[4]]},"list":"g2_status","page":"taxreturns"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2,group3");_addNewTask();}
+	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);}
+	,new_group3:function(){$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"});$("#subtask2_id").val(0)}
 	,load_group1:function(){_grid1();}
 	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"taxreturns"});$("#isLoaded_group1_1").val(1)}
 	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"taxreturns"});$("#isLoaded_group1_2").val(1)}

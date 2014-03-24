@@ -1,24 +1,34 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){}
-_group2=function(){_grid2()}
-});
+$(document).ready(function(){_grid1();});
+
+var _run={
+	  new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"businessformation"});_toggle("group1,largeMenu");_hide("entrance");_addNewTask();}
+	 ,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);}
+	 ,load_group1:function(){_grid1();}
+	 ,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);}
+	 ,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);}
+	 ,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"businessformation"});$("#isLoaded_group1_3").val(1);}
+	 ,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);}
+	 ,load_group1_5:function(){_loadData({"id":"task_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);}
+	 ,load_group2:function(){_grid2();}
+	 ,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"businessformation"});}
+	 }
+	 
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"businessformation.cfc",
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.BF_ID+"',page:'businessformation',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,BF_ACTIVITY:{title:'Activity'}
-			,BF_OWNERS:{title:'Owners'}
-			,BF_BUSINESSTYPETEXT:{title:'Business Type'}
-			,BF_DUEDATE:{title:'Due Date',width:'1%'}
-			,BF_STATUSTEXT:{title:'Status'}
-			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.BF_ID+"',page:'businessformation',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_ID:{list:false,edit:false}
+		,CLIENT_NAME:{title:'Client Name'}
+		,BF_ACTIVITY:{title:'Activity'}
+		,BF_OWNERS:{title:'Owners'}
+		,BF_BUSINESSTYPETEXT:{title:'Business Type'}
+		,BF_DUEDATE:{title:'Due Date',width:'1%'}
+		,BF_STATUSTEXT:{title:'Status'}
+		,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"3"}',
 	"functions":'$("#task_id").val(record.BF_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"businessformation"});'
@@ -29,19 +39,19 @@ _grid2=function(){_jGrid({
 	"url":"businessformation.cfc",
 	"title":"Business Formation Subtask",
 	"fields":{BFS_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.BFS_ID+"',page:'businessformation',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,BFS_TASKNAME:{title:'Task'}
-			,BFS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-            ,BFS_DATEINITIATED:{title:'Date Initiated',width:'1%'}
-			,BFS_DATECOMPLETED:{title:'Date Completed',width:'1%'}
-			,BFS_ESTIMATEDTIME:{title:'Estimated Time'}
-			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.BFS_ID+"',page:'businessformation',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,BFS_TASKNAME:{title:'Task'}
+		,BFS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+        ,BFS_DATEINITIATED:{title:'Date Initiated',width:'1%'}
+		,BFS_DATECOMPLETED:{title:'Date Completed',width:'1%'}
+		,BFS_ESTIMATEDTIME:{title:'Estimated Time'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$("#subtask1_id").val(record.BFS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"businessformation"});'
 	})};
 
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"businessformation"});}
+
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}

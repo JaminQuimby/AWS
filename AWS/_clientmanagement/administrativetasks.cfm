@@ -40,13 +40,9 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"acctingconsulting"});_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
-<!--- Group 1 --->
-<!---Deviations
-add Work Initiated 
---->
 <div id="group1" class="gf-checkbox">
 	<h3>General</h3>
 	<div>

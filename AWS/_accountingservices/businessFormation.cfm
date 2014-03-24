@@ -36,11 +36,11 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- ENTRANCE --->
 <div id="entrance"class="gf-checkbox">
 <cfoutput><h3>#page.title# Search</h3></cfoutput><div>
-<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>
+<div><label for="g0_filter">Filter</label><input id="g0_filter" onBlur="_run.load_group1();" onKeyPress="if(event.keyCode==13){_run.load_group1();}"/></div>
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"businessformation"});_toggle("group1,largeMenu");_hide("entrance");_addNewTask();'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <!--- fields that werent in the original
@@ -59,7 +59,7 @@ articles approved estimated time
 <h3>General</h3>
 <div>
 	<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-	<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_run.load_assets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
     <div><label for="g1_owners"><i class="fa fa-lock link" onClick="_schk('g1_owners')"></i> Owners</label><input type="text" id="g1_owners"  /></div>
 	<div><label for="g1_activity"><i class="fa fa-lock link" onClick="_schk('g1_activity')"></i> Activity</label><input type="text" id="g1_activity" /></div>	
@@ -75,33 +75,33 @@ articles approved estimated time
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!---Subgroup 1--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);'>Articles</h4>
+<h4 onClick='_run.load_group1_1()'>Articles</h4>
 <div>
 	<div><label for="g1_g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_g1_articlessubmitted" class="date"/></div>
 	<div><label for="g1_g1_articlesapproved" >Articles Approved</label><input type="text" id="g1_g1_articlesapproved" class="date"/></div>
 </div>
 <!---Subgroup 2--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);'>Trade Names</h4>
+<h4 onClick='_run.load_group1_2()'>Trade Names</h4>
 <div>
 	<div><label for="g1_g2_tradenamesubmitted" >Trade Name Submitted</label><input type="text" id="g1_g2_tradenamesubmitted" class="date"/></div>
 	<div><label for="g1_g2_tradenamereceived" >Trade Name Received </label><input type="text" id="g1_g2_tradenamereceived" class="date"/></div>
 </div>
 <!---Subgroup 3--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_3","page":"businessformation"});$("#isLoaded_group1_3").val(1);'>Minutes</h4>
+<h4 onClick='_run.load_group1_3()'>Minutes</h4>
 <div>
 	<div><label for="g1_g3_minutesbylawsdraft" >Minutes Bylaws Draft</label><input type="text" id="g1_g3_minutesbylawsdraft" class="date"/></div>
 	<div><label for="g1_g3_minutesbylawsfinal" >Minutes Bylaws Final</label><input type="text" id="g1_g3_minutesbylawsfinal" class="date"/></div>
 	<div><label for="g1_g3_minutescompleted" >Minutes Completed </label><input type="text" id="g1_g3_minutescompleted" class="date"/></div>
 </div>
 <!---Subgroup 4--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);'>Dissolution</h4>
+<h4 onClick='_run.load_group1_4()'>Dissolution</h4>
 <div>
 	<div><label for="g1_g4_dissolutionrequested" >Dissolution Requested</label><input type="text" id="g1_g4_dissolutionrequested" class="date"/></div>
 	<div><label for="g1_g4_dissolutionsubmitted" >Dissolution Submitted</label><input type="text" id="g1_g4_dissolutionsubmitted" class="date"/></div>
 	<div><label for="g1_g4_disolutioncompleted" >Disolution Completed</label><input type="text" id="g1_g4_disolutioncompleted" class="date"/></div>
 </div>
 <!---Subgroup 5--->
-<h4 onClick='_loadData({"id":"task_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);'>Other</h4>
+<h4 onClick='_run.load_group1_5()'>Other</h4>
 <div>
 	<div><label for="g1_g5_otheractivity">Other Activity</label><input type="text" id="g1_g5_otheractivity" class="date"/></div>
 	<div><label for="g1_g5_otherstarted" >Other Started</label><input type="text" id="g1_g5_otherstarted" class="date"/></div>
@@ -110,12 +110,12 @@ articles approved estimated time
 </div>
 <!--- SubTasks Group --->
 <div id="group2" class="gf-checkbox" >
-	<h3 onClick="_grid2();">Subtasks</h3>
+	<h3 onClick="_run.load_group2">Subtasks</h3>
 	<div>
-    	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
+    	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_run.load_group2;" onKeyPress="if(event.keyCode==13){_run.load_group2();}"/></div>
 		<div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox">
-		<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);'>Add</a>
+		<a href="#" class="button optional" onClick='_run.new_group2()'>Add</a>
 		</div>
 	</div>
 	<h4>Add Subtask</h4>

@@ -1,7 +1,7 @@
 $(document).ready(function(){_grid1();});
 
 var _run={
-	new_task:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();$('#g1_date').datetimepicker('setDate', (new Date()) );}
+	 new_group1:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();$('#g1_date').datetimepicker('setDate', (new Date()) );}
 	,load_group0:function(){_grid1();}
 	,load_group1:function(){}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"communications"});_loadData({"id":"task_id","group":"assetCompTask","page":"communications"});}

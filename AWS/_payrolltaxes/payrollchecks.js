@@ -1,10 +1,7 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){}
-});
+$(document).ready(function(){_grid1();});
 
 var _run={
-	new_task:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();}
+	 new_group1:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();}
 	,load_group1:function(){_grid1();}
 	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"payrollchecks"});$("#isLoaded_group1_1").val(1);}
 	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"payrollchecks"});$("#isLoaded_group1_2").val(1);}

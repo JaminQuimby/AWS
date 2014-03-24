@@ -1,56 +1,27 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(params){
-var options = {'open':false}; 
-$.extend(true, options, params);
-_grid1();
-if(options['open']==true){
-_toggle("group1,largeMenu");
-_hide("entrance");
-$("#content").removeClass().addClass("contentbig");
-$("#group1").accordion({active:0});
- }
-if(options['open']==false){ 
-_toggle("entrance,smallMenu");
-_hide("group1,largeMenu");
-$("#content").removeClass().addClass("contentsmall");
- $("#group1").accordion({active:0});
+$(document).ready(function(){_grid1();});
 
- }
+var _run={
+	 new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"acctingconsulting"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();}
+	,new_group2:function(){_run.load_group2({open:true});$("#subtask1_id").val(0);}
+	,load_group1:function(params){var options={'open':false};$.extend(true,options,params);_grid1();if(options['open']==true){_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass().addClass("contentbig");$("#group1").accordion({active:0});}if(options['open']==false){_toggle("entrance,smallMenu");_hide("group1,largeMenu");$("#content").removeClass().addClass("contentsmall");$("#group1").accordion({active:0});}}
+	,load_group2:function(params){_loadData({"id":"task_id","group":"group2","page":"acctingconsulting"});_grid2();$("#subtask_isLoaded").val(1);var options={'open':false};$.extend(true,options,params);if(options['open']==true){$("#group2").accordion({active:1});$("#subtask_isLoaded").val(1);}if(options['open']==false){$("#group2").accordion({active:0})}}
+	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"acctingconsulting"});}
 }
-
-
-_group2=function(params){
-var options = {'open':false}; 
-$.extend(true, options, params);  
-_grid2();
-if(options['open']==true){
- $("#subtask_isLoaded").val(1);
- $("#group2").accordion({active:1});
- }
-if(options['open']==false){ 
- $("#group2").accordion({active:0});
- }
-
-}
-
-
-});
   
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"acctingconsulting.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_group1();","class":"button"},{"name":"no","on_click":"_group1()","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
-			,MC_DESCRIPTION:{title:'Task Description'}
-			,MC_DUEDATE:{title:'Due Date',width:'1%'}
-			,MC_STATUSTEXT:{title:'Status'}
-			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_ID:{list:false,edit:false}
+		,CLIENT_NAME:{title:'Client Name'}
+		,MC_CATEGORYTEXT:{title:'Consulting Categories'}
+		,MC_DESCRIPTION:{title:'Task Description'}
+		,MC_DUEDATE:{title:'Due Date',width:'1%'}
+		,MC_STATUSTEXT:{title:'Status'}
+		,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"2"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.MC_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"acctingconsulting"});'
@@ -61,29 +32,26 @@ _grid2=function(){_jGrid({
 	"url":"acctingconsulting.cfc",
 	"title":"Subtasks",
 	"fields":{MCS_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'});_group2()","class":"button"},{"name":"no","on_click":"_group2()","class":"button"}], autoClose: false})});return $img}}
-			,MCS_SEQUENCE:{title:'Sequence',width:'1%'}
-			,MCS_SUBTASKTEXT:{title:'Subtask'}
-			,MCS_STATUSTEXT:{title:'Status'}	
-			,MCS_DUEDATE:{title:'Due Date',width:'1%'}
-			,MCS_ASSIGNEDTOTEXT:{title:'Assigned To'}
- 			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'});_run.load_group2()","class":"button"},{"name":"no","on_click":"_run.load_group2()","class":"button"}], autoClose: false})});return $img}}
+		,MCS_SEQUENCE:{title:'Sequence',width:'1%'}
+		,MCS_SUBTASKTEXT:{title:'Subtask'}
+		,MCS_STATUSTEXT:{title:'Status'}	
+		,MCS_DUEDATE:{title:'Due Date',width:'1%'}
+		,MCS_ASSIGNEDTOTEXT:{title:'Assigned To'}
+ 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"2"}',
 	"functions":'$(".trackers #subtask1_id").val(record.MCS_ID);_loadData({"id":"subtask1_id","group":"group2","page":"acctingconsulting"});$("#group2").accordion({active:1});;'
 	})};
-	
-_loadAssets=function(){
-_loadData({"id":"client_id","group":"assetCreditHold","page":"acctingconsulting"});
-	}
+
 _loadDataCB=function(query){
 try{
 if(query!=null){
 switch(query.COLUMNS[0]){
-/*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_taskdescription,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginfo,g1_missinginforeceived,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_workinitiated';_loadit({"query":query,"list":list});break;
+/*Group1*/case "MC_ID":var list='task_id,client_id,g1_assignedto,g1_consultingcategory,g1_taskdescription,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginfo,g1_missinginforeceived,g1_paid,g1_priority,g1_projectcompleted,g1_requestforservices,g1_status,g1_workinitiated';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group2*/case "MCS_ID":var list='subtask1_id,g2_actualtime,g2_assignedto,g2_completed,g2_dependancy,g2_duedate,g2_estimatedtime,g2_note,g2_sequence,g2_status,g2_subtask';_loadit({"query":query,"list":list});break;
-/*AssetSpouse*/case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;
-/*AssetCategory*/case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
+		/*AssetSpouse    case "CLIENT_SPOUSE":var list='g1_spouse';_loadit({"query":query,"list":list});break;*/
+/*AssetCategory*/  case "OPTIONDESCRIPTION":var list='g1_taskdescription';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}

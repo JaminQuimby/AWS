@@ -1,8 +1,9 @@
-$(document).ready(function(){
-	
-_grid1();
-_group1=function(){}
-});
+$(document).ready(function(){_grid1()});
+ 
+var _run={
+	 new_group1:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');}
+	 ,load_group1:function(){_grid1()}
+}
  
 _grid1=function(){_jGrid({
 	"grid":"grid1",
@@ -76,8 +77,3 @@ case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: false,duration: 5});break;
 default:jqMessage({message: "A exception in employeecontactinfo.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
 catch(err){alert(err)}};
-
-
-
-
-

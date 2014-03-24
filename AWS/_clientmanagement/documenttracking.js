@@ -1,7 +1,7 @@
 $(document).ready(function(){_grid1();});
 
 var _run={
-	new_task:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');}
+	new_group1:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2');}
 	,load_group1:function(){}
 	}
 

@@ -46,7 +46,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_task()'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
 </div></div></div>
 <!--- GROUP1 --->
 <div id="group1" class="gf-checkbox">
@@ -135,7 +135,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>
-<div class="buttonbox"><a href="#" class="button optional" onClick='_run.new_task2()'>Add</a></div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='_run.new_group2()'>Add</a></div>
 </div>
 <h3 onClick='_run.load_group2()'>Add States</h3>
 <div>
@@ -198,7 +198,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g3_filter">Filter</label><input id="g3_filter" onBlur="_grid3();" onKeyPress="if(event.keyCode==13){_grid3();}"/></div>
 <div class="tblGrid" id="grid3"></div>
-<div class="buttonbox"><a href="#" class="button optional" onClick='_run.new_task3()'>Add</a></div>
+<div class="buttonbox"><a href="#" class="button optional" onClick='_run.new_group3()'>Add</a></div>
 </div>
 <h4 onClick='_run.group3()'>Add Schedule</h4>
 <div>

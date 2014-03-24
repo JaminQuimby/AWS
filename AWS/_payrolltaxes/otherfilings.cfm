@@ -26,7 +26,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
-<!---	<cfquery dbtype="query" name="global_otherfilingsforms">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_otherfilingsforms'</cfquery> --->
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 <cfquery dbtype="query" name="global_otherfilingtype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_otherfilingtype'</cfquery>
 <cfquery dbtype="query" name="global_month">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>
@@ -48,7 +47,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_task()'>Add</a></div></div></div>
+<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>

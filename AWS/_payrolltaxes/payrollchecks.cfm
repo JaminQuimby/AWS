@@ -9,9 +9,6 @@
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <cfinclude template="/assets/inc/header.cfm">
-
-<!--- Load Select Options for each dropdown--->
-<!--- IN HEADER <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery> --->
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 <cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
 
@@ -42,7 +39,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_task()'>Add</a></div></div></div>
+<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>

@@ -1,18 +1,16 @@
 $(document).ready(function(){_grid1()});
 
-
-
 var _run={
-	new_task:function(){$("#g1_active").prop('checked',true);document.getElementById('content').className='contentbig';_addNewTask();_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6');}
-	,new_task1_1:function(){$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);}
-	,new_task3:function(){$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);$("#co_id").val(0);}
-	,new_task4_1:function(){}
-	,new_task4_2:function(){}
-	,new_task4_3:function(){}
-	,new_task4_4:function(){}
-	,new_task4_5:function(){}
-	,new_task5:function(){$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);}
-	,new_task6:function(){$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);}
+	 new_group1:function(){$("#g1_active").prop('checked',true);document.getElementById('content').className='contentbig';_addNewTask();_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6');}
+	,new_group1_1:function(){$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);}
+	,new_group3:function(){$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);$("#co_id").val(0);}
+	,new_group4_1:function(){}
+	,new_group4_2:function(){}
+	,new_group4_3:function(){}
+	,new_group4_4:function(){}
+	,new_group4_5:function(){}
+	,new_group5:function(){$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);}
+	,new_group6:function(){$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);}
 	,load_group1:function(){}	
 	,load_group1_1:function(){_grid1_1();}
 	,load_group1_2:function(){$('#isLoaded_group1_2').val(1)}

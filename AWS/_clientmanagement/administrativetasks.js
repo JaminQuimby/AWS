@@ -1,24 +1,26 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){}
-_group2=function(){_grid2()}
-});
+$(document).ready(function(){_grid1();});
+
+var _run={
+	  new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"acctingconsulting"});_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();}
+	 ,load_group1:function(){_grid1();}
+	 ,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"administrativetasks"});}
+}
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"administrativetasks.cfc",
 	"title":"Client Administrative Tasks",
 	"fields":{CAS_ID:{key:true,list:false,edit:false}
-	,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CAS_ID+"',page:'administrativetasks',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,CAS_CATEGORYTEXT:{title:'Category'}
-			,CAS_TASKDESC:{title:'Description'}
-			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
-			,CAS_STATUSTEXT:{title:'Status'}
-			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
-			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}					
-			},			
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CAS_ID+"',page:'administrativetasks',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_ID:{list:false,edit:false}
+		,CLIENT_NAME:{title:'Client Name'}
+		,CAS_CATEGORYTEXT:{title:'Category'}
+		,CAS_TASKDESC:{title:'Description'}
+		,CAS_DUEDATE:{title:'Due Date',width:'1%'}
+		,CAS_STATUSTEXT:{title:'Status'}
+		,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
+		,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}					
+		},			
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"4"}',
 	"functions":'$("#task_id").val(record.CAS_ID);$("#client_id").val(record.CLIENT_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"administrativetasks"});'
@@ -26,14 +28,13 @@ _grid1=function(){_jGrid({
 
 
 //Load Data call Back
-_loadAssets=function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"administrativetasks"});}
 _loadDataCB=function(query){
 /*LOAD DATA BASED ON QUERY RETURN*/
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else
 {
 switch(query.COLUMNS[0]){
-/*Load Group1*/case "CAS_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_completed,g1_daterequested,g1_datestarted,g1_duedate,g1_estimatedtime,g1_instructions,g1_priority,g1_requestedby,g1_status,g1_taskdescription,g1_workinitiated';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Load Group1*/case "CAS_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_completed,g1_daterequested,g1_datestarted,g1_duedate,g1_estimatedtime,g1_instructions,g1_priority,g1_requestedby,g1_status,g1_taskdescription,g1_workinitiated';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}

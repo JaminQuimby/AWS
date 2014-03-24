@@ -1,37 +1,51 @@
-$(document).ready(function(){
-_grid1();
-_group1=function(){}
-_group2=function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence","sel":"g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0')}
+$(document).ready(function(){_grid1();});
 
-});
+var _run={
+	 new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"financialstatements"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();}
+	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val("0")}
+	,load_group1:function(){}
+	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"financialstatements"});$("#isLoaded_group1_1").val(1);}
+	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"financialstatements"});$("#isLoaded_group1_2").val(1);}
+	,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"financialstatements"});$("#isLoaded_group1_3").val(1);}
+	,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"financialstatements"});$("#isLoaded_group1_4").val(1);}
+	,load_group1_5:function(){_loadData({"id":"task_id","group":"group1_5","page":"financialstatements"});$("#isLoaded_group1_5").val(1);}
+	,load_group1_6:function(){_loadData({"id":"task_id","group":"group1_6","page":"financialstatements"});$("#isLoaded_group1_6").val(1);}
+	,load_group1_7:function(){_loadData({"id":"task_id","group":"group1_7","page":"financialstatements"});$("#isLoaded_group1_7").val(1);}
+	,load_group1_8:function(){_loadData({"id":"task_id","group":"group1_8","page":"financialstatements"});$("#isLoaded_group1_8").val(1);}
+	,load_group1_9:function(){_loadData({"id":"task_id","group":"group1_9","page":"financialstatements"});$("#isLoaded_group1_9").val(1);}
+	,load_group1_10:function(){_loadData({"id":"task_id","group":"group1_10","page":"financialstatements"});$("#isLoaded_group1_10").val(1);}
+	,load_group1_11:function(){_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);}
+	,load_group2:function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence","sel":"g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0')}
+	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"financialstatements"});_loadData({"id":"task_id","group":"assetCompTask","page":"financialstatements"});}
+}
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"financialstatements.cfc",
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDS_ID+"',page:'financialstatements',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,FDS_YEAR:{title:'Year',width:'1%'}
-			,FDS_MONTHTEXT:{title:'Period'}
-			,FDS_PERIODEND:{title:'Period End',width:'1%'}
-			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
-			,FDS_STATUSTEXT:{title:'Status'}
-			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FDS_OBTAININFO:{title:'Info',width:'1%'}
-			,FDS_SORT:{title:'Sort',width:'1%'}
-			,FDS_CHECKS:{title:'Checks',width:'1%'}
-			,FDS_SALES:{title:'Sales',width:'1%'}
-			,FDS_ENTRY:{title:'Entry',width:'1%'}
-			,FDS_RECONCILE:{title:'Reconciliation',width:'1%'}
-			,FDS_COMPILE:{title:'Compiliation',width:'1%'}
-			,FDS_REVIEW:{title:'Review',width:'1%'}
-			,FDS_ASSEMBLY:{title:'Assembly ',width:'1%'}
-			,FDS_DELIVERY:{title:'Delivery',width:'1%'}
-			,FDS_ACCTRPT:{title:'Report',width:'1%'}
-			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDS_ID+"',page:'financialstatements',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_ID:{list:false,edit:false}
+		,CLIENT_NAME:{title:'Client Name'}
+		,FDS_YEAR:{title:'Year',width:'1%'}
+		,FDS_MONTHTEXT:{title:'Period'}
+		,FDS_PERIODEND:{title:'Period End',width:'1%'}
+		,FDS_DUEDATE:{title:'Due Date',width:'1%'}
+		,FDS_STATUSTEXT:{title:'Status'}
+		,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+		,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+		,FDS_OBTAININFO:{title:'Info',width:'1%'}
+		,FDS_SORT:{title:'Sort',width:'1%'}
+		,FDS_CHECKS:{title:'Checks',width:'1%'}
+		,FDS_SALES:{title:'Sales',width:'1%'}
+		,FDS_ENTRY:{title:'Entry',width:'1%'}
+		,FDS_RECONCILE:{title:'Reconciliation',width:'1%'}
+		,FDS_COMPILE:{title:'Compiliation',width:'1%'}
+		,FDS_REVIEW:{title:'Review',width:'1%'}
+		,FDS_ASSEMBLY:{title:'Assembly ',width:'1%'}
+		,FDS_DELIVERY:{title:'Delivery',width:'1%'}
+		,FDS_ACCTRPT:{title:'Report',width:'1%'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"5"}',
 	"functions":'$("#client_id").val(record.CLIENT_ID);$("#task_id").val(record.FDS_ID);_updateh3(record.CLIENT_NAME);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"financialstatements"});'
@@ -42,27 +56,24 @@ _grid2=function(){_jGrid({
 	"url":"financialstatements.cfc",
 	"title":"Subtasks",
 	"fields":{FDSS_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDSS_ID+"',page:'financialstatements',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,FDSS_SEQUENCE:{title:'Sequence'}
-			,FDSS_SUBTASKTEXT:{title:'Subtask'}
-			,FDSS_DUEDATE:{title:'Due Date'}
-			,FDSS_STATUSTEXT:{title:'Status'}
-			,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}
-			},
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDSS_ID+"',page:'financialstatements',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,FDSS_SEQUENCE:{title:'Sequence'}
+		,FDSS_SUBTASKTEXT:{title:'Subtask'}
+		,FDSS_DUEDATE:{title:'Due Date'}
+		,FDSS_STATUSTEXT:{title:'Status'}
+		,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"5"}',
 	"functions":'$("#subtask1_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"financialstatements"});'
 	})};
-_loadAssets=function(){
-_loadData({"id":"client_id","group":"assetCreditHold","page":"financialstatements"});
-_loadData({"id":"task_id","group":"assetCompTask","page":"financialstatements"});
-	}
+
 _loadDataCB=function(query){
 try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year,g1_credithold';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year,g1_credithold';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "FDS_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_datecompleted,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "FDS_SORT_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_datecompleted,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "FDS_CHECKS_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_datecompleted,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -96,23 +107,22 @@ if($("#client_id").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Client');}
 	}
-else if ($("#g1_year").val()=="0"){
+else if($("#g1_year").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Year",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Year');}
 	}
-else if ($("#g1_month").val()=="0"){
+else if($("#g1_month").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Period",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Month');}
 	}
-else if ($("#g1_periodend").val()=="0"){
+else if($("#g1_periodend").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Period End",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Month');}
 	}
-else if($('#task_id').val()==0){
-	if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_month"},{"item":"g1_periodend"}],"loadType":"group1","page":"financialstatements"})){
-		jqMessage({"type":"destroy"});jqMessage({message: "This task already exsist. Client Name, Year, and Month must be unique.",type: "error",autoClose: false});
-		if(debug){window.console.log('This task already exsist. Client Name, Year, and Month must be unique.');}
-	}}
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_month"},{"item":"g1_periodend"}],"loadType":"group1","page":"financialstatements"})=='true'&&$('#task_id').val()=='0'){
+	jqMessage({"type":"destroy"});jqMessage({message: "This task already exsists.",type: "error",autoClose: false});
+	if(debug){window.console.log('This task already exsists.');}
+	}
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});
@@ -318,7 +328,9 @@ if($("#isLoaded_group1_11").val()!=0){
 	}
 break;
 
-case'group2':var json='{"DATA":[["'+
+case'group2':
+$("#subtask1_id").val(options['id']);
+var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
@@ -332,10 +344,10 @@ $("#g2_dependencies").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2").val()!=0){
 	_saveData({group:"group2","payload":$.parseJSON(json),page:"financialstatements"});
-	if(debug){window.console.log('Group2 - Saving Data');alert('STOP : End of Save')}
+	if(debug){window.console.log('Group2 - Saving Data');}
 	}else{
 	_saveDataCB({'group':'plugins'});
-	if(debug){window.console.log('Group2 - Skipped saving data');alert('STOP : End of Save')}
+	if(debug){window.console.log('Group2 - Skipped saving data');}
 	}
 break;
 
@@ -353,18 +365,14 @@ break;
 
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData({"subgroup":options["subgroup"]})
-	if(debug){window.console.log('Saving Plugins');alert('STOP: Start of Plugins Save')}
+	if(debug){window.console.log('Saving Plugins');}
 	
 break;
 /*Other Events*/
 case'error':jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;
-
 default:jqMessage({"message":"A exception in financialstatements.js","description":""+options["group"]+' json: '+json+'  id: '+options["id"]+"" ,"type": "sucess","autoClose": false});
 alert('"message":"A exception in financialstatements.js","description":"'+options["group"]+' json: '+json+'  id: '+options["id"]+'" ,"type": "sucess","autoClose": false')
 break;
-
 }}
-
-
 catch(err){alert(err)}};

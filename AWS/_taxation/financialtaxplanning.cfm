@@ -40,7 +40,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"financialtaxplanning"});_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
@@ -66,7 +66,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_paid">Paid</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>
-
 
 <!--- Start Plugins --->
 <cfinclude template="/assets/plugins/plugins.cfm">
