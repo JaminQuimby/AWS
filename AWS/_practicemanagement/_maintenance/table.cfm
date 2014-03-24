@@ -65,6 +65,9 @@
 <!---Accounting & Consulting Group --->
 <div id="opt_AcctConGroups" style="display:none">
 <div><label for="opt_AcctConGroups_Subtasks">Subtasks</label><select id="opt_AcctConGroups_Subtasks" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="opt_AcctConGroups_Sequence">Sequence</label><input type="text" id="opt_AcctConGroups_Sequence"></div>
+<div><label for="opt_AcctConGroups_Group">Group</label><input type="text" id="opt_AcctConGroups_Group"></div>
+<div><label for="opt_AcctConGroups_Dependency">Dependency</label><input type="text" id="opt_AcctConGroups_Dependency"></div>
 </div>
 <!--- Other Filings Forms & Tax Return Forms & --->
 <div id="opt_OtherFilings" style="display:none">
@@ -87,6 +90,27 @@
 <div id="opt_notices" style="display:none">
 <div><label for="opt_noticeInstructions">Notice Instructions</label><input type="text" id="opt_noticeInstructions"></div>
 </div>
+
+<!--- Financial Statement Subtasks --->
+<div id="opt_FinancialStatements" style="display:none">
+<div><label for="opt_FinancialStatement_Subtasks_Sequence">Sequence</label><input type="text" id="opt_FinancialStatement_Subtask_Sequence"></div>
+<div><label for="opt_FinancialStatement_Subtasks_Group">Group</label><input type="text" id="opt_FinancialStatement_Subtasks_Group"></div>
+<div><label for="opt_FinancialStatement_Subtasks_Dependency">Dependency</label><input type="text" id="opt_FinancialStatement_Subtasks_Dependency"></div>
+</div>
+
+<!---Accounting & Consulting Categories --->
+<div id="opt_AcctConCategories" style="display:none">
+<div><label for="opt_AcctConCategories_Description">Description</label><input type="text" id="opt_AcctConCategories_Description"></div>
+<div><label for="opt_AcctConCategories_Priority">Priority</label><input type="text" id="opt_AcctConCategories_Priority"></div>
+<div><label for="opt_AcctConCategories_EstimatedTime">Estimated Time</label><input type="text" id="opt_AcctConCategories_EstimatedTime"></div>
+</div>
+
+<!--- Global Federal Tax Forms --->
+<div id="opt_globalFederalTaxForms" style="display:none">
+<div><label for="opt_globalFederalTaxForms_Filing_Deadline">Filing Deadline</label><input type="text" id="opt_globalFederalTaxForms_Filing_Deadline"></div>
+<div><label for="opt_globalFederalTaxForms_Extension_Deadline">Extension Extension Deadline</label><input type="text" id="opt_globalFederalTaxForms_Extension_Deadline"></div>
+</div>
+
 
 <!--- END Options --->
 <div><label for="g2_optionDescription">Option Description</label><textarea  id="g2_optionDescription" cols="4" rows="4"></textarea></div>

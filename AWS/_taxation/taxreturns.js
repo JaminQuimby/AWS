@@ -56,7 +56,7 @@ _grid2=function(){_jGrid({
 	"fields":{TRST_ID:{key:true,list:false,edit:false}
 		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRST_ID+"',page:'taxreturns',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,TRST_STATETEXT:{title:'State'}
-		,TRST_PRIMARY:{title:'Primary'}
+		,TRST_PRIMARY:{title:'Primary',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 		,TRST_STATUSTEXT:{title:'Status'}
 		,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
 		,TRST_1_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}},

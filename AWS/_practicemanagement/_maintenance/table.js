@@ -14,6 +14,9 @@ $('#opt_TaxReturnsSchedule').hide();
 $('#opt_AcctConGroups').hide();
 $('#opt_globalState').hide();
 $('#opt_notices').hide();
+$('#opt_FinancialStatements').hide();
+$('#opt_AcctConCategories').hide();
+$('#opt_globalFederalTaxForms').hide();
 
 
 _options=function(id){
@@ -25,6 +28,9 @@ _options=function(id){
 	case'36':$('#opt_OtherFilings').show(); break; 
 	case'37':$('#opt_AcctConGroups').show(); break;
 	case'28':$('#opt_notices').show(); break;
+	case'15':$('#opt_FinancialStatements').show(); break;
+	case'19':$('#opt_AcctConCategories').show(); break;
+	case'2':$('#opt_globalFederalTaxForms').show(); break;
 	}};
 	
 _grid1=function(){_jGrid({
@@ -74,11 +80,26 @@ var list=list+',opt_Form';
 	}	
 	
 if($("#task_id").val() == '37'){
-var list=list+',opt_AcctConGroups_Subtasks';
+var list=list+',opt_AcctConGroups_Subtasks,opt_AcctConGroups_Sequence,opt_AcctConGroups_Group,opt_AcctConGroups_Dependency';
 	}	
 
 if($("#task_id").val() == '28'){
 var list=list+',opt_noticeInstructions';
+	}	
+_loadit({"query":query,"list":list,"page":"table"});break;
+
+if($("#task_id").val() == '15'){
+var list=list+',opt_FinancialStatement_Subtasks_Sequence,opt_FinancialStatement_Subtasks_Group,opt_FinancialStatement_Subtasks_Dependency';
+	}	
+_loadit({"query":query,"list":list,"page":"table"});break;
+
+if($("#task_id").val() == '19'){
+var list=list+',opt_AcctConCategories_Description,opt_AcctConCategories_Priority,opt_AcctConCategories_EstimatedTime';
+	}	
+_loadit({"query":query,"list":list,"page":"table"});break;
+
+if($("#task_id").val() == '2'){
+var list=list+',opt_globalFederalTaxForms_Filing_Deadline,opt_globalFederalTaxForms_Extension_Deadline';
 	}	
 _loadit({"query":query,"list":list,"page":"table"});break;
 
@@ -121,11 +142,31 @@ $("#opt_Form").val()+'","'
 :one='')+
 
 (($("#task_id").val() == '37' )?
-$("#opt_AcctConGroups_Subtasks").val()+'","'
+$("#opt_AcctConGroups_Subtasks").val()+'","'+
+$("#opt_AcctConGroups_Sequence").val()+'","'+
+$("#opt_AcctConGroups_Group").val()+'","'+
+$("#opt_AcctConGroups_Dependency").val()+'","'
 :one='')+
 
 (($("#task_id").val() == '28' )?
 $("#opt_noticeInstructions").val()+'","'
+:one='')+
+
+(($("#task_id").val() == '15' )?
+$("#opt_FinancialStatement_Subtasks_Sequence").val()+'","'+
+$("#opt_FinancialStatement_Subtasks_Group").val()+'","'+
+$("#opt_FinancialStatement_Subtasks_Dependency").val()+'","'
+:one='')+
+
+(($("#task_id").val() == '19' )?
+$("#opt_AcctConCategories_Description").val()+'","'+
+$("#opt_AcctConCategories_Priority").val()+'","'+
+$("#opt_AcctConCategories_EstimatedTime").val()+'","'
+:one='')+
+
+(($("#task_id").val() == '2' )?
+$("#opt_globalFederalTaxForms_Filing_Deadline").val()+'","'+
+$("#opt_globalFederalTaxForms_Extension_Deadline").val()+'","'
 :one='')+
 
 '","'+

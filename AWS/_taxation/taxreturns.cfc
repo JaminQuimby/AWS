@@ -376,11 +376,9 @@ SELECT[tr_id]
 ,[trst_id]
 ,trst_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[trst_state]=[optionvalue_id])
 ,[trst_primary]
-,trst_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[trst_status]=[optionvalue_id])     
-,trst_assignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_assignedto=user_id))
-,trst_1_reviewassignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_1_reviewassignedto=user_id))
-,[trst_1_completed]
-
+,[trst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[trst_status]=[optionvalue_id])     
+,[trst_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_assignedto=user_id))
+,[trst_1_reviewassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_1_reviewassignedto=user_id))
 FROM[v_taxreturns_state]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND [trst_status]!=2 AND [trst_status]!=3
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trst_status]</cfif>
@@ -396,8 +394,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND [trst_status]!=2 AND [tr
 								,"TRST_STATUSTEXT":"'&TRST_STATUSTEXT&'"
 								,"TRST_ASSIGNEDTOTEXT":"'&TRST_ASSIGNEDTOTEXT&'"
 								,"TRST_1_REVIEWASSIGNEDTOTEXT":"'&TRST_1_REVIEWASSIGNEDTOTEXT&'"
-								,"TRST_1_COMPLETED":"'&TRST_1_COMPLETED&'"
-								}'>
+ 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -627,7 +624,7 @@ INSERT INTO[taxreturns_state]([tr_id]
 ,[trst_reviewassignedto]
 ,[trst_state]
 ,[trst_status]
-
+,[trst_requiredforms]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -637,6 +634,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" NULL="#j.DATA[1][9] eq "null"#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -653,7 +651,7 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_reviewassignedto]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[trst_state]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[trst_status]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[trst_requiredforms]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[trst_requiredforms]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#j.DATA[1][10] eq "null"#"/>
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>

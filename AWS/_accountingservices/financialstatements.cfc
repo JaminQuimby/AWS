@@ -710,7 +710,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -733,7 +733,7 @@ SET[fds_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fdss_sequence]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0#"/>
-,[fdss_dependencies]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#LEN(j.DATA[1][10]) eq 0#"/>
+,[fdss_dependencies]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
 WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

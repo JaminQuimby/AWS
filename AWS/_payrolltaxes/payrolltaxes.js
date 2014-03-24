@@ -45,7 +45,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "PT_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_lastpay,g1_missinginformation,g1_missinginforeceived,g1_month,g1_paymentstatus,g1_priority,g1_state,g1_type,g1_year';_loadit({"query":query,"list":list});_loadAssets();break;
+/*Group1*/case "PT_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_lastpay,g1_missinginformation,g1_missinginforeceived,g1_month,g1_paymentstatus,g1_priority,g1_state,g1_type,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "PT_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "PT_ENTRY_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "PT_REC_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
