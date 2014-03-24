@@ -51,24 +51,24 @@ var grid1_config = [
 	"url":"payrolltaxes_report.cfc",
 	"title":"Payroll Taxes Status",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,PT_YEAR:{title:'Year',width:'1%'}
-			,PT_MONTHTEXT:{title:'Period'}
-			,PT_STATETEXT:{title:'State'}
-			,PT_TYPETEXT:{title:'Type'}
-			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
-			,PT_DUEDATE:{title:'Due Date',width:'1%'}
- 			,PT_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
-			,PT_OBTAININFO:{title:'Information Received',width:'1%'}
-			,PT_ENTRY:{title:'Entry',width:'1%'}
-			,PT_REC:{title:'Reconcile',width:'1%'}
-			,PT_REVIEW:{title:'Review',width:'1%'}
-			,PT_ASSEMBLY:{title:'Assembled',width:'1%'}
-			,PT_DELIVERY:{title:'Delivered',width:'1%'}
-			,PT_FEES:{title:'Fees'}
-			,PT_PAIDTEXT:{title:'Payment Status'}
-			},
+		,CLIENT_NAME:{title:'Client Name'}
+		,PT_YEAR:{title:'Year',width:'1%'}
+		,PT_MONTHTEXT:{title:'Period'}
+		,PT_STATETEXT:{title:'State'}
+		,PT_TYPETEXT:{title:'Type'}
+		,PT_LASTPAY:{title:'Last Pay',width:'1%'}
+		,PT_DUEDATE:{title:'Due Date',width:'1%'}
+ 		,PT_MISSINGINFO:{title:'Missing Info',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+		,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
+		,PT_OBTAININFO:{title:'Information Received',width:'1%'}
+		,PT_ENTRY:{title:'Entry',width:'1%'}
+		,PT_REC:{title:'Reconcile',width:'1%'}
+		,PT_REVIEW:{title:'Review',width:'1%'}
+		,PT_ASSEMBLY:{title:'Assembled',width:'1%'}
+		,PT_DELIVERY:{title:'Delivered',width:'1%'}
+		,PT_FEES:{title:'Fees'}
+		,PT_PAIDTEXT:{title:'Payment Status'}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"13"}',
 	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrolltaxes.cfm?task_id="+record.PT_ID+"&nav=0","_blank")'
