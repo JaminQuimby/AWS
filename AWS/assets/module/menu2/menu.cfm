@@ -19,7 +19,6 @@
 			<h4>Module</h4>
 			<ul>
 			<li><a href="#this.url#/AWS/_PracticeManagement/workinprogress.cfm">Work in Progress</a></li>
-      		<!---<li><a href="#this.url#/AWS/_PracticeManagement/employeedashboard.cfm">Employee Dashboard</a></li>--->
       		<li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm">Employee Contact Information</a></li>
             <li><a href="#this.url#/AWS/assets/plugins/jTimeBilling/timebillingreport.cfm">Time &amp; Billing</a></li>
 			</ul>
@@ -128,7 +127,7 @@
 		<div>
 			<h4>Reporting</h4>
 			<ul>
-       		<li><a href="#this.url#/AWS/_taxation/reports/financialtaxplanning_report.cfm">Financial &amp Tax Planning</a></li>
+       		<li><a href="#this.url#/AWS/_taxation/reports/financialtaxplanning_report.cfm">Financial &amp; Tax Planning</a></li>
        		<li><a href="#this.url#/AWS/_taxation/reports/notices_report.cfm">Notices</a></li>
        		<li><a href="#this.url#/AWS/_taxation/reports/powerofattorney_report.cfm">Power of Attorney</a></li>
        		<li><a href="#this.url#/AWS/_taxation/reports/taxreturns_report.cfm">Tax Returns</a></li>

@@ -94,6 +94,8 @@ _toCSV2=function($table, filename) {
     });
 });
 
+
+
 (function($, window){
 // i'll just put them here to get evaluated on script load
 var htmlSpecialCharsRegEx = /[<>&\r\n"']/gm;
@@ -108,199 +110,70 @@ var htmlSpecialCharsPlaceHolders = {
 };
 
 $.extend({
-    //
-    //$.fileDownload('/path/to/url/', options)
-    // see directly below for possible 'options'
-    fileDownload: function (fileUrl, options) {
-
-        //provide some reasonable defaults to any unspecified options below
+  fileDownload: function (fileUrl, options) {
         var settings = $.extend({
-
-            //
-            //Requires jQuery UI: provide a message to display to the user when the file download is being prepared before the browser's dialog appears
-            //
-            preparingMessageHtml: null,
-
-            //
-            //Requires jQuery UI: provide a message to display to the user when a file download fails
-            //
+			preparingMessageHtml: null,
             failMessageHtml: null,
-
-            //
-            //the stock android browser straight up doesn't support file downloads initiated by a non GET: http://code.google.com/p/android/issues/detail?id=1780
-            //specify a message here to display if a user tries with an android browser
-            //if jQuery UI is installed this will be a dialog, otherwise it will be an alert
-            //
             androidPostUnsupportedMessageHtml: "Unfortunately your Android browser doesn't support this type of file download. Please try again with a different browser.",
-
-            //
-            //Requires jQuery UI: options to pass into jQuery UI Dialog
-            //
             dialogOptions: { modal: true },
-
-            //
-            //a function to call while the dowload is being prepared before the browser's dialog appears
-            //Args:
-            // url - the original url attempted
-            //
             prepareCallback: function (url) { },
-
-            //
-            //a function to call after a file download dialog/ribbon has appeared
-            //Args:
-            // url - the original url attempted
-            //
             successCallback: function (url) { },
-
-            //
-            //a function to call after a file download dialog/ribbon has appeared
-            //Args:
-            // responseHtml - the html that came back in response to the file download. this won't necessarily come back depending on the browser.
-            // in less than IE9 a cross domain error occurs because 500+ errors cause a cross domain issue due to IE subbing out the
-            // server's error message with a "helpful" IE built in message
-            // url - the original url attempted
-            //
             failCallback: function (responseHtml, url) { },
-
-            //
-            // the HTTP method to use. Defaults to "GET".
-            //
-            httpMethod: "GET",
-
-            //
-            // if specified will perform a "httpMethod" request to the specified 'fileUrl' using the specified data.
-            // data must be an object (which will be $.param serialized) or already a key=value param string
-            //
+            httpMethod: "POST",
             data: null,
-
-            //
-            //a period in milliseconds to poll to determine if a successful file download has occured or not
-            //
             checkInterval: 100,
-
-            //
-            //the cookie name to indicate if a file download has occured
-            //
             cookieName: "fileDownload",
-
-            //
-            //the cookie value for the above name to indicate that a file download has occured
-            //
             cookieValue: "true",
-
-            //
-            //the cookie path for above name value pair
-            //
             cookiePath: "/",
-
-            //
-            //the title for the popup second window as a download is processing in the case of a mobile browser
-            //
             popupWindowTitle: "Initiating file download...",
-
-            //
-            //Functionality to encode HTML entities for a POST, need this if data is an object with properties whose values contains strings with quotation marks.
-            //HTML entity encoding is done by replacing all &,<,>,',",\r,\n characters.
-            //Note that some browsers will POST the string htmlentity-encoded whilst others will decode it before POSTing.
-            //It is recommended that on the server, htmlentity decoding is done irrespective.
-            //
             encodeHTMLEntities: true
-            
-        }, options);
+        }, options)
+		,deferred=new $.Deferred()
+		,userAgent=(navigator.userAgent || navigator.vendor || window.opera).toLowerCase()
+		,isIos
+		,isAndroid
+		,isOtherMobileBrowser;
 
-        var deferred = new $.Deferred();
-
-        //Setup mobile browser detection: Partial credit: http://detectmobilebrowser.com/
-        var userAgent = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
-
-        var isIos; //has full support of features in iOS 4.0+, uses a new window to accomplish this.
-        var isAndroid; //has full support of GET features in 4.0+ by using a new window. Non-GET is completely unsupported by the browser. See above for specifying a message.
-        var isOtherMobileBrowser; //there is no way to reliably guess here so all other mobile devices will GET and POST to the current window.
-
-        if (/ip(ad|hone|od)/.test(userAgent)) {
-
-            isIos = true;
-
-        } else if (userAgent.indexOf('android') !== -1) {
-
-            isAndroid = true;
-
-        } else {
-
-            isOtherMobileBrowser = /avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|playbook|silk|iemobile|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(userAgent) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|e\-|e\/|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(di|rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|xda(\-|2|g)|yas\-|your|zeto|zte\-/i.test(userAgent.substr(0, 4));
-
+        if (/ip(ad|hone|od)/.test(userAgent)){isIos = true;} 
+		else if (userAgent.indexOf('android') !== -1) {isAndroid = true;} 
+		else {isOtherMobileBrowser = /avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|playbook|silk|iemobile|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(userAgent) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|e\-|e\/|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(di|rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|xda(\-|2|g)|yas\-|your|zeto|zte\-/i.test(userAgent.substr(0, 4));
         }
 
         var httpMethodUpper = settings.httpMethod.toUpperCase();
 
         if (isAndroid && httpMethodUpper !== "GET") {
-            //the stock android browser straight up doesn't support file downloads initiated by non GET requests: http://code.google.com/p/android/issues/detail?id=1780
-
-            if ($().dialog) {
-                $("<div>").html(settings.androidPostUnsupportedMessageHtml).dialog(settings.dialogOptions);
-            } else {
-                alert(settings.androidPostUnsupportedMessageHtml);
-            }
-
-            return deferred.reject();
+            if ($().dialog) {$("<div>").html(settings.androidPostUnsupportedMessageHtml).dialog(settings.dialogOptions);}
+			else {alert(settings.androidPostUnsupportedMessageHtml);}
+			return deferred.reject();
         }
 
-        var $preparingDialog = null;
-
-        var internalCallbacks = {
-
-            onPrepare: function (url) {
-
-                //wire up a jquery dialog to display the preparing message if specified
-                if (settings.preparingMessageHtml) {
-
-                    $preparingDialog = $("<div>").html(settings.preparingMessageHtml).dialog(settings.dialogOptions);
-
-                } else if (settings.prepareCallback) {
-
-                    settings.prepareCallback(url);
-
-                }
-
-            },
+        var $preparingDialog = null
+		   ,internalCallbacks = {
+				 onPrepare: function (url) {
+					if (settings.preparingMessageHtml) {
+					$preparingDialog = jqMessage({message:settings.preparingMessageHtml,"type":"success",autoClose: true});}
+					else if (settings.prepareCallback) {
+					settings.prepareCallback(url);
+					}},
 
             onSuccess: function (url) {
-
-                //remove the perparing message if it was specified
-                if ($preparingDialog) {
-                    $preparingDialog.dialog('close');
-                };
-
+                if ($preparingDialog) {$preparingDialog.dialog('close');};
                 settings.successCallback(url);
-
                 deferred.resolve(url);
             },
 
             onFail: function (responseHtml, url) {
-
-                //remove the perparing message if it was specified
-                if ($preparingDialog) {
-                    $preparingDialog.dialog('close');
-                };
-
-                //wire up a jquery dialog to display the fail message if specified
+                if ($preparingDialog) {$preparingDialog.dialog('close');};
                 if (settings.failMessageHtml) {
-                    $("<div>").html(settings.failMessageHtml).dialog(settings.dialogOptions);
+					jqMessage({message:settings.failMessageHtml,"type":"error",autoClose: false});
                 }
-
-                settings.failCallback(responseHtml, url);
-                
+                settings.failCallback(responseHtml, url);  
                 deferred.reject(responseHtml, url);
             }
         };
 
         internalCallbacks.onPrepare(fileUrl);
-
-        //make settings.data a param string if it exists and isn't already
-        if (settings.data !== null && typeof settings.data !== "string") {
-            settings.data = $.param(settings.data);
-        }
-
+        if (settings.data !== null && typeof settings.data !== "string") {settings.data = $.param(settings.data);}
 
         var $iframe,
             downloadWindow,
@@ -310,13 +183,8 @@ $.extend({
         if (httpMethodUpper === "GET") {
 
             if (settings.data !== null) {
-                //need to merge any fileUrl params with the data object
-
                 var qsStart = fileUrl.indexOf('?');
-
                 if (qsStart !== -1) {
-                    //we have a querystring in the url
-
                     if (fileUrl.substring(fileUrl.length - 1) !== "&") {
                         fileUrl = fileUrl + "&";
                     }
@@ -514,89 +382,13 @@ $.extend({
 })(jQuery, this);
 
 
-function _toCSV(){
-
-	//alert($('.jtable').serialize())
-	alert($('#'+options['grid']+' table'))
-	
-$.fileDownload('../assets/inc/export/excel.cfm', 
-{
-preparingMessageHtml: "We are preparing your report, please wait..."
-,failMessageHtml: "There was a problem generating your report, please try again."
-,data:$('.jtable').serialize()
-})
-
-      return false; //this is critical to stop the click event which will trigger a normal file download!
-	  
+function _toCSV(table,filename){
+$.fileDownload('https://'+window.location.hostname+'/AWS/assets/inc/export/excel.cfm',{data:'data='+encodeURIComponent( $('.jtable')[0].innerHTML),name:filename
+,preparingMessageHtml: "We are preparing your report, please wait..."
+,failMessageHtml: "There was a problem generating your report, please try again."});
+return false;
 	  };
 	
-
- function _toCSV4($table, filename) {
-
-        var $rows = $table.find('tr:has(td)'),
-
-            // Temporary delimiter characters unlikely to be typed by keyboard
-            // This is to avoid accidentally splitting the actual contents
-            tmpColDelim = String.fromCharCode(11), // vertical tab character
-            tmpRowDelim = String.fromCharCode(0), // null character
-
-            // actual delimiter characters for CSV format
-            colDelim = '","',
-            rowDelim = '"\r\n"',
-
-            // Grab text from table into CSV formatted string
-            csv = '"' + $rows.map(function (i, row) {
-                var $row = $(row),
-                    $cols = $row.find('td');
-
-                return $cols.map(function (j, col) {
-                    var $col = $(col),
-                        text = $col.text();
-
-                    return text.replace('"', '""'); // escape double quotes
-
-                }).get().join(tmpColDelim);
-
-            }).get().join(tmpRowDelim)
-                .split(tmpRowDelim).join(rowDelim)
-                .split(tmpColDelim).join(colDelim) + '"',
-
-            // Data URI
-            csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
-
-        $(this)
-            .attr({
-            'download': filename,
-                'href': csvData,
-                'target': '_blank'
-        });
-    }
-
-    // This must be a hyperlink
-    $(".export").on('click', function (event) {
-        // CSV
-        exportTableToCSV.apply(this, [$('#dvData>table'), 'export.csv']);
-        
-        // IF CSV, don't do event.preventDefault() or return false
-        // We actually need this to be a typical hyperlink
-    });
-
-var _toCSV3 = (function() {
-  var uri = 'data:application/vnd.ms-excel;base64,'
-    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
-    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
-    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
-  return function(table, name) {
-    if (!table.nodeType) table =   $('.jtable')[0]; ////document.getElementById(table)
-    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-    window.location.href = uri + base64(format(template, ctx))
-  }
-})()
-
-
-
-
-
 _duplicateCheck=function(params){
 if(debug){window.console.log('_duplicateCheck Start');}
 var options={"check":"","loadType":"","page":""},str='';
