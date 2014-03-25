@@ -183,11 +183,18 @@ SELECT[pc_id]
 ,[pc_missinginfo]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
 ,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
-,CONVERT(VARCHAR(8),[pc_obtaininfo_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_obtaininfo_assignedtoTEXT]) AS [pc_obtaininfo]
-,CONVERT(VARCHAR(8),[pc_preparation_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_preparation_assignedtoTEXT]) AS [pc_preparation]
-,CONVERT(VARCHAR(8),[pc_review_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_review_assignedtoTEXT]) AS [pc_review]
-,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_assembly_assignedtoTEXT]) AS [pc_assembly]
-,CONVERT(VARCHAR(8),[pc_delivery_datecompleted], 1) + '<br />' + CONVERT(VARCHAR(5),[pc_delivery_assignedtoTEXT]) AS [pc_delivery]
+
+,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_obtaininfo_assignedtoTEXT]
+,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_preparation_assignedtoTEXT]
+,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_review_assignedtoTEXT]
+,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_assembly_assignedtoTEXT]
+,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_delivery_assignedtoTEXT]
+
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -211,11 +218,11 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
-								,"PC_OBTAININFO":"'&PC_OBTAININFO&'"
-								,"PC_PREPARATION":"'&PC_PREPARATION&'"
-								,"PC_REVIEW":"'&PC_REVIEW&'"
-								,"PC_ASSEMBLY":"'&PC_ASSEMBLY&'"
-								,"PC_DELIVERY":"'&PC_DELIVERY&'"
+								,"PC_OBTAININFO":"'&pc_obtaininfo_datecompleted&'<br/>'&pc_obtaininfo_assignedtoTEXT&'"
+								,"PC_PREPARATION":"'&pc_preparation_datecompleted&'<br/>'&pc_preparation_assignedtoTEXT&'"
+								,"PC_REVIEW":"'&pc_review_datecompleted&'<br/>'&pc_review_assignedtoTEXT&'"
+								,"PC_ASSEMBLY":"'&pc_assembly_datecompleted&'<br/>'&pc_assembly_assignedtoTEXT&'"
+								,"PC_DELIVERY":"'&pc_delivery_datecompleted&'<br/>'&pc_delivery_assignedtoTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
