@@ -3,6 +3,7 @@
 <cffunction name="f_lookupData" access="remote" output="false">
 <cfargument name="clientid" type="string" required="no">
 <cfargument name="formid" type="string" required="no">
+<cfargument name="taskid" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cftry>
 
@@ -27,6 +28,9 @@ SELECT [file_id]
 FROM[v_ctrl_files]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
 AND[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
+<cfif ARGUMENTS.taskid is not "">
+AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
+</cfif>
 ORDER BY[file_name]
 </cfquery>
 <cfset myResult="">
