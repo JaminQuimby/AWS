@@ -208,7 +208,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g3_reviewassignedto">Review Assigned To</label><select id="g3_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 
-<h4 onClick='_run.group3_1()'>Preparation</h4>
+<h4 onClick='_run.load_group3_1()'>Preparation</h4>
 <div>
 <div><label for="g3_g1_informationreceived">Information Received</label><input type="text" class="date" id="g3_g1_informationreceived" ></div>
 <div><label for="g3_g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g3_g1_filingdeadline"></div>

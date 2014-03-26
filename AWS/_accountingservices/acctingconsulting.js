@@ -2,7 +2,7 @@ $(document).ready(function(){_grid1();});
 
 var _run={
 	 new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"acctingconsulting"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();}
-	,new_group2:function(){_run.load_group2({open:true});$("#subtask1_id").val(0);}
+	,new_group2:function(){_run.load_group2({open:true});$("#subtask1_id").val(0);_clearfields({"list":"g2_sequence,g2_duedate,g2_completed,g2_estimatedtime,g2_actualtime,g2_note","sel":"g2_subtask,g2_assignedto,g2_status,g2_dependancy"});}
 	,load_group1:function(params){var options={'open':false};$.extend(true,options,params);_grid1();if(options['open']==true){_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass().addClass("contentbig");$("#group1").accordion({active:0});}if(options['open']==false){_toggle("entrance,smallMenu");_hide("group1,largeMenu");$("#content").removeClass().addClass("contentsmall");$("#group1").accordion({active:0});}}
 	,load_group2:function(params){_loadData({"id":"task_id","group":"group2","page":"acctingconsulting"});_grid2();$("#subtask_isLoaded").val(1);var options={'open':false};$.extend(true,options,params);if(options['open']==true){$("#group2").accordion({active:1});$("#subtask_isLoaded").val(1);}if(options['open']==false){$("#group2").accordion({active:0})}}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"acctingconsulting"});}
