@@ -7,6 +7,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
+
 <cfquery datasource="AWS" name="fQuery">
 SELECT[co_id]
 ,[client_id]
@@ -17,7 +18,7 @@ SELECT[co_id]
 ,CONVERT(VARCHAR(10),[co_duedate], 101)AS[co_duedate]
 ,[co_emailaddress]
 ,[co_ext]
-,[co_faxnumber]
+	,[co_faxnumber]=FORMAT(co_faxnumber,'#Session.localization.formatphone#')
 ,[co_fees]
 ,[co_for]
 ,[co_paid]
@@ -25,11 +26,12 @@ SELECT[co_id]
 ,[co_responseneeded]
 ,[co_returncall]
 ,[co_takenby]
-,[co_telephone]
+	,[co_telephone]=FORMAT(co_telephone,'#Session.localization.formatphone#')
 ,[client_spouse]
 FROM[v_communications]
 WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
+
 </cfcase>
 
 <!--- Asset Credit Hold --->
@@ -58,6 +60,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="formid" type="string" default="12">
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Communications --->
@@ -70,10 +73,13 @@ SELECT[co_id]
 ,[co_caller]
 ,CONVERT(VARCHAR(8),[co_duedate], 1)AS[co_duedate]
 ,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
+,[co_status]
 ,[co_responseneeded]
 ,[co_returncall]
 ,[client_name]
 ,[client_id]
+,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
+
 FROM[v_communications]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -91,6 +97,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"CO_CALLER":"'&CO_CALLER&'"
 								,"CO_DATE":"'&CO_DATE&'"
 								,"CO_DUEDATE":"'&CO_DUEDATE&'"
+								,"CO_STATUSTEXT":"'&CO_STATUSTEXT&'"
 								,"CO_FORTEXT":"'&CO_FORTEXT&'"
 								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
 								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
@@ -122,7 +129,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
- <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][15])><cfset j.DATA[1][15]=1><cfelse><cfset j.DATA[1][15]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][15])><cfset j.DATA[1][15]=1><cfelse><cfset j.DATA[1][15]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][16])><cfset j.DATA[1][16]=1><cfelse><cfset j.DATA[1][16]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
@@ -183,7 +190,7 @@ UPDATE[communications]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[co_briefmessage]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[co_caller]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
- ,[co_contactmethod]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[co_contactmethod]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[co_date]=<cfqueryparam value="#dateFormat(j.DATA[1][6],'YYYY-MM-DD')# #timeFormat(j.DATA[1][6],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[co_duedate]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[co_emailaddress]=<cfqueryparam value="#j.DATA[1][8]#" />

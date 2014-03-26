@@ -114,7 +114,7 @@ else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_owners"},{"it
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1",payload:$.parseJSON(json),page:"businessformation"});
-	if(debug){window.console.log('Start Saving Other Filings');}	
+	if(debug){window.console.log('Start Saving Business Formation');}	
 	}	
 break;
 

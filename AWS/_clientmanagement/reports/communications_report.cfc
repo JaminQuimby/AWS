@@ -43,14 +43,15 @@ SELECT[co_id]
 ,FORMAT(co_fees, 'C', 'en-us')AS[co_fees]
 ,[co_paid]
 ,CONVERT(CHAR(8),[co_date], 1)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
-,[co_telephone]
+,[co_telephone]=FORMAT(co_telephone,'#Session.localization.formatphone#')
 ,[co_ext]
+,[co_duedate]
 ,[co_emailaddress]
 ,[co_responseneeded]
 ,[co_returncall]
 ,[co_briefmessage]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id]
-)AS[co_statusTEXT]
+,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
+,[co_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[co_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_communications]
@@ -108,6 +109,7 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CO_CALLER":"'&CO_CALLER&'"
 								,"CO_DATE":"'&CO_DATE&'"
+								,"CO_DUEDATE":"'&CO_DUEDATE&'"
 								,"CO_FORTEXT":"'&CO_FORTEXT&'"
 								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
 								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
@@ -117,7 +119,7 @@ WHERE(1)=(1)
 								,"CO_EXT":"'&CO_EXT&'"
 								,"CO_EMAILADDRESS":"'&CO_EMAILADDRESS&'"
 								,"CO_FEES":"'&CO_FEES&'"
-								,"CO_PAID":"'&CO_PAID&'"					
+								,"CO_PAIDTEXT":"'&CO_PAIDTEXT&'"					
 							
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>

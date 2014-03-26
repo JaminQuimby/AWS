@@ -4,7 +4,7 @@ var _run={
 	 new_group1:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();$('#g1_date').datetimepicker('setDate', (new Date()) );}
 	,load_group0:function(){_grid1();}
 	,load_group1:function(){}
-	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"communications"});_loadData({"id":"task_id","group":"assetCompTask","page":"communications"});}
+	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"communications"});}
 	}
 
 _grid1=function(){_jGrid({
@@ -17,6 +17,7 @@ _grid1=function(){_jGrid({
 		,CO_CALLER:{title:'Caller'}
 		,CO_DATE:{title:'Date and Time'}
 		,CO_DUEDATE:{title:'Due Date',width:'1%'}
+		,CO_STATUSTEXT:{title:'Status',width:'1%'}
 		,CO_FORTEXT:{title:'For',width:'1%'}
 		,CO_RESPONSENEEDED:{title:'Response Required',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 		,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			
@@ -55,7 +56,7 @@ $("#g1_date").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_emailaddress").val()+'","'+
 $("#g1_ext").val()+'","'+
-$("#g1_faxnumber").val()+'","'+
+$("#g1_faxnumber").val().replace(/[^0-9\.]/g, '')+'","'+
 $("#g1_fees").val()+'","'+
 $("#g1_for").val()+'","'+
 $("#g1_paid").val()+'","'+
@@ -63,7 +64,7 @@ $("#g1_status").val()+'",'+
 $("#g1_responseneeded").is(':checked')+','+
 $("#g1_returnedcall").is(':checked')+',"'+
 $("#g1_takenby").val()+'","'+
-$("#g1_telephone").val()+'","'+
+$("#g1_telephone").val().replace(/[^0-9\.]/g, '')+'","'+
 '"]]}'
 
 
@@ -94,9 +95,8 @@ else if ($("#g1_briefmessage").val()==""){
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"communications"});
-	if(debug){window.console.log('Start Saving Other Filings');}	
-	}	
-
+	if(debug){window.console.log('Start Saving Communications');}	
+	}
 break;
 /*Start Saving Plugins*/
 case"plugins":$('#task_id').val(options['id']);_pluginSaveData({"subgroup":options["subgroup"]});break;

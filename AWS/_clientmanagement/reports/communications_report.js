@@ -35,16 +35,17 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,CO_CALLER:{title:'Caller'}
 			,CO_DATE:{title:'Date and Time',width:'1%'}
+			,CO_DUEDATE:{title:'Due Date',width:'1%'}
+			,CO_STATUSTEXT:{title:'Status',width:'1%'}
 			,CO_FORTEXT:{title:'For'}
 			,CO_RESPONSENEEDED:{title:'Response Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CO_RETURNCALL:{title:'Return Call',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CO_STATUSTEXT:{title:'Status',width:'1%'}
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			,CO_TELEPHONE:{title:'Phone'}
 			,CO_EXT:{title:'Ext'}
 			,CO_EMAILADDRESS:{title:'Email'}
 			,CO_FEES:{title:'Fees'}
-			,CO_PAID:{title:'Payment Staus'}
+			,CO_PAIDTEXT:{title:'Payment Staus'}
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"10"}',

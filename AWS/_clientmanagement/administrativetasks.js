@@ -83,7 +83,7 @@ else if ($("#g1_taskdescription").val()==""){
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({"group":"group1","payload":$.parseJSON(json),page:"administrativetasks"});
-	if(debug){window.console.log('Start Saving Other Filings');}	
+	if(debug){window.console.log('Start Saving Administrative Tasks');}	
 	}	
 	
 
