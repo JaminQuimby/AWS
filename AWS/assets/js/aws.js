@@ -488,7 +488,7 @@ _loadSelect({"selectName":"selectUsers","option1":"","selectObject":"filter_user
 
 sel.hide().change(function() {
 if(debug){window.console.log('select onchange load _group1() ');}
-_group1();
+_run.load_group1();
 }).appendTo("#g1_searchOptions").chosen();
 if(debug){window.console.log('_toBuild : append and chosen() ')}
 sel.wrap( "<label for='filter_username'>Employee Name</label><div></div>");

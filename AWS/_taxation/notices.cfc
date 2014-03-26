@@ -22,12 +22,12 @@
 <cfquery datasource="AWS" name="fquery" >
 SELECT TOP(1)[client_id]
 FROM[v_notice_subtask]
-WHERE[client_id]=<cfqueryparam value="#item[1]#">
-AND[nst_1_noticenumber]=<cfqueryparam value="#item[2]#">
-AND[nst_1_noticedate]=<cfqueryparam value="#item[3]#">
-AND[nst_1_taxyear]=<cfqueryparam value="#item[4]#">
-AND[nst_1_taxform]=<cfqueryparam value="#item[5]#">
-AND[nst_1_resduedate]=<cfqueryparam value="#item[6]#">
+WHERE[client_id]=<cfqueryparam value="#item[1]#"/>
+AND[nst_1_noticenumber]=<cfqueryparam value="#item[2]#"/>
+AND[nst_1_noticedate]=<cfqueryparam value="#item[3]#"/>
+AND[nst_1_taxyear]=<cfqueryparam value="#item[4]#"/>
+AND[nst_1_taxform]=<cfqueryparam value="#item[5]#"/>
+AND[nst_1_resduedate]=<cfqueryparam value="#item[6]#"/>
 
 </cfquery>
 </cfcase>

@@ -11,7 +11,7 @@ var grid1_config = [
 {"n":"search","type":"text","v":""}    
 ,{"n":"briefmessage","t":"text","v":""}
 ,{"n":"caller","t":"text","v":""}
-,{"n":"completed","t":"boolean","v":""}
+,{"n":"status","t":"numeric","v":""}
 ,{"n":"contactmethod","t":"text","v":""}
 ,{"n":"date","t":"date","v":""}
 ,{"n":"duedate","t":"date","v":""}

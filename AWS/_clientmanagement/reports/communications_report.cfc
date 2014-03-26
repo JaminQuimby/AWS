@@ -57,7 +57,7 @@ SELECT[co_id]
 FROM[v_communications]
 
 
-<cfset sqllist = "co_briefmessage,co_caller,co_completed,co_contactmethod,co_credithold,co_date,co_duedate,co_emailaddress,co_ext,co_faxnumber,co_fees,co_for,co_paid,co_responseneeded,co_returncall,co_takenby,co_telephone">
+<cfset sqllist = "co_briefmessage,co_caller,co_status,co_contactmethod,co_credithold,co_date,co_duedate,co_emailaddress,co_ext,co_faxnumber,co_fees,co_for,co_paid,co_responseneeded,co_returncall,co_takenby,co_telephone">
 <cfset key="co_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
