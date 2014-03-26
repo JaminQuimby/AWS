@@ -45,13 +45,14 @@ SELECT[mc_id]
 ,CONVERT(VARCHAR(8),[mc_duedate], 1)AS[mc_duedate]
 ,CONVERT(VARCHAR(8),[mc_workinitiated], 1)AS[mc_workinitiated]
 ,CONVERT(VARCHAR(8),[mc_projectcompleted], 1)AS[mc_projectcompleted]
+,[mc_missinginfo]
 ,[mc_esttime]
 ,FORMAT(mc_fees, 'C', 'en-us')AS[mc_fees]
 ,[mc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[mc_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
 FROM[v_managementconsulting]
-<cfset sqllist = "mc_assignedto,mc_category,mc_description,mc_duedate,mc_esttime,mc_fees,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_workinitiated">
+<cfset sqllist = "mc_assignedto,mc_category,mc_description,mc_duedate,mc_esttime,mc_fees,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_workinitiated,mc_missinginfo">
 <cfset key="mc_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
@@ -105,7 +106,8 @@ WHERE(1)=(1)
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
-								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"		
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_MISSINGINFO":"'&MC_MISSINGINFO&'"	
 								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
 								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
 								,"MC_WORKINITIATED":"'&MC_WORKINITIATED&'"

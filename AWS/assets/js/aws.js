@@ -393,9 +393,14 @@ _duplicateCheck=function(params){
 if(debug){window.console.log('_duplicateCheck Start');}
 var options={"check":"","loadType":"","page":""},str='';
 $.extend(true,options,params);
-$.each(options['check'],function(idx,obj){if($('#'+obj.item).is(':checkbox')){str=str+$('#'+obj.item).is(':checkbox')}else{str=str+$('#'+obj.item).val()}
+$.each(options['check'],function(idx,obj){
+	if($('#'+obj.item).is(':checkbox')){str=str+$('#'+obj.item).is(':checkbox')}
+	else if($('#'+obj.item).val().length == 0){str=str+" "}
+	else{str=str+$('#'+obj.item).val()}
+	
 if(idx!=options['check'].length -1 ){str=str+','}});
 if(debug){window.console.log('_duplicateCheck Check '+str);}
+
 $.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+str+"","loadType":options['loadType']})}
 ,url: options['page']+'.cfc?method=f_duplicateCheck'
 ,success:function(data){j=$.parseJSON(data);str=j.check;}
