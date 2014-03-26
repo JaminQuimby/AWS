@@ -69,7 +69,6 @@ $("#client_id").val()+'","'+
 $("#g1_mattername").val()+'","'+
 $("#g1_matterstatus").val()+'","'+
 '"]]}'
-
 if($("#client_id").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Client');}
@@ -78,27 +77,27 @@ else if ($("#g1_mattername").val()==""){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Matter Name",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Matter Name');}
 	}
-else if ($("#g2_1_noticenumber").val()=="0"){
+else if ($("#g2_1_noticenumber").val()=="0" && $("#isLoaded_group2_1").val()=="1" ){
 	$('.gf-checkbox').hide();$('#group2').show();$('#group2').accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Notice Number",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Notice Number');}
 	}
-else if ($("#g2_1_noticedate").val()==""){
+else if ($("#g2_1_noticedate").val()==""&& $("#isLoaded_group2_1").val()=="1" ){
 	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Notice Date",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Notice Date');}
 	}
-else if ($("#g2_1_taxyear").val()=="0"){
+else if ($("#g2_1_taxyear").val()=="0"&& $("#isLoaded_group2_1").val()=="1" ){
 	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Year",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Tax Year');}
 	}
-else if ($("#g2_1_taxform").val()=="0"){
+else if ($("#g2_1_taxform").val()=="0"&& $("#isLoaded_group2_1").val()=="1" ){
 	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Tax Form",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Tax Form');}
 	}
-else if ($("#g2_1_methodreceived").val()=="0"){
+else if ($("#g2_1_methodreceived").val()=="0"&& $("#isLoaded_group2_1").val()=="1" ){
 	$('.gf-checkbox').hide();$('#group2').show().accordion({ active: 2 });$("#isLoaded_group2_1").val(1);
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Method Received",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Method Received');}
@@ -112,10 +111,10 @@ else{
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"notices"});
 	if(debug){window.console.log('Start Saving Notices');}	
 	}
+	
 break;
 
-case'group2':
-$("#task_id").val(options["id"]);
+case'group2':$("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
@@ -131,12 +130,11 @@ $("#g2_priority").val()+'","'+
 '"]]}';
 if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'group2_1'})};
+
 break;
 
-case'group2_1':
-$("#subtask1_id").val(options["id"]);
+case'group2_1':$("#subtask1_id").val(options["id"]);
 var json='{"DATA":[["'+
-//group 2 subgroup 1
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_1_noticenumber").val()+'","'+
@@ -151,8 +149,8 @@ if($("#isLoaded_group2_1").val()!=0){_saveData({group:"group2_1","payload":$.par
 else{_saveDataCB({'group':'group2_2'})};
 break;
 
-case'group2_2':var json='{"DATA":[["'+
-//group 2 subgroup 2
+case'group2_2':$("#subtask1_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_2_irsstateresponserecieved").val()+'","'+
@@ -165,6 +163,7 @@ $("#g2_2_reviewrequired").is(':checked')+',"'+
 '"]]}'
 if($("#isLoaded_group2_2").val()!=0){_saveData({group:"group2_2",payload:$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'plugins'})};
+
 break;
 
 /*Start Saving Plugins*/

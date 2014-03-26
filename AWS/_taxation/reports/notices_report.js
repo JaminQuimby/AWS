@@ -14,7 +14,7 @@ var grid1_config = [
 ,{"n":"esttime","t":"numeric","v":""}
 ,{"n":"missinginfo","t":"boolean","v":""}
 ,{"n":"missinginforeceived","t":"date","v":""}
-,{"n":"noticestatus","t":"numeric","v":""}
+,{"n":"status","t":"numeric","v":""}
 ,{"n":"paid","t":"numeric","v":""}
 ,{"n":"priority","t":"numeric","v":""}
 ,{"n":"1_datenoticerec","t":"date","v":""}
