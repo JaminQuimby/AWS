@@ -391,6 +391,7 @@ WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfcase>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[otherfilings]
 SET[of_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -401,9 +402,15 @@ WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_2","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 <!---Group1 Subgroup2 --->
 <cfcase value="group1_2">
+<cftry>
 <cfquery name="fquery" datasource="AWS">
 UPDATE[OTHERFILINGS]
 SET[of_preparation_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -414,6 +421,11 @@ WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_3","result":"ok"}'>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 <!---Group1 Subgroup3 --->
 <cfcase value="group1_3">

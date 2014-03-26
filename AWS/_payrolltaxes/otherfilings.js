@@ -62,8 +62,8 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err +' For:'+query.COLU
 /*SAVE DATA CALL BACK*/
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
-try{	
-$.extend(true, options, params);//turn options into array
+try{$.extend(true, options, params);//turn options into array
+alert(options["group"]);
 switch(options["group"]){
 case'':_saveDataCB({'group':'group1'});break;
 
@@ -121,7 +121,9 @@ else{
 	
 
 break;
-case'group1_1':var json='{"DATA":[["'+
+case'group1_1':
+ $("#task_id").val(options["id"]);
+ var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
