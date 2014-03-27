@@ -22,6 +22,7 @@ var j = {
 
 </script>
 
-<button onclick="j.toggle('test3')" value="test">test1</button>
-<button onclick="j.hide('test3')" value="test">test2</button>
-<button onclick="" id="test3" value="test">test3</button>
+<button onClick="j.toggle('test3')" value="test">test1</button>
+<button onClick="j.hide('test3')" value="test">test2</button>
+<button onClick="" id="test3" value="test">test3</button>
+<cfdump var='#cgi#'>

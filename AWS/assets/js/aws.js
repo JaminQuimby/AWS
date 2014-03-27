@@ -824,15 +824,23 @@ default:return false;
 }}
 
 _clearfields=function(params){
-var options={"sel":"","list":""}
+var options={"list":""}
 $.extend(true,options,params)
-var list=options['list'].split(','),sel=options['sel'].split(',');
-		for(var i=0;i<list.length;i++){$('#'+list[i]).val('');}
-		for(var i=0;i<sel.length;i++){
+var 
+list=options['list'].split(',');
+
+		for(var i=0;i<list.length;i++){
+				 if($('#'+list[i]).is(":text")){ $('#'+list[i]).val(''); }
+			else if($('#'+list[i]).is(":checkbox")){
+				$('#'+list[i]).removeAttr('checked');
+				}
+			else if($('#'+list[i]).is(":selected")){
+				$('#'+sel[i]).find('option').prop('selected',false);
+				$('#'+sel[i]).each(function(){$('#'+sel[i]+'option').removeAttr("selected")}).trigger("chosen:updated");
+				}
+			else{ $('#'+list[i]).val(''); }
 			
-$('#'+sel[i]).find('option').prop('selected',false);
-$('#'+sel[i]).each(function(){$('#'+sel[i]+'option').removeAttr("selected")})
-}}
+			}}
 	
 _loadSelect=function(params){
 if(debug){window.console.log('_loadSelect : Starting');}
