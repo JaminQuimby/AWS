@@ -15,7 +15,7 @@ var _run={
 	,load_group1_9:function(){_loadData({"id":"task_id","group":"group1_9","page":"financialstatements"});$("#isLoaded_group1_9").val(1);}
 	,load_group1_10:function(){_loadData({"id":"task_id","group":"group1_10","page":"financialstatements"});$("#isLoaded_group1_10").val(1);}
 	,load_group1_11:function(){_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);}
-	,load_group2:function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence","sel":"g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0')}
+	,load_group2:function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence,g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0')}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"financialstatements"});_loadData({"id":"task_id","group":"assetCompTask","page":"financialstatements"});}
 }
 

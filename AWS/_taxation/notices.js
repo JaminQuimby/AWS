@@ -2,11 +2,11 @@ $(document).ready(function(){_grid1()});
 
 var _run={
 	 new_group1:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();}
-	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_addNewTask({"new":"subtask1_id"});}
+	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_addNewTask({"new":"subtask1_id"});_clearfields({"list":"g2_priority,g2_estimatedtime,g2_missinginformation,g2_missinginforeceived,g2_fees,g2_1_noticenumber,g2_1_noticedate,g2_1_datenoticereceived,g2_1_duedateforresponse,g2_2_responsecompleted,g2_2_reviewrequired,g2_2_reviewcompleted,g2_2_responsesubmitted,g2_2_irsstateresponserecieved,g2_noticestatus,g2_deliverymethod,g2_1_noticenumber,g2_2_reviewassignedto,g2_assignedto,g2_paid,g2_1_taxyear,g2_1_taxform,g2_1_methodreceived,g2_2_responsecompletedby"});}
 	,load_group1:function(){_grid1();}
 	,load_group2:function(){_grid2();$("#isLoaded_group2").val(1);if($('#task_id').val()!=0||$('#task_id').val()!=''){_loadit({"query":{"COLUMNS":["g2_noticestatus"],"DATA":[[4]]},"list":"g2_noticestatus","page":"notices"});}}
-	,load_group2_1:function(){$("#isLoaded_group2_1").val(1);}
-	,load_group2_2:function(){$("#isLoaded_group2_2").val(1);}
+	,load_group2_1:function(){_loadData({"id":"subtask1_id","group":"group2_1","page":"notices"});$("#isLoaded_group2_1").val(1);}
+	,load_group2_2:function(){_loadData({"id":"subtask1_id","group":"group2_2","page":"notices"});$("#isLoaded_group2_2").val(1);}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"notices"});}
 	}
 
@@ -60,7 +60,7 @@ default:if(query!=""){ if(debug){window.console.log('_loadDataCB switch default:
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 $.extend(true, options, params);
-switch(options["group"]){
+ switch(options["group"]){
 case'':_saveDataCB({'group':'group1'});break;
 
 case'group1':var json='{"DATA":[["'+

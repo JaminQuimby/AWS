@@ -2,14 +2,14 @@ $(document).ready(function(){_grid1();});
 
 var _run={
 	  new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"businessformation"});_toggle("group1,largeMenu");_hide("entrance");_addNewTask();}
-	 ,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_clearfields({"list":"g2_task,g2_dateinitiated,g2_completed,g2_esttime","sel":"g2_assignedto"});}
+	 ,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_clearfields({"list":"g2_task,g2_dateinitiated,g2_completed,g2_esttime,g2_assignedto"});}
 	 ,load_group1:function(){_grid1();}
 	 ,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);}
 	 ,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);}
 	 ,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"businessformation"});$("#isLoaded_group1_3").val(1);}
 	 ,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);}
 	 ,load_group1_5:function(){_loadData({"id":"task_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);}
-	 ,load_group2:function(){_grid2();_clearfields({"list":"g2_task,g2_dateinitiated,g2_completed,g2_esttime","sel":"g2_assignedto"});}
+	 ,load_group2:function(){_grid2();_clearfields({"list":"g2_task,g2_dateinitiated,g2_completed,g2_esttime,g2_assignedto"});}
 	 ,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"businessformation"});}
 	 }
 	 
