@@ -785,6 +785,7 @@ $.extend(true,options,params);
 if(options["result"]=="ok"){
 	jqMessage({"type":"destroy"});
 	jqMessage({message: "The task has been removed.",type: "success",autoClose: true,duration: 5});
+	
 	}
 	}
 _toggle=function(list){var arr=list.split(",");for(var i=0;i<arr.length;i++){$('#'+arr[i]).toggle();}};

@@ -94,7 +94,7 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 </cfif>
 
 
-<cfif NOT isDefined('Session.user.ID') AND CGI.SCRIPT_NAME NEQ"/mail.cfc"  >     
+<cfif NOT isDefined('Session.user.ID') AND ListLast(CGI.SCRIPT_NAME,'/') NEQ "mail.cfc"  >     
 <cfinclude template="/assets/module/login/loginform.cfm">
 <cfabort>
 </cfif>
