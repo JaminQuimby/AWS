@@ -93,11 +93,11 @@ WHERE[nst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub1 --->
 <cfcase value="group2_1">
 <cfquery datasource="AWS" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[nst_1_noticedate], 1)AS[nst_1_datenoticerec]
+SELECT CONVERT(VARCHAR(10),[nst_1_datenoticerec], 101)AS[nst_1_datenoticerec]
 	   ,[nst_1_methodreceived]
-	   ,CONVERT(VARCHAR(10),[nst_1_noticedate], 1)AS[nst_1_noticedate]
+	   ,CONVERT(VARCHAR(10),[nst_1_noticedate], 101)AS[nst_1_noticedate]
 	   ,[nst_1_noticenumber]
-	   ,CONVERT(VARCHAR(10),[nst_1_noticedate], 1)AS[nst_1_resduedate]
+	   ,CONVERT(VARCHAR(10),[nst_1_resduedate], 101)AS[nst_1_resduedate]
 	   ,[nst_1_taxform]
 	   ,[nst_1_taxyear]
 FROM[notice_subtask]

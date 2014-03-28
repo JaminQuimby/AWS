@@ -48,11 +48,11 @@ _grid2=function(){_jGrid({
 _loadDataCB=function(query){if(debug){window.console.log('_loadDataCB Start - '+query.COLUMNS[0]);}
 
 switch(query.COLUMNS[0]){
-/*Group1*/case "N_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}					var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});_run.load_assets();break;
-/*Group2*/case "NST_ID":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}						var list='subtask1_id,g2_assignedto,g2_deliverymethod,g2_estimatedtime,g2_fees,g2_missinginformation,g2_missinginforeceived,g2_noticestatus,g2_paid,g2_priority';_loadit({"query":query,"list":list});break;
-/*Group2_1*/case "N_1_DATENOTICEREC":	if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}		var list='g2_1_datenoticereceived,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_duedateforresponse,g2_1_taxform,g2_1_taxyear';_loadit({"query":query,"list":list});break;
-/*Group2_2*/case "N_2_IRSSTATERESPONSE":if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}		var list='g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
-/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD": if(debug){window.console.log('_loadDataCB switch group:'+query.COLUMNS[0]);}	var list='g1_credithold';_loadit({"query":query,"list":list});break;
+/*Group1*/case "N_ID":var list='task_id,client_id,g1_mattername,g1_matterstatus,g2_matter';_loadit({"query":query,"list":list});_run.load_assets();break;
+/*Group2*/case "NST_ID":var list='subtask1_id,g2_assignedto,g2_deliverymethod,g2_estimatedtime,g2_fees,g2_missinginformation,g2_missinginforeceived,g2_noticestatus,g2_paid,g2_priority';_loadit({"query":query,"list":list});break;
+/*Group2_1*/case "NST_1_DATENOTICEREC":var list='g2_1_datenoticereceived,g2_1_methodreceived,g2_1_noticedate,g2_1_noticenumber,g2_1_duedateforresponse,g2_1_taxform,g2_1_taxyear'; _loadit({"query":query,"list":list}); break;
+/*Group2_2*/case "NST_2_IRSSTATERESPONSE":var list='g2_2_irsstateresponserecieved,g2_2_responsecompleted,g2_2_responsecompletedby,g2_2_responsesubmitted,g2_2_reviewassignedto,g2_2_reviewcompleted,g2_2_reviewrequired';_loadit({"query":query,"list":list});break;
+/*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){ if(debug){window.console.log('_loadDataCB switch default:'+query.COLUMNS[0]);} var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 }
 };
