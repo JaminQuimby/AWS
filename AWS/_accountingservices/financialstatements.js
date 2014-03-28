@@ -2,20 +2,23 @@ $(document).ready(function(){_grid1();});
 
 var _run={
 	 new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"financialstatements"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();}
-	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val("0")}
-	,load_group1:function(){}
-	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"financialstatements"});$("#isLoaded_group1_1").val(1);}
-	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"financialstatements"});$("#isLoaded_group1_2").val(1);}
-	,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"financialstatements"});$("#isLoaded_group1_3").val(1);}
-	,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"financialstatements"});$("#isLoaded_group1_4").val(1);}
-	,load_group1_5:function(){_loadData({"id":"task_id","group":"group1_5","page":"financialstatements"});$("#isLoaded_group1_5").val(1);}
-	,load_group1_6:function(){_loadData({"id":"task_id","group":"group1_6","page":"financialstatements"});$("#isLoaded_group1_6").val(1);}
-	,load_group1_7:function(){_loadData({"id":"task_id","group":"group1_7","page":"financialstatements"});$("#isLoaded_group1_7").val(1);}
-	,load_group1_8:function(){_loadData({"id":"task_id","group":"group1_8","page":"financialstatements"});$("#isLoaded_group1_8").val(1);}
-	,load_group1_9:function(){_loadData({"id":"task_id","group":"group1_9","page":"financialstatements"});$("#isLoaded_group1_9").val(1);}
-	,load_group1_10:function(){_loadData({"id":"task_id","group":"group1_10","page":"financialstatements"});$("#isLoaded_group1_10").val(1);}
-	,load_group1_11:function(){_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);}
-	,load_group2:function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence,g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0')}
+	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val("0"); }
+	,new_clone1:function(){jqMessage({message: "Warning: Would you like to import the selected group?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_clone1\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})}
+	,new_clone2:function(){jqMessage({message: "Warning: Would you like to import the selected history?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_clone2\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})}
+	,load_group1:function(){_grid1();_run.load_select_clone2();}
+	,load_group1_1:function(){if($("#isLoaded_group1_1").val()=="0"){_loadData({"id":"task_id","group":"group1_1","page":"financialstatements"});$("#isLoaded_group1_1").val(1);}}
+	,load_group1_2:function(){if($("#isLoaded_group1_2").val()=="0"){_loadData({"id":"task_id","group":"group1_2","page":"financialstatements"});$("#isLoaded_group1_2").val(1);}}
+	,load_group1_3:function(){if($("#isLoaded_group1_3").val()=="0"){_loadData({"id":"task_id","group":"group1_3","page":"financialstatements"});$("#isLoaded_group1_3").val(1);}}
+	,load_group1_4:function(){if($("#isLoaded_group1_4").val()=="0"){_loadData({"id":"task_id","group":"group1_4","page":"financialstatements"});$("#isLoaded_group1_4").val(1);}}
+	,load_group1_5:function(){if($("#isLoaded_group1_5").val()=="0"){_loadData({"id":"task_id","group":"group1_5","page":"financialstatements"});$("#isLoaded_group1_5").val(1);}}
+	,load_group1_6:function(){if($("#isLoaded_group1_6").val()=="0"){_loadData({"id":"task_id","group":"group1_6","page":"financialstatements"});$("#isLoaded_group1_6").val(1);}}
+	,load_group1_7:function(){if($("#isLoaded_group1_7").val()=="0"){_loadData({"id":"task_id","group":"group1_7","page":"financialstatements"});$("#isLoaded_group1_7").val(1);}}
+	,load_group1_8:function(){if($("#isLoaded_group1_8").val()=="0"){_loadData({"id":"task_id","group":"group1_8","page":"financialstatements"});$("#isLoaded_group1_8").val(1);}}
+	,load_group1_9:function(){if($("#isLoaded_group1_9").val()=="0"){_loadData({"id":"task_id","group":"group1_9","page":"financialstatements"});$("#isLoaded_group1_9").val(1);}}
+	,load_group1_10:function(){if($("#isLoaded_group1_10").val()=="0"){_loadData({"id":"task_id","group":"group1_10","page":"financialstatements"});$("#isLoaded_group1_10").val(1);}}
+	,load_group1_11:function(){if($("#isLoaded_group1_11").val()=="0"){_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);}}
+	,load_group2:function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence,g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0');_run.load_select_clone2()}
+	,load_select_clone2:function(){_loadSelect({'selectName':'g2_history','selectObject':'g2_history',"option1":""+$("#client_id").val()+"",'page':'financialstatements'});}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"financialstatements"});_loadData({"id":"task_id","group":"assetCompTask","page":"financialstatements"});}
 }
 
@@ -167,7 +170,7 @@ if($("#isLoaded_group1_1").val()!=0){
 	_saveData({group:"group1_1","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_1 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_2'});
+	_saveDataCB({'group':'group1_2',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_1 - Skipped saving data');}
 	}
 break;
@@ -185,7 +188,7 @@ if($("#isLoaded_group1_2").val()!=0){
 	_saveData({group:"group1_2","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_2 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_3'});
+	_saveDataCB({'group':'group1_3',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_2 - Skipped saving data');}
 	}
 break;
@@ -203,7 +206,7 @@ if($("#isLoaded_group1_3").val()!=0){
 	_saveData({group:"group1_3","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_3 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_4'});
+	_saveDataCB({'group':'group1_4',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_3 - Skipped saving data');}
 	}
 break;
@@ -221,7 +224,7 @@ if($("#isLoaded_group1_4").val()!=0){
 	_saveData({group:"group1_4","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_4 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_5'});
+	_saveDataCB({'group':'group1_5',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_4 - Skipped saving data');}
 	}
 break;
@@ -239,7 +242,7 @@ if($("#isLoaded_group1_5").val()!=0){
 	_saveData({group:"group1_5","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_5 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_6'});
+	_saveDataCB({'group':'group1_6',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_5 - Skipped saving data');}
 	}
 break;
@@ -257,7 +260,7 @@ if($("#isLoaded_group1_6").val()!=0){
 	_saveData({group:"group1_6","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_6 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_7'});
+	_saveDataCB({'group':'group1_7',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_6 - Skipped saving data');}
 	}
 break;
@@ -275,7 +278,7 @@ if($("#isLoaded_group1_7").val()!=0){
 	_saveData({group:"group1_7","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_7 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_8'});
+	_saveDataCB({'group':'group1_8',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_7 - Skipped saving data');}
 	}
 break;
@@ -293,7 +296,7 @@ if($("#isLoaded_group1_8").val()!=0){
 	_saveData({group:"group1_8","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_8 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_9'});
+	_saveDataCB({'group':'group1_9',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_8 - Skipped saving data');}
 	}
 break;
@@ -311,7 +314,7 @@ if($("#isLoaded_group1_9").val()!=0){
 	_saveData({group:"group1_9","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_9 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_10'});
+	_saveDataCB({'group':'group1_10',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_9 - Skipped saving data');}
 	}
 break;
@@ -329,7 +332,7 @@ if($("#isLoaded_group1_10").val()!=0){
 	_saveData({group:"group1_10","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_10 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group1_11'});
+	_saveDataCB({'group':'group1_11',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_10 - Skipped saving data');}
 	}
 break;
@@ -347,7 +350,7 @@ if($("#isLoaded_group1_11").val()!=0){
 	_saveData({group:"group1_11","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_11 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group2'});
+	_saveDataCB({'group':'group2',"id":""+$("#task_id").val()+""});
 	if(debug){window.console.log('Group 1_11 - Skipped saving data');}
 	}
 break;
@@ -375,14 +378,14 @@ if($("#isLoaded_group2").val()!=0){
 	}
 break;
 
-/*Group2_Duplicate*/
-case'group2_duplicate':var json='{"DATA":[["'+
+/*group2_clone1*/
+case'group2_clone1':var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_group").val()+'","'+
 '"]]}'
 if($("#task_isLoaded").val()!=0){
-	_saveData({group:"group2_duplicate",payload:$.parseJSON(json),page:"financialstatements"})}
+	_saveData({group:"group2_clone1",payload:$.parseJSON(json),page:"financialstatements"})}
 else{jqMessage({message: "You must select a task.",type: "info",autoClose: true})}
 break;
 

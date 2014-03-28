@@ -6,6 +6,31 @@
 <!--- [LOAD FUNCTIONs] --->
 
 <!--- LOAD SELECT BOXES --->
+<cffunction name="f_loadSelect" access="remote" output="true">
+<cfargument name="selectName" type="string">
+<cfargument name="formid" type="string" default="">
+<cfargument name="option1" type="numeric" default="0">
+
+<cfquery datasource="AWS" name="fquery" >
+SELECT[optionname]=CONVERT(char(4),fds_year) +' | '+ ISNULL(FORMAT(fds_periodend,'d','en-us'),'---N/A---') +' | '+ (SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='0'OR[form_id]='0')AND([optionGroup]='0'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id]),[fds_id]AS[optionvalue_id]
+FROM[financialdatastatus]
+WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.option1#" cfsqltype="cf_sql_integer">
+ORDER BY[fds_Year]DESC,[fds_periodend]
+
+</cfquery>
+<cfset myResult="">
+<cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"optionvalue_id":"'&optionvalue_id&'","optionname":"'&optionname&'"}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cffunction>
+
+<!--- dupe chk--->
 <cffunction name="f_duplicateCheck" access="remote" output="true">
 <cfargument name="check" type="string">
 <cfargument name="loadType" type="string">
@@ -215,31 +240,40 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="assetCompTask">
 <cfquery datasource="AWS" name="fQuery">
 SELECT
-[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'d','en-us')
+[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#')
 ,[fds_obtaininfo_assignedtoTEXT]
-,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'d','en-us') 
+,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#') 
 ,[fds_sort_assignedtoTEXT]
-,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'d','en-us') 
+,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#') 
 ,[fds_checks_assignedtoTEXT]
-,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'d','en-us') 
+,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#') 
 ,[fds_sales_assignedtoTEXT]
-,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'d','en-us') 
+,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#') 
 ,[fds_entry_assignedtoTEXT]
-,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'d','en-us') 
+,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#') 
 ,[fds_reconcile_assignedtoTEXT]
-,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'d','en-us') 
+,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#') 
 ,[fds_compile_assignedtoTEXT]
-,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'d','en-us') 
+,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'d','#Session.localization.language#') 
 ,[fds_review_assignedtoTEXT]
-,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'d','en-us') 
+,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#') 
 ,[fds_assembly_assignedtoTEXT]
-,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'d','en-us') 
+,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#') 
 ,[fds_delivery_assignedtoTEXT]
-,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'d','en-us') 
+,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#') 
 ,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialdatastatus]
 WHERE[FDS_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
+</cfcase>
+
+<cfcase value="assetClone2">
+<cfquery datasource="AWS" name="fQuery">
+SELECT CONVERT(char(4),fds_year)+' | '+ISNULL(FORMAT(fds_periodend,'d','#Session.localization.language#'),'------N/A-----')+' | '+(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='0'OR[form_id]='#ARGUMENTS.formid#')AND([optionGroup]='0'OR[optionGroup]='#ARGUMENTS.formid#')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id]),[fds_id]AS[optionvalue_id]
+FROM[financialdatastatus]
+ORDER BY [fds_Year] DESC ,[fds_periodend]
+</cfquery>
+
 </cfcase>
 
 </cfswitch>
@@ -353,8 +387,9 @@ SELECT[fdss_id]
 FROM[v_financialDataStatus_Subtask]
 WHERE[fdss_status] != 2 
 AND [fdss_status] != 3
+AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 AND[fdss_subtaskTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
-<cfif ARGUMENTS.ID neq "0">AND[fdss_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfif>
+
 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>
 </cfquery>
@@ -756,8 +791,8 @@ WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfif>
 </cfcase>
 
-<!--- Group2 Duplicate --->
-<cfcase value="group2_duplicate">
+<!--- Group2_Clone1 --->
+<cfcase value="group2_clone1">
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="aquery" datasource="AWS">
@@ -771,9 +806,31 @@ INSERT INTO[financialdatastatus_subtask]([fds_id],[fdss_sequence],[fdss_subtask]
 </cfloop>
 SELECT SCOPE_IDENTITY()AS[fds_id]
 </cfquery>
-<cfreturn '{"id":"#fquery.mcs_id#","group":"saved","result":"ok"}'>
+<cfreturn '{"id":"#fquery.fds_id#","group":"saved","result":"ok"}'>
 </cfif>
 </cfcase>
+
+<!--- Group2_Clone2 --->
+<cfcase value="group2_clone2">
+<!--- if this is a new record, then insert it--->
+<cfif j.DATA[1][1] eq "0">
+<cfquery name="aquery" datasource="AWS">
+SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='3'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
+</cfquery>
+<cfquery name="fquery" datasource="AWS">
+<cfset indexNumber=0>
+<cfloop index="i" list="#aquery.option_1#">
+<cfset indexNumber = indexNumber + 1 >
+INSERT INTO[financialdatastatus_subtask]([fds_id],[fdss_sequence],[fdss_subtask],[fdss_status])VALUES(<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>,<cfqueryparam value="#indexNumber#"/>,<cfqueryparam value="#i#"/>,<cfqueryparam value="4"/>)
+</cfloop>
+SELECT SCOPE_IDENTITY()AS[fds_id]
+</cfquery>
+<cfreturn '{"id":"#fquery.fds_id#","group":"saved","result":"ok"}'>
+</cfif>
+</cfcase>
+
+
+
 
 
 </cfswitch>

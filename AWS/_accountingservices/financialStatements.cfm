@@ -47,6 +47,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfquery dbtype="query" name="global_financialstatmentsubtask">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_financialstatmentsubtask'</cfquery>
 <cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
 <cfquery dbtype="query" name="global_financialgroup">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_financialgroup'</cfquery>
+
+
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -175,7 +177,10 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div>
     	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_run.load_group2();" onKeyPress="if(event.keyCode==13){_run.load_group2();}"/></div>
         <div><label for="g2_group">Group</label><select id="g2_group"><option value="0">&nbsp;</option><cfoutput query="global_financialgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select>
-       		 <a href="#" class="button optional" onClick='jqMessage({message: "Warning: Would you like to import the selected group?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_duplicate\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})'>Duplicate</a>
+       		 <a href="#" class="button optional" onClick='_run.new_clone1()'>Clone</a>
+        </div>
+        <div><label for="g2_history">History</label><select id="g2_history"><option value="0">&nbsp;</option><option value="0">&nbsp;</option></select>
+       		 <a href="#" class="button optional" onClick='_run.new_clone2()'>Clone</a>
         </div>
 		<div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox">

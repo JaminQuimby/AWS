@@ -3,7 +3,7 @@ $(document).ready(function(){_grid1();});
 var _run={
 	 new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"financialtaxplanning"});_toggle("group1,largeMenu");_hide("entrance,smallMenu");_addNewTask();}
 	,load_group1:function(){_grid1();}
-	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"financialtaxplanning"});_loadData({"id":"task_id","group":"assetCompTask","page":"financialtaxplanning"});}
+	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"financialtaxplanning"});}
 }
 
 	_grid1=function(){_jGrid({
