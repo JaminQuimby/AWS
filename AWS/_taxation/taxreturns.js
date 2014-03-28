@@ -11,16 +11,16 @@ var _run={
 	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_clearfields({"list":"g2_completed,g2_g1_informationreceived,g2_g1_duedate,g2_g1_missinginformation,g2_g1_missinginforeceived,g2_g1_readyforreview,g2_g1_reviewed,g2_g1_reviewedwithnotes,g2_g1_completed,g2_g2_assemblereturn,g2_g2_contacted,g2_g2_messageleft,g2_g2_emailed,g2_g2_missingsignatures,g2_g2_delivered,g2_g2_currentfees,g2_g2_priorfees,g2_g3_required,g2_g3_extended,g2_g3_rfr,g2_g3_completed,g2_g3_delivered,g2_g3_currentfees,g2_g3_priorfees,g2_state,g2_requiredforms,g2_primary,g2_status,g2_assignedto,g2_reviewassignedto,g2_g1_assignedto,g2_g1_preparedby,g2_g1_reviewassignedto,g2_g1_reviewedby,g2_g2_deliverymethod,g2_g2_paymentstatus,g2_g3_assignedto,g2_g3_paymentstatus"});}
 	,new_group3:function(){$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"});$("#subtask2_id").val(0);_clearfields({"list":"g3_g1_informationreceived,g3_g1_filingdeadline,g3_g1_duedate,g3_g1_missinginformation,g3_g1_missinginforeceived,g3_g1_readyforreview,g3_g1_reviewed,g3_g1_reviewedwithnotes,g3_g1_completed,g3_schedule,g3_status,g3_assignedto,g3_reviewassignedto,g3_g1_assignedto,g3_g1_preparedby,g3_g1_reviewassignedto,g3_g1_reviewedby"});}
 	,load_group1:function(){_grid1();}
-	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"taxreturns"});$("#isLoaded_group1_1").val(1)}
-	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"taxreturns"});$("#isLoaded_group1_2").val(1)}
-	,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"taxreturns"});$("#isLoaded_group1_3").val(1)}
-	,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)}
+	,load_group1_1:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"task_id","group":"group1_1","page":"taxreturns"});$("#isLoaded_group1_1").val(1)}}
+	,load_group1_2:function(){if($("#isLoaded_group1_2").val(1)=="0"){_loadData({"id":"task_id","group":"group1_2","page":"taxreturns"});$("#isLoaded_group1_2").val(1)}}
+	,load_group1_3:function(){if($("#isLoaded_group1_3").val(1)=="0"){_loadData({"id":"task_id","group":"group1_3","page":"taxreturns"});$("#isLoaded_group1_3").val(1)}}
+	,load_group1_4:function(){if($("#isLoaded_group1_4").val(1)=="0"){_loadData({"id":"task_id","group":"group1_4","page":"taxreturns"});$("#isLoaded_group1_4").val(1)}}
 	,load_group2:function(){_grid2();_loadData({"id":"subtask1_id","group":"group2","page":"taxreturns"});$("#isLoaded_group2").val(1)}
-	,load_group2_1:function(){_loadData({"id":"subtask1_id","group":"group2_1","page":"taxreturns"});$("#isLoaded_group2_1").val(1)}
-	,load_group2_2:function(){_loadData({"id":"subtask1_id","group":"group2_2","page":"taxreturns"});$("#isLoaded_group2_2").val(1)}
-	,load_group2_3:function(){_loadData({"id":"subtask1_id","group":"group2_3","page":"taxreturns"});$("#isLoaded_group2_3").val(1)}
+	,load_group2_1:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"subtask1_id","group":"group2_1","page":"taxreturns"});$("#isLoaded_group2_1").val(1)}}
+	,load_group2_2:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"subtask1_id","group":"group2_2","page":"taxreturns"});$("#isLoaded_group2_2").val(1)}}
+	,load_group2_3:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"subtask1_id","group":"group2_3","page":"taxreturns"});$("#isLoaded_group2_3").val(1)}}
 	,load_group3:function(){_grid3();_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});$("#isLoaded_group3").val(1)}
-	,load_group3_1:function(){_loadData({"id":"subtask2_id","group":"group3_1","page":"taxreturns"});$("#isLoaded_group3_1").val(1)}
+	,load_group3_1:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"subtask2_id","group":"group3_1","page":"taxreturns"});$("#isLoaded_group3_1").val(1)}}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"taxreturns"})}
 	}
 

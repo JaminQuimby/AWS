@@ -56,7 +56,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
 <div><label for="g1_mattername"><i class="fa fa-lock link" onClick="_schk('g1_mattername')"></i> Matter Name</label><input type="text" id="g1_mattername" disabled="disabled"> </div>
 <div><label for="g1_matterstatus"><i onClick="_schk('g1_matterstatus')"></i> Matter Status</label><select id="g1_matterstatus" ><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<!-- <div style="margin-top:5px;"><a href="#" class="button optional" onClick="_grid1();_toggle('entrance2');_hide('entrance,group2,group3');">Add Notice</a></div> -->
 </div>
 </div>
 
@@ -69,42 +68,44 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <a href="#" class="button optional" onClick='_run.new_group2()'>Add</a>
 </div>
 </div>
-<h4 onClick='_run.load_group2();'>Add Notice</h4>
-<div>
-<div><label for="g2_matter">Matter Name</label><input type="text" id="g2_matter" class="readonly" readonly></div>
-<div><label for="g2_noticestatus">Notice Status</label><select id="g2_noticestatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_priority">Priority</label><input type="text" placeholder="0" id="g2_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-<div><label for="g2_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g2_estimatedtime" ></div>
-<div><label for="g2_missinginformation"><input id="g2_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
-<div><label for="g2_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_missinginforeceived" ></div>
-<div><label for="g2_fees">Fees</label><input type="text" id="g2_fees" class="valid_off" placeholder="0" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-<div><label for="g2_deliverymethod">Delivery Method</label><select id="g2_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_paid">Payment Status</label><select id="g2_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 
-</div>
 <!--- GROUP 2_1 --->
-<h4 onClick='_run.load_group2_1();'>Details</h4>
+<h4 onClick='_run.load_group2_1();'>Add Notice</h4>
+<div>
+<div><label for="g2_1_matter">Matter Name</label><input type="text" id="g2_1_matter" class="readonly" readonly></div>
+<div><label for="g2_1_noticestatus">Notice Status</label><select id="g2_1_noticestatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_assignedto">Assigned To</label><select id="g2_1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_priority">Priority</label><input type="text" placeholder="0" id="g2_1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g2_1_estimatedtime" ></div>
+<div><label for="g2_1_missinginformation"><input id="g2_1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
+<div><label for="g2_1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_1_missinginforeceived" ></div>
+<div><label for="g2_1_fees">Fees</label><input type="text" id="g2_1_fees" class="valid_off" placeholder="0" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_1_deliverymethod">Delivery Method</label><select id="g2_1_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_1_paid">Payment Status</label><select id="g2_1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+</div>
+
+<!--- GROUP 2_2 --->
+<h4 onClick='_run.load_group2_2();'>Details</h4>
 <div class="subtask1_id">
-<div><label for="g2_1_noticenumber"><i class="fa fa-lock link" onClick="_schk('g2_1_noticenumber')"></i> Notice Number</label><select disabled="disabled" id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_noticedate"><i class="fa fa-lock link" onClick="_schk('g2_1_noticedate')"></i> Notice Date</label><input type="text" class="date" id="g2_1_noticedate" disabled="disabled"></div>
-<div><label for="g2_1_taxyear"><i class="fa fa-lock link" onClick="_schk('g2_1_taxyear')"></i> Tax Year</label><select disabled="disabled" id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_taxform"><i class="fa fa-lock link" onClick="_schk('g2_1_taxform')"></i> Tax Form</label><select disabled="disabled" id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_methodreceived"><i class="fa fa-lock link" onClick="_schk('g2_1_methodreceived')"></i> Method Recieved</label><select disabled="disabled" id="g2_1_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_datenoticereceived">Date Notice Received</label><input type="text" class="date" id="g2_1_datenoticereceived"></div>
-<div><label for="g2_1_duedateforresponse">Due Date For Response</label><input type="text" class="date" id="g2_1_duedateforresponse"></div>
+<div><label for="g2_2_noticenumber"><i class="fa fa-lock link" onClick="_schk('g2_2_noticenumber')"></i> Notice Number</label><select disabled="disabled" id="g2_2_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_2_noticedate"><i class="fa fa-lock link" onClick="_schk('g2_2_noticedate')"></i> Notice Date</label><input type="text" class="date" id="g2_2_noticedate" disabled="disabled"></div>
+<div><label for="g2_2_taxyear"><i class="fa fa-lock link" onClick="_schk('g2_2_taxyear')"></i> Tax Year</label><select disabled="disabled" id="g2_2_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_2_taxform"><i class="fa fa-lock link" onClick="_schk('g2_2_taxform')"></i> Tax Form</label><select disabled="disabled" id="g2_2_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_2_methodreceived"><i class="fa fa-lock link" onClick="_schk('g2_2_methodreceived')"></i> Method Recieved</label><select disabled="disabled" id="g2_2_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_2_datenoticereceived">Date Notice Received</label><input type="text" class="date" id="g2_2_datenoticereceived"></div>
+<div><label for="g2_2_duedateforresponse">Due Date For Response</label><input type="text" class="date" id="g2_2_duedateforresponse"></div>
 
 </div>
-<!--- GROUP 2_2 --->
-<h4 onClick='_run.load_group2_2();'>Correspondence</h4>
+<!--- GROUP 2_3 --->
+<h4 onClick='_run.load_group2_3();'>Correspondence</h4>
 <div>
-<div><label for="g2_2_responsecompleted">Response Completed</label><input type="text" class="date" id="g2_2_responsecompleted"></div>
-<div><label for="g2_2_responsecompletedby">Completed By</label><select id="g2_2_responsecompletedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_2_reviewrequired"><input id="g2_2_reviewrequired" type="checkbox" class="ios-switch">Review Required</label></div>
-<div><label for="g2_2_reviewassignedto">Review Assigned To</label><select id="g2_2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_2_reviewcompleted">Review Completed</label><input type="text" class="date" id="g2_2_reviewcompleted"></div>
-<div><label for="g2_2_responsesubmitted">Response Submitted</label><input type="text" class="date" id="g2_2_responsesubmitted"></div>
-<div><label for="g2_2_irsstateresponserecieved">IRS/State Response Recieved</label><input type="text" class="date" id="g2_2_irsstateresponserecieved"></div>
+<div><label for="g2_3_responsecompleted">Response Completed</label><input type="text" class="date" id="g2_3_responsecompleted"></div>
+<div><label for="g2_3_responsecompletedby">Completed By</label><select id="g2_3_responsecompletedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_3_reviewrequired"><input id="g2_3_reviewrequired" type="checkbox" class="ios-switch">Review Required</label></div>
+<div><label for="g2_3_reviewassignedto">Review Assigned To</label><select id="g2_3_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_3_reviewcompleted">Review Completed</label><input type="text" class="date" id="g2_3_reviewcompleted"></div>
+<div><label for="g2_3_responsesubmitted">Response Submitted</label><input type="text" class="date" id="g2_3_responsesubmitted"></div>
+<div><label for="g2_3_irsstateresponserecieved">IRS/State Response Recieved</label><input type="text" class="date" id="g2_3_irsstateresponserecieved"></div>
 </div>
 </div>
 
