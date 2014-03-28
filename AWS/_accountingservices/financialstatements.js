@@ -154,7 +154,9 @@ _saveData({group:"group1","payload":$.parseJSON(json),page:"financialstatements"
 if(debug){window.console.log('Group 1 - Saving Data');}
 break;
 
-case'group1_1':var json='{"DATA":[["'+
+case'group1_1':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g1_assignedto").val()+'","'+
 $("#g1_g1_completedby").val()+'","'+
@@ -170,7 +172,9 @@ if($("#isLoaded_group1_1").val()!=0){
 	}
 break;
 
-case'group1_2':var json='{"DATA":[["'+
+case'group1_2':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g2_assignedto").val()+'","'+
 $("#g1_g2_completedby").val()+'","'+
@@ -186,7 +190,9 @@ if($("#isLoaded_group1_2").val()!=0){
 	}
 break;
 
-case'group1_3':var json='{"DATA":[["'+
+case'group1_3':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g3_assignedto").val()+'","'+
 $("#g1_g3_completedby").val()+'","'+
@@ -202,7 +208,9 @@ if($("#isLoaded_group1_3").val()!=0){
 	}
 break;
 
-case'group1_4':var json='{"DATA":[["'+
+case'group1_4':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g4_assignedto").val()+'","'+
 $("#g1_g4_completedby").val()+'","'+
@@ -218,7 +226,9 @@ if($("#isLoaded_group1_4").val()!=0){
 	}
 break;
 
-case'group1_5':var json='{"DATA":[["'+
+case'group1_5':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g5_assignedto").val()+'","'+
 $("#g1_g5_completedby").val()+'","'+
@@ -234,7 +244,9 @@ if($("#isLoaded_group1_5").val()!=0){
 	}
 break;
 
-case'group1_6':var json='{"DATA":[["'+
+case'group1_6':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g6_assignedto").val()+'","'+
 $("#g1_g6_completedby").val()+'","'+
@@ -250,7 +262,9 @@ if($("#isLoaded_group1_6").val()!=0){
 	}
 break;
 
-case'group1_7':var json='{"DATA":[["'+
+case'group1_7':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g7_assignedto").val()+'","'+
 $("#g1_g7_completedby").val()+'","'+
@@ -266,7 +280,9 @@ if($("#isLoaded_group1_7").val()!=0){
 	}
 break;
 
-case'group1_8':var json='{"DATA":[["'+
+case'group1_8':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g8_assignedto").val()+'","'+
 $("#g1_g8_completedby").val()+'","'+
@@ -282,7 +298,9 @@ if($("#isLoaded_group1_8").val()!=0){
 	}
 break;
 
-case'group1_9':var json='{"DATA":[["'+
+case'group1_9':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g9_assignedto").val()+'","'+
 $("#g1_g9_completedby").val()+'","'+
@@ -298,7 +316,9 @@ if($("#isLoaded_group1_9").val()!=0){
 	}
 break;
 
-case'group1_10':var json='{"DATA":[["'+
+case'group1_10':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g10_assignedto").val()+'","'+
 $("#g1_g10_completedby").val()+'","'+
@@ -314,7 +334,9 @@ if($("#isLoaded_group1_10").val()!=0){
 	}
 break;
 
-case'group1_11':var json='{"DATA":[["'+
+case'group1_11':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g11_assignedto").val()+'","'+
 $("#g1_g11_completedby").val()+'","'+
