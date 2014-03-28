@@ -3,11 +3,11 @@ $(document).ready(function(){_grid1();});
 var _run={
 	 new_group1:function(){document.getElementById("content").className="contentbig";_toggle("group1,largeMenu");_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"otherfilings"});_hide("entrance,smallMenu");_addNewTask();}
 	,load_group1:function(params){var options={'open':false};$.extend(true, options, params);_grid1();if(options['open']==true){_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass().addClass("contentbig");$("#group1").accordion({active:0});}if(options['open']==false){ _toggle("entrance,smallMenu");_hide("group1,largeMenu");$("#content").removeClass().addClass("contentsmall");$("#group1").accordion({active:0});}}
-	,load_group1_1:function(){_loadData({"id":"task_id","group":"group1_1","page":"otherfilings"});$("#isLoaded_group1_1").val(1);}
-	,load_group1_2:function(){_loadData({"id":"task_id","group":"group1_2","page":"otherfilings"});$("#isLoaded_group1_2").val(1);}
-	,load_group1_3:function(){_loadData({"id":"task_id","group":"group1_3","page":"otherfilings"});$("#isLoaded_group1_3").val(1);}
-	,load_group1_4:function(){_loadData({"id":"task_id","group":"group1_4","page":"otherfilings"});$("#isLoaded_group1_4").val(1);}
-	,load_group1_5:function(){_loadData({"id":"task_id","group":"group1_5","page":"otherfilings"});$("#isLoaded_group1_5").val(1);}
+	,load_group1_1:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"task_id","group":"group1_1","page":"otherfilings"});$("#isLoaded_group1_1").val(1);}}
+	,load_group1_2:function(){if($("#isLoaded_group1_2").val(1)=="0"){_loadData({"id":"task_id","group":"group1_2","page":"otherfilings"});$("#isLoaded_group1_2").val(1);}}
+	,load_group1_3:function(){if($("#isLoaded_group1_3").val(1)=="0"){_loadData({"id":"task_id","group":"group1_3","page":"otherfilings"});$("#isLoaded_group1_3").val(1);}}
+	,load_group1_4:function(){if($("#isLoaded_group1_4").val(1)=="0"){_loadData({"id":"task_id","group":"group1_4","page":"otherfilings"});$("#isLoaded_group1_4").val(1);}}
+	,load_group1_5:function(){if($("#isLoaded_group1_5").val(1)=="0"){_loadData({"id":"task_id","group":"group1_5","page":"otherfilings"});$("#isLoaded_group1_5").val(1);}}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"otherfilings"});_loadData({"id":"task_id","group":"assetCompTask","page":"otherfilings"});}
 	}
 
