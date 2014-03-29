@@ -782,10 +782,11 @@ catch(err){jqMessage({message: "Error in js._loadIt: "+err,"type":"error",autoCl
 _removeDataCB=function(params){
 var options={"id":"","group":"","result":"fail"}
 $.extend(true,options,params);
+
 if(options["result"]=="ok"){
+	$('#'+options["group"]).accordion( "option", "active", 0 );
 	jqMessage({"type":"destroy"});
 	jqMessage({message: "The task has been removed.",type: "success",autoClose: true,duration: 5});
-	
 	}
 	}
 _toggle=function(list){var arr=list.split(",");for(var i=0;i<arr.length;i++){$('#'+arr[i]).toggle();}};

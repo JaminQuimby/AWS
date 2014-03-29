@@ -335,8 +335,8 @@ SELECT[fds_id]
 ,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus]
-WHERE[fds_status] != 2 
-AND [fds_status] != 3
+WHERE ISNULL([fds_status],0) != 2 
+AND ISNULL([fds_status],0) != 3
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
@@ -378,17 +378,17 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- Grid 2 --->
 <cfcase value="group2"><cfquery datasource="AWS" name="fquery">
 SELECT[fdss_id]
-,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_status]=[optionvalue_id])
+,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
 ,[fdss_assignedtoTEXT]
 ,[fdss_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#')
 ,[fdss_sequence]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]
 FROM[v_financialDataStatus_Subtask]
-WHERE[fdss_status] != 2 
-AND [fdss_status] != 3
+WHERE ISNULL([fdss_status],0) != 2 
+AND ISNULL([fdss_status],0) != 3
 AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-AND[fdss_subtaskTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+
 
 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>
@@ -749,13 +749,13 @@ INSERT INTO[financialdatastatus_subtask]([fds_id]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
-,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq "null"#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0 or j.DATA[1][8] eq "null"#"/>
+,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0  or j.DATA[1][8] eq "null"#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
@@ -772,17 +772,17 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="AWS">
 UPDATE[financialdatastatus_subtask]
 SET[fds_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[fdss_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
+,[fdss_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq "null"#"/>
 ,[fdss_completed]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[fdss_duedate]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[fdss_notes]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[fdss_sequence]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
-,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0#"/>
-,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0#"/>
+,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0 or j.DATA[1][8] eq "null"#"/>
+,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0  or j.DATA[1][8] eq "null"#"/>
 ,[fdss_dependencies]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
 WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
@@ -794,7 +794,7 @@ WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!--- Group2_Clone1 --->
 <cfcase value="group2_clone1">
 <!--- if this is a new record, then insert it--->
-<cfif j.DATA[1][1] eq "0">
+
 <cfquery name="aquery" datasource="AWS">
 SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='3'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
 </cfquery>
@@ -807,26 +807,24 @@ INSERT INTO[financialdatastatus_subtask]([fds_id],[fdss_sequence],[fdss_subtask]
 SELECT SCOPE_IDENTITY()AS[fds_id]
 </cfquery>
 <cfreturn '{"id":"#fquery.fds_id#","group":"saved","result":"ok"}'>
-</cfif>
+
 </cfcase>
 
 <!--- Group2_Clone2 --->
 <cfcase value="group2_clone2">
 <!--- if this is a new record, then insert it--->
-<cfif j.DATA[1][1] eq "0">
-<cfquery name="aquery" datasource="AWS">
-SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='3'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
-</cfquery>
+
+
 <cfquery name="fquery" datasource="AWS">
-<cfset indexNumber=0>
-<cfloop index="i" list="#aquery.option_1#">
-<cfset indexNumber = indexNumber + 1 >
-INSERT INTO[financialdatastatus_subtask]([fds_id],[fdss_sequence],[fdss_subtask],[fdss_status])VALUES(<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>,<cfqueryparam value="#indexNumber#"/>,<cfqueryparam value="#i#"/>,<cfqueryparam value="4"/>)
-</cfloop>
-SELECT SCOPE_IDENTITY()AS[fds_id]
+INSERT INTO [financialDataStatus_Subtask]([fds_id],[fdss_sequence],[fdss_subtask],[fdss_dependencies])
+SELECT <cfqueryparam value="#j.DATA[1][1]#">,[fdss_sequence],[fdss_subtask],[fdss_dependencies]
+FROM[financialDataStatus_Subtask]
+WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][2]#" />
+AND[fdss_active]!=0
+
 </cfquery>
-<cfreturn '{"id":"#fquery.fds_id#","group":"saved","result":"ok"}'>
-</cfif>
+<cfreturn '{"id":"#j.DATA[1][1]#","group":"saved","result":"ok"}'>
+
 </cfcase>
 
 

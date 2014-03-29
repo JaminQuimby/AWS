@@ -59,7 +59,7 @@ _grid2=function(){_jGrid({
 	"url":"financialstatements.cfc",
 	"title":"Subtasks",
 	"fields":{FDSS_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDSS_ID+"',page:'financialstatements',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDSS_ID+"',page:'financialstatements',group:'group2'});_grid2();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img;}}
 		,FDSS_SEQUENCE:{title:'Sequence'}
 		,FDSS_SUBTASKTEXT:{title:'Subtask'}
 		,FDSS_DUEDATE:{title:'Due Date'}
@@ -350,7 +350,7 @@ if($("#isLoaded_group1_11").val()!=0){
 	_saveData({group:"group1_11","payload":$.parseJSON(json),page:"financialstatements"});
 	if(debug){window.console.log('Group 1_11 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group2',"id":""+$("#task_id").val()+""});
+	_saveDataCB({'group':'group2',"id":""+$("#subtask1_id").val()+""});
 	if(debug){window.console.log('Group 1_11 - Skipped saving data');}
 	}
 break;
@@ -389,6 +389,14 @@ if($("#task_isLoaded").val()!=0){
 else{jqMessage({message: "You must select a task.",type: "info",autoClose: true})}
 break;
 
+case'group2_clone2':var json='{"DATA":[["'+
+$("#task_id").val()+'","'+
+$("#g2_history").val()+'","'+
+'"]]}'
+if($("#task_isLoaded").val()!=0){
+	_saveData({group:"group2_clone2",payload:$.parseJSON(json),page:"financialstatements"})}
+else{jqMessage({message: "You must select a task.",type: "info",autoClose: true})}
+break;
 
 /*Start Saving Plugins*/
 case"plugins":_pluginSaveData({"subgroup":options["subgroup"]})
