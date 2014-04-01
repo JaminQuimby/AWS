@@ -41,7 +41,7 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
 			,CAS_PRIORITY:{title:'Priority',width:'1%'}
-			,CAS_STATUS:{title:'Status'}
+			,CAS_STATUSTEXT:{title:'Status'}
 			,CAS_TASKDESC:{title:'Description'}
 			},
 	"method":"f_lookupData",
@@ -89,10 +89,10 @@ var grid2_config = [
 	,CLIENT_ID:{list:false,edit:false}
 	,CLIENT_NAME:{title:'Client Name'}
 	,BF_ACTIVITY:{title:'Activity'}
-	,BF_STATUS:{title:'Status'}
+	,BF_STATUSTEXT:{title:'Status'}
 	,BF_DUEDATE:{title:'Due Date',width:'1%'}
 	,BF_FEES:{title:'Fees'}
-	,BF_PAID:{title:'Payment Status'}
+	,BF_PAIDTEXT:{title:'Payment Status'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g2_filter").val(),grid2_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"3"}',
@@ -130,7 +130,7 @@ var grid3_config = [
 	,CO_CALLER:{title:'Caller'}
 	,CO_CREDITHOLD:{title:'Credit Hold',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 	,CO_FEES:{title:'Fees'}
-	,CO_PAID:{title:'Payment Status'}
+	,CO_PAIDTEXT:{title:'Payment Status'}
 	,CO_DATE:{title:'Date &amp; Time'}
 	,CO_TELEPHONE:{title:'Phone'}
 	,CO_EXT:{title:'Ext'}
@@ -177,7 +177,7 @@ var grid4_config = [
 	"title":"Client Maintenance",	
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_TYPE:{title:'Client Type',width:"1%"}
+			,CLIENT_TYPETEXT:{title:'Client Type',width:"1%"}
 			,CLIENT_TRADE_NAME:{title:'Trade Name'}
 			,CLIENT_ACTIVE:{title:'Active',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SALUTATION:{title:'Salutation'}
@@ -388,10 +388,10 @@ var grid8_config = [
 	"grid":"grid8",
 	"url":"historical.cfc",
 	"title":"Notices",
-	"fields":{NM_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,NM_NAME:{title:'Matter Name'}
-			,NM_STATUS:{title:'Notice Status'}
+			,N_NAME:{title:'Matter Name'}
+			,N_STATUSTEXT:{title:'Notice Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g8_filter").val(),grid8_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group8","formid":"8"}',
@@ -451,9 +451,9 @@ var grid9_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,OF_STATE:{title:'State'}
-			,OF_TASK:{title:'Task'}
+			,OF_TASKTEXT:{title:'Task'}
 			,OF_FORM:{title:'Form'}
-			,OF_STATUS:{title:'Status'}
+			,OF_STATUSTEXT:{title:'Status'}
 			,OF_DUEDATE:{title:'Due Date',width:'1%'}
 			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
@@ -573,7 +573,7 @@ var grid11_config = [
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTH:{title:'Month'}
 			,PT_TYPE:{title:'Type'}
-			,PT_PAID:{title:'Status'}
+			,PT_PAIDTEXT:{title:'Payment Status'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 			,PT_DUEDATE:{title:'Due Date',width:'1%'}
 			,PT_DELIVERY_DATECOMPLETED:{title:'Completed',width:'1%'}

@@ -20,7 +20,7 @@ SELECT [cas_id]
 ,[client_name]
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
 ,[cas_priority]
-,[cas_status]
+,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
 FROM[v_clientadministrativetasks]
 
@@ -78,7 +78,7 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
 								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_STATUS":"'&CAS_STATUS&'"
+								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -101,10 +101,10 @@ SELECT[bf_id]
 ,[client_id]
 ,[client_name]
 ,[bf_activity]
-,[bf_status]
+,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 ,FORMAT(bf_fees, 'C', 'en-us')AS[bf_fees]
-,[bf_paid]
+,[bf_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[bf_paid]=[optionvalue_id])
 FROM[v_businessformation]
 
 
@@ -163,10 +163,10 @@ ORDER BY[bf_duedate]
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
-								,"BF_STATUS":"'&BF_STATUS&'"
+								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
 								,"BF_DUEDATE":"'&BF_DUEDATE&'"
 								,"BF_FEES":"'&BF_FEES&'"
-								,"BF_PAID":"'&BF_PAID&'"
+								,"BF_PAIDTEXT":"'&BF_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -189,7 +189,7 @@ SELECT[co_id]
 ,[co_caller]
 ,[co_credithold]
 ,FORMAT(co_fees, 'C', 'en-us')AS[co_fees]
-,[co_paid]
+,[co_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[co_paid]=[optionvalue_id])
 ,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
 ,[co_telephone]
 ,[co_ext]
@@ -198,8 +198,6 @@ SELECT[co_id]
 ,[co_returncall]
 ,[co_briefmessage]
 FROM[v_communications]
-
-
 
 <cfset sqllist = "co_briefmessage,co_caller,co_completed,co_contactmethod,co_credithold,co_date,co_duedate,co_emailaddress,co_ext,co_faxnumber,co_fees,co_for,co_paid,co_responseneeded,co_returncall,co_takenby,co_telephone">
 <cfset key="co_">
@@ -256,7 +254,7 @@ WHERE(1)=(1)
 								,"CO_CALLER":"'&CO_CALLER&'"
 								,"CO_CREDITHOLD":"'&CO_CREDITHOLD&'"
 								,"CO_FEES":"'&CO_FEES&'"
-								,"CO_PAID":"'&CO_PAID&'"
+								,"CO_PAIDTEXT":"'&CO_PAIDTEXT&'"
 								,"CO_DATE":"'&CO_DATE&'"
 								,"CO_TELEPHONE":"'&CO_TELEPHONE&'"
 								,"CO_EXT":"'&CO_EXT&'"
@@ -282,7 +280,7 @@ WHERE(1)=(1)
 <cfquery datasource="AWS" name="fquery">
 SELECT[client_id]
 ,[client_name]
-,[client_type]
+,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 ,[client_trade_name]
 ,[client_active]
 ,[client_salutation]
@@ -348,7 +346,7 @@ WHERE(1)=(1)
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CLIENT_TYPE":"'&CLIENT_TYPE&'"
+								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
 								,"CLIENT_TRADE_NAME":"'&CLIENT_TRADE_NAME&'"
 								,"CLIENT_ACTIVE":"'&CLIENT_ACTIVE&'"
 								,"CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'"
@@ -373,12 +371,12 @@ WHERE(1)=(1)
 SELECT[ftp_id]
 ,[client_name]
 ,[client_id]
-,[ftp_category]
+,[ftp_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[ftp_requestservice], 101)AS[ftp_requestservice]
 ,CONVERT(VARCHAR(10),[ftp_duedate], 101)AS[ftp_duedate]
 ,CONVERT(VARCHAR(10),[ftp_inforeceived], 101)AS[ftp_inforeceived]
 ,[ftp_missinginfo]
-,[ftp_status]
+,[ftp_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])
 FROM[v_financialtaxplanning]
 
 
@@ -435,12 +433,12 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"FTP_ID":"'&FTP_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"FTP_CATEGORY":"'&FTP_CATEGORY&'"
+								,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
 								,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
 								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
 								,"FTP_INFORECEIVED":"'&FTP_INFORECEIVED&'"
 								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
-								,"FTP_STATUS":"'&FTP_STATUS&'"
+								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -462,7 +460,7 @@ SELECT[fds_id]
 ,[client_name]
 ,[fds_month]
 ,[fds_year]
-,[fds_monthTEXT]
+,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo]
 ,CONVERT(VARCHAR(10),[fds_missinginforeceived], 101)AS[fds_missinginforeceived]
 ,[fds_compilemi]
@@ -550,7 +548,7 @@ SELECT[mc_id]
 ,[client_name]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_description]
-,[mc_status]
+,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 FROM[v_managementconsulting]
 
@@ -610,7 +608,7 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
-								,"MC_STATUS":"'&MC_STATUS&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -628,14 +626,11 @@ WHERE(1)=(1)
 <cfcase value="group8">
 <cftry>
 <cfquery datasource="AWS" name="fquery">
-SELECT[nm_id]
-,[nm_name]
-,[nm_status]
+SELECT[n_id]
+,[n_name]
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[client_name]
-FROM[v_noticematter]
-
-
-
+FROM[v_notice_subtask]
 
 </cfquery>
 <cfset myResult="">
@@ -643,10 +638,10 @@ FROM[v_noticematter]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'"
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"NM_NAME":"'&NM_NAME&'"
-								,"NM_STATUS":"'&NM_STATUS&'"
+								,"N_NAME":"'&N_NAME&'"
+								,"N_STATUS":"'&N_STATUS&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -666,9 +661,9 @@ FROM[v_noticematter]
 SELECT[of_id]
 ,[of_taxyear]
 ,[of_state]
-,[of_task]
+,[of_taskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_task]=[optionvalue_id])
 ,[of_form]
-,[of_status]
+,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
 ,[of_missinginfo]
 ,[client_name]
@@ -727,9 +722,9 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"
 								,"OF_STATE":"'&OF_STATE&'"
-								,"OF_TASK":"'&OF_TASK&'"
+								,"OF_TASKTEXT":"'&OF_TASKTEXT&'"
 								,"OF_FORM":"'&OF_FORM&'"
-								,"OF_STATUS":"'&OF_STATUS&'"
+								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
 								,"OF_DUEDATE":"'&OF_DUEDATE&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
 								}'>
@@ -832,7 +827,7 @@ SELECT[pt_id]
 ,[pt_year]
 ,[pt_month]
 ,[pt_type]
-,[pt_paid]
+,[pt_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pt_paid]=[optionvalue_id])
 ,CONVERT(VARCHAR(10),[pt_lastpay], 101)AS[pt_lastpay]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
 ,CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 101)AS[pt_delivery_datecompleted]
@@ -896,7 +891,7 @@ WHERE(1)=(1)
 								,"PT_YEAR":"'&PT_YEAR&'"
 								,"PT_MONTH":"'&PT_MONTH&'"
 								,"PT_TYPE":"'&PT_TYPE&'"
-								,"PT_PAID":"'&PT_PAID&'"
+								,"PT_PAIDTEXT":"'&PT_PAIDTEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
 								,"PT_DELIVERY_DATECOMPLETED":"'&PT_DELIVERY_DATECOMPLETED&'"
