@@ -16,9 +16,9 @@ var _run={
 	,load_group1_2:function(){$('#isLoaded_group1_2').val(1)}
 	,load_group1_3:function(){$('#isLoaded_group1_3').val(1)}
 	,load_group2:function(){}
-	,load_group2_1:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"client_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);}}
-	,load_group2_2:function(){if($("#isLoaded_group1_2").val(1)=="0"){_loadData({"id":"client_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);}}
-	,load_group2_3:function(){if($("#isLoaded_group1_3").val(1)=="0"){_loadData({"id":"client_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);}}
+	,load_group2_1:function(){if($("#isLoaded_group1_1").val()=="0"){_loadData({"id":"client_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);}}
+	,load_group2_2:function(){if($("#isLoaded_group1_2").val()=="0"){_loadData({"id":"client_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);}}
+	,load_group2_3:function(){if($("#isLoaded_group1_3").val()=="0"){_loadData({"id":"client_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);}}
 	,load_group3:function(){_grid3()}
 	,load_group4:function(){}
 	,load_group4_1:function(){_grid4_1()}

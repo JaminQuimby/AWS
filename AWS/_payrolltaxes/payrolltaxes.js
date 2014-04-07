@@ -3,12 +3,12 @@ $(document).ready(function(){_run.load_group1();});
 var _run={
 	 new_group1:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');_addNewTask();}
 	,load_group1:function(){_grid1();}
-	,load_group1_1:function(){if($("#isLoaded_group1_1").val(1)=="0"){_loadData({"id":"task_id","group":"group1_1","page":"payrolltaxes"});$("#isLoaded_group1_1").val(1);}}
-	,load_group1_2:function(){if($("#isLoaded_group1_2").val(1)=="0"){_loadData({"id":"task_id","group":"group1_2","page":"payrolltaxes"});$("#isLoaded_group1_2").val(1);}}
-	,load_group1_3:function(){if($("#isLoaded_group1_3").val(1)=="0"){_loadData({"id":"task_id","group":"group1_3","page":"payrolltaxes"});$("#isLoaded_group1_3").val(1);}}
-	,load_group1_4:function(){if($("#isLoaded_group1_4").val(1)=="0"){_loadData({"id":"task_id","group":"group1_4","page":"payrolltaxes"});$("#isLoaded_group1_4").val(1);}}
-	,load_group1_5:function(){if($("#isLoaded_group1_5").val(1)=="0"){_loadData({"id":"task_id","group":"group1_5","page":"payrolltaxes"});$("#isLoaded_group1_5").val(1);}}
-	,load_group1_6:function(){if($("#isLoaded_group1_6").val(1)=="0"){_loadData({"id":"task_id","group":"group1_6","page":"payrolltaxes"});$("#isLoaded_group1_6").val(1);}}
+	,load_group1_1:function(){if($("#isLoaded_group1_1").val()=="0"){_loadData({"id":"task_id","group":"group1_1","page":"payrolltaxes"});$("#isLoaded_group1_1").val(1);}}
+	,load_group1_2:function(){if($("#isLoaded_group1_2").val()=="0"){_loadData({"id":"task_id","group":"group1_2","page":"payrolltaxes"});$("#isLoaded_group1_2").val(1);}}
+	,load_group1_3:function(){if($("#isLoaded_group1_3").val()=="0"){_loadData({"id":"task_id","group":"group1_3","page":"payrolltaxes"});$("#isLoaded_group1_3").val(1);}}
+	,load_group1_4:function(){if($("#isLoaded_group1_4").val()=="0"){_loadData({"id":"task_id","group":"group1_4","page":"payrolltaxes"});$("#isLoaded_group1_4").val(1);}}
+	,load_group1_5:function(){if($("#isLoaded_group1_5").val()=="0"){_loadData({"id":"task_id","group":"group1_5","page":"payrolltaxes"});$("#isLoaded_group1_5").val(1);}}
+	,load_group1_6:function(){if($("#isLoaded_group1_6").val()=="0"){_loadData({"id":"task_id","group":"group1_6","page":"payrolltaxes"});$("#isLoaded_group1_6").val(1);}}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"payrolltaxes"});_loadData({"id":"task_id","group":"assetCompTask","page":"payrolltaxes"});}
 	}
  
