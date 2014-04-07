@@ -227,12 +227,12 @@ var grid5_config = [
 	"title":"Financial &amp; Tax Planning", 
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,FTP_CATEGORY:{title:'Category'}
+			,FTP_CATEGORYTEXT:{title:'Category'}
 			,FTP_REQUESTSERVICE:{title:'Request for Services',width:'1%'}
 			,FTP_DUEDATE:{title:'Due Date',width:'1%'}
 			,FTP_INFORECEIVED:{title:'Information Received',width:'1%'}
 			,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FTP_STATUS:{title:'Status'}
+			,FTP_STATUSTEXT:{title:'Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g5_filter").val(),grid5_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group5","formid":"9"}',
@@ -399,7 +399,7 @@ var grid8_config = [
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g8_filter").val(),grid8_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group8","formid":"8"}',
-	"functions":'$("#nm_id").val(record.NM_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.NM_ID'
+	"functions":'$("#n_id").val(record.N_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID'
 })};
 	
 	
@@ -455,7 +455,7 @@ var grid9_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,OF_STATE:{title:'State'}
-			,OF_TASKTEXT:{title:'Task'}
+			,of_TYPETEXT:{title:'Type'}
 			,OF_FORM:{title:'Form'}
 			,OF_STATUSTEXT:{title:'Status'}
 			,OF_DUEDATE:{title:'Due Date',width:'1%'}

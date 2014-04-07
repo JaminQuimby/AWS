@@ -213,18 +213,18 @@ _grid8=function(){_jGrid({
 	"grid":"grid8",
 	"url":"timebillingreport.cfc",
 	"title":"Notices",
-	"fields":{NM_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,NM_NAME:{title:'Matter Name'}
-			,N_1_TAXYEAR:{title:'Tax Year',width:'1%'}
-			,N_1_TAXFORM:{title:'Tax Form'}
-			,N_1_NOTICENUMBER:{title:'Notice Number'}
-			,N_FEES:{title:'Fees'}
-			,N_PAID:{title:'Payment Status'}
+			,N_NAME:{title:'Matter Name'}
+			,NST_1_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,NST_1_TAXFORM:{title:'Tax Form'}
+			,NST_1_NOTICENUMBER:{title:'Notice Number'}
+			,NST_FEES:{title:'Fees'}
+			,NST_PAID:{title:'Payment Status'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g8_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group8"}',
-	"functions":'$("#nm_id").val(record.NM_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.NM_ID'
+	"functions":'$("#n_id").val(record.N_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID'
 	})};
 
 

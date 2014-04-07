@@ -148,22 +148,22 @@ _grid7=function(){_jGrid({
 	"grid":"grid7",
 	"url":"workinprogress.cfc",
 	"title":"Notices",
-	"fields":{NM_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,NM_NAME:{title:'Matter Name'}
-			,N_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
-			,N_MISSINGINFO:{title:'Missing Information Compiled',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,NM_STATUS:{title:'Notice Status'}
-			,N_PRIORITY:{title:'Priority'}
-			,N_ASSIGNEDTO:{title:'Assigned To'}
-			,N_1_RESDUEDATE:{title:'Response Due'}
-			,N_ESTTIME:{title:'Estimated Time'}
-			,N_2_REVREQUIRED:{title:'Review Required'}
-			,N_2_REVASSIGNEDTO:{title:'Review Assigned To'}
+			,N_NAME:{title:'Matter Name'}
+			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
+			,NST_MISSINGINFO:{title:'Missing Information Compiled',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,N_STATUS:{title:'Notice Status'}
+			,NST_PRIORITY:{title:'Priority'}
+			,NST_ASSIGNEDTO:{title:'Assigned To'}
+			,NST_1_RESDUEDATE:{title:'Response Due'}
+			,NST_ESTTIME:{title:'Estimated Time'}
+			,NST_2_REVREQUIRED:{title:'Review Required'}
+			,NST_2_REVASSIGNEDTO:{title:'Review Assigned To'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g7_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group7","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'"}',
-	"functions":'$("#nm_id").val(record.NM_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.NM_ID'
+	"functions":'$("#n_id").val(record.N_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID'
 })};	
 
 	

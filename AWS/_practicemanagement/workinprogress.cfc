@@ -512,18 +512,18 @@ WHERE[nst_status]!='2'
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'"
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"NM_NAME":"'&NM_NAME&'"
-								,"N_1_NOTICEDATE":"'&N_1_NOTICEDATE&'"
-								,"N_MISSINGINFO":"'&N_MISSINGINFO&'"
-								,"NM_STATUS":"'&NM_STATUS&'"
-								,"N_PRIORITY":"'&N_PRIORITY&'"
-								,"N_ASSIGNEDTO":"'&N_ASSIGNEDTO&'"
-								,"N_1_RESDUEDATE":"'&N_1_RESDUEDATE&'"
-								,"N_ESTTIME":"'&N_ESTTIME&'"
-								,"N_2_REVREQUIRED":"'&N_2_REVREQUIRED&'"
-								,"N_2_REVASSIGNEDTO":"'&N_2_REVASSIGNEDTO&'"
+								,"N_NAME":"'&N_NAME&'"
+								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
+								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
+								,"N_STATUS":"'&N_STATUS&'"
+								,"NST_PRIORITY":"'&NST_PRIORITY&'"
+								,"NST_ASSIGNEDTO":"'&NST_ASSIGNEDTO&'"
+								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
+								,"NST_ESTTIME":"'&NST_ESTTIME&'"
+								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
+								,"NST_2_REVASSIGNEDTO":"'&NST_2_REVASSIGNEDTO&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

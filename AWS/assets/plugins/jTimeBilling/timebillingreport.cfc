@@ -467,7 +467,7 @@ AND ([ftp_paid] = '6' OR [ftp_paid] IS NULL OR [ftp_paid] = '0')
 <cfcase value="group8">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[nm_id]
+SELECT[n_id]
 ,[n_id]
 ,[nm_name]
 ,[n_1_taxyear]
@@ -494,7 +494,7 @@ AND ([n_paid] = '6' OR [n_paid] IS NULL OR [n_paid] = '0')
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"NM_ID":"'&NM_ID&'"
+<cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
  								,"NM_NAME":"'&NM_NAME&'"
