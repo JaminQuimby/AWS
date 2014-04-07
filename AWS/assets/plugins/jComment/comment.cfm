@@ -5,7 +5,7 @@ $(document).ready(function(){
     
 
 //Start Normal Template Functions
-_pluginURL101=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jComment/"}
+_pluginURL101=function(){return "#this.url#/AWS/assets/plugins/jComment/"}
 _pluginLoadData101=function(){return ''}
 _pluginSaveData101=function(){var json='{"DATA":[["'+
 		$("##comment_id").val()+'","'+

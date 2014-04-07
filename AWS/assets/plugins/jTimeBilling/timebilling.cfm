@@ -5,8 +5,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 //Start Normal Template Functions
-_pluginURL102=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jTimeBilling/"}
-_pluginURL102_1=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jTimeBilling/"}
+_pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
+_pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
 _pluginSaveData102=function(){
 
@@ -53,7 +53,7 @@ _group102_1=function(){_grid102_1()}
 _grid102=function(){
 	_jGrid({
 	"grid":"grid102",
-	"url":"/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time &amp; Billing",
 	"fields":{TB_ID:{key:true,list:false,edit:false}
 			,TB_DATE:{title:'Date',width:'1%'}
@@ -68,7 +68,7 @@ _grid102=function(){
 _grid102_1=function(){
 	_jGrid({
 	"grid":"grid102_1",
-	"url":"/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time",
 	"fields":{T_ID:{key:true,list:false,edit:false}
 			,T_START:{title:'Start Time',width:'1%'}
