@@ -10,7 +10,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group102--->
 <cfcase value="group102">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
 'GROUP102'AS[GROUP102]
 ,[tb_id]
@@ -54,7 +54,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Grid 102  --->
 <cfcase value="group102">
 
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tb_id]
 ,CONVERT(VARCHAR(10),[tb_date], 101)AS[tb_date]
 ,[u_name]
@@ -83,7 +83,7 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 <!--- Grid 102_1  --->
 <cfcase value="group102_1">
 
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[t_id]
 ,[tb_id]
 ,CONVERT(VARCHAR(8),t_start,108)AS[t_start]
@@ -123,7 +123,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group102">
 <cfif j.DATA[1][1] eq "0">
 
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[timebilling](
 [form_id]
 ,[user_id]
@@ -167,7 +167,7 @@ SELECT SCOPE_IDENTITY()AS[tb_id]
 
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[timebilling]
 SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[user_id]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -193,7 +193,7 @@ WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group102_1">
 <cfif j.DATA[1][1] eq "0">
 
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[time](
 [tb_id]
 ,[t_start]
@@ -212,7 +212,7 @@ SELECT SCOPE_IDENTITY()AS[t_id]
 
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[time]
 SET[tb_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 ,[t_start]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>

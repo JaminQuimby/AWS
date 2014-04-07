@@ -8,7 +8,7 @@
 <!--- Load Group1--->
 <cfcase value="group1">
 
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[co_id]
 ,[client_id]
 ,[co_briefmessage]
@@ -36,7 +36,7 @@ WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -66,7 +66,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP Communications --->
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[co_id]
 ,[co_forTEXT]
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
@@ -134,7 +134,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[communications](
 [client_id]
 ,[co_briefmessage]
@@ -185,7 +185,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[communications]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[co_briefmessage]=<cfqueryparam value="#j.DATA[1][3]#"/>
@@ -224,7 +224,7 @@ WHERE[co_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[communications]
 SET[co_active]=0
 WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.id#">

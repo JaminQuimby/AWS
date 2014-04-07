@@ -14,7 +14,7 @@
 
 <!--- LOOKUP EMPLOYEES --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[user_id],[name]FROM[v_staffinitials]WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[name]</cfif>
 </cfquery>
@@ -35,7 +35,7 @@ SELECT[user_id],[name]FROM[v_staffinitials]WHERE[name]LIKE <cfqueryparam value="
 <!--- LOOKUP Payroll Checks --->
 <cfcase value="group1_1">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id],[pc_year],CONVERT(VARCHAR(10),[pc_payenddate], 1)AS[pc_payenddate],CONVERT(VARCHAR(10),[pc_paydate], 1)AS[pc_paydate],CONVERT(VARCHAR(10),[pc_duedate], 1)AS[pc_duedate],CONVERT(VARCHAR(10),[pc_obtaininfo_datecompleted], 1)AS[pc_obtaininfo_datecompleted],[pc_missinginfo],[client_name],[client_id]FROM[v_payrollcheckstatus]WHERE([pc_delivery_completedby]IS NULL)
 AND([pc_duedate]< DATEADD(day, 14, GETDATE())OR [pc_duedate]> GETDATE()OR [pc_duedate]IS NULL)
 AND([pc_delivery_completedby]IS NULL AND [pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
@@ -67,7 +67,7 @@ ORDER BY[pc_duedate]</cfquery>
 <!--- LOOKUP Payroll Taxes --->
 <cfcase value="group1_2">
 <cfoutput>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id],[pt_year],[pt_month],[pt_type],[pt_paid],CONVERT(VARCHAR(10),[pt_lastpay], 1)AS[pt_lastpay],CONVERT(VARCHAR(10),[pt_duedate], 1)AS[pt_duedate],CONVERT(VARCHAR(10),[pt_delivery_datecompleted], 1)AS[pt_delivery_datecompleted],[client_name],[client_id],[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 
@@ -98,7 +98,7 @@ ORDER BY[pt_duedate]</cfquery>
 <!--- LOOKUP Other Filings --->
 <cfcase value="group1_3">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[of_id],[of_taxyear],[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_taskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_task]=[optionvalue_id])
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
@@ -149,7 +149,7 @@ ORDER BY[of_duedate]</cfquery>
 <!--- LOOKUP Business Formation --->
 <cfcase value="group2_1">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[bf_id],[client_id],[client_name],[bf_activity],[bf_status],CONVERT(VARCHAR(10),[bf_duedate], 1)AS[bf_duedate],[bf_fees],[bf_paid]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[bf_paid]=[optionvalue_id])
@@ -177,7 +177,7 @@ ORDER BY[bf_duedate]</cfquery>
 <!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group2_2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[mc_id],[client_id],[client_name],[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,[mc_description],[mc_status],CONVERT(VARCHAR(10),[mc_duedate], 1)AS[mc_duedate]FROM[v_managementconsulting]WHERE[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>
@@ -205,7 +205,7 @@ ORDER BY[mc_duedate]</cfquery>
 <!--- LOOKUP Financial Statements --->
 <cfcase value="group2_3">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fds_id],[client_id],[client_name],[fds_month],[fds_year],[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo],CONVERT(VARCHAR(8),[fds_missinginforeceived], 1)AS[fds_missinginforeceived],[fds_compilemi],CONVERT(VARCHAR(8),[fds_cmireceived], 1)AS[fds_cmireceived],CONVERT(VARCHAR(8),[fds_duedate], 1)AS[fds_duedate]FROM[v_financialDataStatus]
 WHERE([fds_obtaininfo_assignedto]= <cfqueryparam value="#ARGUMENTS.userid#"/> AND[fds_obtaininfo_datecompleted]IS NULL AND[fds_delivery_datecompleted]IS NULL AND(fds_status != <cfqueryparam value="2"/> AND[fds_status]!= <cfqueryparam value="3"/> OR fds_status IS NULL))
@@ -241,7 +241,7 @@ ORDER BY[fds_duedate]</cfquery>
 <!--- Grid Notice  --->
 <cfcase value="group3_1">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]
 WHERE[n_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> AND[n_status]!=2
 ORDER BY[n_1_resduedate]</cfquery>
@@ -266,7 +266,7 @@ ORDER BY[n_1_resduedate]</cfquery>
 <!--- Grid Notice  --->
 <cfcase value="group3_2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[nm_id],[n_id],[nm_name],[n_1_taxyear],[n_1_taxform],[n_1_noticenumber],[n_missinginfo],[nm_status],CONVERT(VARCHAR(10),[n_1_datenoticerec], 1)AS[n_1_datenoticerec],CONVERT(VARCHAR(10),[n_1_resduedate], 1)AS[n_1_resduedate],CONVERT(VARCHAR(10),[n_2_rescompleted], 1)AS[n_2_rescompleted],[client_name]FROM[v_notice]
 WHERE ([nm_status]!=<cfqueryparam value="2"/>AND[n_2_revrequired]=<cfqueryparam value="True"/>AND[n_2_revassignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/>)
 ORDER BY[n_1_resduedate]</cfquery>
@@ -290,7 +290,7 @@ ORDER BY[n_1_resduedate]</cfquery>
 <!--- LOOKUP TAX RETURNS --->
 <cfcase value="group4_1">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id],[client_id],[client_name],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_2_informationreceived],[tr_priorfees],CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment],CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment],CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived],CONVERT(VARCHAR(10),[tr_duedate], 1)AS[tr_duedate],CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes]
 ,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 FROM[v_taxreturns]
@@ -329,7 +329,7 @@ OR([tr_2_preparedby]= <cfqueryparam value="#ARGUMENTS.userid#"/> AND[tr_2_readyf
 <!--- LOOKUP TAX RETURNS Missing Info--->
 <cfcase value="group4_2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(10),[tr_2_informationreceived], 1)AS[tr_2_informationreceived],CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived],[client_name],[client_id]
 ,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 FROM[v_taxreturns]
@@ -364,7 +364,7 @@ WHERE[tr_missinginfo]=1 AND[tr_notrequired]=0 AND[tr_2_informationreceived]IS NO
 <!--- LOOKUP TAX RETURNS Ready for review --->
 <cfcase value="group4_3">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id],[client_id],[client_name],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(8),[tr_2_informationreceived], 1)AS[tr_2_informationreceived],CONVERT(VARCHAR(10),[tr_duedate], 1)AS[tr_duedate],CONVERT(VARCHAR(10),[tr_2_readyforreview], 1)AS[tr_2_readyforreview],CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment],CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment],[tr_missinginfo],CONVERT(VARCHAR(10),[tr_2_reviewedwithnotes], 1)AS[tr_2_reviewedwithnotes],CONVERT(VARCHAR(10),[tr_2_completed], 1)AS[tr_2_completed],CONVERT(VARCHAR(10),[tr_3_delivered], 1)AS[tr_3_delivered],[tr_paid]
 ,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 FROM[v_taxreturns]
@@ -405,7 +405,7 @@ ORDER BY[tr_duedate]
 <!--- LOOKUP TAX RETURNS Assembly & Delivery --->
 <cfcase value="group4_4">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id],[client_id],[client_name],[tr_taxyear],[tr_taxform],CONVERT(VARCHAR(10),[tr_2_completed], 1)AS[tr_2_completed],[tr_currentfees],CONVERT(VARCHAR(10),[tr_3_assemblereturn], 1)AS[tr_3_assemblereturn],CONVERT(VARCHAR(10),[tr_3_contacted], 1)AS[tr_3_contacted],CONVERT(VARCHAR(10),[tr_1_dropoffappointment], 1)AS[tr_1_dropoffappointment],CONVERT(VARCHAR(10),[tr_1_pickupappointment], 1)AS[tr_1_pickupappointment],CONVERT(VARCHAR(10),[tr_missinginforeceived], 1)AS[tr_missinginforeceived],[tr_paid]
 ,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 FROM[v_taxreturns]
@@ -443,7 +443,7 @@ WHERE[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"/> AND[tr_2_infor
 <!--- LOOKUP TAX RETURNS State Tax Returns --->
 <cfcase value="group4_5">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[trst_id],[tr_id],[client_name],[tr_taxyear],[tr_taxform],[trst_state],CONVERT(VARCHAR(10),[trst_1_informationreceived], 1)AS[trst_1_informationreceived],CONVERT(VARCHAR(10),[trst_1_duedate], 1)AS[trst_1_duedate],CONVERT(VARCHAR(10),[trst_1_missinginforeceived], 1)AS[trst_1_missinginforeceived],CONVERT(VARCHAR(10),[trst_1_readyforreview], 1)AS[trst_1_readyforreview]
 ,tr_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 FROM[v_TAXRETURNS_STATE]
@@ -479,7 +479,7 @@ ORDER BY[tr_duedate]
 <!--- LOOKUP Financial Tax Planning Financial Tax Planning --->
 <cfcase value="group4_6">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[ftp_id],[client_name],[client_id],[ftp_category],CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice],CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate],CONVERT(VARCHAR(10),[ftp_inforeceived], 1)AS[ftp_inforeceived],[ftp_missinginfo],[ftp_status]
 ,ftp_taxformTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[ftp_taxform]=[optionvalue_id])
 FROM[v_financialtaxplanning]
@@ -509,7 +509,7 @@ AND [ftp_status]!= '2'
 <!--- LOOKUP Administrative Tasks --->
 <cfcase value="group5_1">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[cas_id],[client_id],[client_name],CONVERT(VARCHAR(10),[cas_duedate], 1)AS[cas_duedate],[cas_priority],[cas_status],CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc]END AS[cas_taskdesc]
 ,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 
@@ -546,7 +546,7 @@ ORDER BY [cas_duedate]
 <!--- LOOKUP Communications --->
 <cfcase value="group5_2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[co_id],[client_name],[client_id],[co_caller],[co_credithold],[co_fees],[co_paid],CONVERT(CHAR(10),[co_date], 1)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date],[co_telephone],[co_ext],[co_emailaddress],[co_responseneeded],[co_returncall],[co_briefmessage]FROM[v_communications]
 WHERE[co_for]=<cfqueryparam value="#ARGUMENTS.userid#"/>
 And[co_completed]='0'
@@ -586,7 +586,7 @@ ORDER BY[client_name]
 <!--- LOOKUP Document Tracking Log --->
 <cfcase value="group5_3">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[dt_id],[dt_sender],CASE WHEN LEN([dt_description]) >= 101 THEN SUBSTRING([dt_description],0,100) +  '...' ELSE [dt_description]END AS[dt_description],CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing]END AS[dt_routing],CONVERT(VARCHAR(10),[dt_date], 1)AS[dt_date],[dt_delivery],[dt_staffTEXT],[client_name],[client_id],STUFF((SELECT','+[si_initials]FROM[v_staffinitials]WHERE(','+[v_documenttracking].[dt_assignedto]LIKE'%,'+CONVERT(VARCHAR(12),[user_id])+'%'  )
 FOR XML PATH('')),1,1,'') AS 'dt_assignedtoTEXT' 
 FROM[v_documenttracking]

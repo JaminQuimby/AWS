@@ -5,7 +5,7 @@
 <cfargument name="selectName" type="string">
 <cfargument name="formid" type="string" default="">
 <cfargument name="option1" type="string" default="">
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
 </cfquery>
 <cfset myResult="">
@@ -35,7 +35,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pa_id]
 ,[pa_taxyears]
 ,[pa_taxforms]

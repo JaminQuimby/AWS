@@ -8,4 +8,7 @@
 <file name="acctingconsulting.cfm" server="https://ftp.awensa.com/MS/MS0213/" local="130400959359175560" remote="130400959400000000" />
 <file name="acctingconsulting.js" server="https://ftp.awensa.com/MS/MS0213/" local="130404066917186347" remote="130404067090000000" />
 <file name="acctingconsulting.cfc" server="https://ftp.awensa.com/MS/MS0213/" local="130401600521611936" remote="130401600620000000" />
+<file name="financialstatements.cfc" server="https://ftp.awensa.com/MS/MS0213/AWS/" local="130410986607372524" remote="130410990400000000" />
+<file name="businessformation.cfc" server="https://ftp.awensa.com/MS/MS0213/AWS/" local="130410986606672483" remote="130410990470000000" />
+<file name="acctingconsulting.cfc" server="https://ftp.awensa.com/MS/MS0213/AWS/" local="130410986606452471" remote="130410990530000000" />
 </dwsync>

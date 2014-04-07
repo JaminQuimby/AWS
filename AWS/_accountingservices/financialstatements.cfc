@@ -11,7 +11,7 @@
 <cfargument name="formid" type="string" default="">
 <cfargument name="option1" type="numeric" default="0">
 
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT[optionname]=CONVERT(char(4),fds_year) +' | '+ ISNULL(FORMAT(fds_periodend,'d','en-us'),'---N/A---') +' | '+ (SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='0'OR[form_id]='0')AND([optionGroup]='0'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id]),[fds_id]AS[optionvalue_id]
 FROM[financialdatastatus]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.option1#" cfsqltype="cf_sql_integer">
@@ -43,7 +43,7 @@ ORDER BY[fds_Year]DESC,[fds_periodend]
 <cfset i=i+1>
 <cfset item[i]=s>
 </cfloop>
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT TOP(1)[client_id]
 FROM[financialdatastatus]
 WHERE[client_id]=<cfqueryparam value="#item[1]#">
@@ -68,7 +68,7 @@ AND[fds_periodend]=<cfqueryparam value="#item[4]#">
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_id]
 ,[client_id]
 ,CONVERT(VARCHAR(10),[fds_cmireceived], 101)AS[fds_cmireceived]
@@ -91,7 +91,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup1 --->
 <cfcase value="group1_1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_obtaininfo_assignedto]
 ,[fds_obtaininfo_completedby]
 ,CONVERT(VARCHAR(10),[fds_obtaininfo_datecompleted], 101)AS[fds_obtaininfo_datecompleted]
@@ -102,7 +102,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup2 --->
 <cfcase value="group1_2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_sort_assignedto]
 ,[fds_sort_completedby]
 ,CONVERT(VARCHAR(10),[fds_sort_datecompleted], 101)AS[fds_sort_datecompleted]
@@ -113,7 +113,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup3 --->
 <cfcase value="group1_3">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_checks_assignedto]
 ,[fds_checks_completedby]
 ,CONVERT(VARCHAR(10),[fds_checks_datecompleted], 101)AS[fds_checks_datecompleted]
@@ -124,7 +124,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup4 --->
 <cfcase value="group1_4">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_sales_assignedto]
 ,[fds_sales_completedby]
 ,CONVERT(VARCHAR(10),[fds_sales_datecompleted], 101)AS[fds_sales_datecompleted]
@@ -135,7 +135,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup5 --->
 <cfcase value="group1_5">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_entry_assignedto]
 ,[fds_entry_completedby]
 ,CONVERT(VARCHAR(10),[fds_entry_datecompleted], 101)AS[fds_entry_datecompleted]
@@ -146,7 +146,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup6 --->
 <cfcase value="group1_6">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_reconcile_assignedto]
 ,[fds_reconcile_completedby]
 ,CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 101)AS[fds_reconcile_datecompleted]
@@ -157,7 +157,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup7 --->
 <cfcase value="group1_7">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_compile_assignedto]
 ,[fds_compile_completedby]
 ,CONVERT(VARCHAR(10),[fds_compile_datecompleted], 101)AS[fds_compile_datecompleted]
@@ -168,7 +168,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup8 --->
 <cfcase value="group1_8">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_review_assignedto]
 ,[fds_review_completedby]
 ,CONVERT(VARCHAR(10),[fds_review_datecompleted], 101)AS[fds_review_datecompleted]
@@ -179,7 +179,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup9 --->
 <cfcase value="group1_9">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_assembly_assignedto]
 ,[fds_assembly_completedby]
 ,CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 101)AS[fds_assembly_datecompleted]
@@ -190,7 +190,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup10 --->
 <cfcase value="group1_10">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_delivery_assignedto]
 ,[fds_delivery_completedby]
 ,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101)AS[fds_delivery_datecompleted]
@@ -201,7 +201,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup11 --->
 <cfcase value="group1_11">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_acctrpt_assignedto]
 ,[fds_acctrpt_completedby]
 ,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101)AS[fds_acctrpt_datecompleted]
@@ -212,7 +212,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group 2--->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fdss_id]
 ,[fdss_assignedto]
 ,CONVERT(VARCHAR(10),[fdss_completed], 101)AS[fdss_completed]
@@ -229,7 +229,7 @@ WHERE[fdss_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -238,7 +238,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset GUI Completed Tasks--->
 <cfcase value="assetCompTask">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT
 [fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#')
 ,[fds_obtaininfo_assignedtoTEXT]
@@ -268,7 +268,7 @@ WHERE[FDS_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 
 <cfcase value="assetClone2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(char(4),fds_year)+' | '+ISNULL(FORMAT(fds_periodend,'d','#Session.localization.language#'),'------N/A-----')+' | '+(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='0'OR[form_id]='#ARGUMENTS.formid#')AND([optionGroup]='0'OR[optionGroup]='#ARGUMENTS.formid#')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id]),[fds_id]AS[optionvalue_id]
 FROM[financialdatastatus]
 ORDER BY [fds_Year] DESC ,[fds_periodend]
@@ -299,7 +299,7 @@ ORDER BY [fds_Year] DESC ,[fds_periodend]
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Financial Statements --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fds_id]
 ,[client_id]
 ,[client_name]
@@ -376,7 +376,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 
 <!--- Grid 2 --->
-<cfcase value="group2"><cfquery datasource="AWS" name="fquery">
+<cfcase value="group2"><cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fdss_id]
 ,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
 ,[fdss_assignedtoTEXT]
@@ -435,7 +435,7 @@ AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[financialdatastatus](
 [client_id]
 ,[fds_cmireceived]
@@ -485,7 +485,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
 
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_cmireceived]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -516,7 +516,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -535,7 +535,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup2 --->
 <cfcase value="group1_2">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_sort_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_sort_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -555,7 +555,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_checks_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_checks_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -575,7 +575,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_sales_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_sales_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -595,7 +595,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup5 --->
 <cfcase value="group1_5">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_entry_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_entry_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -615,7 +615,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup6 --->
 <cfcase value="group1_6">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_reconcile_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_reconcile_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -635,7 +635,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup7 --->
 <cfcase value="group1_7">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_compile_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_compile_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -655,7 +655,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup8 --->
 <cfcase value="group1_8">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -675,7 +675,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup9 --->
 <cfcase value="group1_9">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -695,7 +695,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup10 --->
 <cfcase value="group1_10">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_delivery_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_delivery_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -715,7 +715,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup11 --->
 <cfcase value="group1_11">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus]
 SET[fds_acctrpt_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_acctrpt_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -736,7 +736,7 @@ WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2">
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[financialdatastatus_subtask]([fds_id]
 ,[fdss_assignedto]
 ,[fdss_completed]
@@ -769,7 +769,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialdatastatus_subtask]
 SET[fds_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fdss_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq "null"#"/>
@@ -795,10 +795,10 @@ WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_clone1">
 <!--- if this is a new record, then insert it--->
 
-<cfquery name="aquery" datasource="AWS">
+<cfquery name="aquery" datasource="#Session.organization.name#">
 SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='3'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
 </cfquery>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 <cfset indexNumber=0>
 <cfloop index="i" list="#aquery.option_1#">
 <cfset indexNumber = indexNumber + 1 >
@@ -815,7 +815,7 @@ SELECT SCOPE_IDENTITY()AS[fds_id]
 <!--- if this is a new record, then insert it--->
 
 
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO [financialDataStatus_Subtask]([fds_id],[fdss_sequence],[fdss_subtask],[fdss_dependencies])
 SELECT <cfqueryparam value="#j.DATA[1][1]#">,[fdss_sequence],[fdss_subtask],[fdss_dependencies]
 FROM[financialDataStatus_Subtask]
@@ -847,7 +847,7 @@ AND[fdss_active]!=0
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[financialdatastatus]
 SET[fds_active]=0
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.id#">
@@ -855,7 +855,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
 </cfcase>
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[financialdatastatus_subtask]
 SET[fdss_active]=0
 WHERE[fdss_id]=<cfqueryparam value="#ARGUMENTS.id#">

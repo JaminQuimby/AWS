@@ -18,7 +18,7 @@
 <cfset item[i]=s>
 </cfloop>
 
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT TOP(1)[client_id]
 FROM[payrolltaxes]
 WHERE[client_id]=<cfqueryparam value="#item[1]#">
@@ -48,7 +48,7 @@ AND[pt_type]=<cfqueryparam value="#item[5]#">
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[PT_ID]
  ,[client_id]
  ,[pt_deliverymethod]
@@ -70,7 +70,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup1 --->
 <cfcase value="group1_1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_obtaininfo_assignedto]
 ,[pt_obtaininfo_completedby]
 ,CONVERT(VARCHAR(8),[pt_obtaininfo_datecompleted], 1)AS[pt_obtaininfo_datecompleted]
@@ -81,7 +81,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup2 --->
 <cfcase value="group1_2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_entry_assignedto]
 ,[pt_entry_completedby]
 ,CONVERT(VARCHAR(8),[pt_entry_datecompleted], 1)AS[pt_entry_datecompleted]
@@ -92,7 +92,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup3 --->
 <cfcase value="group1_3">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_rec_assignedto]
 ,[pt_rec_completedby]
 ,CONVERT(VARCHAR(8),[pt_rec_datecompleted], 1)AS[pt_rec_datecompleted]
@@ -103,7 +103,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup4 --->
 <cfcase value="group1_4">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_review_assignedto]
 ,[pt_review_completedby]
 ,CONVERT(VARCHAR(8),[pt_review_datecompleted], 1)AS[pt_review_datecompleted]
@@ -114,7 +114,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup5 --->
 <cfcase value="group1_5">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_assembly_assignedto]
 ,[pt_assembly_completedby]
 ,CONVERT(VARCHAR(8),[pt_assembly_datecompleted], 1)AS[pt_assembly_datecompleted]
@@ -125,7 +125,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup6 --->
 <cfcase value="group1_6">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_delivery_assignedto]
 ,[pt_delivery_completedby]
 ,CONVERT(VARCHAR(8),[pt_delivery_datecompleted], 1)AS[pt_delivery_datecompleted]
@@ -137,7 +137,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -147,7 +147,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset GUI Completed Tasks--->
 <cfcase value="assetCompTask">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_obtaininfo_datecompleted]=CONVERT(VARCHAR(8),pt_obtaininfo_datecompleted,1)
 ,[pt_obtaininfo_completedbyTEXT]
 ,[pt_entry_datecompleted]=CONVERT(VARCHAR(8),pt_entry_datecompleted,1)
@@ -188,7 +188,7 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
 ,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
@@ -272,7 +272,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[payrolltaxes](
 [client_id]
 ,[pt_deliverymethod]
@@ -317,7 +317,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_deliverymethod]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -339,7 +339,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfcase>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[pt_obtaininfo_assignedto]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[pt_obtaininfo_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -353,7 +353,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup2 --->
 <cfcase value="group1_2">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[pt_entry_assignedto]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[pt_entry_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -372,7 +372,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[pt_rec_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_rec_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -391,7 +391,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[pt_review_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_review_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -410,7 +410,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup5 --->
 <cfcase value="group1_5">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[pt_assembly_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_assembly_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -429,7 +429,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup6 --->
 <cfcase value="group1_6">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[pt_delivery_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_delivery_completedby]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -460,7 +460,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[payrolltaxes]
 SET[pt_active]=0
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.id#">

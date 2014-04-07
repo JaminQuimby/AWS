@@ -12,7 +12,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pa_id]
  ,[client_id]
  ,CONVERT(VARCHAR(10),[pa_dateofrevocation], 101)AS[pa_dateofrevocation]
@@ -30,7 +30,7 @@ WHERE[pa_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -58,7 +58,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP Financial Statements --->
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pa_id]
 ,[pa_taxyears]
 ,[pa_taxforms]
@@ -118,7 +118,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[powerofattorney](
 [client_id]
  ,[pa_dateofrevocation]
@@ -153,7 +153,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[powerofattorney]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pa_dateofrevocation]=<cfqueryparam value="#j.DATA[1][3]#" NULL="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -183,7 +183,7 @@ WHERE[pa_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 UPDATE[powerofattorney]
 SET[pa_active]=0
 WHERE[pa_id]=<cfqueryparam value="#ARGUMENTS.id#">

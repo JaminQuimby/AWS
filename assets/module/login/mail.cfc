@@ -4,7 +4,7 @@
 <cfargument name="uid" type="uuid" required="no">
 <cftry>
 
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 IF(SELECT TOP(1)COUNT([email])FROM[ctrl_users]WHERE[email]=<cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.email#">)=1
 BEGIN
 IF(SELECT TOP(1)ISNULL(DATEDIFF(MINUTE,[alt_password_timeout],GETDATE()),1500)FROM[ctrl_users]WHERE[email]=<cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.email#">) >= '1440'

@@ -18,7 +18,7 @@
 <cfset item[i]=s>
 </cfloop>
 
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT TOP(1)[client_id]
 FROM[businessformation]
 WHERE[client_id]=<cfqueryparam value="#item[1]#">
@@ -47,7 +47,7 @@ AND[bf_activity]=<cfqueryparam value="#item[3]#">
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Client--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[bf_id]
 ,[client_id]
 ,[bf_activity]
@@ -70,7 +70,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group1_1--->
 <cfcase value="group1_1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(VARCHAR(10),[bf_articlesapproved], 101)AS[bf_articlesapproved]
 ,CONVERT(VARCHAR(10),[bf_articlessubmitted], 101)AS[bf_articlessubmitted]
 FROM[businessformation]
@@ -80,7 +80,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group1_2--->
 <cfcase value="group1_2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(VARCHAR(10),[bf_tradenamereceived], 101)AS[bf_tradenamereceived]
 ,CONVERT(VARCHAR(10),[bf_tradenamesubmitted], 101)AS[bf_tradenamesubmitted]
 FROM[businessformation]
@@ -90,7 +90,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group1_3--->
 <cfcase value="group1_3">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(VARCHAR(10),[bf_minutesbylawsdraft], 101)AS[bf_minutesbylawsdraft]
 ,CONVERT(VARCHAR(10),[bf_minutesbylawsfinal], 101)AS[bf_minutesbylawsfinal]
 ,CONVERT(VARCHAR(10),[bf_minutescompleted], 101)AS[bf_minutescompleted]
@@ -101,7 +101,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group1_4--->
 <cfcase value="group1_4">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(VARCHAR(10),[bf_dissolutioncompleted], 101)AS[bf_dissolutioncompleted]
 ,CONVERT(VARCHAR(10),[bf_dissolutionrequested], 101)AS[bf_dissolutionrequested]
 ,CONVERT(VARCHAR(10),[bf_dissolutionsubmitted], 101)AS[bf_dissolutionsubmitted]
@@ -112,7 +112,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group1_5--->
 <cfcase value="group1_5">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(VARCHAR(10),[bf_otheractivity], 101)AS[bf_otheractivity]
 ,CONVERT(VARCHAR(10),[bf_othercompleted], 101)AS[bf_othercompleted]
 ,CONVERT(VARCHAR(10),[bf_otherstarted], 101)AS[bf_otherstarted]
@@ -123,7 +123,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group 2--->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[bfs_id]
 ,[bfs_assignedto]
 ,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
@@ -138,7 +138,7 @@ WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -167,7 +167,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP Business Formation --->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[bf_id]
 ,[client_id]
 ,[client_name]
@@ -209,7 +209,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <!--- Grid 2 --->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[bfs_id]
 ,[bfs_taskname]
 ,[bfs_assignedtoTEXT]
@@ -254,7 +254,7 @@ WHERE
 <cfcase value="group1">
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[BUSINESSFORMATION](
 [client_id]
 ,[bf_activity]
@@ -298,7 +298,7 @@ SELECT SCOPE_IDENTITY()AS[bf_id]
 
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[BUSINESSFORMATION]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bf_activity]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -330,7 +330,7 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[BUSINESSFORMATION]
 SET[bf_articlesapproved]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[bf_articlessubmitted]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -347,7 +347,7 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup2 --->
 <cfcase value="group1_2">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[BUSINESSFORMATION]
 SET[bf_tradenamereceived]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[bf_tradenamesubmitted]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -364,7 +364,7 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[BUSINESSFORMATION]
 SET[bf_minutesbylawsdraft]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[bf_minutesbylawsfinal]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -382,7 +382,7 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[BUSINESSFORMATION]
 SET[bf_dissolutioncompleted]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[bf_dissolutionrequested]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -402,7 +402,7 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup5 --->
 <cfcase value="group1_5">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[BUSINESSFORMATION]
 SET [bf_otheractivity]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[bf_othercompleted]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -422,7 +422,7 @@ WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2">
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[businessformation_subtask]([bf_id]
 ,[bfs_assignedto]
 ,[bfs_datecompleted]
@@ -449,7 +449,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[businessformation_subtask]
 SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bfs_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -484,7 +484,7 @@ WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[businessformation]
 SET[bf_active]=0
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.id#">
@@ -492,7 +492,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
 </cfcase>
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[businessformation_subtask]
 SET[bfs_active]=0
 WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.id#">

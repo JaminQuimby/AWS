@@ -13,7 +13,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[]
 
 
@@ -43,7 +43,7 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- TOTAL TIME --->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="aquery">
+<cfquery datasource="#Session.organization.name#" name="aquery">
 SELECT'Administrative Tasks'AS[name]
 ,SUM(cas_esttime)AS[total_time]
 ,COUNT(cas_assignedto)AS[count_assigned]
@@ -223,7 +223,7 @@ ORDER BY[orderit]
 <!--- LOOKUP Administrative Tasks --->
 <cfcase value="group2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
@@ -275,7 +275,7 @@ WHERE[cas_status]!='2'
 <!--- LOOKUP Business Formation --->
 <cfcase value="group3">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[bf_id]
 ,[client_id]
 ,[client_name]
@@ -321,7 +321,7 @@ WHERE[bf_status]!='2'
 <!--- LOOKUP Financial Tax Planning --->
 <cfcase value="group4">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[ftp_id]
 ,[client_name]
 ,[client_id]
@@ -372,7 +372,7 @@ WHERE[ftp_status]!='2'
 <!--- LOOKUP Financial Statements --->
 <cfcase value="group5">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fds_id]
 ,[client_id]
 ,[client_name]
@@ -438,7 +438,7 @@ OR([fds_delivery_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fd
 <!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group6">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[mc_id]
 ,[client_id]
 ,[client_name]
@@ -489,7 +489,7 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <!--- Grid Notice  --->
 <cfcase value="group7">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[n_id]
 ,[client_name]
 ,[n_name]
@@ -539,7 +539,7 @@ WHERE[nst_status]!='2'
 <!--- LOOKUP Other Filings --->
 <cfcase value="group8">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[of_id]
 ,[client_name]
 ,[of_type]
@@ -595,7 +595,7 @@ OR([of_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_ass
 <!--- LOOKUP Payroll Checks --->
 <cfcase value="group9">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id]
 ,[client_name]
 ,[client_id]
@@ -646,7 +646,7 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=<cfquerypa
 <!--- LOOKUP Payroll Taxes --->
 <cfcase value="group10">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
 ,[client_id]
 ,[client_name]
@@ -703,7 +703,7 @@ OR([pt_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_ass
 <!--- LOOKUP TAX RETURNS --->
 <cfcase value="group11">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[client_id]
 ,[client_name]
@@ -762,7 +762,7 @@ AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">
 <!--- LOOKUP TAX RETURNS --->
 <cfcase value="group12">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[client_id]
 ,[client_name]

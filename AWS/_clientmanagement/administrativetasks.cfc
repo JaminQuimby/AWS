@@ -31,7 +31,7 @@ SELECT TOP 1000 [cas_id]
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load GROUP1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[cas_id]
 ,[client_id]
 ,[cas_assignedto]
@@ -54,7 +54,7 @@ WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -82,7 +82,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP GROUP1 --->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
@@ -146,7 +146,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcase value="group1">
 
 <cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[clientadministrativetasks](
 [client_id]
 ,[cas_assignedto]
@@ -185,7 +185,7 @@ SELECT SCOPE_IDENTITY()AS[cas_id]
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[clientadministrativetasks]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[cas_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq 'null'#"/>
@@ -221,7 +221,7 @@ WHERE[cas_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[clientadministrativetasks]
 SET[cas_active]=0
 WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.id#">

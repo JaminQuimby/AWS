@@ -14,7 +14,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[FTP_ID]
  ,[client_id]
  ,[ftp_assignedto]
@@ -40,7 +40,7 @@ WHERE[ftp_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -71,7 +71,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP Financial Statements --->
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[ftp_id]
 ,[ftp_status]
 ,[ftp_category]
@@ -139,7 +139,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[financialtaxplanning](
 [client_id]
  ,[ftp_assignedto]
@@ -191,7 +191,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[financialtaxplanning]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
  ,[ftp_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -230,7 +230,7 @@ WHERE[ftp_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[financialtaxplanning]
 SET[ftp_active]=0
 WHERE[ftp_id]=<cfqueryparam value="#ARGUMENTS.id#">

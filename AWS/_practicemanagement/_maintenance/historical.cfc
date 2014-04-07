@@ -14,7 +14,7 @@
 <!--- LOOKUP Administrative Tasks --->
 <cfcase value="group1">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
@@ -96,7 +96,7 @@ WHERE(1)=(1)
 <!--- LOOKUP Business Formation --->
 <cfcase value="group2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[bf_id]
 ,[client_id]
 ,[client_name]
@@ -182,7 +182,7 @@ ORDER BY[bf_duedate]
 <!--- LOOKUP Communications --->
 <cfcase value="group3">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[co_id]
 ,[client_name]
 ,[client_id]
@@ -277,7 +277,7 @@ WHERE(1)=(1)
 <!--- LOOKUP Client Maintenance --->
 <cfcase value="group4">
 
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[client_id]
 ,[client_name]
 ,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
@@ -367,7 +367,7 @@ WHERE(1)=(1)
 <!--- LOOKUP Financial Tax Planning --->
 <cfcase value="group5">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[ftp_id]
 ,[client_name]
 ,[client_id]
@@ -454,7 +454,7 @@ WHERE(1)=(1)
 <!--- LOOKUP Financial Statements --->
 <cfcase value="group6">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fds_id]
 ,[client_id]
 ,[client_name]
@@ -542,7 +542,7 @@ WHERE(1)=(1)
 <!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group7">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[mc_id]
 ,[client_id]
 ,[client_name]
@@ -625,7 +625,7 @@ WHERE(1)=(1)
 <!--- Grid Notice  --->
 <cfcase value="group8">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[n_id]
 ,[n_name]
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
@@ -657,7 +657,7 @@ FROM[v_notice_subtask]
 <!--- LOOKUP Other Filings --->
 <cfcase value="group9">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[of_id]
 ,[of_taxyear]
 ,[of_state]
@@ -741,7 +741,7 @@ WHERE(1)=(1)
 
 <!--- LOOKUP Payroll Checks --->
 <cfcase value="group10">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
@@ -822,7 +822,7 @@ WHERE(1)=(1)
 
 <!--- LOOKUP Payroll Taxes --->
 <cfcase value="group11">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
 ,[pt_month]
@@ -905,7 +905,7 @@ WHERE(1)=(1)
 <!--- LOOKUP TAX RETURNS --->
 <cfcase value="group12">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[client_id]
 ,[client_name]

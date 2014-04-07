@@ -55,7 +55,7 @@
     hint="Fires at first part of page processing.">
  <!--- Define Login Requirements--->
   <cfargument name="request" required="true"/>     
-    
+
 <cfif IsDefined("Form.logout")> 
 <cfset StructClear(form)>
 <cfset StructClear(session.user)>
@@ -68,7 +68,8 @@
 <cfinclude template="/assets/module/login/loginform.cfm">
 <cfabort>
 <cfelse> 
-<cfquery name="loginQuery" dataSource="AWS" cachedwithin="#CreateTimeSpan(0, 0, 28, 0)#">
+
+<cfquery name="loginQuery" datasource="#Session.organization.name#" cachedwithin="#CreateTimeSpan(0, 0, 28, 0)#">
 SELECT[ctrl_users].[user_id],[ctrl_users].[name],[ctrl_users].[role],[ctrl_organization].[orgName],[ctrl_organization].[orgStorage],[ctrl_organization].[orgPlugins]
 FROM[ctrl_users]
 LEFT OUTER JOIN[ctrl_organization] ON[ctrl_users].[org_id]=[ctrl_organization].[org_id]

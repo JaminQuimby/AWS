@@ -10,7 +10,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 
 <cfcase value="group100">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT [file_id]
       ,[form_id]
       ,[client_id]
@@ -61,7 +61,7 @@ ORDER BY[file_name]
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <cfcase value="group100">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
 'group100'AS[group100]
 ,[FILE_ID]
@@ -102,7 +102,7 @@ WHERE[file_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <cfcase value="group100">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[ctrl_files]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[file_day]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -148,7 +148,7 @@ response.id = arguments.CHUNK;
 <!--- save file data from multi-part form.FILE --->
 <cffile action="upload" result="result" filefield="FILE" destination="#uploadFile#" nameconflict="overwrite"/>
 <cfoutput>
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 INSERT INTO[ctrl_files]
 (
 [file_name]

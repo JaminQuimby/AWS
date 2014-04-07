@@ -15,7 +15,7 @@
 <!--- Load Group1--->
 
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[mc_id]
 ,[client_id]
 ,[mc_assignedto]
@@ -38,7 +38,7 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 </cfcase>
 <!--- Load Group2 --->
-<cfcase value="group2"><cfquery datasource="AWS" name="fQuery">
+<cfcase value="group2"><cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[mcs_id]
 ,[mcs_actualtime]
 ,[mcs_assignedto]
@@ -55,7 +55,7 @@ WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 </cfcase>
 <!---Assest Cateogry --->
 <cfcase value="assetCategory">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[optionDescription]
 FROM[v_selectOptions]
 WHERE[selectName]='global_consultingcategory'
@@ -65,7 +65,7 @@ AND[optionValue_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -93,7 +93,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- LOOKUP Group1 --->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[mc_id]
 ,[mc_assignedtoTEXT]
 ,[client_id]
@@ -133,7 +133,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <!--- LOOKUP Group2 --->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT
 [mc_id]
 ,[mcs_id]
@@ -187,7 +187,7 @@ ORDER BY [mcs_sequence]
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[managementconsulting](
 [client_id]
 ,[mc_assignedto]
@@ -236,7 +236,7 @@ SELECT SCOPE_IDENTITY()AS[mc_id]
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[managementconsulting]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mc_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -268,7 +268,7 @@ WHERE[mc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[managementconsulting_subtask](
 [mc_id]
 ,[mcs_actualtime]
@@ -306,7 +306,7 @@ SELECT SCOPE_IDENTITY()AS[mcs_id]
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[managementconsulting_subtask]
 SET[mc_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mcs_actualtime]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -335,10 +335,10 @@ WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_duplicate">
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
-<cfquery name="aquery" datasource="AWS">
+<cfquery name="aquery" datasource="#Session.organization.name#">
 SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='37'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
 </cfquery>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 <cfset indexNumber=0>
 <cfloop index="i" list="#aquery.option_1#">
 <cfset indexNumber = indexNumber + 1 >
@@ -365,7 +365,7 @@ SELECT SCOPE_IDENTITY()AS[mcs_id]
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[managementconsulting]
 SET[mc_active]=0
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
@@ -373,7 +373,7 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
 </cfcase>
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[managementconsulting_subtask]
 SET[mcs_active]=0
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.id#">

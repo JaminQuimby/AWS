@@ -10,7 +10,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Client--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[selectName_id],[selectLabel],[selectDescription]
 FROM[ctrl_selectnames]
 WHERE[selectName_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -19,7 +19,7 @@ ORDER BY[selectLabel]
 </cfcase>
 <!--- Load Group2--->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[select_id],[optionName],[optionDescription],[optionGroup],[optionHide],[option_1],[option_2],[option_3],[option_4]
 FROM[ctrl_selectoptions]
 WHERE[select_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -40,7 +40,7 @@ ORDER BY [optionName]
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- LOOKUP GROUP1 --->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[selectName_id],[selectName],[selectLabel],[selectDescription],[selectUsedIn],[form_id]
 FROM[ctrl_selectnames]
 WHERE[selectName]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -59,7 +59,7 @@ ORDER BY[selectLabel]
 </cfcase>
 <!---  LOOKUP GROUP2 --->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription]
 ,[optionGroupTEXT]=(SELECT TOP(1)[formName]FROM[ctrl_forms]WHERE[form_id]=[optionGroup])
 ,[optionHideTEXT]=(SELECT TOP(1)[formName]FROM[ctrl_forms]WHERE[form_id]=[optionHide])
@@ -93,10 +93,10 @@ ORDER BY[optionName]
 <cfcase value="group1">
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="pquery" datasource="AWS">
+<cfquery name="pquery" datasource="#Session.organization.name#">
 SELECT COUNT(*)+1 AS [OPTIONCOUNT]FROM[ctrl_selectoptions]WHERE[selectName_id]=<cfqueryparam value=" #j.DATA[1][2]#"/>
 </cfquery>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[ctrl_selectoptions]([selectName_id],[optionValue_id],[optionName],[optionDescription],[optionGroup],[optionHide],[option_1],[option_2],[option_3],[option_4])
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -123,7 +123,7 @@ SELECT SCOPE_IDENTITY()AS[select_id]
 
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[ctrl_selectoptions]
 SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>

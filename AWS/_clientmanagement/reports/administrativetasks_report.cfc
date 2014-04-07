@@ -4,7 +4,7 @@
 <cfargument name="selectName" type="string">
 <cfargument name="formid" type="string" default="">
 <cfargument name="option1" type="string" default="">
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
 </cfquery>
 <cfset myResult="">
@@ -32,7 +32,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[cas_id]
 ,CONVERT(VARCHAR(8),[cas_duedate], 1)AS[cas_duedate]
 ,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)

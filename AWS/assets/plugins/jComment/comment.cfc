@@ -15,7 +15,7 @@
 
 <!--- Grid 101  --->
 <cfcase value="group101">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],CASE WHEN LEN([c_notes]) >= 101 THEN SUBSTRING([c_notes],0,100) +  '...' ELSE [c_notes] END AS[c_notes]
 FROM[v_comments]
 WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
@@ -62,7 +62,7 @@ AND[c_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!---Group101--->
 <cfcase value="group101">
 <cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[comments](
 [form_id]
 ,[user_id]

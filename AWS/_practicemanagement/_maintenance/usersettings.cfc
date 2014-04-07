@@ -12,7 +12,7 @@
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[user_id]
       ,[m_payrolltaxes]
       ,[m_accountingservices]
@@ -46,7 +46,7 @@ WHERE[user_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- LOOKUP Financial Statements --->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[user_id]
       ,[name]
       ,[m_payrolltaxes]
@@ -114,7 +114,7 @@ AND[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[staffinitials]
 SET[m_accountingservices]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[m_clientmanagement]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>

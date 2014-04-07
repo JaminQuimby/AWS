@@ -20,7 +20,7 @@
 <cfset item[i]=s>
 </cfloop>
 
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT TOP(1)[client_id]
 FROM[taxreturns]
 WHERE[client_id]=<cfqueryparam value="#item[1]#">
@@ -47,7 +47,7 @@ AND[tr_taxform]=<cfqueryparam value="#item[3]#">
 <cfargument name="formid" type="string" default="6">
 <cfargument name="option1" type="string" default="6">
 
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT[optionvalue_id],[optionname]
 FROM[v_selectOptions]
 WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND([optionHide]!='#ARGUMENTS.formid#'OR[optionHide]IS NULL)AND[selectName]='#ARGUMENTS.selectName#'
@@ -79,7 +79,7 @@ AND[option_1]='#ARGUMENTS.option1#'
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[tr_id]
 ,[client_id]
 ,[tr_currentfees]
@@ -105,7 +105,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup1 --->
 <cfcase value="group1_1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(CHAR(10),[tr_1_dropoffappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_1_dropoffappointment, 100),7)AS[tr_1_dropoffappointment]
 ,[tr_1_dropoffappointmentlength] 
 ,[tr_1_dropoffappointmentwith] 
@@ -119,7 +119,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup2 --->
 <cfcase value="group1_2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[tr_2_assignedto]
 ,CONVERT(VARCHAR(10),[tr_2_completed], 101)AS[tr_2_completed] 
 ,CONVERT(VARCHAR(10),[tr_2_informationreceived], 101)AS[tr_2_informationreceived]
@@ -135,7 +135,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup3 --->
 <cfcase value="group1_3">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT CONVERT(VARCHAR(10),[tr_3_assemblereturn], 101)AS[tr_3_assemblereturn] 
 ,CONVERT(VARCHAR(10),[tr_3_contacted], 101)AS[tr_3_contacted] 
 ,CONVERT(VARCHAR(10),[tr_3_delivered], 101)AS[tr_3_delivered]  
@@ -149,7 +149,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group1 Subgroup4 --->
 <cfcase value="group1_4">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[tr_4_assignedto] 
 ,CONVERT(VARCHAR(10),[tr_4_completed], 101)AS[tr_4_completed]
 ,[tr_4_completedby] 
@@ -171,7 +171,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group 2--->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trst_id]
 ,[trst_assignedto]
 ,CONVERT(VARCHAR(10),[trst_completed], 101)AS[trst_completed]
@@ -187,7 +187,7 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group 2 State--->
 <cfcase value="group2_state">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trst_state]
 FROM[v_taxreturns_state]
 WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -196,7 +196,7 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group2 Subgroup1 --->
 <cfcase value="group2_1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT [trst_1_assignedto]
 ,CONVERT(VARCHAR(10),[trst_1_completed], 101)AS[trst_1_completed]
 ,CONVERT(VARCHAR(10),[trst_1_duedate], 101)AS[trst_1_duedate]
@@ -216,7 +216,7 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group2 Subgroup2 --->
 <cfcase value="group2_2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT  CONVERT(VARCHAR(10),[trst_2_assemblereturn], 101)AS[trst_2_assemblereturn]
 ,CONVERT(VARCHAR(10),[trst_2_contacted], 101)AS[trst_2_contacted]
 ,[trst_2_currentfees]
@@ -234,7 +234,7 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 <!--- Load Group2 Subgroup3 --->
 <cfcase value="group2_3">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trst_3_pptrassignedto]
 ,CONVERT(VARCHAR(10),[trst_3_pptrcompleted], 101)AS[trst_3_pptrcompleted]
 ,[trst_3_pptrcurrentfees]
@@ -251,7 +251,7 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group 3--->
 <cfcase value="group3">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trsc_id]
 ,[trsc_assignedto]
 ,[trsc_reviewassignedto]
@@ -264,7 +264,7 @@ WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Load Group3 Subgroup1 --->
 <cfcase value="group3_1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trsc_1_assignedto]
 ,CONVERT(VARCHAR(10),[trsc_1_completed], 101)AS[trsc_1_completed]
 ,CONVERT(VARCHAR(10),[trsc_1_duedate], 101)AS[trsc_1_duedate]
@@ -284,7 +284,7 @@ WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <!--- Asset Credit Hold --->
 <cfcase value="assetCreditHold">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_credit_hold]
 FROM[client_listing]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -314,7 +314,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP TAX RETURNS --->
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
@@ -371,7 +371,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <!--- Grid 2 --->
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[trst_id]
 ,trst_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[trst_state]=[optionvalue_id])
@@ -402,7 +402,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND [trst_status]!=2 AND [tr
 </cfcase>
 <!--- Grid 3  --->
 <cfcase value="group3">
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 	  ,[trsc_id]
 ,trsc_assignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trsc_assignedto=user_id))
@@ -455,7 +455,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trsc_status]LIKE <cfquer
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[taxreturns](
 [client_id]
 ,[tr_currentfees]
@@ -506,7 +506,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[taxreturns]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_currentfees]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -532,7 +532,7 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[taxreturns]
 SET[tr_1_dropoffappointment]=<cfqueryparam value="#dateFormat(j.DATA[1][2],'YYYY-MM-DD')# #timeFormat(j.DATA[1][2],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[tr_1_dropoffappointmentlength]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -548,7 +548,7 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfcase>
 <!---Group1 Subgroup2 --->
 <cfcase value="group1_2">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[taxreturns]
 SET[tr_2_assignedto]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_2_completed]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -570,7 +570,7 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][6])><cfset j.DATA[1][6]=1><cfelse><cfset j.DATA[1][6]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][7])><cfset j.DATA[1][7]=1><cfelse><cfset j.DATA[1][7]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[taxreturns]
 SET[tr_3_assemblereturn]=<cfqueryparam value="#j.DATA[1][2]#"  null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[tr_3_contacted]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -588,7 +588,7 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group1_4">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][12])><cfset j.DATA[1][12]=1><cfelse><cfset j.DATA[1][12]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][14])><cfset j.DATA[1][14]=1><cfelse><cfset j.DATA[1][14]=0></cfif>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[taxreturns]
 SET[tr_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2]) eq 0#"/>
 ,[tr_4_completed]=<cfqueryparam value="#j.DATA[1][3]#"  null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -616,7 +616,7 @@ WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
 <cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[taxreturns_state]([tr_id]
 ,[trst_assignedto]
 ,[trst_completed]
@@ -642,7 +642,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[taxreturns_state]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -667,7 +667,7 @@ WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_1_assignedto]= <cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -699,7 +699,7 @@ WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_2_assemblereturn]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -728,7 +728,7 @@ WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group2_3">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
 <cftry>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[TAXRETURNS_STATE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_3_pptrassignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -754,7 +754,7 @@ WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group3--->
 <cfcase value="group3">
 <cfif j.DATA[1][1] eq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[TAXRETURNS_SCHEDULE]([tr_id]
 ,[trsc_assignedto]
 ,[trsc_reviewassignedto]
@@ -773,7 +773,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfreturn '{"id":#fquery.id#,"group":"group3_1","result":"ok"}'>
 </cfif>
 <cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[TAXRETURNS_SCHEDULE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trsc_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -788,7 +788,7 @@ WHERE[TRSC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group3 Subgroup1 --->
 <cfcase value="group3_1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
-<cfquery name="fquery" datasource="AWS">
+<cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[TAXRETURNS_SCHEDULE]
 SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trsc_1_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
@@ -823,7 +823,7 @@ WHERE[trsc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfswitch expression="#ARGUMENTS.group#">
 <!--- Load Group1--->
 <cfcase value="group1">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[taxreturns]
 SET[tr_active]=0
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.id#">
@@ -831,7 +831,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 <cfcase value="group2">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[taxreturns_state]
 SET[trst_active]=0
 WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.id#">
@@ -839,7 +839,7 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
 <cfcase value="group3">
-<cfquery datasource="AWS" name="fQuery">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
 update[taxreturns_schedule]
 SET[trsc_active]=0
 WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.id#">

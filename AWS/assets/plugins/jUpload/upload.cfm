@@ -74,7 +74,7 @@ _grid100=function(){
 	"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_SAVEDNAME:{list:true,edit:false,title:'',width: '1%',display: function (data1) {
                          var $img = $('<i class="fa fa-cloud-download fa-2x" style="cursor:pointer"></i>'); 
 						$img.click(function () {
-    						window.open('//cj.qutera.com/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'','_filedownload');
+    						window.open('#Application.url#/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'','_filedownload');
 						});return $img;}} ,FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g100_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","taskid":"'+$("##task_id").val()+'","loadType":"group100","clientid":'+$("##client_id").val()+'}',

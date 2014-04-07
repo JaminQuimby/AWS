@@ -16,7 +16,7 @@
 <!--- LOOKUP Payroll Checks --->
 <cfcase value="group1">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
 ,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
@@ -70,7 +70,7 @@ ORDER BY[pc_duedate]
 <!--- Grid 2 Entrance --->
 <cfcase value="group2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
 ,CONVERT(VARCHAR(10),[pt_duedate], 101)AS[pt_duedate]
 ,[pt_type]
@@ -136,7 +136,7 @@ ORDER BY[pt_duedate]
 <!--- Grid 3 Entrance --->
 <cfcase value="group3">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[of_id]
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
 ,[of_taxyear]
@@ -200,7 +200,7 @@ ORDER BY[of_duedate]
 <!--- Grid 4 Entrance --->
 <cfcase value="group4">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[bf_id]
 ,[bf_assignedto]
 ,[bf_status]
@@ -279,7 +279,7 @@ AND ([bf_paid] = '6' OR [bf_paid] IS NULL OR [bf_paid] = '0')
 <!--- Grid 5 Entrance --->
 <cfcase value="group5">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[mc_id]
 ,[mc_category]
 ,[mc_assignedto]
@@ -335,7 +335,7 @@ AND ([mc_paid] = '6' OR [mc_paid] IS NULL OR [mc_paid] = '0')
 <!--- Grid 6 Entrance --->
 <cfcase value="group6">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fds_id]
 ,[fds_year]
 ,[fds_month]
@@ -405,7 +405,7 @@ AND ([fds_paid] = '6' OR [fds_paid] IS NULL OR [fds_paid] = '0')
 <!--- Grid 7 Entrance --->
 <cfcase value="group7">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[ftp_id]
 ,[ftp_category]
 ,[ftp_status]
@@ -466,7 +466,7 @@ AND ([ftp_paid] = '6' OR [ftp_paid] IS NULL OR [ftp_paid] = '0')
 <!--- Grid 8 Entrance --->
 <cfcase value="group8">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[nm_id]
 ,[n_id]
 ,[nm_name]
@@ -524,7 +524,7 @@ AND ([n_paid] = '6' OR [n_paid] IS NULL OR [n_paid] = '0')
 <!--- Grid 9 Entrance --->
 <cfcase value="group9">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
@@ -572,7 +572,7 @@ WHERE([tr_paid]IS NULL OR [tr_paid] = '6' OR [tr_paid] = '0')
 <!--- Grid 10 Entrance --->
 <cfcase value="group10">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
@@ -620,7 +620,7 @@ AND ([tr_4_paid]IS NULL OR[tr_4_paid] = '6' OR[tr_4_paid] = '0')
 <!--- Grid 11 Entrance --->
 <cfcase value="group11">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[trst_id]
 ,[tr_id]
 ,[tr_taxyear]
@@ -673,7 +673,7 @@ AND ([trst_2_paid]IS NULL OR [trst_2_paid] = '6' OR [trst_2_paid] = '0')
 <!--- Grid 12 Entrance --->
 <cfcase value="group12">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[trst_id]
 ,[tr_id]
 ,[tr_taxyear]
@@ -724,7 +724,7 @@ AND ([trst_3_paid] IS NULL OR [trst_3_paid] ='6' OR [trst_3_paid] ='0')
 <!--- Grid 13 Entrance --->
 <cfcase value="group13">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[co_id]
 ,[co_caller]
 ,[co_for]

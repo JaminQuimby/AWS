@@ -1,4 +1,6 @@
 <cfsetting showDebugOutput="No">
+<cfset Session.organization.name=UCase("AWS_"&ListFirst(cgi.server_name, "."))>
+
 <cfparam name="URL.r" default="">
 <cfparam name="URL.e" default="">
 <!DOCTYPE html> 
@@ -40,6 +42,10 @@ input { font-family: 'FontAwesome'; }
 <br/>
 
 <cfoutput>
+
+
+#Session.organization.name#
+
 <cfif Len(URL.r)gt 1 and Len(URL.e)gt 1>
 <H2>Please Enter a new Password</H2>
 <div class="message">

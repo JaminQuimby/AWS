@@ -5,7 +5,7 @@
 <cfargument name="selectName" type="string">
 <cfargument name="formid" type="string" default="">
 <cfargument name="option1" type="string" default="">
-<cfquery datasource="AWS" name="fquery" >
+<cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
 </cfquery>
 <cfset myResult="">
@@ -35,7 +35,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <!--- Grid 1 Entrance --->
 <cfcase value="group0">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
@@ -159,7 +159,7 @@ WHERE(1)=(1)
 <!--- Grid 2 Entrance --->
 <cfcase value="group2">
 <cftry>
-<cfquery datasource="AWS" name="fquery">
+<cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[trst_id]
 ,[tr_id]
 ,[tr_taxyear]
