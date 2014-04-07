@@ -2,14 +2,6 @@
 jqMessage Required
 --->
 
-<footer id="footer">
-<div class="buttonbox">
-<div >
-<cfdump var="#selectRoles#">
-</div>
-</div>
-</footer>
-
 <cfparam name="page.footer" default="1">
 <cfif page.footer neq 0>
 <cfswitch expression="#page.module#">

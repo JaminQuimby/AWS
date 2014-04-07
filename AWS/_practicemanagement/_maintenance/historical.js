@@ -1,20 +1,24 @@
 
 $(document).ready(function(){
-	_grid1();
-	_group1=function(){_grid1();}
-	_group2=function(){_grid2();}
-	_group3=function(){_grid3();}
-	_group4=function(){_grid4();}
-	_group5=function(){_grid5();}
-	_group6=function(){_grid6();}
-	_group7=function(){_grid7();}
-	_group8=function(){_grid8();}
-	_group9=function(){_grid9();}
-	_group10=function(){_grid10();}
-	_group11=function(){_grid11();}
-	_group12=function(){_grid12();}
-});
 
+	_grid1();
+});
+_run={	
+	
+	load_group1:function(){_grid1();}
+	,load_group2:function(){_grid2();}
+	,load_group3:function(){_grid3();}
+	,load_group4:function(){_grid4();}
+	,load_group5:function(){_grid5();}
+	,load_group6:function(){_grid6();}
+	,load_group7:function(){_grid7();}
+	,load_group8:function(){_grid8();}
+	,load_group9:function(){_grid9();}
+	,load_group10:function(){_grid10();}
+	,load_group11:function(){_grid11();}
+	,load_group12:function(){_grid12();}
+	
+}
 _grid1=function(){
 var grid1_config = [
 {"n":"search","type":"text","v":""}    
