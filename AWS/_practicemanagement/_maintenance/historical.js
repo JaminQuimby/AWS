@@ -4,8 +4,7 @@ $(document).ready(function(){
 	_grid1();
 });
 _run={	
-	
-	load_group1:function(){_grid1();}
+ 	load_group1:function(){_grid1();}
 	,load_group2:function(){_grid2();}
 	,load_group3:function(){_grid3();}
 	,load_group4:function(){_grid4();}
@@ -17,7 +16,6 @@ _run={
 	,load_group10:function(){_grid10();}
 	,load_group11:function(){_grid11();}
 	,load_group12:function(){_grid12();}
-	
 }
 _grid1=function(){
 var grid1_config = [
@@ -90,13 +88,13 @@ var grid2_config = [
 	"url":"historical.cfc",
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
-	,CLIENT_ID:{list:false,edit:false}
-	,CLIENT_NAME:{title:'Client Name'}
-	,BF_ACTIVITY:{title:'Activity'}
-	,BF_STATUSTEXT:{title:'Status'}
-	,BF_DUEDATE:{title:'Due Date',width:'1%'}
-	,BF_FEES:{title:'Fees'}
-	,BF_PAIDTEXT:{title:'Payment Status'}
+			,CLIENT_ID:{list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,BF_ACTIVITY:{title:'Activity'}
+			,BF_STATUSTEXT:{title:'Status'}
+			,BF_DUEDATE:{title:'Due Date',width:'1%'}
+			,BF_FEES:{title:'Fees'}
+			,BF_PAIDTEXT:{title:'Payment Status'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g2_filter").val(),grid2_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"3"}',
@@ -130,18 +128,18 @@ var grid3_config = [
 	"url":"historical.cfc",	
 	"title":"Communications Dashboard",
 	"fields":{CO_ID:{key:true,list:false,edit:false}
-	,CLIENT_NAME:{title:'Client Name'}
-	,CO_CALLER:{title:'Caller'}
-	,CO_CREDITHOLD:{title:'Credit Hold',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-	,CO_FEES:{title:'Fees'}
-	,CO_PAIDTEXT:{title:'Payment Status'}
-	,CO_DATE:{title:'Date &amp; Time'}
-	,CO_TELEPHONE:{title:'Phone'}
-	,CO_EXT:{title:'Ext'}
-	,CO_EMAILADDRESS:{title:'Email'}
-	,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-	,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-	,CO_BRIEFMESSAGE:{title:'Brief Message'}
+			,CLIENT_NAME:{title:'Client Name'}
+			,CO_CALLER:{title:'Caller'}
+			,CO_CREDITHOLD:{title:'Credit Hold',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_FEES:{title:'Fees'}
+			,CO_PAIDTEXT:{title:'Payment Status'}
+			,CO_DATE:{title:'Date &amp; Time'}
+			,CO_TELEPHONE:{title:'Phone'}
+			,CO_EXT:{title:'Ext'}
+			,CO_EMAILADDRESS:{title:'Email'}
+			,CO_RESPONSENEEDED:{title:'Response Needed',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g3_filter").val(),grid3_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3","formid":"12"}',
@@ -350,7 +348,7 @@ var grid7_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
 			,MC_DESCRIPTION:{title:'Task Description'}
-			,MC_STATUS:{title:'Status'}
+			,MC_STATUSTEXT:{title:'Status'}
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
 			},
 	"method":"f_lookupData",
@@ -455,7 +453,7 @@ var grid9_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,OF_STATE:{title:'State'}
-			,of_TYPETEXT:{title:'Type'}
+			,OF_TYPETEXT:{title:'Type'}
 			,OF_FORM:{title:'Form'}
 			,OF_STATUSTEXT:{title:'Status'}
 			,OF_DUEDATE:{title:'Due Date',width:'1%'}

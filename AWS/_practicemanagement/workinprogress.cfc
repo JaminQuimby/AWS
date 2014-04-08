@@ -229,12 +229,12 @@ SELECT [cas_id]
 ,[client_name]
 <!--- missing variable: Initiated --->
 ,CONVERT(VARCHAR(10),[cas_completed], 101)AS[cas_completed]
-,[cas_status]
+,[cas_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 ,[cas_priority]
-,[cas_assignedto]
+,[cas_assignedtoTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
 ,CONVERT(VARCHAR(10),[cas_duedate], 101)AS[cas_duedate]
 ,[cas_esttime]
-,[cas_category]
+,[cas_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
@@ -252,12 +252,12 @@ WHERE[cas_status]!='2'
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"
-								,"CAS_STATUS":"'&CAS_STATUS&'"
+								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
 								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_ASSIGNEDTO":"'&CAS_ASSIGNEDTO&'"
+								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
 								,"CAS_ESTTIME":"'&CAS_ESTTIME&'"
-								,"CAS_CATEGORY":"'&CAS_CATEGORY&'"
+								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -280,9 +280,9 @@ SELECT[bf_id]
 ,[client_id]
 ,[client_name]
 ,CONVERT(VARCHAR(10),[bf_dateinitiated], 101)AS[bf_dateinitiated]
-,[bf_status]
+,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_priority]
-,[bf_assignedto]
+,[bf_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
 ,[bf_esttime]
 ,[bf_activity]
@@ -299,9 +299,9 @@ WHERE[bf_status]!='2'
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"BF_DATEINITIATED":"'&BF_DATEINITIATED&'"
-								,"BF_STATUS":"'&BF_STATUS&'"
+								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
 								,"BF_PRIORITY":"'&BF_PRIORITY&'"
-								,"BF_ASSIGNEDTO":"'&BF_ASSIGNEDTO&'"
+								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
 								,"BF_DUEDATE":"'&BF_DUEDATE&'"
 								,"BF_ESTTIME":"'&BF_ESTTIME&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
@@ -328,12 +328,13 @@ SELECT[ftp_id]
 ,CONVERT(VARCHAR(10),[ftp_requestservice], 101)AS[ftp_requestservice]
 ,CONVERT(VARCHAR(10),[ftp_reportcompleted], 101)AS[ftp_reportcompleted]
 ,[ftp_missinginfo]
-,[ftp_status]
-,[ftp_priority]
-,[ftp_assignedto]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id]
+)AS[ftp_categoryTEXT]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id]
+)AS[ftp_statusTEXT],[ftp_priority]
+,[ftp_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[ftp_duedate], 101)AS[ftp_duedate]
 ,[ftp_esttime]
-,[ftp_category]
 FROM[v_financialtaxplanning]
 WHERE[ftp_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL AND[ftp_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -351,12 +352,12 @@ WHERE[ftp_status]!='2'
 								,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
 								,"FTP_REPORTCOMPLETED":"'&FTP_REPORTCOMPLETED&'"
 								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
-								,"FTP_STATUS":"'&FTP_STATUS&'"
+								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
 								,"FTP_PRIORITY":"'&FTP_PRIORITY&'"
-								,"FTP_ASSIGNEDTO":"'&FTP_ASSIGNEDTO&'"
+								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
 								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
 								,"FTP_ESTTIME":"'&FTP_ESTTIME&'"
-								,"FTP_CATEGORY":"'&FTP_CATEGORY&'"
+								,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -379,9 +380,8 @@ SELECT[fds_id]
 ,CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend]
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,[fds_status]     
+,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
 ,[fds_priority]
-,[fds_entry_assignedto]
 ,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]      
 ,[fds_esttime]
 ,[fds_month]
@@ -416,9 +416,8 @@ OR([fds_delivery_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fd
 								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
-								,"FDS_STATUS":"'&FDS_STATUS&'"
+								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
 								,"FDS_PRIORITY":"'&FDS_PRIORITY&'"
-								,"FDS_ENTRY_ASSIGNEDTO":"'&FDS_ENTRY_ASSIGNEDTO&'"
 								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
 								,"FDS_ESTTIME":"'&FDS_ESTTIME&'"
 								,"FDS_YEAR":"'&FDS_YEAR&'"
@@ -444,9 +443,9 @@ SELECT[mc_id]
 ,[client_name]
 ,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
 ,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
-,[mc_status]
+,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,[mc_priority]
-,[mc_assignedto]
+,[mc_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
 ,[mc_esttime]
 ,[mc_category]
@@ -467,9 +466,9 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
 								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
-								,"MC_STATUS":"'&MC_STATUS&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
 								,"MC_PRIORITY":"'&MC_PRIORITY&'"
-								,"MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
@@ -495,13 +494,13 @@ SELECT[n_id]
 ,[n_name]
 ,CONVERT(VARCHAR(10),[nst_1_noticedate], 101)AS[nst_1_noticedate]
 ,[nst_missinginfo]
-,[n_status]
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id]
 ,[nst_priority]
-,[nst_assignedto]
+,[nst_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[nst_1_resduedate], 101)AS[nst_1_resduedate]
 ,[nst_esttime]
 ,[nst_2_revrequired]
-,[nst_2_revassignedto]
+,[nst_2_revassignedto]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](nst_2_revassignedto)))FOR XML PATH('')),3,1000)
 FROM[v_notice_subtask]
 WHERE[nst_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL AND[nst_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -517,13 +516,13 @@ WHERE[nst_status]!='2'
 								,"N_NAME":"'&N_NAME&'"
 								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
 								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
-								,"N_STATUS":"'&N_STATUS&'"
+								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
 								,"NST_PRIORITY":"'&NST_PRIORITY&'"
-								,"NST_ASSIGNEDTO":"'&NST_ASSIGNEDTO&'"
+								,"NST_ASSIGNEDTOTEXT":"'&NST_ASSIGNEDTOTEXT&'"
 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
 								,"NST_ESTTIME":"'&NST_ESTTIME&'"
 								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
-								,"NST_2_REVASSIGNEDTO":"'&NST_2_REVASSIGNEDTO&'"
+								,"NST_2_REVASSIGNEDTOTEXT":"'&NST_2_REVASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -542,16 +541,15 @@ WHERE[nst_status]!='2'
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[of_id]
 ,[client_name]
-,[of_type]
-,[of_form]
+,[of_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_type]=[optionvalue_id])
+,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_missinginfo]
-,[of_status]
+,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
 ,[of_priority]
-<!--- nonspecfic assigned to --->
 ,CONVERT(VARCHAR(10),[of_duedate], 101)AS[of_duedate]
 ,[of_esttime]
 ,[of_taxyear]
-,[of_period]
+,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
 FROM[v_otherfilings]
 WHERE[of_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -571,15 +569,15 @@ OR([of_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_ass
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"OF_TASK":"'&OF_TASK&'"
-								,"OF_FORM":"'&OF_FORM&'"
+								,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
+								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
-								,"OF_STATUS":"'&OF_STATUS&'"
+								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
 								,"OF_PRIORITY":"'&OF_PRIORITY&'"
 								,"OF_DUEDATE":"'&OF_DUEDATE&'"
 								,"OF_ESTTIME":"'&OF_ESTTIME&'"
 								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"
-								,"OF_PERIOD":"'&OF_PERIOD&'"
+								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -602,7 +600,6 @@ SELECT[pc_id]
 ,CONVERT(VARCHAR(8),[pc_payenddate], 1)AS[pc_payenddate]
 ,CONVERT(VARCHAR(8),[pc_assembly_datecompleted], 1)AS[pc_assembly_datecompleted]  <!---Unsure if this is the correct completed to use. --->
 ,[pc_missinginfo]
-,[pc_preparation_assignedto]
 ,CONVERT(VARCHAR(8),[pc_duedate], 1)AS[pc_duedate]
 ,[pc_esttime]
 ,CONVERT(VARCHAR(8),[pc_paydate], 1)AS[pc_paydate]
@@ -627,7 +624,6 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=<cfquerypa
  								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
 								,"PC_ASSEMBLY_DATECOMPLETED":"'&PC_ASSEMBLY_DATECOMPLETED&'"
 								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
-								,"PC_PREPARATION_ASSIGNEDTO":"'&PC_PREPARATION_ASSIGNEDTO&'"
 								,"PC_DUEDATE":"'&PC_DUEDATE&'"
 								,"PC_ESTTIME":"'&PC_ESTTIME&'"
 								,"PC_PAYDATE":"'&PC_PAYDATE&'"
@@ -718,7 +714,7 @@ SELECT[tr_id]
 ,[tr_esttime]
 ,[tr_4_required]
 ,CONVERT(VARCHAR(10),[tr_4_rfr], 101)AS[tr_4_rfr]
-,[tr_4_assignedto] 
+,[tr_4_assignedtoTEX]T=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 FROM[v_taxreturns]
 WHERE[tr_2_informationreceived]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL AND[tr_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -746,7 +742,7 @@ AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">
 								,"TR_ESTTIME":"'&TR_ESTTIME&'"
 								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"
 								,"TR_4_RFR":"'&TR_4_RFR&'"
-								,"TR_4_ASSIGNEDTO":"'&TR_4_ASSIGNEDTO&'"
+								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -771,7 +767,7 @@ SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[tr_priority]
-,[tr_4_assignedto]
+,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[tr_4_pptresttime]
 ,CONVERT(VARCHAR(10),[tr_4_rfr], 101)AS[tr_4_rfr]
 ,CONVERT(VARCHAR(10),[tr_4_delivered], 101)AS[tr_4_delivered]
@@ -796,7 +792,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TR_PRIORITY":"'&TR_PRIORITY&'"
-								,"TR_4_ASSIGNEDTO":"'&TR_4_ASSIGNEDTO&'"
+								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
 								,"TR_4_PPTRESTTIME":"'&TR_4_PPTRESTTIME&'"
 								,"TR_4_RFR":"'&TR_4_RFR&'"
 								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
