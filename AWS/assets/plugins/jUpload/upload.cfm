@@ -1,11 +1,15 @@
+<cfparam name="page.formid" default="0">
+<cfquery dbtype="query" name="plugin_documents">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='plugin_documents'</cfquery>
+
 <cfoutput>
 <script type="text/javascript">
 $(document).ready(function(){
 $(function() {
+
 $("##uploader").pluploadQueue({
 // General settings
 preinit:_FileUploadedCB,
-runtimes:'html5,flash',
+runtimes:'html5',
 url:'#this.url#/AWS/assets/plugins/jUpload/upload.cfc?method=upload',
 max_file_size:'10mb',
 chunk_size:'1mb',
@@ -14,33 +18,37 @@ multiple_queues:true,
 drop_element:"uploader",
 browse_button:"selectFiles",
 container:"uploader",
-flash_swf_url:"#this.url#/assets/plupload/js/plupload.flash.swf",
+flash_swf_url:"./assets/plupload/js/plupload.flash.swf",
 urlstream_upload:true,
 multipart:true,
 multipart_params:{ },
 resize:{width:320, height:240, quality:90},
 filters:[	{title:"Image files", extensions:"jpg,gif,png,bmp"},
-			{title:"Audio", extensions:"wav,wma,m4a"},
-			{title:"Zip files", extensions:"zip,rar,7z"},
-			{title:"Database", extensions:"qbb,qbw,db,dbf,accdb,mdb"},
-			{title:"Document Files", extensions:"pdf,doc,docx,xlsx,xls,xlr,ppt,pptx,txt,wpd,wps,vcf,csv,key"},
-			{title:"Misc", extensions:"tax2012,tax2013,tax2014,tax2015"}],
-			
-flash_swf_url:'#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.flash.swf',
-silverlight_xap_url:'#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.silverlight.xap',
-init:{
-	BeforeUpload:function(up, files){
-		up.settings.multipart_params = {
-			'formid':'#page.formid#',
-			'clientid':$('##client_id').val(),
-			'userid':'#session.user.id#',
-			'taskid':$('##task_id').val(),
-						  }
-		            }
-					//ADD LINE
+{title:"Audio", extensions:"wav,wma,m4a"},
+{title:"Zip files", extensions:"zip,rar,7z"},
+{title:"Database", extensions:"qbb,qbw,db,dbf,accdb,mdb"},
+{title:"Document Files", extensions:"pdf,doc,docx,xlsx,xls,xlr,ppt,pptx,txt,wpd,wps,vcf,csv,key"},
+{title:"Misc", extensions:"tax2012,tax2013,tax2014,tax2015"}],
 
-		}
+//flash_swf_url:'#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.flash.swf',
+//silverlight_xap_url:'#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.silverlight.xap',
+
+init:{
+BeforeUpload:function(up, files){
+up.settings.multipart_params = {
+'formid':'#page.formid#',
+'clientid':$('##client_id').val(),
+'userid':'#session.user.id#',
+'taskid':$('##task_id').val(),
+}
+}
+//ADD LINE
+
+}
     });
+	
+
+	
 });
 //Start Normal Template Functions
 
@@ -49,43 +57,42 @@ Uploader.bind('FileUploaded', function(Up, File, Response){
 if((Uploader.total.uploaded + 1) == Uploader.files.length){_group100();$("##group100").accordion({active:0});}
 })}
 
-_pluginURL100=function(){return "#this.url#/AWS/assets/plugins/jUpload/"}
+_pluginURL100=function(){return "https://"+window.location.hostname+"/AWS/assets/plugins/jUpload/"}
 _pluginLoadData100=function(){return 'file_id,file_id,g100_name,g100_description,g100_year,g100_month,g100_day'}
 _pluginSaveData100=function(){
-	var json='{"DATA":[["'+
-		$("##file_id").val()+'","'+
-		$("##client_id").val()+'","'+
-		$("##g100_day").val()+'","'+
-		$("##g100_description").val()+'","'+
-		$("##g100_month").val()+'","'+
-		$("##g100_name").val()+'","'+
-		$("##g100_year").val()+'","'+
-		'"]]}'
-		if($("##isLoaded_group100").val()!=0){
-			_saveData({"group":"group100",payload:$.parseJSON(json),page:"upload",plugin:"group100"})}
-		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}
-	}
+var json='{"DATA":[["'+
+$("##file_id").val()+'","'+
+$("##client_id").val()+'","'+
+$("##g100_day").val()+'","'+
+$("##g100_description").val()+'","'+
+$("##g100_month").val()+'","'+
+$("##g100_name").val()+'","'+
+$("##g100_year").val()+'","'+
+'"]]}'
+if($("##isLoaded_group100").val()!=0){
+_saveData({"group":"group100",payload:$.parseJSON(json),page:"upload",plugin:"group100"})}
+else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}
+}
 _group100=function(){_grid100()}
 _grid100=function(){
-	_jGrid({
-	"grid":"grid100",
-	"url":"#this.url#/AWS/assets/plugins/jUpload/upload.cfc",
-	"title":"Files",
-	"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_SAVEDNAME:{list:true,edit:false,title:'',width: '1%',display: function (data1) {
-                         var $img = $('<i class="fa fa-cloud-download fa-2x" style="cursor:pointer"></i>'); 
-						$img.click(function () {
-    						window.open('#this.url#/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'','_filedownload');
-						});return $img;}} ,FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
-	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("##g100_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","taskid":"'+$("##task_id").val()+'","loadType":"group100","clientid":'+$("##client_id").val()+'}',
-	"functions":'$("##file_id").val(record.FILE_ID);$("##isLoaded_group100").val(1);_loadData({"id":"file_id","group":"group100","page":"upload","plugin":"group100"});$("##group100").accordion({active:1});'
-	})};
+_jGrid({
+"grid":"grid100",
+"url":"/AWS/assets/plugins/jUpload/upload.cfc",
+"title":"Files",
+"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_SAVEDNAME:{list:true,edit:false,title:'',width: '1%',display: function (data1) {
+                         var $img = $('<i class="fa fa-cloud-download fa-2x" style="cursor:pointer"></i>');
+$img.click(function () {
+     window.open('//cj.qutera.com/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'','_filedownload');
+});return $img;}} ,FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
+"method":"f_lookupData",
+"arguments":'{"search":"'+$("##g100_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","taskid":"'+$("##task_id").val()+'","loadType":"group100","clientid":'+$("##client_id").val()+'}',
+"functions":'$("##file_id").val(record.FILE_ID);$("##isLoaded_group100").val(1);_loadData({"id":"file_id","group":"group100","page":"upload","plugin":"group100"});$("##group100").accordion({active:1});'
+})};
 
 })
 
 </script>
 </cfoutput>
-<cfquery dbtype="query" name="plugin_documents">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='plugin_documents'</cfquery>
 <span class="trackers">
 <input type="hidden" id="file_id" value="0" />
 <input type="hidden" id="isLoaded_group100" value="0" />
