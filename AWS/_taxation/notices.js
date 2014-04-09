@@ -60,7 +60,7 @@ default:if(query!=""){ if(debug){window.console.log('_loadDataCB switch default:
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 $.extend(true, options, params);
- switch(options["group"]){
+switch(options["group"]){
 case'':_saveDataCB({'group':'group1'});break;
 
 case'group1':var json='{"DATA":[["'+
@@ -130,7 +130,6 @@ $("#g2_priority").val()+'","'+
 '"]]}';
 if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'group2_1'})};
-
 break;
 
 case'group2_1':$("#subtask1_id").val(options["id"]);
@@ -163,7 +162,6 @@ $("#g2_2_reviewrequired").is(':checked')+',"'+
 '"]]}'
 if($("#isLoaded_group2_2").val()!=0){_saveData({group:"group2_2",payload:$.parseJSON(json),page:"notices"})}
 else{_saveDataCB({'group':'plugins'})};
-
 break;
 
 /*Start Saving Plugins*/

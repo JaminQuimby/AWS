@@ -208,14 +208,14 @@ AND [nst_status]!=2 AND [nst_status]!=3
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"NST_ID":"'&nst_id&'"
-								,"N_NAME":"'&n_name&'"
-								,"NST_ASSIGNEDTOTEXT":"'&nst_ASSIGNEDTOTEXT&'"
-								,"NST_STATUSTEXT":"'&nst_STATUSTEXT&'"
-								,"NST_1_TAXFORMTEXT":"'&nst_1_TAXFORMTEXT&'"
-								,"NST_1_TAXYEAR":"'&nst_1_TAXYEAR&'"
-								,"NST_1_RESDUEDATE":"'&nst_1_RESDUEDATE&'"
-								,"NST_1_NOTICENUMBER":"'&nst_1_NOTICENUMBER&'"
+<cfset queryResult=queryResult&'{"NST_ID":"'&NST_ID&'"
+								,"N_NAME":"'&N_NAME&'"
+								,"NST_ASSIGNEDTOTEXT":"'&NST_ASSIGNEDTOTEXT&'"
+								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
+								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
+								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
+								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
+								,"NST_1_NOTICENUMBER":"'&NST_1_NOTICENUMBER&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -304,7 +304,6 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" NULL="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" NULL="#LEN(j.DATA[1][11]) eq 0#"/>
-
 )
 SELECT SCOPE_IDENTITY()AS[nst_id]
 </cfquery>
