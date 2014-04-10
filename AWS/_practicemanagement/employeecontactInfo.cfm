@@ -36,8 +36,8 @@
 <h3>General</h3>
 <div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<div><label for="g1_name">Name</label><input type="text" id="g1_name" class="readonly" readonly></div>
-<div><label for="g1_initials">Initials</label><input type="text" id="g1_initials"></div>
+<div><label for="g1_name">Name</label><input type="text" id="g1_name" ></div>
+<div><label for="g1_initials">Initials</label><input type="text" id="g1_initials" class="readonly" readonly="readonly"></div>
 <div><label for="g1_active"><input id="g1_active" type="checkbox" class="ios-switch">Active</label></div>
 <div><label for="g1_address">Address</label><input type="text" id="g1_address"></div>
 <div><label for="g1_city">City</label><input type="text" id="g1_city"></div>
