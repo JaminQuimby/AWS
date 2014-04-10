@@ -36,6 +36,7 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="orderBy" type="any" required="no">
 <cfargument name="row" type="numeric" required="no">
 <cfargument name="ID" type="string" required="no">
+<cfargument name="formid" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
 <cfargument name="userid" type="string" required="no">
@@ -494,13 +495,13 @@ SELECT[n_id]
 ,[n_name]
 ,CONVERT(VARCHAR(10),[nst_1_noticedate], 101)AS[nst_1_noticedate]
 ,[nst_missinginfo]
-,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id]
 ,[nst_priority]
 ,[nst_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[nst_1_resduedate], 101)AS[nst_1_resduedate]
 ,[nst_esttime]
 ,[nst_2_revrequired]
-,[nst_2_revassignedto]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](nst_2_revassignedto)))FOR XML PATH('')),3,1000)
+,[nst_2_revassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(nst_2_revassignedto=user_id))
+
 FROM[v_notice_subtask]
 WHERE[nst_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL AND[nst_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
@@ -516,7 +517,6 @@ WHERE[nst_status]!='2'
 								,"N_NAME":"'&N_NAME&'"
 								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
 								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
-								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
 								,"NST_PRIORITY":"'&NST_PRIORITY&'"
 								,"NST_ASSIGNEDTOTEXT":"'&NST_ASSIGNEDTOTEXT&'"
 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
@@ -714,7 +714,7 @@ SELECT[tr_id]
 ,[tr_esttime]
 ,[tr_4_required]
 ,CONVERT(VARCHAR(10),[tr_4_rfr], 101)AS[tr_4_rfr]
-,[tr_4_assignedtoTEX]T=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
+,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 FROM[v_taxreturns]
 WHERE[tr_2_informationreceived]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL AND[tr_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>

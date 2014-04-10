@@ -73,6 +73,7 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);
+alert(options["group"]);
 switch(options["group"]){
 	
 case'':_saveDataCB({'group':'group1'});break;
@@ -118,7 +119,9 @@ else{
 	}	
 break;
 
-case'group1_1':var json='{"DATA":[["'+
+case'group1_1':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g1_articlesapproved").val()+'","'+
 $("#g1_g1_articlessubmitted").val()+'","'+
@@ -127,7 +130,9 @@ if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.par
 else{_saveDataCB({'group':'group1_2'})};
 break;
 
-case'group1_2':var json='{"DATA":[["'+
+case'group1_2':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g2_tradenamereceived").val()+'","'+
 $("#g1_g2_tradenamesubmitted").val()+'","'+
@@ -136,7 +141,9 @@ if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.par
 else{_saveDataCB({'group':'group1_3'})};
 break;
 
-case'group1_3':var json='{"DATA":[["'+
+case'group1_3':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g3_minutesbylawsdraft").val()+'","'+
 $("#g1_g3_minutesbylawsfinal").val()+'","'+
@@ -146,7 +153,9 @@ if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.par
 else{_saveDataCB({'group':'group1_4'})};
 break;
 
-case'group1_4':var json='{"DATA":[["'+
+case'group1_4':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g4_disolutioncompleted").val()+'","'+
 $("#g1_g4_dissolutionrequested").val()+'","'+
@@ -156,7 +165,9 @@ if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.par
 else{_saveDataCB({'group':'group1_5'})};
 break;
 
-case'group1_5':var json='{"DATA":[["'+
+case'group1_5':
+$("#task_id").val(options["id"]);
+var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g5_otheractivity").val()+'","'+
 $("#g1_g5_othercompleted").val()+'","'+
@@ -166,7 +177,9 @@ if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.par
 else{_saveDataCB({'group':'group2'})};
 break;
 
-case'group2':var json='{"DATA":[["'+
+case'group2':
+$("#subtask1_id").val(options['id']);
+var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_assignedto").val()+'","'+
