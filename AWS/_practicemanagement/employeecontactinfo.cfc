@@ -39,7 +39,7 @@ SELECT[USER_ID]
 ,[si_state]
 ,[si_website1]
 ,[si_zip]
-,[name]
+,[si_name]
 FROM[v_staffinitials]
 WHERE[user_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -68,17 +68,17 @@ WHERE[user_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Grid 0 Entrance --->
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[user_id],[name]
+SELECT[user_id],[si_name]
 FROM[v_staffinitials]
-WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[name]</cfif>
+WHERE[si_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[si_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"USER_ID":"'&USER_ID&'","NAME":"'&NAME&'"}'>
+<cfset queryResult=queryResult&'{"USER_ID":"'&USER_ID&'","NAME":"'&SI_NAME&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -111,7 +111,7 @@ WHERE[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="#Session.organization.name#">
-INSERT INTO[v_staffinitials](
+INSERT INTO[staffinitials](
 [si_active]
 ,[si_address]
 ,[si_birthday]
@@ -125,7 +125,7 @@ INSERT INTO[v_staffinitials](
 ,[si_email2]  
 ,[si_emergencycontact]  
 ,[si_ext]
-,[si_initials]
+,[si_name]
 ,[si_phone1]
 ,[si_phone2]
 ,[si_phone3]
@@ -135,6 +135,7 @@ INSERT INTO[v_staffinitials](
 ,[si_state]
 ,[si_website1]
 ,[si_zip]
+,[user_id]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -160,6 +161,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][22]#" null="#LEN(j.DATA[1][22]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][23]#" null="#LEN(j.DATA[1][23]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][24]#" null="#LEN(j.DATA[1][24]) eq 0#"/>
+,(SELECT[user_id]+1 FROM[staffinitials] WHERE[user_id] < '10000')
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -174,7 +176,7 @@ SELECT SCOPE_IDENTITY()AS[id]
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="#Session.organization.name#">
-UPDATE[v_staffinitials]
+UPDATE[staffinitials]
 SET[si_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[si_address]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[si_birthday]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
@@ -188,7 +190,7 @@ SET[si_active]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[si_email2]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>  
 ,[si_emergencycontact]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[si_ext]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[si_initials]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[si_name]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,[si_phone1]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 ,[si_phone2]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 ,[si_phone3]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>

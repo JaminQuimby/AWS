@@ -56,7 +56,7 @@ $("#g1_email1").val()+'","'+
 $("#g1_email2").val()+'","'+
 $("#g1_emergencycontact").val()+'","'+
 $("#g1_ext").val()+'","'+
-$("#g1_initials").val()+'","'+
+$("#g1_name").val()+'","'+
 $("#g1_phone1").val()+'","'+
 $("#g1_phone2").val()+'","'+
 $("#g1_phone3").val()+'","'+
