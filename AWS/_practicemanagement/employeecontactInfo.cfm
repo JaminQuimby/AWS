@@ -1,5 +1,5 @@
 <!--- Required for AJAX --->
-<cfset page.module="_practicemanagement">
+<cfset page.module="_maintenance">
 <cfset page.location="employeecontactinfo">
 <cfset page.formid=15>
 <cfset page.title="Employee Contact Info">
