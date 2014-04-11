@@ -60,7 +60,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_accountingservices"><input id="g1_accountingservices" type="checkbox" class="ios-switch">Accounting Services</label></div>
 <div><label for="g1_taxation"><input id="g1_taxation" type="checkbox" class="ios-switch">Taxation</label></div>
 <div><label for="g1_clientmanagement"><input id="g1_clientmanagement" type="checkbox" class="ios-switch">Client Management</label></div>
-
 <div><label for="g1_maintenance"><input id="g1_maintenance" type="checkbox" class="ios-switch">Maintenance</label></div>
 <div><label for="g1_delete"><input id="g1_delete" type="checkbox" class="ios-switch">Delete Rights</label></div>
 </div>

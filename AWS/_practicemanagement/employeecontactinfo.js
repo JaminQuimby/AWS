@@ -47,10 +47,10 @@ $("#g1_active").is(':checked')+',"'+
 $("#g1_address").val()+'","'+
 $("#g1_birthday").val()+'","'+
 $("#g1_cafnum").val()+'","'+
-$("#g1_city").val()+'","'+
 $("#g1_childname1").val()+'","'+
 $("#g1_childname2").val()+'","'+
 $("#g1_childname3").val()+'","'+
+$("#g1_city").val()+'","'+
 $("#g1_contactphone").val()+'","'+
 $("#g1_email1").val()+'","'+
 $("#g1_email2").val()+'","'+
@@ -77,3 +77,16 @@ case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: false,duration: 5});break;
 default:jqMessage({message: "A exception in employeecontactinfo.js "+options["group"]+" json: "+json+"  id: "+options["id"],type: "sucess",autoClose: true,duration: 5});break;}}
 catch(err){alert(err)}};
+
+
+
+
+
+
+
+
+
+
+
+
+

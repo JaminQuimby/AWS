@@ -1,16 +1,17 @@
-// JavaScript Document
-$(document).ready(function(){
-_grid1();
-_group1=function(){_grid1()}
+$(document).ready(function(){_grid1()});
+ 
+var _run={
+	 new_group1:function(){document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');}
+	 ,load_group1:function(){_grid1()}
+}
 
-});
 
 _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"usersettings.cfc",
 	"title":"User Security",
 	"fields":{USER_ID:{key:true,list:false,edit:false}
-			,NAME:{title:'User'}
+			,SI_NAME:{title:'User'}
 			,M_PAYROLLTAXES:{title:'Payroll Taxes'}
 			,M_ACCOUNTINGSERVICES:{title:'Accounting Services'}
 			,M_TAXATION:{title:'Taxation'}

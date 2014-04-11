@@ -46,8 +46,6 @@ _pluginSaveData102_1=function(){
 			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"102_1"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
 
-_group102=function(){_grid102(), jqMessage({message: "Time And Billing under construction.",type: "information",autoClose: true})}
-
 _group102_1=function(){_grid102_1()}
 
 _grid102=function(){
@@ -120,9 +118,9 @@ _grid102_1=function(){
     	<div><label for="g102_billingtype">Billing Type</label><select id="g102_billingtype"><option value="0">&nbsp;</option></select></div>
     	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option></select></div>
         
-        <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly="readonly" id="g102_rate" ></div>
-        <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly="readonly" id="g102_totaltime" ></div>
-        <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly="readonly" id="g102_subtotal" ></div>   
+        <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly id="g102_rate" ></div>
+        <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly id="g102_totaltime" ></div>
+        <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>   
             
         <div><label for="g102_flatfee">Flat Fee</label><input type="text" id="g102_flatfee" ></div>
         <div><label for="g102_adjustment">Adjustment</label><input type="text" id="g102_adjustment" ></div>

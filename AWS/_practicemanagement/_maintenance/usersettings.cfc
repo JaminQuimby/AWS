@@ -44,11 +44,11 @@ WHERE[user_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 
-<!--- LOOKUP Financial Statements --->
+<!--- LOOKUP USER SETTINGS--->
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[user_id]
-      ,[name]
+      ,[si_name]
       ,[m_payrolltaxes]
       ,[m_accountingservices]
       ,[m_taxation]
@@ -70,7 +70,7 @@ AND[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"USER_ID":"'&USER_ID&'"
-								,"NAME":"'&NAME&'"
+								,"SI_NAME":"'&SI_NAME&'"
 								,"M_PAYROLLTAXES":"'&M_PAYROLLTAXES&'"
 								,"M_ACCOUNTINGSERVICES":"'&M_ACCOUNTINGSERVICES&'"
 								,"M_TAXATION":"'&M_TAXATION&'"
