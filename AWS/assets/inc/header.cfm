@@ -34,7 +34,7 @@
 <cfcase value="_clientmanagement"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/green/jtable.min.css"></cfcase>
 <cfcase value="_payrolltaxes"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/red/jtable.min.css"></cfcase>
 <cfcase value="_payrolltaxes_report"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/red/jtable.min.css"></cfcase>
-<cfcase value="_practicemanagement"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/darkgray/jtable.min.css"></cfcase>
+<cfcase value="_practicemanagement"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/purple/jtable.min.css"></cfcase>
 <cfcase value="_taxation"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/darkorange/jtable.min.css"></cfcase>
 <cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/darkgray/jtable.min.css"></cfdefaultcase>
 </cfswitch>
