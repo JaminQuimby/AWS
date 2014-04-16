@@ -12,12 +12,12 @@ _grid1=function(){_jGrid({
 	"title":"User Security",
 	"fields":{USER_ID:{key:true,list:false,edit:false}
 			,SI_NAME:{title:'User'}
-			,M_PAYROLLTAXES:{title:'Payroll Taxes'}
-			,M_ACCOUNTINGSERVICES:{title:'Accounting Services'}
-			,M_TAXATION:{title:'Taxation'}
-			,M_CLIENTMANAGEMENT:{title:'Client Management'}
-			,M_MAINTENANCE:{title:'Maintenance'}
-			,G_DELETE:{title:'Delete'}
+			,M_PAYROLLTAXES:{title:'Payroll Taxes',values:{ '0' : 'No', '1' : 'Yes' }}
+			,M_ACCOUNTINGSERVICES:{title:'Accounting Services',values:{ '0' : 'No', '1' : 'Yes' }}
+			,M_TAXATION:{title:'Taxation',values:{ '0' : 'No', '1' : 'Yes' }}
+			,M_CLIENTMANAGEMENT:{title:'Client Management',values:{ '0' : 'No', '1' : 'Yes' }}
+			,M_MAINTENANCE:{title:'Maintenance',values:{ '0' : 'No', '1' : 'Yes' }}
+			,G_DELETE:{title:'Delete',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',

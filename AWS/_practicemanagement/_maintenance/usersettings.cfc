@@ -56,11 +56,11 @@ SELECT[user_id]
       ,[g_delete]
       ,[m_maintenance]
 FROM[v_staffinitials]
-
+WHERE[user_id]>'10000'
 <cfif ARGUMENTS.search neq "">
-AND[name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+AND[si_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[name]</cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[si_name]</cfif>
 </cfquery>
 
 

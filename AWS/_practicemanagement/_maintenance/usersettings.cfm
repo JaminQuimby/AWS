@@ -1,3 +1,4 @@
+
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
@@ -28,7 +29,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </cfoutput>
 </cfif>
 <!--- Load Select Options for each dropdown--->
-<cfquery datasource="#Session.organization.name#" name="global_users">SELECT[user_id]AS[optionvalue_id],[name]AS[optionname]FROM[v_staffinitials]ORDER BY[name]</cfquery>
+
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
