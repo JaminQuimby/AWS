@@ -161,7 +161,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][22]#" null="#LEN(j.DATA[1][22]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][23]#" null="#LEN(j.DATA[1][23]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][24]#" null="#LEN(j.DATA[1][24]) eq 0#"/>
-,(SELECT[user_id]+1 FROM[staffinitials] WHERE[user_id] < '10000')
+,(SELECT MAX([si_id])+1 FROM[staffinitials])
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>

@@ -11,7 +11,7 @@
 <!---Head & Supporting Documents--->
 <cfinclude template="/assets/inc/header.cfm">
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
-<cfinclude template="/assets/inc/header.cfm">
+
 <cfinclude template="/assets/inc/pagemenu.cfm">
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8,group9,group10,group11,group12'); ">
 <!---PAGE CONTENTS--->
