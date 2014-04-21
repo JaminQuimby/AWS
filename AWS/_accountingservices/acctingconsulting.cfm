@@ -59,14 +59,14 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_assignedto">Assigned To</label><select  id="g1_assignedto" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_status">Status</label><select id="g1_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0" >&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" ></div>
-<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_estimatedtime"></div>
+<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" id="g1_priority" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_estimatedtime"></div>
 <div><label for="g1_requestforservices">Request for Services</label><input class="date" type="text" id="g1_requestforservices" ></div>
 <div><label for="g1_workinitiated">Work Initiated</label><input type="text" class="date" id="g1_workinitiated" ></div>
 <div><label for="g1_projectcompleted">Project Completed</label><input type="text" class="date" id="g1_projectcompleted" ></div>
 <div><label for="g1_missinginfo"><input id="g1_missinginfo" type="checkbox" class="ios-switch">Missing Info</label></div>
 <div><label for="g1_missinginforeceived">Missing Information Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" ></div>
+<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" maxlength="10" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" ></div>
 <div><label for="g1_paid">Payment Status</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 </div>
@@ -85,15 +85,15 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 <h4 onClick='_run.load_group2();'>Add Subtask</h4>
 <div>
-<div><label for="g2_sequence">Sequence</label><input type="text" id="g2_sequence" ></div>
+<div><label for="g2_sequence">Sequence</label><input maxlength="3" type="text" id="g2_sequence" ></div>
 <div><label for="g2_subtask">Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_status">Status</label><select  id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date" ></div>
 <div><label for="g2_completed">Completed</label><input type="text" id="g2_completed" class="date" ></div>
 <div><label for="g2_dependancy">Dependencies</label><select  id="g2_dependancy" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g2_estimatedtime" ></div>
-<div><label for="g2_actualtime">Actual Time</label><input type="text" id="g2_actualtime"></div>
+<div><label for="g2_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g2_estimatedtime" ></div>
+<div><label for="g2_actualtime">Actual Time</label><input type="text" maxlength="4" id="g2_actualtime"></div>
 <div><label for="g2_note">Notes</label><textarea  id="g2_note" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 </div>
 </div>

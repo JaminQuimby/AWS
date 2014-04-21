@@ -71,7 +71,7 @@ SELECT[dt_id]
 ,[dt_sender]
 ,CASE WHEN LEN([dt_description]) >= 101 THEN SUBSTRING([dt_description],0,100) +  '...' ELSE [dt_description] END AS[dt_description]
 ,[dt_assignedto]
-,[dt_staff]
+,[dt_staffTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(dt_staff=user_id))
 ,[dt_routing]
 ,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
 ,CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing] END AS[dt_routing]
@@ -98,7 +98,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"DT_DATE":"'&DT_DATE&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"DT_SENDER":"'&DT_SENDER&'"
-								,"DT_STAFF":"'&DT_STAFF&'"
+								,"DT_STAFFTEXT":"'&DT_STAFFTEXT&'"
 								,"DT_ASSIGNEDTOTEXT":"'&DT_ASSIGNEDTOTEXT&'"
 								,"DT_DESCRIPTION":"'&DT_DESCRIPTION&'"
 								,"DT_ROUTING":"'&DT_ROUTING&'" 
@@ -113,8 +113,6 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
-
-
 </cftry>
 </cffunction>
 

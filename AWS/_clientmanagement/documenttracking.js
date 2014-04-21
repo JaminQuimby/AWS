@@ -16,7 +16,7 @@ _grid1=function(){_jGrid({
 		,DT_DATE:{title:'Date',width:'1%'}
 		,CLIENT_NAME:{title:'Client Name'}
 		,DT_SENDER:{title:'Sender'}
-		,DT_STAFF:{title:'Received By'}
+		,DT_STAFFTEXT:{title:'Received By'}
 		,DT_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 		,DT_DESCRIPTION:{title:'Description'}
 		,DT_ROUTING:{title:'Routing'}

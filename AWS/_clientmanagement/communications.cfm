@@ -51,20 +51,20 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
 	<div><label for="g1_date"><i class="fa fa-lock link" onClick="_schk('g1_date')"></i> Date and Time</label><input type="text" class="datetime" id="g1_date"></div>
-	<div><label for="g1_caller"><i class="fa fa-lock link" onClick="_schk('g1_caller')"></i> Caller</label><input type="text" id="g1_caller" ></div>
+	<div><label for="g1_caller"><i class="fa fa-lock link" onClick="_schk('g1_caller')"></i> Caller</label><input type="text" id="g1_caller" maxlength="40" ></div>
 	<div><label for="g1_takenby"><i class="fa fa-lock link" onClick="_schk('g1_takenby')"></i> Taken By</label><select id="g1_takenby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_contactmethod"><i class="fa fa-lock link" onClick="_schk('g1_contactmethod')"></i> Contact Methods</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_comcontactmethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_briefmessage"><i class="fa fa-lock link" onClick="_schk('g1_briefmessage')"></i> Brief Message</label><textarea type="text" id="g1_briefmessage" cols="4" rows="4"  maxlength="1000"></textarea></div>
 	<div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});"></div>
+	<div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone" maxlength="13" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});"></div>
 	<div><label for="g1_ext">Ext</label><input type="text" id="g1_ext" maxlength="5"></div>
-	<div><label for="g1_faxnumber">Fax Number</label><input type="text" id="g1_faxnumber" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});"></div>
-	<div><label for="g1_emailaddress">Email</label><input type="text" id="g1_emailaddress"></div>
+	<div><label for="g1_faxnumber">Fax Number</label><input type="text" maxlength="13" id="g1_faxnumber" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});"></div>
+	<div><label for="g1_emailaddress">Email</label><input type="text" maxlength="50" id="g1_emailaddress"></div>
   	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
     <div><label for="g1_for">For</label><select id="g1_for"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="g1_responseneeded"><input id="g1_responseneeded" type="checkbox" class="ios-switch">Response Needed</label></div>
     <div><label for="g1_returnedcall"><input id="g1_returnedcall" type="checkbox" class="ios-switch">Returned Call</label></div>
-    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" class="valid_off" placeholder="0" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" maxlength="10" class="valid_off" placeholder="0" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	</div>

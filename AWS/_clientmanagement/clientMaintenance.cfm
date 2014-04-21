@@ -68,12 +68,12 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="g1_name"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Client Name</label><input id="g1_name" disabled="disabled" type="text" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" /></div>
-<div><label for="g1_spouse">Spouse</label><input id="g1_spouse" type="text"/></div>
+<div><label for="g1_spouse">Spouse</label><input id="g1_spouse" maxlength="40" type="text"/></div>
 <div><label for="g1_salutation"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Salutation</label><input id="g1_salutation" type="text" class="valid_off" disabled="disabled" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_type"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..." disabled="disabled" onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="global_clienttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_since"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Client Since</label><input id="g1_since" type="text" class="valid_off date" disabled="disabled" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g1_trade_name">Trade Name</label><input id="g1_trade_name" type="text" /></div>
-<div><label for="g1_referred_by">Referred By</label><input id="g1_referred_by"  type="text"/></div>
+<div><label for="g1_trade_name">Trade Name</label><input id="g1_trade_name" maxlength="100" type="text" /></div>
+<div><label for="g1_referred_by">Referred By</label><input id="g1_referred_by" maxlength="40" type="text"/></div>
 <div><label for="g1_active"><input id="g1_active" type="checkbox" class="ios-switch">Active</label></div>
 <div><label for="g1_credit_hold"><input id="g1_credit_hold" type="checkbox" class="ios-switchb">Credit Hold</label></div>
 <div><label for="g1_notes">Notes</label><textarea id="g1_notes" cols="4" rows="4" ></textarea></div>
@@ -90,8 +90,8 @@ ACTIVITY (CLIENT DATA)
 <!---Group 1 Sub 2--->
 <h4 onClick="_run.load_group1_2();">Custom Fields</h4>
 <div>
-<div><label for="g1_g2_fieldname">Field Name</label><input id="g1_g2_fieldname" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g1_g2_fieldvalue">Field Value</label><input id="g1_g2_fieldvalue" type="text" /></div>
+<div><label for="g1_g2_fieldname">Field Name</label><input id="g1_g2_fieldname" maxlength="100" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
+<div><label for="g1_g2_fieldvalue">Field Value</label><input id="g1_g2_fieldvalue" maxlength="100" type="text" /></div>
 </div>
 
 <!---Group 1 Sub 3--->
@@ -124,9 +124,9 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g2_g2_payrolltaxservices"><input id="g2_g2_payrolltaxservices" type="checkbox" class="ios-switch">Payroll Tax Services</label></div>
 <div><label for="g2_g2_prtaxdepositschedule">P/R Tax Deposit Schedule</label><select id="g2_g2_prtaxdepositschedule" data-placeholder="Select a Tax Deposit Schedule."><option value="0">&nbsp;</option><cfoutput query="global_timespans"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_g2_1099preparation"><input id="g2_g2_1099preparation" type="checkbox" class="ios-switch">1099 Payroll Preparation</label></div>
-<div><label for="g2_g2_ein">EIN</label><input id="g2_g2_ein" type="text"/></div>
-<div><label for="g2_g2_pin">PIN</label><input id="g2_g2_pin" type="text"/></div>
-<div><label for="g2_g2_password">Password</label><input id="g2_g2_password" type="text"/></div>
+<div><label for="g2_g2_ein">EIN</label><input id="g2_g2_ein" maxlength="30" type="text"/></div>
+<div><label for="g2_g2_pin">PIN</label><input id="g2_g2_pin" maxlength="30" type="text"/></div>
+<div><label for="g2_g2_password">Password</label><input id="g2_g2_password" maxlength="30" type="text"/></div>
 </div>
 
 <!---Group 2 Sub 3--->
@@ -140,9 +140,9 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g2_g3_financialstatementfreq">Financial Statement Freq</label><select id="g2_g3_financialstatementfreq" data-placeholder="Select a Financial Statment Freq."><option value="0">&nbsp;</option><cfoutput query="global_timespans"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_g3_fiscalyearend">Fiscal Year End</label><input id="g2_g3_fiscalyearend" type="text" class="date"/></div>
 <div><label for="g2_g3_software">Software</label><select id="g2_g3_software" data-placeholder="Select a Software"><option value="0">&nbsp;</option><cfoutput query="global_software"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_g3_version">Version</label><input id="g2_g3_version" type="text"/></div>
-<div><label for="g2_g3_username">User Name</label><input id="g2_g3_username" type="text"/></div>
-<div><label for="g2_g3_accountingpassword">Password</label><input id="g2_g3_accountingpassword" type="text"/></div>
+<div><label for="g2_g3_version">Version</label><input id="g2_g3_version" maxlength="30" type="text"/></div>
+<div><label for="g2_g3_username">User Name</label><input id="g2_g3_username" maxlength="30" type="text"/></div>
+<div><label for="g2_g3_accountingpassword">Password</label><input id="g2_g3_accountingpassword" maxlength="30" type="text"/></div>
 </div>
 </div>
 
@@ -160,25 +160,25 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div><label for="g3_type">Type</label><select id="g3_type"><option value="0">&nbsp;</option><cfoutput query="global_contacttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_name">Contact Name</label><input id="g3_name" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g3_address1">Street #1</label><input id="g3_address1" type="text"/></div>
-<div><label for="g3_address2">Street #2</label><input id="g3_address2" type="text"/></div>
-<div><label for="g3_city">City</label><input id="g3_city" type="text" /></div>
+<div><label for="g3_address1">Street #1</label><input id="g3_address1" maxlength="50" type="text"/></div>
+<div><label for="g3_address2">Street #2</label><input id="g3_address2" maxlength="50" type="text"/></div>
+<div><label for="g3_city">City</label><input id="g3_city" maxlength="25" type="text" /></div>
 <div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_stateabbreviation"><option value="#optionvalue_id#">#option_1#</option></cfoutput></select></div>
-<div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="5" required id="g3_zip" /></div>
-<div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="10" required id="g3_zip" /></div>
+<div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel" maxlength="13" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_ext1">Ext 1</label><input type="text" id="g3_ext1" maxlength="5"></div>
-<div><label for="g3_phone2">Phone 2</label><input id="g3_phone2" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone2">Phone 2</label><input id="g3_phone2" type="tel" maxlength="13" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_ext2">Ext 2</label><input type="text" id="g3_ext2" maxlength="5"></div>
-<div><label for="g3_phone3">Mobile</label><input id="g3_phone3" type="tel" class="phone"    onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
-<div><label for="g3_phone4">Pager</label><input id="g3_phone4" type="tel" class="phone"     onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
-<div><label for="g3_phone5">Fax</label><input id="g3_phone5" type="tel" class="phone"       onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
-<div><label for="g3_email1">Email 1</label><input id="g3_email1" type="email"/></div>
-<div><label for="g3_email2">Email 2</label><input id="g3_email2" type="email"/></div>
-<div><label for="g3_website">Website</label><input type="url" id="g3_website" /></div>
+<div><label for="g3_phone3">Mobile</label><input id="g3_phone3" type="tel" maxlength="13" class="phone"    onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone4">Pager</label><input id="g3_phone4" type="tel" maxlength="13" class="phone"     onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone5">Fax</label><input id="g3_phone5" type="tel" maxlength="13" class="phone"       onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_email1">Email 1</label><input id="g3_email1" maxlength="50" type="email"/></div>
+<div><label for="g3_email2">Email 2</label><input id="g3_email2" maxlength="50" type="email"/></div>
+<div><label for="g3_website">Website</label><input type="url" id="g3_website" maxlength="100" /></div>
 <div><label for="g3_effectivedate">Effective Date</label><input type="text" id="g3_effectivedate" class="date"/></div>
 <div><label for="g3_acctsoftwareupdate"><input id="g3_acctsoftwareupdate" type="checkbox" class="ios-switch">Updated in accounting software</label></div>
 <div><label for="g3_taxupdate"><input id="g3_taxupdate" type="checkbox" class="ios-switch">Update in tax software</label></div>
-<div><label style="float:left;width:70px" ><input id="g3_customvalue" type="checkbox" class="ios-switch" /></label><input type="text" id="g3_customlabel" class="customlabel"/></div>
+<div><label style="float:left;width:70px" ><input id="g3_customvalue" type="checkbox" class="ios-switch" /></label><input type="text" id="g3_customlabel" maxlength="50" class="customlabel"/></div>
 </div>
 </div>
 
@@ -259,12 +259,12 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g5_employees"><input id="g5_employees" type="checkbox" class="ios-switch">Employees</label></div>
 <div><label for="g5_property"><input id="g5_property" type="checkbox" class="ios-switch">Property</label></div>
 <div><label for="g5_nexus"><input id="g5_nexus" type="checkbox" class="ios-switch">NEXUS</label></div>
-<div><label for="g5_reason">Reason</label><input id="g5_reason" /></div>
+<div><label for="g5_reason">Reason</label><input id="g5_reason" maxlength="50" /></div>
 <div><label for="g5_registered"><input id="g5_registered" type="checkbox" class="ios-switch">Registered</label></div>
-<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value1" type="checkbox" class="ios-switch"></label><label for="g5_value1"style="height:25px;padding:5px"></label></div><!---label for="g5_value1" id="g5_label1"></label--->
-<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value2" type="checkbox" class="ios-switch"></label><label for="g5_value2"style="height:25px;padding:5px"></label></div><!---label for="g5_value2" id="g5_label2"></label--->
-<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value3" type="checkbox" class="ios-switch"></label><label for="g5_value3"style="height:25px;padding:5px"></label></div><!---label for="g5_value3" id="g5_label3"></label--->
-<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value4" type="checkbox" class="ios-switch"></label><label for="g5_value4"style="height:25px;padding:5px"></label></div><!---label for="g5_value4" id="g5_label4"></label--->
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value1" maxlength="30" type="checkbox" class="ios-switch"></label><label for="g5_value1"style="height:25px;padding:5px"></label></div><!---label for="g5_value1" id="g5_label1"></label--->
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value2" maxlength="30" type="checkbox" class="ios-switch"></label><label for="g5_value2"style="height:25px;padding:5px"></label></div><!---label for="g5_value2" id="g5_label2"></label--->
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value3" maxlength="30" type="checkbox" class="ios-switch"></label><label for="g5_value3"style="height:25px;padding:5px"></label></div><!---label for="g5_value3" id="g5_label3"></label--->
+<div style="height:30px"><label style="float:left;width:70px;"><input id="g5_value4" maxlength="30" type="checkbox" class="ios-switch"></label><label for="g5_value4"style="height:25px;padding:5px"></label></div><!---label for="g5_value4" id="g5_label4"></label--->
 </div>
 
 <h4 onclick="_run.load_group5_1();">State Labels</h4>

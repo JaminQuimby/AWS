@@ -43,35 +43,23 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
-<!--- fields that werent in the original
-filingdeadline
-extensiondeadline
-extensionrequested
-extensioncompleted
-missinginformation
-missinginforeceived
-articles assignedto
-articles drafted
-articles approved estimated time
-
---->
 <div id="group1" class="gf-checkbox">
 <h3>General</h3>
 <div>
 	<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 	<div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i> Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_run.load_assets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
-    <div><label for="g1_owners"><i class="fa fa-lock link" onClick="_schk('g1_owners')"></i> Owners</label><input type="text" id="g1_owners"  /></div>
-	<div><label for="g1_activity"><i class="fa fa-lock link" onClick="_schk('g1_activity')"></i> Activity</label><input type="text" id="g1_activity" /></div>	
+    <div><label for="g1_owners"><i class="fa fa-lock link" onClick="_schk('g1_owners')"></i> Owners</label><input type="text" maxlength="40" id="g1_owners"  /></div>
+	<div><label for="g1_activity"><i class="fa fa-lock link" onClick="_schk('g1_activity')"></i> Activity</label><input type="text" maxlength="50" id="g1_activity" /></div>	
 	<div><label for="g1_g5_businesstype"><i class="fa fa-lock link" onClick="_schk('g1_g5_businesstype')"></i> Business Type</label><select id="g1_g5_businesstype"><option value="0">&nbsp;</option><cfoutput query="global_businesstype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g5_businesscreceived" >Received</label><input type="text" id="g1_g5_businesscreceived" class="date"/></div>
 	<div><label for="g1_g5_businesssubmitted" >Submitted</label><input type="text" id="g1_g5_businesssubmitted" class="date"/></div>    <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" data-placeholder="Assign To."><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>   
     <div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_duedate" >Due Date</label><input type="text" id="g1_duedate" class="date"/></div>
-	<div><label for="g1_priority">Priority</label><input type="text" placeholder="0" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
-	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g1_estimatedtime"/></div>
+	<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" placeholder="0" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
+	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" maxlength="4" id="g1_estimatedtime"/></div>
 	<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
-    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
+    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" maxlength="10" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!---Subgroup 1--->
@@ -120,11 +108,11 @@ articles approved estimated time
 	</div>
 	<h4>Add Subtask</h4>
     <div>
-    	<div><label for="g2_task">Task Name</label><input type="text" id="g2_task"  /></div>
+    	<div><label for="g2_task">Task Name</label><input type="text" id="g2_task" maxlength="40"  /></div>
 		<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g2_dateinitiated">Date Initiated</label><input type="text" id="g2_dateinitiated" class="date"/></div>
 		<div><label for="g2_completed">Date Completed</label><input type="text" id="g2_completed"  class="date" /></div>
-		<div><label for="g2_esttime">Estimated Time </label><input type="text"  placeholder="0" id="g2_esttime"  /></div>
+		<div><label for="g2_esttime">Estimated Time </label><input type="text" maxlength="4"  placeholder="0" id="g2_esttime"  /></div>
 	</div>
 </div>
 <!--- Start Plugins --->

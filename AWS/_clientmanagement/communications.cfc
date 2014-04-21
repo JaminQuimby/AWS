@@ -18,7 +18,7 @@ SELECT[co_id]
 ,CONVERT(VARCHAR(10),[co_duedate], 101)AS[co_duedate]
 ,[co_emailaddress]
 ,[co_ext]
-	,[co_faxnumber]=FORMAT(co_faxnumber,'#Session.localization.formatphone#')
+,[co_faxnumber]=FORMAT(co_faxnumber,'#Session.localization.formatphone#')
 ,[co_fees]
 ,[co_for]
 ,[co_paid]
@@ -26,7 +26,7 @@ SELECT[co_id]
 ,[co_responseneeded]
 ,[co_returncall]
 ,[co_takenby]
-	,[co_telephone]=FORMAT(co_telephone,'#Session.localization.formatphone#')
+,[co_telephone]=FORMAT(co_telephone,'#Session.localization.formatphone#')
 ,[client_spouse]
 FROM[v_communications]
 WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>

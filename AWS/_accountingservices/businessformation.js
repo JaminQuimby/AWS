@@ -178,7 +178,7 @@ else{_saveDataCB({'group':'group2'})};
 break;
 
 case'group2':
-$("#subtask1_id").val(options['id']);
+$("#subtask1_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
