@@ -58,17 +58,17 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
     <div><label for="g1_taxyear"><i class="fa fa-lock link" onClick="_schk('g1_taxyear')"></i> Tax Year</label><select  id="g1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_taxform"><i class="fa fa-lock link" onClick="_schk('g1_taxform')"></i> Tax Form</label><select  id="g1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="g1_notrequired"><input id="g1_notrequired" type="checkbox" class="ios-switch">Not Required</label></div>
-	<div><label for="g1_reason">Reason</label><input type="text" id="g1_reason" ></div>
+	<div><label for="g1_reason">Reason</label><input type="text" maxlength="100" id="g1_reason" ></div>
 	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 	<div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline"></div>
-	<div><label for="g1_priority">Priority</label><input type="text" id="g1_priority" placeholder="0"  class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_esttime">Estimated Time</label><input type="text" placeholder="0" id="g1_esttime" ></div>
+	<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" id="g1_priority" placeholder="0"  class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_esttime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_esttime" ></div>
 	<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
     <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 	<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
 	<div><label for="g1_extensiondone">Extension Completed</label><input type="text" class="date" id="g1_extensiondone" ></div>
-	<div><label for="g1_currentfees">Current Fees</label><input type="text" id="g1_currentfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_priorfees">Prior Fees</label><input type="text" id="g1_priorfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_currentfees">Current Fees</label><input type="text" maxlength="10" id="g1_currentfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_priorfees">Prior Fees</label><input type="text" maxlength="10" id="g1_priorfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
@@ -80,7 +80,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_g1_dropoffappointmentwith">Appointment With</label><select id="g1_g1_dropoffappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g1_whileyouwaitappt"><input id="g1_g1_whileyouwaitappt" type="checkbox" class="ios-switch">While You Wait Appointment</label></div>
     <div><label for="g1_g1_pickupappointment">Pick Up Appointment</label><input type="text" class="datetime" id="g1_g1_pickupappointment" ></div>
-	<div><label for="g1_g1_pickupappointmentlength">Appointment Length</label><input type="text" id="g1_g1_pickupappointmentlength" ></div>
+	<div><label for="g1_g1_pickupappointmentlength">Appointment Length</label><input type="text" maxlength="1" id="g1_g1_pickupappointmentlength" ></div>
 	<div><label for="g1_g1_pickupappointmentwith">Appointment With</label><select id="g1_g1_pickupappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!--- GROUP1 SUBGROUP2 --->
@@ -123,10 +123,10 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
     <div><label for="g1_g4_reviewedby">PPTR Reviewed By</label><select id="g1_g4_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="g1_g4_completed">PPTR Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
 	<div><label for="g1_g4_delivered">PPTR Delivered</label><input type="text" class="date" id="g1_g4_delivered" ></div>
-	<div><label for="g1_g4_currentfees">PPTR Current Fees</label><input type="text" id="g1_g4_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_g4_priorfees">PPTR Prior Fees</label><input type="text" id="g1_g4_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_g4_currentfees">PPTR Current Fees</label><input type="text" maxlength="10" id="g1_g4_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_g4_priorfees">PPTR Prior Fees</label><input type="text" maxlength="10" id="g1_g4_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_g4_paymentstatus">Payment Status</label><select id="g1_g4_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_g4_pptresttime">PPTR Est Time</label><input type="text" id="g1_g4_pptresttime" ></div>
+	<div><label for="g1_g4_pptresttime">PPTR Est Time</label><input type="text" maxlength="4" id="g1_g4_pptresttime" ></div>
 </div>
 </div>
 <!--- GROUP2 --->
@@ -174,8 +174,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_g2_delivered">Delivered</label><input type="text" class="date" id="g2_g2_delivered" ></div>
 <div><label for="g2_g2_deliverymethod">Delivery Method</label><select id="g2_g2_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_g2_paymentstatus">Payment Status</label><select id="g2_g2_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_g2_currentfees">Current Fees</label><input type="text" id="g2_g2_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-<div><label for="g2_g2_priorfees">Prior Fees</label><input type="text" id="g2_g2_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_g2_currentfees">Current Fees</label><input type="text" maxlength="10" id="g2_g2_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_g2_priorfees">Prior Fees</label><input type="text" maxlength="10" id="g2_g2_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 </div>
 <!--- GROUP2 SUBGROUP3 --->
 <h4 onClick='_run.load_group2_3()'>Personal Property Tax</h4>
@@ -187,8 +187,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_g3_completed">PPTR Completed</label><input type="text" class="date" id="g2_g3_completed" ></div>
 <div><label for="g2_g3_delivered">PPTR Delivered</label><input type="text" class="date" id="g2_g3_delivered" ></div>
 <div><label for="g2_g3_paymentstatus">Payment Status</label><select id="g2_g3_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_g3_currentfees">PPTR Current Fees</label><input type="text" id="g2_g3_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-<div><label for="g2_g3_priorfees">PPTR Prior Fees</label><input type="text" id="g2_g3_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_g3_currentfees">PPTR Current Fees</label><input type="text" maxlength="10" id="g2_g3_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_g3_priorfees">PPTR Prior Fees</label><input type="text" maxlength="10" id="g2_g3_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 </div>
 </div>
 

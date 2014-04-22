@@ -107,7 +107,7 @@ $img.click(function () {
 </div>
 </div>
 <h4 onClick='_loadData({"id":"file_id","group":"group100","page":"upload",plugin:"group100"});$("#isLoaded_group100").val(1);'>File Meta Data</h4>
-<div><div><label for="g100_name">Name</label><input type="text" id="g100_name"></div>
+<div><div><label for="g100_name">Name</label><input type="text" maxlength="100" id="g100_name"></div>
 <div><label for="g100_description">Description</label><select id="g100_description" ><option value="0">&nbsp;</option><cfoutput query="plugin_documents"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <cfoutput>
 <div><label for="g100_year">Year</label><input type="text" id="g100_year" value="#Year(Now())#"></div>
@@ -117,6 +117,6 @@ $img.click(function () {
 </div>
 <h4>Upload Files</h4>
 <div>
-<div id="uploader"><p>You browser doesn't have Flash or HTML5 support.</p></div>	
+<div id="uploader"><p>Your browser doesn't have Flash or HTML5 support.</p></div>	
 </div>
 </div>

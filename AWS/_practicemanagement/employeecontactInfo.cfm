@@ -36,30 +36,30 @@
 <h3>General</h3>
 <div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<div><label for="g1_name">Name</label><input type="text" id="g1_name" ></div>
-<div><label for="g1_initials">Initials</label><input type="text" id="g1_initials" class="readonly" readonly="readonly"></div>
+<div><label for="g1_name">Name</label><input type="text" maxlength="40" id="g1_name" ></div>
+<div><label for="g1_initials">Initials</label><input type="text" id="g1_initials" class="readonly" readonly></div>
 <div><label for="g1_active"><input id="g1_active" type="checkbox" class="ios-switch">Active</label></div>
-<div><label for="g1_address">Address</label><input type="text" id="g1_address"></div>
-<div><label for="g1_city">City</label><input type="text" id="g1_city"></div>
+<div><label for="g1_address">Address</label><input type="text" maxlength="100" id="g1_address"></div>
+<div><label for="g1_city">City</label><input type="text" maxlength="40" id="g1_city"></div>
 <div><label for="g1_state">State</label><select id="g1_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_zip">Zip Code</label><input type="text" id="g1_zip"></div>
-<div><label for="g1_phone1">Home Phone</label><input type="text" id="g1_phone1" type="tel" class="phone"   ></div>
-<div><label for="g1_phone2">Cell Phone</label><input type="text" id="g1_phone2" type="tel" class="phone"   ></div>
-<div><label for="g1_phone3">Work Phone</label><input type="text" id="g1_phone3" type="tel" class="phone"   ></div>
-<div><label for="g1_ext">Ext</label><input type="text" id="g1_ext"></div>
-<div><label for="g1_email1">Email 1</label><input type="text" id="g1_email1"></div>
-<div><label for="g1_email2">Email 2</label><input type="text" id="g1_email2"></div>
-<div><label for="g1_website1">Web Site</label><input type="text" id="g1_website1"></div>
-<div><label for="g1_cafnum">CAF#</label><input type="text" id="g1_cafnum"></div>
-<div><label for="g1_ptin">PTIN</label><input type="text" id="g1_ptin"></div>
+<div><label for="g1_zip">Zip Code</label><input type="text" maxlength="10" id="g1_zip"></div>
+<div><label for="g1_phone1">Home Phone</label><input type="text" maxlength="13" id="g1_phone1" type="tel" class="phone"   ></div>
+<div><label for="g1_phone2">Cell Phone</label><input type="text" maxlength="13" id="g1_phone2" type="tel" class="phone"   ></div>
+<div><label for="g1_phone3">Work Phone</label><input type="text" maxlength="13" id="g1_phone3" type="tel" class="phone"   ></div>
+<div><label for="g1_ext">Ext</label><input type="text" maxlength="5" id="g1_ext"></div>
+<div><label for="g1_email1">Email 1</label><input type="text" maxlength="40" id="g1_email1"></div>
+<div><label for="g1_email2">Email 2</label><input type="text" maxlength="40" id="g1_email2"></div>
+<div><label for="g1_website1">Web Site</label><input type="text" maxlength="100" id="g1_website1"></div>
+<div><label for="g1_cafnum">CAF#</label><input type="text" maxlength="30" id="g1_cafnum"></div>
+<div><label for="g1_ptin">PTIN</label><input type="text" maxlength="30" id="g1_ptin"></div>
 <div><label for="g1_birthday">Birthday</label><input type="text" class="date" id="g1_birthday"></div>
-<div><label for="g1_spousename">Spouse</label><input type="text" id="g1_spousename"></div>
-<div><label for="g1_childname1">Child's Name</label><input type="text" id="g1_childname1"></div>
-<div><label for="g1_childname2">Child's Name</label><input type="text" id="g1_childname2"></div>
-<div><label for="g1_childname3">Child's Name</label><input type="text" id="g1_childname3"></div>
-<div><label for="g1_emergencycontact">Emergency Contact</label><input type="text" id="g1_emergencycontact"></div>
-<div><label for="g1_relationship">Relationship</label><input type="text" id="g1_relationship"></div>
-<div><label for="g1_contactphone">Emergency Phone</label><input type="text" id="g1_contactphone" type="tel" class="phone"></div>
+<div><label for="g1_spousename">Spouse</label><input type="text" maxlength="40" id="g1_spousename"></div>
+<div><label for="g1_childname1">Child's Name</label><input type="text" maxlength="40" id="g1_childname1"></div>
+<div><label for="g1_childname2">Child's Name</label><input type="text" maxlength="40" id="g1_childname2"></div>
+<div><label for="g1_childname3">Child's Name</label><input type="text" maxlength="40" id="g1_childname3"></div>
+<div><label for="g1_emergencycontact">Emergency Contact</label><input type="text" maxlength="40" id="g1_emergencycontact"></div>
+<div><label for="g1_relationship">Relationship</label><input type="text" maxlength="20" id="g1_relationship"></div>
+<div><label for="g1_contactphone">Emergency Phone</label><input type="text" maxlength="13" id="g1_contactphone" type="tel" class="phone"></div>
 </div>
 </div>
 <!--- Start Plugins --->

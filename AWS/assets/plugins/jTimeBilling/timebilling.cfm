@@ -32,7 +32,6 @@ _pluginSaveData102=function(){
 			_saveData({"group":"group102",payload:$.parseJSON(json),page:"timebilling",plugin:"group102"})}
 		else{
 			_pluginSaveDataCB({'subgroup':'102_1'})
-			
 			}}
 
 _pluginSaveData102_1=function(){
@@ -110,23 +109,18 @@ _grid102_1=function(){
     	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option></select></div>
 		<div><label for="g102_notes">Notes</label><textarea type="text" id="g102_notes" cols="4" rows="4"  maxlength="1000"></textarea></div>
 		<div><label for="g102_paymentstatus">Payment Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-        <div><label for="g102_mileage">Mileage</label><input type="text" id="g102_mileage" ></div>
-        <div><label for="g102_reimbursement">Reimbursement</label><input type="text" id="g102_reimbursement" ></div>
-
-
+        <div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div>
+        <div><label for="g102_reimbursement">Reimbursement</label><input type="text" maxlength="10" id="g102_reimbursement" ></div>
         <div><label for="g102_manualtime">Manual Time</label><input type="text" class="time" id="g102_manualtime" ></div>
     	<div><label for="g102_billingtype">Billing Type</label><select id="g102_billingtype"><option value="0">&nbsp;</option></select></div>
     	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option></select></div>
-        
         <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly id="g102_rate" ></div>
         <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly id="g102_totaltime" ></div>
         <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>   
-            
-        <div><label for="g102_flatfee">Flat Fee</label><input type="text" id="g102_flatfee" ></div>
-        <div><label for="g102_adjustment">Adjustment</label><input type="text" id="g102_adjustment" ></div>
+        <div><label for="g102_flatfee">Flat Fee</label><input type="text" maxlength="10" id="g102_flatfee" ></div>
+        <div><label for="g102_adjustment">Adjustment</label><input type="text" maxlength="10" id="g102_adjustment" ></div>
 	</div>  
     
-
 
 <h3 group="group102_1" onClick="_grid102_1();">Add Time</h3>
 <div>
