@@ -202,7 +202,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_2"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_2();window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_2();window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
 </div>
 </div>
 
@@ -211,7 +211,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_3"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_3();window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_3();window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
 </div>
 </div>
 
@@ -220,16 +220,16 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_4"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_4();window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_4();window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
 </div>
 </div>
 
-<!--- GROUP 4 SUB 5 ADD TO TAX STATUS LISTING --->
-<h4 onClick='_run.load_group4_5();'>Tax Status Listing</h4>
+<!--- GROUP 4 SUB 5 ADD TO TAX RETURNS --->
+<h4 onClick='_run.load_group4_5();'>Tax Returns</h4>
 <div>
 <div class="tblGrid" id="grid4_5"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_5();window.location='#this.url#/AWS/_taxation/taxreturns.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_5();window.location='#this.url#/AWS/_taxation/taxreturns.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
 </div>
 </div>
 

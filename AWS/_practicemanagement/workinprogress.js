@@ -235,7 +235,7 @@ _grid11=function(){_jGrid({
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,TR_TAXFORM:{title:'Tax Form',width:'1%'}
 			,TR_PRIORITY:{title:'Priority',width:'1%'}
-			,TR_2_ASSIGNEDTO:{title:'Assigned To',width:'1%'}
+			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 			,TR_DUEDATE:{title:'Due Date',width:'1%'}
 			,TR_ESTTIME:{title:'Estimated Time',width:'1%'}
 			,TR_4_REQUIRED:{title:'PPTR Required',width:'1%'}

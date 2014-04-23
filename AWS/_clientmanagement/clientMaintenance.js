@@ -16,9 +16,9 @@ var _run={
 	,load_group1_2:function(){$('#isLoaded_group1_2').val(1)}
 	,load_group1_3:function(){$('#isLoaded_group1_3').val(1)}
 	,load_group2:function(){}
-	,load_group2_1:function(){if($("#isLoaded_group1_1").val()=="0"){_loadData({"id":"client_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);}}
-	,load_group2_2:function(){if($("#isLoaded_group1_2").val()=="0"){_loadData({"id":"client_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);}}
-	,load_group2_3:function(){if($("#isLoaded_group1_3").val()=="0"){_loadData({"id":"client_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);}}
+	,load_group2_1:function(){if($("#isLoaded_group2_1").val()=="0"){_loadData({"id":"client_id","group":"group2_1","page":"clientmaintenance"});$("#isLoaded_group2_1").val(1);}}
+	,load_group2_2:function(){if($("#isLoaded_group2_2").val()=="0"){_loadData({"id":"client_id","group":"group2_2","page":"clientmaintenance"});$("#isLoaded_group2_2").val(1);}}
+	,load_group2_3:function(){if($("#isLoaded_group2_3").val()=="0"){_loadData({"id":"client_id","group":"group2_3","page":"clientmaintenance"});$("#isLoaded_group2_3").val(1);}}
 	,load_group3:function(){_grid3()}
 	,load_group4:function(){}
 	,load_group4_1:function(){_grid4_1()}
@@ -117,6 +117,15 @@ _grid4_3=function(){_jGrid({
 	"fields":{PC_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
+			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_PAYENDDATE:{title:'Pay End Date',width:'1%'}
+			,PC_DUEDATE:{title:'Due Date',width:'1%'}
+			,PC_OBTAININFO_ASSIGNEDTOTEXT:{title:'Obtain Info Assigned To',width:'1%'}
+			,PC_PREPARATION_ASSIGNEDTOTEXT:{title:'Preparation Assigned To',width:'1%'}
+			,PC_REVIEW_ASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}
+			,PC_ASSEMBLY_ASSIGNEDTOTEXT:{title:'Assembly Assigned To',width:'1%'}
+			,PC_DELIVERY_ASSIGNEDTOTEXT:{title:'Delivery Assigned To',width:'1%'}
+			,PC_ESTTIME:{title:'Estimated Time',width:'1%'}
 			,PC_YEAR:{title:'Year',width:'1%'}
 			},
 	"method":"f_lookupData",
@@ -225,6 +234,7 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
+alert(options["group"]);
 switch(options["group"]){
 case'':
 if($("#g1_name").val()!=""){

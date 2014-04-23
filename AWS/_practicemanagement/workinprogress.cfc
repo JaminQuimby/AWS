@@ -710,7 +710,7 @@ SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[tr_priority]
-,[tr_2_assignedto]
+,[tr_2_assignedtoTEXT]
 ,CONVERT(VARCHAR(10),[tr_duedate], 101)AS[tr_duedate]
 ,[tr_esttime]
 ,[tr_4_required]
@@ -738,7 +738,7 @@ AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 								,"TR_TAXFORM":"'&TR_TAXFORM&'"
 								,"TR_PRIORITY":"'&TR_PRIORITY&'"
-								,"TR_2_ASSIGNEDTO":"'&TR_2_ASSIGNEDTO&'"
+								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
 								,"TR_DUEDATE":"'&TR_DUEDATE&'"
 								,"TR_ESTTIME":"'&TR_ESTTIME&'"
 								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"

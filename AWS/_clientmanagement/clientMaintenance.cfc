@@ -382,6 +382,15 @@ SELECT[pc_id]
 ,[pc_year]
 ,[client_name]
 ,[client_id]
+,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
+,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
+,CONVERT(VARCHAR(10),[pc_duedate], 101)AS[pc_duedate]
+ ,[pc_obtaininfo_assignedtoTEXT]
+ ,[pc_preparation_assignedtoTEXT]
+ ,[pc_review_assignedtoTEXT]
+ ,[pc_assembly_assignedtoTEXT]
+ ,[pc_delivery_assignedtoTEXT]
+,[pc_esttime]
 FROM[v_payrollcheckstatus]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -391,7 +400,20 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PC_YEAR":"'&PC_YEAR&'"}'>
+<cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PC_PAYDATE":"'&PC_PAYDATE&'"
+								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
+								,"PC_DUEDATE":"'&PC_DUEDATE&'"
+								,"PC_ESTTIME":"'&PC_ESTTIME&'"
+								,"PC_OBTAININFO_ASSIGNEDTOTEXT":"'&PC_OBTAININFO_ASSIGNEDTOTEXT&'"
+								,"PC_PREPARATION_ASSIGNEDTOTEXT":"'&PC_PREPARATION_ASSIGNEDTOTEXT&'"
+								,"PC_REVIEW_ASSIGNEDTOTEXT":"'&PC_REVIEW_ASSIGNEDTOTEXT&'"
+								,"PC_ASSEMBLY_ASSIGNEDTOTEXT":"'&PC_ASSEMBLY_ASSIGNEDTOTEXT&'"
+								,"PC_DELIVERY_ASSIGNEDTOTEXT":"'&PC_DELIVERY_ASSIGNEDTOTEXT&'"								
+								,"PC_YEAR":"'&PC_YEAR&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

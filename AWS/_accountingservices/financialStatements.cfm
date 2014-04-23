@@ -134,7 +134,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 		<div><label for="g1_g6_completedby">Competed By</label><select id="g1_g6_completedby" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g6_estimatedtime">Estimated Time</label><input type="text"  maxlength="4" placeholder="0" id="g1_g6_estimatedtime"/></div>
 	</div>
-	<h4 onClick='_run.load_group1_7();'>Complications | <span id="g1_g7_head1"></span> | <span id="g1_g7_head2"></span></h4>
+	<h4 onClick='_run.load_group1_7();'>Compilations | <span id="g1_g7_head1"></span> | <span id="g1_g7_head2"></span></h4>
 	<div>
 		<div><label for="g1_g7_assignedto">Assigned to</label><select id="g1_g7_assignedto" ><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g1_g7_datecompleted">Date Completed</label><input type="text" id="g1_g7_datecompleted" class="date"/></div>
