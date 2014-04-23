@@ -713,11 +713,16 @@ try{
 $.extend(true, options, params);//turn options into array
 if(options["payload"]!=""||options["payload"]=="undefined"){
 if(options["plugin"]!=""){options["url"]= _pluginURL(options["plugin"]);}else{options["url"]=""};
+$('#savedata').prop('disabled',true);
+$('#savedata').find('i').addClass('fa fa-spinner fa-spin');
 $.ajax({
   type: 'GET',
   url:options["url"]+options["page"]+'.cfc?method=f_saveData',
   data: {"returnFormat":"json","argumentCollection":JSON.stringify({"group":options["group"],"payload":JSON.stringify(options["payload"])})}
-  ,success:function(json){_saveDataCB($.parseJSON(json))},   // successful request; do something with the data
+  ,success:function(json){_saveDataCB($.parseJSON(json));  setTimeout(function(){
+     $("#savedata").prop('disabled',false);
+	 $('#savedata').find('i').removeClass('fa fa-spinner fa-spin');
+    }, 5*1000); },   // successful request; do something with the data
   error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
 });}else{_saveDataCB({"id":options["id"],"group":options["group"]});}}
 catch(err){
