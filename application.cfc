@@ -88,7 +88,7 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 <cfset Session.user.plugins=loginQuery.orgPlugins>
 <cfset Session.user.storage=LCase(loginQuery.orgStorage&"\"&loginQuery.orgName&"\") >
 <cfset Session.localization.language='en-US'>
-<cfset Session.localization.formatphone='(######)######-########'>
+<cfset Session.localization.formatphone='(######) ######-########'>
 </cfif>
 <cfif loginQuery.recordCount eq 0>
 
