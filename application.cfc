@@ -69,11 +69,11 @@
 <cfabort>
 <cfelse> 
 
-<cfquery name="loginQuery" datasource="#Session.organization.name#" cachedwithin="#CreateTimeSpan(0, 0, 28, 0)#">
-SELECT[ctrl_users].[user_id],[si_name],[ctrl_users].[role],[ctrl_organization].[orgName],[ctrl_organization].[orgStorage],[ctrl_organization].[orgPlugins]
+<cfquery name="loginQuery" datasource="#Session.organization.name#" cachedwithin="#CreateTimeSpan(0, 0, 0, 0)#">
+SELECT[ctrl_users].[user_id],[si_name],[si_initials],[ctrl_users].[role],[ctrl_organization].[orgName],[ctrl_organization].[orgStorage],[ctrl_organization].[orgPlugins]
 FROM[ctrl_users]
 LEFT OUTER JOIN[ctrl_organization]ON[ctrl_users].[org_id]=[ctrl_organization].[org_id]
-LEFT OUTER JOIN[staffinitials]ON[ctrl_users].[user_id]=[staffinitials].[user_id]
+LEFT OUTER JOIN[v_staffinitials]ON[ctrl_users].[user_id]=[v_staffinitials].[user_id]
 WHERE([ctrl_users].[email]=<cfqueryparam value="#FORM.J_USERNAME#" CFSQLTYPE="CF_SQL_VARCHAR">)
 AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="CF_SQL_VARCHAR">)
 </cfquery>
@@ -81,6 +81,7 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 <cfif loginQuery.recordCount eq 1>
 <cfset Session.user.id=loginQuery.user_id>
 <cfset Session.user.name=loginQuery.si_name>
+<cfset Session.user.initials=loginQuery.si_initials>
 <cfset Session.user.email=FORM.J_USERNAME>
 <cfset Session.user.role=loginQuery.role>
 <cfset Session.user.organization=loginQuery.orgName>
