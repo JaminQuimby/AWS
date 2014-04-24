@@ -17,7 +17,7 @@ $.datepicker.setDefaults({showOn:"button",buttonImageOnly:true,buttonImage:"http
 $(".datetime").datetimepicker({timeFormat: 'hh:mmtt'}).mask('00/00/0000 00:00:00');
 $(".date").datepicker().mask('00/00/0000');
 $(".time").timepicker().mask('00:00:00');
-$('.phone').mask('(000)000-0000');
+$('.phone').mask('(000) 000-0000');
 $('select').chosen();
 $('.gf-checkbox').hide();
 $('#entrance').show();

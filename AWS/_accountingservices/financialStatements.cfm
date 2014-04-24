@@ -189,9 +189,9 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	</div>
 	<h4>Add Subtask</h4>
     <div>
-    	<div><label for="g2_subtask">SubTask</label><select id="g2_subtask" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><label for="g2_sequence">Sequence</label><input type="text" maxlength="6" id="g2_sequence"  /></div>
-		<div><label for="g2_status">Status</label><select id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    	<div><label for="g2_subtask"><i class="fa fa-lock link" onClick="_schk('g2_subtask')"></i> SubTask</label><select id="g2_subtask" disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+		<div><label for="g2_sequence"><i class="fa fa-lock link" onClick="_schk('g2_sequence')"></i> Sequence</label><input type="text" disabled="disabled" maxlength="6" id="g2_sequence"  /></div>
+		<div><label for="g2_status"><i class="fa fa-lock link" onClick="_schk('g2_status')"></i> Status</label><select id="g2_status" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     	<div><label for="g2_dependencies">Dependencies</label><select id="g2_dependencies" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>		
         <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date"/></div>

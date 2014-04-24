@@ -2,7 +2,7 @@ $(document).ready(function(){_grid1();});
 
 var _run={
 	 new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"financialstatements"});_toggle("group1,largeMenu");_hide("entrance,smallMenu,group2");_addNewTask();}
-	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val("0"); }
+	,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val("0");_loadit({"query":{"COLUMNS":["G2_STATUS"],"DATA":[[4]]},"list":"g2_status","page":"financialstatements"});_clearfields({"list":"g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask,g2_dependencies"});	 }
 	,new_clone1:function(){jqMessage({message: "Warning: Would you like to import the selected group?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_clone1\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})}
 	,new_clone2:function(){jqMessage({message: "Warning: Would you like to import the selected history?.", "type":"warning", autoClose: false,buttons:[{"name":"Save","on_click":"_saveDataCB({\"group\":\"group2_clone2\"});_grid2();","class":"optional"},{"name":"Exit","on_click":"","class":"optional"}]})}
 	,load_group1:function(){_grid1();_run.load_select_clone2();}

@@ -63,6 +63,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline"></div>
 	<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" id="g1_priority" placeholder="0"  class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_esttime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_esttime" ></div>
+	<div><label for="g1_g2_informationreceived">Information Received</label><input type="text" class="date" id="g1_g2_informationreceived" ></div>
 	<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
     <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 	<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
@@ -86,7 +87,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- GROUP1 SUBGROUP2 --->
 <h4 onClick='_run.load_group1_2()'>Preparation</h4>
 <div>
-	<div><label for="g1_g2_informationreceived">Information Received</label><input type="text" class="date" id="g1_g2_informationreceived" ></div>
 	<div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g2_readyforreview">Ready for Review</label><input type="text" class="date" id="g1_g2_readyforreview" ></div>
 	<div><label for="g1_g2_preparedby">Prepared By</label><select id="g1_g2_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

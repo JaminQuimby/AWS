@@ -137,7 +137,7 @@
 		</div><!-- /cbp-hrsub -->
 	</li>
 
-      <li><a href="##">#session.user.name#</a>
+      <li><a href="##">#session.user.initials#</a>
         <div class="cbp-hrsub _practicemanagement">
 		<div class="cbp-hrsub-inner"> 
 		<div>

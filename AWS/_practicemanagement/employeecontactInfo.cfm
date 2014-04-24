@@ -43,9 +43,9 @@
 <div><label for="g1_city">City</label><input type="text" maxlength="40" id="g1_city"></div>
 <div><label for="g1_state">State</label><select id="g1_state"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_zip">Zip Code</label><input type="text" maxlength="10" id="g1_zip"></div>
-<div><label for="g1_phone1">Home Phone</label><input type="text" maxlength="13" id="g1_phone1" type="tel" class="phone"   ></div>
-<div><label for="g1_phone2">Cell Phone</label><input type="text" maxlength="13" id="g1_phone2" type="tel" class="phone"   ></div>
-<div><label for="g1_phone3">Work Phone</label><input type="text" maxlength="13" id="g1_phone3" type="tel" class="phone"   ></div>
+<div><label for="g1_phone1">Home Phone</label><input type="text" maxlength="14" id="g1_phone1" type="tel" class="phone"   ></div>
+<div><label for="g1_phone2">Cell Phone</label><input type="text" maxlength="14" id="g1_phone2" type="tel" class="phone"   ></div>
+<div><label for="g1_phone3">Work Phone</label><input type="text" maxlength="14" id="g1_phone3" type="tel" class="phone"   ></div>
 <div><label for="g1_ext">Ext</label><input type="text" maxlength="5" id="g1_ext"></div>
 <div><label for="g1_email1">Email 1</label><input type="text" maxlength="40" id="g1_email1"></div>
 <div><label for="g1_email2">Email 2</label><input type="text" maxlength="40" id="g1_email2"></div>
@@ -59,7 +59,7 @@
 <div><label for="g1_childname3">Child's Name</label><input type="text" maxlength="40" id="g1_childname3"></div>
 <div><label for="g1_emergencycontact">Emergency Contact</label><input type="text" maxlength="40" id="g1_emergencycontact"></div>
 <div><label for="g1_relationship">Relationship</label><input type="text" maxlength="20" id="g1_relationship"></div>
-<div><label for="g1_contactphone">Emergency Phone</label><input type="text" maxlength="13" id="g1_contactphone" type="tel" class="phone"></div>
+<div><label for="g1_contactphone">Emergency Phone</label><input type="text" maxlength="14" id="g1_contactphone" type="tel" class="phone"></div>
 </div>
 </div>
 <!--- Start Plugins --->
