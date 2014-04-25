@@ -37,27 +37,27 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 SELECT[bf_id]
 ,[bf_assignedtoTEXT]
 ,[bf_activity]
-,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
+,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_owners]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
-,CONVERT(VARCHAR(8),[bf_businesssubmitted], 1)AS[bf_businesssubmitted]
-,CONVERT(VARCHAR(8),[bf_businessreceived], 1)AS[bf_businessreceived]
-,CONVERT(VARCHAR(8),[bf_dateinitiated], 1)AS[bf_dateinitiated]
-,CONVERT(VARCHAR(8),[bf_articlessubmitted], 1)AS[bf_articlessubmitted]
-,CONVERT(VARCHAR(8),[bf_articlesapproved], 1)AS[bf_articlesapproved]
-,CONVERT(VARCHAR(8),[bf_tradenamesubmitted], 1)AS[bf_tradenamesubmitted]
-,CONVERT(VARCHAR(8),[bf_tradenamereceived], 1)AS[bf_tradenamereceived]
-,CONVERT(VARCHAR(8),[bf_minutesbylawsdraft], 1)AS[bf_minutesbylawsdraft]
-,CONVERT(VARCHAR(8),[bf_minutesbylawsfinal], 1)AS[bf_minutesbylawsfinal]
-,CONVERT(VARCHAR(8),[bf_minutescompleted], 1)AS[bf_minutescompleted]
-,CONVERT(VARCHAR(8),[bf_dissolutionrequested], 1)AS[bf_dissolutionrequested]
-,CONVERT(VARCHAR(8),[bf_dissolutionsubmitted], 1)AS[bf_dissolutionsubmitted]
-,CONVERT(VARCHAR(8),[bf_dissolutioncompleted], 1)AS[bf_dissolutioncompleted]
-,CONVERT(VARCHAR(8),[bf_otheractivity], 1)AS[bf_otheractivity]
-,CONVERT(VARCHAR(8),[bf_otherstarted], 1)AS[bf_otherstarted]
-,CONVERT(VARCHAR(8),[bf_othercompleted], 1)AS[bf_othercompleted]
-,CONVERT(VARCHAR(8),[bf_recordbookordered], 1)AS[bf_recordbookordered]
+,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'d','#Session.localization.language#') 
+,[bf_businessreceived]=FORMAT(bf_businessreceived,'d','#Session.localization.language#') 
+,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'d','#Session.localization.language#') 
+,[bf_articlessubmitted]=FORMAT(bf_articlessubmitted,'d','#Session.localization.language#') 
+,[bf_articlesapproved]=FORMAT(bf_articlesapproved,'d','#Session.localization.language#') 
+,[bf_tradenamesubmitted]=FORMAT(bf_tradenamesubmitted,'d','#Session.localization.language#') 
+,[bf_tradenamereceived]=FORMAT(bf_tradenamereceived,'d','#Session.localization.language#') 
+,[bf_minutesbylawsdraft]=FORMAT(bf_minutesbylawsdraft,'d','#Session.localization.language#') 
+,[bf_minutesbylawsfinal]=FORMAT(bf_minutesbylawsfinal,'d','#Session.localization.language#') 
+,[bf_minutescompleted]=FORMAT(bf_minutescompleted,'d','#Session.localization.language#') 
+,[bf_dissolutionrequested]=FORMAT(bf_dissolutionrequested,'d','#Session.localization.language#') 
+,[bf_dissolutionsubmitted]=FORMAT(bf_dissolutionsubmitted,'d','#Session.localization.language#') 
+,[bf_dissolutioncompleted]=FORMAT(bf_dissolutioncompleted,'d','#Session.localization.language#') 
+,[bf_otheractivity]=FORMAT(bf_otheractivity,'d','#Session.localization.language#') 
+,[bf_otherstarted]=FORMAT(bf_otherstarted,'d','#Session.localization.language#') 
+,[bf_othercompleted]=FORMAT(bf_othercompleted,'d','#Session.localization.language#') 
+,[bf_recordbookordered]=FORMAT(bf_recordbookordered,'d','#Session.localization.language#') 
 ,FORMAT(bf_fees, 'C', 'en-us')AS[bf_fees]
 ,[bf_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[bf_paid]=[optionvalue_id])
 ,[client_name]

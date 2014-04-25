@@ -41,10 +41,10 @@ SELECT[mc_id]
 ,mc_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,[mc_status]
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
-,CONVERT(VARCHAR(8),[mc_requestforservice], 1)AS[mc_requestforservice]
-,CONVERT(VARCHAR(8),[mc_duedate], 1)AS[mc_duedate]
-,CONVERT(VARCHAR(8),[mc_workinitiated], 1)AS[mc_workinitiated]
-,CONVERT(VARCHAR(8),[mc_projectcompleted], 1)AS[mc_projectcompleted]
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
+,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_workinitiated]=FORMAT(mc_workinitiated,'d','#Session.localization.language#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
 ,[mc_missinginfo]
 ,[mc_esttime]
 ,FORMAT(mc_fees, 'C', 'en-us')AS[mc_fees]

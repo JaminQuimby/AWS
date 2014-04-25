@@ -34,13 +34,13 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[cas_id]
-,CONVERT(VARCHAR(8),[cas_duedate], 1)AS[cas_duedate]
+,[cas_duedate]=FORMAT(cas_duedate,'d','#Session.localization.language#') 
 ,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
 ,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
 ,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
-,CONVERT(VARCHAR(8),[cas_datereqested], 1)AS[cas_datereqested]
-,CONVERT(VARCHAR(8),[cas_datestarted], 1)AS[cas_datestarted]
-,CONVERT(VARCHAR(8),[cas_completed], 1)AS[cas_completed]
+,[cas_datereqested]=FORMAT(cas_datereqested,'d','#Session.localization.language#') 
+,[cas_datestarted]=FORMAT(cas_datestarted,'d','#Session.localization.language#') 
+,[cas_completed]=FORMAT(cas_completed,'d','#Session.localization.language#') 
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,CASE WHEN LEN([cas_instructions]) >= 101 THEN SUBSTRING([cas_instructions],0,100) +  '...' ELSE [cas_instructions] END AS[cas_instructions]
 ,[client_name]

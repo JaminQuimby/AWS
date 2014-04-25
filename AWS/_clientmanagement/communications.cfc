@@ -15,7 +15,7 @@ SELECT[co_id]
 ,[co_caller]
 ,[co_contactmethod]
 ,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
-,CONVERT(VARCHAR(10),[co_duedate], 101)AS[co_duedate]
+,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#')
 ,[co_emailaddress]
 ,[co_ext]
 ,[co_faxnumber]=FORMAT(co_faxnumber,'#Session.localization.formatphone#')
@@ -71,7 +71,7 @@ SELECT[co_id]
 ,[co_forTEXT]
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
 ,[co_caller]
-,CONVERT(VARCHAR(8),[co_duedate], 1)AS[co_duedate]
+,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#')
 ,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
 ,[co_status]
 ,[co_responseneeded]

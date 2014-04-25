@@ -18,7 +18,7 @@
 SELECT[USER_ID]
 ,[si_active]
 ,[si_address]
-,CONVERT(VARCHAR(10),[si_birthday], 101)AS[si_birthday]
+,[si_birthday]=FORMAT(si_birthday,'d','#Session.localization.language#') 
 ,[si_cafnum]
 ,[si_childname1]
 ,[si_childname2]

@@ -304,11 +304,11 @@ ORDER BY [fds_Year] DESC ,[fds_periodend]
 SELECT[fds_id]
 ,[client_id]
 ,[client_name]
-,[fds_periodend]=FORMAT(fdss_duedate,'d','#Session.localization.language#') 
+,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
 ,[fds_month]
 ,[fds_year]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
-,[fds_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#') 
+,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
 ,[fds_status]
 ,[fds_missinginfo]
 ,[fds_compilemi]

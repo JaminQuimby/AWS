@@ -31,13 +31,13 @@ SELECT
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[DT_ID]
- ,[client_id]
- ,[dt_assignedto]
-,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
- ,[dt_description]
- ,[dt_routing]
- ,[dt_sender]
- ,[dt_staff]
+,[client_id]
+,[dt_assignedto]
+,[dt_date]=FORMAT(dt_date,'d','#Session.localization.language#') 
+,[dt_description]
+,[dt_routing]
+,[dt_sender]
+,[dt_staff]
 FROM[documenttracking]
 WHERE[dt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -73,7 +73,7 @@ SELECT[dt_id]
 ,[dt_assignedto]
 ,[dt_staffTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(dt_staff=user_id))
 ,[dt_routing]
-,CONVERT(VARCHAR(10),[dt_date], 101)AS[dt_date]
+,[dt_date]=FORMAT(dt_date,'d','#Session.localization.language#') 
 ,CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing] END AS[dt_routing]
 ,[client_name]
 ,[client_id]

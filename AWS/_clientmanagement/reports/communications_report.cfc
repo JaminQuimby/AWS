@@ -45,7 +45,7 @@ SELECT[co_id]
 ,CONVERT(CHAR(8),[co_date], 1)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
 ,[co_telephone]=FORMAT(co_telephone,'#Session.localization.formatphone#')
 ,[co_ext]
-,[co_duedate]
+,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#') 
 ,[co_emailaddress]
 ,[co_responseneeded]
 ,[co_returncall]
@@ -142,7 +142,7 @@ WHERE(1)=(1)
 
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[comment_id]
-,CONVERT(VARCHAR(8),[c_date], 1)AS[c_date]
+,[c_date]=FORMAT(c_date,'d','#Session.localization.language#') 
 ,[u_name]
 ,[u_email]
 ,CASE WHEN LEN([c_notes]) >= 101 THEN SUBSTRING([c_notes],0,100) +  '...' ELSE [c_notes] END AS[c_notes]

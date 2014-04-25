@@ -50,20 +50,20 @@ AND[pt_type]=<cfqueryparam value="#item[5]#">
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[PT_ID]
- ,[client_id]
- ,[pt_deliverymethod]
-,CONVERT(VARCHAR(8),[pt_duedate], 1)AS[pt_duedate]
- ,[pt_esttime]
- ,[pt_fees]
-,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
- ,[pt_missinginfo]
-,CONVERT(VARCHAR(8),[pt_missinginforeceived], 1)AS[pt_missinginforeceived]
- ,[pt_month]
- ,[pt_paid]
- ,[pt_priority]
- ,[pt_state]
- ,[pt_type]
- ,[pt_year]
+,[client_id]
+,[pt_deliverymethod]
+,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#')
+,[pt_esttime]
+,[pt_fees]
+,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#')
+,[pt_missinginfo]
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
+,[pt_month]
+,[pt_paid]
+,[pt_priority]
+,[pt_state]
+,[pt_type]
+,[pt_year]
 FROM[payrolltaxes]
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -73,7 +73,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_obtaininfo_assignedto]
 ,[pt_obtaininfo_completedby]
-,CONVERT(VARCHAR(8),[pt_obtaininfo_datecompleted], 1)AS[pt_obtaininfo_datecompleted]
+,[pt_obtaininfo_datecompleted]=FORMAT(pt_obtaininfo_datecompleted,'d','#Session.localization.language#')
 ,[pt_obtaininfo_esttime]
 FROM[payrolltaxes]
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -84,7 +84,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_entry_assignedto]
 ,[pt_entry_completedby]
-,CONVERT(VARCHAR(8),[pt_entry_datecompleted], 1)AS[pt_entry_datecompleted]
+,[pt_entry_datecompleted]=FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#')
 ,[pt_entry_esttime]
 FROM[payrolltaxes]
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -95,7 +95,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_rec_assignedto]
 ,[pt_rec_completedby]
-,CONVERT(VARCHAR(8),[pt_rec_datecompleted], 1)AS[pt_rec_datecompleted]
+,[pt_rec_datecompleted]=FORMAT(pt_rec_datecompleted,'d','#Session.localization.language#')
 ,[pt_rec_esttime]
 FROM[payrolltaxes]
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -106,7 +106,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_review_assignedto]
 ,[pt_review_completedby]
-,CONVERT(VARCHAR(8),[pt_review_datecompleted], 1)AS[pt_review_datecompleted]
+,[pt_review_datecompleted]=FORMAT(pt_review_datecompleted,'d','#Session.localization.language#')
 ,[pt_review_esttime]
 FROM[payrolltaxes]
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -117,7 +117,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_assembly_assignedto]
 ,[pt_assembly_completedby]
-,CONVERT(VARCHAR(8),[pt_assembly_datecompleted], 1)AS[pt_assembly_datecompleted]
+,[pt_assembly_datecompleted]=FORMAT(pt_assembly_datecompleted,'d','#Session.localization.language#')
 ,[pt_assembly_esttime]
 FROM[payrolltaxes]
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -128,7 +128,7 @@ WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pt_delivery_assignedto]
 ,[pt_delivery_completedby]
-,CONVERT(VARCHAR(8),[pt_delivery_datecompleted], 1)AS[pt_delivery_datecompleted]
+,[pt_delivery_datecompleted]=FORMAT(pt_delivery_datecompleted,'d','#Session.localization.language#')
 ,[pt_delivery_esttime]
 FROM[payrolltaxes]
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -148,17 +148,17 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Asset GUI Completed Tasks--->
 <cfcase value="assetCompTask">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT[pt_obtaininfo_datecompleted]=CONVERT(VARCHAR(8),pt_obtaininfo_datecompleted,1)
+SELECT[pt_obtaininfo_datecompleted]=FORMAT(pt_assembly_datecompleted,'d','#Session.localization.language#')
 ,[pt_obtaininfo_completedbyTEXT]
-,[pt_entry_datecompleted]=CONVERT(VARCHAR(8),pt_entry_datecompleted,1)
+,[pt_entry_datecompleted]=FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#')
 ,[pt_entry_completedbyTEXT]
-,[pt_rec_datecompleted]=CONVERT(VARCHAR(8),pt_rec_datecompleted,1)
+,[pt_rec_datecompleted]=FORMAT(pt_rec_datecompleted,'d','#Session.localization.language#')
 ,[pt_rec_completedbyTEXT]
-,[pt_review_datecompleted]=CONVERT(VARCHAR(8),pt_review_datecompleted,1)
+,[pt_review_datecompleted]=FORMAT(pt_review_datecompleted,'d','#Session.localization.language#')
 ,[pt_review_completedbyTEXT]
-,[pt_assembly_datecompleted]=CONVERT(VARCHAR(8),pt_assembly_datecompleted,1)
+,[pt_assembly_datecompleted]=FORMAT(pt_assembly_datecompleted,'d','#Session.localization.language#')
 ,[pt_assembly_completedbyTEXT]
-,[pt_delivery_datecompleted]=CONVERT(VARCHAR(8),pt_delivery_datecompleted,1)
+,[pt_delivery_datecompleted]=FORMAT(pt_delivery_datecompleted,'d','#Session.localization.language#')
 ,[pt_delivery_completedbyTEXT]
 FROM[v_payrolltaxes]
 WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -192,11 +192,11 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[pt_id]
 ,[pt_year]
 ,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
-,CONVERT(VARCHAR(8),[pt_duedate], 1)AS[pt_duedate]
+,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#') 
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
-,CONVERT(VARCHAR(8),[pt_lastpay], 1)AS[pt_lastpay]
+,[pt_lastpay]FORMAT(pt_lastpay,'d','#Session.localization.language#') 
 ,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
-,CONVERT(VARCHAR(8),[pt_missinginforeceived], 1)AS[pt_missinginforeceived]
+,[pt_missinginforeceived]FORMAT(pt_missinginforeceived,'d','#Session.localization.language#') 
 ,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[pt_obtaininfo_assignedtoTEXT]
 ,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
@@ -209,7 +209,7 @@ SELECT[pt_id]
 ,[pt_assembly_assignedtoTEXT]
 ,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[pt_delivery_assignedtoTEXT]
-,CONVERT(VARCHAR(8),[pt_missinginforeceived], 1)AS[pt_missinginforeceived]
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
 ,[pt_missinginfo]
 ,[client_name]
 ,[client_id]
