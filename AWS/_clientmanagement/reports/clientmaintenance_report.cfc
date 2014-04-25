@@ -35,7 +35,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[client_id]
 ,[client_name]
-	,[client_type]
+,[client_type]
 ,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 ,[client_active]
 ,[client_spouse]

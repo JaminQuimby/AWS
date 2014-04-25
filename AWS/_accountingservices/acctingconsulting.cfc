@@ -21,17 +21,17 @@ SELECT[mc_id]
 ,[mc_assignedto]
 ,[mc_category]
 ,[mc_description]
-,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
 ,[mc_esttime]
 ,[mc_fees]
 ,[mc_missinginfo]
-,CONVERT(VARCHAR(10),[mc_missinginforeceived], 101)AS[mc_missinginforeceived]
+,[mc_missinginforeceived]=FORMAT(mc_missinginforeceived,'d','#Session.localization.language#') 
 ,[mc_paid]
 ,[mc_priority]
-,CONVERT(VARCHAR(10),[mc_projectcompleted], 101)AS[mc_projectcompleted]
-,CONVERT(VARCHAR(10),[mc_requestforservice], 101)AS[mc_requestforservice]
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
 ,[mc_status]
-,CONVERT(VARCHAR(10),[mc_workinitiated], 101)AS[mc_workinitiated]
+,[mc_workinitiated]=FORMAT(mc_workinitiated,'d','#Session.localization.language#') 
 FROM[managementconsulting]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -42,9 +42,9 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[mcs_id]
 ,[mcs_actualtime]
 ,[mcs_assignedto]
-,CONVERT(VARCHAR(10),[mcs_completed], 101)AS[mcs_completed]
+,[mcs_completed]=FORMAT(mcs_completed,'d','#Session.localization.language#') 
 ,[mcs_dependencies]
-,CONVERT(VARCHAR(10),[mcs_duedate], 101)AS[mcs_duedate]
+,[mcs_duedate]=FORMAT(mcs_duedate,'d','#Session.localization.language#') 
 ,[mcs_esttime]
 ,[mcs_notes]
 ,[mcs_sequence]
@@ -102,7 +102,7 @@ SELECT[mc_id]
 ,[mc_description]
 ,[mc_status]
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
-,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
 FROM[v_managementconsulting]
 WHERE[mc_status] != 2 
 AND [mc_status] != 3

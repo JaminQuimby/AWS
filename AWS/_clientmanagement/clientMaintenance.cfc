@@ -54,7 +54,7 @@ SELECT TOP(1)
 	,[client_notes]
 	,[client_referred_by]
 	,[client_salutation]
-	,CONVERT(VARCHAR(10),[client_since], 101)AS[client_since]
+	,[client_since]=FORMAT(client_since,'d','#Session.localization.language#') 
 	,[client_spouse]
 	,[client_trade_name]
 	,[client_type]
@@ -235,7 +235,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[client_id]
 ,[client_name]
 ,[client_salutation]
-,CONVERT(VARCHAR(10),[client_since], 101)AS[client_since]
+,[client_since]=FORMAT(client_since,'d','#Session.localization.language#') 
 ,[client_type]
 ,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 FROM[v_client_listing]
@@ -318,7 +318,7 @@ SELECT[fds_id]
 ,[client_name]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_year]
-,CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend]
+,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
 FROM[v_financialDataStatus]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -351,7 +351,7 @@ SELECT[mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_description]
 ,[mc_status]
-,CONVERT(VARCHAR(10),[mc_duedate], 101)AS[mc_duedate]
+,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
 FROM[v_managementconsulting]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -382,14 +382,14 @@ SELECT[pc_id]
 ,[pc_year]
 ,[client_name]
 ,[client_id]
-,CONVERT(VARCHAR(10),[pc_paydate], 101)AS[pc_paydate]
-,CONVERT(VARCHAR(10),[pc_payenddate], 101)AS[pc_payenddate]
-,CONVERT(VARCHAR(10),[pc_duedate], 101)AS[pc_duedate]
- ,[pc_obtaininfo_assignedtoTEXT]
- ,[pc_preparation_assignedtoTEXT]
- ,[pc_review_assignedtoTEXT]
- ,[pc_assembly_assignedtoTEXT]
- ,[pc_delivery_assignedtoTEXT]
+,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
+,[pc_payenddate]=FORMAT(pc_payenddate,'d','#Session.localization.language#') 
+,[pc_duedate]=FORMAT(pc_duedate,'d','#Session.localization.language#') 
+,[pc_obtaininfo_assignedtoTEXT]
+,[pc_preparation_assignedtoTEXT]
+,[pc_review_assignedtoTEXT]
+,[pc_assembly_assignedtoTEXT]
+,[pc_delivery_assignedtoTEXT]
 ,[pc_esttime]
 FROM[v_payrollcheckstatus]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
@@ -542,7 +542,7 @@ WHERE(
 SELECT[client_id]
 ,[client_name]
 ,[client_active]
-,CONVERT(VARCHAR(10),[client_since], 101)AS[client_since]
+,[client_since]=FORMAT(client_since,'d','#Session.localization.language#') 
 ,[client_typeTEXT]
 ,[client_type]
 FROM[v_client_listing]
@@ -1107,6 +1107,23 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>
+<cfcase value="group3">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+update[client_contact]
+SET[contact_active]=0
+WHERE[contact_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group3","result":"ok"}'>
+</cfcase>
+<cfcase value="group5">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+update[client_state]
+SET[si_active]=0
+WHERE[si_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group5","result":"ok"}'>
+</cfcase>
+
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->

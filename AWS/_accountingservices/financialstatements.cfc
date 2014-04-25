@@ -71,17 +71,18 @@ AND[fds_periodend]=<cfqueryparam value="#item[4]#">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_id]
 ,[client_id]
-,CONVERT(VARCHAR(10),[fds_cmireceived], 101)AS[fds_cmireceived]
+,[fds_cmireceived]=FORMAT(fds_cmireceived,'d','#Session.localization.language#') 
 ,[fds_compilemi]
 ,[fds_deliverymethod]
-,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
+,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
 ,[fds_esttime]
 ,[fds_fees]
-,CONVERT(VARCHAR(10),[fds_missinginforeceived], 101)AS[fds_missinginforeceived]
+,[fds_inforeceived]=FORMAT(fds_inforeceived,'d','#Session.localization.language#') 
+,[fds_missinginforeceived]=FORMAT(fds_missinginforeceived,'d','#Session.localization.language#') 
 ,[fds_missinginfo]
 ,[fds_month]
 ,[fds_paid]
-,CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend]
+,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
 ,[fds_priority]
 ,[fds_status]
 ,[fds_year]
@@ -94,7 +95,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_obtaininfo_assignedto]
 ,[fds_obtaininfo_completedby]
-,CONVERT(VARCHAR(10),[fds_obtaininfo_datecompleted], 101)AS[fds_obtaininfo_datecompleted]
+,[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#') 
 ,[fds_obtaininfo_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -105,7 +106,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_sort_assignedto]
 ,[fds_sort_completedby]
-,CONVERT(VARCHAR(10),[fds_sort_datecompleted], 101)AS[fds_sort_datecompleted]
+,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#') 
 ,[fds_sort_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -116,7 +117,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_checks_assignedto]
 ,[fds_checks_completedby]
-,CONVERT(VARCHAR(10),[fds_checks_datecompleted], 101)AS[fds_checks_datecompleted]
+,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#') 
 ,[fds_checks_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -127,7 +128,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_sales_assignedto]
 ,[fds_sales_completedby]
-,CONVERT(VARCHAR(10),[fds_sales_datecompleted], 101)AS[fds_sales_datecompleted]
+,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#') 
 ,[fds_sales_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -138,7 +139,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_entry_assignedto]
 ,[fds_entry_completedby]
-,CONVERT(VARCHAR(10),[fds_entry_datecompleted], 101)AS[fds_entry_datecompleted]
+,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#') 
 ,[fds_entry_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -149,7 +150,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_reconcile_assignedto]
 ,[fds_reconcile_completedby]
-,CONVERT(VARCHAR(10),[fds_reconcile_datecompleted], 101)AS[fds_reconcile_datecompleted]
+,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#') 
 ,[fds_reconcile_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -160,7 +161,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_compile_assignedto]
 ,[fds_compile_completedby]
-,CONVERT(VARCHAR(10),[fds_compile_datecompleted], 101)AS[fds_compile_datecompleted]
+,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#') 
 ,[fds_compile_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -171,7 +172,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_review_assignedto]
 ,[fds_review_completedby]
-,CONVERT(VARCHAR(10),[fds_review_datecompleted], 101)AS[fds_review_datecompleted]
+,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'d','#Session.localization.language#') 
 ,[fds_review_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -182,7 +183,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_assembly_assignedto]
 ,[fds_assembly_completedby]
-,CONVERT(VARCHAR(10),[fds_assembly_datecompleted], 101)AS[fds_assembly_datecompleted]
+,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#') 
 ,[fds_assembly_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -193,7 +194,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_delivery_assignedto]
 ,[fds_delivery_completedby]
-,CONVERT(VARCHAR(10),[fds_delivery_datecompleted], 101)AS[fds_delivery_datecompleted]
+,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#') 
 ,[fds_delivery_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -204,7 +205,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_acctrpt_assignedto]
 ,[fds_acctrpt_completedby]
-,CONVERT(VARCHAR(10),[fds_acctrpt_datecompleted], 101)AS[fds_acctrpt_datecompleted]
+,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#') 
 ,[fds_acctrpt_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -215,8 +216,8 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fdss_id]
 ,[fdss_assignedto]
-,CONVERT(VARCHAR(10),[fdss_completed], 101)AS[fdss_completed]
-,CONVERT(VARCHAR(10),[fdss_duedate], 101)AS[fdss_duedate]
+,[fdss_completed]=FORMAT(fdss_completed,'d','#Session.localization.language#') 
+,[fdss_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#') 
 ,[fdss_notes]
 ,[fdss_sequence]
 ,[fdss_status]
@@ -303,11 +304,11 @@ ORDER BY [fds_Year] DESC ,[fds_periodend]
 SELECT[fds_id]
 ,[client_id]
 ,[client_name]
-,CONVERT(VARCHAR(10),[fds_periodend], 101)AS[fds_periodend]
+,[fds_periodend]=FORMAT(fdss_duedate,'d','#Session.localization.language#') 
 ,[fds_month]
 ,[fds_year]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
-,CONVERT(VARCHAR(10),[fds_duedate], 101)AS[fds_duedate]
+,[fds_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#') 
 ,[fds_status]
 ,[fds_missinginfo]
 ,[fds_compilemi]
@@ -431,7 +432,7 @@ AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Group1 --->
 <cfcase value="group1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][4])><cfset j.DATA[1][4]=1><cfelse><cfset j.DATA[1][4]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][11])><cfset j.DATA[1][11]=1><cfelse><cfset j.DATA[1][11]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -444,6 +445,7 @@ INSERT INTO[financialdatastatus](
 ,[fds_duedate]
 ,[fds_esttime]
 ,[fds_fees]
+,[fds_inforeceived]
 ,[fds_missinginforeceived]
 ,[fds_missinginfo]
 ,[fds_month]
@@ -469,6 +471,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -494,14 +497,15 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fds_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[fds_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[fds_fees]=<cfqueryparam value="#j.DATA[1][8]#"  null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[fds_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[fds_missinginfo]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[fds_month]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[fds_paid]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[fds_periodend]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[fds_priority]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[fds_status]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[fds_year]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[fds_inforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[fds_missinginforeceived]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[fds_missinginfo]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[fds_month]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[fds_paid]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[fds_periodend]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[fds_priority]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[fds_status]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[fds_year]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 

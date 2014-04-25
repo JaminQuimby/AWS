@@ -68,6 +68,8 @@ _grid3=function(){_jGrid({
 	"url":"clientMaintenance.cfc",
 	"title":"Client Contacts",
 	"fields":{CONTACT_ID:{key:true,list:false,edit:false}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CONTACT_ID+"',page:'clientmaintenance',group:'group3'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+
 			,CONTACT_NAME:{title:'Contact'}
 			,CONTACT_PHONE1:{title:'Phone 1',width:'1%'}
 			,CONTACT_EMAIL1:{title:'Email 1'}
@@ -180,6 +182,7 @@ _grid5=function(){_jGrid({
 	"url":"clientMaintenance.cfc",
 	"title":"State Information",
 	"fields":{SI_ID:{key:true,list:false,edit:false}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.SI_ID+"',page:'clientmaintenance',group:'group5'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,SI_STATETEXT:{title:'State'}
 			,SI_REVENUE:{title:'Revenue',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}}
 			,SI_EMPLOYEES:{title:'Employees',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}}
@@ -234,7 +237,6 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 switch(options["group"]){
 case'':
 if($("#g1_name").val()!=""){

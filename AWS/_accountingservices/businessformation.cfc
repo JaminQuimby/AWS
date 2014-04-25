@@ -52,11 +52,11 @@ SELECT[bf_id]
 ,[client_id]
 ,[bf_activity]
 ,[bf_assignedto]
-,CONVERT(VARCHAR(10),[bf_businessreceived], 101)AS[bf_businessreceived]
-,CONVERT(VARCHAR(10),[bf_businesssubmitted], 101)AS[bf_businesssubmitted]
+,[bf_businessreceived]=FORMAT(bf_businessreceived,'d','#Session.localization.language#') 
+,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'d','#Session.localization.language#') 
 ,[bf_businesstype]
-,CONVERT(VARCHAR(10),[bf_dateinitiated], 101)AS[bf_dateinitiated]
-,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
+,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'d','#Session.localization.language#') 
+,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_esttime]
 ,[bf_fees]
 ,[bf_owners]
@@ -71,8 +71,8 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_1--->
 <cfcase value="group1_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[bf_articlesapproved], 101)AS[bf_articlesapproved]
-,CONVERT(VARCHAR(10),[bf_articlessubmitted], 101)AS[bf_articlessubmitted]
+SELECT [bf_articlesapproved]=FORMAT(bf_articlesapproved,'d','#Session.localization.language#') 
+,[bf_articlessubmitted]=FORMAT(bf_articlessubmitted,'d','#Session.localization.language#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -81,8 +81,8 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_2--->
 <cfcase value="group1_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[bf_tradenamereceived], 101)AS[bf_tradenamereceived]
-,CONVERT(VARCHAR(10),[bf_tradenamesubmitted], 101)AS[bf_tradenamesubmitted]
+SELECT [bf_tradenamereceived]=FORMAT(bf_tradenamereceived,'d','#Session.localization.language#') 
+,[bf_tradenamesubmitted]=FORMAT(bf_tradenamesubmitted,'d','#Session.localization.language#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -91,9 +91,9 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_3--->
 <cfcase value="group1_3">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[bf_minutesbylawsdraft], 101)AS[bf_minutesbylawsdraft]
-,CONVERT(VARCHAR(10),[bf_minutesbylawsfinal], 101)AS[bf_minutesbylawsfinal]
-,CONVERT(VARCHAR(10),[bf_minutescompleted], 101)AS[bf_minutescompleted]
+SELECT [bf_minutesbylawsdraft]=FORMAT(bf_minutesbylawsdraft,'d','#Session.localization.language#') 
+,[bf_minutesbylawsfinal]=FORMAT(bf_minutesbylawsfinal,'d','#Session.localization.language#') 
+,[bf_minutescompleted]=FORMAT(bf_minutescompleted,'d','#Session.localization.language#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -102,9 +102,9 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_4--->
 <cfcase value="group1_4">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[bf_dissolutioncompleted], 101)AS[bf_dissolutioncompleted]
-,CONVERT(VARCHAR(10),[bf_dissolutionrequested], 101)AS[bf_dissolutionrequested]
-,CONVERT(VARCHAR(10),[bf_dissolutionsubmitted], 101)AS[bf_dissolutionsubmitted]
+SELECT [bf_dissolutioncompleted]=FORMAT(bf_dissolutioncompleted,'d','#Session.localization.language#') 
+,[bf_dissolutionrequested]=FORMAT(bf_dissolutionrequested,'d','#Session.localization.language#') 
+,[bf_dissolutionsubmitted]=FORMAT(bf_dissolutionsubmitted,'d','#Session.localization.language#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -113,9 +113,9 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_5--->
 <cfcase value="group1_5">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[bf_otheractivity], 101)AS[bf_otheractivity]
-,CONVERT(VARCHAR(10),[bf_othercompleted], 101)AS[bf_othercompleted]
-,CONVERT(VARCHAR(10),[bf_otherstarted], 101)AS[bf_otherstarted]
+SELECT [bf_otheractivity]=FORMAT(bf_otheractivity,'d','#Session.localization.language#') 
+,[bf_othercompleted]=FORMAT(bf_othercompleted,'d','#Session.localization.language#') 
+,[bf_otherstarted]=FORMAT(bf_otherstarted,'d','#Session.localization.language#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -126,8 +126,8 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[bfs_id]
 ,[bfs_assignedto]
-,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
-,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
+,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#') 
+,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'d','#Session.localization.language#') 
 ,[bfs_estimatedtime]
 ,[bfs_taskname]
 FROM[businessformation_subtask]
@@ -173,7 +173,7 @@ SELECT[bf_id]
 ,[client_name]
 ,[bf_owners]
 ,[bf_status]
-,CONVERT(VARCHAR(10),[bf_duedate], 101)AS[bf_duedate]
+,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_assignedtoTEXT]
 ,[bf_activity]
@@ -213,8 +213,8 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT[bfs_id]
 ,[bfs_taskname]
 ,[bfs_assignedtoTEXT]
-,CONVERT(VARCHAR(10),[bfs_dateinitiated], 101)AS[bfs_dateinitiated]
-,CONVERT(VARCHAR(10),[bfs_datecompleted], 101)AS[bfs_datecompleted]
+,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'d','#Session.localization.language#')
+,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#')
 ,bfs_estimatedtime
 FROM[v_businessformation_subtask]
 WHERE
