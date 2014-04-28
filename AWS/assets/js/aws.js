@@ -837,13 +837,14 @@ var
 list=options['list'].split(',');
 
 		for(var i=0;i<list.length;i++){
-				 if($('#'+list[i]).is(":text")){ $('#'+list[i]).val(''); }
-			else if($('#'+list[i]).is(":checkbox")){
-				$('#'+list[i]).removeAttr('checked');
-				}
-			else if($('#'+list[i]).is(":selected")){
-				$('#'+sel[i]).find('option').prop('selected',false);
-				$('#'+sel[i]).each(function(){$('#'+sel[i]+'option').removeAttr("selected")}).trigger("chosen:updated");
+			listitem=$('#'+list[i])
+				 if(listitem.is(":text")){ 		listitem.val('');}
+			else if(listitem.is(":checkbox")){	listitem.removeAttr('checked');}
+			else if(listitem.is("select")){
+				
+				 listitem.prop('selectedIndex', 0).children().each( function() {$(this).removeAttr('selected'); }).trigger("chosen:updated");
+				
+			
 				}
 			else{ $('#'+list[i]).val(''); }
 			

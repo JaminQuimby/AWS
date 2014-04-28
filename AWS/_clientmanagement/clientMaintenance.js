@@ -1,9 +1,24 @@
 $(document).ready(function(){_grid1()});
 
 var _run={
-	 new_group1:function(){$("#g1_active").prop('checked',true);document.getElementById('content').className='contentbig';_addNewTask();_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6');}
+	 new_group1:function(){
+		 
+		 $("#g1_active").prop('checked',true);
+		 document.getElementById('content').className='contentbig';
+		 _addNewTask();_toggle('group1,largeMenu');
+		 _hide('entrance,smallMenu,group2,group3,group4,group5,group6');
+		 
+		 }
 	,new_group1_1:function(){$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);_clearfields({"list":"g1_g2_fieldname,g1_g2_fieldvalue,g1_g3_group"});}
-	,new_group3:function(){$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);$("#co_id").val(0);_clearfields({"list":"g3_type,g3_name,g3_address1,g3_address2,g3_city,g3_state,g3_zip,g3_phone1,g3_ext1,g3_phone2,g3_ext2,g3_phone3,g3_phone4,g3_phone5,g3_email1,g3_email2,g3_website,g3_effectivedate,g3_acctsoftwareupdate,g3_taxupdate,g3_customvalue"});}
+	,new_group3:function(){
+		
+		$("#group3").accordion({active:1});
+		$("#isLoaded_group3").val(1);
+		$("#co_id").val(0);
+		_clearfields({"list":"g3_type,g3_name,g3_address1,g3_address2,g3_city,g3_state,g3_zip,g3_phone1,g3_ext1,g3_phone2,g3_ext2,g3_phone3,g3_phone4,g3_phone5,g3_email1,g3_email2,g3_website,g3_effectivedate,g3_acctsoftwareupdate,g3_taxupdate,g3_customvalue"});
+		}
+		
+		
 	,new_group4_1:function(){}
 	,new_group4_2:function(){}
 	,new_group4_3:function(){}
@@ -226,6 +241,9 @@ switch(query.COLUMNS[0]){
 /*Group 2_2*/case "CLIENT_PAYROLL_PREP":var list='g2_g2_payrollpreparation,g2_g2_paycheckfrequency,g2_g2_payrolltaxservices,g2_g2_prtaxdepositschedule,g2_g2_1099preparation,g2_g2_ein,g2_g2_pin,g2_g2_password';_loadit({"query":query,"list":list});break;
 /*Group 2_3*/case "CLIENT_ACCOUNTING_SERVICES":var list='g2_g3_accountingServices,g2_g3_bookkeeping,g2_g3_compilation,g2_g3_review,g2_g3_audit,g2_g3_financialstatementfreq,g2_g3_fiscalyearend,g2_g3_software,g2_g3_version,g2_g3_username,g2_g3_accountingpassword';_loadit({"query":query,"list":list});break;
 /*Group 3*/case "CONTACT_ID":var list='co_id,g3_acctsoftwareupdate,g3_address1,g3_address2,g3_city,g3_customlabel,g3_customvalue,g3_effectivedate,g3_email1,g3_email2,g3_ext1,g3_ext2,g3_name,g3_phone1,g3_phone2,g3_phone3,g3_phone4,g3_phone5,g3_state,g3_taxupdate,g3_type,g3_website,g3_zip';_loadit({"query":query,"list":list});break;
+
+
+
 /*Group 5*/case "SI_ID":var list="si_id,g5_state,g5_revenue,g5_employees,g5_property,g5_nexus,g5_reason,g5_registered,g5_value1,g5_value2,g5_value3,g5_value4";_loadit({"query":query,"list":list});break;
 /*Group 5_1*/case"CLIENT_STATELABEL1":var list="g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4";_loadit({"query":query,"list":list});break;
 /*Group 6*/case"CLIENT_RELATIONS":var list="g6_group";_loadit({"query":query,"list":list});break;
@@ -234,7 +252,7 @@ else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error"
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
 _saveDataCB=function(params){
-var options={"id":"","group":"","subgroup":"","result":""}
+var options={"id":"","contact_id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 switch(options["group"]){
@@ -385,6 +403,7 @@ else{_saveDataCB({'group':'group5'})}
 break;
 
 case'group5':
+$("#co_id").val(options["contact_id"]);
 var json='{"DATA":[["'+
 $("#si_id").val()+'","'+
 $("#client_id").val()+'",'+

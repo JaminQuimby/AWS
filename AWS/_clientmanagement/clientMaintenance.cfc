@@ -912,7 +912,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[contact_id]
 </cfquery>
-<cfreturn '{"id":#fquery.contact_id#,"group":"group5","result":"ok"}'>
+<cfreturn '{"contact_id":#fquery.contact_id#,"group":"group5","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -946,7 +946,7 @@ SET[contact_acctsoftwareupdate]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(
 ,[contact_zip]=<cfqueryparam value="#j.DATA[1][24]#"null="#LEN(j.DATA[1][24]) eq 0#"/>
 WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"group5","result":"ok"}'>
+<cfreturn '{"contact_id":#j.DATA[1][1]#,"group":"group5","result":"ok"}'>
 </cfif>
 </cfcase>
 
