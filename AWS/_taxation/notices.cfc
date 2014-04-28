@@ -82,7 +82,7 @@ SELECT[nst_id]
       ,[nst_esttime]
       ,[nst_fees]
       ,[nst_missinginfo]
-      ,CONVERT(VARCHAR(10),[nst_missinginforeceived], 1)AS[nst_missinginforeceived]
+      ,[nst_missinginforeceived]=FORMAT(nst_missinginforeceived,'d','#Session.localization.language#')
       ,[nst_status]
       ,[nst_paid]
       ,[nst_priority]
@@ -93,11 +93,11 @@ WHERE[nst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub1 --->
 <cfcase value="group2_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[nst_1_datenoticerec], 101)AS[nst_1_datenoticerec]
+SELECT [nst_1_datenoticerec]=FORMAT(nst_1_datenoticerec,'d','#Session.localization.language#')
 	   ,[nst_1_methodreceived]
-	   ,CONVERT(VARCHAR(10),[nst_1_noticedate], 101)AS[nst_1_noticedate]
+	   ,[nst_1_noticedate]=FORMAT(nst_1_noticedate,'d','#Session.localization.language#')
 	   ,[nst_1_noticenumber]
-	   ,CONVERT(VARCHAR(10),[nst_1_resduedate], 101)AS[nst_1_resduedate]
+	   ,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
 	   ,[nst_1_taxform]
 	   ,[nst_1_taxyear]
 FROM[notice_subtask]
@@ -107,13 +107,13 @@ WHERE[nst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 sub2 --->
 <cfcase value="group2_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(VARCHAR(10),[nst_2_irsstateresponse], 1)AS[nst_2_irsstateresponse]
-	  ,CONVERT(VARCHAR(10),[nst_2_rescompleted], 1)AS[nst_2_rescompleted]
+SELECT [nst_2_irsstateresponse]=FORMAT(nst_2_irsstateresponse,'d','#Session.localization.language#')
+	  ,[nst_2_rescompleted]=FORMAT(nst_2_rescompleted,'d','#Session.localization.language#')
 	  ,[nst_2_rescompletedby]
- 	  ,CONVERT(VARCHAR(10),[nst_2_ressubmited], 1)AS[nst_2_ressubmited]      
+ 	  ,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#')
 	  ,[nst_2_revassignedto]
-	  ,CONVERT(VARCHAR(10),[nst_2_revcompleted], 1)AS[nst_2_revcompleted]
-	  ,CONVERT(VARCHAR(10),[nst_2_revrequired], 1)AS[nst_2_revrequired]  
+	  ,[nst_2_revcompleted]=FORMAT(nst_2_revcompleted,'d','#Session.localization.language#')
+	  ,[nst_2_revrequired]=FORMAT(nst_2_revrequired,'d','#Session.localization.language#')
 FROM[notice_subtask]
 WHERE[nst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -196,7 +196,7 @@ SELECT[n_id]
 ,[nst_1_taxform]
 ,[nst_1_taxyear]
 ,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
-,CONVERT(VARCHAR(10),[nst_1_resduedate], 1)AS[nst_1_resduedate]
+,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
 FROM[v_notice_subtask]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND ([nst_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR [nst_assignedtoTEXT]IS NULL)

@@ -17,10 +17,10 @@ SELECT
 ,[user_id]
 ,[tb_adjustment]
 ,[tb_billingtype]
-,CONVERT(VARCHAR(10),[tb_date], 101)AS[tb_date]
+,[tb_date]=FORMAT(tb_date,'d','#Session.localization.language#') 
 ,[tb_description]
 ,[tb_flatfee]
-,CONVERT(VARCHAR(5),[tb_manualtime], 108)AS[tb_manualtime]
+,[tb_manualtime]=FORMAT(tb_manualtime,'d','#Session.localization.language#') 
 ,[tb_mileage]
 ,[tb_notes]
 ,[tb_paymentstatus]
@@ -32,9 +32,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
-
 </cffunction>
-
 
 
 <!--- LOOKUP DATA --->
@@ -48,15 +46,13 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="formid" type="string" required="no">
 <cfargument name="taskid" type="string" required="no">
 
-
-
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 102  --->
 <cfcase value="group102">
 
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tb_id]
-,CONVERT(VARCHAR(10),[tb_date], 101)AS[tb_date]
+,[tb_date]=FORMAT(tb_date,'d','#Session.localization.language#') 
 ,[u_name]
 ,[tb_description]
 FROM[v_timebilling]
@@ -86,8 +82,8 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[t_id]
 ,[tb_id]
-,CONVERT(VARCHAR(8),t_start,108)AS[t_start]
-,CONVERT(VARCHAR(8),t_stop,108)AS[t_stop]
+,[t_start]=FORMAT(t_start,'d','#Session.localization.language#') 
+,[t_stop]=FORMAT(t_stop,'d','#Session.localization.language#') 
 FROM[v_time]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>

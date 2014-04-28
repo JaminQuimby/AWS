@@ -37,16 +37,16 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 SELECT[ftp_id]
 ,[ftp_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])
 ,[ftp_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])
-,CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate]
+,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
 ,[ftp_assignedtoTEXT]
-,CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice]
-,CONVERT(VARCHAR(10),[ftp_inforequested], 1)AS[ftp_inforequested]
-,CONVERT(VARCHAR(10),[ftp_inforeceived], 1)AS[ftp_inforeceived]
-,CONVERT(VARCHAR(10),[ftp_infocompiled], 1)AS[ftp_infocompiled]
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
+,[ftp_inforequested]=FORMAT(ftp_inforequested,'d','#Session.localization.language#')
+,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'d','#Session.localization.language#')
+,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'d','#Session.localization.language#')
 ,[ftp_missinginfo]
-,CONVERT(VARCHAR(10),[ftp_missinginforeceived], 1)AS[ftp_missinginforeceived]
-,CONVERT(VARCHAR(10),[ftp_reportcompleted], 1)AS[ftp_reportcompleted]
-,CONVERT(VARCHAR(10),[ftp_finalclientmeeting], 1)AS[ftp_finalclientmeeting]
+,[ftp_missinginforeceived]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
+,[ftp_reportcompleted]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
+,[ftp_finalclientmeeting]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
 ,FORMAT(ftp_fees, 'C', 'en-us')AS[ftp_fees]
 ,[ftp_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[ftp_paid]=[optionvalue_id])
 ,[client_name]

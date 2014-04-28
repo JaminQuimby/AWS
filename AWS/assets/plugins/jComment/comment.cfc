@@ -16,7 +16,11 @@
 <!--- Grid 101  --->
 <cfcase value="group101">
 <cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[comment_id],CONVERT(VARCHAR(10),[c_date], 101)AS[c_date],[u_name],[u_email],CASE WHEN LEN([c_notes]) >= 101 THEN SUBSTRING([c_notes],0,100) +  '...' ELSE [c_notes] END AS[c_notes]
+SELECT[comment_id]
+,[c_date]=FORMAT(c_date,'d','#Session.localization.language#') 
+,[u_name]
+,[u_email]
+,CASE WHEN LEN([c_notes]) >= 101 THEN SUBSTRING([c_notes],0,100) +  '...' ELSE [c_notes] END AS[c_notes]
 FROM[v_comments]
 WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
 AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>

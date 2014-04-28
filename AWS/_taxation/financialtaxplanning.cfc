@@ -19,19 +19,19 @@ SELECT[FTP_ID]
  ,[client_id]
  ,[ftp_assignedto]
  ,[ftp_category]
- ,CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate]
+ ,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
  ,[ftp_esttime]
  ,[ftp_fees]
- ,CONVERT(VARCHAR(10),[ftp_finalclientmeeting], 1)AS[ftp_finalclientmeeting]
- ,CONVERT(VARCHAR(10),[ftp_infocompiled], 1)AS[ftp_infocompiled]
- ,CONVERT(VARCHAR(10),[ftp_inforeceived], 1)AS[ftp_inforeceived]
- ,CONVERT(VARCHAR(10),[ftp_inforequested], 1)AS[ftp_inforequested]
+ ,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'d','#Session.localization.language#')
+ ,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'d','#Session.localization.language#')
+ ,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'d','#Session.localization.language#')
+ ,[ftp_inforequested]=FORMAT(ftp_inforequested,'d','#Session.localization.language#')
  ,[ftp_missinginfo]
- ,CONVERT(VARCHAR(10),[ftp_missinginforeceived], 1)AS[ftp_missinginforeceived]
+ ,[ftp_missinginforeceived]=FORMAT(ftp_missinginforeceived,'d','#Session.localization.language#')
  ,[ftp_paid]
  ,[ftp_priority]
- ,CONVERT(VARCHAR(10),[ftp_reportcompleted], 1)AS[ftp_reportcompleted]
- ,CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice]
+ ,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'d','#Session.localization.language#')
+ ,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
  ,[ftp_status]
 FROM[financialtaxplanning]
 WHERE[ftp_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -76,8 +76,8 @@ SELECT[ftp_id]
 ,[ftp_status]
 ,[ftp_category]
 ,[ftp_assignedtoTEXT]
-,CONVERT(VARCHAR(10),[ftp_duedate], 1)AS[ftp_duedate]
-,CONVERT(VARCHAR(10),[ftp_requestservice], 1)AS[ftp_requestservice]
+,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
 ,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]

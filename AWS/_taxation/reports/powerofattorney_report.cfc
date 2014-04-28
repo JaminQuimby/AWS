@@ -49,9 +49,9 @@ SELECT[pa_id]
 ,pa_taxmattersTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxmatters') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxmatters)))FOR XML PATH('')),3,1000)
 ,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
 
-,CONVERT(VARCHAR(10),[pa_datesignedbyclient], 1)AS[pa_datesignedbyclient]
-,CONVERT(VARCHAR(10),[pa_datesenttoirs], 1)AS[pa_datesenttoirs]
-,CONVERT(VARCHAR(10),[pa_dateofrevocation], 1)AS[pa_dateofrevocation]
+,[pa_datesignedbyclient]=FORMAT(pa_datesignedbyclient,'d','#Session.localization.language#')
+,[pa_datesenttoirs]=FORMAT(pa_datesenttoirs,'d','#Session.localization.language#')
+,[pa_dateofrevocation]=FORMAT(pa_dateofrevocation,'d','#Session.localization.language#')
 
 
 FROM[v_powerofattorney]
