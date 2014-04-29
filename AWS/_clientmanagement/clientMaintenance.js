@@ -84,8 +84,9 @@ _grid3=function(){_jGrid({
 	"title":"Client Contacts",
 	"fields":{CONTACT_ID:{key:true,list:false,edit:false}
 			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CONTACT_ID+"',page:'clientmaintenance',group:'group3'});_grid3();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-			,CONTACT_TYPETEXT:{title:'Type'}
 			,CONTACT_NAME:{title:'Contact'}
+			,CONTACT_TYPETEXT:{title:'Type'}
+			,CONTACT_TITLE:{title:'Title'}
 			,CONTACT_PHONE1:{title:'Phone 1'}
 			,CONTACT_EMAIL1:{title:'Email 1'}
 			},
@@ -240,10 +241,7 @@ switch(query.COLUMNS[0]){
 /*Group 2_1*/case "CLIENT_TAX_SERVICES":var list='g2_g1_taxservices,g2_g1_formtype,g2_g1_businessc,g2_g1_rentalpropertye,g2_g1_disregardedentity,g2_g1_personalproperty';_loadit({"query":query,"list":list});break;
 /*Group 2_2*/case "CLIENT_PAYROLL_PREP":var list='g2_g2_payrollpreparation,g2_g2_paycheckfrequency,g2_g2_payrolltaxservices,g2_g2_prtaxdepositschedule,g2_g2_1099preparation,g2_g2_ein,g2_g2_pin,g2_g2_password';_loadit({"query":query,"list":list});break;
 /*Group 2_3*/case "CLIENT_ACCOUNTING_SERVICES":var list='g2_g3_accountingServices,g2_g3_bookkeeping,g2_g3_compilation,g2_g3_review,g2_g3_audit,g2_g3_financialstatementfreq,g2_g3_fiscalyearend,g2_g3_software,g2_g3_version,g2_g3_username,g2_g3_accountingpassword';_loadit({"query":query,"list":list});break;
-/*Group 3*/case "CONTACT_ID":var list='co_id,g3_acctsoftwareupdate,g3_address1,g3_address2,g3_city,g3_customlabel,g3_customvalue,g3_effectivedate,g3_email1,g3_email2,g3_ext1,g3_ext2,g3_name,g3_phone1,g3_phone2,g3_phone3,g3_phone4,g3_phone5,g3_state,g3_taxupdate,g3_type,g3_website,g3_zip';_loadit({"query":query,"list":list});break;
-
-
-
+/*Group 3*/case "CONTACT_ID":var list='co_id,g3_acctsoftwareupdate,g3_address1,g3_address2,g3_city,g3_customlabel,g3_customvalue,g3_effectivedate,g3_email1,g3_email2,g3_ext1,g3_ext2,g3_name,g3_phone1,g3_phone2,g3_phone3,g3_phone4,g3_phone5,g3_state,g3_taxupdate,g3_title,g3_type,g3_website,g3_zip';_loadit({"query":query,"list":list});break;
 /*Group 5*/case "SI_ID":var list="si_id,g5_state,g5_revenue,g5_employees,g5_property,g5_nexus,g5_reason,g5_registered,g5_value1,g5_value2,g5_value3,g5_value4";_loadit({"query":query,"list":list});break;
 /*Group 5_1*/case"CLIENT_STATELABEL1":var list="g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4";_loadit({"query":query,"list":list});break;
 /*Group 6*/case"CLIENT_RELATIONS":var list="g6_group";_loadit({"query":query,"list":list});break;
@@ -394,6 +392,7 @@ $("#g3_phone4").val().replace(/[^0-9\.]/g, '')+'","'+
 $("#g3_phone5").val().replace(/[^0-9\.]/g, '')+'","'+
 $("#g3_state").val()+'",'+
 $("#g3_taxupdate").is(':checked')+',"'+
+$("#g3_title").val()+'","'+
 $("#g3_type").val()+'","'+
 $("#g3_website").val()+'","'+
 $("#g3_zip").val()+'","'+

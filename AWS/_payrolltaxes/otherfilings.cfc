@@ -90,6 +90,7 @@ SELECT[OF_ID]
 ,[of_fees]
 ,[of_filingdeadline]=FORMAT(of_filingdeadline,'d','#Session.localization.language#') 
 ,[of_form]
+,[of_informationreceived]=FORMAT(of_informationreceived,'d','#Session.localization.language#') 
 ,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'d','#Session.localization.language#') 
 ,[of_missinginfo]
 ,[of_paid]
@@ -231,6 +232,7 @@ SELECT[of_id]
 ,[of_assembly_assignedto]
 ,[of_delivery_assignedto]
 ,[of_duedate]=FORMAT(of_duedate,'d','#Session.localization.language#') 
+,[of_informationreceived]=FORMAT(of_informationreceived,'d','#Session.localization.language#') 
 ,[of_missinginfo]
 ,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'d','#Session.localization.language#') 
 ,[of_filingdeadline]=FORMAT(of_filingdeadline,'d','#Session.localization.language#') 
@@ -276,6 +278,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"OF_DUEDATE":"'&OF_DUEDATE&'"						
 								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
 								,"OF_FILINGDEADLINE":"'&OF_FILINGDEADLINE&'"
+ 								,"OF_INFORMATIONRECEIVED":"'&OF_INFORMATIONRECEIVED&'"								
  								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
  								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"								
 								,"OF_OBTAININFO":"'&of_obtaininfo_datecompleted&'<br/>'&of_obtaininfo_assignedtoTEXT&'"
@@ -308,7 +311,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][12])><cfset j.DATA[1][12]=1><cfelse><cfset j.DATA[1][12]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][13])><cfset j.DATA[1][13]=1><cfelse><cfset j.DATA[1][13]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -323,6 +326,7 @@ INSERT INTO[otherfilings](
 ,[of_fees]
 ,[of_filingdeadline]
 ,[of_form]
+,[of_informationreceived]
 ,[of_missinginforeceived]
 ,[of_missinginfo]
 ,[of_paid]
@@ -352,6 +356,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -376,15 +381,16 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[of_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[of_filingdeadline]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[of_form]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[of_missinginforeceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[of_missinginfo]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[of_paid]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[of_period]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[of_priority]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[of_state]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
-,[of_status]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
-,[of_type]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
-,[of_taxyear]=<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
+,[of_informationreceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[of_missinginforeceived]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[of_missinginfo]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[of_paid]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[of_period]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[of_priority]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[of_state]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
+,[of_status]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+,[of_type]=<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
+,[of_taxyear]=<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0#"/>
 WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

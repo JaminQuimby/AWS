@@ -159,7 +159,8 @@ ACTIVITY (CLIENT DATA)
 <h4 onclick="_run.load_group3();">Contact</h4>
 <div>
 <div><label for="g3_type">Type</label><select id="g3_type"><option value="0">&nbsp;</option><cfoutput query="global_contacttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g3_name">Contact Name</label><input id="g3_name" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
+<div><label for="g3_name">Contact Name</label><input id="g3_name" type="text" /></div>
+<div><label for="g3_title">Title</label><input id="g3_title" type="text"/></div>
 <div><label for="g3_address1">Street #1</label><input id="g3_address1" maxlength="50" type="text"/></div>
 <div><label for="g3_address2">Street #2</label><input id="g3_address2" maxlength="50" type="text"/></div>
 <div><label for="g3_city">City</label><input id="g3_city" maxlength="25" type="text" /></div>

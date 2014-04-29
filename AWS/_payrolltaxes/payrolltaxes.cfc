@@ -56,6 +56,7 @@ SELECT[PT_ID]
 ,[pt_esttime]
 ,[pt_fees]
 ,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#')
+,[pt_informationreceived]=FORMAT(pt_informationreceived,'d','#Session.localization.language#')
 ,[pt_missinginfo]
 ,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
 ,[pt_month]
@@ -209,6 +210,7 @@ SELECT[pt_id]
 ,[pt_assembly_assignedtoTEXT]
 ,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[pt_delivery_assignedtoTEXT]
+,[pt_informationreceived]=FORMAT(pt_informationreceived,'d','#Session.localization.language#')
 ,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
 ,[pt_missinginfo]
 ,[client_name]
@@ -234,6 +236,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
+ 								,"PT_INFORMATIONRECEIVED":"'&PT_INFORMATIONECEIVED&'"
  								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
  								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
 								,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"
@@ -268,7 +271,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -280,6 +283,7 @@ INSERT INTO[payrolltaxes](
 ,[pt_esttime]
 ,[pt_fees]
 ,[pt_lastpay]
+,[pt_informationreceived]
 ,[pt_missinginfo]
 ,[pt_missinginforeceived]
 ,[pt_month]
@@ -304,6 +308,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 ) 
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -325,14 +330,15 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[pt_fees]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[pt_lastpay]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[pt_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[pt_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[pt_month]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[pt_paid]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[pt_priority]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[pt_state]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[pt_type]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[pt_year]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[pt_informationreceived]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[pt_missinginfo]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[pt_missinginforeceived]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[pt_month]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[pt_paid]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[pt_priority]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[pt_state]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[pt_type]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[pt_year]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

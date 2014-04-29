@@ -25,8 +25,9 @@ _grid1=function(){_jGrid({
 		,PT_TYPETEXT:{title:'Return Type'}	
 		,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 		,PT_DUEDATE:{title:'Due Date',width:'1%'}
+		,PT_INFORMATIONECEIVED:{title:'Information Received',width:'1%'}
 		,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-		,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+		,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 		,PT_OBTAININFO:{title:'Information',width:'1%'}
 		,PT_ENTRY:{title:'Entry',width:'1%'}
 		,PT_REC:{title:'Reconciliation',width:'1%'}
@@ -45,7 +46,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "PT_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_lastpay,g1_missinginformation,g1_missinginforeceived,g1_month,g1_paymentstatus,g1_priority,g1_state,g1_type,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
+/*Group1*/case "PT_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_lastpay,g1_informationreceived,g1_missinginformation,g1_missinginforeceived,g1_month,g1_paymentstatus,g1_priority,g1_state,g1_type,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "PT_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "PT_ENTRY_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "PT_REC_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -71,7 +72,8 @@ $("#g1_deliverymethod").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
 $("#g1_fees").val()+'","'+
-$("#g1_lastpay").val()+'",'+
+$("#g1_lastpay").val()+'","'+
+$("#g1_informationreceived").val()+'",'+
 $("#g1_missinginformation").is(':checked')+',"'+
 $("#g1_missinginforeceived").val()+'","'+
 $("#g1_month").val()+'","'+
@@ -81,8 +83,6 @@ $("#g1_state").val()+'","'+
 $("#g1_type").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
-
-
 
 
 if($("#client_id").val()=="0"){

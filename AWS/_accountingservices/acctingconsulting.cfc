@@ -24,6 +24,7 @@ SELECT[mc_id]
 ,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
 ,[mc_esttime]
 ,[mc_fees]
+,[mc_informationreceived]=FORMAT(mc_informationreceived,'d','#Session.localization.language#') 
 ,[mc_missinginfo]
 ,[mc_missinginforeceived]=FORMAT(mc_missinginforeceived,'d','#Session.localization.language#') 
 ,[mc_paid]
@@ -121,8 +122,8 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
-								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'",
-								"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -186,7 +187,7 @@ ORDER BY [mcs_sequence]
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[managementconsulting](
 [client_id]
@@ -195,6 +196,7 @@ INSERT INTO[managementconsulting](
 ,[mc_duedate]
 ,[mc_esttime]
 ,[mc_fees]
+,[mc_informationreceived]
 ,[mc_missinginfo]
 ,[mc_missinginforeceived]
 ,[mc_paid]
@@ -221,6 +223,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[mc_id]
 </cfquery>
@@ -244,15 +247,16 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mc_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[mc_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[mc_fees]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[mc_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[mc_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[mc_paid]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[mc_priority]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[mc_projectcompleted]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[mc_requestforservice]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[mc_status]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[mc_description]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[mc_workinitiated]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[mc_informationreceived]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[mc_missinginfo]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[mc_missinginforeceived]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[mc_paid]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[mc_priority]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[mc_projectcompleted]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[mc_requestforservice]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[mc_status]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[mc_description]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[mc_workinitiated]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 WHERE[mc_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2","result":"ok"}'>
