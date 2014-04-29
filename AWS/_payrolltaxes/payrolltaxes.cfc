@@ -195,9 +195,9 @@ SELECT[pt_id]
 ,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
 ,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#') 
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
-,[pt_lastpay]FORMAT(pt_lastpay,'d','#Session.localization.language#') 
+,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#') 
 ,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
-,[pt_missinginforeceived]FORMAT(pt_missinginforeceived,'d','#Session.localization.language#') 
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#') 
 ,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[pt_obtaininfo_assignedtoTEXT]
 ,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#'),'N/A')

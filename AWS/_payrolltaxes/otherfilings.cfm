@@ -55,7 +55,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 <div><label for="client_id"><i class="fa fa-lock link" onClick="_schk('client_id')"></i>Client</label><select id="client_id"  disabled="disabled"onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_loadAssets()"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
-<div><label for="g1_taxyear"><i class="fa fa-lock link" onClick="_schk('g1_taxyear')"></i> Year</label><select  id="g1_taxyear" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_years"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_taxyear"><i class="fa fa-lock link" onClick="_schk('g1_taxyear')"></i> Year</label><select  id="g1_taxyear" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_years"><cfif optionvalue_id neq year(now())><option value="#optionvalue_id#">#optionname#</option><cfelse><option value="#optionvalue_id#" selected="selected">#optionname#</option></cfif></cfoutput></select></div>
 <div><label for="g1_period"><i class="fa fa-lock link" onClick="_schk('g1_period')"></i> Period</label><select id="g1_period" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_month"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_state"><i class="fa fa-lock link" onClick="_schk('g1_state')"></i> State</label><select id="g1_state" disabled="disabled" onChange="_loadSelect({'selectName':'global_otherfilingsforms','selectObject':'g1_form','option1':$('#g1_state').val(),'page':'otherfilings'});"><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_type"><i class="fa fa-lock link" onClick="_schk('g1_type')"></i> Type</label><select id="g1_type" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_otherfilingtype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -79,7 +79,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
-<div><label for="g1_g1_completedby">Completed By</label><select id="g1_g1_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_g1_completedby">Completed By</label><select id="g1_g1_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>13344
 <div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g1_estimatedtime" ></div>
 </div>
 

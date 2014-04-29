@@ -915,7 +915,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#">
 ,<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#">
 ,<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#">
-,<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0#">
+,<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0 or j.DATA[1][20] eq 'null'#">
 ,<cfqueryparam value="#j.DATA[1][21]#" null="#LEN(j.DATA[1][21]) eq 0#">
 ,<cfqueryparam value="#j.DATA[1][22]#" null="#LEN(j.DATA[1][22]) eq 0#">
 ,<cfqueryparam value="#j.DATA[1][23]#" null="#LEN(j.DATA[1][23]) eq 0#">
@@ -951,7 +951,7 @@ SET[contact_acctsoftwareupdate]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(
 ,[contact_phone3]=<cfqueryparam value="#j.DATA[1][17]#"null="#LEN(j.DATA[1][17]) eq 0#"/>
 ,[contact_phone4]=<cfqueryparam value="#j.DATA[1][18]#"null="#LEN(j.DATA[1][18]) eq 0#"/>
 ,[contact_phone5]=<cfqueryparam value="#j.DATA[1][19]#"null="#LEN(j.DATA[1][19]) eq 0#"/>
-,[contact_state]=<cfqueryparam value="#j.DATA[1][20]#"null="#LEN(j.DATA[1][20]) eq 0#"/>
+,[contact_state]=<cfqueryparam value="#j.DATA[1][20]#" null="#LEN(j.DATA[1][20]) eq 0 or j.DATA[1][20] eq 'null'#">
 ,[contact_taxupdate]=<cfqueryparam value="#j.DATA[1][21]#"null="#LEN(j.DATA[1][21]) eq 0#"/>
 ,[contact_title]=<cfqueryparam value="#j.DATA[1][22]#"null="#LEN(j.DATA[1][22]) eq 0#"/>
 ,[contact_type]=<cfqueryparam value="#j.DATA[1][23]#"null="#LEN(j.DATA[1][23]) eq 0#"/>

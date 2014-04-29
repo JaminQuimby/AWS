@@ -143,7 +143,7 @@
 		<div>
 			
 			<ul>
-            <li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm?userid=#session.user.id#"><h4>About Me</h4></a></li>
+            <li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm?task_id=#session.user.id#"><h4>About Me</h4></a></li>
 			<li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="##" onclick="parentNode.submit()">Logout </a></form></li>
             </ul>
         </div>

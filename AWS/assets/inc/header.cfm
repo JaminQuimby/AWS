@@ -17,7 +17,7 @@
 <cfset page.cache.reports=CreateTimeSpan(0,0,0,0)>
 <cfquery name="selectOptions" cachedWithin="#page.cache.options#" datasource="#Session.organization.name#">SELECT[selectName],[optionvalue_id],[optionname],[option_1],[optionDescription]FROM[v_selectOptions]WHERE([form_id]='#page.formid#'OR[form_id]='0')AND([optionGroup]='#page.formid#'OR[optionGroup]='0')AND([optionHide]!='#page.formid#'OR[optionHide]IS NULL)</cfquery>
 <cfquery name="selectClients" cachedWithin="#page.cache.clients#" datasource="#Session.organization.name#">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
-<cfquery name="selectUsers" cachedWithin="#page.cache.users#" datasource="#Session.organization.name#">SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
+<cfquery name="selectUsers" cachedWithin="#page.cache.users#" datasource="#Session.organization.name#">SELECT[user_id]AS[optionvalue_id],[si_name]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 <cfquery name="selectReports" cachedWithin="#page.cache.reports#" datasource="#Session.organization.name#">SELECT[report_name],[report_description],[report_query],[report_fields]FROM[ctrl_reports]WHERE[form_id]='#page.formid#'AND([user_id]=0)ORDER BY[report_order]</cfquery>
 <cfquery name="selectRoles"  cachedWithin="#page.cache.roles#" datasource="#Session.organization.name#">SELECT[m_payrolltaxes],[m_accountingservices],[m_taxation],[m_clientmanagement],[m_maintenance],[g_delete]FROM[v_staffinitials]WHERE[user_id]=<cfqueryparam value="#Session.user.id#"/></cfquery>
 
@@ -35,6 +35,7 @@
 <cfcase value="_payrolltaxes"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/red/jtable.min.css"></cfcase>
 <cfcase value="_payrolltaxes_report"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/red/jtable.min.css"></cfcase>
 <cfcase value="_practicemanagement"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/purple/jtable.min.css"></cfcase>
+<cfcase value="_maintenance"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/purple/jtable.min.css"></cfcase>
 <cfcase value="_taxation"><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/darkorange/jtable.min.css"></cfcase>
 <cfdefaultcase><link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/module/jtable/themes/metro/darkgray/jtable.min.css"></cfdefaultcase>
 </cfswitch>
