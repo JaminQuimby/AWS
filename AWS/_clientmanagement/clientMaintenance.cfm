@@ -26,7 +26,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_month">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_month'</cfquery>
 <cfquery dbtype="query" name="global_state">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
-<cfquery dbtype="query" name="global_stateabbreviation">SELECT[optionvalue_id],[option_1],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
+<cfquery dbtype="query" name="global_stateabbreviation">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_state'</cfquery>
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
 <cfquery dbtype="query" name="global_otherfilingtype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_otherfilingtype'</cfquery>
 <cfquery dbtype="query" name="global_clienttype">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_clienttype'</cfquery>
@@ -163,7 +163,7 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_address1">Street #1</label><input id="g3_address1" maxlength="50" type="text"/></div>
 <div><label for="g3_address2">Street #2</label><input id="g3_address2" maxlength="50" type="text"/></div>
 <div><label for="g3_city">City</label><input id="g3_city" maxlength="25" type="text" /></div>
-<div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_stateabbreviation"><option value="#optionvalue_id#">#option_1#</option></cfoutput></select></div>
+<div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_stateabbreviation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="10" required id="g3_zip" /></div>
 <div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel" maxlength="14" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_ext1">Ext 1</label><input type="text" id="g3_ext1" maxlength="5"></div>

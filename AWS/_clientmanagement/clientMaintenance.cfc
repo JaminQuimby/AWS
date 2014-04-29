@@ -181,7 +181,7 @@ SELECT[si_id]
     ,[si_misc3]
     ,[si_misc4]
 FROM[v_client_state]
-WHERE[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+WHERE[si_active]=(1)AND[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
@@ -193,7 +193,7 @@ SELECT[client_statelabel1]
     ,[client_statelabel3]
     ,[client_statelabel4]
 FROM[v_client_listing]
-WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+WHERE[client_active]=(1)AND[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
@@ -203,7 +203,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[client_relations]
 FROM[v_client_listing]
-WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+WHERE[client_active]=(1)AND[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 </cfswitch>
@@ -225,6 +225,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
 <cfargument name="clientid" type="string" required="no">
+<cfargument name="formid" type="string" required="no">
 
 <cftry>
 <cfswitch expression="#ARGUMENTS.loadType#">
@@ -239,7 +240,7 @@ SELECT[client_id]
 ,[client_type]
 ,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 FROM[v_client_listing]
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[client_active]=(1)AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -286,11 +287,12 @@ AND[field_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcase value="group3">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[contact_id]
+,[contact_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_contacttype'AND[contact_type]=[optionvalue_id])
 ,[contact_name]
 ,[contact_phone1]=FORMAT(contact_phone1,'#Session.localization.formatphone#')
 ,[contact_email1]
 FROM[client_contact]
-WHERE
+WHERE[contact_active]=(1)AND
 <cfif ARGUMENTS.ID neq "0">[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
 [client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>AND
 [contact_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -302,7 +304,7 @@ WHERE
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CONTACT_ID":"'&CONTACT_ID&'","CONTACT_NAME":"'&CONTACT_NAME&'","CONTACT_PHONE1":"'&CONTACT_PHONE1&'","CONTACT_EMAIL1":"'&CONTACT_EMAIL1&'"}'>
+<cfset queryResult=queryResult&'{"CONTACT_ID":"'&CONTACT_ID&'","CONTACT_TYPETEXT":"'&CONTACT_TYPETEXT&'","CONTACT_NAME":"'&CONTACT_NAME&'","CONTACT_PHONE1":"'&CONTACT_PHONE1&'","CONTACT_EMAIL1":"'&CONTACT_EMAIL1&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
