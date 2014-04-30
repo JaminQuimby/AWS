@@ -44,9 +44,9 @@ SELECT[ftp_id]
 ,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'d','#Session.localization.language#')
 ,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'d','#Session.localization.language#')
 ,[ftp_missinginfo]
-,[ftp_missinginforeceived]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
-,[ftp_reportcompleted]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
-,[ftp_finalclientmeeting]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
+,[ftp_missinginforeceived]=FORMAT(ftp_missinginforeceived,'d','#Session.localization.language#')
+,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'d','#Session.localization.language#')
+,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'d','#Session.localization.language#')
 ,FORMAT(ftp_fees, 'C', 'en-us')AS[ftp_fees]
 ,[ftp_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[ftp_paid]=[optionvalue_id])
 ,[client_name]
