@@ -107,10 +107,10 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1 Subgroup1 --->
 <cfcase value="group1_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(CHAR(10),[tr_1_dropoffappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_1_dropoffappointment, 100),7)AS[tr_1_dropoffappointment]
+SELECT [tr_1_dropoffappointment]=FORMAT(tr_1_dropoffappointment,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[tr_1_dropoffappointmentlength] 
 ,[tr_1_dropoffappointmentwith] 
-,CONVERT(CHAR(10),[tr_1_pickupappointment], 101)+' '+RIGHT(CONVERT(VARCHAR,tr_1_pickupappointment, 100),7)AS[tr_1_pickupappointment]
+,[tr_1_pickupappointment]=FORMAT(tr_1_pickupappointment,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[tr_1_pickupappointmentlength]
 ,[tr_1_pickupappointmentwith]
 ,[tr_1_whileyouwaitappt]

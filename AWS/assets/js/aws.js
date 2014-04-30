@@ -14,7 +14,7 @@ $(document).ready(function(){
 
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 $.datepicker.setDefaults({showOn:"button",buttonImageOnly:true,buttonImage:"https://"+window.location.hostname+"/AWS/assets/img/datepicker.gif",showButtonPanel:true,constrainInput:true});
-$(".datetime").datetimepicker({timeFormat: 'hh:mmtt'}).mask('00/00/0000 00:00:00');
+$(".datetime").datetimepicker({timeFormat: 'hh:mmtt',dateFormat: 'm/d/yy'}).mask('00/00/0000 00:00:00');
 $(".date").datepicker({ dateFormat: "m/d/yy" }).mask('00/00/0000');
 $(".time").timepicker().mask('00:00:00');
 $('.phone').mask('(000) 000-0000');

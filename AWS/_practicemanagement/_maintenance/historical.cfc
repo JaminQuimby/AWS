@@ -184,7 +184,7 @@ SELECT[co_id]
 ,[co_credithold]
 ,FORMAT(co_fees, 'C', 'en-us')AS[co_fees]
 ,[co_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[co_paid]=[optionvalue_id])
-,CONVERT(CHAR(10),[co_date], 101)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]
+,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[co_telephone]
 ,[co_ext]
 ,[co_emailaddress]
