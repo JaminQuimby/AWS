@@ -70,6 +70,7 @@ _grid1_1=function(){_jGrid({
 	"url":"clientMaintenance.cfc",
 	"title":"Custom Fields",
 	"fields":{FIELD_ID:{key:true,list:false,edit:false}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CLIENT_ID+"',page:'clientmaintenance',group:'group1_1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,FIELD_NAME:{title:'Name'}
 			,FIELD_VALUE:{title:'Value'}
 			},
@@ -87,8 +88,8 @@ _grid3=function(){_jGrid({
 			,CONTACT_NAME:{title:'Contact'}
 			,CONTACT_TYPETEXT:{title:'Type'}
 			,CONTACT_TITLE:{title:'Title'}
-			,CONTACT_PHONE1:{title:'Phone 1'}
-			,CONTACT_EMAIL1:{title:'Email 1'}
+			,CONTACT_PHONE1:{title:'Primary Phone'}
+			,CONTACT_EMAIL1:{title:'Primary Email'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group3","clientid":'+$("#client_id").val()+',"formid":"1"}',
@@ -304,13 +305,10 @@ else{
 	_saveData({group:"group1",payload:$.parseJSON(json),page:"clientmaintenance"});
 	if(debug){window.console.log('Start Saving Client Maintenance');}	
 	}	
-	
-	
 break;
 
 case'group1_2':
 $("#client_id").val(options['id'])
-
 var json='{"DATA":[["'+
 $("#client_id").val()+'","'+
 $("#cl_fieldid").val()+'","'+

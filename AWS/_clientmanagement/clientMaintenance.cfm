@@ -166,15 +166,15 @@ ACTIVITY (CLIENT DATA)
 <div><label for="g3_city">City</label><input id="g3_city" maxlength="25" type="text" /></div>
 <div><label for="g3_state">State</label><select id="g3_state"><option value="0">&nbsp;</option><cfoutput query="global_stateabbreviation"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g3_zip">Zip</label><input type="number" pattern="[0-9]*" maxlength="10" required id="g3_zip" /></div>
-<div><label for="g3_phone1">Phone 1</label><input id="g3_phone1" type="tel" maxlength="14" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone1">Primary Phone Number</label><input id="g3_phone1" type="tel" maxlength="14" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_ext1">Ext 1</label><input type="text" id="g3_ext1" maxlength="5"></div>
-<div><label for="g3_phone2">Phone 2</label><input id="g3_phone2" type="tel" maxlength="14" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
+<div><label for="g3_phone2">Secondary Phone</label><input id="g3_phone2" type="tel" maxlength="14" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_ext2">Ext 2</label><input type="text" id="g3_ext2" maxlength="5"></div>
 <div><label for="g3_phone3">Mobile</label><input id="g3_phone3" type="tel" maxlength="14" class="phone"    onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_phone4">Pager</label><input id="g3_phone4" type="tel" maxlength="14" class="phone"     onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
 <div><label for="g3_phone5">Fax</label><input id="g3_phone5" type="tel" maxlength="14" class="phone"       onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});" /></div>
-<div><label for="g3_email1">Email 1</label><input id="g3_email1" maxlength="50" type="email"/></div>
-<div><label for="g3_email2">Email 2</label><input id="g3_email2" maxlength="50" type="email"/></div>
+<div><label for="g3_email1">Primary Email</label><input id="g3_email1" maxlength="50" type="email"/></div>
+<div><label for="g3_email2">Secondary Email</label><input id="g3_email2" maxlength="50" type="email"/></div>
 <div><label for="g3_website">Website</label><input type="url" id="g3_website" maxlength="100" /></div>
 <div><label for="g3_effectivedate">Effective Date</label><input type="text" id="g3_effectivedate" class="date"/></div>
 <div><label for="g3_acctsoftwareupdate"><input id="g3_acctsoftwareupdate" type="checkbox" class="ios-switch">Updated in accounting software</label></div>

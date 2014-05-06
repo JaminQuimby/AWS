@@ -664,10 +664,9 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
 </cfcatch>
 </cftry>
-
 </cfif>
-
 </cfcase>
+
 <!---Group 1_2 Custom Fields --->
 <cfcase value="group1_2">
 <cfif j.DATA[1][2] eq "0">
@@ -686,7 +685,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[field_id]
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"group2_1","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>
 </cfif>
 <cfif j.DATA[1][2] neq "0">
 <cfquery name="fquery" datasource="#Session.organization.name#">
@@ -697,7 +696,6 @@ WHERE[field_id]=<cfqueryparam value="#j.DATA[1][2]#">
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>
 </cfif>
-
 </cfcase>
 
 <!--- Taxes --->

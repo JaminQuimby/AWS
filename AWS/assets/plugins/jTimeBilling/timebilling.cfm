@@ -108,7 +108,7 @@ _grid102_1=function(){
 		<div><label for="g102_date">Date</label><input type="text" class="date" id="g102_date"/></div>
     	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option></select></div>
 		<div><label for="g102_notes">Notes</label><textarea type="text" id="g102_notes" cols="4" rows="4"  maxlength="1000"></textarea></div>
-		<div><label for="g102_paymentstatus">Payment Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+		<div><label for="g102_paymentstatus">Billing Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
         <div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div>
         <div><label for="g102_reimbursement">Reimbursement</label><input type="text" maxlength="10" id="g102_reimbursement" ></div>
         <div><label for="g102_manualtime">Manual Time</label><input type="text" class="time" id="g102_manualtime" ></div>
