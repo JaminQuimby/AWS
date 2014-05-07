@@ -236,7 +236,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
- 								,"PT_INFORMATIONRECEIVED":"'&PT_INFORMATIONECEIVED&'"
+ 								,"PT_INFORMATIONRECEIVED":"'&PT_INFORMATIONRECEIVED&'"
  								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
  								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
 								,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"

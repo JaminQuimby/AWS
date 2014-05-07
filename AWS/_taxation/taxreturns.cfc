@@ -321,7 +321,7 @@ SELECT[tr_id]
 ,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 ,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
 ,[tr_missinginfo]
-,[tr_2_informationreceived]
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
 ,[tr_4_assignedto]
 ,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[client_name]

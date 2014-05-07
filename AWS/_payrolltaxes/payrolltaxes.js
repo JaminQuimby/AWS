@@ -25,7 +25,7 @@ _grid1=function(){_jGrid({
 		,PT_TYPETEXT:{title:'Return Type'}	
 		,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 		,PT_DUEDATE:{title:'Due Date',width:'1%'}
-		,PT_INFORMATIONECEIVED:{title:'Information Received',width:'1%'}
+		,PT_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
 		,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 		,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 		,PT_OBTAININFO:{title:'Information',width:'1%'}

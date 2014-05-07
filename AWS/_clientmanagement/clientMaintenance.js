@@ -15,7 +15,7 @@ var _run={
 		$("#group3").accordion({active:1});
 		$("#isLoaded_group3").val(1);
 		$("#co_id").val(0);
-		_clearfields({"list":"g3_type,g3_name,g3_address1,g3_address2,g3_city,g3_state,g3_zip,g3_phone1,g3_ext1,g3_phone2,g3_ext2,g3_phone3,g3_phone4,g3_phone5,g3_email1,g3_email2,g3_website,g3_effectivedate,g3_acctsoftwareupdate,g3_taxupdate,g3_customvalue"});
+		_clearfields({"list":"g3_type,g3_name,g3_address1,g3_address2,g3_city,g3_state,g3_zip,g3_phone1,g3_ext1,g3_phone2,g3_ext2,g3_phone3,g3_phone4,g3_phone5,g3_email1,g3_email2,g3_website,g3_effectivedate,g3_acctsoftwareupdate,g3_taxupdate,g3_title,g3_customvalue"});
 		}
 		
 		
