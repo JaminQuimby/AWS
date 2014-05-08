@@ -652,8 +652,8 @@ SELECT[pt_id]
 ,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#') 
 ,[pt_esttime]
 ,[pt_year]
-,[pt_month]
-,[pt_type]
+,[pt_month]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
+,[pt_type]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
 FROM[v_payrolltaxes]
 WHERE([pt_delivery_completedby]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL AND[pt_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>

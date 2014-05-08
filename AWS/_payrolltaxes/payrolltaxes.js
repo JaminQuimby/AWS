@@ -84,7 +84,6 @@ $("#g1_type").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
 
-
 if($("#client_id").val()=="0"){
 	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Client');}
@@ -115,9 +114,6 @@ else{
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"payrolltaxes"});
 	if(debug){window.console.log('Start Saving Other Filings');}	
 	}	
-
-
-
 break;
 
 case'group1_1':

@@ -35,15 +35,12 @@ $.ajax({
 input { font-family: 'FontAwesome'; } 
 </style>
 <cfoutput>
-<div style="display:inline-block; margin:30px;"><img src="#this.url#/assets/images/logo_workflow4accountants.png" alt="AWS Online" width="75%"></div>
-</cfoutput>
-<div  style="display:inline-block;">
-<H1>Workflow 4 Accountants</H1>
-<br/>
-
+<div>
+<table>
+<tr>
+  <td><img src="#this.url#/assets/images/logo_accountants_ workflow_ solutions.png" alt="Accountants' Workflow Solutions"></td>
+  <td><div  style="display:inline-block;">
 <cfoutput>
-
-
 #Session.organization.name#
 
 <cfif Len(URL.r)gt 1 and Len(URL.e)gt 1>
@@ -68,6 +65,12 @@ input { font-family: 'FontAwesome'; }
 </div>
 </cfif>
 </cfoutput>
-</div>
+</div></td>
+ </tr>
+<tr>
+  <td><img src="#this.url#/assets/images/logo_workflow4accountants.png" alt="AWS Online"></td>
+ </tr>
+</table> 
+</cfoutput>
 </body>
 </html>

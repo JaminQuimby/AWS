@@ -184,7 +184,6 @@ SELECT[pc_id]
 ,[pc_missinginfo]
 ,[pc_payenddate]=FORMAT(pc_payenddate,'d','#Session.localization.language#') 
 ,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
-
 ,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[pc_obtaininfo_assignedtoTEXT]
 ,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
@@ -195,7 +194,6 @@ SELECT[pc_id]
 ,[pc_assembly_assignedtoTEXT]
 ,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[pc_delivery_assignedtoTEXT]
-
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
@@ -203,7 +201,7 @@ WHERE[pc_delivery_datecompleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, pc_duedate, 101) ASC </cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
