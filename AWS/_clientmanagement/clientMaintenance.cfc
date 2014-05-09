@@ -182,7 +182,7 @@ SELECT[si_id]
     ,[si_misc3]
     ,[si_misc4]
 FROM[v_client_state]
-WHERE[si_active]=(1)AND[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+WHERE[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
@@ -265,7 +265,7 @@ WHERE[client_active]=(1)AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.sea
 <cfcase value="group1_1"><cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[field_id],[field_name],[field_value]
 FROM[ctrl_customfields]
-WHERE[form_id]='1'
+WHERE[form_id]='1'AND[field_active]='1'
 <cfif ARGUMENTS.ID neq "0">
 AND[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfif>
@@ -518,7 +518,7 @@ FROM[v_client_state]
 WHERE(
 <cfif ARGUMENTS.ID neq "0">[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND</cfif>
 [client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>AND
-[si_reason]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> )
+([si_reason]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>OR[si_reason] is null ) )
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1115,6 +1115,14 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 update[client_listing]
 SET[client_active]=0
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
+</cfcase>
+<cfcase value="group1_2">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+update[ctrl_customfields]
+SET[field_active]=0
+WHERE[field_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>

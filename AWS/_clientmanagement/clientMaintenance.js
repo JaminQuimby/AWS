@@ -24,7 +24,7 @@ var _run={
 	,new_group4_3:function(){}
 	,new_group4_4:function(){}
 	,new_group4_5:function(){}
-	,new_group5:function(){$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);_clearfields({"list":"g5_state,g5_revenue,g5_employees,g5_property,g5_nexus,g5_reason,g5_registered,g5_value1,g5_value2,g5_value3,g5_value4,g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4"});}
+	,new_group5:function(){$("#si_id").val("0");$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);_clearfields({"list":"g5_state,g5_revenue,g5_employees,g5_property,g5_nexus,g5_reason,g5_registered,g5_value1,g5_value2,g5_value3,g5_value4,g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4"})}
 	,new_group6:function(){$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);_clearfields({"list":"g6_group"});}
 	,load_group1:function(){}	
 	,load_group1_1:function(){_grid1_1();}
@@ -70,7 +70,7 @@ _grid1_1=function(){_jGrid({
 	"url":"clientMaintenance.cfc",
 	"title":"Custom Fields",
 	"fields":{FIELD_ID:{key:true,list:false,edit:false}
-			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CLIENT_ID+"',page:'clientmaintenance',group:'group1_1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FIELD_ID+"',page:'clientmaintenance',group:'group1_2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,FIELD_NAME:{title:'Name'}
 			,FIELD_VALUE:{title:'Value'}
 			},
@@ -199,7 +199,7 @@ _grid5=function(){_jGrid({
 	"url":"clientMaintenance.cfc",
 	"title":"State Information",
 	"fields":{SI_ID:{key:true,list:false,edit:false}
-			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.SI_ID+"',page:'clientmaintenance',group:'group5'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.SI_ID+"',page:'clientmaintenance',group:'group5'});_grid5();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,SI_STATETEXT:{title:'State'}
 			,SI_REVENUE:{title:'Revenue',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}}
 			,SI_EMPLOYEES:{title:'Employees',width:'1%',type:'checkbox',values:{'0':'No','1':'Yes'}}
