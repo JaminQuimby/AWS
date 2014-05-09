@@ -192,7 +192,7 @@ var grid4_config = [
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g4_filter").val(),grid4_config)+',"orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group4","formid":"1"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?client_id="+record.CLIENT_ID'
+	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/clientMaintenance.cfm?task_id="+record.CLIENT_ID'
 	})};  
 	
 	

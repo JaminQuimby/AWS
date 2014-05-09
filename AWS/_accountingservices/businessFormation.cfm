@@ -57,7 +57,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
     <div><label for="g1_status">Status</label><select id="g1_status" data-placeholder="Select Status."><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_duedate" >Due Date</label><input type="text" id="g1_duedate" class="date"/></div>
 	<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" placeholder="0" id="g1_priority" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
-	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" maxlength="4" id="g1_estimatedtime"/></div>
+	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" maxlength="6" id="g1_estimatedtime"/></div>
 	<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
     <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" maxlength="10" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -112,7 +112,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 		<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g2_dateinitiated">Date Initiated</label><input type="text" id="g2_dateinitiated" class="date"/></div>
 		<div><label for="g2_completed">Date Completed</label><input type="text" id="g2_completed"  class="date" /></div>
-		<div><label for="g2_esttime">Estimated Time </label><input type="text" maxlength="4"  placeholder="0" id="g2_esttime"  /></div>
+		<div><label for="g2_esttime">Estimated Time</label><input type="text" maxlength="6"  placeholder="0" id="g2_esttime"  /></div>
 	</div>
 </div>
 <!--- Start Plugins --->

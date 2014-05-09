@@ -62,7 +62,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 	<div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline"></div>
 	<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" id="g1_priority" placeholder="0"  class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_esttime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_esttime" ></div>
+	<div><label for="g1_esttime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_esttime" ></div>
 	<div><label for="g1_g2_informationreceived">Information Received</label><input type="text" class="date" id="g1_g2_informationreceived" ></div>
 	<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
     <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
@@ -126,7 +126,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_g4_currentfees">PPTR Current Fees</label><input type="text" maxlength="10" id="g1_g4_currentfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_g4_priorfees">PPTR Prior Fees</label><input type="text" maxlength="10" id="g1_g4_priorfees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_g4_paymentstatus">Payment Status</label><select id="g1_g4_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_g4_pptresttime">PPTR Est Time</label><input type="text" maxlength="4" id="g1_g4_pptresttime" ></div>
+	<div><label for="g1_g4_pptresttime">PPTR Est Time</label><input type="text" maxlength="6" id="g1_g4_pptresttime" ></div>
 </div>
 </div>
 <!--- GROUP2 --->

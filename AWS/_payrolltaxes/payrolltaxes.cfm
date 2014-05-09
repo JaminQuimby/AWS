@@ -61,7 +61,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_type"><i class="fa fa-lock link" onClick="_schk('g1_type')"></i> Return Type</label><select id="g1_type" disabled="disabled"></option><option value="0">&nbsp;</option><cfoutput query="global_returntypes"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 <div><label for="g1_priority">Priority</label><input type="text" maxlength="2" placeholder="0" id="g1_priority" ></div>
-<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_estimatedtime" ></div>
+<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_estimatedtime" ></div>
 <div><label for="g1_informationreceived">Information Received</label><input type="text" class="date" id="g1_informationreceived" ></div>
 <div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
@@ -75,7 +75,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
 <div><label for="g1_g1_completedby">Completed By</label><select id="g1_g1_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g1_estimatedtime" ></div>
+<div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_g1_estimatedtime" ></div>
 </div>
 <!---Subgroup 2--->
 <h4 onClick='_run.load_group1_2();'>Entry | <span id="g1_g2_head1"></span> | <span id="g1_g2_head2"></span></h4>
@@ -83,7 +83,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
 <div><label for="g1_g2_completedby">Completed By</label><select id="g1_g2_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g2_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g2_estimatedtime" ></div>
+<div><label for="g1_g2_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_g2_estimatedtime" ></div>
 </div>
 <!---Subgroup 3--->
 <h4 onClick='_run.load_group1_3();'>Reconciliation | <span id="g1_g3_head1"></span> | <span id="g1_g3_head2"></span></h4>
@@ -91,7 +91,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g3_assignedto">Assigned To</label><select id="g1_g3_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g3_completed">Completed</label><input type="text" class="date" id="g1_g3_completed" ></div>
 <div><label for="g1_g3_completedby">Completed By</label><select id="g1_g3_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g3_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g3_estimatedtime" ></div>
+<div><label for="g1_g3_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_g3_estimatedtime" ></div>
 </div>
 <!---Subgroup 4--->
 <h4 onClick='_run.load_group1_4();'>Review | <span id="g1_g4_head1"></span> | <span id="g1_g4_head2"></span></h4>
@@ -99,7 +99,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g4_assignedto">Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g4_completed">Completed</label><input type="text" class="date" id="g1_g4_completed" ></div>
 <div><label for="g1_g4_completedby">Completed By</label><select id="g1_g4_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g4_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g4_estimatedtime" ></div>
+<div><label for="g1_g4_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_g4_estimatedtime" ></div>
 </div>
 <!---Subgroup 5--->
 <h4 onClick='_run.load_group1_5();'>Assembly | <span id="g1_g5_head1"></span> | <span id="g1_g5_head2"></span></h4>
@@ -107,7 +107,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g5_assignedto">Assigned To</label><select id="g1_g5_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g5_completed">Completed</label><input type="text" class="date" id="g1_g5_completed" ></div>
 <div><label for="g1_g5_completedby">Completed By</label><select id="g1_g5_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g5_estimatedtime" ></div>
+<div><label for="g1_g5_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_g5_estimatedtime" ></div>
 </div>
 <!---Subgroup 6--->
 <h4 onClick='_run.load_group1_6();'>Delivery | <span id="g1_g6_head1"></span> | <span id="g1_g6_head2"></span></h4>
@@ -115,7 +115,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_g6_assignedto">Assigned To</label><select id="g1_g6_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g6_completed">Completed</label><input type="text" class="date" id="g1_g6_completed" ></div>
 <div><label for="g1_g6_completedby">Completed By</label><select id="g1_g6_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_g6_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g6_estimatedtime" ></div>
+<div><label for="g1_g6_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_g6_estimatedtime" ></div>
 </div>
 </div>
 <!--- Start Plugins --->

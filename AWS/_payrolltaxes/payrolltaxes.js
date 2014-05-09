@@ -63,7 +63,6 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
 switch(options["group"]){
 case'':_saveDataCB({'group':'group1'});break;
 case'group1':var json='{"DATA":[["'+

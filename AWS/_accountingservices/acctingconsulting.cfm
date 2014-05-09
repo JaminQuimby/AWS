@@ -60,7 +60,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_status">Status</label><select id="g1_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0" >&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" ></div>
 <div><label for="g1_priority">Priority</label><input type="text" maxlength="2" id="g1_priority" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_estimatedtime"></div>
+<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_estimatedtime"></div>
 <div><label for="g1_requestforservices">Request for Services</label><input class="date" type="text" id="g1_requestforservices" ></div>
 <div><label for="g1_workinitiated">Work Initiated</label><input type="text" class="date" id="g1_workinitiated" ></div>
 <div><label for="g1_projectcompleted">Project Completed</label><input type="text" class="date" id="g1_projectcompleted" ></div>
@@ -93,8 +93,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date" ></div>
 <div><label for="g2_completed">Completed</label><input type="text" id="g2_completed" class="date" ></div>
 <div><label for="g2_dependancy">Dependencies</label><select  id="g2_dependancy" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g2_estimatedtime" ></div>
-<div><label for="g2_actualtime">Actual Time</label><input type="text" maxlength="4" id="g2_actualtime"></div>
+<div><label for="g2_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g2_estimatedtime" ></div>
+<div><label for="g2_actualtime">Actual Time</label><input type="text" maxlength="6" id="g2_actualtime"></div>
 <div><label for="g2_note">Notes</label><textarea  id="g2_note" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 </div>
 </div>
