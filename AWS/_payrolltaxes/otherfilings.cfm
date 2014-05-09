@@ -67,7 +67,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_estimatedtime" ></div>
 <div><label for="g1_extensiondeadline">Extension Deadline</label><input type="text" class="date" id="g1_extensiondeadline" ></div>
 <div><label for="g1_extensioncompleted">Extension Completed</label><input type="text" class="date" id="g1_extensioncompleted" ></div>
-<div><label for="g1_informationreceived">Information Received</label><input type="text" class="date" id="g1_informationreceived" ></div>
 <div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 <div><label for="g1_fees">Fees</label><input type="text" placeholder="0" maxlength="10" id="g1_fees" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
@@ -79,7 +78,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 <div><label for="g1_g1_assignedto">Assigned To</label><select id="g1_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_completed">Completed</label><input type="text" class="date" id="g1_g1_completed" ></div>
-<div><label for="g1_g1_completedby">Completed By</label><select id="g1_g1_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>13344
+<div><label for="g1_g1_completedby">Completed By</label><select id="g1_g1_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_g1_estimatedtime">Estimated Time</label><input type="text" maxlength="4" placeholder="0" id="g1_g1_estimatedtime" ></div>
 </div>
 

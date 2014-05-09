@@ -36,9 +36,9 @@ input { font-family: 'FontAwesome'; }
 </style>
 <cfoutput>
 <div>
-<table>
+<table  cellpadding="30">
 <tr>
-  <td><img src="#this.url#/assets/images/logo_accountants_ workflow_ solutions.png" alt="Accountants' Workflow Solutions"></td>
+  <td><img src="#this.url#/assets/images/logo_aws.png" alt="Accountants' Workflow Solutions"></td>
   <td><div  style="display:inline-block;">
 <cfoutput>
 #Session.organization.name#
@@ -66,9 +66,6 @@ input { font-family: 'FontAwesome'; }
 </cfif>
 </cfoutput>
 </div></td>
- </tr>
-<tr>
-  <td><img src="#this.url#/assets/images/logo_workflow4accountants.png" alt="AWS Online"></td>
  </tr>
 </table> 
 </cfoutput>

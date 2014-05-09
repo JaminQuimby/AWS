@@ -73,7 +73,6 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);
-alert(options["group"]);
 switch(options["group"]){
 	
 case'':_saveDataCB({'group':'group1'});break;
