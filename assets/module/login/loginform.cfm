@@ -1,5 +1,8 @@
 <cfsetting showDebugOutput="No">
 <cfset Session.organization.name=UCase("AWS_"&ListFirst(cgi.server_name, "."))>
+<cfif  Session.organization.name eq "AWS_sandbox">
+<cfset Session.organization.name=UCase("AWS_CJ")>
+</cfif>
 
 <cfparam name="URL.r" default="">
 <cfparam name="URL.e" default="">
@@ -36,12 +39,12 @@ input { font-family: 'FontAwesome'; }
 </style>
 <cfoutput>
 <div>
-<table  cellpadding="30">
+<table >
 <tr>
-  <td><img src="#this.url#/assets/images/logo_aws.png" alt="Accountants' Workflow Solutions"></td>
-  <td><div  style="display:inline-block;">
+  <td style="padding:30px"><img src="#this.url#/assets/images/logo_aws.png" alt="Accountants' Workflow Solutions"></td>
+  <td style="padding:30px"><div  style="display:inline-block;">
 <cfoutput>
-#Session.organization.name#
+
 
 <cfif Len(URL.r)gt 1 and Len(URL.e)gt 1>
 <H2>Please Enter a new Password</H2>
