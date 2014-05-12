@@ -61,8 +61,8 @@ ORDER BY[selectLabel]
 <cfcase value="group2">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[select_id],[selectName_id],[optionValue_id],[optionName],[optionDescription]
-,[optionGroupTEXT]=(SELECT TOP(1)[formName]FROM[ctrl_forms]WHERE[form_id]=[optionGroup])
-,[optionHideTEXT]=(SELECT TOP(1)[formName]FROM[ctrl_forms]WHERE[form_id]=[optionHide])
+,[optionGroupTEXT]=SUBSTRING((SELECT', '+[formName]FROM[ctrl_forms]WHERE(CAST([form_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](optionGroup)))FOR XML PATH('')),3,1000)
+,[optionHideTEXT]=SUBSTRING((SELECT', '+[formName]FROM[ctrl_forms]WHERE(CAST([form_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](optionHide)))FOR XML PATH('')),3,1000)
 FROM[v_selectoptions]
 WHERE[selectName_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 ORDER BY[optionName]
@@ -103,8 +103,8 @@ VALUES(
 ,#pquery.OPTIONCOUNT#
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0 or j.DATA[1][6] eq 'null'#"/>
+,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0 or j.DATA[1][7] eq 'null'#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
@@ -127,8 +127,8 @@ SELECT SCOPE_IDENTITY()AS[select_id]
 UPDATE[ctrl_selectoptions]
 SET[optionName]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[optionDescription]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[optionGroup]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[optionHide]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[optionGroup]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0  or j.DATA[1][6] eq 'null'#"/>
+,[optionHide]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0 or j.DATA[1][7] eq 'null'#"/>
 ,[option_1]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,[option_2]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[option_3]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
