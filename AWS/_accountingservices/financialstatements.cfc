@@ -15,7 +15,7 @@
 SELECT[optionname]=CONVERT(char(4),fds_year) +' | '+ ISNULL(FORMAT(fds_periodend,'d','en-us'),'---N/A---') +' | '+ (SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='0'OR[form_id]='0')AND([optionGroup]='0'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id]),[fds_id]AS[optionvalue_id]
 FROM[financialdatastatus]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.option1#" cfsqltype="cf_sql_integer">
-ORDER BY[fds_Year]DESC,[fds_periodend]
+ORDER BY[fds_year]DESC,[fds_periodend]
 
 </cfquery>
 <cfset myResult="">

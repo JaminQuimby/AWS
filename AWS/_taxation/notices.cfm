@@ -4,7 +4,7 @@
 <cfset page.formid=8>
 <cfset page.title="Notices">
 <cfset page.menuLeft="Matter Detail,Notice">
-<cfset page.trackers="task_id,subtask1_id,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3">
+<cfset page.trackers="task_id,subtask1_id,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2">
 <cfset page.footer="1">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -70,7 +70,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!--- GROUP 2_1 --->
-<h4 onClick='_run.load_group2_1();'>Add Notice</h4>
+<h4 onClick='_run.load_group2();'>Add Notice</h4>
 <div>
 <div><label for="g2_matter">Matter Name</label><input type="text" id="g2_matter" class="readonly" readonly></div>
 <div><label for="g2_noticestatus">Notice Status</label><select id="g2_noticestatus"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -85,7 +85,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!--- GROUP 2_2 --->
-<h4 onClick='_run.load_group2_2();'>Details</h4>
+<h4 onClick='_run.load_group2_1();'>Details</h4>
 <div class="subtask1_id">
 <div><label for="g2_1_noticenumber"><i class="fa fa-lock link" onClick="_schk('g2_1_noticenumber')"></i> Notice Number</label><select disabled="disabled" id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_noticedate"><i class="fa fa-lock link" onClick="_schk('g2_1_noticedate')"></i> Notice Date</label><input type="text" class="date" id="g2_1_noticedate" disabled="disabled"></div>
@@ -97,7 +97,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 
 <!--- GROUP 2_3 --->
-<h4 onClick='_run.load_group2_3();'>Correspondence</h4>
+<h4 onClick='_run.load_group2_2();'>Correspondence</h4>
 <div>
 <div><label for="g2_2_responsecompleted">Response Completed</label><input type="text" class="date" id="g2_2_responsecompleted"></div>
 <div><label for="g2_2_responsecompletedby">Completed By</label><select id="g2_2_responsecompletedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

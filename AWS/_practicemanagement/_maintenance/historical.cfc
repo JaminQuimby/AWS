@@ -350,7 +350,7 @@ WHERE(1)=(1)
 <cfreturn myResult>
 </cfcase>
 
-<!--- LOOKUP Financial Tax Planning --->
+<!--- LOOKUP Financia &amp; Tax Planning --->
 <cfcase value="group5">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">

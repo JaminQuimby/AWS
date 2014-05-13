@@ -40,7 +40,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
+<a href="#" class="button optional" onClick='_run.new_group1();'>Add</a>
 </div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
@@ -63,33 +63,33 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!---Subgroup 1--->
-<h4 onClick='_run.load_group1_1()'>Articles</h4>
+<h4 onClick='_run.load_group1_1();'>Articles</h4>
 <div>
 	<div><label for="g1_g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_g1_articlessubmitted" class="date"/></div>
 	<div><label for="g1_g1_articlesapproved" >Articles Approved</label><input type="text" id="g1_g1_articlesapproved" class="date"/></div>
 </div>
 <!---Subgroup 2--->
-<h4 onClick='_run.load_group1_2()'>Trade Names</h4>
+<h4 onClick='_run.load_group1_2();'>Trade Names</h4>
 <div>
 	<div><label for="g1_g2_tradenamesubmitted" >Trade Name Submitted</label><input type="text" id="g1_g2_tradenamesubmitted" class="date"/></div>
 	<div><label for="g1_g2_tradenamereceived" >Trade Name Received </label><input type="text" id="g1_g2_tradenamereceived" class="date"/></div>
 </div>
 <!---Subgroup 3--->
-<h4 onClick='_run.load_group1_3()'>Minutes</h4>
+<h4 onClick='_run.load_group1_3();'>Minutes</h4>
 <div>
 	<div><label for="g1_g3_minutesbylawsdraft" >Minutes Bylaws Draft</label><input type="text" id="g1_g3_minutesbylawsdraft" class="date"/></div>
 	<div><label for="g1_g3_minutesbylawsfinal" >Minutes Bylaws Final</label><input type="text" id="g1_g3_minutesbylawsfinal" class="date"/></div>
 	<div><label for="g1_g3_minutescompleted" >Minutes Completed </label><input type="text" id="g1_g3_minutescompleted" class="date"/></div>
 </div>
 <!---Subgroup 4--->
-<h4 onClick='_run.load_group1_4()'>Dissolution</h4>
+<h4 onClick='_run.load_group1_4();'>Dissolution</h4>
 <div>
 	<div><label for="g1_g4_dissolutionrequested" >Dissolution Requested</label><input type="text" id="g1_g4_dissolutionrequested" class="date"/></div>
 	<div><label for="g1_g4_dissolutionsubmitted" >Dissolution Submitted</label><input type="text" id="g1_g4_dissolutionsubmitted" class="date"/></div>
 	<div><label for="g1_g4_disolutioncompleted" >Disolution Completed</label><input type="text" id="g1_g4_disolutioncompleted" class="date"/></div>
 </div>
 <!---Subgroup 5--->
-<h4 onClick='_run.load_group1_5()'>Other</h4>
+<h4 onClick='_run.load_group1_5();'>Other</h4>
 <div>
 	<div><label for="g1_g5_otheractivity">Other Activity</label><input type="text" id="g1_g5_otheractivity" class="date"/></div>
 	<div><label for="g1_g5_otherstarted" >Other Started</label><input type="text" id="g1_g5_otherstarted" class="date"/></div>
@@ -98,12 +98,12 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 <!--- SubTasks Group --->
 <div id="group2" class="gf-checkbox" >
-	<h3 onClick="_run.load_group2">Subtasks</h3>
+	<h3 onClick="_run.load_group2();">Subtasks</h3>
 	<div>
     	<div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_run.load_group2;" onKeyPress="if(event.keyCode==13){_run.load_group2();}"/></div>
 		<div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 		<div class="buttonbox">
-		<a href="#" class="button optional" onClick='_run.new_group2()'>Add</a>
+		<a href="#" class="button optional" onClick='_run.new_group2();'>Add</a>
 		</div>
 	</div>
 	<h4>Add Subtask</h4>

@@ -121,7 +121,7 @@ _grid4_2=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
 			,MC_DESCRIPTION:{title:'Task Description'}
-			,MC_STATUS:{title:'Status'}
+			,MC_STATUSTEXT:{title:'Status'}
 			,MC_DUEDATE:{title:'Due Date',width:'1%'}
 			},
 	"method":"f_lookupData",
@@ -191,7 +191,7 @@ _grid4_6=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_6","formid":"11"}',
-	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm?task_id="+$("#of_id").val();'
+	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/otherfilings.cfm?task_id="+$("#of_id").val();'
 	})};
 	
 _grid5=function(){_jGrid({

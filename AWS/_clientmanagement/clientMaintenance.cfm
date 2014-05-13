@@ -239,7 +239,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_6"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_6();window.location='#this.url#/AWS/_payrolltaxes/payrollOtherFilingsRequirements.cfm?task_id=0&client_id='+$('##client_id').val()'">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_6();window.location='#this.url#/AWS/_payrolltaxes/otherfilings.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
 </div>
 </div>
 </div>

@@ -30,7 +30,7 @@ var grid1_config = [
 	_jGrid({
 	"grid":"grid1",
 	"url":"financialtaxplanning_report.cfc",
-	"title":"Financial Tax Planning",
+	"title":"Financial & Tax Planning",
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FTP_CATEGORYTEXT:{title:'Category'}

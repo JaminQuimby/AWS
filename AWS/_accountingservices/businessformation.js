@@ -9,7 +9,7 @@ var _run={
 	 ,load_group1_3:function(){if($("#isLoaded_group1_3").val()=="0"){_loadData({"id":"task_id","group":"group1_3","page":"businessformation"});$("#isLoaded_group1_3").val(1);}}
 	 ,load_group1_4:function(){if($("#isLoaded_group1_4").val()=="0"){_loadData({"id":"task_id","group":"group1_4","page":"businessformation"});$("#isLoaded_group1_4").val(1);}}
 	 ,load_group1_5:function(){if($("#isLoaded_group1_5").val()=="0"){_loadData({"id":"task_id","group":"group1_5","page":"businessformation"});$("#isLoaded_group1_5").val(1);}}
-	 ,load_group2:function(){_grid2();_clearfields({"list":"g2_task,g2_dateinitiated,g2_completed,g2_esttime,g2_assignedto"});}
+	 ,load_group2:function(){_grid2();_clearfields({"list":"g2_task,g2_dateinitiated,g2_completed,g2_esttime,g2_assignedto"});$('#subtask1_id').val('0');}
 	 ,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"businessformation"});}
 	 }
 	 
@@ -47,7 +47,7 @@ _grid2=function(){_jGrid({
 		,BFS_ESTIMATEDTIME:{title:'Estimated Time'}
 		},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
+	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"3"}',
 	"functions":'$("#subtask1_id").val(record.BFS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"businessformation"});'
 	})};
 
@@ -126,8 +126,13 @@ $("#task_id").val()+'","'+
 $("#g1_g1_articlesapproved").val()+'","'+
 $("#g1_g1_articlessubmitted").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_1").val()!=0){_saveData({group:"group1_1","payload":$.parseJSON(json),page:"businessformation"})}
-else{_saveDataCB({'group':'group1_2'})};
+if($("#isLoaded_group1_1").val()!=0){
+	_saveData({group:"group1_1","payload":$.parseJSON(json),page:"businessformation"});
+	if(debug){window.console.log('Group 1_1 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_2',"id":""+$("#task_id").val()+""});
+	if(debug){window.console.log('Group 1_1 - Skipped saving data');}
+	}
 break;
 
 case'group1_2':
@@ -137,8 +142,13 @@ $("#task_id").val()+'","'+
 $("#g1_g2_tradenamereceived").val()+'","'+
 $("#g1_g2_tradenamesubmitted").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_2").val()!=0){_saveData({group:"group1_2","payload":$.parseJSON(json),page:"businessformation"})}
-else{_saveDataCB({'group':'group1_3'})};
+if($("#isLoaded_group1_2").val()!=0){
+	_saveData({group:"group1_2","payload":$.parseJSON(json),page:"businessformation"});
+	if(debug){window.console.log('Group 1_2 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_3',"id":""+$("#task_id").val()+""});
+	if(debug){window.console.log('Group 1_2 - Skipped saving data');}
+}
 break;
 
 case'group1_3':
@@ -149,8 +159,13 @@ $("#g1_g3_minutesbylawsdraft").val()+'","'+
 $("#g1_g3_minutesbylawsfinal").val()+'","'+
 $("#g1_g3_minutescompleted").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_3").val()!=0){_saveData({group:"group1_3","payload":$.parseJSON(json),page:"businessformation"})}
-else{_saveDataCB({'group':'group1_4'})};
+if($("#isLoaded_group1_3").val()!=0){
+	_saveData({group:"group1_3","payload":$.parseJSON(json),page:"businessformation"});
+	if(debug){window.console.log('Group 1_3 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_4',"id":""+$("#task_id").val()+""});
+	if(debug){window.console.log('Group 1_3 - Skipped saving data');}
+	}
 break;
 
 case'group1_4':
@@ -161,8 +176,13 @@ $("#g1_g4_disolutioncompleted").val()+'","'+
 $("#g1_g4_dissolutionrequested").val()+'","'+
 $("#g1_g4_dissolutionsubmitted").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_4").val()!=0){_saveData({group:"group1_4","payload":$.parseJSON(json),page:"businessformation"})}
-else{_saveDataCB({'group':'group1_5'})};
+if($("#isLoaded_group1_4").val()!=0){
+	_saveData({group:"group1_4","payload":$.parseJSON(json),page:"businessformation"});
+	if(debug){window.console.log('Group 1_4 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group1_5',"id":""+$("#task_id").val()+""});
+	if(debug){window.console.log('Group 1_4 - Skipped saving data');}
+	}
 break;
 
 case'group1_5':
@@ -173,8 +193,13 @@ $("#g1_g5_otheractivity").val()+'","'+
 $("#g1_g5_othercompleted").val()+'","'+
 $("#g1_g5_otherstarted").val()+'","'+
 '"]]}'
-if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5","payload":$.parseJSON(json),page:"businessformation"})}
-else{_saveDataCB({'group':'group2'})};
+if($("#isLoaded_group1_5").val()!=0){
+	_saveData({group:"group1_5","payload":$.parseJSON(json),page:"businessformation"});
+	if(debug){window.console.log('Group 1_5 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'group2',"id":""+$("#task_id").val()+""});
+	if(debug){window.console.log('Group 1_5 - Skipped saving data');}
+	}
 break;
 
 case'group2':
@@ -188,8 +213,13 @@ $("#g2_dateinitiated").val()+'","'+
 $("#g2_esttime").val()+'","'+
 $("#g2_task").val()+'","'+
 '"]]}'
-if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"businessformation"})}
-else{_saveDataCB({'group':'plugins'})};
+if($("#isLoaded_group2").val()!=0){
+	_saveData({group:"group2","payload":$.parseJSON(json),page:"businessformation"});
+	if(debug){window.console.log('Group2 - Saving Data');}
+	}else{
+	_saveDataCB({'group':'plugins'});
+	if(debug){window.console.log('Group2 - Skipped saving data');}
+	}
 break;
 
 /*Start Saving Plugins*/

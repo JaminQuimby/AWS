@@ -104,6 +104,7 @@ FROM[notice_subtask]
 WHERE[nst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
 <!--- Load Group2 sub2 --->
 <cfcase value="group2_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
@@ -113,7 +114,7 @@ SELECT [nst_2_irsstateresponse]=FORMAT(nst_2_irsstateresponse,'d','#Session.loca
  	  ,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#')
 	  ,[nst_2_revassignedto]
 	  ,[nst_2_revcompleted]=FORMAT(nst_2_revcompleted,'d','#Session.localization.language#')
-	  ,[nst_2_revrequired]=FORMAT(nst_2_revrequired,'d','#Session.localization.language#')
+	  ,[nst_2_revrequired]      
 FROM[notice_subtask]
 WHERE[nst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -192,7 +193,7 @@ SELECT[n_id]
 ,[n_name]
 ,[nst_assignedtoTEXT]
 ,[nst_status]
-,[nst_1_noticenumber]
+,[nst_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[nst_1_noticenumber]=[optionvalue_id])
 ,[nst_1_taxform]
 ,[nst_1_taxyear]
 ,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
@@ -215,7 +216,7 @@ AND [nst_status]!=2 AND [nst_status]!=3
 								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
 								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
-								,"NST_1_NOTICENUMBER":"'&NST_1_NOTICENUMBER&'"
+								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

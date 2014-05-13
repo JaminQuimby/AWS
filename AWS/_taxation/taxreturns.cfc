@@ -465,6 +465,7 @@ INSERT INTO[taxreturns](
 ,[tr_extensiondone]
 ,[tr_extensionrequested]
 ,[tr_filingdeadline]
+,[tr_2_informationreceived]
 ,[tr_missinginfo]
 ,[tr_missinginforeceived]
 ,[tr_notrequired]
@@ -713,7 +714,6 @@ SET[tr_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[trst_2_missingsignatures]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[trst_2_paid]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[trst_2_priorfees]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-
 WHERE[trst_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

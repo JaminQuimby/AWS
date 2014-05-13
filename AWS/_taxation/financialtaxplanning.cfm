@@ -2,7 +2,7 @@
 <cfset page.module="_taxation">
 <cfset page.location="financialtaxplanning">
 <cfset page.formid=9>
-<cfset page.title="Finanical Tax Planning">
+<cfset page.title="Finanical &amp; Tax Planning">
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id">
 <cfset page.footer="1">

@@ -36,7 +36,7 @@ _grid2=function(){_jGrid({
 		,NST_1_TAXFORMTEXT:{title:'Tax Form'}
 		,NST_1_TAXYEAR:{title:'Tax Year',width:'1%'}
 		,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	
-		,NST_1_NOTICENUMBER:{title:'Notice Number',width:'1%'}
+		,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'1%'}
 		,NST_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 		},
 	"method":"f_lookupData",
@@ -60,6 +60,7 @@ default:if(query!=""){ if(debug){window.console.log('_loadDataCB switch default:
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 $.extend(true, options, params);
+
 switch(options["group"]){
 case'':_saveDataCB({'group':'group1'});break;
 

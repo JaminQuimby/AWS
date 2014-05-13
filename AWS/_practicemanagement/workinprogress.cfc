@@ -318,7 +318,7 @@ WHERE[bf_status]!='2'
 </cfcase>
 
 
-<!--- LOOKUP Financial Tax Planning --->
+<!--- LOOKUP Financial &amp; Tax Planning --->
 <cfcase value="group4">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">

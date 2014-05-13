@@ -4,7 +4,7 @@
 <cfset page.module="_taxation">
 <cfset page.location="financialtaxplanning_report">
 <cfset page.formid=9>
-<cfset page.title="Financial Tax Planning Report">
+<cfset page.title="Financial &amp; Tax Planning Report">
 <cfset page.menuLeft="All Data">
 <cfset page.menuLeft_report="Yes">
 <cfset page.type="report">

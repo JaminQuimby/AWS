@@ -21,6 +21,20 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 })
 </script>
 </cfoutput>
+<cfelseif URL.client_id gt 0>
+<cfoutput>
+<script>
+$(document).ready(function(){
+$('##task_id').val('#URL.task_id#');
+$('##client_id').val('#URL.client_id#');
+_addNewTask();
+_toggle("group1,largeMenu");
+_hide("entrance");$("##content").removeClass();
+$("##content").addClass("contentbig");
+_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
+})
+</script>
+</cfoutput>
 </cfif>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>

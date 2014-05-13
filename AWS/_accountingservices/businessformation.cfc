@@ -215,18 +215,22 @@ SELECT[bfs_id]
 ,[bfs_assignedtoTEXT]
 ,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'d','#Session.localization.language#')
 ,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#')
-,bfs_estimatedtime
+,[bfs_estimatedtime]
 FROM[v_businessformation_subtask]
-WHERE
-[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
-
+WHERE [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[bfs_taskname]</cfif></cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'","BFS_TASKNAME":"'&BFS_TASKNAME&'","BFS_ASSIGNEDTOTEXT":"'&BFS_ASSIGNEDTOTEXT&'","BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'","BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'","BFS_ESTIMATEDTIME":"'&BFS_ESTIMATEDTIME&'"}'>
+<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'"
+								,"BFS_TASKNAME":"'&BFS_TASKNAME&'"
+								,"BFS_ASSIGNEDTOTEXT":"'&BFS_ASSIGNEDTOTEXT&'"
+								,"BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'"
+								,"BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'"
+								,"BFS_ESTIMATEDTIME":"'&BFS_ESTIMATEDTIME&'"
+								}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -457,10 +461,9 @@ SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bfs_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[bfs_estimatedtime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-
 WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 

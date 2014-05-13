@@ -2,7 +2,7 @@
 <cfset page.module="_clientmanagement">
 <cfset page.location="communications">
 <cfset page.formid=12>
-<cfset page.title="Client Communications">
+<cfset page.title="Communications">
 <cfset page.menuLeft="General">
 <cfset page.trackers="task_id">
 <cfset page.footer="1">

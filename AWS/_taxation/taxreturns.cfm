@@ -21,6 +21,20 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 })
 </script>
 </cfoutput>
+<cfelseif URL.client_id gt 0>
+<cfoutput>
+<script>
+$(document).ready(function(){
+$('##task_id').val('#URL.task_id#');
+$('##client_id').val('#URL.client_id#');
+_addNewTask();
+_toggle("group1,largeMenu");
+_hide("entrance");$("##content").removeClass();
+$("##content").addClass("contentbig");
+_loadData({"id":"task_id","group":"group1","page":"#page.location#"});
+})
+</script>
+</cfoutput>
 </cfif>
 <!--- Load Select Options for each dropdown--->
 <cfquery dbtype="query" name="global_taxservices">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_taxservices'</cfquery>
@@ -77,11 +91,11 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <h4 onClick='_run.load_group1_1()'>Appointment</h4>
 <div>
 	<div><label for="g1_g1_dropoffappointment">Drop Off Appointment</label><input type="text" class="datetime" id="g1_g1_dropoffappointment" ></div>
-	<div><label for="g1_g1_dropoffappointmentlength">Appointment Length</label><input type="text" id="g1_g1_dropoffappointmentlength" ></div>
+	<div><label for="g1_g1_dropoffappointmentlength">Appointment Length</label><input type="text" maxlength="4" id="g1_g1_dropoffappointmentlength" ></div>
 	<div><label for="g1_g1_dropoffappointmentwith">Appointment With</label><select id="g1_g1_dropoffappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g1_whileyouwaitappt"><input id="g1_g1_whileyouwaitappt" type="checkbox" class="ios-switch">While You Wait Appointment</label></div>
     <div><label for="g1_g1_pickupappointment">Pick Up Appointment</label><input type="text" class="datetime" id="g1_g1_pickupappointment" ></div>
-	<div><label for="g1_g1_pickupappointmentlength">Appointment Length</label><input type="text" maxlength="1" id="g1_g1_pickupappointmentlength" ></div>
+	<div><label for="g1_g1_pickupappointmentlength">Appointment Length</label><input type="text" maxlength="4" id="g1_g1_pickupappointmentlength" ></div>
 	<div><label for="g1_g1_pickupappointmentwith">Appointment With</label><select id="g1_g1_pickupappointmentwith"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!--- GROUP1 SUBGROUP2 --->
