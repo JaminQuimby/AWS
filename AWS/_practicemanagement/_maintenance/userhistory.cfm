@@ -1,4 +1,3 @@
-
 <!--- Required for AJAX --->
 <cfheader name="Cache-Control" value="no-cache"/>
 <cfheader name="Expires" value="0"/>
@@ -29,7 +28,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </cfoutput>
 </cfif>
 <!--- Load Select Options for each dropdown--->
-
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -49,18 +47,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 		</div>
 	</div>
 </div>
-<!--- FIELD DATA --->
-<div id="group1" class="gf-checkbox">
-	<h3>General</h3>
-	<div>
-<div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-
-
-
-</div>
-
-</div>
-
 
 <!--- Start Plugins --->
 <cfinclude template="/assets/plugins/plugins.cfm">
@@ -68,7 +54,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- END CONTENTS --->
 </div>
 <!---Start of footer--->
-
 <cfinclude template="/assets/inc/footer.cfm" />
 </body>
 </html>

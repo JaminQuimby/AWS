@@ -251,7 +251,6 @@ SELECT[of_id]
 ,[of_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_type]=[optionvalue_id])
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 ,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
-
 FROM[v_otherfilings]
 WHERE[of_status] != 2 
 AND [of_status] != 3
@@ -274,8 +273,8 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
 								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
 								,"OF_DUEDATE":"'&OF_DUEDATE&'"						
-								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
 								,"OF_FILINGDEADLINE":"'&OF_FILINGDEADLINE&'"
+								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
  								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
  								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"								
 								,"OF_OBTAININFO":"'&of_obtaininfo_datecompleted&'<br/>'&of_obtaininfo_assignedtoTEXT&'"

@@ -25,14 +25,13 @@ _grid1=function(){_jGrid({
 		,PT_TYPETEXT:{title:'Return Type'}	
 		,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 		,PT_DUEDATE:{title:'Due Date',width:'1%'}
-		,PT_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
 		,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 		,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 		,PT_OBTAININFO:{title:'Information',width:'1%'}
 		,PT_ENTRY:{title:'Entry',width:'1%'}
 		,PT_REC:{title:'Reconciliation',width:'1%'}
 		,PT_REVIEW:{title:'Review',width:'1%'}
-		,PT_ASSEMBLY:{title:'Assembled',width:'1%'}
+		,PT_ASSEMBLY:{title:'Assembly',width:'1%'}
 		,PT_DELIVERY:{title:'Delivery',width:'1%'}
 		},
 	"method":"f_lookupData",
@@ -46,7 +45,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "PT_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_lastpay,g1_informationreceived,g1_missinginformation,g1_missinginforeceived,g1_month,g1_paymentstatus,g1_priority,g1_state,g1_type,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
+/*Group1*/case "PT_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_fees,g1_lastpay,g1_missinginformation,g1_missinginforeceived,g1_month,g1_paymentstatus,g1_priority,g1_state,g1_type,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "PT_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "PT_ENTRY_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "PT_REC_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -72,8 +71,7 @@ $("#g1_deliverymethod").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
 $("#g1_fees").val()+'","'+
-$("#g1_lastpay").val()+'","'+
-$("#g1_informationreceived").val()+'",'+
+$("#g1_lastpay").val()+'",'+
 $("#g1_missinginformation").is(':checked')+',"'+
 $("#g1_missinginforeceived").val()+'","'+
 $("#g1_month").val()+'","'+
@@ -105,14 +103,14 @@ else if ($("#g1_type").val()=="0"){
 	if(debug){window.console.log('Missing Type');}
 	}
 else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_month"},{"item":"g1_lastpay"},{"item":"g1_type"}],"loadType":"group1","page":"payrolltaxes"})=='true'&&$('#task_id').val()=='0'){
-	jqMessage({"type":"destroy"});jqMessage({message: "This Client Name already exsists.",type: "error",autoClose: false});
+	jqMessage({"type":"destroy"});jqMessage({message: "This task already exsists.",type: "error",autoClose: false});
 	if(debug){window.console.log('This Client Name already exsists.');}
 	}
 
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"payrolltaxes"});
-	if(debug){window.console.log('Start Saving Other Filings');}	
+	if(debug){window.console.log('Start Saving Payroll Taxes');}	
 	}	
 break;
 

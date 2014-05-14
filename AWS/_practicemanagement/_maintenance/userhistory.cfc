@@ -1,31 +1,4 @@
 <cfcomponent output="true">
-<!--- f_saveData = Insert or Update tables with json data from ajax--->
-<!--- f_lookupData = Query SQL return json via Ajax to build table grids --->
-<!--- f_loadData = Get data from SQL for Ajax deployment to elements --->
-<!--- f_loadSelect = get select data--->
-<!--- [LOAD FUNCTIONs] --->
-
-<cffunction name="f_loadData" access="remote" output="false">
-<cfargument name="ID" type="numeric" required="yes" default="0">
-<cfargument name="loadType" type="string" required="no">
-
-<cfswitch expression="#ARGUMENTS.loadType#">
-<!--- Load Group1--->
-<cfcase value="group1">
-<cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT[user_id]
-
-FROM[v_staffinitials]
-WHERE[user_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfquery>
-</cfcase>
-</cfswitch>
-<cfreturn SerializeJSON(fQuery)>
-
-
-</cffunction>
-
-
 <!--- [LOOKUP FUNCTIONS] --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
 <cfargument name="search" type="any" required="no">

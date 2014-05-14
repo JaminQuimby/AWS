@@ -65,7 +65,6 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_payenddate"><i class="fa fa-lock link" onClick="_schk('g1_payenddate')"></i> Pay End Date</label><input type="text" class="date" id="g1_payenddate" disabled="disable" ></div>
 <div><label for="g1_paydate"><i class="fa fa-lock link" onClick="_schk('g1_paydate')"></i> Pay Date</label><input type="text" class="date" id="g1_paydate" disabled="disable"></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
-<div><label for="g1_inforeceived">Information Received</label><input type="text" class="date" id="g1_inforeceived" ></div>
 <div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 <div><label for="g1_altfrequency"><input id="g1_altfrequency" type="checkbox" class="ios-switch">Alt Frequency</label></div>

@@ -29,7 +29,7 @@ _grid1=function(){
 		,PC_OBTAININFO:{title:'Information',width:'1%'}
 		,PC_PREPARATION:{title:'Preparation',width:'1%'}
 		,PC_REVIEW:{title:'Review',width:'1%'}
-		,PC_ASSEMBLY:{title:'Assembled',width:'1%'}
+		,PC_ASSEMBLY:{title:'Assembly',width:'1%'}
 		,PC_DELIVERY:{title:'Delivery',width:'1%'}
 		},
 	"method":"f_lookupData",
@@ -42,7 +42,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "PC_ID":var list='task_id,client_id,g1_altfrequency,g1_duedate,g1_deliverymethod,g1_estimatedtime,g1_fees,g1_inforeceived,g1_missinginformation,g1_missinginforeceived,g1_paydate,g1_payenddate,g1_paymentstatus,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
+/*Group1*/case "PC_ID":var list='task_id,client_id,g1_altfrequency,g1_duedate,g1_deliverymethod,g1_estimatedtime,g1_fees,g1_missinginformation,g1_missinginforeceived,g1_paydate,g1_payenddate,g1_paymentstatus,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "PC_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "PC_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "PC_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -67,8 +67,7 @@ $("#g1_altfrequency").is(':checked')+',"'+
 $("#g1_duedate").val()+'","'+
 $("#g1_deliverymethod").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_fees").val()+'","'+
-$("#g1_inforeceived").val()+'",'+
+$("#g1_fees").val()+'",'+
 $("#g1_missinginformation").is(':checked')+',"'+
 $("#g1_missinginforeceived").val()+'","'+
 $("#g1_paydate").val()+'","'+
@@ -77,30 +76,33 @@ $("#g1_paymentstatus").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
 
-
 if($("#client_id").val()=="0"){
-	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});if(debug){window.console.log('Missing Client');}
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Client",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Client');}
 	}
 else if ($("#g1_year").val()=="0"){
-	jqMessage({"type":"destroy"});jqMessage({message: "Missing Year",type: "error",autoClose: false});if(debug){window.console.log('Missing Year');}
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Year",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Year');}
 	}
-else if ($("#g1_payenddate").val()==""){
-	jqMessage({"type":"destroy"});jqMessage({message: "Missing Pay End Date",type: "error",autoClose: false});if(debug){window.console.log('Missing  Pay End Date');}
+else if ($("#g1_payenddate").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Pay End Date",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Pay End Date');}
 	}
-else if ($("#g1_paydate").val()==""){
-	jqMessage({"type":"destroy"});jqMessage({message: "Missing Pay Date",type: "error",autoClose: false});if(debug){window.console.log('Pay Date');}
+else if ($("#g1_paydate").val()=="0"){
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Pay Date",type: "error",autoClose: false});
+	if(debug){window.console.log('Missing Pay Date');}
 	}
-else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_payenddate"},{"item":"g1_paydate"},{"item":"g1_altfrequency"}],"loadType":"group1","page":"payrollchecks"})=='true'&&$('#task_id').val()=='0'){
-	jqMessage({"type":"destroy"});jqMessage({message: "This task already exsist.",type: "error",autoClose: false});
-	if(debug){window.console.log('This task already exsist.');}
+
+else if(_duplicateCheck({"check":[{"item":"client_id"},{"item":"g1_year"},{"item":"g1_payenddate"},{"item":"g1_paydate"}],"loadType":"group1","page":"payrollchecks"})=='true'&&$('#task_id').val()=='0'){
+	jqMessage({"type":"destroy"});jqMessage({message: "This task already exsists.",type: "error",autoClose: false});
+	if(debug){window.console.log('This Client Name already exsists.');}
 	}
 
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
 	_saveData({group:"group1","payload":$.parseJSON(json),page:"payrollchecks"});
-	if(debug){window.console.log('Start Saving Other Filings');}	
+	if(debug){window.console.log('Start Saving Payroll Checks');}	
 	}	
-
 break;
 
 case'group1_1':

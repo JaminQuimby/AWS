@@ -452,7 +452,7 @@ var grid9_config = [
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year',width:'1%'}
-			,OF_STATE:{title:'State'}
+			,OF_STATETEXT:{title:'State'}
 			,OF_TYPETEXT:{title:'Type'}
 			,OF_FORM:{title:'Form'}
 			,OF_STATUSTEXT:{title:'Status'}
@@ -573,8 +573,8 @@ var grid11_config = [
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_YEAR:{title:'Year',width:'1%'}
-			,PT_MONTH:{title:'Month'}
-			,PT_TYPE:{title:'Type'}
+			,PT_MONTHTEXT:{title:'Month'}
+			,PT_TYPETEXT:{title:'Type'}
 			,PT_PAIDTEXT:{title:'Payment Status'}
 			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
 			,PT_DUEDATE:{title:'Due Date',width:'1%'}
@@ -652,11 +652,11 @@ var grid12_config = [
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_TAXYEAR:{title:'Year',width:'1%'}
-			,TR_TAXFORM:{title:'Form'}
+			,TR_TAXFORMTEXT:{title:'Form'}
 			,TR_1_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}
 			,TR_PRIORFEES:{title:'Prior Fees',width:'1%'}
 			,TR_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'1%'}
-			,TR_4_PICKUPAPPOINTMENT:{title:'Pick UP Appointment',width:'1%'}
+			,TR_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'1%'}
 			,TR_1_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 			,TR_1_DUEDATE:{title:'Due Date',width:'1%'}
 			,TR_1_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}

@@ -185,7 +185,7 @@ SELECT[co_id]
 ,FORMAT(co_fees, 'C', 'en-us')AS[co_fees]
 ,[co_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[co_paid]=[optionvalue_id])
 ,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
-,[co_telephone]
+,[co_telephone]=FORMAT(co_telephone,'#Session.localization.formatphone#')
 ,[co_ext]
 ,[co_emailaddress]
 ,[co_responseneeded]
@@ -529,7 +529,7 @@ SELECT[mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,[mc_description]
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
-,[mc_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#')
+,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#')
 FROM[v_managementconsulting]
 
 <cfset sqllist = "mc_assignedto,mc_category,mc_description,mc_duedate,mc_esttime,mc_fees,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_workinitiated">
@@ -638,9 +638,9 @@ FROM[v_notice_subtask]
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[of_id]
 ,[of_taxyear]
-,[of_state]
+,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 ,[of_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_type]=[optionvalue_id])
-,[of_form]
+,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
 ,[of_duedate]=FORMAT(of_duedate,'d','#Session.localization.language#')
 ,[of_missinginfo]
@@ -697,9 +697,9 @@ WHERE(1)=(1)
 <cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"
-								,"OF_STATE":"'&OF_STATE&'"
+								,"OF_STATETEXT":"'&OF_STATETEXT&'"
 								,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
-								,"OF_FORM":"'&OF_FORM&'"
+								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
 								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
 								,"OF_DUEDATE":"'&OF_DUEDATE&'"
 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
@@ -797,8 +797,8 @@ WHERE(1)=(1)
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
-,[pt_month]
-,[pt_type]
+,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
+,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
 ,[pt_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pt_paid]=[optionvalue_id])
 ,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#')
 ,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#')
@@ -859,8 +859,8 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"PT_YEAR":"'&PT_YEAR&'"
-								,"PT_MONTH":"'&PT_MONTH&'"
-								,"PT_TYPE":"'&PT_TYPE&'"
+								,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
+								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
 								,"PT_PAIDTEXT":"'&PT_PAIDTEXT&'"
 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
 								,"PT_DUEDATE":"'&PT_DUEDATE&'"
@@ -880,7 +880,7 @@ SELECT[tr_id]
 ,[client_id]
 ,[client_name]
 ,[tr_taxyear]
-,[tr_taxform]
+,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 ,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#')
 ,FORMAT(tr_priorfees, 'C', 'en-us')AS[tr_priorfees]
 ,[tr_1_dropoffappointment]=FORMAT(tr_1_dropoffappointment,'d','#Session.localization.language#')
@@ -941,7 +941,7 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
 								,"TR_1_DROPOFFAPPOINTMENT":"'&TR_1_DROPOFFAPPOINTMENT&'"
