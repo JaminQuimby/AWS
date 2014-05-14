@@ -74,6 +74,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[field_id]
 	,[field_name]
 	,[field_value]
+    ,[field_global]
 FROM[ctrl_customfields]
 WHERE[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -263,13 +264,16 @@ WHERE[client_active]=(1)AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.sea
 
 <!--- LOOKUP CUSTOM FIELDS --->
 <cfcase value="group1_1"><cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[field_id],[field_name],[field_value]
+SELECT[field_id],[field_name],[field_value],[field_global]
 FROM[ctrl_customfields]
 WHERE[form_id]='1'AND[field_active]='1'
+AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/> OR [field_global]=1 )
+
 <cfif ARGUMENTS.ID neq "0">
 AND[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfif>
-AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
+
+
 AND[field_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[field_name]</cfif></cfquery>
 <cfset myResult="">
@@ -277,7 +281,7 @@ AND[field_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FIELD_ID":"'&FIELD_ID&'","FIELD_NAME":"'&FIELD_NAME&'","FIELD_VALUE":"'&FIELD_VALUE&'"}'>
+<cfset queryResult=queryResult&'{"FIELD_ID":"'&FIELD_ID&'","FIELD_NAME":"'&FIELD_NAME&'","FIELD_VALUE":"'&FIELD_VALUE&'","FIELD_GLOBAL":"'&FIELD_GLOBAL&'"}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -669,6 +673,7 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 
 <!---Group 1_2 Custom Fields --->
 <cfcase value="group1_2">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][5])><cfset j.DATA[1][5]=1><cfelse><cfset j.DATA[1][5]=0></cfif>
 <cfif j.DATA[1][2] eq "0">
 <cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[ctrl_customfields](
@@ -676,12 +681,14 @@ INSERT INTO[ctrl_customfields](
 ,[client_id]
 ,[field_name]
 ,[field_value]
+,[field_global]
 )
 VALUES(
 <cfqueryparam value="1">
 ,<cfqueryparam value="#j.DATA[1][1]#">
 ,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[field_id]
 </cfquery>
@@ -692,6 +699,7 @@ SELECT SCOPE_IDENTITY()AS[field_id]
 UPDATE[ctrl_customfields]
 SET[field_name]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[field_value]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[field_global]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 WHERE[field_id]=<cfqueryparam value="#j.DATA[1][2]#">
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group2_1","result":"ok"}'>

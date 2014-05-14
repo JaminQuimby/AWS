@@ -9,7 +9,7 @@ var _run={
 		 _hide('entrance,smallMenu,group2,group3,group4,group5,group6');
 		 
 		 }
-	,new_group1_1:function(){$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);_clearfields({"list":"g1_g2_fieldname,g1_g2_fieldvalue,g1_g3_group"});}
+	,new_group1_1:function(){$("#group1").accordion({active:2});$("#isLoaded_group1_2").val(1);$("#cl_fieldid").val(0);_clearfields({"list":"g1_g2_fieldname,g1_g2_fieldvalue,g1_g2_fieldglobal,g1_g3_group"});}
 	,new_group3:function(){
 		
 		$("#group3").accordion({active:1});
@@ -17,13 +17,14 @@ var _run={
 		$("#co_id").val(0);
 		_clearfields({"list":"g3_type,g3_name,g3_address1,g3_address2,g3_city,g3_state,g3_zip,g3_phone1,g3_ext1,g3_phone2,g3_ext2,g3_phone3,g3_phone4,g3_phone5,g3_email1,g3_email2,g3_website,g3_effectivedate,g3_acctsoftwareupdate,g3_taxupdate,g3_title,g3_customvalue"});
 		}
+
 		
-		
-	,new_group4_1:function(){}
-	,new_group4_2:function(){}
-	,new_group4_3:function(){}
-	,new_group4_4:function(){}
-	,new_group4_5:function(){}
+	,new_group4_1:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/financialStatements.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
+	,new_group4_2:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/acctingconsulting.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
+	,new_group4_3:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/payrollchecks.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
+	,new_group4_4:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/payrolltaxes.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
+	,new_group4_5:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/otherfilings.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
+	,new_group4_6:function(){ window.open('https://'+window.location.hostname+'/AWS/_taxation/_taxation.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
 	,new_group5:function(){$("#si_id").val("0");$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);_clearfields({"list":"g5_state,g5_revenue,g5_employees,g5_property,g5_nexus,g5_reason,g5_registered,g5_value1,g5_value2,g5_value3,g5_value4,g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4"})}
 	,new_group6:function(){$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);_clearfields({"list":"g6_group"});}
 	,load_group1:function(){}	
@@ -73,6 +74,7 @@ _grid1_1=function(){_jGrid({
 			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FIELD_ID+"',page:'clientmaintenance',group:'group1_2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,FIELD_NAME:{title:'Name'}
 			,FIELD_VALUE:{title:'Value'}
+			,FIELD_GLOBAL:{title:'Global'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1_1","clientid":'+$("#client_id").val()+'}',
@@ -238,7 +240,7 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request w
 else{
 switch(query.COLUMNS[0]){
 /*Group 1*/case "CLIENT_ID":var list='client_id,g1_active,g1_credit_hold,g1_g3_group,g1_name,g1_notes,g1_referred_by,g1_salutation,g1_since,g1_spouse,g1_trade_name,g1_type,g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4,g6_group';_loadit({"query":query,"list":list});break;
-/*Group 1_2*/case "FIELD_ID":var list="cl_fieldid,g1_g2_fieldname,g1_g2_fieldvalue";_loadit({"query":query,"list":list});break;
+/*Group 1_2*/case "FIELD_ID":var list="cl_fieldid,g1_g2_fieldname,g1_g2_fieldvalue,g1_g2_fieldglobal";_loadit({"query":query,"list":list});break;
 /*Group 2_1*/case "CLIENT_TAX_SERVICES":var list='g2_g1_taxservices,g2_g1_formtype,g2_g1_businessc,g2_g1_rentalpropertye,g2_g1_disregardedentity,g2_g1_personalproperty';_loadit({"query":query,"list":list});break;
 /*Group 2_2*/case "CLIENT_PAYROLL_PREP":var list='g2_g2_payrollpreparation,g2_g2_paycheckfrequency,g2_g2_payrolltaxservices,g2_g2_prtaxdepositschedule,g2_g2_1099preparation,g2_g2_ein,g2_g2_pin,g2_g2_password';_loadit({"query":query,"list":list});break;
 /*Group 2_3*/case "CLIENT_ACCOUNTING_SERVICES":var list='g2_g3_accountingServices,g2_g3_bookkeeping,g2_g3_compilation,g2_g3_review,g2_g3_audit,g2_g3_financialstatementfreq,g2_g3_fiscalyearend,g2_g3_software,g2_g3_version,g2_g3_username,g2_g3_accountingpassword';_loadit({"query":query,"list":list});break;
@@ -314,6 +316,7 @@ $("#client_id").val()+'","'+
 $("#cl_fieldid").val()+'","'+
 $("#g1_g2_fieldname").val()+'","'+
 $("#g1_g2_fieldvalue").val()+'","'+
+$("#g1_g2_fieldglobal").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_2").val()!=0){
 	if($("#g1_g2_fieldname").val()!=''||$("#g1_g2_fieldvalue").val()!=''){

@@ -1,6 +1,7 @@
 <cfparam name="page.formid" default="0">
-
-
+<cfquery dbtype="query" name="g102_description">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_description'</cfquery>
+<cfquery dbtype="query" name="g102_billingtype">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_billingtype'</cfquery>
+<cfquery dbtype="query" name="g102_ratetype">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_ratetype'</cfquery>
 <cfoutput>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -106,14 +107,14 @@ _grid102_1=function(){
         </cfswitch>
         <div><label for="user_id">Employee</label><select id="user_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g102_date">Date</label><input type="text" class="date" id="g102_date"/></div>
-    	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option></select></div>
+    	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="g102_description"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g102_notes">Notes</label><textarea type="text" id="g102_notes" cols="4" rows="4"  maxlength="1000"></textarea></div>
 		<div><label for="g102_paymentstatus">Billing Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
         <div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div>
         <div><label for="g102_reimbursement">Reimbursement</label><input type="text" maxlength="10" id="g102_reimbursement" ></div>
         <div><label for="g102_manualtime">Manual Time</label><input type="text" class="time" id="g102_manualtime" ></div>
-    	<div><label for="g102_billingtype">Billing Type</label><select id="g102_billingtype"><option value="0">&nbsp;</option></select></div>
-    	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option></select></div>
+    	<div><label for="g102_billingtype">Billing Type</label><select id="g102_billingtype"><option value="0">&nbsp;</option><cfoutput query="g102_billingtype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option><cfoutput query="g102_ratetype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
         <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly id="g102_rate" ></div>
         <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly id="g102_totaltime" ></div>
         <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>   

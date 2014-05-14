@@ -53,7 +53,7 @@
 </div>
 <h4 onClick='$("#isLoaded_group2").val(1);'>Option</h4>
 <div>
-<div><label for="g2_optionGroup">Form Specific</label><select id="g2_optionGroup" multiple="multiple"></option><option value="0">&nbsp;</option><cfoutput query="optionGroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_optionGroup">Show On</label><select id="g2_optionGroup" multiple="multiple"></option><option value="0">All Modules</option><cfoutput query="optionGroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_optionHide">Hide On</label><select id="g2_optionHide"  multiple="multiple"></option><option value="0">&nbsp;</option><cfoutput query="optionGroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 
 <div><label for="g2_optionName">Option Name</label><input type="text" id="g2_optionName"></div>
@@ -111,6 +111,11 @@
 <div><label for="opt_globalFederalTaxForms_Extension_Deadline">Extension Extension Deadline</label><input type="text" id="opt_globalFederalTaxForms_Extension_Deadline"></div>
 </div>
 
+<!--- G102 Time Billing Rate Type --->
+<div id="opt_g102ratetype" style="display:none">
+<div><label for="opt_g102_employee">Employee</label><select id="opt_g102_employee"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="opt_g102_rate">Rate</label><input type="text" id="opt_g102_rate"></div>
+</div>
 
 <!--- END Options --->
 <div><label for="g2_optionDescription">Option Description</label><textarea  id="g2_optionDescription" cols="4" rows="4"></textarea></div>

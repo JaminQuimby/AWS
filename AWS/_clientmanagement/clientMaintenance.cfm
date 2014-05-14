@@ -92,6 +92,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div><label for="g1_g2_fieldname">Field Name</label><input id="g1_g2_fieldname" maxlength="100" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_g2_fieldvalue">Field Value</label><input id="g1_g2_fieldvalue" maxlength="100" type="text" /></div>
+<div><label for="g1_g2_fieldglobal"><input id="g1_g2_fieldglobal" type="checkbox" class="ios-switch">Global</label></div>
 </div>
 
 <!---Group 1 Sub 3--->
@@ -194,7 +195,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_1"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_1();window.location='#this.url#/AWS/_accountingservices/financialStatements.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_1();">Add</a></cfoutput>
 </div>
 </div>
 
@@ -203,7 +204,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_2"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_2();window.location='#this.url#/AWS/_accountingservices/acctingconsulting.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_2();">Add</a></cfoutput>
 </div>
 </div>
 
@@ -212,7 +213,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_3"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_3();window.location='#this.url#/AWS/_payrolltaxes/payrollchecks.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_3();">Add</a></cfoutput>
 </div>
 </div>
 
@@ -221,7 +222,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_4"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_4();window.location='#this.url#/AWS/_payrolltaxes/payrolltaxes.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_4();">Add</a></cfoutput>
 </div>
 </div>
 
@@ -230,7 +231,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_5"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_5();window.location='#this.url#/AWS/_taxation/taxreturns.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_5();">Add</a></cfoutput>
 </div>
 </div>
 
@@ -239,7 +240,7 @@ ACTIVITY (CLIENT DATA)
 <div>
 <div class="tblGrid" id="grid4_6"></div>
 <div class="buttonbox">
-<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_6();window.location='#this.url#/AWS/_payrolltaxes/otherfilings.cfm?task_id=0&client_id='+$('##client_id').val()">Add</a></cfoutput>
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_6();">Add</a></cfoutput>
 </div>
 </div>
 </div>
