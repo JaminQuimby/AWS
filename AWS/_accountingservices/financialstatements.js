@@ -103,7 +103,6 @@ var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);//turn options into array
 
-alert(options["group"]);
 switch(options["group"]){
 case'':
 
