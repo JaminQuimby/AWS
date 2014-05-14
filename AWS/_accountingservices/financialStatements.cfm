@@ -197,6 +197,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 		<div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date"/></div>
 		<div><label for="g2_completed">Completed</label><input type="text" id="g2_completed"  class="date" /></div>
 		<div><label for="g2_notes">Notes</label><textarea id="g2_notes" cols="4" rows="4"  maxlength="1000" ></textarea></div>
+		<div><label for="g2_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g2_estimatedtime"></div>
+		<div><label for="g2_actualtime">Actual Time</label><input type="text" maxlength="6" placeholder="0" id="g2_actualtime"></div>
 	</div>
 </div>
 

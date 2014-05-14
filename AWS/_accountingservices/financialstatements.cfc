@@ -222,6 +222,8 @@ SELECT[fdss_id]
 ,[fdss_status]
 ,[fdss_subtask]
 ,[fdss_dependencies]
+,[fdss_esttime]
+,[fdss_actualtime]
 FROM[financialdatastatus_subtask]
 WHERE[fdss_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -340,7 +342,7 @@ AND ISNULL([fds_status],0) != 3
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, fds_duedate, 101) ASC </cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -746,6 +748,8 @@ INSERT INTO[financialdatastatus_subtask]([fds_id]
 ,[fdss_status]
 ,[fdss_subtask]
 ,[fdss_dependencies]
+,[fdss_esttime]
+,[fdss_actualtime]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -757,6 +761,8 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0 or j.DATA[1][8] eq "null"#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0  or j.DATA[1][8] eq "null"#"/>
 ,<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
+,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -780,6 +786,8 @@ SET[fds_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0 or j.DATA[1][8] eq "null"#"/>
 ,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0  or j.DATA[1][8] eq "null"#"/>
 ,[fdss_dependencies]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
+,[fdss_esttime]=<cfqueryparam value="#j.DATA[1][11]#" NULL="#j.DATA[1][11] eq "null"#"/>
+,[fdss_actualtime]=<cfqueryparam value="#j.DATA[1][12]#" NULL="#j.DATA[1][12] eq "null"#"/>
 WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>
@@ -824,12 +832,7 @@ AND[fdss_active]!=0
 
 </cfquery>
 <cfreturn '{"id":"#j.DATA[1][1]#","group":"saved","result":"ok"}'>
-
 </cfcase>
-
-
-
-
 
 </cfswitch>
 <cfcatch>
