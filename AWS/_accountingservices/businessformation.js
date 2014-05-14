@@ -73,7 +73,7 @@ _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);
-alert(options["group"]);
+
 switch(options["group"]){
 	
 case'':_saveDataCB({'group':'group1'});break;
@@ -197,7 +197,7 @@ if($("#isLoaded_group1_5").val()!=0){
 	_saveData({group:"group1_5","payload":$.parseJSON(json),page:"businessformation"});
 	if(debug){window.console.log('Group 1_5 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group2',"id":""+$("#task_id").val()+""});
+	_saveDataCB({'group':'group2',"id":""+$("#subtask1_id").val()+""});
 	if(debug){window.console.log('Group 1_5 - Skipped saving data');}
 	}
 break;
@@ -223,7 +223,7 @@ if($("#isLoaded_group2").val()!=0){
 break;
 
 /*Start Saving Plugins*/
-case"plugins":_pluginSaveData({"subgroup":options["subgroup"]});break;
+case"plugins":$("#subtask1_id").val(options["id"]);_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;

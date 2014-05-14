@@ -238,8 +238,11 @@ SELECT [cas_id]
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
+
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL AND[cas_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[cas_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.userid neq "">AND(','+[cas_assignedto]+','LIKE'%,'+<cfqueryparam value="#ARGUMENTS.userid#">+',%')
+
+</cfif>
 
 
 </cfquery>
