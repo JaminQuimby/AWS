@@ -24,9 +24,9 @@
   <h3 onClick="_run.load_group1();">Total Time</h3>
 	<div>
 	<!---<div><label for="g1_filter">Filter</label><input id="g1_filter" onBlur="_grid1();" onKeyPress="if(event.keyCode==13){_grid1();}"/></div>--->
-	<div><label for="client_id"> Client</label><select id="client_id" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-    <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" onchange="_grid1();"></div>
-    <div><label for="g1_assignedto">Employee</label><select id="g1_assignedto" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="client_id"> Client</label><select id="client_id" onchange="_grid1();"><option value="0">Unassigned</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="g1_duedate">Due on or before</label><input type="text" class="date" id="g1_duedate" onchange="_grid1();"></div>
+    <div><label for="g1_assignedto">Employee</label><select id="g1_assignedto" onchange="_grid1();"><option value="0">Unassigned</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
     </div>
 

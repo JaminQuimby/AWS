@@ -44,36 +44,55 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- TOTAL TIME --->
 <cfcase value="group1">
+<cftry>
 <cfquery datasource="#Session.organization.name#" name="aquery">
 SELECT'Administrative Tasks'AS[name]
-,SUM(cas_esttime)AS[total_time]
+,ISNULL(SUM(ISNULL(cas_esttime,0)),0)AS[total_time]
 ,COUNT(cas_assignedto)AS[count_assigned]
+,ISNULL(SUM(0),0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
 ,'1'AS[orderit]
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL AND[cas_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[cas_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND(','+[cas_assignedto]+','LIKE'%,'+<cfqueryparam value="#ARGUMENTS.userid#">+',%')</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
+
 
 UNION
-SELECT'Business Formation'AS[name],SUM(bf_esttime)AS[total_time],COUNT(bf_assignedto)AS[count_assigned],'1'AS[orderit]
-FROM[v_businessformation]
+SELECT'Business Formation'AS[name]
+,ISNULL(SUM(ISNULL(bf_esttime,0)),0)AS[total_time]
+,COUNT(DISTINCT[bf_id])AS[count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(DISTINCT[bfs_id])AS[count_subtask_assigned]
+,'1'AS[orderit]
+FROM[v_businessformation_subtask]
 WHERE[bf_status]!='2'
-<cfif ARGUMENTS.userid neq "">AND[bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.userid neq "">AND([bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">OR[bfs_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
+
 
 UNION
-SELECT'Financial & Tax Planning'AS[name],SUM(ftp_esttime)AS[total_time],COUNT(ftp_assignedto)AS[count_assigned],'1'AS[orderit]
+SELECT'Financial & Tax Planning'AS[name],ISNULL(SUM(ISNULL(ftp_esttime,0)),0)AS[total_time],COUNT(ftp_assignedto)AS[count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
+,'1'AS[orderit]
 FROM[v_financialtaxplanning]
 WHERE[ftp_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL AND[ftp_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND([ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
+
 
 UNION
-SELECT'Financial Statements'AS[name],SUM(fds_esttime)AS[total_time]
+SELECT'Financial Statements'AS[name],ISNULL(SUM(ISNULL(fds_esttime,0)),0)AS[total_time]
 ,COUNT(fds_obtaininfo_assignedto)+COUNT(fds_sort_assignedto)+COUNT(fds_checks_assignedto)+COUNT(fds_sales_assignedto)+COUNT(fds_entry_assignedto)+COUNT(fds_reconcile_assignedto)+COUNT(fds_compile_assignedto)+COUNT(fds_review_assignedto)+COUNT(fds_assembly_assignedto)+COUNT(fds_delivery_assignedto)AS[count_assigned]
+,ISNULL(SUM(fdss_esttime),0)AS[total_subtask_time]
+,COUNT(DISTINCT[fdss_id])AS[count_subtask_assigned]
 ,'1'AS[orderit]
-FROM[v_financialdatastatus] 
+FROM[v_financialdatastatus_subtask] 
 WHERE[fds_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL AND[fds_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">
 AND([fds_status]!='3'OR[fds_status] IS NULL)
 AND[fds_delivery_datecompleted] IS NULL
@@ -88,32 +107,48 @@ OR([fds_review_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fds_
 OR([fds_assembly_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fds_review_datecompleted] IS NOT NULL AND [fds_assembly_datecompleted]  IS NULL)
 OR([fds_delivery_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fds_assembly_datecompleted] IS NOT NULL)
 </cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
+
 
 UNION
-SELECT'Accounting and Consulting'AS[name], SUM(mc_esttime)AS[total_time],COUNT(mc_assignedto)AS[count_assigned],'1'AS[orderit]
-FROM[v_managementconsulting]
+SELECT'Accounting and Consulting'AS[name]
+,ISNULL(SUM(ISNULL(mc_esttime,0)),0)AS[total_time]
+,COUNT(DISTINCT[mc_id])AS[count_assigned]
+,ISNULL(SUM(ISNULL([mcs_esttime],0)),0)AS[total_subtask_time]
+,COUNT(DISTINCT[mcs_id])AS[count_subtask_assigned]
+,'1'AS[orderit]
+
+FROM[v_managementconsulting_subtask]
 WHERE[mc_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL AND[mc_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL  OR[mc_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND([mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
+
 
 UNION
-SELECT'Notices'AS[name], SUM(nst_esttime)AS[total_time],COUNT(nst_assignedto)AS[count_assigned],'1'AS[orderit]
+SELECT'Notices'AS[name], SUM(ISNULL(nst_esttime,0))AS[total_time],COUNT(nst_assignedto)AS[count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
+,'1'AS[orderit]
 FROM[v_notice_subtask]
 WHERE[nst_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL AND[nst_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[nst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
-
+<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND([nst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 UNION
-SELECT'Other Filings'AS[name], SUM(of_esttime)AS[total_time]
-,COUNT(of_obtaininfo_assignedto)
-+COUNT(of_preparation_assignedto)
-+COUNT(of_review_assignedto)
-+COUNT(of_assembly_assignedto)
-+COUNT(of_delivery_assignedto)AS[count_assigned]
+SELECT'Other Filings'AS[name], ISNULL(SUM(ISNULL(of_esttime,0)),0)AS[total_time]
+, SUM(CASE WHEN of_obtaininfo_assignedto=<cfqueryparam value="#ARGUMENTS.userid#"> THEN 1 ELSE 0 END  
++ CASE WHEN of_preparation_assignedto=<cfqueryparam value="#ARGUMENTS.userid#"> THEN 1 ELSE 0 END
++ CASE WHEN of_review_assignedto=<cfqueryparam value="#ARGUMENTS.userid#"> THEN 1 ELSE 0 END
++ CASE WHEN of_assembly_assignedto=<cfqueryparam value="#ARGUMENTS.userid#"> THEN 1 ELSE 0 END
++ CASE WHEN of_delivery_assignedto=<cfqueryparam value="#ARGUMENTS.userid#"> THEN 1 ELSE 0 END
+)AS [count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
 ,'1'AS[orderit]
 FROM[v_otherfilings]
 WHERE[of_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">
 AND(([of_status]!='3')OR([of_status]IS NULL))
 AND([of_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_obtaininfo_datecompleted]IS NULL)
@@ -122,36 +157,40 @@ OR([of_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_prepa
 OR([of_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_review_datecompleted]IS NOT NULL AND[of_assembly_datecompleted]IS NULL)
 OR([of_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_assembly_datecompleted]IS NOT NULL AND[of_delivery_datecompleted]IS NULL)
 </cfif>
-
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 UNION
-SELECT'Payroll Checks'AS[name], SUM(pc_esttime)AS[total_time]
+SELECT'Payroll Checks'AS[name], ISNULL(SUM(ISNULL(pc_esttime,0)),0)AS[total_time]
 ,COUNT(pc_delivery_datecompleted)
 +COUNT(pc_obtaininfo_datecompleted)
 +COUNT(pc_review_datecompleted)
 +COUNT(pc_assembly_datecompleted)AS[count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
 ,'1'AS[orderit]
 FROM[v_payrollcheckstatus]
 WHERE[pc_delivery_completedby]IS NOT NULL 
-<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL AND[pc_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">AND[pc_delivery_datecompleted]IS NULL AND([pc_obtaininfo_datecompleted]IS NULL AND[pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_obtaininfo_datecompleted]IS NOT NULL AND[pc_preparation_datecompleted]IS NULL AND[pc_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_preparation_datecompleted]IS NOT NULL AND[pc_review_datecompleted]IS NULL AND[pc_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_review_datecompleted]IS NOT NULL AND[pc_assembly_datecompleted]IS NULL AND[pc_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 </cfif>
-
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 UNION
-SELECT'Payroll Taxes'AS[name], SUM(pt_esttime)AS[total_time]
+SELECT'Payroll Taxes'AS[name], ISNULL(SUM(ISNULL(pt_esttime,0)),0)AS[total_time]
 ,COUNT(pt_obtaininfo_assignedto)
 +COUNT(pt_entry_assignedto)
 +COUNT(pt_rec_assignedto)
 +COUNT(pt_review_assignedto)
 +COUNT(pt_assembly_assignedto)
 +COUNT(pt_delivery_assignedto)AS[count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
 ,'1'AS[orderit]
 FROM[v_payrolltaxes] 
 WHERE([pt_delivery_completedby]IS NULL)
-<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL AND[pt_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">
 AND([pt_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_obtaininfo_datecompleted]IS NULL)
 OR([pt_entry_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_obtaininfo_datecompleted]IS NOT NULL AND[pt_entry_datecompleted]IS NULL)
@@ -160,43 +199,45 @@ OR([pt_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_rec_d
 OR([pt_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_review_completedby]IS NOT NULL AND[pt_assembly_datecompleted]IS NULL)
 OR([pt_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_assembly_datecompleted]IS NOT NULL)
 </cfif>
-
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 UNION
-SELECT'Tax Returns'AS[name], SUM(tr_esttime)AS[total_time]
+SELECT'Tax Returns'AS[name], ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
 ,COUNT(tr_2_assignedto)AS[count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
 ,'1'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_2_informationreceived]IS NOT NULL 
-<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL AND[tr_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">
-AND[tr_3_delivered]IS NULL
-AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">
-</cfif>
-
+<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 
 UNION
-SELECT'Personal Property Tax Returns'AS[name], SUM(tr_esttime)AS[total_time]
+SELECT'Personal Property Tax Returns'AS[name]
+,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
 ,COUNT(tr_4_assignedto)AS[count_assigned]
+,SUM(0)AS[total_subtask_time]
+,COUNT(0)AS[count_subtask_assigned]
 ,'2'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_4_required]='TRUE'
 AND[tr_4_required]IS NULL
-<cfif ARGUMENTS.userid neq "">
-AND[tr_4_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">
-</cfif>
-AND(
-([tr_taxyear]=Year(getdate())-1)
-OR(Year([tr_2_informationreceived])=Year(getdate()))
-)
-
+<cfif ARGUMENTS.userid neq "">AND[tr_4_assignedto]IS NULL AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+AND(([tr_taxyear]=Year(getdate())-1)OR(Year([tr_2_informationreceived])=Year(getdate())))
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 
 
 
 <cfquery dbtype="query" name="fquery">
-SELECT[name],[total_time],[count_assigned],[orderit]FROM[aquery]
+SELECT[name],[total_time],[count_assigned],[total_subtask_time],[count_subtask_assigned],[orderit]FROM[aquery]
 UNION
-SELECT'<b style=''font-weight: bold;''>Total</b>'AS[name],SUM(total_time)AS[total_time],SUM(count_assigned)[count_assigned],'999'AS[orderit]
+SELECT'<b style=''font-weight: bold;''>Total</b>'AS[name]
+,SUM(total_time)AS[total_time]
+,SUM(count_assigned)AS[count_assigned]
+,SUM(total_subtask_time)AS[total_subtask_time]
+,SUM(count_subtask_assigned)AS[count_subtask_assigned]
+,'999'AS[orderit]
 FROM[aquery]
 
 ORDER BY[orderit]
@@ -213,11 +254,20 @@ ORDER BY[orderit]
 								"NAME":"'&NAME&'"
 								,"TOTAL_TIME":"'&TOTAL_TIME&'"
 								,"COUNT_ASSIGNED":"'&COUNT_ASSIGNED&'"
+								,"TOTAL_SUBTAKS_TIME":"'&total_subtask_time&'"
+								,"COUNT_SUBTASK_ASSIGNED":"'&count_subtask_assigned&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+
+   <cfcatch >
+        <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#","QUERY":['&queryResult&']]}'> 
+    </cfcatch>
+</cftry>
+
+
 </cfcase>
 
 
@@ -239,11 +289,9 @@ SELECT [cas_id]
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
 
-<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL AND[cas_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND(','+[cas_assignedto]+','LIKE'%,'+<cfqueryparam value="#ARGUMENTS.userid#">+',%')
-
-</cfif>
-
+<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND(','+[cas_assignedto]+','LIKE'%,'+<cfqueryparam value="#ARGUMENTS.userid#">+',%')</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 
 </cfquery>
 <cfset myResult="">
@@ -291,7 +339,8 @@ SELECT[bf_id]
 ,[bf_activity]
 FROM[v_businessformation]
 WHERE[bf_status]!='2'
-<cfif ARGUMENTS.userid neq "">AND[bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.userid neq "">AND([bf_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -341,9 +390,9 @@ SELECT[ftp_id]
 ,[ftp_esttime]
 FROM[v_financialtaxplanning]
 WHERE[ftp_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL AND[ftp_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
-
+<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND([ftp_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -393,7 +442,7 @@ SELECT[fds_id]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='5'OR[form_id]='0')AND([optionGroup]='5'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 FROM[v_financialDataStatus]
 WHERE[fds_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL AND[fds_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">
 AND([fds_status]!='3'OR[fds_status] IS NULL)
 AND[fds_delivery_datecompleted] IS NULL
@@ -408,6 +457,7 @@ OR([fds_review_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fds_
 OR([fds_assembly_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fds_review_datecompleted] IS NOT NULL AND [fds_assembly_datecompleted]  IS NULL)
 OR([fds_delivery_assignedto] = <cfqueryparam value="#ARGUMENTS.userid#"> AND [fds_assembly_datecompleted] IS NOT NULL)
 </cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -459,7 +509,10 @@ FROM[v_managementconsulting]
 WHERE([mc_status] !=3 OR [mc_status] !=6 OR [mc_status] IS NULL)
 <cfif ARGUMENTS.search neq "">
 AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+<cfif ARGUMENTS.userid neq "">AND([mc_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
+
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -507,8 +560,9 @@ SELECT[n_id]
 
 FROM[v_notice_subtask]
 WHERE[nst_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL AND[nst_1_resduedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[nst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND([nst_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -555,7 +609,7 @@ SELECT[of_id]
 ,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
 FROM[v_otherfilings]
 WHERE[of_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">
 AND(([of_status]!='3')OR([of_status]IS NULL))
 AND([of_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_obtaininfo_datecompleted]IS NULL)
@@ -564,6 +618,7 @@ OR([of_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_prepa
 OR([of_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_review_datecompleted]IS NOT NULL AND[of_assembly_datecompleted]IS NULL)
 OR([of_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[of_assembly_datecompleted]IS NOT NULL AND[of_delivery_datecompleted]IS NULL)
 </cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -608,13 +663,14 @@ SELECT[pc_id]
 ,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
 FROM[v_payrollcheckstatus]
 WHERE[pc_delivery_completedby]IS NOT NULL 
-<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL AND[pc_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">AND[pc_delivery_datecompleted]IS NULL AND([pc_obtaininfo_datecompleted]IS NULL AND[pc_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_obtaininfo_datecompleted]IS NOT NULL AND[pc_preparation_datecompleted]IS NULL AND[pc_preparation_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_preparation_datecompleted]IS NOT NULL AND[pc_review_datecompleted]IS NULL AND[pc_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_review_datecompleted]IS NOT NULL AND[pc_assembly_datecompleted]IS NULL AND[pc_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">)
 </cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -659,7 +715,7 @@ SELECT[pt_id]
 ,[pt_type]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
 FROM[v_payrolltaxes]
 WHERE([pt_delivery_completedby]IS NULL)
-<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL AND[pt_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
 <cfif ARGUMENTS.userid neq "">
 AND([pt_obtaininfo_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_obtaininfo_datecompleted]IS NULL)
 OR([pt_entry_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_obtaininfo_datecompleted]IS NOT NULL AND[pt_entry_datecompleted]IS NULL)
@@ -668,6 +724,7 @@ OR([pt_review_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_rec_d
 OR([pt_assembly_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_review_completedby]IS NOT NULL AND[pt_assembly_datecompleted]IS NULL)
 OR([pt_delivery_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"> AND[pt_assembly_datecompleted]IS NOT NULL)
 </cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -718,11 +775,9 @@ SELECT[tr_id]
 ,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 FROM[v_taxreturns]
 WHERE[tr_2_informationreceived]IS NOT NULL 
-<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL AND[tr_duedate]><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
-<cfif ARGUMENTS.userid neq "">
-AND[tr_3_delivered]IS NULL
-AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#">
-</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]=><cfqueryparam value="#ARGUMENTS.duedate#">)</cfif>
+<cfif ARGUMENTS.userid neq "">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -777,8 +832,9 @@ WHERE datepart(year,[tr_2_informationreceived]) = datepart(year, getdate())
 AND [tr_taxyear] = DATEADD(year,-1,getdate())
 AND[tr_4_required] = '1'
 AND [tr_3_delivered] IS NULL
-<cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+<cfif ARGUMENTS.userid neq "">AND[tr_4_assignedto]=<cfqueryparam value="#ARGUMENTS.userid#"></cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#">)</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

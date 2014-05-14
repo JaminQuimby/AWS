@@ -25,10 +25,12 @@ _grid1=function(){_jGrid({
 	"fields":{
 		NAME:{title:'Module'}
 		,COUNT_ASSIGNED:{title:'Task Assigned'}
+		/*,COUNT_SUBTASK_ASSIGNED:{title:'Subtasks Assigned'}*/
 		,TOTAL_TIME:{title:'Estimated Time'}
+		/*,TOTAL_SUBTAKS_TIME:{title:'Subtasks Estimated Time'}*/
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group1","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'"}',
 	"functions":''
 })};
 
