@@ -23,7 +23,7 @@ AND('#page.formid#'NOT IN(SELECT[id]FROM[CSVToTable](optionHide))OR[optionHide]I
 
 
 </cfquery>
-<cfquery name="selectClients" cachedWithin="#page.cache.clients#" datasource="#Session.organization.name#">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1</cfquery>
+<cfquery name="selectClients" cachedWithin="#page.cache.clients#" datasource="#Session.organization.name#">SELECT[client_id]AS[optionvalue_id],[client_name]AS[optionname]FROM[client_listing]WHERE[client_active]=1ORDER BY[client_name]</cfquery>
 <cfquery name="selectUsers" cachedWithin="#page.cache.users#" datasource="#Session.organization.name#">SELECT[user_id]AS[optionvalue_id],[si_name]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]</cfquery>
 <cfquery name="selectReports" cachedWithin="#page.cache.reports#" datasource="#Session.organization.name#">SELECT[report_name],[report_description],[report_query],[report_fields]FROM[ctrl_reports]WHERE[form_id]='#page.formid#'AND([user_id]=0)ORDER BY[report_order]</cfquery>
 <cfquery name="selectRoles"  cachedWithin="#page.cache.roles#" datasource="#Session.organization.name#">SELECT[m_payrolltaxes],[m_accountingservices],[m_taxation],[m_clientmanagement],[m_maintenance],[g_delete]FROM[v_staffinitials]WHERE[user_id]=<cfqueryparam value="#Session.user.id#"/></cfquery>
