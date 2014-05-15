@@ -31,7 +31,8 @@ AND('#page.formid#'NOT IN(SELECT[id]FROM[CSVToTable](optionHide))OR[optionHide]I
 <!---Required for Time Billing plugin--->
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <head>
-
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 <cfoutput><title>#page.title#</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 <link rel="stylesheet" media="all" type="text/css" href="#this.url#/AWS/assets/module/jquery-Timepicker-Addon/jquery-ui-timepicker-addon.css" />
