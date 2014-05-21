@@ -18,21 +18,16 @@ _grid1=function(){_jGrid({
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
 		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PT_ID+"',page:'payrolltaxes',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,CLIENT_ID:{list:false,edit:false}
 		,CLIENT_NAME:{title:'Client Name'}
-		,PT_YEAR:{title:'Year',width:'1%'}
-		,PT_MONTHTEXT:{title:'Period'}
-		,PT_STATETEXT:{title:'State'}
-		,PT_TYPETEXT:{title:'Return Type'}	
 		,PT_LASTPAY:{title:'Last Pay',width:'1%'}
-		,PT_DUEDATE:{title:'Due Date',width:'1%'}
 		,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-		,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
-		,PT_OBTAININFO:{title:'Information',width:'1%'}
-		,PT_ENTRY:{title:'Entry',width:'1%'}
-		,PT_REC:{title:'Reconciliation',width:'1%'}
-		,PT_REVIEW:{title:'Review',width:'1%'}
-		,PT_ASSEMBLY:{title:'Assembly',width:'1%'}
-		,PT_DELIVERY:{title:'Delivery',width:'1%'}
+		,PT_PRIORITY:{title:'Priority',width:'1%'}
+		,PT_DUEDATE:{title:'Due Date',width:'1%'}
+		,PT_ESTTIME:{title:'Estimated Time',width:'1%'}
+		,PT_YEAR:{title:'Year',width:'1%'}
+		,PT_MONTH:{title:'Month',width:'1%'}
+		,PT_TYPE:{title:'Return Type',width:'1%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"13"}',

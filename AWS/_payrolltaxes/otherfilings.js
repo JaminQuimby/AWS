@@ -18,23 +18,17 @@ _grid1=function(){_jGrid({
 	"title":"Other Filings",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
 			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.OF_ID+"',page:'otherfilings',group:'group0'});_run.load_group1();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,OF_TAXYEAR:{title:'Tax Year'}
-			,OF_PERIODTEXT:{title:'Period'}
-			,OF_STATETEXT:{title:'State'}
-			,OF_TYPETEXT:{title:'Type'}
-			,OF_FORMTEXT:{title:'Form',width:'1%'}
-			,OF_DUEDATE:{title:'Due Date',width:'1%'}
-			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
+ 			,OF_TYPETEXT:{title:'Type'}
+			,OF_FORMTEXT:{title:'Form'}
+			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,OF_STATUSTEXT:{title:'Status'}
-			,OF_INFORMATIONRECEIVED:{title:'Information',width:'1%'}												
-			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
-			,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}									
-			,OF_OBTAININFO:{title:'Informtaion',width:'1%'}
-			,OF_PREPARATION:{title:'Preparation',width:'1%'}
-			,OF_REVIEW:{title:'Review',width:'1%'}
-			,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
-			,OF_DELIVERY:{title:'Delivery',width:'1%'}						
+			,OF_PRIORITY:{title:'Priority'}
+			,OF_DUEDATE:{title:'Due Date',width:'1%'}
+			,OF_ESTTIME:{title:'Estimated Time',width:'1%'}
+			,OF_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,OF_PERIODTEXT:{title:'Period',width:'1%'}					
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"11"}',

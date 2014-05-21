@@ -219,37 +219,15 @@ WHERE[OF_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[of_id]
-,[of_taxyear]
-,[of_period]
-,[of_state]
-,[of_type]
-,[of_form]
-,[of_period]
-,[of_obtaininfo_assignedto]
-,[of_preparation_assignedto]
-,[of_review_assignedto]
-,[of_assembly_assignedto]
-,[of_delivery_assignedto]
-,[of_duedate]=FORMAT(of_duedate,'d','#Session.localization.language#') 
-,[of_missinginfo]
-,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'d','#Session.localization.language#') 
-,[of_filingdeadline]=FORMAT(of_filingdeadline,'d','#Session.localization.language#') 
 ,[client_name]
-,[client_id]
-,[of_obtaininfo_datecompleted]=ISNULL(FORMAT(of_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
-,[of_obtaininfo_assignedtoTEXT]
-,[of_preparation_datecompleted]=ISNULL(FORMAT(of_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
-,[of_preparation_assignedtoTEXT]
-,[of_review_datecompleted]=ISNULL(FORMAT(of_review_datecompleted,'d','#Session.localization.language#'),'N/A')
-,[of_review_assignedtoTEXT]
-,[of_assembly_datecompleted]=ISNULL(FORMAT(of_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
-,[of_assembly_assignedtoTEXT]
-,[of_delivery_datecompleted]=ISNULL(FORMAT(of_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
-,[of_delivery_assignedtoTEXT] 
-,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
-,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_type]=[optionvalue_id])
-,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
+,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
+,[of_missinginfo]
+,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
+,[of_priority]
+,[of_duedate]=FORMAT(of_duedate,'d','#Session.localization.language#') 
+,[of_esttime]
+,[of_taxyear]
 ,[of_periodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[of_period]=[optionvalue_id])
 FROM[v_otherfilings]
 WHERE[of_status] != 2 
@@ -265,23 +243,16 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'"
-								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"								
-								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
-								,"OF_STATETEXT":"'&OF_STATETEXT&'"
 								,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
 								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
-								,"OF_DUEDATE":"'&OF_DUEDATE&'"						
-								,"OF_FILINGDEADLINE":"'&OF_FILINGDEADLINE&'"
+								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
 								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
- 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
- 								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"								
-								,"OF_OBTAININFO":"'&of_obtaininfo_datecompleted&'<br/>'&of_obtaininfo_assignedtoTEXT&'"
-								,"OF_PREPARATION":"'&of_preparation_datecompleted&'<br/>'&of_preparation_assignedtoTEXT&'"
-								,"OF_REVIEW":"'&of_review_datecompleted&'<br/>'&of_review_assignedtoTEXT&'"
-								,"OF_ASSEMBLY":"'&of_assembly_datecompleted&'<br/>'&of_assembly_assignedtoTEXT&'"
-								,"OF_DELIVERY":"'&of_delivery_datecompleted&'<br/>'&of_delivery_assignedtoTEXT&'"								
+								,"OF_PRIORITY":"'&OF_PRIORITY&'"
+								,"OF_DUEDATE":"'&OF_DUEDATE&'"
+								,"OF_ESTTIME":"'&OF_ESTTIME&'"
+								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"
+								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"							
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

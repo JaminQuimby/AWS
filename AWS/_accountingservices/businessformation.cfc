@@ -171,13 +171,13 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[bf_id]
 ,[client_id]
 ,[client_name]
-,[bf_owners]
-,[bf_status]
-,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
-,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
-,[bf_assignedtoTEXT]
-,[bf_activity]
+,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'d','#Session.localization.language#') 
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
+,[bf_priority]
+,[bf_assignedtoTEXT]
+,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
+,[bf_esttime]
+,[bf_activity]
 FROM[v_businessformation]
 WHERE[bf_status] != 2 
 AND [bf_status] != 3
@@ -193,12 +193,13 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
-								,"BF_OWNERS":"'&BF_OWNERS&'"
-								,"BF_BUSINESSTYPETEXT":"'&BF_BUSINESSTYPETEXT&'"
-								,"BF_DUEDATE":"'&BF_DUEDATE&'"								
+								,"BF_DATEINITIATED":"'&BF_DATEINITIATED&'"
 								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
+								,"BF_PRIORITY":"'&BF_PRIORITY&'"
 								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
+								,"BF_DUEDATE":"'&BF_DUEDATE&'"
+								,"BF_ESTTIME":"'&BF_ESTTIME&'"
+								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
