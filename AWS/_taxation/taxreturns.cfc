@@ -316,23 +316,20 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
+,[client_id]
+,[client_name]
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
+,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
+,[tr_missinginfo]
 ,[tr_taxyear]
 ,[tr_taxform]
-,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+,[tr_priority]
+,[tr_2_assignedtoTEXT]
 ,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
-,[tr_missinginfo]
-,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
-,[tr_4_assignedto]
+,[tr_esttime]
+,[tr_4_required]
+,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#') 
 ,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
-,[client_name]
-,[client_id]
-,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
-,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
-,[tr_2_reviewassignedtoTEXT] 
-,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#') 
-,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
-,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
-,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
 
 FROM[v_taxreturns]
 
@@ -349,19 +346,18 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
-								,"TR_DUEDATE":"'&TR_DUEDATE&'"
-								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
-								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
-								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
-								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
-								,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
-								,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
-								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
 								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
-								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
+								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"TR_PRIORITY":"'&TR_PRIORITY&'"
+								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
+								,"TR_DUEDATE":"'&TR_DUEDATE&'"
+								,"TR_ESTTIME":"'&TR_ESTTIME&'"
+								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"
+								,"TR_4_RFR":"'&TR_4_RFR&'"
+								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
