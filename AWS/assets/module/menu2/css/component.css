@@ -48,8 +48,8 @@
 .cbp-hrmenu > ul > li.cbp-hropen:nth-child(4) h4{color:#FFF; text-decoration:underline;}
 .cbp-hrmenu > ul > li.cbp-hropen:nth-child(5){background: #F3AE03;}
 .cbp-hrmenu > ul > li.cbp-hropen:nth-child(5) h4{text-decoration:underline;}
-.cbp-hrmenu > ul > li.cbp-hropen:nth-child(6){background: #A6A6A6;}
-.cbp-hrmenu > ul > li.cbp-hropen:nth-child(6) h4{text-decoration:underline;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(6){background: #3E1A98;}
+.cbp-hrmenu > ul > li.cbp-hropen:nth-child(6) h4{color:#FFF; text-decoration:underline;}
 
 .cbp-hrmenu > ul > li.cbp-hropen a,
 .cbp-hrmenu > ul > li.cbp-hropen > a:hover {

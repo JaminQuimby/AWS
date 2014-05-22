@@ -20,4 +20,4 @@ ul[class*="taxation"] li:not(:first-child){background-color: #FC0; border: mediu
 ul[class*="clientManagement"] li:not(:first-child){background-color:#060; border: medium solid; color:#fff; border: 2px solid #030;}
 
 /*Practice Management*/
-ul[class*="practiceManagement"] li:not(:first-child){background-color:#999; border: medium solid; color:#fff; border: 2px solid #666;}
+ul[class*="practiceManagement"] li:not(:first-child){background-color:#3E1A98; border: medium solid; color:#fff; border: 2px solid #666;}

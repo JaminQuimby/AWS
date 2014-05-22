@@ -120,9 +120,9 @@ tr{vertical-align:top;}
 ._clientmanagement li{border-color:#030;}
 ._clientmanagement li a{color:#fff;}
 /*Practice Management*/
-._practicemanagement{background-color:#A6A6A6;border-bottom-color:#333;color:#fff;}
-._practicemanagement li{border-color:#333;}
-._practicemanagement li a{color:#000;}
+._practicemanagement{background-color:#3E1A98;border-bottom-color:#3E1A98;color:#fff;}
+._practicemanagement li{border-color:#3E1A98;}
+._practicemanagement li a{color:#fff;}
 
 /*Search*/
 .search-bar{

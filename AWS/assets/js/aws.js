@@ -12,6 +12,7 @@ Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(
 var debug=true;
 $(document).ready(function(){
 
+
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 $.datepicker.setDefaults({showOn:"button",buttonImageOnly:true,buttonImage:"https://"+window.location.hostname+"/AWS/assets/img/datepicker.gif",showButtonPanel:true,constrainInput:true});
 $(".datetime").datetimepicker({timeFormat: 'hh:mmtt',dateFormat: 'm/d/yy'}).mask('00/00/0000 00:00:00');
@@ -50,7 +51,25 @@ $('.ui-accordion-header').click(function(){
 	});
 $( "<div class='switch'></div>" ).insertAfter( ".ios-switch,.ios-switchb" );
 	
-	
+
+
+
+_lock=function(e){
+e=$('.fa-lock');
+	target=e.parent().parent()
+	target.find('input').attr('disabled','disabled');
+	target.find('input.hasDatepicker').datepicker("disable");
+	target.find('select').attr('disabled','disabled').trigger("chosen:updated");
+	e.click(function( event ) {target=$( event.target )
+		target.parent().parent().find('input').removeAttr('disabled');
+		target.parent().parent().find('input.hasDatepicker').datepicker("enable");
+		target.parent().parent().find('select').removeAttr('disabled').trigger("chosen:updated"); })
+
+}
+
+
+_lock();
+
 _toCSV2=function($table, filename) {
 
         var $rows = $table.find('tr:has(td)'),
@@ -428,14 +447,7 @@ else if($('.'+options['new']).val()==0){
 }
 
 
-_schk=function(i){
-if(user["role"]==1){
-if($('#'+i).is(":disabled")){
-	$('label[for="'+i+'"] i').removeClass('fa-lock').addClass('fa-unlock');
-	if($('#'+i).is('select')){
-	$('#'+i).prop("disabled", false).trigger("chosen:updated");
-	}else{$('#'+i).prop("disabled", false);}}}}
-	
+
 
 _toReport=function(data,config){
 //Build Report Groups

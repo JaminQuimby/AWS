@@ -67,11 +67,11 @@ ACTIVITY (CLIENT DATA)
 <h3>Client</h3>
 <div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
-<div><label for="g1_name"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Client Name</label><input id="g1_name" disabled="disabled" type="text" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" /></div>
+<div><label for="g1_name"><i class="fa fa-lock link" ></i> Client Name</label><input id="g1_name" type="text" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});" /></div>
 <div><label for="g1_spouse">Spouse</label><input id="g1_spouse" maxlength="40" type="text"/></div>
-<div><label for="g1_salutation"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Salutation</label><input id="g1_salutation" type="text" class="valid_off" disabled="disabled" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
-<div><label for="g1_type"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..." disabled="disabled" onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="global_clienttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g1_since"><i class="fa fa-lock link" onClick="_schk('g1_name')"></i> Client Since</label><input id="g1_since" type="text" class="valid_off date" disabled="disabled" onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
+<div><label for="g1_salutation"><i class="fa fa-lock link" ></i> Salutation</label><input id="g1_salutation" type="text" class="valid_off"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
+<div><label for="g1_type"><i class="fa fa-lock link" ></i> Type</label><select id="g1_type" type="text"  data-placeholder="Choose type of client..."  onChange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select a field'});"><option value="0">&nbsp;</option><cfoutput query="global_clienttype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_since"><i class="fa fa-lock link" ></i> Client Since</label><input id="g1_since" type="text" class="valid_off date"  onBlur="jqValid({'type':'empty','object':this,'message':'Cannot be empty.'});"/></div>
 <div><label for="g1_trade_name">Trade Name</label><input id="g1_trade_name" maxlength="100" type="text" /></div>
 <div><label for="g1_referred_by">Referred By</label><input id="g1_referred_by" maxlength="40" type="text"/></div>
 <div><label for="g1_active"><input id="g1_active" type="checkbox" class="ios-switch">Active</label></div>
@@ -191,7 +191,7 @@ ACTIVITY (CLIENT DATA)
 
 
 <!--- GROUP 4 SUB 1 ADD TO FINANCIAL STATEMENTS --->
-<h4 onClick='_run.load_group4_1();'>Financial Statements</h4>
+<h4 onClick='_run.load_group4_1(); '>Financial Statements</h4>
 <div>
 <div class="tblGrid" id="grid4_1"></div>
 <div class="buttonbox">
