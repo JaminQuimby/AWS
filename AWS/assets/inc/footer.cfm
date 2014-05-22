@@ -18,9 +18,19 @@ jqMessage Required
 <div class="buttonbox">
 <div >
 <cfoutput>
-<button type="button" id="savedata" onclick="_saveData();" class="button"><i></i> Save</button> 
+<table>
+<tr>
+<td><button type="button" id="savedata" onclick="_saveData();" class="button"><i></i> Save</button> 
 <a class="button optional" onclick='jqMessage({message: "Are you sure you wish to close this task? Any unsaved data will be lost. ",type: "warning",autoClose: false,buttons:[{"name":"save","on_click":"_saveData();","class":"button"},{"name":"close","on_click":" window.location = \"#this.url##CGI.SCRIPT_NAME#\" ","class":"button"}]});' >Close</a> 
 <a class="button optional" onclick='window.open("#this.url#/AWS/_clientmanagement/clientmaintenance.cfm?task_id=" + $("##client_id").val()); ' style='background-color: ##247639; color:##FFF;'  >Client Maintenance</a>
+</td>
+<!--- Can't figure out why the 50 different ways i've tried to right justify this hasn't worked moving ot a different task for now
+<td style="right:20px"><img src="#this.url#/assets/images/logo_aws_mini.png" alt="Accountants' Workflow Solutions" ></td>
+--->
+</tr>
+</table>
+
+
 </cfoutput>
 </div>
 </div>
