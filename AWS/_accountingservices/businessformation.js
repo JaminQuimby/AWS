@@ -22,13 +22,24 @@ _grid1=function(){_jGrid({
 		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.BF_ID+"',page:'businessformation',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,CLIENT_ID:{list:false,edit:false}
 		,CLIENT_NAME:{title:'Client Name'}
-		,BF_DATEINITIATED:{title:'Date Initiated'}
-		,BF_STATUSTEXT:{title:'Status'}
-		,BF_PRIORITY:{title:'Priority',width:'1%'}
-		,BF_ASSIGNEDTOTEXT:{title:'Assigned To'}
-		,BF_DUEDATE:{title:'Due Date'}
-		,BF_ESTTIME:{title:'Estimated Time'}
 		,BF_ACTIVITY:{title:'Activity'}
+		,BF_OWNERS:{title:'Owners'}	
+		,BF_BUSINESSTYPE:{title:'Business Type'}
+		,BF_DUEDATE:{title:'Due Date'}
+		,BF_STATUSTEXT:{title:'Status'}
+		,BF_ASSIGNEDTOTEXT:{title:'Assigned To'}
+		,BF_ASSIGNEDTOTEXT:{title:'Assigned To'}
+		
+		
+		,BF_DATEINITIATED:{title:'Date Initiated'}
+		
+		,BF_PRIORITY:{title:'Priority',width:'1%'}
+		
+		
+
+		
+		
+		
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"3"}',
@@ -71,7 +82,7 @@ else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error"
 catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",autoClose: false})}};
 
 _saveDataCB=function(params){
-var options={"id":"","group":"","subgroup":"","result":""}
+var options={"id":"","subtask1_id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);
 
@@ -121,7 +132,7 @@ else{
 break;
 
 case'group1_1':
-$("#task_id").val(options["id"]);
+$("#task_id").val(options["id"]); alert("Set ID:"+options["id"])
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g1_articlesapproved").val()+'","'+
@@ -137,7 +148,7 @@ if($("#isLoaded_group1_1").val()!=0){
 break;
 
 case'group1_2':
-$("#task_id").val(options["id"]);
+$("#task_id").val(options["id"]);  alert("Set ID2:"+options["id"])
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g2_tradenamereceived").val()+'","'+
@@ -152,7 +163,7 @@ if($("#isLoaded_group1_2").val()!=0){
 }
 break;
 
-case'group1_3':
+case'group1_3':  alert("Set ID3:"+options["id"])
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -169,7 +180,7 @@ if($("#isLoaded_group1_3").val()!=0){
 	}
 break;
 
-case'group1_4':
+case'group1_4':  alert("Set ID4:"+options["id"])
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -186,7 +197,7 @@ if($("#isLoaded_group1_4").val()!=0){
 	}
 break;
 
-case'group1_5':
+case'group1_5':  alert("Set ID5:"+options["id"])
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -198,13 +209,13 @@ if($("#isLoaded_group1_5").val()!=0){
 	_saveData({group:"group1_5","payload":$.parseJSON(json),page:"businessformation"});
 	if(debug){window.console.log('Group 1_5 - Saving Data');}
 	}else{
-	_saveDataCB({'group':'group2',"id":""+$("#subtask1_id").val()+""});
+	_saveDataCB({'group':'group2',"subtask1_id":""+$("#subtask1_id").val()+""});
 	if(debug){window.console.log('Group 1_5 - Skipped saving data');}
 	}
 break;
 
-case'group2':
-$("#subtask1_id").val(options["id"]);
+case'group2':  alert("Set sID2:"+options["subtask1_id"])
+$("#subtask1_id").val(options["subtask1_id"]);
 var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
@@ -224,7 +235,7 @@ if($("#isLoaded_group2").val()!=0){
 break;
 
 /*Start Saving Plugins*/
-case"plugins":$("#subtask1_id").val(options["id"]);_pluginSaveData({"subgroup":options["subgroup"]});break;
+case"plugins":$("#subtask1_id").val(options["subtask1_id"]);alert("Set pID1:"+options["subtask1_id"]);_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;

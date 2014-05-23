@@ -178,6 +178,8 @@ SELECT[bf_id]
 ,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_esttime]
 ,[bf_activity]
+,[bf_owners]
+,[bf_businesstype]
 FROM[v_businessformation]
 WHERE[bf_status] != 2 
 AND [bf_status] != 3
@@ -200,6 +202,12 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"BF_DUEDATE":"'&BF_DUEDATE&'"
 								,"BF_ESTTIME":"'&BF_ESTTIME&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
+								,"BF_OWNERS":"'&BF_OWNERS&'"
+								,"BF_BUSINESSTYPE":"'&BF_BUSINESSTYPE&'"
+								
+
+
+
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -445,7 +453,7 @@ VALUES(
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
-<cfreturn '{"id":#fquery.id#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"subtask1_id":#fquery.id#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -464,7 +472,7 @@ SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
-<cfreturn '{"id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"subtask1_id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":""#cfcatch.message#","#cfcatch.detail#"","result":"error"}'> 
@@ -501,7 +509,7 @@ update[businessformation_subtask]
 SET[bfs_active]=0
 WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
-<cfreturn '{"id":#ARGUMENTS.id#,"group":"group2","result":"ok"}'>
+<cfreturn '{"subtask1_id":#ARGUMENTS.id#,"group":"group2","result":"ok"}'>
 </cfcase>
 
 </cfswitch>

@@ -63,26 +63,26 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!---Subgroup 1--->
-<h4 onClick='_run.load_group1_1();'>Articles</h4>
+<h4 onClick='_run.load_group1_1();'>Articles Approved</h4>
 <div>
 	<div><label for="g1_g1_articlessubmitted" >Articles Submitted</label><input type="text" id="g1_g1_articlessubmitted" class="date"/></div>
 	<div><label for="g1_g1_articlesapproved" >Articles Approved</label><input type="text" id="g1_g1_articlesapproved" class="date"/></div>
 </div>
 <!---Subgroup 2--->
-<h4 onClick='_run.load_group1_2();'>Trade Names</h4>
+<h4 onClick='_run.load_group1_2();'>Trade Name Received</h4>
 <div>
 	<div><label for="g1_g2_tradenamesubmitted" >Trade Name Submitted</label><input type="text" id="g1_g2_tradenamesubmitted" class="date"/></div>
 	<div><label for="g1_g2_tradenamereceived" >Trade Name Received </label><input type="text" id="g1_g2_tradenamereceived" class="date"/></div>
 </div>
 <!---Subgroup 3--->
-<h4 onClick='_run.load_group1_3();'>Minutes</h4>
+<h4 onClick='_run.load_group1_3();'>Minutes Completed</h4>
 <div>
 	<div><label for="g1_g3_minutesbylawsdraft" >Minutes Bylaws Draft</label><input type="text" id="g1_g3_minutesbylawsdraft" class="date"/></div>
 	<div><label for="g1_g3_minutesbylawsfinal" >Minutes Bylaws Final</label><input type="text" id="g1_g3_minutesbylawsfinal" class="date"/></div>
 	<div><label for="g1_g3_minutescompleted" >Minutes Completed </label><input type="text" id="g1_g3_minutescompleted" class="date"/></div>
 </div>
 <!---Subgroup 4--->
-<h4 onClick='_run.load_group1_4();'>Dissolution</h4>
+<h4 onClick='_run.load_group1_4();'>Dissolution Completed</h4>
 <div>
 	<div><label for="g1_g4_dissolutionrequested" >Dissolution Requested</label><input type="text" id="g1_g4_dissolutionrequested" class="date"/></div>
 	<div><label for="g1_g4_dissolutionsubmitted" >Dissolution Submitted</label><input type="text" id="g1_g4_dissolutionsubmitted" class="date"/></div>
