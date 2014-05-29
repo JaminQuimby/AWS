@@ -74,7 +74,7 @@ _grid1_1=function(){_jGrid({
 			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FIELD_ID+"',page:'clientmaintenance',group:'group1_2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,FIELD_NAME:{title:'Name'}
 			,FIELD_VALUE:{title:'Value'}
-			,FIELD_GLOBAL:{title:'Global'}
+			,FIELD_GLOBAL:{title:'Global',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_g1_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1_1","clientid":'+$("#client_id").val()+'}',

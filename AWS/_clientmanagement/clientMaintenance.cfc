@@ -264,7 +264,10 @@ WHERE[client_active]=(1)AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.sea
 
 <!--- LOOKUP CUSTOM FIELDS --->
 <cfcase value="group1_1"><cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[field_id],[field_name],[field_value],[field_global]
+SELECT[field_id]
+,[field_name]
+,[field_value]
+,[field_global]
 FROM[ctrl_customfields]
 WHERE[form_id]='1'AND[field_active]='1'
 AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/> OR [field_global]=1 )

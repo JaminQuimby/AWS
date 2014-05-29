@@ -25,21 +25,11 @@ _grid1=function(){_jGrid({
 		,BF_ACTIVITY:{title:'Activity'}
 		,BF_OWNERS:{title:'Owners'}	
 		,BF_BUSINESSTYPE:{title:'Business Type'}
-		,BF_DUEDATE:{title:'Due Date'}
+		,BF_DUEDATE:{title:'Due Date',width:'1%'}
 		,BF_STATUSTEXT:{title:'Status'}
 		,BF_ASSIGNEDTOTEXT:{title:'Assigned To'}
-		,BF_ASSIGNEDTOTEXT:{title:'Assigned To'}
-		
-		
-		,BF_DATEINITIATED:{title:'Date Initiated'}
-		
-		,BF_PRIORITY:{title:'Priority',width:'1%'}
-		
-		
-
-		
-		
-		
+	    ,BF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+		,BF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"3"}',
@@ -69,7 +59,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "BF_ID":var list='task_id,client_id,g1_activity,g1_assignedto,g1_g5_businesscreceived,g1_g5_businesssubmitted,g1_g5_businesstype,g1_dateinitiated,g1_duedate,g1_estimatedtime,g1_fees,g1_owners,g1_paid,g1_priority,g1_status';_loadit({"query":query,"list":list,"page":"businessformation"});break;
+/*Group1*/case "BF_ID":var list='task_id,client_id,g1_activity,g1_assignedto,g1_g5_businesscreceived,g1_g5_businesssubmitted,g1_g5_businesstype,g1_dateinitiated,g1_duedate,g1_estimatedtime,g1_fees,g1_missinginforeceived,g1_missinginformation,g1_owners,g1_paid,g1_priority,g1_status';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_1*/case "BF_ARTICLESAPPROVED":var list='g1_g1_articlesapproved,g1_g1_articlessubmitted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_2*/case "BF_TRADENAMERECEIVED":var list='g1_g2_tradenamereceived,g1_g2_tradenamesubmitted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_3*/case "BF_MINUTESBYLAWSDRAFT":var list='g1_g3_minutesbylawsdraft,g1_g3_minutesbylawsfinal,g1_g3_minutescompleted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
@@ -85,7 +75,6 @@ _saveDataCB=function(params){
 var options={"id":"","subtask1_id":"","group":"","subgroup":"","result":""}
 try{	
 $.extend(true, options, params);
-
 switch(options["group"]){
 	
 case'':_saveDataCB({'group':'group1'});break;
@@ -102,6 +91,8 @@ $("#g1_dateinitiated").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
 $("#g1_fees").val()+'","'+
+$("#g1_missinginforeceived").val()+'",'+
+$("#g1_missinginformation").is(':checked')+',"'+
 $("#g1_owners").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_priority").val()+'","'+
@@ -132,7 +123,7 @@ else{
 break;
 
 case'group1_1':
-$("#task_id").val(options["id"]); alert("Set ID:"+options["id"])
+$("#task_id").val(options["id"]); 
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g1_articlesapproved").val()+'","'+
@@ -148,7 +139,7 @@ if($("#isLoaded_group1_1").val()!=0){
 break;
 
 case'group1_2':
-$("#task_id").val(options["id"]);  alert("Set ID2:"+options["id"])
+$("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#g1_g2_tradenamereceived").val()+'","'+
@@ -163,7 +154,7 @@ if($("#isLoaded_group1_2").val()!=0){
 }
 break;
 
-case'group1_3':  alert("Set ID3:"+options["id"])
+case'group1_3': 
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -180,7 +171,7 @@ if($("#isLoaded_group1_3").val()!=0){
 	}
 break;
 
-case'group1_4':  alert("Set ID4:"+options["id"])
+case'group1_4':
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -197,7 +188,7 @@ if($("#isLoaded_group1_4").val()!=0){
 	}
 break;
 
-case'group1_5':  alert("Set ID5:"+options["id"])
+case'group1_5': 
 $("#task_id").val(options["id"]);
 var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
@@ -214,7 +205,7 @@ if($("#isLoaded_group1_5").val()!=0){
 	}
 break;
 
-case'group2':  alert("Set sID2:"+options["subtask1_id"])
+case'group2': 
 $("#subtask1_id").val(options["subtask1_id"]);
 var json='{"DATA":[["'+
 $("#subtask1_id").val()+'","'+
@@ -235,7 +226,7 @@ if($("#isLoaded_group2").val()!=0){
 break;
 
 /*Start Saving Plugins*/
-case"plugins":$("#subtask1_id").val(options["subtask1_id"]);alert("Set pID1:"+options["subtask1_id"]);_pluginSaveData({"subgroup":options["subgroup"]});break;
+case"plugins":$("#subtask1_id").val(options["subtask1_id"]);_pluginSaveData({"subgroup":options["subgroup"]});break;
 /*Other Events*/
 case'error': jqMessage({message:"Error in _saveDataCB, General Error:"+options["id"]+"."+options["group"]+"."+options["result"],type: "error",autoClose: false});break;
 case'saved':jqMessage({"type":"destroy"});jqMessage({message: "Your document has been saved. ",type: "success",autoClose: true,duration: 5});break;

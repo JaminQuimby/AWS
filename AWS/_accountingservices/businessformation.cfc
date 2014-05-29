@@ -59,6 +59,8 @@ SELECT[bf_id]
 ,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_esttime]
 ,[bf_fees]
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_missinginfo]
 ,[bf_owners]
 ,[bf_paid]
 ,[bf_priority]
@@ -171,15 +173,15 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[bf_id]
 ,[client_id]
 ,[client_name]
-,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'d','#Session.localization.language#') 
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
-,[bf_priority]
 ,[bf_assignedtoTEXT]
 ,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
-,[bf_esttime]
 ,[bf_activity]
 ,[bf_owners]
 ,[bf_businesstype]
+,[bf_missinginfo]
+
 FROM[v_businessformation]
 WHERE[bf_status] != 2 
 AND [bf_status] != 3
@@ -195,19 +197,14 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"BF_DATEINITIATED":"'&BF_DATEINITIATED&'"
-								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
-								,"BF_PRIORITY":"'&BF_PRIORITY&'"
-								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
-								,"BF_DUEDATE":"'&BF_DUEDATE&'"
-								,"BF_ESTTIME":"'&BF_ESTTIME&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
 								,"BF_OWNERS":"'&BF_OWNERS&'"
 								,"BF_BUSINESSTYPE":"'&BF_BUSINESSTYPE&'"
-								
-
-
-
+								,"BF_DUEDATE":"'&BF_DUEDATE&'"
+								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
+								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
+								,"BF_MISSINGINFO":"'&BF_MISSINGINFO&'"
+								,"BF_MISSINGINFORECEIVED":"'&BF_MISSINGINFORECEIVED&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -265,6 +262,7 @@ WHERE [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[bfs_taskname]LIKE <cfqu
 </cfcase>
 <!--- Save Group1 --->
 <cfcase value="group1">
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][13])><cfset j.DATA[1][13]=1><cfelse><cfset j.DATA[1][13]=0></cfif>
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="#Session.organization.name#">
@@ -279,6 +277,8 @@ INSERT INTO[BUSINESSFORMATION](
 ,[bf_duedate]
 ,[bf_esttime]
 ,[bf_fees]
+,[bf_missinginforeceived]
+,[bf_missinginfo]
 ,[bf_owners]
 ,[bf_paid]
 ,[bf_priority]
@@ -298,6 +298,8 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[bf_id]
 </cfquery>
@@ -323,10 +325,12 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bf_duedate]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[bf_esttime]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[bf_fees]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[bf_owners]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[bf_paid]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[bf_priority]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[bf_status]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[bf_missinginforeceived]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[bf_missinginfo]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[bf_owners]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[bf_paid]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[bf_priority]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[bf_status]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 WHERE[BF_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
