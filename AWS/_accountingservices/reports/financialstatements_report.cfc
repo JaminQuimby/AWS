@@ -41,8 +41,8 @@ SELECT[fds_id]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,[fds_periodend]
-,[fds_duedate]
+,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
 ,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
  
 

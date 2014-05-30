@@ -287,14 +287,16 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
-,[cas_completed]=FORMAT(cas_completed,'d','#Session.localization.language#') 
-,[cas_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
-,[cas_priority]
-,[cas_assignedtoTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
 ,[cas_duedate]=FORMAT(cas_duedate,'d','#Session.localization.language#') 
-,[cas_esttime]
-,[cas_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
-,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc] 
+,[cas_assignedto]
+,[cas_category]
+,[cas_datereqested]=FORMAT(cas_datereqested,'d','#Session.localization.language#') 
+,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
+,[cas_status]
+,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
+,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
+,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
+
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
 
@@ -311,14 +313,12 @@ WHERE[cas_status]!='2'
 <cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"
-								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
-								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
-								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_ESTTIME":"'&CAS_ESTTIME&'"
 								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
+								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
+								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
+								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
+								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -343,13 +343,13 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[bf_id]
 ,[client_id]
 ,[client_name]
-,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'d','#Session.localization.language#') 
-,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
-,[bf_priority]
-,[bf_assignedtoTEXT]
+,[bf_owners]
+,[bf_status]
 ,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
-,[bf_esttime]
+,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
+,[bf_assignedtoTEXT]
 ,[bf_activity]
+,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 FROM[v_businessformation]
 WHERE[bf_status]!='2'
 <cfif ARGUMENTS.userid neq "">AND([bf_assignedto]=@u )</cfif>
@@ -363,13 +363,12 @@ WHERE[bf_status]!='2'
 <cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"BF_DATEINITIATED":"'&BF_DATEINITIATED&'"
-								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
-								,"BF_PRIORITY":"'&BF_PRIORITY&'"
-								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
-								,"BF_DUEDATE":"'&BF_DUEDATE&'"
-								,"BF_ESTTIME":"'&BF_ESTTIME&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
+								,"BF_OWNERS":"'&BF_OWNERS&'"
+								,"BF_BUSINESSTYPETEXT":"'&BF_BUSINESSTYPETEXT&'"
+								,"BF_DUEDATE":"'&BF_DUEDATE&'"								
+								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
+								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -392,19 +391,17 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[ftp_id]
+,[ftp_status]
+,[ftp_category]
+,[ftp_assignedtoTEXT]
+,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
+,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]
-,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#') 
-,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'d','#Session.localization.language#') 
-,[ftp_missinginfo]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id]
-)AS[ftp_categoryTEXT]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id]
-)AS[ftp_statusTEXT]
-,[ftp_priority]
-,[ftp_assignedtoTEXT]
-,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#') 
-,[ftp_esttime]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])AS[ftp_categoryTEXT]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
+
 FROM[v_financialtaxplanning]
 WHERE[ftp_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]=>@d)</cfif>
@@ -417,18 +414,16 @@ WHERE[ftp_status]!='2'
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"FTP_ID":"'&FTP_ID&'"
-								,"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
-								,"FTP_REPORTCOMPLETED":"'&FTP_REPORTCOMPLETED&'"
-								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
-								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
-								,"FTP_PRIORITY":"'&FTP_PRIORITY&'"
-								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
-								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
-								,"FTP_ESTTIME":"'&FTP_ESTTIME&'"
-								,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
-								}'>
+ 									,"CLIENT_ID":"'&CLIENT_ID&'"
+ 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
+									,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
+									,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
+									,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
+									,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
+ 									,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
+ 									,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
+									}'>
+                                    
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -449,18 +444,40 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[fds_id]
-,[client_id]
-,[client_name]
-,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
-,[fds_missinginfo]
-,[fds_compilemi]
-,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
-,[fds_priority]
-,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#')    
-,[fds_esttime]
-,[fds_month]
-,[fds_year]
-,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='5'OR[form_id]='0')AND([optionGroup]='5'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+ 	,[client_id]
+ 	,[client_name]
+ 	,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+	,[fds_month]
+	,[fds_year]
+	,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+	,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+	,[fds_status]
+	,[fds_missinginfo]
+ 	,[fds_compilemi]
+	,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
+	,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_obtaininfo_assignedtoTEXT]
+	,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_sort_assignedtoTEXT]
+	,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_checks_assignedtoTEXT]
+	,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_sales_assignedtoTEXT]
+	,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_entry_assignedtoTEXT]
+	,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_reconcile_assignedtoTEXT]
+	,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_compile_assignedtoTEXT]
+	,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_review_assignedtoTEXT]
+	,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_assembly_assignedtoTEXT]
+	,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_delivery_assignedtoTEXT]
+	,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_acctrpt_assignedtoTEXT]
+
 FROM[v_financialDataStatus]
 WHERE[fds_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
@@ -488,15 +505,24 @@ OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
 <cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
-								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
-								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
-								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
-								,"FDS_PRIORITY":"'&FDS_PRIORITY&'"
-								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
-								,"FDS_ESTTIME":"'&FDS_ESTTIME&'"
-								,"FDS_YEAR":"'&FDS_YEAR&'"
 								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
+								,"FDS_YEAR":"'&FDS_YEAR&'"
+								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
+								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
+								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
+								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
+								,"FDS_OBTAININFO":"'&fds_obtaininfo_datecompleted&'<br/>'&fds_obtaininfo_assignedtoTEXT&'"
+								,"FDS_SORT":"'&fds_sort_datecompleted&'<br/>'&fds_sort_assignedtoTEXT&'"
+								,"FDS_CHECKS":"'&fds_checks_datecompleted&'<br/>'&fds_checks_assignedtoTEXT&'"
+								,"FDS_SALES":"'&fds_sales_datecompleted&'<br/>'&fds_sales_assignedtoTEXT&'"
+								,"FDS_ENTRY":"'&fds_entry_datecompleted&'<br/>'&fds_entry_assignedtoTEXT&'"
+								,"FDS_RECONCILE":"'&fds_reconcile_datecompleted&'<br/>'&fds_reconcile_assignedtoTEXT&'"
+								,"FDS_COMPILE":"'&fds_compile_datecompleted&'<br/>'&fds_compile_assignedtoTEXT&'"
+								,"FDS_REVIEW":"'&fds_review_datecompleted&'<br/>'&fds_review_assignedtoTEXT&'"
+								,"FDS_ASSEMBLY":"'&fds_assembly_datecompleted&'<br/>'&fds_assembly_assignedtoTEXT&'"
+								,"FDS_DELIVERY":"'&fds_delivery_datecompleted&'<br/>'&fds_delivery_assignedtoTEXT&'"
+								,"FDS_ACCTRPT":"'&fds_acctrpt_datecompleted&'<br/>'&fds_acctrpt_assignedtoTEXT&'"
+
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

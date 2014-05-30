@@ -28,17 +28,26 @@ _grid1=function(){_jGrid({
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
 		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDS_ID+"',page:'financialstatements',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-		,CLIENT_ID:{list:false,edit:false}
-		,CLIENT_NAME:{title:'Client Name'}
-		,FDS_PERIODEND:{title:'Period End',width:'2%'}
-		,FDS_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-		,FDS_COMPILEMI:{title:'Missing Information Compiled',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-		,FDS_STATUSTEXT:{title:'Status'}
-		,FDS_PRIORITY:{title:'Priority',width:'2%'}
-		,FDS_DUEDATE:{title:'Due Date',width:'2%'}
-		,FDS_ESTTIME:{title:'Estimated Time'}		
-		,FDS_YEAR:{title:'Year',width:'2%'}
-		,FDS_MONTHTEXT:{title:'Month'}
+	 			,CLIENT_ID:{list:false,edit:false}
+	 			,CLIENT_NAME:{title:'Client Name'}
+				,FDS_YEAR:{title:'Year',width:'1%'}
+				,FDS_MONTHTEXT:{title:'Period'}
+	 			,FDS_PERIODEND:{title:'Period End',width:'1%'}
+				,FDS_DUEDATE:{title:'Due Date',width:'1%'}
+				,FDS_STATUSTEXT:{title:'Status'}
+				,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+				,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+				,FDS_OBTAININFO:{title:'Info',width:'1%'}
+				,FDS_SORT:{title:'Sort',width:'1%'}
+				,FDS_CHECKS:{title:'Checks',width:'1%'}
+				,FDS_SALES:{title:'Sales',width:'1%'}
+				,FDS_ENTRY:{title:'Entry',width:'1%'}
+				,FDS_RECONCILE:{title:'Reconciliation',width:'1%'}
+				,FDS_COMPILE:{title:'Compiliation',width:'1%'}
+				,FDS_REVIEW:{title:'Review',width:'1%'}
+				,FDS_ASSEMBLY:{title:'Assembly ',width:'1%'}
+				,FDS_DELIVERY:{title:'Delivery',width:'1%'}
+				,FDS_ACCTRPT:{title:'Report',width:'1%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"5"}',

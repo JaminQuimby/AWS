@@ -41,14 +41,12 @@ _grid2=function(){_jGrid({
 	"fields":{CAS_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CAS_COMPLETED:{title:'Completed',width:'2%'}
-			,CAS_STATUSTEXT:{title:'Status',width:'2%'}
-			,CAS_PRIORITY:{title:'Priority',width:"1%"}
-			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To'}
-			,CAS_DUEDATE:{title:'Due Date',width:"1%"}
-			,CAS_ESTTIME:{title:'Estimated Time'}
-			,CAS_CATEGORYTEXT:{title:'Category'}
-			,CAS_TASKDESC:{title:'Task Description'}		
+ 			,CAS_CATEGORYTEXT:{title:'Category'}
+			,CAS_TASKDESC:{title:'Description'}
+			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
+			,CAS_STATUSTEXT:{title:'Status'}
+			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
+			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}							
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group2","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"4"}',
@@ -62,13 +60,12 @@ _grid3=function(){_jGrid({
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,BF_DATEINITIATED:{title:'Date Initiated'}
-			,BF_STATUSTEXT:{title:'Status'}
-			,BF_PRIORITY:{title:'Priority',width:'2%'}
-			,BF_ASSIGNEDTOTEXT:{title:'Assigned To'}
-			,BF_DUEDATE:{title:'Due Date'}
-			,BF_ESTTIME:{title:'Estimated Time'}
 			,BF_ACTIVITY:{title:'Activity'}
+			,BF_OWNERS:{title:'Owners'}
+			,BF_BUSINESSTYPETEXT:{title:'Business Type'}
+			,BF_DUEDATE:{title:'Due Date',width:'1%'}
+ 			,BF_STATUSTEXT:{title:'Status'}
+			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group3","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"3"}',
@@ -80,16 +77,13 @@ _grid4=function(){_jGrid({
 	"url":"workinprogress.cfc",	
 	"title":"Financial &amp; Tax Planning", 
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,FTP_REQUESTSERVICE:{title:'Request for Services',width:'2%'}
-			,FTP_REPORTCOMPLETED:{title:'Due Date',width:'2%'}
-			,FTP_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FTP_STATUSTEXT:{title:'Status'}
-			,FTP_PRIORITY:{title:'Status'}
-			,FTP_ASSIGNEDTOTEXT:{title:'Status'}
-			,FTP_DUEDATE:{title:'Status'}
-			,FTP_ESTIMATEDTIME:{title:'Status'}
-			,FTP_CATEGORYTEXT:{title:'Category'}
+  			 ,CLIENT_NAME:{title:'Client Name'}
+			 ,FTP_CATEGORYTEXT:{title:'Category'}
+			 ,FTP_DUEDATE:{title:'Due Date',width:'1%'}
+			 ,FTP_STATUSTEXT:{title:'Status'}
+			 ,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			 ,FTP_REQUESTSERVICE:{title:'Request for Services',width:'1%'}
+			 ,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"9"}',
@@ -101,17 +95,27 @@ _grid5=function(){_jGrid({
 	"url":"workinprogress.cfc",
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,FDS_PERIODEND:{title:'Period End',width:'2%'}
-			,FDS_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FDS_COMPILEMI:{title:'Missing Information Compiled',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+ 			,CLIENT_ID:{list:false,edit:false}
+ 			,CLIENT_NAME:{title:'Client Name'}
+			,FDS_YEAR:{title:'Year',width:'1%'}
+			,FDS_MONTHTEXT:{title:'Period'}
+			,FDS_PERIODEND:{title:'Period End',width:'1%'}
+			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
 			,FDS_STATUSTEXT:{title:'Status'}
-			,FDS_PRIORITY:{title:'Priority',width:'2%'}
-			,FDS_DUEDATE:{title:'Due Date',width:'2%'}
-			,FDS_ESTTIME:{title:'Estimated Time'}		
-			,FDS_YEAR:{title:'Year',width:'2%'}
-			,FDS_MONTHTEXT:{title:'Month'}
+			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_OBTAININFO:{title:'Info',width:'1%'}
+			,FDS_SORT:{title:'Sort',width:'1%'}
+			,FDS_CHECKS:{title:'Checks',width:'1%'}
+			,FDS_SALES:{title:'Sales',width:'1%'}
+			,FDS_ENTRY:{title:'Entry',width:'1%'}
+			,FDS_RECONCILE:{title:'Reconciliation',width:'1%'}
+			,FDS_COMPILE:{title:'Compiliation',width:'1%'}
+			,FDS_REVIEW:{title:'Review',width:'1%'}
+			,FDS_ASSEMBLY:{title:'Assembly ',width:'1%'}
+			,FDS_DELIVERY:{title:'Delivery',width:'1%'}
+			,FDS_ACCTRPT:{title:'Report',width:'1%'}
+
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group5","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"5"}',
