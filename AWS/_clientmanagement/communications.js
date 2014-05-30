@@ -12,15 +12,15 @@ _grid1=function(){_jGrid({
 	"url":"communications.cfc",
 	"title":"Communications",
 	"fields":{CO_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CO_ID+"',page:'communications',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CO_ID+"',page:'communications',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,CLIENT_NAME:{title:'Client Name'}
 		,CO_CALLER:{title:'Caller'}
 		,CO_DATE:{title:'Date and Time'}
-		,CO_DUEDATE:{title:'Due Date',width:'1%'}
-		,CO_STATUSTEXT:{title:'Status',width:'1%'}
-		,CO_FORTEXT:{title:'For',width:'1%'}
-		,CO_RESPONSENEEDED:{title:'Response Required',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-		,CO_RETURNCALL:{title:'Returned Call',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			
+		,CO_DUEDATE:{title:'Due Date',width:'2%'}
+		,CO_STATUSTEXT:{title:'Status',width:'2%'}
+		,CO_FORTEXT:{title:'For',width:'2%'}
+		,CO_RESPONSENEEDED:{title:'Response Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+		,CO_RETURNCALL:{title:'Returned Call',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			
 		,CO_BRIEFMESSAGE:{title:'Brief Message'}
 		},
 	"method":"f_lookupData",

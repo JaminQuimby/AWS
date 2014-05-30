@@ -11,11 +11,11 @@ var _run={
 	"url":"financialtaxplanning.cfc",
 	"title":"Financial & Tax Planning",
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
-			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FTP_ID+"',page:'financialtaxplanning',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FTP_ID+"',page:'financialtaxplanning',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
-			,FTP_REQUESTSERVICE:{title:'Request for Services',width:'1%'}
-			,FTP_REPORTCOMPLETED:{title:'Report Completed',width:'1%'}
-			,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,FTP_REQUESTSERVICE:{title:'Request for Services',width:'2%'}
+			,FTP_REPORTCOMPLETED:{title:'Report Completed',width:'2%'}
+			,FTP_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,FTP_STATUSTEXT:{title:'Status'}
 			,FTP_PRIORITY:{title:'Priority'}
 			,FTP_ASSIGNEDTOTEXT:{title:'Assigned To'}

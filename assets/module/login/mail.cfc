@@ -5,32 +5,29 @@
 <cftry>
 
 <cfquery datasource="#Session.organization.name#" name="fquery" >
-IF(SELECT TOP(1)COUNT([email])FROM[ctrl_users]WHERE[email]=<cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.email#">)=1
-BEGIN
-IF(SELECT TOP(1)ISNULL(DATEDIFF(MINUTE,[alt_password_timeout],GETDATE()),1500)FROM[ctrl_users]WHERE[email]=<cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.email#">) >= '1440'
+DECLARE @r varchar(8000),@s varchar(8000),@e varchar(500) 
+SET @e =  <cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.email#">
+SET @s = (SELECT TOP(1)ISNULL(DATEDIFF(MINUTE,[alt_password_timeout],GETDATE()),1500)FROM[ctrl_users]WHERE[email]=@e )
+
+IF (@s >='1440')
 BEGIN
 <!---/*You can Reset your Password*/--->
 UPDATE[ctrl_users]
 SET[alt_password]=NEWID(),[alt_password_timeout]=GETDATE()
-WHERE[user_id]=(SELECT TOP(1)[user_id]FROM[ctrl_users]WHERE[email]=<cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.email#">)
-SELECT TOP(1)[alt_password]FROM[ctrl_users]WHERE[email]=<cfqueryparam cfsqltype="cf_sql_varchar" value="#ARGUMENTS.email#">
+WHERE[user_id]=(SELECT TOP(1)[user_id]FROM[ctrl_users]WHERE[email]=@e )
+SET @r=(SELECT TOP(1)[alt_password]FROM[ctrl_users]WHERE[email]=@e )
 END
-ELSE
+IF (@s <='1440')
 BEGIN
 <!---/*You must wait before you can reset your password*/--->
-SELECT'You must wait 24 hours before you can reset your password again.'AS[message]
+SET @r=(SELECT'You must wait 24 hours before you can reset your password again.')
 END
-END
-ELSE
-BEGIN
 <!--- User not found: Log Fail Attempt?--->
-SELECT'Fail'AS[message]
-END
-
+SELECT ISNULL(@r,'Your password reset failed.')as[response]
 
 </cfquery>
 <cfoutput query="fquery">
-<cfif ListFindNoCase( fquery.ColumnList, "alt_password" )>
+<cfif ListLen(response,"-") eq "5">
 <cfmail 
    from="reset@awsionline.com" 
    to="#ARGUMENTS.email#" 
@@ -42,17 +39,17 @@ END
  To reset the password for #ARGUMENTS.email#, please click the link below:<br />
  Please do not respond to this email address it is not monitored.<br />
  
- Password Reset: https://#CGI.SERVER_NAME#/?r=#URLEncodedFormat(alt_password)#&e=#ARGUMENTS.email# <br />
+ Password Reset: https://#CGI.SERVER_NAME#/?r=#URLEncodedFormat(response)#&e=#ARGUMENTS.email# <br />
  
  This request is valid for 24 hours. If you did not request to reset your password, please email support@awsionline.com<br />
 </p>
-<cfset myResult='{"result":"OK","URL":"https://#CGI.SERVER_NAME#/?r=#URLEncodedFormat(alt_password)#&e=#ARGUMENTS.email#"}'>
+<cfset myResult='{"result":"OK","URL":"https://#CGI.SERVER_NAME#/?r=#URLEncodedFormat(response)#&e=#ARGUMENTS.email#"}'>
 </cfmail>  
 </cfif>
 
 
-<cfif NOT ListFindNoCase( fquery.ColumnList, "alt_password" )>
-<cfset myResult='{"result":"Fail","message":"#Message#"}'>
+<cfif NOT listlen(response,"-") eq "5">
+<cfset myResult='{"result":"Your passowrd reset has failed.","message":"#response#"}'>
 </cfif>
    
 

@@ -54,7 +54,7 @@ _grid102=function(){
 	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time &amp; Billing",
 	"fields":{TB_ID:{key:true,list:false,edit:false}
-			,TB_DATE:{title:'Date',width:'1%'}
+			,TB_DATE:{title:'Date',width:'2%'}
 			,U_NAME:{title:'Name'}
 			,TB_DESCRIPTION:{title:'Description'}
 			},
@@ -69,8 +69,8 @@ _grid102_1=function(){
 	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time",
 	"fields":{T_ID:{key:true,list:false,edit:false}
-			,T_START:{title:'Start Time',width:'1%'}
-			,T_STOP:{title:'End Time',width:'1%'}
+			,T_START:{title:'Start Time',width:'2%'}
+			,T_STOP:{title:'End Time',width:'2%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g102_1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'","loadType":"group102_1"}',

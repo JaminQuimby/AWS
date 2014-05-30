@@ -34,16 +34,16 @@ var grid1_config = [
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FTP_CATEGORYTEXT:{title:'Category'}
-			,FTP_DUEDATE:{title:'Due Date',width:'1%'}
+			,FTP_DUEDATE:{title:'Due Date',width:'2%'}
 			,FTP_STATUSTEXT:{title:'Status'}
-			,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			,FTP_REQUESTSERVICE:{title:'Request for Service',width:'1%'}
-			,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,FTP_INFOREQUESTED:{title:'Information Requested',width:'1%'}
-			,FTP_INFORECEIVED:{title:'Information Received',width:'1%'}
-			,FTP_INFOCOMPILED:{title:'Information Compiled',width:'1%'}
-			,FTP_REPORTCOMPLETED:{title:'Report Completed',width:'1%'}
-			,FTP_FINALCLIENTMEETING:{title:'Final Client Meeting',width:'1%'}
+			,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
+			,FTP_REQUESTSERVICE:{title:'Request for Service',width:'2%'}
+			,FTP_MISSINGINFO:{title:'Missing Information',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,FTP_INFOREQUESTED:{title:'Information Requested',width:'2%'}
+			,FTP_INFORECEIVED:{title:'Information Received',width:'2%'}
+			,FTP_INFOCOMPILED:{title:'Information Compiled',width:'2%'}
+			,FTP_REPORTCOMPLETED:{title:'Report Completed',width:'2%'}
+			,FTP_FINALCLIENTMEETING:{title:'Final Client Meeting',width:'2%'}
 			,FTP_FEES:{title:'Fees'}
 			,FTP_PAIDTEXT:{title:'Payment Status'}
 			},

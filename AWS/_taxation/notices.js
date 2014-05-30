@@ -15,7 +15,7 @@ _grid1=function(){_jGrid({
 	"url":"notices.cfc",
 	"title":"Notice Matters",
 	"fields":{N_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,CLIENT_NAME:{title:'Client Name'}
 		,N_NAME:{title:'Matter Name'}
 		,N_STATUSTEXT:{title:'Matter Status'}
@@ -30,14 +30,14 @@ _grid2=function(){_jGrid({
 	"url":"notices.cfc",
 	"title":"Notices",
 	"fields":{NST_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,N_NAME:{title:'Notice'}
 		,NST_STATUSTEXT:{title:'Status'}
 		,NST_1_TAXFORMTEXT:{title:'Tax Form'}
-		,NST_1_TAXYEAR:{title:'Tax Year',width:'1%'}
-		,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'1%'}	
-		,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'1%'}
-		,NST_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+		,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}
+		,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'2%'}	
+		,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'2%'}
+		,NST_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"8"}',

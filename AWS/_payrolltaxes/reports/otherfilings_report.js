@@ -54,21 +54,21 @@ var grid1_config = [
 	"title":"Other Filings Status",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,OF_TAXYEAR:{title:'Year',width:'1%'}
+			,OF_TAXYEAR:{title:'Year',width:'2%'}
 			,OF_PERIODTEXT:{title:'Period'}
 			,OF_STATETEXT:{title:'State'}
 			,OF_TYPETEXT:{title:'Type'}
-			,OF_FORMTEXT:{title:'Form',width:'1%'}			
-			,OF_DUEDATE:{title:'Due Date',width:'1%'}
-			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
+			,OF_FORMTEXT:{title:'Form',width:'2%'}			
+			,OF_DUEDATE:{title:'Due Date',width:'2%'}
+			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'2%'}
 			,OF_STATUSTEXT:{title:'Status'}
-			,OF_MISSINGINFO:{title:'Missing Info',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,OF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
-			,OF_OBTAININFO:{title:'Information',width:'1%'}
-			,OF_PREPARATION:{title:'Preparation',width:'1%'}
-			,OF_REVIEW:{title:'Review',width:'1%'}
-			,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
-			,OF_DELIVERY:{title:'Delivery',width:'1%'}
+			,OF_MISSINGINFO:{title:'Missing Info',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,OF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}
+			,OF_OBTAININFO:{title:'Information',width:'2%'}
+			,OF_PREPARATION:{title:'Preparation',width:'2%'}
+			,OF_REVIEW:{title:'Review',width:'2%'}
+			,OF_ASSEMBLY:{title:'Assembly',width:'2%'}
+			,OF_DELIVERY:{title:'Delivery',width:'2%'}
 			,OF_FEES:{title:'Fees'}
 			,OF_PAIDTEXT:{title:'Payment Status'}
 			},

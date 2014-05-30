@@ -41,11 +41,11 @@ var grid1_config = [
 			,CLIENT_SPOUSE:{title:'Spouse'}
 			,CLIENT_TYPETEXT:{title:'Client Type',width:"1%"}
 			,CLIENT_ACTIVE:{title:'Active',width:"1%",type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_DISREGARD:{title:'Disregarded Entity',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_DISREGARD:{title:'Disregarded Entity',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 				"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group0","formid":"1"}',
@@ -91,12 +91,12 @@ var grid2_config = [
 			,CONTACT_ADDRESS1:{title:'Address'}
 			,CONTACT_CITY:{title:'City'}
 			,CONTACT_STATETEXT:{title:'State'}
-			,CONTACT_ZIP:{title:'Zip',width:'1%'}
-			,CONTACT_PHONE1:{title:'Work Phone',width:'1%'}
-			,CONTACT_PHONE2:{title:'Ext',width:'1%'}
-			,CONTACT_PHONE3:{title:'Mobile Phone',width:'1%'}
-			,CONTACT_PHONE4:{title:'Home Phone',width:'1%'}
-			,CONTACT_PHONE5:{title:'Fax',width:'1%'}
+			,CONTACT_ZIP:{title:'Zip',width:'2%'}
+			,CONTACT_PHONE1:{title:'Work Phone',width:'2%'}
+			,CONTACT_PHONE2:{title:'Ext',width:'2%'}
+			,CONTACT_PHONE3:{title:'Mobile Phone',width:'2%'}
+			,CONTACT_PHONE4:{title:'Home Phone',width:'2%'}
+			,CONTACT_PHONE5:{title:'Fax',width:'2%'}
 			,CONTACT_EMAIL1:{title:'Email 1'}
 			,CONTACT_EMAIL2:{title:'Email 2'}
 			},

@@ -34,12 +34,12 @@ var grid1_config = [
 	"fields":{CO_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CO_CALLER:{title:'Caller'}
-			,CO_DATE:{title:'Date and Time',width:'1%'}
-			,CO_DUEDATE:{title:'Due Date',width:'1%'}
-			,CO_STATUSTEXT:{title:'Status',width:'1%'}
+			,CO_DATE:{title:'Date and Time',width:'2%'}
+			,CO_DUEDATE:{title:'Due Date',width:'2%'}
+			,CO_STATUSTEXT:{title:'Status',width:'2%'}
 			,CO_FORTEXT:{title:'For'}
-			,CO_RESPONSENEEDED:{title:'Response Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,CO_RETURNCALL:{title:'Return Call',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RESPONSENEEDED:{title:'Response Required',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RETURNCALL:{title:'Return Call',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 			,CO_TELEPHONE:{title:'Phone'}
 			,CO_EXT:{title:'Ext'}

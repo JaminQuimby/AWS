@@ -32,13 +32,13 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
 			,MC_DESCRIPTION:{title:'Description'}
-			,MC_DUEDATE:{title:'Due Date',width:'1%'}
+			,MC_DUEDATE:{title:'Due Date',width:'2%'}
 			,MC_STATUSTEXT:{title:'Status'}
-			,MC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			,MC_REQUESTFORSERVICE:{title:'Request For Service',width:'1%'}
-			,MC_WORKINITIATED:{title:'Work Initiated',width:'1%'}
-			,MC_PROJECTCOMPLETED:{title:'Project Completed',width:'1%'}
+			,MC_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
+			,MC_REQUESTFORSERVICE:{title:'Request For Service',width:'2%'}
+			,MC_WORKINITIATED:{title:'Work Initiated',width:'2%'}
+			,MC_PROJECTCOMPLETED:{title:'Project Completed',width:'2%'}
 			,MC_FEES:{title:'Fees'}
 			,MC_PAIDTEXT:{title:'Payment Status'}
 			},

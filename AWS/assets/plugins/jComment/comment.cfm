@@ -24,7 +24,7 @@ _grid101=function(){
 	"grid":"grid101",
 	"url":"#this.url#/AWS/assets/plugins/jComment/comment.cfc",
 	"title":"Comments",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date',width:'1%'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
+	"fields":{COMMENT_ID:{key:true,list:false,edit:false},C_DATE:{title:'Date',width:'2%'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g101_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","clientid":"'+$("##client_id").val()+'","taskid":"'+$("##task_id").val()+'","loadType":"group101"}',
 	"functions":''

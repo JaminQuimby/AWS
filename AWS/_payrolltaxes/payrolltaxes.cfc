@@ -148,7 +148,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Asset GUI Completed Tasks--->
 <cfcase value="assetCompTask">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT[pt_obtaininfo_datecompleted]=FORMAT(pt_assembly_datecompleted,'d','#Session.localization.language#')
+SELECT[pt_obtaininfo_datecompleted]=FORMAT(pt_obtaininfo_datecompleted,'d','#Session.localization.language#')
 ,[pt_obtaininfo_completedbyTEXT]
 ,[pt_entry_datecompleted]=FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#')
 ,[pt_entry_completedbyTEXT]

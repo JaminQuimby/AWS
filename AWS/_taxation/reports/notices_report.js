@@ -44,15 +44,15 @@ var grid1_config = [
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
 			,N_STATUSTEXT:{title:'Matter Status'}
-			,NST_1_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}
 			,NST_1_TAXFORMTEXT:{title:'Tax Form'}
 			,NST_1_NOTICENUMBERTEXT:{title:'Notice Number'}
 			,NST_STATUSTEXT:{title:'Notice Status'}
-			,NST_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,NST_1_DATENOTICEREC:{title:'Date Notice Received',width:'1%'}
-			,NST_1_RESDUEDATE:{title:'Response Due Date',width:'1%'}
-			,NST_2_RESSUBMITED:{title:'Response Submitted',width:'1%'}
-			,NST_2_REVREQUIRED:{title:'Review Required',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_MISSINGINFO:{title:'Missing Information',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_1_DATENOTICEREC:{title:'Date Notice Received',width:'2%'}
+			,NST_1_RESDUEDATE:{title:'Response Due Date',width:'2%'}
+			,NST_2_RESSUBMITED:{title:'Response Submitted',width:'2%'}
+			,NST_2_REVREQUIRED:{title:'Review Required',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,NST_FEES:{title:'Fees'}
 			,NST_PAIDTEXT:{title:'Payment Status'}
 },

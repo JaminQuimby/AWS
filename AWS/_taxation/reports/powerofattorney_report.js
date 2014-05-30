@@ -28,11 +28,11 @@ var grid1_config = [
 			,PA_TAXYEARS:{title:'Tax Years'}
 			,PA_TAXFORMSTEXT:{title:'Tax Forms'}
 			,PA_TAXMATTERSTEXT:{title:'Tax Matters'}
-			,PA_PREPARERSTEXT:{title:'Preparers',width:'1%'}
+			,PA_PREPARERSTEXT:{title:'Preparers',width:'2%'}
 			,PA_STATUSTEXT:{title:'Status'}			
-			,PA_DATESIGNEDBYCLIENT:{title:'Date Signed',width:'1%'}
-			,PA_DATESENTTOIRS:{title:'Date Sent',width:'1%'}
-			,PA_DATEOFREVOCATION:{title:'Date of revocation',width:'1%'}		
+			,PA_DATESIGNEDBYCLIENT:{title:'Date Signed',width:'2%'}
+			,PA_DATESENTTOIRS:{title:'Date Sent',width:'2%'}
+			,PA_DATEOFREVOCATION:{title:'Date of revocation',width:'2%'}		
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"7"}',

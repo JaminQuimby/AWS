@@ -32,12 +32,12 @@ var grid1_config = [
 			,CAS_CATEGORYTEXT:{title:'Category'}
 			,CAS_TASKDESC:{title:'Description'}
 			,CAS_INSTRUCTIONS:{title:'Instructions'}
-			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
-			,CAS_STATUSTEXT:{title:'Status',width:'1%'}
-			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
-			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}
-			,CAS_DATESTARTED:{title:'Date Started',width:'1%'}
- 			,CAS_COMPLETED:{title:'Completed',width:'1%'}
+			,CAS_DUEDATE:{title:'Due Date',width:'2%'}
+			,CAS_STATUSTEXT:{title:'Status',width:'2%'}
+			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
+			,CAS_DATEREQESTED:{title:'Date Requested',width:'2%'}
+			,CAS_DATESTARTED:{title:'Date Started',width:'2%'}
+ 			,CAS_COMPLETED:{title:'Completed',width:'2%'}
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"4"}',

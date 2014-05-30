@@ -79,7 +79,7 @@ _jGrid({
 "grid":"grid100",
 "url":"/AWS/assets/plugins/jUpload/upload.cfc",
 "title":"Files",
-"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_SAVEDNAME:{list:true,edit:false,title:'',width: '1%',display: function (data1) {
+"fields":{FILE_ID:{key:true,list:false,edit:false},FILE_SAVEDNAME:{list:true,edit:false,title:'',width:'2%',display: function (data1) {
                          var $img = $('<i class="fa fa-cloud-download fa-2x" style="cursor:pointer"></i>');
 $img.click(function () {
      window.open('//cj.qutera.com/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'','_filedownload');

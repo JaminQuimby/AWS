@@ -13,12 +13,12 @@ var _run={
 	"url":"powerofattorney.cfc",
 	"title":"Power of Attorney",
 	"fields":{PA_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PA_ID+"',page:'powerofattorney',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PA_ID+"',page:'powerofattorney',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,CLIENT_NAME:{title:'Client Name'}
 		,PA_TAXYEARS:{title:'Tax Years'}
 		,PA_TAXFORMSTEXT:{title:'Tax Forms'}
 		,PA_TAXMATTERSTEXT:{title:'Tax Matters'}
-		,PA_PREPARERSTEXT:{title:'Preparers',width:'1%'}
+		,PA_PREPARERSTEXT:{title:'Preparers',width:'2%'}
 		,PA_STATUSTEXT:{title:'Status'}
 		},
 	"method":"f_lookupData",
