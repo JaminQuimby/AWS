@@ -43,7 +43,7 @@ _grid101=function(){
 	<div>
 		<div><label for="g101_filter">Filter</label><input id="g101_filter" onBlur="_grid101();" onKeyPress="if(event.keyCode==13){_grid101();}"/></div>
 		<div id="grid101" class="tblGrid"></div>
-		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group101").accordion({active:1});$("#isLoaded_group101").val(1);'>Add</a></div>
+		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group101").accordion({active:1});$("#isLoaded_group101").val(1);$("#g101_commentdate").val( new Date().mmddyyyy() )'>Add</a></div>
 	</div>
 	<h4 onClick='_loadData({"id":"comment_id","group":"group101","page":"comment",plugin:"group101"});$("#isLoaded_group101").val(1);'>Add Comment</h4>
 	<div>
