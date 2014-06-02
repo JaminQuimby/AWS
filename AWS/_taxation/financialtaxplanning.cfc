@@ -73,19 +73,17 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[ftp_id]
+,[ftp_status]
+,[ftp_category]
+,[ftp_assignedtoTEXT]
+,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
+,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]
-,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#') 
-,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'d','#Session.localization.language#') 
-,[ftp_missinginfo]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id]
-)AS[ftp_categoryTEXT]
-,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id]
-)AS[ftp_statusTEXT]
-,[ftp_priority]
-,[ftp_assignedtoTEXT]
-,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#') 
-,[ftp_esttime]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])AS[ftp_categoryTEXT]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
+
 
 FROM[v_financialtaxplanning]
 WHERE [ftp_status]!=2 AND [ftp_status]!=3
@@ -101,17 +99,14 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"FTP_ID":"'&FTP_ID&'"
-								,"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
-								,"FTP_REPORTCOMPLETED":"'&FTP_REPORTCOMPLETED&'"
-								,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
-								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
-								,"FTP_PRIORITY":"'&FTP_PRIORITY&'"
-								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
-								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
-								,"FTP_ESTTIME":"'&FTP_ESTTIME&'"
-								,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
+ 									,"CLIENT_ID":"'&CLIENT_ID&'"
+ 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
+									,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
+									,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
+									,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
+									,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
+ 									,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
+ 									,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

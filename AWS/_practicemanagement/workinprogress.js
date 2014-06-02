@@ -170,17 +170,24 @@ _grid8=function(){_jGrid({
 	"url":"workinprogress.cfc",
 	"title":"Other Fililngs",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
- 			,OF_TYPETEXT:{title:'Type'}
-			,OF_FORMTEXT:{title:'Form'}
-			,OF_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,OF_STATUSTEXT:{title:'Status'}
-			,OF_PRIORITY:{title:'Priority'}
-			,OF_DUEDATE:{title:'Due Date',width:'2%'}
-			,OF_ESTTIME:{title:'Estimated Time',width:'2%'}
-			,OF_TAXYEAR:{title:'Tax Year',width:'2%'}
-			,OF_PERIODTEXT:{title:'Period',width:'2%'}
+  				,CLIENT_NAME:{title:'Client Name'}
+				,OF_TAXYEAR:{title:'Tax Year'}
+				,OF_PERIODTEXT:{title:'Period'}
+				,OF_STATETEXT:{title:'State'}
+				,OF_TYPETEXT:{title:'Type'}
+				,OF_FORMTEXT:{title:'Form',width:'1%'}
+				,OF_DUEDATE:{title:'Due Date',width:'1%'}
+				,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
+ 				,OF_STATUSTEXT:{title:'Status'}
+				,OF_INFORMATIONRECEIVED:{title:'Information',width:'1%'}												
+				,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
+				,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}									
+				,OF_OBTAININFO:{title:'Informtaion',width:'1%'}
+				,OF_PREPARATION:{title:'Preparation',width:'1%'}
+				,OF_REVIEW:{title:'Review',width:'1%'}
+				,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
+				,OF_DELIVERY:{title:'Delivery',width:'1%'}						
+
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group8","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"11"}',
@@ -192,14 +199,19 @@ _grid9=function(){_jGrid({
 	"url":"workinprogress.cfc",
 	"title":"Payroll Checks",
 	"fields":{PC_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
- 			,PC_PAYENDDATE:{title:'Pay End',width:'2%'}
-			,PC_ASSEMBLY_DATECOMPLETED:{title:'Completed',width:'2%'}
-			,PC_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,PC_DUEDATE:{title:'Date Due',width:'2%'}
-			,PC_ESTTIME:{title:'Estimated Time',width:'2%'}
-			,PC_PAYDATE:{title:'Pay Date',width:'2%'}
+ 			,CLIENT_NAME:{title:'Client Name'}
+			,PC_YEAR:{title:'Year',width:'1%'}
+			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
+			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_DUEDATE:{title:'Due Date',width:'1%'}
+ 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+ 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_OBTAININFO:{title:'Information',width:'1%'}
+			,PC_PREPARATION:{title:'Preparation',width:'1%'}
+			,PC_REVIEW:{title:'Review',width:'1%'}
+			,PC_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,PC_DELIVERY:{title:'Delivery',width:'1%'}
+
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group9","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"10"}',
@@ -211,16 +223,20 @@ _grid10=function(){_jGrid({
 	"url":"workinprogress.cfc",
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,PT_LASTPAY:{title:'Last Pay',width:'2%'}
-			,PT_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,PT_PRIORITY:{title:'Priority',width:'2%'}
-			,PT_DUEDATE:{title:'Due Date',width:'2%'}
-			,PT_ESTTIME:{title:'Estimated Time',width:'2%'}
-			,PT_YEAR:{title:'Year',width:'2%'}
-			,PT_MONTH:{title:'Month',width:'2%'}
-			,PT_TYPE:{title:'Return Type',width:'2%'}
+			,PT_YEAR:{title:'Year',width:'1%'}
+			,PT_MONTHTEXT:{title:'Period'}
+			,PT_STATETEXT:{title:'State'}
+			,PT_TYPETEXT:{title:'Return Type'}	
+			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
+			,PT_DUEDATE:{title:'Due Date',width:'1%'}
+			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
+			,PT_OBTAININFO:{title:'Information',width:'1%'}
+			,PT_ENTRY:{title:'Entry',width:'1%'}
+			,PT_REC:{title:'Reconciliation',width:'1%'}
+			,PT_REVIEW:{title:'Review',width:'1%'}
+			,PT_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,PT_DELIVERY:{title:'Delivery',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group10","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"13"}',
@@ -235,18 +251,19 @@ _grid11=function(){_jGrid({
 	"title":"Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'2%'}
-			,TR_2_COMPLETED:{title:'Completed',width:'2%'}
-			,TR_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,TR_TAXYEAR:{title:'Tax Year',width:'2%'}
-			,TR_TAXFORM:{title:'Tax Form',width:'2%'}
-			,TR_PRIORITY:{title:'Priority',width:'2%'}
-			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
-			,TR_DUEDATE:{title:'Due Date',width:'2%'}
-			,TR_ESTTIME:{title:'Estimated Time',width:'2%'}
-			,TR_4_REQUIRED:{title:'PPTR Required',width:'2%'}
-			,TR_4_RFR:{title:'Ready For Review',width:'2%'}
-			,TR_4_ASSIGNEDTOTEXT:{title:'PPTR Assigned To',width:'2%'}		
+			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
+			,TR_DUEDATE:{title:'Due Date',width:'1%'}
+			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
+			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
+			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
+			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		
+			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
+			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
+			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
+			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group11","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"6"}',

@@ -96,14 +96,18 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[mc_id]
-,[mc_assignedtoTEXT]
 ,[client_id]
 ,[client_name]
-,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
-,[mc_description]
-,[mc_status]
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
+,[mc_priority]
+,[mc_assignedtoTEXT]
 ,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_esttime]
+,[mc_category]
+,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
+,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 FROM[v_managementconsulting]
 WHERE[mc_status] != 2 
 AND [mc_status] != 3
@@ -118,13 +122,17 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
-								,"MC_ID":"'&MC_ID&'"
-								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
+								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_PRIORITY":"'&MC_PRIORITY&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
-								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -20,14 +20,18 @@ _grid1=function(){
 	"fields":{
 		PC_ID:{key:true,list:false,edit:false}
 		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PC_ID+"',page:'payrollchecks',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-		,CLIENT_ID:{list:false,edit:false}
-		,CLIENT_NAME:{title:'Client Name'}
- 		,PC_PAYENDDATE:{title:'Pay End',width:'2%'}
-		,PC_ASSEMBLY_DATECOMPLETED:{title:'Completed',width:'2%'}
-		,PC_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-		,PC_DUEDATE:{title:'Date Due',width:'2%'}
-		,PC_ESTTIME:{title:'Estimated Time',width:'2%'}
-		,PC_PAYDATE:{title:'Pay Date',width:'2%'}
+ 			,CLIENT_NAME:{title:'Client Name'}
+			,PC_YEAR:{title:'Year',width:'1%'}
+			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
+			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_DUEDATE:{title:'Due Date',width:'1%'}
+ 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+ 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_OBTAININFO:{title:'Information',width:'1%'}
+			,PC_PREPARATION:{title:'Preparation',width:'1%'}
+			,PC_REVIEW:{title:'Review',width:'1%'}
+			,PC_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,PC_DELIVERY:{title:'Delivery',width:'1%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"10"}',

@@ -31,18 +31,19 @@ _grid1=function(){_jGrid({
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TR_ID+"',page:'taxreturns',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
-			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'2%'}
-			,TR_2_COMPLETED:{title:'Completed',width:'2%'}
-			,TR_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,TR_TAXYEAR:{title:'Tax Year',width:'2%'}
-			,TR_TAXFORM:{title:'Tax Form',width:'2%'}
-			,TR_PRIORITY:{title:'Priority',width:'2%'}
-			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
-			,TR_DUEDATE:{title:'Due Date',width:'2%'}
-			,TR_ESTTIME:{title:'Estimated Time',width:'2%'}
-			,TR_4_REQUIRED:{title:'PPTR Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,TR_4_RFR:{title:'Ready For Review',width:'2%'}
-			,TR_4_ASSIGNEDTOTEXT:{title:'PPTR Assigned To',width:'2%'}		
+			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
+			,TR_DUEDATE:{title:'Due Date',width:'1%'}
+			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
+			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
+			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
+			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		
+			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
+			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
+			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
+			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}	
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"6"}',

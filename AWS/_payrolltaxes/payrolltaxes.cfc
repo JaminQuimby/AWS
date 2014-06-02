@@ -190,17 +190,29 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
-,[client_id]
-,[client_name]
-,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#') 
-,[pt_missinginfo]
-,[pt_priority]
-,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#') 
-,[pt_esttime]
-,[pt_year]
-,[pt_month]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
-,[pt_type]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
-
+		,[pt_year]
+		,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
+		,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#') 
+		,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
+		,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#') 
+		,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
+		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#') 
+		,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_obtaininfo_assignedtoTEXT]
+		,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_entry_assignedtoTEXT]
+		,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_rec_assignedtoTEXT]
+		,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_review_assignedtoTEXT]
+		,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_assembly_assignedtoTEXT]
+		,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_delivery_assignedtoTEXT]
+		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
+	 	,[pt_missinginfo]
+		,[client_name]
+	,[client_id]
 FROM[v_payrolltaxes]
 WHERE[pt_delivery_datecompleted] IS NULL
 <cfif ARGUMENTS.search neq "">
@@ -214,16 +226,22 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
-								,"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"PT_LASTPAY":"'&PT_LASTPAY&'"
-								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
-								,"PT_PRIORITY":"'&PT_PRIORITY&'"
-								,"PT_DUEDATE":"'&PT_DUEDATE&'"
-								,"PT_ESTTIME":"'&PT_ESTTIME&'"
-								,"PT_YEAR":"'&PT_YEAR&'"
-								,"PT_MONTH":"'&PT_MONTH&'"
-								,"PT_TYPE":"'&PT_TYPE&'"
+ 									,"CLIENT_ID":"'&CLIENT_ID&'"
+ 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
+									,"PT_YEAR":"'&PT_YEAR&'"
+									,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
+									,"PT_STATETEXT":"'&PT_STATETEXT&'"
+									,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
+ 									,"PT_LASTPAY":"'&PT_LASTPAY&'"
+  									,"PT_DUEDATE":"'&PT_DUEDATE&'"
+	 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
+	 								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
+									,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"
+									,"PT_ENTRY":"'&pt_entry_datecompleted&'<br/>'&pt_entry_assignedtoTEXT&'"
+									,"PT_REC":"'&pt_rec_datecompleted&'<br/>'&pt_rec_assignedtoTEXT&'"
+									,"PT_REVIEW":"'&pt_review_datecompleted&'<br/>'&pt_review_assignedtoTEXT&'"
+									,"PT_ASSEMBLY":"'&pt_assembly_datecompleted&'<br/>'&pt_assembly_assignedtoTEXT&'"
+									,"PT_DELIVERY":"'&pt_delivery_datecompleted&'<br/>'&pt_delivery_assignedtoTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
