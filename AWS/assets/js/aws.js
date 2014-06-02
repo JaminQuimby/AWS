@@ -17,8 +17,8 @@ var debug=true;
 $(document).ready(function(){
 
     $.sessionTimeout({
-        warnAfter: 900000,
-        redirAfter: 400000
+        warnAfter: 400000,
+        redirAfter: 900000
     });
 	
 $.ajaxSetup({cache:false});//Stop ajax cacheing
