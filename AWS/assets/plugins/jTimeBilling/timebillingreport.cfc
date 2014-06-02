@@ -262,7 +262,7 @@ AND ([bf_paid] = '6' OR [bf_paid] IS NULL OR [bf_paid] = '0')
 								,"BF_OTHERCOMPLETED":"'&BF_OTHERCOMPLETED&'"
 								,"BF_RECORDBOOKORDERED":"'&BF_RECORDBOOKORDERED&'"
 								,"BF_FEES":"'&BF_FEES&'"
-								,"BF_PAID":"'&BF_PAID&'"
+								,"BF_PAIDTEXT":"'&BF_PAIDTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

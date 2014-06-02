@@ -13,7 +13,6 @@
 
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group1--->
-
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[mc_id]

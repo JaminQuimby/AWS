@@ -44,7 +44,6 @@ var options={"id":"","group":"","subgroup":"","result":""}
 try{
 $.extend(true, options, params);//turn options into array
 var $client_id=$("#client_id");
-alert(options["group"]);
 switch(options["group"]){	
 case'':_saveDataCB({'group':'group1'});break;
 case'group1':var json='{"DATA":[["'+
