@@ -41,10 +41,12 @@ var grid1_config = [
 	"fields":{CAS_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CAS_DUEDATE:{title:'Due Date',width:'2%'}
-			,CAS_PRIORITY:{title:'Priority',width:'2%'}
-			,CAS_STATUSTEXT:{title:'Status'}
+ 			,CAS_CATEGORYTEXT:{title:'Category'}
 			,CAS_TASKDESC:{title:'Description'}
+			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
+			,CAS_STATUSTEXT:{title:'Status'}
+			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
+			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}	
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g1_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group1","formid":"4"}',
@@ -91,10 +93,13 @@ var grid2_config = [
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,BF_ACTIVITY:{title:'Activity'}
-			,BF_STATUSTEXT:{title:'Status'}
-			,BF_DUEDATE:{title:'Due Date',width:'2%'}
-			,BF_FEES:{title:'Fees'}
-			,BF_PAIDTEXT:{title:'Payment Status'}
+			,BF_OWNERS:{title:'Owners'}
+			,BF_BUSINESSTYPETEXT:{title:'Business Type'}
+			,BF_DUEDATE:{title:'Due Date',width:'1%'}
+ 			,BF_STATUSTEXT:{title:'Status'}
+			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+		    ,BF_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,BF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}	
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g2_filter").val(),grid2_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"3"}',
@@ -126,19 +131,16 @@ var grid3_config = [
 	_jGrid({
 	"grid":"grid3",
 	"url":"historical.cfc",	
-	"title":"Communications Dashboard",
+	"title":"Communications",
 	"fields":{CO_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CO_CALLER:{title:'Caller'}
-			,CO_CREDITHOLD:{title:'Credit Hold',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,CO_FEES:{title:'Fees'}
-			,CO_PAIDTEXT:{title:'Payment Status'}
-			,CO_DATE:{title:'Date &amp; Time'}
-			,CO_TELEPHONE:{title:'Phone'}
-			,CO_EXT:{title:'Ext'}
-			,CO_EMAILADDRESS:{title:'Email'}
-			,CO_RESPONSENEEDED:{title:'Response Needed',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,CO_RETURNCALL:{title:'Returned Call',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_DATE:{title:'Date and Time'}
+			,CO_DUEDATE:{title:'Due Date',width:'2%'}
+			,CO_STATUSTEXT:{title:'Status',width:'2%'}
+			,CO_FORTEXT:{title:'For',width:'2%'}
+			,CO_RESPONSENEEDED:{title:'Response Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RETURNCALL:{title:'Returned Call',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			
 			,CO_BRIEFMESSAGE:{title:'Brief Message'}
 	},
 	"method":"f_lookupData",
@@ -179,16 +181,9 @@ var grid4_config = [
 	"title":"Client Maintenance",	
 	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CLIENT_TYPETEXT:{title:'Client Type',width:"1%"}
-			,CLIENT_TRADE_NAME:{title:'Trade Name'}
-			,CLIENT_ACTIVE:{title:'Active',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SALUTATION:{title:'Salutation'}
-			,CLIENT_SPOUSE:{title:'Spouse'}
-			,CLIENT_CREDIT_HOLD:{title:'Credit Hold',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_SCHEDULE_C:{title:'Business (C)',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_SCHEDULE_E:{title:'Rental Property (E)',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_DISREGARD:{title:'Disregarded',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,CLIENT_PERSONAL_PROPERTY:{title:'Personal Property',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CLIENT_TYPETEXT:{title:'Type'}
+			,CLIENT_SINCE:{title:'Client Since',width:'2%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g4_filter").val(),grid4_config)+',"orderBy":"0","row":"0","ID":"'+$("#client_id").val()+'","loadType":"group4","formid":"1"}',
@@ -224,13 +219,13 @@ var grid5_config = [
 	"url":"historical.cfc",	
 	"title":"Financial &amp; Tax Planning", 
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,FTP_CATEGORYTEXT:{title:'Category'}
-			,FTP_REQUESTSERVICE:{title:'Request for Services',width:'2%'}
-			,FTP_DUEDATE:{title:'Due Date',width:'2%'}
-			,FTP_INFORECEIVED:{title:'Information Received',width:'2%'}
-			,FTP_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FTP_STATUSTEXT:{title:'Status'}
+  			 ,CLIENT_NAME:{title:'Client Name'}
+			 ,FTP_CATEGORYTEXT:{title:'Category'}
+			 ,FTP_DUEDATE:{title:'Due Date',width:'1%'}
+			 ,FTP_STATUSTEXT:{title:'Status'}
+			 ,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+			 ,FTP_REQUESTSERVICE:{title:'Request for Services',width:'1%'}
+			 ,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g5_filter").val(),grid5_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group5","formid":"9"}',
@@ -304,15 +299,26 @@ var grid6_config = [
 	"url":"historical.cfc",
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,FDS_YEAR:{title:'Year',width:'2%'}
-			,FDS_MONTHTEXT:{title:'Month'}
-			,FDS_DUEDATE:{title:'Due Date',width:'2%'}
-			,FDS_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}
-			,FDS_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,FDS_CMIRECEIVED:{title:'Compiled Missing Information Received',width:'2%'}
-			,FDS_COMPILEMI:{title:'Missing Information Compiled',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+ 			,CLIENT_ID:{list:false,edit:false}
+ 			,CLIENT_NAME:{title:'Client Name'}
+			,FDS_YEAR:{title:'Year',width:'1%'}
+			,FDS_MONTHTEXT:{title:'Period'}
+			,FDS_PERIODEND:{title:'Period End',width:'1%'}
+			,FDS_DUEDATE:{title:'Due Date',width:'1%'}
+			,FDS_STATUSTEXT:{title:'Status'}
+			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,FDS_OBTAININFO:{title:'Info',width:'1%'}
+			,FDS_SORT:{title:'Sort',width:'1%'}
+			,FDS_CHECKS:{title:'Checks',width:'1%'}
+			,FDS_SALES:{title:'Sales',width:'1%'}
+			,FDS_ENTRY:{title:'Entry',width:'1%'}
+			,FDS_RECONCILE:{title:'Reconciliation',width:'1%'}
+			,FDS_COMPILE:{title:'Compiliation',width:'1%'}
+			,FDS_REVIEW:{title:'Review',width:'1%'}
+			,FDS_ASSEMBLY:{title:'Assembly ',width:'1%'}
+			,FDS_DELIVERY:{title:'Delivery',width:'1%'}
+			,FDS_ACCTRPT:{title:'Report',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g6_filter").val(),grid6_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group6","formid":"5"}',
@@ -346,10 +352,15 @@ var grid7_config = [
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
-			,MC_DESCRIPTION:{title:'Task Description'}
+			,MC_REQUESTFORSERVICE:{title:'Request For Service'}
+			,MC_PROJECTCOMPLETED:{title:'Project Completed'}
 			,MC_STATUSTEXT:{title:'Status'}
+			,MC_PRIORITY:{title:'Priority'}
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
 			,MC_DUEDATE:{title:'Due Date',width:'2%'}
+			,MC_ESTTIME:{title:'Estimated Time',width:'2%'}
+			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
+			,MC_DESCRIPTION:{title:'Task Description'}	
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g7_filter").val(),grid7_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group7","formid":"2"}',
@@ -393,7 +404,14 @@ var grid8_config = [
 	"fields":{N_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
-			,N_STATUSTEXT:{title:'Notice Status'}
+			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
+			,NST_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_PRIORITY:{title:'Priority'}
+			,NST_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,NST_1_RESDUEDATE:{title:'Response Due'}
+			,NST_ESTTIME:{title:'Estimated Time'}
+			,NST_2_REVREQUIRED:{title:'Review Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_2_REVASSIGNEDTOTEXT:{title:'Review Assigned To'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g8_filter").val(),grid8_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group8","formid":"8"}',
@@ -449,15 +467,23 @@ var grid9_config = [
 	"url":"historical.cfc",
 	"title":"Other Fililngs",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,OF_TAXYEAR:{title:'Tax Year',width:'2%'}
+			,OF_TAXYEAR:{title:'Tax Year'}
+			,OF_PERIODTEXT:{title:'Period'}
 			,OF_STATETEXT:{title:'State'}
 			,OF_TYPETEXT:{title:'Type'}
-			,OF_FORM:{title:'Form'}
+			,OF_FORMTEXT:{title:'Form',width:'1%'}
+			,OF_DUEDATE:{title:'Due Date',width:'1%'}
+			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
 			,OF_STATUSTEXT:{title:'Status'}
-			,OF_DUEDATE:{title:'Due Date',width:'2%'}
-			,OF_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,OF_INFORMATIONRECEIVED:{title:'Information',width:'1%'}												
+			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
+			,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}									
+			,OF_OBTAININFO:{title:'Informtaion',width:'1%'}
+			,OF_PREPARATION:{title:'Preparation',width:'1%'}
+			,OF_REVIEW:{title:'Review',width:'1%'}
+			,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,OF_DELIVERY:{title:'Delivery',width:'1%'}						
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g9_filter").val(),grid9_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group9","formid":"11"}',
@@ -508,14 +534,18 @@ var grid10_config = [
 	"url":"historical.cfc",
 	"title":"Payroll Checks",
 	"fields":{PC_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,PC_YEAR:{title:'Year',width:'2%'}
-			,PC_PAYENDDATE:{title:'Pay End',width:'2%'}
-			,PC_PAYDATE:{title:'Pay Date',width:'2%'}
-			,PC_DUEDATE:{title:'Due Date',width:'2%'}
-			,PC_MISSINGINFORECEIVED:{title:'Information Received',width:'2%'}
-			,PC_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+ 			,CLIENT_NAME:{title:'Client Name'}
+			,PC_YEAR:{title:'Year',width:'1%'}
+			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
+			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_DUEDATE:{title:'Due Date',width:'1%'}
+ 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+ 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}
+			,PC_OBTAININFO:{title:'Information',width:'1%'}
+			,PC_PREPARATION:{title:'Preparation',width:'1%'}
+			,PC_REVIEW:{title:'Review',width:'1%'}
+			,PC_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,PC_DELIVERY:{title:'Delivery',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g10_filter").val(),grid10_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group10","formid":"10"}',
@@ -570,15 +600,20 @@ var grid11_config = [
 	"url":"historical.cfc",
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,PT_YEAR:{title:'Year',width:'2%'}
-			,PT_MONTHTEXT:{title:'Month'}
-			,PT_TYPETEXT:{title:'Type'}
-			,PT_PAIDTEXT:{title:'Payment Status'}
-			,PT_LASTPAY:{title:'Last Pay',width:'2%'}
-			,PT_DUEDATE:{title:'Due Date',width:'2%'}
-			,PT_DELIVERY_DATECOMPLETED:{title:'Completed',width:'2%'}
+			,PT_YEAR:{title:'Year',width:'1%'}
+			,PT_MONTHTEXT:{title:'Period'}
+			,PT_STATETEXT:{title:'State'}
+			,PT_TYPETEXT:{title:'Return Type'}	
+			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
+			,PT_DUEDATE:{title:'Due Date',width:'1%'}
+			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
+			,PT_OBTAININFO:{title:'Information',width:'1%'}
+			,PT_ENTRY:{title:'Entry',width:'1%'}
+			,PT_REC:{title:'Reconciliation',width:'1%'}
+			,PT_REVIEW:{title:'Review',width:'1%'}
+			,PT_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,PT_DELIVERY:{title:'Delivery',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g11_filter").val(),grid11_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group11","formid":"13"}',
@@ -651,15 +686,19 @@ var grid12_config = [
 	"title":"Tax Returns",
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,TR_TAXYEAR:{title:'Year',width:'2%'}
-			,TR_TAXFORMTEXT:{title:'Form'}
-			,TR_1_INFORMATIONRECEIVED:{title:'Information Received',width:'2%'}
-			,TR_PRIORFEES:{title:'Prior Fees',width:'2%'}
-			,TR_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'2%'}
-			,TR_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'2%'}
-			,TR_1_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}
-			,TR_1_DUEDATE:{title:'Due Date',width:'2%'}
-			,TR_1_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'2%'}
+			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
+			,TR_DUEDATE:{title:'Due Date',width:'1%'}
+			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
+			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
+			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
+			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		
+			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
+			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
+			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
+			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g12_filter").val(),grid12_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group12","formid":"6"}',
