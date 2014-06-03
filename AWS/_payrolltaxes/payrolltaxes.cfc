@@ -226,7 +226,6 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
- 									,"CLIENT_ID":"'&CLIENT_ID&'"
  									,"CLIENT_NAME":"'&CLIENT_NAME&'"
 									,"PT_YEAR":"'&PT_YEAR&'"
 									,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"

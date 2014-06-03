@@ -66,6 +66,8 @@ _grid3=function(){_jGrid({
 			,BF_DUEDATE:{title:'Due Date',width:'1%'}
  			,BF_STATUSTEXT:{title:'Status'}
 			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
+		    ,BF_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,BF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}			
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group3","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"3"}',

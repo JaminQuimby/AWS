@@ -350,6 +350,8 @@ SELECT[bf_id]
 ,[bf_assignedtoTEXT]
 ,[bf_activity]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_missinginfo]
 FROM[v_businessformation]
 WHERE[bf_status]!='2'
 <cfif ARGUMENTS.userid neq "">AND([bf_assignedto]=@u )</cfif>
@@ -369,6 +371,8 @@ WHERE[bf_status]!='2'
 								,"BF_DUEDATE":"'&BF_DUEDATE&'"								
 								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
 								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
+								,"BF_MISSINGINFO":"'&BF_MISSINGINFO&'"
+								,"BF_MISSINGINFORECEIVED":"'&BF_MISSINGINFORECEIVED&'"								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -444,40 +448,39 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[fds_id]
- 	,[client_id]
- 	,[client_name]
- 	,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
-	,[fds_month]
-	,[fds_year]
-	,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
-	,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
-	,[fds_status]
-	,[fds_missinginfo]
- 	,[fds_compilemi]
-	,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
-	,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_obtaininfo_assignedtoTEXT]
-	,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_sort_assignedtoTEXT]
-	,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_checks_assignedtoTEXT]
-	,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_sales_assignedtoTEXT]
-	,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_entry_assignedtoTEXT]
-	,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_reconcile_assignedtoTEXT]
-	,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_compile_assignedtoTEXT]
-	,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_review_assignedtoTEXT]
-	,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_assembly_assignedtoTEXT]
-	,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_delivery_assignedtoTEXT]
-	,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_acctrpt_assignedtoTEXT]
-
+,[client_id]
+,[client_name]
+,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+,[fds_month]
+,[fds_year]
+,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+,[fds_status]
+,[fds_missinginfo]
+,[fds_compilemi]
+,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
+,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_obtaininfo_assignedtoTEXT]
+,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sort_assignedtoTEXT]
+,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_checks_assignedtoTEXT]
+,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sales_assignedtoTEXT]
+,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_entry_assignedtoTEXT]
+,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_reconcile_assignedtoTEXT]
+,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_compile_assignedtoTEXT]
+,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_review_assignedtoTEXT]
+,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_assembly_assignedtoTEXT]
+,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_delivery_assignedtoTEXT]
+,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus]
 WHERE[fds_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
