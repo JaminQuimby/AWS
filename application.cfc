@@ -171,7 +171,10 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
     required="false"
     default="#StructNew()#"
     />
-     
+<cfif NOT isDefined('Session.user.ID') AND ListLast(CGI.SCRIPT_NAME,'/') NEQ "mail.cfc"  >     
+<cfinclude template="#this.url#">
+<cfabort>
+</cfif>
     <!--- Return out. --->
     <cfreturn />
     </cffunction>
@@ -191,7 +194,10 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
     required="false"
     default="#StructNew()#"
     />
-     
+<cfif NOT isDefined('Session.user.ID') AND ListLast(CGI.SCRIPT_NAME,'/') NEQ "mail.cfc"  >     
+<cfinclude template="#this.url#">
+<cfabort>
+</cfif>  
     <!--- Return out. --->
     <cfreturn />
     </cffunction>
