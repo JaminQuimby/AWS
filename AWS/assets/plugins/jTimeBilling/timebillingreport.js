@@ -30,8 +30,8 @@ _grid1=function(){_jGrid({
 			,PC_PAYDATE:{title:'Pay Date',width:'2%'}
 			,PC_MISSINGINFO:{title:'Missing Info',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,PC_OBTAININFO_DATECOMPLETED:{title:'Information Received',width:'2%'}
-			,PC_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'2%'}
-			,PC_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'2%'}
+			,PC_ASSEMBLY_DATECOMPLETED:{title:'Assembly',width:'2%'}
+			,PC_DELIVERY_DATECOMPLETED:{title:'Delivery',width:'2%'}
 			,PC_FEES:{title:'Fees'}
 			,PC_PAIDTEXT:{title:'Payment Status'}
 			},
@@ -57,8 +57,8 @@ _grid2=function(){_jGrid({
 			,PT_ENTRY_DATECOMPLETED:{title:'Entry',width:'2%'}
 			,PT_REC_DATECOMPLETED:{title:'Reconcile',width:'2%'}
 			,PT_REVIEW_DATECOMPLETED:{title:'Review',width:'2%'}
-			,PT_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'2%'}
-			,PT_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'2%'}
+			,PT_ASSEMBLY_DATECOMPLETED:{title:'Assembly',width:'2%'}
+			,PT_DELIVERY_DATECOMPLETED:{title:'Delivery',width:'2%'}
 			,PT_FEES:{title:'Fees'}
 			,PT_PAIDTEXT:{title:'Payment Status'}
 			},
@@ -83,8 +83,8 @@ _grid3=function(){_jGrid({
 			,OF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}
 			,OF_PREPARATION_DATECOMPLETED:{title:'Preparation',width:'2%'}
 			,OF_REVIEW_DATECOMPLETED:{title:'Review',width:'2%'}
-			,OF_ASSEMBLY_DATECOMPLETED:{title:'Assembled',width:'2%'}
-			,OF_DELIVERY_DATECOMPLETED:{title:'Delivered',width:'2%'}
+			,OF_ASSEMBLY_DATECOMPLETED:{title:'Assembly',width:'2%'}
+			,OF_DELIVERY_DATECOMPLETED:{title:'Delivery',width:'2%'}
 			,OF_FEES:{title:'Fees'}
 			,OF_ESTTIME:{title:'Estimated Time'}
 			,OF_PAIDTEXT:{title:'Payment Status'}
@@ -171,8 +171,8 @@ _grid6=function(){_jGrid({
 			,FDS_RECONCILE:{title:'Reconcile',width:'2%'}
 			,FDS_COMPILE:{title:'Compilie',width:'2%'}
 			,FDS_REVIEW:{title:'Review',width:'2%'}
-			,FDS_ASSEMBLY:{title:'Assembled',width:'2%'}
-			,FDS_DELIVERY:{title:'Delivered',width:'2%'}
+			,FDS_ASSEMBLY:{title:'Assembly',width:'2%'}
+			,FDS_DELIVERY:{title:'Delivery',width:'2%'}
 			,FDS_ACCTRPT:{title:'Report',width:'2%'}
 			,FDS_FEES:{title:'Fees',width:'2%'}
 			,FDS_PAIDTEXT:{title:'Payment Status',width:'2%'}
@@ -244,7 +244,7 @@ _grid9=function(){_jGrid({
 			TR_TAXYEAR:{title:'Tax Year',width:'2%'},
 			TR_TAXFORMTEXT:{title:'Tax Form'},
 			TR_2_COMPLETED:{title:'Completed',width:'2%'},
-			TR_3_DELIVERED:{title:'Delivered',width:'2%'},
+			TR_3_DELIVERED:{title:'Delivery',width:'2%'},
 			TR_2_PREPAREDBYTEXT:{title:'Prepared By',width:'2%'},
 			TR_CURRENTFEES:{title:'Fees'},
 			TR_PAIDTEXT:{title:'Payment Status'},
@@ -266,7 +266,7 @@ _grid10=function(){_jGrid({
 			TR_4_COMPLETED:{title:'Completed',width:'2%'},
 			TR_4_CURRENTFEES:{title:'Current Fees'},		
 			TR_4_PAIDTEXT:{title:'Payment Status'},
-			TR_4_DELIVERED:{title:'Delivered',width:'2%'},
+			TR_4_DELIVERED:{title:'Delivery',width:'2%'},
 			TR_4_MULTISTATERETURN:{title:'Multi State Return',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
@@ -284,7 +284,7 @@ _grid11=function(){_jGrid({
 			TR_TAXYEAR:{title:'Year',width:'2%'},
 			TRST_STATETEXT:{title:'State'},
 			TRST_1_COMPLETED:{title:'Completed',width:'2%'},
-			TRST_2_DELIVERED:{title:'Delivered',width:'2%'},
+			TRST_2_DELIVERED:{title:'Delivery',width:'2%'},
 			TRST_1_PREPAREDBY:{title:'Prepared By',width:'2%'},
 			TRST_2_CURRENTFEES:{title:'Fees'},
 			TRST_2_PAIDTEXT:{title:'Payment Status'}
@@ -308,7 +308,7 @@ _grid12=function(){_jGrid({
 			TRST_3_PPTRCOMPLETED:{title:'Completed',width:'2%'},
 			TRST_3_PPTRCURRENTFEES:{title:'Current Fees'},
 			TRST_2_PAIDTEXT:{title:'Payment Status'},
-			TRST_3_PPTRDELIVERED:{title:'Delivered',width:'2%'}			
+			TRST_3_PPTRDELIVERED:{title:'Delivery',width:'2%'}			
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g12_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group12","formid":"6"}',

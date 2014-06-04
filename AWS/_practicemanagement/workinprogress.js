@@ -265,7 +265,7 @@ _grid11=function(){_jGrid({
 			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
 			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
-			,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'1%'}
+			,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group11","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"6"}',
@@ -288,7 +288,7 @@ _grid12=function(){_jGrid({
 			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
 			,TR_4_PPTRESTTIME:{title:'Estimated Time',width:'2%'}
 			,TR_4_RFR:{title:'Ready For Review',width:'2%'}
-			,TR_4_DELIVERED:{title:'Delivered',width:'2%'}
+			,TR_4_DELIVERED:{title:'Delivery',width:'2%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group12","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"6"}',

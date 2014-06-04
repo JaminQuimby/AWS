@@ -81,9 +81,9 @@ var grid1_config = [
 		,TR_2_REVIEWED:{title:'Reviewed'}			
 		,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'2%'}
 		,TR_2_COMPLETED:{title:'Completed',width:'2%'}
-		,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'2%'}
+		,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'2%'}
 		,TR_3_CONTACTED:{title:'Contacted',width:'2%'}
-		,TR_3_DELIVERED:{title:'Delivered',width:'2%'}
+		,TR_3_DELIVERED:{title:'Delivery',width:'2%'}
 		,TR_DELIVERYMETHODTEXT:{title:'Delivery Method'}
 		,TR_PRIORFEES:{title:'Prior Fees'}
 		,TR_CURRENTFEES:{title:'Current Fees'}
@@ -119,18 +119,18 @@ _grid2=function(){_jGrid({
 		,TR_EXTENSIONREQUESTED:{title:'Extension Requested',width:'2%'}
 		,TR_EXTENSIONDONE:{title:'Extension Done',width:'2%'}
 		,TR_3_MISSINGSIGNATURES:{title:'Missing Signatures',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-		,TR_3_ASSEMBLERETURN:{title:'Assembled',width:'2%'}
+		,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'2%'}
 		,TR_3_CONTACTED:{title:'Contacted',width:'2%'}
 		,TR_2_PREPAREDBYTEXT:{title:'Prepared By',width:'2%'}
 		,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'2%'}
 		,TR_2_COMPLETED:{title:'Completed',width:'2%'}
-		,TR_3_DELIVERED:{title:'Delivered',width:'2%'}
+		,TR_3_DELIVERED:{title:'Delivery',width:'2%'}
 		,TR_FILINGDEADLINE:{title:'Filing Deadline',width:'2%'}
 		,TR_4_REQUIRED:{title:'PPTR Required',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 		,TR_4_EXTENDED:{title:'PPTR Extended',width:'2%'}
 		,TR_4_RFR:{title:'PPTR Ready For Review',width:'2%'}
 		,TR_4_COMPLETED:{title:'PPTR Completed',width:'2%'}
-		,TR_4_DELIVERED:{title:'PPTR Delivered',width:'2%'}	
+		,TR_4_DELIVERED:{title:'PPTR Delivery',width:'2%'}	
 		,TRST_STATETEXT:{title:'State'}	
 		,TRST_PRIMARY:{title:'Primary State',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}	
 		,TRST_COMPLETED:{title:'State Return Completed',width:'2%'}	

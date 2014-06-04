@@ -5,7 +5,7 @@
 <cfset page.location="historical">
 <cfset page.formid=11>
 <cfset page.title="Historical Data">
-<cfset page.menuLeft="Administrative Tasks,Business Formation,Communications,Client Maintenance,Financial &amp; Tax Planning,Financial Statements,Accounting &amp; Consulting Tasks,Notice Matters,Other Filings,Payroll Checks,Payroll Taxes,Tax Returns">
+<cfset page.menuLeft="Accounting &amp; Consulting Tasks,Administrative Tasks,Business Formation,Client Maintenance,Communications,Financial &amp; Tax Planning,Financial Statements,Notice Matters,Other Filings,Payroll Checks,Payroll Taxes,Tax Returns">
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
 <!DOCTYPE html> 

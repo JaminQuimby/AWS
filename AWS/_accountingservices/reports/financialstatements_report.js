@@ -120,8 +120,8 @@ _grid2=function(){_jGrid({
 			,FDS_RECONCILE:{title:'Reconcile',width:'2%'}
 			,FDS_COMPILE:{title:'Compilie',width:'2%'}
 			,FDS_REVIEW:{title:'Review',width:'2%'}
-			,FDS_ASSEMBLY:{title:'Assembled',width:'2%'}
-			,FDS_DELIVERY:{title:'Delivered',width:'2%'}
+			,FDS_ASSEMBLY:{title:'Assembly',width:'2%'}
+			,FDS_DELIVERY:{title:'Delivery',width:'2%'}
 			,FDS_ACCTRPT:{title:'Report',width:'2%'}
 			,FDSS_SUBTASKTEXT:{title:'Subtask',width:'2%'}
 			,FDSS_STATUSTEXT:{title:'Status',width:'2%'}

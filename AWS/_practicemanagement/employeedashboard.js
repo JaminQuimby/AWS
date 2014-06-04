@@ -258,7 +258,7 @@ _grid4_3=function(){_jGrid({
 			TR_1_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }},
 			TR_1_REVIEWEDWITHNOTES:{title:'Review With Notes',width:'2%'},
 			TR_1_COMPLETED:{title:'Completed',width:'2%'},
-			TR_2_DELIVERED:{title:'Delivered',width:'2%'},
+			TR_2_DELIVERED:{title:'Delivery',width:'2%'},
 			TR_2_PAYMENTSTATUS:{title:'Paid'}
 			},
 	"method":"f_lookupData",
@@ -276,7 +276,7 @@ _grid4_4=function(){_jGrid({
 			TR_TAXFORMTEXT:{title:'Tax Form'},
 			TR_1_COMPLETED:{title:'Completed',width:'2%'},
 			TR_CURRENTFEES:{title:'Fees'},
-			TR_2_ASSEMBLERETURN:{title:'Assembled',width:'2%'},
+			TR_2_ASSEMBLERETURN:{title:'Assembly',width:'2%'},
 			TR_2_CONTACTED:{title:'Contacted',width:'2%'},
 			TR_4_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'2%'},
 			TR_4_PICKUPAPPOINTMENT:{title:'Pick Up Appointment',width:'2%'},

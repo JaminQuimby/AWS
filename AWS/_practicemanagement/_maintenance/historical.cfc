@@ -11,8 +11,102 @@
 <cfargument name="userid" type="string" required="no">
 
 <cfswitch expression="#ARGUMENTS.loadType#">
-<!--- LOOKUP Administrative Tasks --->
+
+<!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group1">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[mc_id]
+,[client_id]
+,[client_name]
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
+,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
+,[mc_priority]
+,[mc_assignedtoTEXT]
+,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_esttime]
+,[mc_category]
+,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
+,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
+FROM[v_managementconsulting]
+
+<cfset sqllist = "mc_assignedto,mc_category,mc_description,mc_duedate,mc_esttime,mc_fees,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_workinitiated">
+<cfset key="mc_">
+<cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
+<cfset data=#ARGUMENTS.search#>
+<cfif ArrayLen(data.b) gt 0>
+WHERE(1)=(1)
+<cfloop array="#data.b#" index="i">
+	<cfif #i.t# eq "NONE">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+			
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "AND">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "OR">OR((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+</cfloop>
+</cfif>
+</cfif>
+
+
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
+								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_PRIORITY":"'&MC_PRIORITY&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								,"MC_ESTTIME":"'&MC_ESTTIME&'"
+								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
+								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+
+<!--- LOOKUP Administrative Tasks --->
+<cfcase value="group2">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT [cas_id]
@@ -100,7 +194,7 @@ WHERE(1)=(1)
 
 
 <!--- LOOKUP Business Formation --->
-<cfcase value="group2">
+<cfcase value="group3">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[bf_id]
@@ -188,8 +282,82 @@ ORDER BY[bf_duedate]
 </cftry>
 </cfcase>
 
+
+<!--- LOOKUP Client Maintenance --->
+<cfcase value="group4">
+
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[client_id]
+,[client_name]
+,[client_salutation]
+,[client_since]=FORMAT(client_since,'d','#Session.localization.language#') 
+,[client_type]
+,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
+FROM[v_client_listing]
+
+<cfset sqllist = "client_active,client_credit_hold,client_group,client_name,client_notes,client_referred_by,client_salutation,client_since,client_spouse,client_trade_name,client_type,client_statelabel1,client_statelabel2,client_statelabel3,client_statelabel4,client_relations,client_schedule_c,client_schedule_e,client_disregard,client_personal_property">
+<cfset key="client_">
+<cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
+<cfset data=#ARGUMENTS.search#>
+<cfif ArrayLen(data.b) gt 0>
+WHERE(1)=(1)
+<cfloop array="#data.b#" index="i">
+	<cfif #i.t# eq "NONE">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "AND">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "OR">OR((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+</cfloop>
+</cfif>
+</cfif>
+
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'"
+								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
+								,"CLIENT_SINCE":"'&CLIENT_SINCE&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cfcase>
+
+
+
 <!--- LOOKUP Communications --->
-<cfcase value="group3">
+<cfcase value="group5">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[co_id]
@@ -277,79 +445,8 @@ WHERE(1)=(1)
 </cftry>
 </cfcase>
 
-<!--- LOOKUP Client Maintenance --->
-<cfcase value="group4">
-
-<cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[client_id]
-,[client_name]
-,[client_salutation]
-,[client_since]=FORMAT(client_since,'d','#Session.localization.language#') 
-,[client_type]
-,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
-FROM[v_client_listing]
-
-<cfset sqllist = "client_active,client_credit_hold,client_group,client_name,client_notes,client_referred_by,client_salutation,client_since,client_spouse,client_trade_name,client_type,client_statelabel1,client_statelabel2,client_statelabel3,client_statelabel4,client_relations,client_schedule_c,client_schedule_e,client_disregard,client_personal_property">
-<cfset key="client_">
-<cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
-<cfset data=#ARGUMENTS.search#>
-<cfif ArrayLen(data.b) gt 0>
-WHERE(1)=(1)
-<cfloop array="#data.b#" index="i">
-	<cfif #i.t# eq "NONE">AND((1)=(1)
-		<cfloop array="#i.g#" index="g">
-			<cfloop list="#sqllist#" index="list">
-                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
-                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
-					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
-					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
-			</cfloop>
-		</cfloop>)
-	</cfif>
-	<cfif #i.t# eq "AND">AND((1)=(1)
-		<cfloop array="#i.g#" index="g">
-			<cfloop list="#sqllist#" index="list">
-                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
-                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
-					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
-					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
-			</cfloop>
-		</cfloop>)
-	</cfif>
-	<cfif #i.t# eq "OR">OR((1)=(1)
-		<cfloop array="#i.g#" index="g">
-			<cfloop list="#sqllist#" index="list">
-                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
-                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
-					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
-					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
-			</cfloop>
-		</cfloop>)
-	</cfif>
-</cfloop>
-</cfif>
-</cfif>
-
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'"
-								,"CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'"
-								,"CLIENT_SINCE":"'&CLIENT_SINCE&'"
-								}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-</cfcase>
-
 <!--- LOOKUP Financia &amp; Tax Planning --->
-<cfcase value="group5">
+<cfcase value="group6">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[ftp_id]
@@ -434,7 +531,7 @@ WHERE(1)=(1)
 </cfcase>
 
 <!--- LOOKUP Financial Statements --->
-<cfcase value="group6">
+<cfcase value="group7">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fds_id]
@@ -552,97 +649,7 @@ WHERE(1)=(1)
 </cftry>
 </cfcase>
 
-<!--- LOOKUP Accounting and Consulting Tasks --->
-<cfcase value="group7">
-<cftry>
-<cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[mc_id]
-,[client_id]
-,[client_name]
-,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
-,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
-,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
-,[mc_priority]
-,[mc_assignedtoTEXT]
-,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
-,[mc_esttime]
-,[mc_category]
-,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
-,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
-FROM[v_managementconsulting]
 
-<cfset sqllist = "mc_assignedto,mc_category,mc_description,mc_duedate,mc_esttime,mc_fees,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_workinitiated">
-<cfset key="mc_">
-<cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
-<cfset data=#ARGUMENTS.search#>
-<cfif ArrayLen(data.b) gt 0>
-WHERE(1)=(1)
-<cfloop array="#data.b#" index="i">
-	<cfif #i.t# eq "NONE">AND((1)=(1)
-		<cfloop array="#i.g#" index="g">
-			<cfloop list="#sqllist#" index="list">
-			
-                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
-                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
-					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
-					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
-			</cfloop>
-		</cfloop>)
-	</cfif>
-	<cfif #i.t# eq "AND">AND((1)=(1)
-		<cfloop array="#i.g#" index="g">
-			<cfloop list="#sqllist#" index="list">
-                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
-                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
-					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
-					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
-			</cfloop>
-		</cfloop>)
-	</cfif>
-	<cfif #i.t# eq "OR">OR((1)=(1)
-		<cfloop array="#i.g#" index="g">
-			<cfloop list="#sqllist#" index="list">
-                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
-                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
-					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
-					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
-			</cfloop>
-		</cfloop>)
-	</cfif>
-</cfloop>
-</cfif>
-</cfif>
-
-
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
-								,"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
-								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
-								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_PRIORITY":"'&MC_PRIORITY&'"
-								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
-								,"MC_DUEDATE":"'&MC_DUEDATE&'"
-								,"MC_ESTTIME":"'&MC_ESTTIME&'"
-								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
-								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
-								}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cfcase>
 
 <!--- Grid Notice  --->
 <cfcase value="group8">
