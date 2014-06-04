@@ -41,6 +41,7 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="clientid" type="string" required="no" default="">
 <cfargument name="userid" type="string" required="no" default="">
 <cfargument name="duedate" type="string" required="no" default="">
+<cfargument name="group" type="string" required="no" default="">
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- TOTAL TIME --->
 <cfcase value="group1">
@@ -48,6 +49,7 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="aquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
 SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
+SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 
@@ -62,7 +64,7 @@ WHERE[cas_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "">AND(','+[cas_assignedto]+','LIKE'%,'+@u+',%')</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
-
+<cfif ARGUMENTS.group neq "0">AND([client_id]=@c)</cfif>
 
 UNION
 SELECT'Business Formation'AS[name]

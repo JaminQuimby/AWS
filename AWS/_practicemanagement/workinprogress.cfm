@@ -11,7 +11,7 @@
 <!---Head & Supporting Documents--->
 <cfinclude template="/assets/inc/header.cfm">
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
-
+<cfquery dbtype="query" name="global_clientgroup">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_clientgroup'</cfquery>
 <cfinclude template="/assets/inc/pagemenu.cfm">
 <body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8,group9,group10,group11,group12'); ">
 <!---PAGE CONTENTS--->
@@ -27,7 +27,10 @@
 	<div><label for="client_id"> Client</label><select id="client_id" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="g1_duedate">Due on or before</label><input type="text" class="date" id="g1_duedate" onchange="_grid1();"></div>
     <div><label for="g1_assignedto">Employee</label><select id="g1_assignedto" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
+	<div><label for="g1_group">Group</label><select id="g1_group" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="global_clientgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	
+    
+    <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
     </div>
 
   <h3 onClick="_run.load_group2();">Administrative Tasks</h3>

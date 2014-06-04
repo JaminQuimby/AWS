@@ -20,12 +20,14 @@ END
 IF (@s <='1440')
 BEGIN
 <!---/*You must wait before you can reset your password*/--->
-SET @r=(SELECT'You must wait 24 hours before you can reset your password again.')
+SET @r=(SELECT'You must wait 8 hours before you can reset your password again.')
 END
 <!--- User not found: Log Fail Attempt?--->
 SELECT ISNULL(@r,'Your password reset failed.')as[response]
 
 </cfquery>
+
+
 <cfoutput query="fquery">
 <cfif ListLen(response,"-") eq "5">
 <cfmail 
@@ -43,10 +45,9 @@ SELECT ISNULL(@r,'Your password reset failed.')as[response]
  
  This request is valid for 24 hours. If you did not request to reset your password, please email support@awsionline.com<br />
 </p>
-<cfset myResult='{"result":"OK","URL":"https://#CGI.SERVER_NAME#/?r=#URLEncodedFormat(response)#&e=#ARGUMENTS.email#"}'>
+<cfset myResult='{"result":"OK","URL":"https://#CGI.SERVER_NAME#/?r=#URLEncodedFormat(response)#&e=#ARGUMENTS.email#","message":"Please check your email for your password reset link."}'>
 </cfmail>  
 </cfif>
-
 
 <cfif NOT listlen(response,"-") eq "5">
 <cfset myResult='{"result":"Your passowrd reset has failed.","message":"#response#"}'>
@@ -56,6 +57,7 @@ SELECT ISNULL(@r,'Your password reset failed.')as[response]
 
 <cfreturn myResult>
  </cfoutput>
+
 
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
