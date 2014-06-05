@@ -16,6 +16,7 @@ var _run={
 	 ,load_group10:function(){_grid10();}
 	 ,load_group11:function(){_grid11();}
 	 ,load_group12:function(){_grid12();}
+	 ,load_group13:function(){_grid13();}
 }
 
 _grid1=function(){_jGrid({
@@ -36,6 +37,28 @@ _grid1=function(){_jGrid({
 
 _grid2=function(){_jGrid({
 	"grid":"grid2",
+	"url":"workinprogress.cfc",
+	"title":"Accounting &amp; Consulting",
+	"fields":{MC_ID:{key:true,list:false,edit:false}
+			,CLIENT_ID:{list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,MC_REQUESTFORSERVICE:{title:'Request For Service'}
+			,MC_PROJECTCOMPLETED:{title:'Project Completed'}
+			,MC_STATUSTEXT:{title:'Status'}
+			,MC_PRIORITY:{title:'Priority'}
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
+			,MC_DUEDATE:{title:'Due Date',width:'2%'}
+			,MC_ESTTIME:{title:'Estimated Time',width:'2%'}
+			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
+			,MC_DESCRIPTION:{title:'Task Description'}									
+			},
+	"method":"f_lookupData",
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group2","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
+	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID'
+})};	
+
+_grid3=function(){_jGrid({
+	"grid":"grid3",
 	"url":"workinprogress.cfc",	
 	"title":"Administrative Tasks",
 	"fields":{CAS_ID:{key:true,list:false,edit:false}
@@ -49,12 +72,12 @@ _grid2=function(){_jGrid({
 			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}							
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group2","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"4"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group3","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"4"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.CAS_ID'
 })};
 
-_grid3=function(){_jGrid({
-	"grid":"grid3",
+_grid4=function(){_jGrid({
+	"grid":"grid4",
 	"url":"workinprogress.cfc",
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
@@ -70,12 +93,35 @@ _grid3=function(){_jGrid({
 			,BF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}			
 	},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group3","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"3"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"3"}',
 	"functions":'$("#bf_id").val(record.BF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?task_id="+record.BF_ID'
 })};
+
+_grid5=function(){_jGrid({
+	"grid":"grid5", 
+	"url":"workinprogress.cfc",	
+	"title":"Communications",
+	"fields":{CO_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,CO_CALLER:{title:'Caller'}
+			,CO_DATE:{title:'Date and Time'}
+			,CO_DUEDATE:{title:'Due Date',width:'2%'}
+			,CO_STATUSTEXT:{title:'Status',width:'2%'}
+			,CO_FORTEXT:{title:'For',width:'2%'}
+			,CO_RESPONSENEEDED:{title:'Response Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,CO_RETURNCALL:{title:'Returned Call',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			
+			,CO_BRIEFMESSAGE:{title:'Brief Message'}
+	},
+	"method":"f_lookupData",
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group5","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"12"}',	
+	"functions":'$("#co_id").val(record.CO_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID'
+})};
+
+
+
 	
-_grid4=function(){_jGrid({
-	"grid":"grid4",
+_grid6=function(){_jGrid({
+	"grid":"grid6",
 	"url":"workinprogress.cfc",	
 	"title":"Financial &amp; Tax Planning", 
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
@@ -88,12 +134,12 @@ _grid4=function(){_jGrid({
 			 ,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"9"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group6","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"9"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/financialtaxplanning.cfm?task_id="+record.FTP_ID'
 })};
 
-_grid5=function(){_jGrid({
-	"grid":"grid5",
+_grid7=function(){_jGrid({
+	"grid":"grid7",
 	"url":"workinprogress.cfc",
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
@@ -120,34 +166,14 @@ _grid5=function(){_jGrid({
 
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group5","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"5"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group7","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"5"}',
 	"functions":'$("#fds_id").val(record.FDS_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID'
 })};
 
-_grid6=function(){_jGrid({
-	"grid":"grid6",
-	"url":"workinprogress.cfc",
-	"title":"Accounting &amp; Consulting",
-	"fields":{MC_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,MC_REQUESTFORSERVICE:{title:'Request For Service'}
-			,MC_PROJECTCOMPLETED:{title:'Project Completed'}
-			,MC_STATUSTEXT:{title:'Status'}
-			,MC_PRIORITY:{title:'Priority'}
-			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
-			,MC_DUEDATE:{title:'Due Date',width:'2%'}
-			,MC_ESTTIME:{title:'Estimated Time',width:'2%'}
-			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
-			,MC_DESCRIPTION:{title:'Task Description'}									
-			},
-	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group6","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
-	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID'
-})};	
 
-_grid7=function(){_jGrid({
-	"grid":"grid7",
+
+_grid8=function(){_jGrid({
+	"grid":"grid8",
 	"url":"workinprogress.cfc",
 	"title":"Notices",
 	"fields":{N_ID:{key:true,list:false,edit:false}
@@ -163,12 +189,12 @@ _grid7=function(){_jGrid({
 			,NST_2_REVASSIGNEDTOTEXT:{title:'Review Assigned To'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group7","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"8"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group8","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"8"}',
 	"functions":'$("#n_id").val(record.N_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID'
 })};	
 	
-_grid8=function(){_jGrid({
-	"grid":"grid8",
+_grid9=function(){_jGrid({
+	"grid":"grid9",
 	"url":"workinprogress.cfc",
 	"title":"Other Fililngs",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
@@ -192,12 +218,12 @@ _grid8=function(){_jGrid({
 
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group8","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"11"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group9","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"11"}',
 	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/otherfilings.cfm?task_id="+record.OF_ID'
 })};
 	
-_grid9=function(){_jGrid({
-	"grid":"grid9",
+_grid10=function(){_jGrid({
+	"grid":"grid10",
 	"url":"workinprogress.cfc",
 	"title":"Payroll Checks",
 	"fields":{PC_ID:{key:true,list:false,edit:false}
@@ -216,12 +242,12 @@ _grid9=function(){_jGrid({
 
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group9","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"10"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group10","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"10"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollchecks.cfm?task_id="+record.PC_ID'
 })};
 	
-_grid10=function(){_jGrid({
-	"grid":"grid10",
+_grid11=function(){_jGrid({
+	"grid":"grid11",
 	"url":"workinprogress.cfc",
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
@@ -241,37 +267,10 @@ _grid10=function(){_jGrid({
 			,PT_DELIVERY:{title:'Delivery',width:'1%'}
 			},
 	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group10","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"13"}',
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group11","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"13"}',
 	"functions":'$("#pt_id").val(record.PT_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrolltaxes.cfm?task_id="+record.PT_ID'
 })};
 	
-
-
-_grid11=function(){_jGrid({
-	"grid":"grid11",
-	"url":"workinprogress.cfc",	
-	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
-			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
-			,TR_DUEDATE:{title:'Due Date',width:'1%'}
-			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
-			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
-			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
-			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
-			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		
-			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
-			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
-			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
-			,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'1%'}
-			},
-	"method":"f_lookupData",
-	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group11","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"6"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
-})};
-
 
 
 _grid12=function(){_jGrid({
@@ -294,3 +293,31 @@ _grid12=function(){_jGrid({
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group12","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"6"}',
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
 })};
+
+
+_grid13=function(){_jGrid({
+	"grid":"grid13",
+	"url":"workinprogress.cfc",	
+	"title":"Tax Returns",
+	"fields":{TR_ID:{key:true,list:false,edit:false}
+			,CLIENT_NAME:{title:'Client Name'}
+			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
+			,TR_DUEDATE:{title:'Due Date',width:'1%'}
+			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
+			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
+			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
+			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		
+			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
+			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
+			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
+			,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'1%'}
+			},
+	"method":"f_lookupData",
+	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group13","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"6"}',
+	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
+})};
+
+

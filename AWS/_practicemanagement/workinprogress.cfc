@@ -58,7 +58,7 @@ SELECT'Administrative Tasks'AS[name]
 ,COUNT(cas_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'2'AS[orderit]
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=>@d)</cfif>
@@ -72,7 +72,7 @@ SELECT'Business Formation'AS[name]
 ,COUNT(DISTINCT[bf_id])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(DISTINCT[bfs_id])AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'3'AS[orderit]
 FROM[v_businessformation_subtask]
 WHERE[bf_status]!='2'
 <cfif ARGUMENTS.userid neq "">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
@@ -80,10 +80,22 @@ WHERE[bf_status]!='2'
 
 
 UNION
+SELECT'Communication'AS[name]
+,ISNULL(SUM(0),0)AS[total_time]
+,COUNT(DISTINCT[co_id])AS[count_assigned]
+,ISNULL(SUM(0),0)AS[total_subtask_time]
+,'4'AS[orderit]
+FROM[v_communications]
+WHERE[co_status]!='2'
+<cfif ARGUMENTS.userid neq "">AND([co_for]=@u )</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+
+
+UNION
 SELECT'Financial & Tax Planning'AS[name],ISNULL(SUM(ISNULL(ftp_esttime,0)),0)AS[total_time],COUNT(ftp_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'5'AS[orderit]
 FROM[v_financialtaxplanning]
 WHERE[ftp_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]=>@d)</cfif>
@@ -96,7 +108,7 @@ SELECT'Financial Statements'AS[name],ISNULL(SUM(ISNULL(fds_esttime,0)),0)AS[tota
 ,COUNT(fds_obtaininfo_assignedto)+COUNT(fds_sort_assignedto)+COUNT(fds_checks_assignedto)+COUNT(fds_sales_assignedto)+COUNT(fds_entry_assignedto)+COUNT(fds_reconcile_assignedto)+COUNT(fds_compile_assignedto)+COUNT(fds_review_assignedto)+COUNT(fds_assembly_assignedto)+COUNT(fds_delivery_assignedto)AS[count_assigned]
 ,ISNULL(SUM(fdss_esttime),0)AS[total_subtask_time]
 ,COUNT(DISTINCT[fdss_id])AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'6'AS[orderit]
 FROM[v_financialdatastatus_subtask] 
 WHERE[fds_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
@@ -136,12 +148,13 @@ UNION
 SELECT'Notices'AS[name], ISNULL(SUM(ISNULL(nst_esttime,0)),0)AS[total_time],COUNT(nst_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'7'AS[orderit]
 FROM[v_notice_subtask]
 WHERE[nst_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "">AND([nst_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+
 UNION
 SELECT'Other Filings'AS[name], ISNULL(SUM(ISNULL(of_esttime,0)),0)AS[total_time]
 , ISNULL(SUM(CASE WHEN of_obtaininfo_assignedto=@u  THEN 1 ELSE 0 END  
@@ -152,7 +165,7 @@ SELECT'Other Filings'AS[name], ISNULL(SUM(ISNULL(of_esttime,0)),0)AS[total_time]
 ),0)AS [count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'8'AS[orderit]
 FROM[v_otherfilings]
 WHERE[of_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]=>@d)</cfif>
@@ -173,7 +186,7 @@ SELECT'Payroll Checks'AS[name], ISNULL(SUM(ISNULL(pc_esttime,0)),0)AS[total_time
 +COUNT(pc_assembly_datecompleted)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'9'AS[orderit]
 FROM[v_payrollcheckstatus]
 WHERE[pc_delivery_completedby]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]=>@d)</cfif>
@@ -194,7 +207,7 @@ SELECT'Payroll Taxes'AS[name], ISNULL(SUM(ISNULL(pt_esttime,0)),0)AS[total_time]
 +COUNT(pt_delivery_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'10'AS[orderit]
 FROM[v_payrolltaxes] 
 WHERE([pt_delivery_completedby]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]=>@d)</cfif>
@@ -212,7 +225,7 @@ SELECT'Tax Returns'AS[name], ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
 ,COUNT(tr_2_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'12'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_2_informationreceived]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]=>@d)</cfif>
@@ -225,7 +238,7 @@ SELECT'Personal Property Tax Returns'AS[name]
 ,COUNT(tr_4_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'2'AS[orderit]
+,'11'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_4_required]='TRUE'
 AND[tr_4_required]IS NULL
@@ -273,13 +286,69 @@ ORDER BY[orderit]
         <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#","QUERY":['&queryResult&']]}'> 
     </cfcatch>
 </cftry>
-
-
 </cfcase>
 
 
-<!--- LOOKUP Administrative Tasks --->
+<!--- LOOKUP Accounting and Consulting Tasks --->
 <cfcase value="group2">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+DECLARE @c varchar(8000),@u varchar(8000),@d date
+SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
+SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
+SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
+SELECT[mc_id]
+,[client_id]
+,[client_name]
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
+,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
+,[mc_priority]
+,[mc_assignedtoTEXT]
+,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_esttime]
+,[mc_category]
+,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
+,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
+FROM[v_managementconsulting]
+WHERE([mc_status] !=3 OR [mc_status] !=6 OR [mc_status] IS NULL)
+<cfif ARGUMENTS.search neq "">
+AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+<cfif ARGUMENTS.userid neq "">AND([mc_assignedto]=@u )</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+</cfquery>
+
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
+								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_PRIORITY":"'&MC_PRIORITY&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								,"MC_ESTTIME":"'&MC_ESTTIME&'"
+								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
+								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<!--- LOOKUP Administrative Tasks --->
+<cfcase value="group3">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -335,7 +404,7 @@ WHERE[cas_status]!='2'
 
 
 <!--- LOOKUP Business Formation --->
-<cfcase value="group3">
+<cfcase value="group4">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -388,8 +457,59 @@ WHERE[bf_status]!='2'
 </cfcase>
 
 
+<!--- LOOKUP Communications --->
+<cfcase value="group5">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[co_id]
+,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
+,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
+,[co_caller]
+,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#')
+,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
+,[co_status]
+,[co_responseneeded]
+,[co_returncall]
+,[client_name]
+,[client_id]
+,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
+
+FROM[v_communications]
+WHERE[co_status]!='2'
+<cfif ARGUMENTS.userid neq "">AND([co_assignedto]=@u )</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CO_CALLER":"'&CO_CALLER&'"
+								,"CO_DATE":"'&CO_DATE&'"
+								,"CO_DUEDATE":"'&CO_DUEDATE&'"
+								,"CO_STATUSTEXT":"'&CO_STATUSTEXT&'"
+								,"CO_FORTEXT":"'&CO_FORTEXT&'"
+								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
+								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
+								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"								
+								}'>                          
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+
 <!--- LOOKUP Financial &amp; Tax Planning --->
-<cfcase value="group4">
+<cfcase value="group6">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -442,7 +562,7 @@ WHERE[ftp_status]!='2'
 </cfcase>
 
 <!--- LOOKUP Financial Statements --->
-<cfcase value="group5">
+<cfcase value="group7">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -540,66 +660,9 @@ OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
 </cftry>
 </cfcase>
 
-<!--- LOOKUP Accounting and Consulting Tasks --->
-<cfcase value="group6">
-<cftry>
-<cfquery datasource="#Session.organization.name#" name="fquery">
-DECLARE @c varchar(8000),@u varchar(8000),@d date
-SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
-SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
-SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
-SELECT[mc_id]
-,[client_id]
-,[client_name]
-,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
-,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
-,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
-,[mc_priority]
-,[mc_assignedtoTEXT]
-,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
-,[mc_esttime]
-,[mc_category]
-,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
-,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
-FROM[v_managementconsulting]
-WHERE([mc_status] !=3 OR [mc_status] !=6 OR [mc_status] IS NULL)
-<cfif ARGUMENTS.search neq "">
-AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-<cfif ARGUMENTS.userid neq "">AND([mc_assignedto]=@u )</cfif>
-<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
-</cfquery>
-
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
-								,"CLIENT_ID":"'&CLIENT_ID&'"
-								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
-								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
-								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_PRIORITY":"'&MC_PRIORITY&'"
-								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
-								,"MC_DUEDATE":"'&MC_DUEDATE&'"
-								,"MC_ESTTIME":"'&MC_ESTTIME&'"
-								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
-								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
-								}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cfcase>
 
 <!--- Grid Notice  --->
-<cfcase value="group7">
+<cfcase value="group8">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -653,7 +716,7 @@ WHERE[nst_status]!='2'
 </cfcase>
 
 <!--- LOOKUP Other Filings --->
-<cfcase value="group8">
+<cfcase value="group9">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -742,7 +805,7 @@ OR([of_delivery_assignedto]=@u  AND[of_assembly_datecompleted]IS NOT NULL AND[of
 </cfcase>
 
 <!--- LOOKUP Payroll Checks --->
-<cfcase value="group9">
+<cfcase value="group10">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -812,7 +875,7 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=@u )
 </cfcase>
 
 <!--- LOOKUP Payroll Taxes --->
-<cfcase value="group10">
+<cfcase value="group11">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -892,7 +955,7 @@ OR([pt_delivery_assignedto]=@u  AND[pt_assembly_datecompleted]IS NOT NULL)
 </cfcase>
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group11">
+<cfcase value="group12">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -958,7 +1021,7 @@ WHERE[tr_2_informationreceived]IS NOT NULL
 </cfcase>
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group12">
+<cfcase value="group13">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date

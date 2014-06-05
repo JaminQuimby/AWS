@@ -13,7 +13,7 @@
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_clientgroup">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_clientgroup'</cfquery>
 <cfinclude template="/assets/inc/pagemenu.cfm">
-<body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8,group9,group10,group11,group12'); ">
+<body onLoad="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu,group2,group3,group4,group5,group6,group7,group8,group9,group10,group11,group12,group13'); ">
 <!---PAGE CONTENTS--->
 <div id="content" class="contentsmall"><nav id="topMenu">
 <cfinclude template="/assets/module/menu2/menu.cfm"></nav>
@@ -33,40 +33,42 @@
     <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
     </div>
 
-  <h3 onClick="_run.load_group2();">Administrative Tasks</h3>
+  <h3 onClick="_run.load_group2();">Accounting &amp; Consulting</h3>
   	<div><div class="tblGrid" id="grid2"></div></div>
 
-  <h3 onClick="_run.load_group3();">Business Formation</h3>
+  <h3 onClick="_run.load_group3();">Administrative Tasks</h3>
 	<div><div class="tblGrid" id="grid3"></div></div>
 
-  <h3 onClick="_run.load_group4();">Financial &amp; Tax Planning</h3>
+  <h3 onClick="_run.load_group4();">Business Formation</h3>
 	<div><div class="tblGrid" id="grid4"></div></div>
 
-  <h3 onClick="_run.load_group5();">Financial Statements</h3>
+  <h3 onClick="_run.load_group5();">Communications</h3>
 	<div><div class="tblGrid" id="grid5"></div></div>
 
-  <h3 onClick="_run.load_group6();">Accounting &amp; Consulting</h3>
+  <h3 onClick="_run.load_group6();">Financial &amp; Tax Planning</h3>
 	<div><div class="tblGrid" id="grid6"></div></div>
 
-  <h3 onClick="_run.load_group7();">Notices</h3>
+  <h3 onClick="_run.load_group7();">Financial Statements</h3>
 	<div><div class="tblGrid" id="grid7"></div></div>
 
-  <h3 onClick="_run.load_group8();">Other Filings</h3>
+  <h3 onClick="_run.load_group8();">Notices</h3>
 	<div><div class="tblGrid" id="grid8"></div></div>
 
-  <h3 onClick="_run.load_group9();">Payroll Checks</h3>
+  <h3 onClick="_run.load_group9();">Other Fililngs</h3>
 	<div><div class="tblGrid" id="grid9"></div></div>
 
-  <h3 onClick="_run.load_group10();">Payroll Taxes</h3>
+  <h3 onClick="_run.load_group10();">Payroll Checks</h3>
 	<div><div class="tblGrid" id="grid10"></div></div>
 
-  <h3 onClick="_run.load_group11();">Tax Returns</h3>
+  <h3 onClick="_run.load_group11();">Payroll Taxes</h3>
 	<div><div class="tblGrid" id="grid11"></div></div>
 
   <h3 onClick="_run.load_group12();">Personal Property Tax Returns</h3>
 	<div><div class="tblGrid" id="grid12"></div></div>
-  </div>
 
+  <h3 onClick="_run.load_group13();">Tax Returns</h3>
+	<div><div class="tblGrid" id="grid13"></div></div>
+  </div>
 <!--- Start Plugins --->
 <cfinclude template="/assets/plugins/plugins.cfm">
 <!--- END FIELD DATA --->
