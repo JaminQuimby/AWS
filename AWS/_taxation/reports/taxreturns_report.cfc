@@ -71,6 +71,10 @@ SELECT[tr_id]
 ,[tr_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[tr_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
+,[tr_4_completed]=FORMAT(tr_4_completed,'d','#Session.localization.language#')
+,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#')
+,[tr_priority]
+,[tr_esttime]
 FROM[v_taxreturns]
 <cfset sqllist = "tr_currentfees,tr_esttime,tr_extensiondone,tr_extensionrequested,tr_notrequired,tr_priority,tr_priorfees,tr_taxform,tr_taxyear,tr_duedate,tr_filingdeadline,tr_missinginfo,tr_missinginforeceived,tr_deliverymethod,tr_paid,tr_reason,tr_1_dropoffappointment,tr_1_dropoffappointmentlength,tr_1_dropoffappointmentwith,tr_1_whileyouwaitappt,tr_1_pickupappointment,tr_1_pickupappointmentlength,tr_1_pickupappointmentwith,tr_2_assignedto,tr_2_completed,tr_2_informationreceived,tr_2_preparedby,tr_2_readyforreview,tr_2_reviewassignedtotext,tr_2_reviewed,tr_2_reviewedby,tr_2_reviewedwithnotes,tr_3_assemblereturn,tr_3_contacted,tr_3_delivered,tr_3_emailed,tr_3_messageleft,tr_3_missingsignatures,tr_3_multistatereturn,tr_4_assignedto,tr_4_completed,tr_4_currentfees,tr_4_delivered,tr_4_extended,tr_4_paid,tr_4_pptresttime,tr_4_priorfees,tr_4_required,tr_4_rfr,tr_4_extensionrequested,tr_4_completedby,tr_4_reviewassigned,tr_4_reviewed,tr_4_reviewedby">
 <cfset key="tr_">
@@ -135,7 +139,6 @@ WHERE(1)=(1)
 								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
 								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"
-								,"TR_3_CONTACTED":"'&TR_3_CONTACTED&'"
 								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"
 								,"TR_DELIVERYMETHODTEXT":"'&TR_DELIVERYMETHODTEXT&'"
 								,"TR_PRIORFEES":"'&TR_PRIORFEES&'"
@@ -144,7 +147,11 @@ WHERE(1)=(1)
 								,"TR_EXTENSIONREQUESTED":"'&TR_EXTENSIONREQUESTED&'"
 								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
 								,"TR_3_MULTISTATERETURN":"'&TR_3_MULTISTATERETURN&'"
-								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"															
+								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"		
+								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"		
+								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"		
+								,"TR_PRIORITY":"'&TR_PRIORITY&'"		
+								,"TR_ESTTIME":"'&TR_ESTTIME&'"														
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

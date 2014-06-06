@@ -82,7 +82,6 @@ var grid1_config = [
 		,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'2%'}
 		,TR_2_COMPLETED:{title:'Completed',width:'2%'}
 		,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'2%'}
-		,TR_3_CONTACTED:{title:'Contacted',width:'2%'}
 		,TR_3_DELIVERED:{title:'Delivery',width:'2%'}
 		,TR_DELIVERYMETHODTEXT:{title:'Delivery Method'}
 		,TR_PRIORFEES:{title:'Prior Fees'}
@@ -92,6 +91,10 @@ var grid1_config = [
 		,TR_EXTENSIONDONE:{title:'Extension Completed',width:'2%'}
 		,TR_3_MULTISTATERETURN:{title:'Multi-State Return',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 		,TR_4_REQUIRED:{title:'PPTR Required',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+		,TR_4_COMPLETED:{title:'PPTR Completed',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+		,TR_4_DELIVERED:{title:'PPTR Delivered',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+		,TR_PRIORITY:{title:'Priority',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+		,TR_ESTTIME:{title:'Estimated Time',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"6"}',

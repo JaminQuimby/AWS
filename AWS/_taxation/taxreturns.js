@@ -44,6 +44,7 @@ _grid1=function(){_jGrid({
 			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
 			,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'1%'}	
+			,TR_3_DELIVERED:{title:'Delivery',width:'1%'}	
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"6"}',

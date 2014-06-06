@@ -333,6 +333,7 @@ SELECT[tr_id]
 	,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
 	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
 	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
+ ,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#')
 
 FROM[v_taxreturns]
 
@@ -362,6 +363,7 @@ WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 									,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
  									,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
 									,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
+									,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

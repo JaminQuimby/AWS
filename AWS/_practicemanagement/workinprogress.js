@@ -215,8 +215,7 @@ _grid9=function(){_jGrid({
 				,OF_REVIEW:{title:'Review',width:'1%'}
 				,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
 				,OF_DELIVERY:{title:'Delivery',width:'1%'}						
-
-			},
+				},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group9","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"11"}',
 	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/otherfilings.cfm?task_id="+record.OF_ID'
@@ -314,6 +313,7 @@ _grid13=function(){_jGrid({
 			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
 			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
 			,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'1%'}
+			,TR_3_DELIVERED:{title:'Delivery',width:'1%'}	
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group13","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"6"}',

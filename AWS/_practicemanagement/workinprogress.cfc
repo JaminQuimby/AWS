@@ -954,74 +954,9 @@ OR([pt_delivery_assignedto]=@u  AND[pt_assembly_datecompleted]IS NOT NULL)
 </cftry>
 </cfcase>
 
+
 <!--- LOOKUP TAX RETURNS --->
 <cfcase value="group12">
-<cftry>
-<cfquery datasource="#Session.organization.name#" name="fquery">
-DECLARE @c varchar(8000),@u varchar(8000),@d date
-SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
-SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
-SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
-SELECT[tr_id]
- 	,[tr_taxyear]
- 	,[tr_taxform]
-	,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
-  	,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
-	,[tr_missinginfo]
-	,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
-	,[tr_4_assignedto]
-  	,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
-	,[client_name]
-	,[client_id]
-	,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
-	,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
-	,[tr_2_reviewassignedtoTEXT] 
-	,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#') 
-	,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
-	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
-	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
-
-FROM[v_taxreturns]
-WHERE[tr_2_informationreceived]IS NOT NULL 
-<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]=>@d)</cfif>
-<cfif ARGUMENTS.userid neq "">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=@u</cfif>
-<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
- 									,"CLIENT_ID":"'&CLIENT_ID&'"
- 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
-									,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-									,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
-									,"TR_DUEDATE":"'&TR_DUEDATE&'"
-									,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
- 									,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
-									,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
-									,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
-									,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
-									,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
-									,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
-									,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
- 									,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
-									,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
-								}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cfcase>
-
-<!--- LOOKUP TAX RETURNS --->
-<cfcase value="group13">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date
@@ -1077,6 +1012,75 @@ AND [tr_3_delivered] IS NULL
 </cfcatch>
 </cftry>
 </cfcase>
+
+<!--- LOOKUP TAX RETURNS --->
+<cfcase value="group13">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+DECLARE @c varchar(8000),@u varchar(8000),@d date
+SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
+SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
+SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
+SELECT[tr_id]
+ 	,[tr_taxyear]
+ 	,[tr_taxform]
+	,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+  	,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
+	,[tr_missinginfo]
+	,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
+	,[tr_4_assignedto]
+  	,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
+	,[client_name]
+	,[client_id]
+	,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
+	,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
+	,[tr_2_reviewassignedtoTEXT] 
+	,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#') 
+	,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
+	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
+	,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#') 
+	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
+
+FROM[v_taxreturns]
+WHERE[tr_2_informationreceived]IS NOT NULL 
+<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]=>@d)</cfif>
+<cfif ARGUMENTS.userid neq "">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=@u</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
+ 									,"CLIENT_ID":"'&CLIENT_ID&'"
+ 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
+									,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+									,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
+									,"TR_DUEDATE":"'&TR_DUEDATE&'"
+									,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
+ 									,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
+									,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
+									,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
+									,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
+									,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
+									,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
+									,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
+ 									,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
+									,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
+									,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"	
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
 </cfswitch>
 </cffunction>
 </cfcomponent>
