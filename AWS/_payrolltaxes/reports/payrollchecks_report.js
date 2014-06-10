@@ -62,6 +62,8 @@ _jGrid({
 			,PC_DELIVERY:{title:'Delivery',width:'2%'}
 			,PC_FEES:{title:'Fees'}
 			,PC_PAIDTEXT:{title:'Payment Status'}
+			,PC_PRIORITY:{title:'Priority'}
+			,PC_ESTTIME:{title:'Estimated Time'}			
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"10"}',

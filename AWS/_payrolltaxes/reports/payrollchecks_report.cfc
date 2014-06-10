@@ -45,6 +45,8 @@ SELECT
 ,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#')
 ,[pc_missinginforeceived]=ISNULL(FORMAT(pc_missinginforeceived,'d','#Session.localization.language#'),'N/A')
 ,[pc_missinginfo] 
+,[pc_priority]
+,[pc_esttime]
 ,[pc_duedate]=FORMAT(pc_duedate,'d','#Session.localization.language#')
 ,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[pc_obtaininfo_assignedtoTEXT]
@@ -126,6 +128,8 @@ WHERE(1)=(1)
 								,"PC_DELIVERY":"'&pc_delivery_datecompleted&'<br/>'&pc_delivery_assignedtoTEXT&'"
 								,"PC_FEES":"'&PC_FEES&'"
 								,"PC_PAIDTEXT":"'&PC_PAIDTEXT&'"
+								,"PC_PRIORITY":"'&PC_PRIORITY&'"
+								,"PC_ESTTIME":"'&PC_ESTTIME&'"								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -92,6 +92,8 @@ var grid1_config = [
 			,FDS_ACCTRPT:{title:'Report',width:'2%'}
 			,FDS_FEES:{title:'Fees'}
 			,FDS_PAIDTEXT:{title:'Payment Status'}
+			,FDS_PRIORITY:{title:'Priority'}
+			,FDS_ESTTIME:{title:'Estimated Time'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"5"}',

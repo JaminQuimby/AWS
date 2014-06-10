@@ -47,6 +47,7 @@ SELECT[mc_id]
 ,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
 ,[mc_missinginfo]
 ,[mc_esttime]
+,[mc_priority]
 ,FORMAT(mc_fees, 'C', 'en-us')AS[mc_fees]
 ,[mc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[mc_paid]=[optionvalue_id])
 ,[client_name]
@@ -107,13 +108,13 @@ WHERE(1)=(1)
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_MISSINGINFO":"'&MC_MISSINGINFO&'"	
 								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								,"MC_MISSINGINFO":"'&MC_MISSINGINFO&'"	
 								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
 								,"MC_WORKINITIATED":"'&MC_WORKINITIATED&'"
 								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
-								,"MC_FEES":"'&MC_FEES&'"
-								,"MC_PAIDTEXT":"'&MC_PAIDTEXT&'"	
+								,"MC_PRIORITY":"'&MC_PRIORITY&'"
+								,"MC_ESTTIME":"'&MC_ESTTIME&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

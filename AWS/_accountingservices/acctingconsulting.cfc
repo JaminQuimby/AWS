@@ -123,13 +123,9 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
-								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
 								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_PRIORITY":"'&MC_PRIORITY&'"
 								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
-								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
 								}'>
@@ -148,6 +144,7 @@ SELECT
 ,[mcs_assignedtoTEXT]
 ,[mcs_duedate]
 ,[mcs_sequence]
+,[mcs_completed]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
 ,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
 FROM[v_managementconsulting_subtask]
@@ -165,6 +162,7 @@ ORDER BY [mcs_sequence]
  								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
 								,"MCS_DUEDATE":"'&MCS_DUEDATE&'"
 								,"MCS_ASSIGNEDTOTEXT":"'&MCS_ASSIGNEDTOTEXT&'"
+								,"MCS_COMPLETED":"'&MCS_COMPLETED&'"
  								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

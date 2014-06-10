@@ -68,6 +68,8 @@ var grid1_config = [
 		,PT_DELIVERY:{title:'Delivery',width:'2%'}
 		,PT_FEES:{title:'Fees'}
 		,PT_PAIDTEXT:{title:'Payment Status'}
+		,PT_PRIORITY:{title:'Priority'}
+		,PT_ESTTIME:{title:'Estimated Time'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"13"}',

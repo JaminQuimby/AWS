@@ -16,14 +16,10 @@ _grid1=function(){_jGrid({
 		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,MC_REQUESTFORSERVICE:{title:'Request For Service'}
-			,MC_PROJECTCOMPLETED:{title:'Project Completed'}
 			,MC_STATUSTEXT:{title:'Status'}
-			,MC_PRIORITY:{title:'Priority'}
 			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
 			,MC_DUEDATE:{title:'Due Date',width:'2%'}
-			,MC_ESTTIME:{title:'Estimated Time',width:'2%'}
-			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
+			,MC_CATEGORYTEXT:{title:'Consulting Category'}
 			,MC_DESCRIPTION:{title:'Task Description'}	
 		},
 	"method":"f_lookupData",
@@ -42,6 +38,7 @@ _grid2=function(){_jGrid({
 		,MCS_STATUSTEXT:{title:'Status'}	
 		,MCS_DUEDATE:{title:'Due Date',width:'2%'}
 		,MCS_ASSIGNEDTOTEXT:{title:'Assigned To'}
+		,MCS_COMPLETED:{title:'Completed'}
  		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"2"}',

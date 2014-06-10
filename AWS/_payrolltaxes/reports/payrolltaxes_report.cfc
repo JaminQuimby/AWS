@@ -42,6 +42,8 @@ SELECT[pt_id]
 ,[pt_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pt_paid]=[optionvalue_id])
 ,[pt_year]
 ,[pt_missinginfo]
+,[pt_priority]
+,[pt_esttime]
 ,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#')
 ,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#')
 ,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
@@ -131,6 +133,8 @@ WHERE(1)=(1)
 								,"PT_DELIVERY":"'&pt_delivery_datecompleted&'<br/>'&pt_delivery_assignedtoTEXT&'"
 								,"PT_FEES":"'&PT_FEES&'"
 								,"PT_PAIDTEXT":"'&PT_PAIDTEXT&'"
+								,"PT_PRIORITY":"'&PT_PRIORITY&'"
+								,"PT_ESTTIME":"'&PT_ESTTIME&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

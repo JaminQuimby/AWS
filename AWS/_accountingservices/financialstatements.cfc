@@ -387,6 +387,7 @@ SELECT[fdss_id]
 ,[fdss_sequence]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]
+,[fdss_completed]
 FROM[v_financialDataStatus_Subtask]
 WHERE ISNULL([fdss_status],0) != 2 
 AND ISNULL([fdss_status],0) != 3
@@ -407,6 +408,7 @@ AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 								,"FDSS_DUEDATE":"'&FDSS_DUEDATE&'"
 								,"FDSS_STATUSTEXT":"'&FDSS_STATUSTEXT&'"
 								,"FDSS_ASSIGNEDTOTEXT":"'&FDSS_ASSIGNEDTOTEXT&'"
+								,"FDSS_COMPLETED":"'&FDSS_COMPLETED&'"
 								}'>
 <cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

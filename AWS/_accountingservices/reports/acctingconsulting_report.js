@@ -34,13 +34,13 @@ var grid1_config = [
 			,MC_DESCRIPTION:{title:'Description'}
 			,MC_DUEDATE:{title:'Due Date',width:'2%'}
 			,MC_STATUSTEXT:{title:'Status'}
-			,MC_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
+			,MC_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,MC_REQUESTFORSERVICE:{title:'Request For Service',width:'2%'}
 			,MC_WORKINITIATED:{title:'Work Initiated',width:'2%'}
 			,MC_PROJECTCOMPLETED:{title:'Project Completed',width:'2%'}
-			,MC_FEES:{title:'Fees'}
-			,MC_PAIDTEXT:{title:'Payment Status'}
+			,MC_PRIORITY:{title:'Priority'}
+			,MC_ESTTIME:{title:'Estimated Time'}
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"2"}',

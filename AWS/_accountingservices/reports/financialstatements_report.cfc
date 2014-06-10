@@ -39,6 +39,8 @@ SELECT[fds_id]
 ,[fds_year]
 ,[fds_month]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+,[fds_priority]
+,[fds_esttime]
 ,[fds_missinginfo]
 ,[fds_compilemi]
 ,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
@@ -145,6 +147,8 @@ WHERE(1)=(1)
 								,"FDS_ACCTRPT":"'&fds_acctrpt_datecompleted&'<br/>'&fds_acctrpt_assignedtoTEXT&'"
 								,"FDS_FEES":"'&FDS_FEES&'"
 								,"FDS_PAIDTEXT":"'&FDS_PAIDTEXT&'"
+								,"FDS_PRIORITY":"'&FDS_PRIORITY&'"
+								,"FDS_ESTTIME":"'&FDS_ESTTIME&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
