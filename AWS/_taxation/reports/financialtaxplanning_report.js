@@ -34,6 +34,7 @@ var grid1_config = [
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FTP_CATEGORYTEXT:{title:'Category'}
+			,FTP_DESCRIPTION:{title:'Description'}		
 			,FTP_DUEDATE:{title:'Due Date',width:'2%'}
 			,FTP_STATUSTEXT:{title:'Status'}
 			,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
@@ -46,6 +47,8 @@ var grid1_config = [
 			,FTP_FINALCLIENTMEETING:{title:'Final Client Meeting',width:'2%'}
 			,FTP_FEES:{title:'Fees'}
 			,FTP_PAIDTEXT:{title:'Payment Status'}
+			,FTP_PRIORITY:{title:'Priority'}
+			,FTP_ESTTIME:{title:'Estimated Time'}
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"9"}',

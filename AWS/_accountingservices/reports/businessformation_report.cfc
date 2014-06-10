@@ -39,6 +39,8 @@ SELECT[bf_id]
 ,[bf_activity]
 ,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_owners]
+,[bf_priority]
+,[bf_esttime]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'d','#Session.localization.language#') 
@@ -125,8 +127,8 @@ WHERE(1)=(1)
 								,"BF_TRADENAMERECEIVED":"'&BF_TRADENAMERECEIVED&'"
 								,"BF_MINUTESCOMPLETED":"'&BF_MINUTESCOMPLETED&'"
 								,"BF_DISSOLUTIONCOMPLETED":"'&BF_DISSOLUTIONCOMPLETED&'"						
-								,"BF_FEES":"'&BF_FEES&'"
-								,"BF_PAIDTEXT":"'&BF_PAIDTEXT&'"
+								,"BF_PRIORITY":"'&BF_PRIORITY&'"
+								,"BF_ESTTIME":"'&BF_ESTTIME&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -43,6 +43,8 @@ SELECT[cas_id]
 ,[cas_completed]=FORMAT(cas_completed,'d','#Session.localization.language#') 
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,CASE WHEN LEN([cas_instructions]) >= 101 THEN SUBSTRING([cas_instructions],0,100) +  '...' ELSE [cas_instructions] END AS[cas_instructions]
+,[cas_priority]
+,[cas_esttime]
 ,[client_name]
 ,[client_id]
 FROM[v_clientadministrativetasks]
@@ -99,13 +101,15 @@ WHERE(1)=(1)
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
 								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
-								,"CAS_INSTRUCTIONS":"'&CAS_INSTRUCTIONS&'"
 								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
 								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
 								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
 								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"
 								,"CAS_DATESTARTED":"'&CAS_DATESTARTED&'"
 								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"	
+								,"CAS_INSTRUCTIONS":"'&CAS_INSTRUCTIONS&'"
+								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
+								,"CAS_ESTTIME":"'&CAS_ESTTIME&'"
 
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>

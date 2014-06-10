@@ -53,8 +53,8 @@ var grid1_config = [
 			,BF_TRADENAMERECEIVED:{title:'Trade Name Received',width:'2%'}
 			,BF_MINUTESCOMPLETED:{title:'Minutes Completed',width:'2%'}
 			,BF_DISSOLUTIONCOMPLETED:{title:'Dissolution Completed',width:'2%',list:false}
-  			,BF_FEES:{title:'Fees'}
-			,BF_PAIDTEXT:{title:'Payment Status'}
+  			,BF_PRIORITY:{title:'Priority'}
+			,BF_ESTTIME:{title:'Estimated Time'}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"3"}',

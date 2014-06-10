@@ -19,6 +19,7 @@ SELECT[FTP_ID]
  ,[client_id]
  ,[ftp_assignedto]
  ,[ftp_category]
+ ,[ftp_description]
  ,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
  ,[ftp_esttime]
  ,[ftp_fees]
@@ -75,6 +76,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[ftp_id]
 ,[ftp_status]
 ,[ftp_category]
+,[ftp_description]
 ,[ftp_assignedtoTEXT]
 ,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
 ,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
@@ -102,6 +104,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
  									,"CLIENT_ID":"'&CLIENT_ID&'"
  									,"CLIENT_NAME":"'&CLIENT_NAME&'"
 									,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
+									,"FTP_DESCRIPTION":"'&FTP_DESCRIPTION&'"
 									,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
 									,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
 									,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
@@ -133,7 +136,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][12])><cfset j.DATA[1][12]=1><cfelse><cfset j.DATA[1][12]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][13])><cfset j.DATA[1][13]=1><cfelse><cfset j.DATA[1][13]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -143,6 +146,7 @@ INSERT INTO[financialtaxplanning](
 [client_id]
  ,[ftp_assignedto]
  ,[ftp_category]
+ ,[ftp_description]
  ,[ftp_duedate]
  ,[ftp_esttime]
  ,[ftp_fees]
@@ -176,6 +180,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -195,20 +200,21 @@ UPDATE[financialtaxplanning]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
  ,[ftp_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
  ,[ftp_category]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
- ,[ftp_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
- ,[ftp_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
- ,[ftp_fees]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
- ,[ftp_finalclientmeeting]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
- ,[ftp_infocompiled]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
- ,[ftp_inforeceived]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
- ,[ftp_inforequested]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
- ,[ftp_missinginfo]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
- ,[ftp_missinginforeceived]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
- ,[ftp_paid]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
- ,[ftp_priority]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
- ,[ftp_reportcompleted]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
- ,[ftp_requestservice]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
- ,[ftp_status]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+ ,[ftp_description]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+ ,[ftp_duedate]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+ ,[ftp_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+ ,[ftp_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+ ,[ftp_finalclientmeeting]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+ ,[ftp_infocompiled]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+ ,[ftp_inforeceived]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+ ,[ftp_inforequested]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+ ,[ftp_missinginfo]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+ ,[ftp_missinginforeceived]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+ ,[ftp_paid]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+ ,[ftp_priority]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+ ,[ftp_reportcompleted]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
+ ,[ftp_requestservice]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+ ,[ftp_status]=<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
 WHERE[ftp_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>

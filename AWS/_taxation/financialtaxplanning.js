@@ -14,6 +14,7 @@ var _run={
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FTP_ID+"',page:'financialtaxplanning',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
   			 ,CLIENT_NAME:{title:'Client Name'}
 			 ,FTP_CATEGORYTEXT:{title:'Category'}
+			 ,FTP_DESCRIPTION:{title:'Description'}
 			 ,FTP_DUEDATE:{title:'Due Date',width:'1%'}
 			 ,FTP_STATUSTEXT:{title:'Status'}
 			 ,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
@@ -30,7 +31,7 @@ _loadDataCB=function(query){
 try{
 if(query==null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}else{
 switch(query.COLUMNS[0]){
-case "FTP_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_duedate,g1_estimatedtime,g1_fees,g1_finalclientmeeting,g1_informationcompiled,g1_informationreceived,g1_informationrequested,g1_missinginformation,g1_missinginforeceived,g1_paid,g1_priority,g1_reportcompleted,g1_requestforservices,g1_status';_loadit({"query":query,"list":list});_run.load_assets();break;
+case "FTP_ID":var list='task_id,client_id,g1_assignedto,g1_category,g1_description,g1_duedate,g1_estimatedtime,g1_fees,g1_finalclientmeeting,g1_informationcompiled,g1_informationreceived,g1_informationrequested,g1_missinginformation,g1_missinginforeceived,g1_paid,g1_priority,g1_reportcompleted,g1_requestforservices,g1_status';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -53,6 +54,7 @@ $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
 $("#g1_assignedto").val()+'","'+
 $("#g1_category").val()+'","'+
+$("#g1_description").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
 $("#g1_fees").val()+'","'+

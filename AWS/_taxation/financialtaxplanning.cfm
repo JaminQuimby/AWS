@@ -49,6 +49,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="client_id"><i class="fa fa-lock link" ></i> Client</label><select id="client_id" disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});_run.load_assets();"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
 <div><label for="g1_category">Category</label><select id="g1_category"><option value="0">&nbsp;</option><cfoutput query="global_financialcategory"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_description">Description</label><textarea id="g1_description" cols="4" rows="4"  maxlength="1000" ></textarea></div>
 <div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate" ></div>
 <div><label for="g1_priority">Priority</label><input type="text" maxlength="2" id="g1_priority" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
