@@ -44,6 +44,8 @@ SELECT[n_id]
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[nst_1_taxyear]
 ,[nst_missinginfo]
+,[nst_priority]
+,[nst_esttime]
 ,[nst_1_datenoticerec]=FORMAT(nst_1_datenoticerec,'d','#Session.localization.language#')
 ,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
 ,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#')
@@ -121,6 +123,8 @@ WHERE(1)=(1)
  								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
  								,"NST_FEES":"'&NST_FEES&'"
  								,"NST_PAIDTEXT":"'&NST_PAIDTEXT&'"
+ 								,"NST_PIRORITY":"'&NST_PRIORITY&'"
+ 								,"NST_ESTTIME":"'&NST_ESTTIME&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

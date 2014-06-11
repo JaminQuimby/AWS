@@ -71,6 +71,8 @@ var grid1_config = [
 			,OF_DELIVERY:{title:'Delivery',width:'2%'}
 			,OF_FEES:{title:'Fees'}
 			,OF_PAIDTEXT:{title:'Payment Status'}
+			,OF_PRIORITY:{title:'Priority'}
+			,OF_ESTTIME:{title:'Estimated Time'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"11"}',

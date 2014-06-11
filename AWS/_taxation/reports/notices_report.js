@@ -55,6 +55,8 @@ var grid1_config = [
 			,NST_2_REVREQUIRED:{title:'Review Required',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,NST_FEES:{title:'Fees'}
 			,NST_PAIDTEXT:{title:'Payment Status'}
+			,NST_PRIORITY:{title:'Priority'}
+			,NST_ESTTIME:{title:'Estimated Time'}
 },
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"8"}',

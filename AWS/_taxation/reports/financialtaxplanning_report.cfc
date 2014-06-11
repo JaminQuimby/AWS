@@ -39,11 +39,14 @@ SELECT[ftp_id]
 ,[ftp_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])
 ,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
 ,[ftp_assignedtoTEXT]
+,[ftp_description]
 ,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
 ,[ftp_inforequested]=FORMAT(ftp_inforequested,'d','#Session.localization.language#')
 ,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'d','#Session.localization.language#')
 ,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'d','#Session.localization.language#')
 ,[ftp_missinginfo]
+,[ftp_priority]
+,[ftp_esttime]
 ,[ftp_missinginforeceived]=FORMAT(ftp_missinginforeceived,'d','#Session.localization.language#')
 ,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'d','#Session.localization.language#')
 ,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'d','#Session.localization.language#')
@@ -103,6 +106,7 @@ WHERE(1)=(1)
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
+								,"FTP_DESCRIPTION":"'&FTP_DESCRIPTION&'"
 								,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
 								,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
 								,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
@@ -115,6 +119,8 @@ WHERE(1)=(1)
 								,"FTP_FINALCLIENTMEETING":"'&FTP_FINALCLIENTMEETING&'"
 								,"FTP_FEES":"'&FTP_FEES&'"
 								,"FTP_PAIDTEXT":"'&FTP_PAIDTEXT&'"
+								,"FTP_PRIORITY":"'&FTP_PRIORITY&'"
+								,"FTP_ESTTIME":"'&FTP_ESTTIME&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

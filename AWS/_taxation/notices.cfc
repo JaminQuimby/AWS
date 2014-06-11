@@ -190,6 +190,8 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[n_id]
 ,[nst_id]
+,[client_name]
+,[client_id]
 ,[n_name]
 ,[nst_assignedtoTEXT]
 ,[nst_status]
@@ -198,6 +200,7 @@ SELECT[n_id]
 ,[nst_1_taxyear]
 ,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
 ,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
 FROM[v_notice_subtask]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND ([nst_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR [nst_assignedtoTEXT]IS NULL)
@@ -210,13 +213,15 @@ AND [nst_status]!=2 AND [nst_status]!=3
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"NST_ID":"'&NST_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"N_NAME":"'&N_NAME&'"
-								,"NST_ASSIGNEDTOTEXT":"'&NST_ASSIGNEDTOTEXT&'"
+								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
 								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
 								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
 								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
-								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
+								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"							
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
