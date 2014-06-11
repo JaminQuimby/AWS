@@ -24,7 +24,7 @@ _grid1=function(){_jGrid({
 		,CLIENT_NAME:{title:'Client Name'}
 		,BF_ACTIVITY:{title:'Activity'}
 		,BF_OWNERS:{title:'Owners'}	
-		,BF_BUSINESSTYPE:{title:'Business Type'}
+		,BF_BUSINESSTYPETEXT:{title:'Business Type'}
 		,BF_DUEDATE:{title:'Due Date',width:'2%'}
 		,BF_STATUSTEXT:{title:'Status'}
 		,BF_ASSIGNEDTOTEXT:{title:'Assigned To'}
