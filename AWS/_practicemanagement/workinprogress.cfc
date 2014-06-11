@@ -138,8 +138,8 @@ SELECT'Accounting and Consulting'AS[name]
 
 FROM[v_managementconsulting_subtask]
 WHERE[mc_status]!='2'
-<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL  OR[mc_duedate]=>@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u )</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]=>@d)</cfif>
+<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
@@ -311,7 +311,7 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
-SELECT[mc_id]
+SELECT DISTINCT[mc_id]
 ,[client_id]
 ,[client_name]
 ,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
@@ -324,11 +324,10 @@ SELECT[mc_id]
 ,[mc_category]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
-FROM[v_managementconsulting]
+FROM[v_managementconsulting_subtask]
 WHERE([mc_status] !=3 OR [mc_status] !=6 OR [mc_status] IS NULL)
-<cfif ARGUMENTS.search neq "">
-AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u )</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]=>@d)</cfif>
+<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 </cfquery>
@@ -361,6 +360,57 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 </cfcatch>
 </cftry>
 </cfcase>
+
+<cfcase value="group2_subtask">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+DECLARE @c varchar(8000),@u varchar(8000),@d date,@g varchar(8000)
+SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
+SET @g=<cfqueryparam value="#ARGUMENTS.group#">
+SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
+SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
+SELECT [mc_id]
+,[mcs_id]
+,[mcs_assignedtoTEXT]
+,[mcs_duedate]
+,[mcs_sequence]
+,[mcs_completed]
+,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
+,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
+FROM[v_managementconsulting_subtask]
+WHERE([mc_status] !=3 OR [mc_status] !=6 OR [mc_status] IS NULL)
+AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
+<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]=>@d)</cfif>
+<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+<cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+</cfquery>
+
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'"
+								,"MCS_SEQUENCE":"'&MCS_SEQUENCE&'"
+								,"MCS_SUBTASKTEXT":"'&MCS_SUBTASKTEXT&'"
+ 								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
+								,"MCS_DUEDATE":"'&MCS_DUEDATE&'"
+								,"MCS_ASSIGNEDTOTEXT":"'&MCS_ASSIGNEDTOTEXT&'"
+								,"MCS_COMPLETED":"'&MCS_COMPLETED&'"
+ 								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+
 
 <!--- LOOKUP Administrative Tasks --->
 <cfcase value="group3">

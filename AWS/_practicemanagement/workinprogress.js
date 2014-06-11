@@ -41,6 +41,73 @@ _grid2=function(){_jGrid({
 	"title":"Accounting &amp; Consulting",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
+			
+			
+			  //CHILD TABLE DEFINITION FOR SUBTAKS
+      /*  */     ,Subtasks: {
+                    title: '',
+                    width: '2%',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function (subtasks) {
+                        //Create an image that will be used to open child table
+                        var $img = $('<i class="fa fa-tasks "></i>'+subtasks.record.MC_ID);
+                        //Open child table when user clicks the image
+                        $img.click(function () {
+                            $('#grid2').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: ' - Subtasks',
+                                        actions: {
+                                            listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.MC_ID+'","loadType":"group2_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
+
+                                        },
+
+                                        fields: {
+                        
+                                            MCS_ID: {
+                                                key: true,
+                                                create: false,
+                                                edit: false,
+                                                list: false
+                                            },
+                                            MCS_SEQUENCE: {
+                                                title: 'Sequence',
+
+                                            },
+                                            MCS_SUBTASKTEXT: {
+                                                title: 'Subtask',
+                                                width: '30%'
+                                            },
+                                            MCS_STATUSTEXT: {
+                                                title: 'Status',
+                                       
+                                            },
+                                            MCS_DUEDATE: {
+                                                title: 'Due Date',
+                                   
+                                                type: 'date',
+
+                                     
+                                            },
+                                            MCS_ASSIGNEDTOTEXT: {
+                                                title: 'Assigned To',
+                                      
+                                            }
+											
+                                        }
+                                    }, function (data) { //opened handler
+                                        data.childTable.jtable('load');
+                                    });
+                        });
+                        //Return image to show on the person row
+                        return $img;
+                    }
+                }
+			
+			
+			
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_REQUESTFORSERVICE:{title:'Request For Service'}
 			,MC_PROJECTCOMPLETED:{title:'Project Completed'}
@@ -54,7 +121,7 @@ _grid2=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group2","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
-	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID'
+	"functions":'$("#mc_id").val(record.MC_ID);' //  window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID
 })};	
 
 _grid3=function(){_jGrid({
@@ -83,7 +150,7 @@ _grid4=function(){_jGrid({
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,BFS_TASKNAME:{title:'Subtask Name',width:'2%'}
+			,BFS_TASKNAME:{title:'Subtask Name',width:'4%'}
 			,BF_ACTIVITY:{title:'Activity'}
 			,BF_OWNERS:{title:'Owners'}
 			,BF_BUSINESSTYPETEXT:{title:'Business Type'}
