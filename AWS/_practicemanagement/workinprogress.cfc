@@ -340,13 +340,9 @@ WHERE([mc_status] !=3 OR [mc_status] !=6 OR [mc_status] IS NULL)
 <cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"MC_REQUESTFORSERVICE":"'&MC_REQUESTFORSERVICE&'"
-								,"MC_PROJECTCOMPLETED":"'&MC_PROJECTCOMPLETED&'"
 								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_PRIORITY":"'&MC_PRIORITY&'"
 								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
-								,"MC_ESTTIME":"'&MC_ESTTIME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
 								}'>
@@ -600,6 +596,7 @@ SELECT[ftp_id]
 ,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]
+,[ftp_description]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])AS[ftp_categoryTEXT]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
 
@@ -619,6 +616,7 @@ WHERE[ftp_status]!='2'
  									,"CLIENT_ID":"'&CLIENT_ID&'"
  									,"CLIENT_NAME":"'&CLIENT_NAME&'"
 									,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
+									,"FTP_DESCRIPTION":"'&FTP_DESCRIPTION&'"
 									,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
 									,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
 									,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
@@ -753,13 +751,13 @@ SELECT[n_id]
 ,[n_name]
 ,[nst_1_noticedate]=FORMAT(nst_1_noticedate,'d','#Session.localization.language#') 
 ,[nst_missinginfo]
-,[nst_priority]
 ,[nst_assignedtoTEXT]
 ,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#') 
-,[nst_esttime]
 ,[nst_2_revrequired]
-,[nst_2_revassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(nst_2_revassignedto=user_id))
-
+,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
+,[nst_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[nst_1_noticenumber]=[optionvalue_id])
+,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
+,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#') 
 FROM[v_notice_subtask]
 WHERE[nst_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
@@ -776,13 +774,13 @@ WHERE[nst_status]!='2'
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"N_NAME":"'&N_NAME&'"
 								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
+								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
+								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
 								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
-								,"NST_PRIORITY":"'&NST_PRIORITY&'"
-								,"NST_ASSIGNEDTOTEXT":"'&NST_ASSIGNEDTOTEXT&'"
+								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
+								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
-								,"NST_ESTTIME":"'&NST_ESTTIME&'"
-								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
-								,"NST_2_REVASSIGNEDTOTEXT":"'&NST_2_REVASSIGNEDTOTEXT&'"
+								,"NST_2_RESSUBMITED":"'&NST_2_RESSUBMITED&'"							
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -109,13 +109,9 @@ _grid2=function(){_jGrid({
 			
 			
 			,CLIENT_NAME:{title:'Client Name'}
-			,MC_REQUESTFORSERVICE:{title:'Request For Service'}
-			,MC_PROJECTCOMPLETED:{title:'Project Completed'}
 			,MC_STATUSTEXT:{title:'Status'}
-			,MC_PRIORITY:{title:'Priority'}
 			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
 			,MC_DUEDATE:{title:'Due Date',width:'2%'}
-			,MC_ESTTIME:{title:'Estimated Time',width:'2%'}
 			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
 			,MC_DESCRIPTION:{title:'Task Description'}									
 			},
@@ -196,6 +192,7 @@ _grid6=function(){_jGrid({
 	"fields":{FTP_ID:{key:true,list:false,edit:false}
   			 ,CLIENT_NAME:{title:'Client Name'}
 			 ,FTP_CATEGORYTEXT:{title:'Category'}
+			 ,FTP_DESCRIPTION:{title:'Description'}
 			 ,FTP_DUEDATE:{title:'Due Date',width:'1%'}
 			 ,FTP_STATUSTEXT:{title:'Status'}
 			 ,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}
@@ -249,13 +246,13 @@ _grid8=function(){_jGrid({
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
 			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
-			,NST_MISSINGINFO:{title:'Missing Information Compiled',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,NST_PRIORITY:{title:'Priority'}
-			,NST_ASSIGNEDTOTEXT:{title:'Assigned To'}
-			,NST_1_RESDUEDATE:{title:'Response Due'}
-			,NST_ESTTIME:{title:'Estimated Time'}
-			,NST_2_REVREQUIRED:{title:'Review Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,NST_2_REVASSIGNEDTOTEXT:{title:'Review Assigned To'}
+			,NST_1_TAXFORMTEXT:{title:'Tax Form'}
+			,NST_1_NOTICENUMBERTEXT:{title:'Notice Number'}
+			,NST_MISSINGINFO:{title:'Missing Information'}
+			,NST_STATUSTEXT:{title:'Notice Status'}
+			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
+			,NST_1_RESDUEDATE:{title:'Due Date',width:"1%"}
+			,NST_2_RESSUBMITED:{title:'Response Submitted',width:"1%"}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group8","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"8"}',
