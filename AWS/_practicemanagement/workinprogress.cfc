@@ -56,7 +56,7 @@ SELECT'Administrative Tasks'AS[name]
 ,COUNT(cas_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'2'AS[orderit]
+,'B'AS[orderit]
 FROM[v_clientadministrativetasks]
 WHERE[cas_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=>@d)</cfif>
@@ -70,7 +70,7 @@ SELECT'Business Formation'AS[name]
 ,COUNT(DISTINCT[bf_id])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(DISTINCT[bfs_id])AS[count_subtask_assigned]
-,'3'AS[orderit]
+,'C'AS[orderit]
 FROM[v_businessformation_subtask]
 WHERE[bf_status]!='2'
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
@@ -83,7 +83,7 @@ SELECT'Communication'AS[name]
 ,COUNT(DISTINCT[co_id])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'4'AS[orderit]
+,'D'AS[orderit]
 FROM[v_communications]
 WHERE[co_status]!='2'
 <cfif ARGUMENTS.userid neq "0">AND([co_for]=@u )</cfif>
@@ -94,7 +94,7 @@ UNION
 SELECT'Financial & Tax Planning'AS[name],ISNULL(SUM(ISNULL(ftp_esttime,0)),0)AS[total_time],COUNT(ftp_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'5'AS[orderit]
+,'E'AS[orderit]
 FROM[v_financialtaxplanning]
 WHERE[ftp_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]=>@d)</cfif>
@@ -107,7 +107,7 @@ SELECT'Financial Statements'AS[name],ISNULL(SUM(ISNULL(fds_esttime,0)),0)AS[tota
 ,COUNT(fds_obtaininfo_assignedto)+COUNT(fds_sort_assignedto)+COUNT(fds_checks_assignedto)+COUNT(fds_sales_assignedto)+COUNT(fds_entry_assignedto)+COUNT(fds_reconcile_assignedto)+COUNT(fds_compile_assignedto)+COUNT(fds_review_assignedto)+COUNT(fds_assembly_assignedto)+COUNT(fds_delivery_assignedto)AS[count_assigned]
 ,ISNULL(SUM(fdss_esttime),0)AS[total_subtask_time]
 ,COUNT(DISTINCT[fdss_id])AS[count_subtask_assigned]
-,'6'AS[orderit]
+,'F'AS[orderit]
 FROM[v_financialdatastatus_subtask] 
 WHERE[fds_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
@@ -134,7 +134,7 @@ SELECT'Accounting and Consulting'AS[name]
 ,COUNT(DISTINCT[mc_id])AS[count_assigned]
 ,ISNULL(SUM(ISNULL([mcs_esttime],0)),0)AS[total_subtask_time]
 ,COUNT(DISTINCT[mcs_id])AS[count_subtask_assigned]
-,'1'AS[orderit]
+,'A'AS[orderit]
 
 FROM[v_managementconsulting_subtask]
 WHERE[mc_status]!='2'
@@ -147,7 +147,7 @@ UNION
 SELECT'Notices'AS[name], ISNULL(SUM(ISNULL(nst_esttime,0)),0)AS[total_time],COUNT(nst_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'7'AS[orderit]
+,'G'AS[orderit]
 FROM[v_notice_subtask]
 WHERE[nst_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
@@ -165,7 +165,7 @@ SELECT'Other Filings'AS[name], ISNULL(SUM(ISNULL(of_esttime,0)),0)AS[total_time]
 ),0)AS [count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'8'AS[orderit]
+,'H'AS[orderit]
 FROM[v_otherfilings]
 WHERE[of_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]=>@d)</cfif>
@@ -189,7 +189,7 @@ SELECT'Payroll Checks'AS[name], ISNULL(SUM(ISNULL(pc_esttime,0)),0)AS[total_time
 +COUNT(pc_assembly_datecompleted)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'9'AS[orderit]
+,'I'AS[orderit]
 FROM[v_payrollcheckstatus]
 WHERE[pc_delivery_completedby]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]=>@d)</cfif>
@@ -215,7 +215,7 @@ SELECT'Payroll Taxes'AS[name], ISNULL(SUM(ISNULL(pt_esttime,0)),0)AS[total_time]
 +COUNT(pt_delivery_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'10'AS[orderit]
+,'J'AS[orderit]
 FROM[v_payrolltaxes] 
 WHERE([pt_delivery_completedby]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]=>@d)</cfif>
@@ -236,7 +236,7 @@ SELECT'Tax Returns'AS[name], ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
 ,COUNT(tr_2_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'12'AS[orderit]
+,'L'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_2_informationreceived]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]=>@d)</cfif>
@@ -250,7 +250,7 @@ SELECT'Personal Property Tax Returns'AS[name]
 ,COUNT(tr_4_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
-,'11'AS[orderit]
+,'K'AS[orderit]
 FROM[v_taxreturns]
 WHERE[tr_4_required]='TRUE'
 AND[tr_4_required]IS NULL
@@ -270,7 +270,7 @@ SELECT'<b style=''font-weight: bold;''>Total</b>'AS[name]
 ,SUM(count_assigned)AS[count_assigned]
 ,SUM(total_subtask_time)AS[total_subtask_time]
 ,SUM(count_subtask_assigned)AS[count_subtask_assigned]
-,'999'AS[orderit]
+,'ZZZ'AS[orderit]
 FROM[aquery]
 
 ORDER BY[orderit]
@@ -433,7 +433,7 @@ SELECT[bf_id]
 ,[client_name]
 ,[bf_owners]
 ,[bf_status]
-
+.[bf_taskname]
 ,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_assignedtoTEXT]=(SELECT TOP (1)[si_initials]FROM[v_staffinitials]WHERE(bf_assignedto = user_id)) 

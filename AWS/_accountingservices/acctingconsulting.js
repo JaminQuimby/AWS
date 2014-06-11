@@ -13,12 +13,12 @@ _grid1=function(){_jGrid({
 	"url":"acctingconsulting.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
+		,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_STATUSTEXT:{title:'Status'}
 			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
-			,MC_DUEDATE:{title:'Due Date',width:'2%'}
+			,MC_DUEDATE:{title:'Due Date',width:'4%'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
 			,MC_DESCRIPTION:{title:'Task Description'}	
 		},
@@ -32,11 +32,11 @@ _grid2=function(){_jGrid({
 	"url":"acctingconsulting.cfc",
 	"title":"Subtasks",
 	"fields":{MCS_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'});_run.load_group2()","class":"button"},{"name":"no","on_click":"_run.load_group2()","class":"button"}], autoClose: false})});return $img}}
-		,MCS_SEQUENCE:{title:'Sequence',width:'2%'}
+		,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'});_run.load_group2()","class":"button"},{"name":"no","on_click":"_run.load_group2()","class":"button"}], autoClose: false})});return $img}}
+		,MCS_SEQUENCE:{title:'Sequence',width:'4%'}
 		,MCS_SUBTASKTEXT:{title:'Subtask'}
 		,MCS_STATUSTEXT:{title:'Status'}	
-		,MCS_DUEDATE:{title:'Due Date',width:'2%'}
+		,MCS_DUEDATE:{title:'Due Date',width:'4%'}
 		,MCS_ASSIGNEDTOTEXT:{title:'Assigned To'}
 		,MCS_COMPLETED:{title:'Completed'}
  		},
@@ -60,7 +60,7 @@ catch(err){jqMessage({message: "Error in js._loadData: "+err,"type":"error",auto
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""};
 $.extend(true, options, params);//turn options into array
-alert(options["group"]);
+
 switch(options["group"]){
 
 case'':_saveDataCB({'group':'group1'});jqMessage({message: "Saving",type: "save",autoClose: true});break;
@@ -100,7 +100,7 @@ else if ($("#g1_taskdescription").val()=="0"){
 	}
 else{
 	jqMessage({message: "Saving.",type: "save",autoClose: true});
-	_saveData({group:"group1","payload":$.parseJSON(json),page:"acctingconsulting"})
+	_saveData({group:"group1","payload":$.parseJSON(json),page:"acctingconsulting"});
 	if(debug){window.console.log('Start Saving Accounting and Consulting tasks');}	
 	}
 break;
