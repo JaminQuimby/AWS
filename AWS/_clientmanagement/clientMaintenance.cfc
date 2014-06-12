@@ -326,39 +326,9 @@ WHERE[contact_active]=(1)AND
 <cfreturn myResult>
 </cfcase>
 
-<!--- LOOKUP Financial Statements --->
-<cfcase value="group4_1">
-<cftry>
-<cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[fds_id]
-,[client_id]
-,[client_name]
-,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
-,[fds_year]
-,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
-FROM[v_financialDataStatus]
-WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'","FDS_YEAR":"'&FDS_YEAR&'","FDS_PERIODEND":"'&FDS_PERIODEND&'"}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
-<cfcatch>
-	<!--- CACHE ERRORS DEBUG CODE --->
-<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
-</cfcatch>
-</cftry>
-</cfcase>
 
 <!--- LOOKUP Accounting and Consulting Tasks --->
-<cfcase value="group4_2">
+<cfcase value="group4_1">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[mc_id]
@@ -378,7 +348,64 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","MC_ID":"'&MC_ID&'","MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'","CLIENT_NAME":"'&CLIENT_NAME&'","MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'","MC_DESCRIPTION":"'&MC_DESCRIPTION&'","MC_STATUSTEXT":"'&MC_STATUSTEXT&'","MC_DUEDATE":"'&MC_DUEDATE&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
+								,"MC_ID":"'&MC_ID&'"
+								,"MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
+								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<cfcase value="group4_2">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT [cas_id]
+,[client_id]
+,[client_name]
+,[cas_duedate]=FORMAT(cas_duedate,'d','#Session.localization.language#') 
+,[cas_assignedto]
+,[cas_category]
+,[cas_datereqested]=FORMAT(cas_datereqested,'d','#Session.localization.language#') 
+,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
+,[cas_status]
+,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
+,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
+,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
+
+FROM[v_clientadministrativetasks]
+WHERE[cas_status] != 2 AND [cas_status] != 3
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, cas_duedate, 101) ASC </cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
+								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
+								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
+								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
+								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
+								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"	
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
@@ -391,9 +418,319 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 </cfcase>
 
 
+<cfcase value="group4_3">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[bf_id]
+,[client_id]
+,[client_name]
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
+,[bf_assignedtoTEXT]
+,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
+,[bf_activity]
+,[bf_owners]
+,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
+,[bf_missinginfo]
+
+FROM[v_businessformation]
+WHERE[bf_status] != 2 
+AND [bf_status] != 3
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif></cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
+								,"BF_OWNERS":"'&BF_OWNERS&'"
+								,"BF_BUSINESSTYPETEXT":"'&BF_BUSINESSTYPETEXT&'"
+								,"BF_DUEDATE":"'&BF_DUEDATE&'"
+								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
+								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
+								,"BF_MISSINGINFO":"'&BF_MISSINGINFO&'"
+								,"BF_MISSINGINFORECEIVED":"'&BF_MISSINGINFORECEIVED&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<cfcase value="group4_4">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[co_id]
+,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
+,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
+,[co_caller]
+,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#')
+,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
+,[co_status]
+,[co_responseneeded]
+,[co_returncall]
+,[client_name]
+,[client_id]
+,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
+FROM[v_communications]
+<cfif ARGUMENTS.search neq "">
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, co_duedate, 101) ASC </cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"CO_ID":"'&CO_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"CO_CALLER":"'&CO_CALLER&'"
+								,"CO_DATE":"'&CO_DATE&'"
+								,"CO_DUEDATE":"'&CO_DUEDATE&'"
+								,"CO_STATUSTEXT":"'&CO_STATUSTEXT&'"
+								,"CO_FORTEXT":"'&CO_FORTEXT&'"
+								,"CO_RESPONSENEEDED":"'&CO_RESPONSENEEDED&'"
+								,"CO_RETURNCALL":"'&CO_RETURNCALL&'"
+								,"CO_BRIEFMESSAGE":"'&CO_BRIEFMESSAGE&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<!--- Grid 0 Entrance --->
+<cfcase value="group4_5">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[ftp_id]
+,[ftp_status]
+,[ftp_category]
+,[ftp_description]
+,[ftp_assignedtoTEXT]
+,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
+,[ftp_missinginfo]
+,[client_name]
+,[client_id]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])AS[ftp_categoryTEXT]
+,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
+
+
+FROM[v_financialtaxplanning]
+WHERE [ftp_status]!=2 AND [ftp_status]!=3
+
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, ftp_duedate, 101) ASC </cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"FTP_ID":"'&FTP_ID&'"
+ 									,"CLIENT_ID":"'&CLIENT_ID&'"
+ 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
+									,"FTP_CATEGORYTEXT":"'&FTP_CATEGORYTEXT&'"
+									,"FTP_DESCRIPTION":"'&FTP_DESCRIPTION&'"
+									,"FTP_DUEDATE":"'&FTP_DUEDATE&'"
+									,"FTP_STATUSTEXT":"'&FTP_STATUSTEXT&'"
+									,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
+ 									,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
+ 									,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<!--- LOOKUP Financial Statements --->
+<cfcase value="group4_6">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[fds_id]
+ 	,[client_id]
+ 	,[client_name]
+ 	,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+	,[fds_month]
+	,[fds_year]
+	,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+	,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+	,[fds_status]
+	,[fds_missinginfo]
+ 	,[fds_compilemi]
+	,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
+	,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_obtaininfo_assignedtoTEXT]
+	,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_sort_assignedtoTEXT]
+	,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_checks_assignedtoTEXT]
+	,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_sales_assignedtoTEXT]
+	,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_entry_assignedtoTEXT]
+	,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_reconcile_assignedtoTEXT]
+	,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_compile_assignedtoTEXT]
+	,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_review_assignedtoTEXT]
+	,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_assembly_assignedtoTEXT]
+	,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_delivery_assignedtoTEXT]
+	,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[fds_acctrpt_assignedtoTEXT]
+FROM[v_financialDataStatus]
+WHERE ISNULL([fds_status],0) != 2 
+AND ISNULL([fds_status],0) != 3
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, fds_duedate, 101) ASC </cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"FDS_ID":"'&FDS_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"FDS_MONTHTEXT":"'&FDS_MONTHTEXT&'"
+								,"FDS_YEAR":"'&FDS_YEAR&'"
+								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
+								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
+								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
+								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
+								,"FDS_OBTAININFO":"'&fds_obtaininfo_datecompleted&'<br/>'&fds_obtaininfo_assignedtoTEXT&'"
+								,"FDS_SORT":"'&fds_sort_datecompleted&'<br/>'&fds_sort_assignedtoTEXT&'"
+								,"FDS_CHECKS":"'&fds_checks_datecompleted&'<br/>'&fds_checks_assignedtoTEXT&'"
+								,"FDS_SALES":"'&fds_sales_datecompleted&'<br/>'&fds_sales_assignedtoTEXT&'"
+								,"FDS_ENTRY":"'&fds_entry_datecompleted&'<br/>'&fds_entry_assignedtoTEXT&'"
+								,"FDS_RECONCILE":"'&fds_reconcile_datecompleted&'<br/>'&fds_reconcile_assignedtoTEXT&'"
+								,"FDS_COMPILE":"'&fds_compile_datecompleted&'<br/>'&fds_compile_assignedtoTEXT&'"
+								,"FDS_REVIEW":"'&fds_review_datecompleted&'<br/>'&fds_review_assignedtoTEXT&'"
+								,"FDS_ASSEMBLY":"'&fds_assembly_datecompleted&'<br/>'&fds_assembly_assignedtoTEXT&'"
+								,"FDS_DELIVERY":"'&fds_delivery_datecompleted&'<br/>'&fds_delivery_assignedtoTEXT&'"
+								,"FDS_ACCTRPT":"'&fds_acctrpt_datecompleted&'<br/>'&fds_acctrpt_assignedtoTEXT&'"
+
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<cfcase value="group4_7">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[n_id]
+,[n_name]
+,[n_status]
+,[client_name]
+,[client_id]
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id]
+)
+FROM[v_notice]
+WHERE[n_status] != 2 AND [n_status] != 3
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"N_ID":"'&n_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"N_NAME":"'&n_NAME&'"
+								,"N_STATUSTEXT":"'&n_STATUSTEXT&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+
+<!--- LOOKUP Other Filings --->
+<cfcase value="group4_8">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[of_id]
+,[of_taxyear]
+,[client_name]
+,[client_id]
+FROM[v_otherfilings]
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
 
 <!--- LOOKUP Payroll Checks --->
-<cfcase value="group4_3">
+<cfcase value="group4_9">
+<cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
@@ -435,10 +772,16 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
 <!--- LOOKUP Payroll Taxes --->
-<cfcase value="group4_4">
+<cfcase value="group4_10">
+<cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
 ,[pt_year]
@@ -453,15 +796,73 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","PT_YEAR":"'&PT_YEAR&'"}'>
+<cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PT_YEAR":"'&PT_YEAR&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
+<cfcase value="group4_11">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[pa_id]
+,[pa_taxyears]
+,[pa_taxforms]
+,[pa_preparers]
+,[pa_status]
+,[pa_taxmatters]
+,[client_name]
+,[client_id]
+,pa_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[pa_status]=[optionvalue_id])
+,pa_taxformsTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxservices') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxforms)))FOR XML PATH('')),3,1000)
+,pa_taxmattersTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxmatters') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxmatters)))FOR XML PATH('')),3,1000)
+,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
+
+FROM[v_powerofattorney]
+<cfif ARGUMENTS.search neq "">
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"PA_ID":"'&PA_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PA_TAXYEARS":"'&PA_TAXYEARS&'"
+								,"PA_TAXFORMSTEXT":"'&PA_TAXFORMSTEXT&'"
+								,"PA_TAXMATTERSTEXT":"'&PA_TAXMATTERSTEXT&'"
+								,"PA_PREPARERSTEXT":"'&PA_PREPARERSTEXT&'"
+								,"PA_STATUSTEXT":"'&PA_STATUSTEXT&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group4_5">
+<cfcase value="group4_12">
+<cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
 ,[tr_taxyear]
@@ -476,34 +877,20 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","TR_TAXYEAR":"'&TR_TAXYEAR&'"}'>
+<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-</cfcase>
-
-<!--- LOOKUP Other Filings --->
-<cfcase value="group4_6">
-<cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[of_id]
-,[of_taxyear]
-,[client_name]
-,[client_id]
-FROM[v_otherfilings]
-WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
-</cfquery>
-<cfset myResult="">
-<cfset queryResult="">
-<cfset queryIndex=0>
-<cfloop query="fquery">
-<cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'","CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","OF_TAXYEAR":"'&OF_TAXYEAR&'"}'>
-<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
-</cfloop>
-<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
-<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
 </cfcase>
 
 <!--- LOOKUP STATE INFORMATION --->

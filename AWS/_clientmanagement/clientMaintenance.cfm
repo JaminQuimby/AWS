@@ -436,8 +436,8 @@ ACTIVITY (CLIENT DATA)
 
 
 
-<!--- GROUP 4 SUB 1 ADD TO FINANCIAL STATEMENTS --->
-<h4 onClick='_run.load_group4_1(); '>Financial Statements</h4>
+<!--- Accounting &amp; Consulting Tasks --->
+<h4 onClick='_run.load_group4_1(); '>Accounting &amp; Consulting Tasks</h4>
 <div>
 <div class="tblGrid" id="grid4_1"></div>
 <div class="buttonbox">
@@ -445,8 +445,8 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 
-<!--- GROUP 4 SUB 2 Accounting &amp; Consulting Tasks --->
-<h4  onClick='_run.load_group4_2();'>Accounting &amp; Consulting Tasks</h4>
+<!---  Administrative Tasks --->
+<h4  onClick='_run.load_group4_2();'>Administrative Tasks</h4>
 <div>
 <div class="tblGrid" id="grid4_2"></div>
 <div class="buttonbox">
@@ -454,8 +454,8 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 
-<!--- GROUP 4 SUB 3 ADD TO PAYROLL CHECKS --->
-<h4 onClick='_run.load_group4_3();'>Payroll Checks</h4>
+<!---  Business Formation --->
+<h4 onClick='_run.load_group4_3();'>Business Formation</h4>
 <div>
 <div class="tblGrid" id="grid4_3"></div>
 <div class="buttonbox">
@@ -463,8 +463,8 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 
-<!--- GROUP 4 SUB 4 ADD TO PAYROLL TAXES --->
-<h4 onClick='_run.load_group4_4();'>Payroll Taxes</h4>
+<!--- Communications --->
+<h4 onClick='_run.load_group4_4();'>Communications</h4>
 <div>
 <div class="tblGrid" id="grid4_4"></div>
 <div class="buttonbox">
@@ -472,8 +472,8 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 
-<!--- GROUP 4 SUB 5 ADD TO TAX RETURNS --->
-<h4 onClick='_run.load_group4_5();'>Tax Returns</h4>
+<!---  Financial &amp; Tax Planning --->
+<h4 onClick='_run.load_group4_5();'>Financial &amp; Tax Planning</h4>
 <div>
 <div class="tblGrid" id="grid4_5"></div>
 <div class="buttonbox">
@@ -481,14 +481,70 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 
-<!--- GROUP 4 SUB 6 OTHER FILINGS --->
-<h4 onClick='_run.load_group4_6();'>Other Filings</h4>
+<!---  Financial Statements --->
+<h4 onClick='_run.load_group4_6();'>Financial Statements</h4>
 <div>
 <div class="tblGrid" id="grid4_6"></div>
 <div class="buttonbox">
 <cfoutput><a href="##" class="button optional" onClick="_run.new_group4_6();">Add</a></cfoutput>
 </div>
 </div>
+
+<!---  Notices  --->
+<h4 onClick='_run.load_group4_7();'>Notices</h4>
+<div>
+<div class="tblGrid" id="grid4_7"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_7();">Add</a></cfoutput>
+</div>
+</div>
+
+<!---  OTHER FILINGS --->
+<h4 onClick='_run.load_group4_8();'>Other Filings</h4>
+<div>
+<div class="tblGrid" id="grid4_8"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_8();">Add</a></cfoutput>
+</div>
+</div>
+
+<!---  Payroll Checks --->
+<h4 onClick='_run.load_group4_9();'>Payroll Checks</h4>
+<div>
+<div class="tblGrid" id="grid4_9"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_9();">Add</a></cfoutput>
+</div>
+</div>
+
+<!---  Payroll Taxes --->
+<h4 onClick='_run.load_group4_10();'>Payroll Taxes</h4>
+<div>
+<div class="tblGrid" id="grid4_10"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_10();">Add</a></cfoutput>
+</div>
+</div>
+
+
+<!---  Power of Attorney --->
+<h4 onClick='_run.load_group4_11();'>Power of Attorney</h4>
+<div>
+<div class="tblGrid" id="grid4_11"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_11();">Add</a></cfoutput>
+</div>
+</div>
+
+<!---  Tax Returns --->
+<h4 onClick='_run.load_group4_12();'>Tax Returns</h4>
+<div>
+<div class="tblGrid" id="grid4_12"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_12();">Add</a></cfoutput>
+</div>
+</div>
+
 </div>
 <!--- GROUP 5--->
 <div id="group5" class="gf-checkbox">
