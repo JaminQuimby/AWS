@@ -19,12 +19,18 @@ var _run={
 		}
 
 		
-	,new_group4_1:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/financialStatements.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
-	,new_group4_2:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/acctingconsulting.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
-	,new_group4_3:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/payrollchecks.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
-	,new_group4_4:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/payrolltaxes.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
-	,new_group4_5:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/otherfilings.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
-	,new_group4_6:function(){ window.open('https://'+window.location.hostname+'/AWS/_taxation/_taxation.cfm?task_id=0&client_id=+$("#client_id").val()','_blank');}
+	,new_group4_1:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/acctingconsulting.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_2:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/administrativetasks.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_3:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/businessFormation.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_4:function(){ window.open('https://'+window.location.hostname+'/AWS/_clientmanagement/communications.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_5:function(){ window.open('https://'+window.location.hostname+'/AWS/_taxation/financialtaxplanning.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_6:function(){ window.open('https://'+window.location.hostname+'/AWS/_accountingservices/financialstatements.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_7:function(){ window.open('https://'+window.location.hostname+'/AWS/_taxation/notices.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_8:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/otherfilings.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_9:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/payrollchecks.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_10:function(){ window.open('https://'+window.location.hostname+'/AWS/_payrolltaxes/payrolltaxes.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_11:function(){ window.open('https://'+window.location.hostname+'/AWS/_taxation/powerofattorney.cfm?task_id="+$("#task_id").val()','_blank');}
+	,new_group4_12:function(){ window.open('https://'+window.location.hostname+'/AWS/_taxation/taxreturns.cfm?task_id="+$("#task_id").val()','_blank');}
 	,new_group5:function(){$("#si_id").val("0");$("#group5").accordion({active:1});$("#isLoaded_group5").val(1);_clearfields({"list":"g5_state,g5_revenue,g5_employees,g5_property,g5_nexus,g5_reason,g5_registered,g5_value1,g5_value2,g5_value3,g5_value4,g5_g1_label1,g5_g1_label2,g5_g1_label3,g5_g1_label4"})}
 	,new_group6:function(){$("#group6").accordion({active:1});$("#isLoaded_group6").val(1);_clearfields({"list":"g6_group"});}
 	,load_group1:function(){}	
@@ -42,12 +48,13 @@ var _run={
 	,load_group4_3:function(){_grid4_3()}
 	,load_group4_4:function(){_grid4_4()}	
 	,load_group4_5:function(){_grid4_5()}	
-	,load_group4_6:function(){_grid4_7()}
-	,load_group4_6:function(){_grid4_8()}
-	,load_group4_6:function(){_grid4_9()}
-	,load_group4_6:function(){_grid4_10()}
-	,load_group4_6:function(){_grid4_11()}
-	,load_group4_6:function(){_grid4_12()}
+	,load_group4_6:function(){_grid4_6()}
+	,load_group4_7:function(){_grid4_7()}
+	,load_group4_8:function(){_grid4_8()}
+	,load_group4_9:function(){_grid4_9()}
+	,load_group4_10:function(){_grid4_10()}
+	,load_group4_11:function(){_grid4_11()}
+	,load_group4_12:function(){_grid4_12()}
 	,load_group5:function(){_grid5()}
 	,load_group5_1:function(){$('#isLoaded_group5_1').val(1);_loadData({'id':'client_id','group':'group5_1','page':'clientmaintenance'});
 								var g5_g1_label1=$("#g5_g1_label1"),g5_g1_label2=$("#g5_g1_label2"),g5_g1_label3=$("#g5_g1_label3"),g5_g1_label4=$("#g5_g1_label4"),g5_value1=$('label[for="g5_value1"]'),g5_value2=$('label[for="g5_value2"]'),g5_value3=$('label[for="g5_value3"]'),g5_value4=$('label[for="g5_value4"]');g5_value1.html(g5_g1_label1.val());g5_value2.html(g5_g1_label2.val());g5_value3.html(g5_g1_label3.val());g5_value4.html(g5_g1_label4.val());g5_g1_label1.change(function(){g5_value1.html($(this).val())});g5_g1_label2.change(function(){g5_value2.html($(this).val())});g5_g1_label3.change(function(){g5_value3.html($(this).val())});g5_g1_label4.change(function(){g5_value4.html($(this).val())});g5_value1.change(function(){g5_g1_label1.html($(this).val())});g5_value2.change(function(){g5_g1_label2.html($(this).val())});g5_value3.change(function(){g5_g1_label3.html($(this).val())});g5_value4.change(function(){g5_g1_label4.html($(this).val())});}
@@ -253,8 +260,22 @@ _grid4_8=function(){_jGrid({
 	"title":"Other Filings",
 	"fields":{OF_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,OF_TAXYEAR:{title:'Tax Year',width:'2%'}
+  			,CLIENT_NAME:{title:'Client Name'}
+			,OF_TAXYEAR:{title:'Tax Year'}
+			,OF_PERIODTEXT:{title:'Period'}
+			,OF_STATETEXT:{title:'State'}
+			,OF_TYPETEXT:{title:'Type'}
+			,OF_FORMTEXT:{title:'Form',width:'1%'}
+			,OF_DUEDATE:{title:'Due Date',width:'1%'}
+			,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
+ 			,OF_STATUSTEXT:{title:'Status'}
+			,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
+			,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}									
+			,OF_OBTAININFO:{title:'Information',width:'1%'}
+			,OF_PREPARATION:{title:'Preparation',width:'1%'}
+			,OF_REVIEW:{title:'Review',width:'1%'}
+			,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,OF_DELIVERY:{title:'Delivery',width:'1%'}	
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_8","formid":"11"}',
@@ -290,9 +311,21 @@ _grid4_10=function(){_jGrid({
 	"url":"clientMaintenance.cfc",
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
-			,CLIENT_ID:{list:false,edit:false}
-			,CLIENT_NAME:{title:'Client Name'}
-			,PT_YEAR:{title:'Year',width:'2%'}
+ 			,CLIENT_NAME:{title:'Client Name'}
+			,PT_YEAR:{title:'Year',width:'1%'}
+			,PT_MONTHTEXT:{title:'Period'}
+			,PT_STATETEXT:{title:'State'}
+			,PT_TYPETEXT:{title:'Return Type'}	
+			,PT_LASTPAY:{title:'Last Pay',width:'1%'}
+			,PT_DUEDATE:{title:'Due Date',width:'1%'}
+			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}
+			,PT_OBTAININFO:{title:'Information',width:'1%'}
+			,PT_ENTRY:{title:'Entry',width:'1%'}
+			,PT_REC:{title:'Reconciliation',width:'1%'}
+			,PT_REVIEW:{title:'Review',width:'1%'}
+			,PT_ASSEMBLY:{title:'Assembly',width:'1%'}
+			,PT_DELIVERY:{title:'Delivery',width:'1%'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_10","formid":"13"}',
@@ -324,7 +357,20 @@ _grid4_12=function(){_jGrid({
 	"fields":{TR_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,TR_TAXYEAR:{title:'Tax Year',width:'2%'}
+			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
+			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
+			,TR_DUEDATE:{title:'Due Date',width:'1%'}
+			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
+			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
+			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		
+			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		
+			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			
+			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		
+			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		
+			,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'1%'}	
+			,TR_3_DELIVERED:{title:'Delivery',width:'1%'}					
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_12","formid":"6"}',

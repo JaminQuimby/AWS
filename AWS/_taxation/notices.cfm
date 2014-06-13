@@ -88,7 +88,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <h4 onClick='_run.load_group2_1();'>Details</h4>
 <div class="subtask1_id">
 <div><label for="g2_1_noticenumber"><i class="fa fa-lock link" ></i> Notice Number</label><select disabled="disabled" id="g2_1_noticenumber"><option value="0">&nbsp;</option><cfoutput query="global_noticenumber"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_1_noticedate"><i class="fa fa-lock link" ></i> Notice Date</label><input type="text" class="date" id="g2_1_noticedate" disabled="disabled"></div>
+<div><label for="g2_1_noticedate"><i class="fa fa-lock link" ></i> Notice Date</label><input type="text" class="date" id="g2_1_noticedate"></div>
 <div><label for="g2_1_taxyear"><i class="fa fa-lock link" ></i> Tax Year</label><select disabled="disabled" id="g2_1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><cfif optionvalue_id neq year(now())><option value="#optionvalue_id#">#optionname#</option><cfelse><option value="#optionvalue_id#" selected="selected">#optionname#</option></cfif></cfoutput></select></div>
 <div><label for="g2_1_taxform"><i class="fa fa-lock link" ></i> Tax Form</label><select disabled="disabled" id="g2_1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_1_methodreceived"><i class="fa fa-lock link" ></i> Method Recieved</label><select disabled="disabled" id="g2_1_methodreceived"><option value="0">&nbsp;</option><cfoutput query="global_noticemethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
