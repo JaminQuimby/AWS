@@ -68,9 +68,9 @@ WHERE[cas_status]!='2'
 UNION
 SELECT'Business Formation'AS[name]
 ,ISNULL(SUM(ISNULL(bf_esttime,0)),0)AS[total_time]
-,COUNT([bf_id])AS[count_assigned]
+,COUNT(DISTINCT[bf_id])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
-,COUNT([bfs_id])AS[count_subtask_assigned]
+,COUNT(DISTINCT[bfs_id])AS[count_subtask_assigned]
 ,'C'AS[orderit]
 FROM[v_businessformation_subtask]
 WHERE[bf_status]!='2'
@@ -81,7 +81,7 @@ WHERE[bf_status]!='2'
 UNION
 SELECT'Communication'AS[name]
 ,ISNULL(SUM(0),0)AS[total_time]
-,COUNT([co_id])AS[count_assigned]
+,COUNT(DISTINCT[co_id])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
 ,'D'AS[orderit]
@@ -92,7 +92,9 @@ WHERE[co_status]!='2'
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
 UNION
-SELECT'Financial & Tax Planning'AS[name],ISNULL(SUM(ISNULL(ftp_esttime,0)),0)AS[total_time],COUNT(ftp_assignedto)AS[count_assigned]
+SELECT'Financial & Tax Planning'AS[name]
+,ISNULL(SUM(ISNULL(ftp_esttime,0)),0)AS[total_time]
+,COUNT(DISTINCT[ftp_assignedto])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
 ,'E'AS[orderit]
@@ -107,7 +109,7 @@ UNION
 SELECT'Financial Statements'AS[name],ISNULL(SUM(ISNULL(fds_esttime,0)),0)AS[total_time]
 ,COUNT(fds_obtaininfo_assignedto)+COUNT(fds_sort_assignedto)+COUNT(fds_checks_assignedto)+COUNT(fds_sales_assignedto)+COUNT(fds_entry_assignedto)+COUNT(fds_reconcile_assignedto)+COUNT(fds_compile_assignedto)+COUNT(fds_review_assignedto)+COUNT(fds_assembly_assignedto)+COUNT(fds_delivery_assignedto)AS[count_assigned]
 ,ISNULL(SUM(fdss_esttime),0)AS[total_subtask_time]
-,COUNT([fdss_id])AS[count_subtask_assigned]
+,COUNT(DISTINCT[fdss_id])AS[count_subtask_assigned]
 ,'F'AS[orderit]
 FROM[v_financialdatastatus_subtask] 
 WHERE[fds_status]!='2'
@@ -132,9 +134,9 @@ OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
 UNION
 SELECT'Accounting and Consulting'AS[name]
 ,ISNULL(SUM(ISNULL(mc_esttime,0)),0)AS[total_time]
-,COUNT([mc_id])AS[count_assigned]
+,COUNT(DISTINCT[mc_id])AS[count_assigned]
 ,ISNULL(SUM(ISNULL([mcs_esttime],0)),0)AS[total_subtask_time]
-,COUNT([mcs_id])AS[count_subtask_assigned]
+,COUNT(DISTINCT[mcs_id])AS[count_subtask_assigned]
 ,'A'AS[orderit]
 
 FROM[v_managementconsulting_subtask]
@@ -145,7 +147,9 @@ WHERE[mc_status]!='2'
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
 UNION
-SELECT'Notices'AS[name], ISNULL(SUM(ISNULL(nst_esttime,0)),0)AS[total_time],COUNT(nst_assignedto)AS[count_assigned]
+SELECT'Notices'AS[name]
+,ISNULL(SUM(ISNULL(nst_esttime,0)),0)AS[total_time]
+,COUNT(DISTINCT[nst_assignedto])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
 ,'G'AS[orderit]
@@ -157,7 +161,8 @@ WHERE[nst_status]!='2'
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
 UNION
-SELECT'Other Filings'AS[name], ISNULL(SUM(ISNULL(of_esttime,0)),0)AS[total_time]
+SELECT'Other Filings'AS[name]
+,ISNULL(SUM(ISNULL(of_esttime,0)),0)AS[total_time]
 , ISNULL(SUM(CASE WHEN of_obtaininfo_assignedto=@u  THEN 1 ELSE 0 END  
 + CASE WHEN of_preparation_assignedto=@u  THEN 1 ELSE 0 END
 + CASE WHEN of_review_assignedto=@u  THEN 1 ELSE 0 END
@@ -183,7 +188,8 @@ OR([of_delivery_assignedto]=@u  AND[of_assembly_datecompleted]IS NOT NULL AND[of
 
 
 UNION
-SELECT'Payroll Checks'AS[name], ISNULL(SUM(ISNULL(pc_esttime,0)),0)AS[total_time]
+SELECT'Payroll Checks'AS[name]
+,ISNULL(SUM(ISNULL(pc_esttime,0)),0)AS[total_time]
 ,COUNT(pc_delivery_datecompleted)
 +COUNT(pc_obtaininfo_datecompleted)
 +COUNT(pc_review_datecompleted)
