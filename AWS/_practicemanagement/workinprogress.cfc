@@ -51,13 +51,14 @@ SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 
-SELECT'Administrative Tasks'AS[name]
+
+SELECT  'Administrative Tasks'AS[name]
 ,ISNULL(SUM(ISNULL(cas_esttime,0)),0)AS[total_time]
 ,COUNT(cas_assignedto)AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
 ,'B'AS[orderit]
-FROM[v_clientadministrativetasks]
+FROM [v_clientadministrativetasks]
 WHERE[cas_status]!='2'
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(','+[cas_assignedto]+','LIKE'%,'+@u+',%')</cfif>
@@ -67,9 +68,9 @@ WHERE[cas_status]!='2'
 UNION
 SELECT'Business Formation'AS[name]
 ,ISNULL(SUM(ISNULL(bf_esttime,0)),0)AS[total_time]
-,COUNT(DISTINCT[bf_id])AS[count_assigned]
+,COUNT([bf_id])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
-,COUNT(DISTINCT[bfs_id])AS[count_subtask_assigned]
+,COUNT([bfs_id])AS[count_subtask_assigned]
 ,'C'AS[orderit]
 FROM[v_businessformation_subtask]
 WHERE[bf_status]!='2'
@@ -80,7 +81,7 @@ WHERE[bf_status]!='2'
 UNION
 SELECT'Communication'AS[name]
 ,ISNULL(SUM(0),0)AS[total_time]
-,COUNT(DISTINCT[co_id])AS[count_assigned]
+,COUNT([co_id])AS[count_assigned]
 ,ISNULL(SUM(0),0)AS[total_subtask_time]
 ,COUNT(0)AS[count_subtask_assigned]
 ,'D'AS[orderit]
@@ -106,7 +107,7 @@ UNION
 SELECT'Financial Statements'AS[name],ISNULL(SUM(ISNULL(fds_esttime,0)),0)AS[total_time]
 ,COUNT(fds_obtaininfo_assignedto)+COUNT(fds_sort_assignedto)+COUNT(fds_checks_assignedto)+COUNT(fds_sales_assignedto)+COUNT(fds_entry_assignedto)+COUNT(fds_reconcile_assignedto)+COUNT(fds_compile_assignedto)+COUNT(fds_review_assignedto)+COUNT(fds_assembly_assignedto)+COUNT(fds_delivery_assignedto)AS[count_assigned]
 ,ISNULL(SUM(fdss_esttime),0)AS[total_subtask_time]
-,COUNT(DISTINCT[fdss_id])AS[count_subtask_assigned]
+,COUNT([fdss_id])AS[count_subtask_assigned]
 ,'F'AS[orderit]
 FROM[v_financialdatastatus_subtask] 
 WHERE[fds_status]!='2'
@@ -131,9 +132,9 @@ OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
 UNION
 SELECT'Accounting and Consulting'AS[name]
 ,ISNULL(SUM(ISNULL(mc_esttime,0)),0)AS[total_time]
-,COUNT(DISTINCT[mc_id])AS[count_assigned]
+,COUNT([mc_id])AS[count_assigned]
 ,ISNULL(SUM(ISNULL([mcs_esttime],0)),0)AS[total_subtask_time]
-,COUNT(DISTINCT[mcs_id])AS[count_subtask_assigned]
+,COUNT([mcs_id])AS[count_subtask_assigned]
 ,'A'AS[orderit]
 
 FROM[v_managementconsulting_subtask]
@@ -311,7 +312,7 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
-SELECT DISTINCT[mc_id]
+SELECT [mc_id]
 ,[client_id]
 ,[client_name]
 ,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
@@ -474,12 +475,11 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
-SELECT[bf_id]
+SELECT [bf_id]
 ,[client_id]
 ,[client_name]
 ,[bf_owners]
 ,[bf_status]
-.[bf_taskname]
 ,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_assignedtoTEXT]=(SELECT TOP (1)[si_initials]FROM[v_staffinitials]WHERE(bf_assignedto = user_id)) 
@@ -487,7 +487,6 @@ SELECT[bf_id]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
 ,[bf_missinginfo]
-,[bfs_taskname]
 FROM[v_businessformation_subtask]
 WHERE[bf_status]!='2'
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
@@ -511,7 +510,7 @@ WHERE[bf_status]!='2'
 								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
 								,"BF_MISSINGINFO":"'&BF_MISSINGINFO&'"
 								,"BF_MISSINGINFORECEIVED":"'&BF_MISSINGINFORECEIVED&'"
-								,"BFS_TASKNAME":"'&BFS_TASKNAME&'"					
+			
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -522,6 +521,46 @@ WHERE[bf_status]!='2'
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
+</cfcase>
+
+<cfcase value="group4_subtask">
+<cfquery datasource="#Session.organization.name#" name="fquery">
+DECLARE @c varchar(8000),@u varchar(8000),@d date,@g varchar(8000), @id varchar(8000)
+SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
+SET @g=<cfqueryparam value="#ARGUMENTS.group#">
+SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
+SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
+SET @id=<cfqueryparam value="#ARGUMENTS.id#">
+SELECT[bfs_id]
+,[bfs_taskname]
+,[bfs_assignedtoTEXT]
+,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'d','#Session.localization.language#')
+,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#')
+,[bfs_estimatedtime]
+FROM[v_businessformation_subtask]
+WHERE[bf_status]!='2'
+<cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+<cfif ARGUMENTS.group neq "0">AND([bf_id]=@g)</cfif>
+AND[BF_ID]=@id
+
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'"
+								,"BFS_TASKNAME":"'&BFS_TASKNAME&'"
+								,"BFS_ASSIGNEDTOTEXT":"'&BFS_ASSIGNEDTOTEXT&'"
+								,"BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'"
+								,"BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'"
+								,"BFS_ESTIMATEDTIME":"'&BFS_ESTIMATEDTIME&'"
+								}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
 </cfcase>
 
 
@@ -644,7 +683,7 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
-SELECT[fds_id]
+SELECT [fds_id]
 ,[client_id]
 ,[client_name]
 ,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
@@ -737,6 +776,65 @@ OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
 </cfcase>
 
 
+<cfcase value="group7_subtask"><cfquery datasource="#Session.organization.name#" name="fquery">
+DECLARE @c varchar(8000),@u varchar(8000),@d date,@g varchar(8000), @id varchar(8000)
+SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
+SET @g=<cfqueryparam value="#ARGUMENTS.group#">
+SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
+SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
+SET @id=<cfqueryparam value="#ARGUMENTS.id#">
+SELECT[fdss_id]
+,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
+,[fdss_assignedtoTEXT]
+,[fdss_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#')
+,[fdss_sequence]
+,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
+,[fdss_subtask]
+,[fdss_completed]
+FROM[v_financialDataStatus_Subtask]
+WHERE[fds_status]!='2'
+<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
+<cfif ARGUMENTS.userid neq "0">
+AND([fds_status]!='3'OR[fds_status] IS NULL)
+AND[fds_delivery_datecompleted] IS NULL
+AND([fds_obtaininfo_assignedto] = @u AND[fds_obtaininfo_datecompleted]IS NULL)
+OR([fds_sort_assignedto] = @u AND[fds_obtaininfo_datecompleted]IS NOT NULL AND[fds_sort_datecompleted] IS NULL)
+OR([fds_checks_assignedto] = @u  AND [fds_sort_datecompleted] IS NOT NULL AND [fds_checks_datecompleted] IS NULL)
+OR([fds_sales_assignedto] = @u  AND [fds_checks_datecompleted] IS NOT NULL AND [fds_sales_datecompleted] IS NULL)
+OR([fds_entry_assignedto] = @u  AND [fds_sales_datecompleted] IS NOT NULL AND [fds_entry_datecompleted] IS NULL)
+OR([fds_reconcile_assignedto] = @u  AND [fds_entry_datecompleted] IS NOT NULL AND [fds_reconcile_datecompleted] IS NULL)
+OR([fds_compile_assignedto]= @u  AND [fds_reconcile_datecompleted] IS NOT NULL AND [fds_compile_datecompleted] IS NULL)
+OR([fds_review_assignedto] = @u  AND [fds_compile_datecompleted] IS NOT NULL AND [fds_review_datecompleted] IS NULL)
+OR([fds_assembly_assignedto] = @u  AND [fds_review_datecompleted] IS NOT NULL AND [fds_assembly_datecompleted]  IS NULL)
+OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
+</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+<cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+AND[fds_id]=@id
+
+
+
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"FDSS_ID":"'&FDSS_ID&'"
+								,"FDSS_SEQUENCE":"'&FDSS_SEQUENCE&'"
+								,"FDSS_SUBTASKTEXT":"'&FDSS_SUBTASKTEXT&'"
+								,"FDSS_DUEDATE":"'&FDSS_DUEDATE&'"
+								,"FDSS_STATUSTEXT":"'&FDSS_STATUSTEXT&'"
+								,"FDSS_ASSIGNEDTOTEXT":"'&FDSS_ASSIGNEDTOTEXT&'"
+								,"FDSS_COMPLETED":"'&FDSS_COMPLETED&'"
+								}'>
+<cfif queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cfcase>
+
 <!--- Grid Notice  --->
 <cfcase value="group8">
 <cftry>
@@ -792,6 +890,9 @@ WHERE[nst_status]!='2'
 </cfcatch>
 </cftry>
 </cfcase>
+
+
+
 
 <!--- LOOKUP Other Filings --->
 <cfcase value="group9">

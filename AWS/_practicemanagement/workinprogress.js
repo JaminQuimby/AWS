@@ -44,61 +44,32 @@ _grid2=function(){_jGrid({
 			
 			
 			  //CHILD TABLE DEFINITION FOR SUBTAKS
-      /*  */     ,Subtasks: {
+ 			    ,Subtasks: {
                     title: '',
                     width: '2%',
                     sorting: false,
                     edit: false,
                     create: false,
                     display: function (subtasks) {
-                        //Create an image that will be used to open child table
                         var $img = $('<i class="fa fa-tasks "></i>'+subtasks.record.MC_ID);
-                        //Open child table when user clicks the image
                         $img.click(function () {
                             $('#grid2').jtable('openChildTable',
                                     $img.closest('tr'),
                                     {
                                         title: ' - Subtasks',
                                         actions: {
-                                            listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.MC_ID+'","loadType":"group2_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
-
+                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.MC_ID+'","loadType":"group2_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
                                         },
-
                                         fields: {
-                        
-                                            MCS_ID: {
-                                                key: true,
-                                                create: false,
-                                                edit: false,
-                                                list: false
-                                            },
-                                            MCS_SEQUENCE: {
-                                                title: 'Sequence',
-
-                                            },
-                                            MCS_SUBTASKTEXT: {
-                                                title: 'Subtask',
-                                                width: '30%'
-                                            },
-                                            MCS_STATUSTEXT: {
-                                                title: 'Status',
-                                       
-                                            },
-                                            MCS_DUEDATE: {
-                                                title: 'Due Date',
-                                   
-                                                type: 'date',
-
-                                     
-                                            },
-                                            MCS_ASSIGNEDTOTEXT: {
-                                                title: 'Assigned To',
-                                      
-                                            }
-											
+                                            MCS_ID:{key: true,create: false,edit: false,list: false},
+                                            MCS_SEQUENCE:{title:'Sequence'},
+                                            MCS_SUBTASKTEXT:{title:'Subtask',width:'30%'},
+                                            MCS_STATUSTEXT:{title:'Status'},
+                                            MCS_DUEDATE:{title:'Due Date',type:'date'},
+                                            MCS_ASSIGNEDTOTEXT: {title: 'Assigned To',}
                                         }
-                                    }, function (data) { //opened handler
-                                        data.childTable.jtable('load');
+                                    }, function(data){ //opened handler
+                                    	data.childTable.jtable('load');
                                     });
                         });
                         //Return image to show on the person row
@@ -145,8 +116,40 @@ _grid4=function(){_jGrid({
 	"title":"Business Formation",
 	"fields":{BF_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
+			,Subtasks: {
+                    title: '',
+                    width: '2%',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function (subtasks) {
+                        var $img = $('<i class="fa fa-tasks "></i>'+subtasks.record.MC_ID);
+                        $img.click(function () {
+                            $('#grid4').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: ' - Subtasks',
+                                        actions: {
+                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.BF_ID+'","loadType":"group4_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
+                                        },
+                                        fields: {
+                                            BFS_ID:{key: true,create: false,edit: false,list: false}
+											,BFS_TASKNAME:{title:'Task'}
+ 											,BFS_ASSIGNEDTOTEXT:{title:'Assigned To'}
+											,BFS_DATEINITIATED:{title:'Date Initiated'}
+											,BFS_DATECOMPLETED:{title:'Date Completed'}
+											,BFS_ESTIMATEDTIME:{title:'Estimated Time'}
+
+                                        }
+                                    }, function(data){ //opened handler
+                                    	data.childTable.jtable('load');
+                                    });
+                        });
+                        //Return image to show on the person row
+                        return $img;
+                    }
+                }
 			,CLIENT_NAME:{title:'Client Name'}
-			,BFS_TASKNAME:{title:'Subtask Name',width:'4%'}
 			,BF_ACTIVITY:{title:'Activity'}
 			,BF_OWNERS:{title:'Owners'}
 			,BF_BUSINESSTYPETEXT:{title:'Business Type'}
@@ -159,7 +162,7 @@ _grid4=function(){_jGrid({
 	},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group4","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"3"}',
-	"functions":'$("#bf_id").val(record.BF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?task_id="+record.BF_ID'
+	"functions":'$("#bf_id").val(record.BF_ID); '//window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?task_id="+record.BF_ID
 })};
 
 _grid5=function(){_jGrid({
@@ -210,6 +213,40 @@ _grid7=function(){_jGrid({
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
  			,CLIENT_ID:{list:false,edit:false}
+			,Subtasks: {
+                    title: '',
+                    width: '2%',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function (subtasks) {
+                        var $img = $('<i class="fa fa-tasks "></i>'+subtasks.record.MC_ID);
+                        $img.click(function () {
+                            $('#grid7').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: ' - Subtasks',
+                                        actions: {
+                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.FDS_ID+'","loadType":"group7_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
+                                        },
+                                        fields: {
+                                            FDSS_ID:{key:true,list:false,edit:false}
+											,FDSS_SEQUENCE:{title:'Sequence'}
+											,FDSS_SUBTASKTEXT:{title:'Subtask'}
+											,FDSS_DUEDATE:{title:'Due Date'}
+											,FDSS_STATUSTEXT:{title:'Status'}
+											,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}
+											,FDSS_COMPLETED:{title:'Completed'}
+
+                                        }
+                                    }, function(data){ //opened handler
+                                    	data.childTable.jtable('load');
+                                    });
+                        });
+                        //Return image to show on the person row
+                        return $img;
+                    }
+                }
  			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
 			,FDS_MONTHTEXT:{title:'Period'}
@@ -233,7 +270,7 @@ _grid7=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group7","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"5"}',
-	"functions":'$("#fds_id").val(record.FDS_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID'
+	"functions":'$("#fds_id").val(record.FDS_ID); ' //window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID
 })};
 
 
@@ -243,6 +280,34 @@ _grid8=function(){_jGrid({
 	"url":"workinprogress.cfc",
 	"title":"Notices",
 	"fields":{N_ID:{key:true,list:false,edit:false}
+				,Subtasks: {
+                    title: '',
+                    width: '2%',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function (subtasks) {
+                        var $img = $('<i class="fa fa-tasks "></i>'+subtasks.record.MC_ID);
+                        $img.click(function () {
+                            $('#grid2').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: ' - Subtasks',
+                                        actions: {
+                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.MC_ID+'","loadType":"group2_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
+                                        },
+                                        fields: {
+                                            NST_ID:{key: true,create: false,edit: false,list: false},
+                                          
+                                        }
+                                    }, function(data){ //opened handler
+                                    	data.childTable.jtable('load');
+                                    });
+                        });
+                        //Return image to show on the person row
+                        return $img;
+                    }
+                }
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
 			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
