@@ -16,11 +16,11 @@ _grid1=function(){_jGrid({
 		,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,MC_STATUSTEXT:{title:'Status'}
-			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
-			,MC_DUEDATE:{title:'Due Date',width:'4%'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
 			,MC_DESCRIPTION:{title:'Task Description'}	
+			,MC_DUEDATE:{title:'Due Date',width:'4%'}
+			,MC_STATUSTEXT:{title:'Status'}
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1","formid":"2"}',
@@ -35,8 +35,8 @@ _grid2=function(){_jGrid({
 		,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'});_run.load_group2()","class":"button"},{"name":"no","on_click":"_run.load_group2()","class":"button"}], autoClose: false})});return $img}}
 		,MCS_SEQUENCE:{title:'Sequence',width:'4%'}
 		,MCS_SUBTASKTEXT:{title:'Subtask'}
-		,MCS_STATUSTEXT:{title:'Status'}	
 		,MCS_DUEDATE:{title:'Due Date',width:'4%'}
+ 		,MCS_STATUSTEXT:{title:'Status'}	
 		,MCS_ASSIGNEDTOTEXT:{title:'Assigned To'}
 		,MCS_COMPLETED:{title:'Completed'}
  		},

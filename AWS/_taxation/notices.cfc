@@ -217,11 +217,11 @@ AND [nst_status]!=2 AND [nst_status]!=3
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"N_NAME":"'&N_NAME&'"
 								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
-								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
-								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
 								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
+								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
+								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
-								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"							
+								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"													
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

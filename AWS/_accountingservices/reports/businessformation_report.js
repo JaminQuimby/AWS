@@ -49,6 +49,8 @@ var grid1_config = [
 			,BF_DUEDATE:{title:'Due Date',width:'2%'}
 			,BF_STATUSTEXT:{title:'Status',width:'2%'}
 			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
+		    ,BF_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,BF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}				
 			,BF_ARTICLESAPPROVED:{title:'Article Approved',width:'2%'}
 			,BF_TRADENAMERECEIVED:{title:'Trade Name Received',width:'2%'}
 			,BF_MINUTESCOMPLETED:{title:'Minutes Completed',width:'2%'}

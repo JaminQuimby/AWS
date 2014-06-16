@@ -117,10 +117,11 @@ _grid4_1=function(){_jGrid({
 	"fields":{MC_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
-			,MC_DESCRIPTION:{title:'Task Description'}
+			,MC_CATEGORYTEXT:{title:'Consulting Category'}
+			,MC_DESCRIPTION:{title:'Task Description'}	
+			,MC_DUEDATE:{title:'Due Date',width:'4%'}
 			,MC_STATUSTEXT:{title:'Status'}
-			,MC_DUEDATE:{title:'Due Date',width:'2%'}
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_1","formid":"2"}',
@@ -246,7 +247,12 @@ _grid4_7=function(){_jGrid({
 	"fields":{N_ID:{key:true,list:false,edit:false}
 		,CLIENT_NAME:{title:'Client Name'}
 		,N_NAME:{title:'Matter Name'}
-		,N_STATUSTEXT:{title:'Matter Status'}
+		,N_STATUSTEXT:{title:'Matter Status'}	
+		,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}
+		,NST_1_TAXFORMTEXT:{title:'Tax Form'}
+		,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'2%'}
+		,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'2%'}	
+		,NST_STATUSTEXT:{title:'Notice Status'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_7","formid":"8"}',

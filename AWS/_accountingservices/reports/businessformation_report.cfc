@@ -41,6 +41,8 @@ SELECT[bf_id]
 ,[bf_owners]
 ,[bf_priority]
 ,[bf_esttime]
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_missinginfo]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'d','#Session.localization.language#') 
@@ -123,6 +125,8 @@ WHERE(1)=(1)
 								,"BF_DUEDATE":"'&BF_DUEDATE&'"
 								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
 								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
+								,"BF_MISSINGINFORECEIVED":"'&BF_MISSINGINFORECEIVED&'"
+								,"BF_MISSINGINFO":"'&BF_MISSINGINFO&'"							
 								,"BF_ARTICLESAPPROVED":"'&BF_ARTICLESAPPROVED&'"
 								,"BF_TRADENAMERECEIVED":"'&BF_TRADENAMERECEIVED&'"
 								,"BF_MINUTESCOMPLETED":"'&BF_MINUTESCOMPLETED&'"

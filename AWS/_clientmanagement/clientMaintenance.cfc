@@ -334,11 +334,17 @@ WHERE[contact_active]=(1)AND
 SELECT[mc_id]
 ,[client_id]
 ,[client_name]
-,[mc_assignedto]
-,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
-,[mc_description]
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
+,[mc_priority]
+,[mc_assignedtoTEXT]
 ,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_esttime]
+,[mc_category]
+,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
+,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
+
 FROM[v_managementconsulting]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -350,12 +356,12 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'"
 								,"MC_ID":"'&MC_ID&'"
-								,"MC_ASSIGNEDTO":"'&MC_ASSIGNEDTO&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
 								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -385,11 +391,8 @@ SELECT [cas_id]
 ,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 
 FROM[v_clientadministrativetasks]
-WHERE[cas_status] != 2 AND [cas_status] != 3
-<cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, cas_duedate, 101) ASC </cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -434,12 +437,9 @@ SELECT[bf_id]
 ,[bf_missinginfo]
 
 FROM[v_businessformation]
-WHERE[bf_status] != 2 
-AND [bf_status] != 3
-<cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif></cfquery>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
@@ -484,10 +484,8 @@ SELECT[co_id]
 ,[client_id]
 ,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
 FROM[v_communications]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, co_duedate, 101) ASC </cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -536,12 +534,8 @@ SELECT[ftp_id]
 
 
 FROM[v_financialtaxplanning]
-WHERE [ftp_status]!=2 AND [ftp_status]!=3
-
-<cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, ftp_duedate, 101) ASC </cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -609,12 +603,8 @@ SELECT[fds_id]
 	,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
 	,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus]
-WHERE ISNULL([fds_status],0) != 2 
-AND ISNULL([fds_status],0) != 3
-<cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, fds_duedate, 101) ASC </cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -658,17 +648,22 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[n_id]
-,[n_name]
-,[n_status]
+,[nst_id]
 ,[client_name]
 ,[client_id]
-,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id]
-)
-FROM[v_notice]
-WHERE[n_status] != 2 AND [n_status] != 3
-<cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
+,[n_name]
+,[nst_assignedtoTEXT]
+,[nst_status]
+,[nst_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[nst_1_noticenumber]=[optionvalue_id])
+,[nst_1_taxform]
+,[nst_1_taxyear]
+,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
+,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
+,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
+
+FROM[v_notice_subtask]
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -679,8 +674,13 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"N_ID":"'&n_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"N_NAME":"'&n_NAME&'"
-								,"N_STATUSTEXT":"'&n_STATUSTEXT&'"
+								,"N_NAME":"'&N_NAME&'"
+								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
+								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
+								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
+								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
+								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
+								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -904,9 +904,7 @@ SELECT[pa_id]
 ,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
 
 FROM[v_powerofattorney]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif>
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">

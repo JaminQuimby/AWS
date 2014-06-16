@@ -39,7 +39,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[co_id]
 ,[co_caller]
-,[co_forTEXT]
+,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
 ,FORMAT(co_fees, 'C', 'en-us')AS[co_fees]
 ,[co_paid]
 ,CONVERT(CHAR(8),[co_date], 1)+' '+RIGHT(CONVERT(VARCHAR,co_date, 100),7)AS[co_date]

@@ -123,11 +123,12 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
-								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
+								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -159,8 +160,8 @@ ORDER BY [mcs_sequence]
 <cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'"
 								,"MCS_SEQUENCE":"'&MCS_SEQUENCE&'"
 								,"MCS_SUBTASKTEXT":"'&MCS_SUBTASKTEXT&'"
- 								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
 								,"MCS_DUEDATE":"'&MCS_DUEDATE&'"
+ 								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
 								,"MCS_ASSIGNEDTOTEXT":"'&MCS_ASSIGNEDTOTEXT&'"
 								,"MCS_COMPLETED":"'&MCS_COMPLETED&'"
  								}'>

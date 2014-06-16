@@ -34,11 +34,11 @@ _grid2=function(){_jGrid({
 		,CLIENT_NAME:{title:'Client Name'}
 		,N_NAME:{title:'Matter Name'}
 		,N_STATUSTEXT:{title:'Matter Status'}	
-		,NST_STATUSTEXT:{title:'Notice Status'}
-		,NST_1_TAXFORMTEXT:{title:'Tax Form'}
 		,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}
-		,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'2%'}	
+		,NST_1_TAXFORMTEXT:{title:'Tax Form'}
 		,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'2%'}
+		,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'2%'}	
+		,NST_STATUSTEXT:{title:'Notice Status'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"8"}',
