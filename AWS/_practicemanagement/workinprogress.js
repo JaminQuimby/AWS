@@ -25,11 +25,50 @@ _grid1=function(){_jGrid({
 	"title":"Estimated Time",
 	"fields":{
 		NAME:{title:'Module'}
-		,COUNT_ASSIGNED:{title:'Task Assigned'}
-		,COUNT_SUBTASK_ASSIGNED:{title:'Subtasks Assigned'}
-		,TOTAL_TIME:{title:'Estimated Time'}
-		,TOTAL_SUBTAKS_TIME:{title:'Subtasks Estimated Time'}
-			},
+		,COUNT_ASSIGNED:{title:'Task Assigned'
+			,display:function(data){
+			switch(data.record.NAME){
+			case'Notices': return'N/A'; break;
+			default: return data.record.COUNT_ASSIGNED;
+				}}
+		}
+		
+		,COUNT_SUBTASK_ASSIGNED:{
+			title:'Subtasks Assigned'
+			
+			,display:function(data){
+				switch(data.record.NAME){
+				 case'Administrative Tasks': return'N/A'; break;
+				 case'Communication': return'N/A'; break;
+				 case'Financial & Tax Planning': return'N/A'; break;
+				 case'Other Filings': return'N/A'; break;
+				 case'Payroll Checks': return'N/A'; break;
+				 case'Payroll Taxes': return'N/A'; break;
+				 case'Personal Property Tax Returns': return'N/A'; break;
+				 default: return data.record.COUNT_SUBTASK_ASSIGNED;
+				}}
+		}
+		,TOTAL_TIME:{title:'Estimated Time'
+		,display:function(data){
+				switch(data.record.NAME){
+				 case'Communication': return'N/A'; break;
+				 case'Notices': return'N/A'; break;
+				 default: return data.record.TOTAL_SUBTAKS_TIME;
+				}}}
+		,TOTAL_SUBTAKS_TIME:{title:'Subtasks Estimated Time'
+		,display:function(data){
+				switch(data.record.NAME){
+				 case'Administrative Tasks': return'N/A'; break;
+				 case'Communication': return'N/A'; break;
+				 case'Financial & Tax Planning': return'N/A'; break;
+				 case'Other Filings': return'N/A'; break;
+				 case'Payroll Checks': return'N/A'; break;
+				 case'Payroll Taxes': return'N/A'; break;
+				 case'Personal Property Tax Returns': return'N/A'; break;
+				 default: return data.record.TOTAL_SUBTAKS_TIME;
+				}}
+		}
+		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group1","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'"}',
 	"functions":''
@@ -289,16 +328,16 @@ _grid8=function(){_jGrid({
                     display: function (subtasks) {
                         var $img = $('<i class="fa fa-tasks "></i>'+subtasks.record.MC_ID);
                         $img.click(function () {
-                            $('#grid2').jtable('openChildTable',
+                            $('#grid8').jtable('openChildTable',
                                     $img.closest('tr'),
                                     {
                                         title: ' - Subtasks',
                                         actions: {
-                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.MC_ID+'","loadType":"group2_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
+                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.N_ID+'","loadType":"group8_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
                                         },
                                         fields: {
                                             NST_ID:{key: true,create: false,edit: false,list: false},
-                                          
+                                          	NST_STATUSTEXT:{title:'Notice Status Text'}
                                         }
                                     }, function(data){ //opened handler
                                     	data.childTable.jtable('load');
@@ -321,7 +360,7 @@ _grid8=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group8","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"8"}',
-	"functions":'$("#n_id").val(record.N_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID'
+	"functions":'$("#n_id").val(record.N_ID); '//window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID
 })};	
 	
 _grid9=function(){_jGrid({
