@@ -81,7 +81,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_periodend"><i class="fa fa-lock link" ></i> Period End</label><input type="text" id="g1_periodend" disabled="disabled" class="date"/></div>
 <div><label for="g1_status">Status</label><select id="g1_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" id="g1_duedate" class="date" /></div>
-<div><label for="g1_priority">Priority</label><input type="text" placeholder="0" id="g1_priority" maxlength="2" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"  /></div>
+<div><label for="g1_priority">Priority</label><input type="text" placeholder="0" id="g1_priority" maxlength="2" class="valid_off" onblur="jqValid({'type':'rationalNumbers','object':this,'message':'This field must be a whole number.'});"  /></div>
 <div><label for="g1_esttime">Estimated Time</label><input type="text" id="g1_esttime"  maxlength="6" placeholder="0" /></div>
 <div><label for="g1_missinginfo"><input id="g1_missinginfo" type="checkbox" class="ios-switch">Missing Info</label></div>
 <div><label for="g1_mireceived">Missing Information Received</label><input type="text"id="g1_mireceived" class="date"/></div>

@@ -30,7 +30,7 @@ _grid2=function(){_jGrid({
 	"url":"notices.cfc",
 	"title":"Notices",
 	"fields":{NST_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.N_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.NST_ID+"',page:'notices',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,CLIENT_NAME:{title:'Client Name'}
 		,N_NAME:{title:'Matter Name'}
 		,N_STATUSTEXT:{title:'Matter Status'}	
@@ -61,7 +61,7 @@ default:if(query!=""){ if(debug){window.console.log('_loadDataCB switch default:
 _saveDataCB=function(params){
 var options={"id":"","group":"","subgroup":"","result":""}
 $.extend(true, options, params);
-
+alert(options["group"]);
 switch(options["group"]){
 case'':_saveDataCB({'group':'group1'});break;
 
