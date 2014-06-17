@@ -158,8 +158,7 @@ SELECT[n_id]
 ,[n_status]
 ,[client_name]
 ,[client_id]
-,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id]
-)
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 FROM[v_notice]
 WHERE[n_status] != 2 AND [n_status] != 3
 <cfif ARGUMENTS.search neq "">
@@ -205,7 +204,6 @@ SELECT[n_id]
 FROM[v_notice_subtask]
 WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND ([nst_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR [nst_assignedtoTEXT]IS NULL)
 AND [nst_status]!=2 AND [nst_status]!=3
-
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -233,8 +231,6 @@ AND [nst_status]!=2 AND [nst_status]!=3
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
-
-
 </cftry>
 </cffunction>
 

@@ -341,11 +341,11 @@ WHERE([mc_status]!='2'OR[mc_status] IS NULL)
 <cfset queryResult=queryResult&'{"MC_ID":"'&MC_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
-								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
-								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								,"MC_CATEGORYTEXT":"'&MC_CATEGORYTEXT&'"
 								,"MC_DESCRIPTION":"'&MC_DESCRIPTION&'"
+								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
+								,"MC_DUEDATE":"'&MC_DUEDATE&'"
+								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -391,8 +391,8 @@ AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfset queryResult=queryResult&'{"MCS_ID":"'&MCS_ID&'"
 								,"MCS_SEQUENCE":"'&MCS_SEQUENCE&'"
 								,"MCS_SUBTASKTEXT":"'&MCS_SUBTASKTEXT&'"
- 								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
 								,"MCS_DUEDATE":"'&MCS_DUEDATE&'"
+ 								,"MCS_STATUSTEXT":"'&MCS_STATUSTEXT&'"
 								,"MCS_ASSIGNEDTOTEXT":"'&MCS_ASSIGNEDTOTEXT&'"
 								,"MCS_COMPLETED":"'&MCS_COMPLETED&'"
  								}'>
@@ -835,17 +835,11 @@ SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[n_id]
-,[client_name]
 ,[n_name]
-,[nst_1_noticedate]=FORMAT(nst_1_noticedate,'d','#Session.localization.language#') 
-,[nst_missinginfo]
-,[nst_assignedtoTEXT]
-,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#') 
-,[nst_2_revrequired]
-,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
-,[nst_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[nst_1_noticenumber]=[optionvalue_id])
-,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
-,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#') 
+,[n_status]
+,[client_name]
+,[client_id]
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 FROM[v_notice_subtask]
 WHERE([nst_status]!='2'OR[nst_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
@@ -859,16 +853,10 @@ WHERE([nst_status]!='2'OR[nst_status]IS NULL)
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"N_NAME":"'&N_NAME&'"
-								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
-								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
-								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
-								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
-								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
-								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
-								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
-								,"NST_2_RESSUBMITED":"'&NST_2_RESSUBMITED&'"							
+								,"N_NAME":"'&n_NAME&'"
+								,"N_STATUSTEXT":"'&n_STATUSTEXT&'"						
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -892,17 +880,19 @@ SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SET @id=<cfqueryparam value="#ARGUMENTS.id#">
 SELECT[n_id],[nst_id]
+,[nst_id]
 ,[client_name]
+,[client_id]
 ,[n_name]
-,[nst_1_noticedate]=FORMAT(nst_1_noticedate,'d','#Session.localization.language#') 
-,[nst_missinginfo]
 ,[nst_assignedtoTEXT]
-,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#') 
-,[nst_2_revrequired]
-,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
+,[nst_status]
 ,[nst_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[nst_1_noticenumber]=[optionvalue_id])
+,[nst_1_taxform]
+,[nst_1_taxyear]
+,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
+,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
-,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#') 
 FROM[v_notice_subtask]
 WHERE([nst_status]!='2'OR[nst_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
@@ -920,8 +910,12 @@ AND[n_id]=@id
 <cfset queryResult=queryResult&'{"NST_ID":"'&NST_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"N_NAME":"'&N_NAME&'"
-								
-								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
+								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
+								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
+								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
+								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
+								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
+								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"		
 					
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -1074,20 +1068,19 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=@u )
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"PC_ID":"'&PC_ID&'"
- 									,"CLIENT_ID":"'&CLIENT_ID&'"
- 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
-									,"PC_YEAR":"'&PC_YEAR&'"
-									,"PC_DUEDATE":"'&PC_DUEDATE&'"
-									,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
-									,"PC_PAYDATE":"'&PC_PAYDATE&'"
-									,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
-									,"PC_PAYDATE":"'&PC_PAYDATE&'"
-									,"PC_OBTAININFO":"'&pc_obtaininfo_datecompleted&'<br/>'&pc_obtaininfo_assignedtoTEXT&'"
-									,"PC_PREPARATION":"'&pc_preparation_datecompleted&'<br/>'&pc_preparation_assignedtoTEXT&'"
-									,"PC_REVIEW":"'&pc_review_datecompleted&'<br/>'&pc_review_assignedtoTEXT&'"
-									,"PC_ASSEMBLY":"'&pc_assembly_datecompleted&'<br/>'&pc_assembly_assignedtoTEXT&'"
-									,"PC_DELIVERY":"'&pc_delivery_datecompleted&'<br/>'&pc_delivery_assignedtoTEXT&'"
-
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PC_YEAR":"'&PC_YEAR&'"
+								,"PC_DUEDATE":"'&PC_DUEDATE&'"
+								,"PC_PAYENDDATE":"'&PC_PAYENDDATE&'"
+								,"PC_PAYDATE":"'&PC_PAYDATE&'"
+								,"PC_MISSINGINFO":"'&PC_MISSINGINFO&'"
+								,"PC_PAYDATE":"'&PC_PAYDATE&'"
+								,"PC_OBTAININFO":"'&pc_obtaininfo_datecompleted&'<br/>'&pc_obtaininfo_assignedtoTEXT&'"
+								,"PC_PREPARATION":"'&pc_preparation_datecompleted&'<br/>'&pc_preparation_assignedtoTEXT&'"
+								,"PC_REVIEW":"'&pc_review_datecompleted&'<br/>'&pc_review_assignedtoTEXT&'"
+								,"PC_ASSEMBLY":"'&pc_assembly_datecompleted&'<br/>'&pc_assembly_assignedtoTEXT&'"
+								,"PC_DELIVERY":"'&pc_delivery_datecompleted&'<br/>'&pc_delivery_assignedtoTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -1153,23 +1146,21 @@ OR([pt_delivery_assignedto]=@u  AND[pt_assembly_datecompleted]IS NOT NULL)
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
- 									,"CLIENT_ID":"'&CLIENT_ID&'"
- 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
-									,"PT_YEAR":"'&PT_YEAR&'"
-									,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
-									,"PT_STATETEXT":"'&PT_STATETEXT&'"
-									,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
- 									,"PT_LASTPAY":"'&PT_LASTPAY&'"
-  									,"PT_DUEDATE":"'&PT_DUEDATE&'"
-	 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
-	 								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
-									,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"
-									,"PT_ENTRY":"'&pt_entry_datecompleted&'<br/>'&pt_entry_assignedtoTEXT&'"
-									,"PT_REC":"'&pt_rec_datecompleted&'<br/>'&pt_rec_assignedtoTEXT&'"
-									,"PT_REVIEW":"'&pt_review_datecompleted&'<br/>'&pt_review_assignedtoTEXT&'"
-									,"PT_ASSEMBLY":"'&pt_assembly_datecompleted&'<br/>'&pt_assembly_assignedtoTEXT&'"
-									,"PT_DELIVERY":"'&pt_delivery_datecompleted&'<br/>'&pt_delivery_assignedtoTEXT&'"
-
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PT_YEAR":"'&PT_YEAR&'"
+								,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
+								,"PT_STATETEXT":"'&PT_STATETEXT&'"
+								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
+								,"PT_LASTPAY":"'&PT_LASTPAY&'"
+								,"PT_DUEDATE":"'&PT_DUEDATE&'"
+ 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
+ 								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
+								,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"
+								,"PT_ENTRY":"'&pt_entry_datecompleted&'<br/>'&pt_entry_assignedtoTEXT&'"
+								,"PT_REC":"'&pt_rec_datecompleted&'<br/>'&pt_rec_assignedtoTEXT&'"
+								,"PT_REVIEW":"'&pt_review_datecompleted&'<br/>'&pt_review_assignedtoTEXT&'"
+								,"PT_ASSEMBLY":"'&pt_assembly_datecompleted&'<br/>'&pt_assembly_assignedtoTEXT&'"
+								,"PT_DELIVERY":"'&pt_delivery_datecompleted&'<br/>'&pt_delivery_assignedtoTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -100,12 +100,13 @@ _grid2=function(){_jGrid({
                                         listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.MC_ID+'","loadType":"group2_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
                                         },
                                         fields: {
-                                            MCS_ID:{key: true,create: false,edit: false,list: false},
-                                            MCS_SEQUENCE:{title:'Sequence'},
-                                            MCS_SUBTASKTEXT:{title:'Subtask',width:'30%'},
-                                            MCS_STATUSTEXT:{title:'Status'},
-                                            MCS_DUEDATE:{title:'Due Date',type:'date'},
-                                            MCS_ASSIGNEDTOTEXT: {title: 'Assigned To',}
+                                            MCS_ID:{key: true,create: false,edit: false,list: false}
+                                           		,MCS_SEQUENCE:{title:'Sequence',width:'4%'}
+												,MCS_SUBTASKTEXT:{title:'Subtask'}
+												,MCS_DUEDATE:{title:'Due Date',width:'4%'}
+ 												,MCS_STATUSTEXT:{title:'Status'}	
+												,MCS_ASSIGNEDTOTEXT:{title:'Assigned To'}
+												,MCS_COMPLETED:{title:'Completed'}
                                         }
                                     }, function(data){ //opened handler
                                     	data.childTable.jtable('load');
@@ -119,11 +120,11 @@ _grid2=function(){_jGrid({
 			
 			
 			,CLIENT_NAME:{title:'Client Name'}
+			,MC_CATEGORYTEXT:{title:'Consulting Category'}
+			,MC_DESCRIPTION:{title:'Task Description'}	
+			,MC_DUEDATE:{title:'Due Date',width:'4%'}
 			,MC_STATUSTEXT:{title:'Status'}
-			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}			
-			,MC_DUEDATE:{title:'Due Date',width:'2%'}
-			,MC_CATEGORYTEXT:{title:'Consulting Categories'}
-			,MC_DESCRIPTION:{title:'Task Description'}									
+			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}									
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group2","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
@@ -337,7 +338,13 @@ _grid8=function(){_jGrid({
                                         },
                                         fields: {
                                             NST_ID:{key: true,create: false,edit: false,list: false},
-                                          	NST_STATUSTEXT:{title:'Notice Status Text'}
+                                          	N_NAME:{title:'Matter Name'}
+											,N_STATUSTEXT:{title:'Matter Status'}	
+											,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}
+											,NST_1_TAXFORMTEXT:{title:'Tax Form'}
+											,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'2%'}
+											,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'2%'}	
+											,NST_STATUSTEXT:{title:'Notice Status'}
                                         }
                                     }, function(data){ //opened handler
                                     	data.childTable.jtable('load');
@@ -347,16 +354,9 @@ _grid8=function(){_jGrid({
                         return $img;
                     }
                 }
-			,CLIENT_NAME:{title:'Client Name'}
-			,N_NAME:{title:'Matter Name'}
-			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
-			,NST_1_TAXFORMTEXT:{title:'Tax Form'}
-			,NST_1_NOTICENUMBERTEXT:{title:'Notice Number'}
-			,NST_MISSINGINFO:{title:'Missing Information'}
-			,NST_STATUSTEXT:{title:'Notice Status'}
-			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
-			,NST_1_RESDUEDATE:{title:'Due Date',width:"1%"}
-			,NST_2_RESSUBMITED:{title:'Response Submitted',width:"1%"}
+				,CLIENT_NAME:{title:'Client Name'}
+				,N_NAME:{title:'Matter Name'}
+				,N_STATUSTEXT:{title:'Matter Status'}	
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group8","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"8"}',
@@ -377,10 +377,9 @@ _grid9=function(){_jGrid({
 				,OF_DUEDATE:{title:'Due Date',width:'1%'}
 				,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}
  				,OF_STATUSTEXT:{title:'Status'}
-				,OF_INFORMATIONRECEIVED:{title:'Information',width:'1%'}												
 				,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	
 				,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}									
-				,OF_OBTAININFO:{title:'Informtaion',width:'1%'}
+				,OF_OBTAININFO:{title:'Information',width:'1%'}
 				,OF_PREPARATION:{title:'Preparation',width:'1%'}
 				,OF_REVIEW:{title:'Review',width:'1%'}
 				,OF_ASSEMBLY:{title:'Assembly',width:'1%'}
@@ -408,7 +407,6 @@ _grid10=function(){_jGrid({
 			,PC_REVIEW:{title:'Review',width:'1%'}
 			,PC_ASSEMBLY:{title:'Assembly',width:'1%'}
 			,PC_DELIVERY:{title:'Delivery',width:'1%'}
-
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group10","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"10"}',
@@ -420,6 +418,7 @@ _grid11=function(){_jGrid({
 	"url":"workinprogress.cfc",
 	"title":"Payroll Taxes",
 	"fields":{PT_ID:{key:true,list:false,edit:false}
+ 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTHTEXT:{title:'Period'}
 			,PT_STATETEXT:{title:'State'}
