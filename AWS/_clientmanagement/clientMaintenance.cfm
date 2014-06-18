@@ -528,7 +528,7 @@ ACTIVITY (CLIENT DATA)
 
 
 <!---  Power of Attorney --->
-<h4 onClick='_run.load_group4_11();'>Power of Attorney</h4>
+<h4 onClick='_run.load_group4_11();'>Personal Property Tax Returns</h4>
 <div>
 <div class="tblGrid" id="grid4_11"></div>
 <div class="buttonbox">
@@ -536,12 +536,22 @@ ACTIVITY (CLIENT DATA)
 </div>
 </div>
 
-<!---  Tax Returns --->
-<h4 onClick='_run.load_group4_12();'>Tax Returns</h4>
+<!--- PERSONAL PROPERTY Tax Returns --->
+<h4 onClick='_run.load_group4_12();'>Power of Attorney</h4>
 <div>
 <div class="tblGrid" id="grid4_12"></div>
 <div class="buttonbox">
 <cfoutput><a href="##" class="button optional" onClick="_run.new_group4_12();">Add</a></cfoutput>
+</div>
+</div>
+
+
+<!---  Tax Returns --->
+<h4 onClick='_run.load_group4_13();'>Tax Returns</h4>
+<div>
+<div class="tblGrid" id="grid4_13"></div>
+<div class="buttonbox">
+<cfoutput><a href="##" class="button optional" onClick="_run.new_group4_13();">Add</a></cfoutput>
 </div>
 </div>
 

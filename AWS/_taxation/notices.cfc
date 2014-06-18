@@ -319,7 +319,8 @@ SELECT SCOPE_IDENTITY()AS[nst_id]
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[notice_subtask]
-SET[nst_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+SET[n_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[nst_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
 ,[nst_deliverymethod]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[nst_esttime]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[nst_fees]=<cfqueryparam value="#j.DATA[1][6]#" NULL="#LEN(j.DATA[1][6]) eq 0#"/>

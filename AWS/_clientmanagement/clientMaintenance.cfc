@@ -887,7 +887,56 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 </cftry>
 </cfcase>
 
+<!--- LOOKUP PERSONAL PROPERTY TAX RETURNS --->
 <cfcase value="group4_11">
+<cftry>
+<cfquery datasource="#Session.organization.name#" name="fquery">
+SELECT[tr_id]
+,[client_id]
+,[client_name]
+,[tr_4_extended]=FORMAT(tr_4_extended,'d','#Session.localization.language#') 
+,[tr_4_completed]=FORMAT(tr_4_completed,'d','#Session.localization.language#') 
+,[tr_taxyear]
+,[tr_taxform]
+,[tr_priority]
+,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
+,[tr_4_pptresttime]
+,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#') 
+,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#') 
+FROM[v_taxreturns]
+WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"TR_4_EXTENDED":"'&TR_4_EXTENDED&'"
+								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"TR_PRIORITY":"'&TR_PRIORITY&'"
+								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
+								,"TR_4_PPTRESTTIME":"'&TR_4_PPTRESTTIME&'"
+								,"TR_4_RFR":"'&TR_4_RFR&'"
+								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+<cfcatch>
+	<!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
+</cfcatch>
+</cftry>
+</cfcase>
+
+<cfcase value="group4_12">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pa_id]
@@ -934,7 +983,7 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 
 
 <!--- LOOKUP TAX RETURNS --->
-<cfcase value="group4_12">
+<cfcase value="group4_13">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tr_id]
@@ -956,7 +1005,6 @@ SELECT[tr_id]
 	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
 	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
  ,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#')
-
 FROM[v_taxreturns]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
