@@ -3,7 +3,22 @@
 	[
 		{
 			"follow_symlinks": true,
-			"path": "."
+			"path": ".",
+			"folder_exclude_patterns": []
 		}
-	]
+	],
+    "settings":
+    {
+        "webdavsync":
+        {
+            "host":"ftp.awensa.com",
+            "protocol":"https",
+            "path":"/MS/MS0213/AWS",
+            "username":"jamin@awensa.com",
+            "password":"Monkey1_"
+        }
+    },
+    "build_systems":
+    [
+    ]
 }

@@ -58,7 +58,7 @@ SELECT'Accounting and Consulting'AS[name]
 ,COUNT(DISTINCT[mcs_id])AS[count_subtask_assigned]
 ,'A'AS[orderit]
 FROM[v_managementconsulting_subtask]
-WHERE([mc_status]!='2'OR[mc_status]IS NULL)
+WHERE([mc_status]!='2'OR[mc_status]!='3'OR[mc_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -72,7 +72,7 @@ SELECT'Administrative Tasks'AS[name]
 ,(0)AS[count_subtask_assigned]
 ,'B'AS[orderit]
 FROM [v_clientadministrativetasks]
-WHERE([cas_status]!='2'OR[cas_status]IS NULL)
+WHERE([cas_status]!='2'OR[cas_status]!='3'OR[cas_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(','+[cas_assignedto]+','LIKE'%,'+@u+',%')</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -86,7 +86,7 @@ SELECT'Business Formation'AS[name]
 ,COUNT(DISTINCT[bfs_id])AS[count_subtask_assigned]
 ,'C'AS[orderit]
 FROM[v_businessformation_subtask]
-WHERE([bf_status]!='2'OR[bf_status]IS NULL)
+WHERE([bf_status]!='2'OR[bf_status]!='3'OR[bf_status]IS NULL)
 
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -100,7 +100,7 @@ SELECT'Communication'AS[name]
 ,(0)AS[count_subtask_assigned]
 ,'D'AS[orderit]
 FROM[v_communications]
-WHERE([co_status]!='2'OR[co_status]IS NULL)
+WHERE([co_status]!='2'OR[co_status]!='3'OR[co_status]IS NULL)
 <cfif ARGUMENTS.userid neq "0">AND([co_for]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -113,7 +113,7 @@ SELECT'Financial & Tax Planning'AS[name]
 ,(0)AS[count_subtask_assigned]
 ,'E'AS[orderit]
 FROM[v_financialtaxplanning]
-WHERE([ftp_status]!='2'OR[ftp_status]IS NULL)
+WHERE([ftp_status]!='2'OR[ftp_status]!='3'OR[ftp_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([ftp_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -122,12 +122,25 @@ WHERE([ftp_status]!='2'OR[ftp_status]IS NULL)
 UNION
 SELECT'Financial Statements'AS[name],ISNULL(SUM(ISNULL(fds_esttime,0)),0)AS[total_time]
 --,COUNT(fds_obtaininfo_assignedto)+COUNT(fds_sort_assignedto)+COUNT(fds_checks_assignedto)+COUNT(fds_sales_assignedto)+COUNT(fds_entry_assignedto)+COUNT(fds_reconcile_assignedto)+COUNT(fds_compile_assignedto)+COUNT(fds_review_assignedto)+COUNT(fds_assembly_assignedto)+COUNT(fds_delivery_assignedto)AS[count_assigned1]
-,COUNT(DISTINCT[fds_id])AS[count_assigned]
+,COUNT(DISTINCT fds_id)AS[count_assigned]
+--,COUNT(DISTINCT[fds_id])AS[count_assigned]
 ,ISNULL(SUM(fdss_esttime),0)AS[total_subtask_time]
-,COUNT(DISTINCT[fdss_id])AS[count_subtask_assigned]
+
+,SUM(DISTINCT CASE WHEN ISNULL(fds_obtaininfo_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_sort_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_checks_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_sales_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_entry_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_reconcile_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_compile_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_review_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_assembly_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(DISTINCT CASE WHEN ISNULL(fds_delivery_assignedto,0) =@u THEN 1 ELSE 0 END)
++SUM(CASE WHEN ISNULL(fdss_assignedto,0) =@u THEN 1 ELSE 0 END)AS[count_subtask_assigned]
+
 ,'F'AS[orderit]
 FROM[v_financialdatastatus_subtask] 
-WHERE([fds_status]!='2'OR[fds_status]IS NULL)
+WHERE([fds_status]!='2'OR[fds_status]!='3'OR[fds_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND[fds_delivery_datecompleted] IS NULL
@@ -154,7 +167,8 @@ SELECT'Notices'AS[name]
 ,COUNT(DISTINCT[nst_id])AS[count_subtask_assigned]
 ,'G'AS[orderit]
 FROM[v_notice_subtask]
-WHERE([n_status]!='2'OR[n_status]IS NULL)AND([nst_status]!='2'OR[nst_status]IS NULL)
+WHERE([n_status]!='2'OR[n_status]!='3'OR[n_status]IS NULL)
+AND([nst_status]!='2'OR[nst_status]!='3'OR[nst_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -173,7 +187,7 @@ SELECT'Other Filings'AS[name]
 ,(0)AS[count_subtask_assigned]
 ,'H'AS[orderit]
 FROM[v_otherfilings]
-WHERE([of_status]!='2'OR[of_status]IS NULL)
+WHERE([of_status]!='2'OR[of_status]!='3'OR[of_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([of_obtaininfo_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NULL)
@@ -326,7 +340,7 @@ SELECT Distinct [mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 FROM[v_managementconsulting_subtask]
-WHERE([mc_status]!='2'OR[mc_status] IS NULL)
+WHERE([mc_status]!='2'OR[mc_status]!='3'OR[mc_status] IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -375,7 +389,7 @@ SELECT DISTINCT[mc_id]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
 ,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
 FROM[v_managementconsulting_subtask]
-WHERE([mc_status]!='2'OR[mc_status] IS NULL)
+WHERE([mc_status]!='2'OR[mc_status]!='3'OR[mc_status] IS NULL)
 AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
@@ -432,7 +446,7 @@ SELECT [cas_id]
 ,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 
 FROM[v_clientadministrativetasks]
-WHERE([cas_status]!='2'OR[cas_status]IS NULL)
+WHERE([cas_status]!='2'OR[cas_status]!='3'OR[cas_status]IS NULL)
 
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(','+[cas_assignedto]+','LIKE'%,'+@u+',%')</cfif>
@@ -488,7 +502,7 @@ SELECT DISTINCT[bf_id]
 ,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
 ,[bf_missinginfo]
 FROM[v_businessformation_subtask]
-WHERE([bf_status]!='2'OR[bf_status]IS NULL)
+WHERE([bf_status]!='2'OR[bf_status]!='3'OR[bf_status]IS NULL)
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -538,7 +552,7 @@ SELECT[bfs_id]
 ,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#')
 ,[bfs_estimatedtime]
 FROM[v_businessformation_subtask]
-WHERE([bf_status]!='2'OR[bf_status]IS NULL)
+WHERE([bf_status]!='2'OR[bf_status]!='3'OR[bf_status]IS NULL)
 
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND([bf_id]=@g)</cfif>
@@ -583,7 +597,7 @@ SELECT[co_id]
 ,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
 
 FROM[v_communications]
-WHERE([co_status]!='2'OR[co_status]IS NULL)
+WHERE([co_status]!='2'OR[co_status]!='3'OR[co_status]IS NULL)
 <cfif ARGUMENTS.userid neq "0">AND([co_for]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -640,7 +654,7 @@ SELECT[ftp_id]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
 
 FROM[v_financialtaxplanning]
-WHERE([ftp_status]!='2'OR[ftp_status]IS NULL)
+WHERE([ftp_status]!='2'OR[ftp_status]!='3'OR[ftp_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([ftp_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -720,7 +734,7 @@ SELECT DISTINCT [fds_id]
 ,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus_subtask]
-WHERE([fds_status]!='2'OR[fds_status]IS NULL)
+WHERE([fds_status]!='2'OR[fds_status]!='3'OR[fds_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND[fds_delivery_datecompleted] IS NULL
@@ -795,7 +809,7 @@ SELECT[fdss_id]
 ,[fdss_subtask]
 ,[fdss_completed]
 FROM[v_financialDataStatus_Subtask]
-WHERE([fds_status]!='2'OR[fds_status] IS NULL)
+WHERE([fds_status]!='2'OR[fds_status]!='3'OR[fds_status] IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0"></cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -834,16 +848,16 @@ SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
-SELECT[n_id]
+SELECT DISTINCT[n_id]
 ,[n_name]
 ,[n_status]
 ,[client_name]
 ,[client_id]
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 FROM[v_notice_subtask]
-WHERE([nst_status]!='2'OR[nst_status]IS NULL)
+WHERE([n_status]!='2'AND[n_status]!='3')
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u)</cfif>
+<cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u OR[nst_assignedto]=0 )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 </cfquery>
@@ -894,9 +908,9 @@ SELECT[n_id],[nst_id]
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
 FROM[v_notice_subtask]
-WHERE([nst_status]!='2'OR[nst_status]IS NULL)
+WHERE([nst_status]!='2'AND[nst_status]!='3')
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]=>@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u)</cfif>
+<cfif ARGUMENTS.userid neq "0">--AND([nst_assignedto]=@u  OR[nst_assignedto]=0)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 AND[n_id]=@id
@@ -916,7 +930,7 @@ AND[n_id]=@id
 								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
 								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"		
-					
+								,"NST_ASSIGNEDTOTEXT":"'&NST_ASSIGNEDTOTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -975,7 +989,7 @@ SELECT[of_id]
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 
 FROM[v_otherfilings]
-WHERE([of_status]!='2'OR[of_status]IS NULL)
+WHERE([of_status]!='2'OR[of_status]!='3'OR[of_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]=>@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([of_obtaininfo_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NULL)

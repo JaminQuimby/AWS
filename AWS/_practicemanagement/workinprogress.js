@@ -345,6 +345,8 @@ _grid8=function(){_jGrid({
 											,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'2%'}
 											,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'2%'}	
 											,NST_STATUSTEXT:{title:'Notice Status'}
+											,NST_ASSIGNEDTOTEXT:{title:'Assigned To'}
+											
                                         }
                                     }, function(data){ //opened handler
                                     	data.childTable.jtable('load');
@@ -489,4 +491,4 @@ _grid13=function(){_jGrid({
 	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
 })};
 
-
+// This is a test test
