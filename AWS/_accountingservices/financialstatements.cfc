@@ -789,8 +789,8 @@ SET[fds_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0 or j.DATA[1][8] eq "null"#"/>
 ,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0  or j.DATA[1][8] eq "null"#"/>
 ,[fdss_dependencies]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
-,[fdss_esttime]=<cfqueryparam value="#j.DATA[1][11]#" NULL="#j.DATA[1][11] eq "null"#"/>
-,[fdss_actualtime]=<cfqueryparam value="#j.DATA[1][12]#" NULL="#j.DATA[1][12] eq "null"#"/>
+,[fdss_esttime]=<cfqueryparam value="#j.DATA[1][11]#"  null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[fdss_actualtime]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>
