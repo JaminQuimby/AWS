@@ -53,9 +53,9 @@ _grid1=function(){_jGrid({
 				switch(data.record.NAME){
 				 case'Communication': return'N/A'; break;
 				 case'Notices': return'N/A'; break;
-				 default: return data.record.TOTAL_SUBTAKS_TIME;
+				 default: return data.record.TOTAL_TIME;
 				}}}
-		,TOTAL_SUBTAKS_TIME:{title:'Subtasks Estimated Time'
+		,TOTAL_SUBTASK_TIME:{title:'Subtasks Estimated Time'
 		,display:function(data){
 				switch(data.record.NAME){
 				 case'Administrative Tasks': return'N/A'; break;
@@ -65,7 +65,7 @@ _grid1=function(){_jGrid({
 				 case'Payroll Checks': return'N/A'; break;
 				 case'Payroll Taxes': return'N/A'; break;
 				 case'Personal Property Tax Returns': return'N/A'; break;
-				 default: return data.record.TOTAL_SUBTAKS_TIME;
+				 default: return data.record.TOTAL_SUBTASK_TIME;
 				}}
 		}
 		},
