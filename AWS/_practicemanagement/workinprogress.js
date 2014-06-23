@@ -17,6 +17,20 @@ var _run={
 	 ,load_group11:function(){_grid11();}
 	 ,load_group12:function(){_grid12();}
 	 ,load_group13:function(){_grid13();}
+	 ,gotogrid:function(i){switch(i){
+		 case'A':_run.load_group2();$("#group1").accordion("option", "active", 1); break;
+		 case'B':_run.load_group3();$("#group1").accordion("option", "active", 2); break;
+		 case'C':_run.load_group4();$("#group1").accordion("option", "active", 3); break;
+		 case'D':_run.load_group5();$("#group1").accordion("option", "active", 4); break;
+		 case'E':_run.load_group6();$("#group1").accordion("option", "active", 5); break;
+		 case'F':_run.load_group7();$("#group1").accordion("option", "active", 6); break;
+		 case'G':_run.load_group8();$("#group1").accordion("option", "active", 7); break;
+		 case'H':_run.load_group9();$("#group1").accordion("option", "active", 8); break;
+		 case'I':_run.load_group10();$("#group1").accordion("option", "active", 9); break;
+		 case'J':_run.load_group11();$("#group1").accordion("option", "active", 10); break;
+		 case'K':_run.load_group12();$("#group1").accordion("option", "active", 11); break;
+		 case'L':_run.load_group13();$("#group1").accordion("option", "active", 12); break;
+		 }  }
 }
 
 _grid1=function(){_jGrid({
@@ -29,6 +43,12 @@ _grid1=function(){_jGrid({
 			,display:function(data){
 			switch(data.record.NAME){
 			case'Notices': return'N/A'; break;
+			case'Financial Statements': return'N/A'; break;
+			case'Other Filings': return'N/A'; break;
+			case'Payroll Checks': return'N/A'; break;
+			case'Payroll Taxes': return'N/A'; break;
+			case'Personal Property Tax Returns': return'N/A'; break;
+			case'Taxe Returns': return'N/A'; break;
 			default: return data.record.COUNT_ASSIGNED;
 				}}
 		}
@@ -41,37 +61,30 @@ _grid1=function(){_jGrid({
 				 case'Administrative Tasks': return'N/A'; break;
 				 case'Communication': return'N/A'; break;
 				 case'Financial & Tax Planning': return'N/A'; break;
-				 case'Other Filings': return'N/A'; break;
-				 case'Payroll Checks': return'N/A'; break;
-				 case'Payroll Taxes': return'N/A'; break;
-				 case'Personal Property Tax Returns': return'N/A'; break;
 				 default: return data.record.COUNT_SUBTASK_ASSIGNED;
-				}}
-		}
+		}}}
+				
 		,TOTAL_TIME:{title:'Estimated Time'
 		,display:function(data){
 				switch(data.record.NAME){
 				 case'Communication': return'N/A'; break;
 				 case'Notices': return'N/A'; break;
 				 default: return data.record.TOTAL_TIME;
-				}}}
+		}}}
+				
 		,TOTAL_SUBTASK_TIME:{title:'Subtasks Estimated Time'
 		,display:function(data){
 				switch(data.record.NAME){
 				 case'Administrative Tasks': return'N/A'; break;
 				 case'Communication': return'N/A'; break;
 				 case'Financial & Tax Planning': return'N/A'; break;
-				 case'Other Filings': return'N/A'; break;
-				 case'Payroll Checks': return'N/A'; break;
-				 case'Payroll Taxes': return'N/A'; break;
-				 case'Personal Property Tax Returns': return'N/A'; break;
 				 default: return data.record.TOTAL_SUBTASK_TIME;
-				}}
-		}
+		}}}
+		
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group1","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'"}',
-	"functions":''
+	"functions":'_run.gotogrid(record.ORDERIT)'
 })};
 
 _grid2=function(){_jGrid({
