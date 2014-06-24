@@ -443,7 +443,7 @@ SELECT'Personal Property Tax Returns'AS[name]
 /--->
 <cfif ARGUMENTS.userid neq "0">
 ,SUM(DISTINCT CASE WHEN ISNULL( tr_4_assignedto ,0)=@u  THEN ISNULL([tr_esttime],0) ELSE NULL END)AS[total_time]
-,COUNT(DISTINCT CASE WHEN ISNULL(tr_4_assignedto,0)=@u THEN[bf_id]ELSE NULL END)AS[count_assigned]
+,COUNT(DISTINCT CASE WHEN ISNULL(tr_4_assignedto,0)=@u THEN[tr_id]ELSE NULL END)AS[count_assigned]
 
 ,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
@@ -451,36 +451,21 @@ SELECT'Personal Property Tax Returns'AS[name]
 <cfelse>
 ,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
 ,COUNT(DISTINCT[tr_id])AS[count_assigned]
-
 ,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
-
 </cfif>
 
-
 ,'K'AS[orderit]
-FROM[v_taxreturns]
-WHERE[tr_4_required]='TRUE'
-AND[tr_4_required]IS NULL
-
-<!---
-((([Tax Status Listing].[Tax Year])=(Year(Now())-1)) 
-AND (([Tax Status Listing].[PPTR Required])=Yes) 
-AND (([Tax Status Listing].[PPTR Delivered]) Is Null) 
-AND (([Tax Status Listing].[PPTR Assigned To].Value)=[Forms]![System Administration Reporting]![Combo3])) 
-OR ((([Tax Status Listing].[PPTR Required])=Yes) 
-AND (([Tax Status Listing].[PPTR Delivered]) Is Null) 
-AND (([Tax Status Listing].[PPTR Assigned To].Value)=[Forms]![System Administration Reporting]![Combo3]) 
-AND ((Year([Info Recd]))=Year(Now())))
---->
-
-AND(([tr_taxyear]=Year(getdate())-1)OR(Year([tr_2_informationreceived])=Year(getdate())))
+FROM[v_taxreturns_schedule]
+WHERE([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
+OR(([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL) AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL AND[tr_2_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
 UNION
 SELECT'Tax Returns'AS[name]
+
 <cfif ARGUMENTS.userid neq "0">
 ,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u THEN[tr_id]ELSE NULL END)AS[count_assigned]
@@ -494,14 +479,8 @@ SELECT'Tax Returns'AS[name]
 </cfif>
 
 ,'L'AS[orderit]
-FROM[v_taxreturns]
+FROM[v_taxreturns_schedule]
 WHERE[tr_2_informationreceived]IS NOT NULL 
-
-<!--- WHERE ((([Tax Status Listing].[Info Recd]) Is Not Null) 
-AND (([Tax Status Listing].Due)<[Forms]![System Administration Reporting]![Text42] Or ([Tax Status Listing].Due) Is Null) 
-AND (([Tax Status Listing].Deliv) Is Null) 
-AND (([Tax Status Listing].[Assigned To])=[Forms]![System Administration Reporting]![Combo3]))
---->
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=@u</cfif>
