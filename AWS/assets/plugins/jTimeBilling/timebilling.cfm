@@ -46,7 +46,8 @@ _pluginSaveData102_1=function(){
 			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"102_1"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
 
-_group102_1=function(){_grid102_1()}
+_group102=function(){_grid102();}
+_group102_1=function(){_grid102_1();}
 
 _grid102=function(){
 	_jGrid({

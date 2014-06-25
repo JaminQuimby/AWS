@@ -49,12 +49,11 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Grid 102  --->
 <cfcase value="group102">
-
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tb_id]
 ,[tb_date]=FORMAT(tb_date,'d','#Session.localization.language#') 
 ,[u_name]
-,[tb_description]
+,[tb_description]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='g102_description'AND[tb_description]=[optionvalue_id])
 FROM[v_timebilling]
 WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
 AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
@@ -74,11 +73,10 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
-
 </cfcase>
+
 <!--- Grid 102_1  --->
 <cfcase value="group102_1">
-
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[t_id]
 ,[tb_id]
