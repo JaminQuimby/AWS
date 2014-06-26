@@ -9,6 +9,9 @@ $(document).ready(function(){
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
+_group102=function(){_grid102();}
+_group102_1=function(){_grid102_1();}
+
 _pluginSaveData102=function(){
 
 	var json='{"DATA":[["'+
@@ -46,8 +49,6 @@ _pluginSaveData102_1=function(){
 			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"102_1"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
 
-_group102=function(){_grid102();}
-_group102_1=function(){_grid102_1();}
 
 _grid102=function(){
 	_jGrid({
@@ -89,7 +90,7 @@ _grid102_1=function(){
 <input type="hidden" id="isLoaded_group102_1" value="0" />
 </span>
 <div id="group102" class="gf-checkbox" >
-	<h3 onClick="_group102(); ">Time Card</h3>
+	<h3 onClick="_group102();">Time Card</h3>
 	<div>
 			<div><label for="g102_filter">Filter</label><input id="g102_filter" onBlur="_grid102();" onKeyPress="if(event.keyCode==13){_grid102();}"/></div>
 			<div id="grid102" class="tblGrid"></div>

@@ -152,8 +152,6 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[tb_id]
-
-
 </cfquery>
 <cfreturn '{"id":#fquery.tb_id#,"group":"plugins","subgroup":"102_1","result":"ok"}'>
 </cfif>
@@ -201,7 +199,6 @@ VALUES(
 SELECT SCOPE_IDENTITY()AS[t_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
-
 </cfif>
 
 <!--- if this is a not a new record, then insert it--->
