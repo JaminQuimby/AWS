@@ -329,7 +329,7 @@ AS[total_subtask_time]
 
 <cfelse>
 ,ISNULL(SUM(ISNULL(pc_esttime,0)),0)AS[total_time]
-(0)AS[count_assigned]
+,(0)AS[count_assigned]
 
 ,ISNULL(SUM(DISTINCT CASE WHEN [pc_delivery_datecompleted]IS NULL THEN[pc_delivery_esttime]ELSE NULL END),0)
 +ISNULL(SUM(DISTINCT CASE WHEN [pc_obtaininfo_datecompleted]IS NULL THEN[pc_obtaininfo_esttime]ELSE NULL END),0)
@@ -367,7 +367,6 @@ SELECT'Payroll Taxes'AS[name]
 <cfif ARGUMENTS.userid neq "0">
 ,ISNULL(SUM(ISNULL(pt_esttime,0)),0)AS[total_time]
 ,(0)AS[count_assigned]
-
 ,ISNULL(SUM(DISTINCT CASE WHEN ISNULL(pt_obtaininfo_assignedto,0)=@u AND [pt_obtaininfo_datecompleted]IS NULL THEN[pt_obtaininfo_esttime]ELSE NULL END),0)
 +ISNULL(SUM(DISTINCT CASE WHEN ISNULL(pt_entry_assignedto,0)=@u AND[pt_entry_datecompleted]IS NULL THEN[pt_entry_esttime]ELSE NULL END),0)
 +ISNULL(SUM(DISTINCT CASE WHEN ISNULL(pt_rec_assignedto,0)=@u AND[pt_rec_datecompleted]IS NULL THEN[pt_rec_esttime]ELSE NULL END),0)
@@ -385,6 +384,8 @@ AS[total_subtask_time]
 +COUNT(DISTINCT CASE WHEN ISNULL(pt_delivery_assignedto,0)=@u THEN[pt_id]ELSE NULL END)
 AS[count_subtask_assigned]
 <cfelse>
+
+
 ,ISNULL(SUM(ISNULL(pt_esttime,0)),0)AS[total_time]
 ,(0)AS[count_assigned]
 
@@ -396,9 +397,6 @@ AS[count_subtask_assigned]
 +ISNULL(SUM(DISTINCT CASE WHEN ISNULL(pt_delivery_assignedto,0)=@u AND[pt_delivery_datecompleted]IS NULL THEN[pt_delivery_esttime]ELSE NULL END),0)
 AS[total_subtask_time]
 
-,ISNULL(SUM(ISNULL(pt_esttime,0)),0)AS[total_time]
-
-
 ,COUNT(pt_obtaininfo_assignedto)
 +COUNT(pt_entry_assignedto)
 +COUNT(pt_rec_assignedto)
@@ -409,8 +407,6 @@ AS[count_subtask_assigned]
 
 
 </cfif>
-
-
 ,'J'AS[orderit]
 FROM[v_payrolltaxes] 
 WHERE([pt_delivery_completedby]IS NULL)
@@ -426,31 +422,20 @@ OR([pt_delivery_assignedto]=@u  AND[pt_assembly_datecompleted]IS NOT NULL)
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
+
+
+
+
 UNION
 SELECT'Personal Property Tax Returns'AS[name]
-<!---
 <cfif ARGUMENTS.userid neq "0">
-,SUM(DISTINCT CASE WHEN ISNULL( bf_assignedto ,0)=@u  THEN ISNULL([bf_esttime],0) ELSE NULL END)AS[total_time]
-,COUNT(DISTINCT CASE WHEN ISNULL(bf_assignedto,0)=@u THEN[bf_id]ELSE NULL END)AS[count_assigned]
-,SUM(DISTINCT CASE WHEN ISNULL( bfs_assignedto ,0)=@u  THEN ISNULL([bfs_estimatedtime],0) ELSE NULL END)AS[total_subtask_time]
-,COUNT(DISTINCT CASE WHEN ISNULL( bf_assignedto ,0)=@u  THEN [bfs_id] ELSE NULL END)AS[count_subtask_assigned]
-<cfelse>
-,ISNULL(SUM(ISNULL(bf_esttime,0)),0)AS[total_time]
-,COUNT(DISTINCT[bf_id])AS[count_assigned]
-,ISNULL(SUM(ISNULL([bfs_estimatedtime],0)),0)AS[total_subtask_time]
-,COUNT(DISTINCT[bfs_id])AS[count_subtask_assigned]
-</cfif>
-/--->
-<cfif ARGUMENTS.userid neq "0">
-,SUM(DISTINCT CASE WHEN ISNULL( tr_4_assignedto ,0)=@u  THEN ISNULL([tr_esttime],0) ELSE NULL END)AS[total_time]
+,SUM(DISTINCT CASE WHEN ISNULL( tr_4_assignedto ,0)=@u  THEN ISNULL([tr_4_pptresttime],0) ELSE 0 END)AS[total_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL(tr_4_assignedto,0)=@u THEN[tr_id]ELSE NULL END)AS[count_assigned]
-
 ,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
-
 <cfelse>
-,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
-,COUNT(DISTINCT[tr_id])AS[count_assigned]
+,SUM(DISTINCT CASE WHEN ISNULL( tr_4_required ,'TRUE')=@u THEN ISNULL([tr_4_pptresttime],0) ELSE 0 END)AS[total_time]
+,COUNT(DISTINCT CASE WHEN ISNULL(tr_4_required,'TRUE')=@u THEN[tr_id]ELSE NULL END)AS[count_assigned]
 ,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 </cfif>
@@ -458,8 +443,11 @@ SELECT'Personal Property Tax Returns'AS[name]
 ,'K'AS[orderit]
 FROM[v_taxreturns_schedule]
 WHERE([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-OR(([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL) AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
-<cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL AND[tr_2_assignedto]=@u</cfif>
+OR(([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
+AND [tr_3_delivered] IS NULL
+AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
+<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+<cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
@@ -468,22 +456,23 @@ SELECT'Tax Returns'AS[name]
 
 <cfif ARGUMENTS.userid neq "0">
 ,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
-,COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u THEN[tr_id]ELSE NULL END)AS[count_assigned]
+,(0)AS[count_assigned]
 ,(0)AS[total_subtask_time]
-,(0)AS[count_subtask_assigned]
+,COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u THEN[tr_id]ELSE 0 END)AS[count_subtask_assigned]
 <cfelse>
 ,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
-,COUNT(tr_2_assignedto)AS[count_assigned]
+,(0)AS[count_assigned]
 ,(0)AS[total_subtask_time]
-,(0)AS[count_subtask_assigned]
+,COUNT(tr_2_assignedto)AS[count_subtask_assigned]
 </cfif>
 
 ,'L'AS[orderit]
 FROM[v_taxreturns_schedule]
-WHERE[tr_2_informationreceived]IS NOT NULL 
+WHERE[tr_2_informationreceived]IS NOT NULL
+AND([tr_3_delivered]IS NULL OR [tr_3_delivered] ='' )
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=@u</cfif>
+<cfif ARGUMENTS.userid neq "0">AND[tr_2_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 </cfquery>
@@ -1425,13 +1414,13 @@ SELECT[tr_id]
 ,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#') 
 ,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#') 
 FROM[v_taxreturns]
-WHERE datepart(year,[tr_2_informationreceived])= datepart(year, getdate())
-AND [tr_taxyear] = DATEADD(year,-1,getdate())
-AND[tr_4_required] = '1'
+WHERE([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
+OR(([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
 AND [tr_3_delivered] IS NULL
+AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-<cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]=@u </cfif>
-<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+<cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 </cfquery>
 <cfset myResult="">
@@ -1485,19 +1474,21 @@ SELECT[tr_id]
 	,[client_id]
 	,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
 	,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
-	,[tr_2_reviewassignedtoTEXT] 
+	,[tr_2_reviewassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_reviewassignedto=user_id))
 	,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#') 
 	,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
 	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
 	,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#') 
 	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
 
-FROM[v_taxreturns]
+FROM[v_taxreturns_schedule]
+
 WHERE[tr_2_informationreceived]IS NOT NULL 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=@u</cfif>
-<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

@@ -47,8 +47,7 @@ _grid1=function(){_jGrid({
 			case'Other Filings': return'N/A'; break;
 			case'Payroll Checks': return'N/A'; break;
 			case'Payroll Taxes': return'N/A'; break;
-			case'Personal Property Tax Returns': return'N/A'; break;
-			case'Taxe Returns': return'N/A'; break;
+			case'Tax Returns': return'N/A'; break;
 			default: return data.record.COUNT_ASSIGNED;
 				}}
 		}
@@ -58,17 +57,18 @@ _grid1=function(){_jGrid({
 			
 			,display:function(data){
 				switch(data.record.NAME){
-				 case'Administrative Tasks': return'N/A'; break;
-				 case'Communication': return'N/A'; break;
-				 case'Financial & Tax Planning': return'N/A'; break;
-				 default: return data.record.COUNT_SUBTASK_ASSIGNED;
+				case'Administrative Tasks': return'N/A'; break;
+				case'Communication': return'N/A'; break;
+				case'Financial & Tax Planning': return'N/A'; break;
+				case'Personal Property Tax Returns': return'N/A'; break;
+				default: return data.record.COUNT_SUBTASK_ASSIGNED;
 		}}}
 				
 		,TOTAL_TIME:{title:'Estimated Time'
 		,display:function(data){
 				switch(data.record.NAME){
-				 case'Communication': return'N/A'; break;
-				 case'Notices': return'N/A'; break;
+				case'Communication': return'N/A'; break;
+				case'Notices': return'N/A'; break;
 				 default: return data.record.TOTAL_TIME;
 		}}}
 				
@@ -78,6 +78,8 @@ _grid1=function(){_jGrid({
 				 case'Administrative Tasks': return'N/A'; break;
 				 case'Communication': return'N/A'; break;
 				 case'Financial & Tax Planning': return'N/A'; break;
+				 case'Tax Returns': return'N/A'; break;
+				 case'Personal Property Tax Returns': return'N/A'; break;
 				 default: return data.record.TOTAL_SUBTASK_TIME;
 		}}}
 		
