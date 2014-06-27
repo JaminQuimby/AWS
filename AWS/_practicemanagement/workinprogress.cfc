@@ -468,8 +468,7 @@ SELECT'Tax Returns'AS[name]
 
 ,'L'AS[orderit]
 FROM[v_taxreturns_schedule]
-WHERE[tr_2_informationreceived]IS NOT NULL
-AND([tr_3_delivered]IS NULL OR [tr_3_delivered] ='' )
+WHERE([tr_3_delivered]IS NULL )
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_2_assignedto]=@u</cfif>
@@ -1468,8 +1467,8 @@ SELECT[tr_id]
   	,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
 	,[tr_missinginfo]
 	,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
-	,[tr_4_assignedto]
-  	,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
+	,[tr_2_assignedto]
+  	,[tr_2_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_assignedto=user_id))
 	,[client_name]
 	,[client_id]
 	,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
@@ -1483,9 +1482,10 @@ SELECT[tr_id]
 
 FROM[v_taxreturns_schedule]
 
-WHERE[tr_2_informationreceived]IS NOT NULL 
+WHERE([tr_3_delivered]IS NULL )
+
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND[tr_3_delivered]IS NULL AND[tr_2_assignedto]=@u</cfif>
+<cfif ARGUMENTS.userid neq "0">AND[tr_2_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
@@ -1501,7 +1501,7 @@ WHERE[tr_2_informationreceived]IS NOT NULL
 									,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
 									,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 									,"TR_DUEDATE":"'&TR_DUEDATE&'"
-									,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
+									,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
  									,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 									,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
 									,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
