@@ -164,7 +164,7 @@ SELECT[tr_4_assignedto]
 ,[tr_4_reviewassigned]
 ,[tr_4_reviewed]
 ,[tr_4_reviewedby]
-,[tr_4_rfr]
+,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#')
 FROM[v_taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
