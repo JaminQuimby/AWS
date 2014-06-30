@@ -8,7 +8,7 @@ $(document).ready(function(){
 //Start Normal Template Functions
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
-_pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_billingtype,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
+_pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
 _group102=function(){_grid102();}
 _group102_1=function(){_grid102_1();}
 
@@ -21,7 +21,6 @@ _pluginSaveData102=function(){
 		$("##client_id").val()+'","'+
 		$("##task_id").val()+'","'+
         $("##g102_adjustment").val()+'","'+
-		$("##g102_billingtype").val()+'","'+
     	$("##g102_date").val()+'","'+
     	$("##g102_description").val()+'","'+
         $("##g102_flatfee").val()+'","'+
@@ -58,7 +57,7 @@ _grid102=function(){
 	"fields":{TB_ID:{key:true,list:false,edit:false}
 			,TB_DATE:{title:'Date',width:'2%'}
 			,U_NAME:{title:'Name'}
-			,TB_DESCRIPTION:{title:'Description'}
+			,TB_DESCRIPTIONTEXT:{title:'Description'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g102_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","clientid":"'+$("##client_id").val()+'","taskid":"'+$("##task_id").val()+'","loadType":"group102"}',
@@ -78,7 +77,6 @@ _grid102_1=function(){
 	"arguments":'{"search":"'+$("##g102_1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'","loadType":"group102_1"}',
 	"functions":''
 })};
-
 })
 
 </script>
@@ -90,40 +88,31 @@ _grid102_1=function(){
 <input type="hidden" id="isLoaded_group102_1" value="0" />
 </span>
 <div id="group102" class="gf-checkbox" >
-	<h3 onClick="_group102();">Time Card</h3>
-	<div>
-			<div><label for="g102_filter">Filter</label><input id="g102_filter" onBlur="_grid102();" onKeyPress="if(event.keyCode==13){_grid102();}"/></div>
-			<div id="grid102" class="tblGrid"></div>
-			<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:1});$("#isLoaded_group102").val(1);'>Add</a></div>
-	</div>
+<h3 onClick="_group102();">Time Card</h3>
+<div>
+		<div><label for="g102_filter">Filter</label><input id="g102_filter" onBlur="_grid102();" onKeyPress="if(event.keyCode==13){_grid102();}"/></div>
+		<div id="grid102" class="tblGrid"></div>
+		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:1});$("#isLoaded_group102").val(1);'>Add</a></div>
+</div>
     
-	<h4 onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});$("#isLoaded_group102").val(1);'>Add Time Card</h4>
-	<div>
-    	<div><label for="client_id">Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-        <cfswitch expression="#page.formid#">
-        <cfcase value="6">
-        <!--- TAX RETURNS --->
-        <div>Subtask1</div>
-        <div>Subtask2</div>
-        </cfcase>
-        </cfswitch>
-        <div><label for="user_id">Employee</label><select id="user_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><label for="g102_date">Date</label><input type="text" class="date" id="g102_date"/></div>
-    	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="g102_description"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><label for="g102_notes">Notes</label><textarea type="text" id="g102_notes" cols="4" rows="4"  maxlength="1000"></textarea></div>
-		<div><label for="g102_paymentstatus">Billing Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-        <div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div>
-        <div><label for="g102_reimbursement">Reimbursement</label><input type="text" maxlength="10" id="g102_reimbursement" ></div>
-        <div><label for="g102_manualtime">Manual Time</label><input type="text" class="time" id="g102_manualtime" ></div>
-    	<div><label for="g102_billingtype">Billing Type</label><select id="g102_billingtype"><option value="0">&nbsp;</option><cfoutput query="g102_billingtype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-    	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option><cfoutput query="g102_ratetype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-        <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly id="g102_rate" ></div>
-        <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly id="g102_totaltime" ></div>
-        <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>   
-        <div><label for="g102_flatfee">Flat Fee</label><input type="text" maxlength="10" id="g102_flatfee" ></div>
-        <div><label for="g102_adjustment">Adjustment</label><input type="text" maxlength="10" id="g102_adjustment" ></div>
-	</div>  
-    
+<h4 onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});$("#isLoaded_group102").val(1);'>Add Time Card</h4>
+<div>
+   	<div><label for="client_id">Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="user_id">Employee</label><select id="user_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g102_date">Date</label><input type="text" class="date" id="g102_date"/></div>
+   	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="g102_description"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g102_notes">Notes</label><textarea type="text" id="g102_notes" cols="4" rows="4"  maxlength="1000"></textarea></div>
+	<div><label for="g102_paymentstatus">Billing Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div>
+    <div><label for="g102_reimbursement">Reimbursement</label><input type="text" maxlength="10" id="g102_reimbursement" ></div>
+    <div><label for="g102_manualtime">Manual Time</label><input type="text" class="time" id="g102_manualtime" ></div>
+  	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option><cfoutput query="g102_ratetype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly id="g102_rate" ></div>
+    <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly id="g102_totaltime" ></div>
+    <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>   
+    <div><label for="g102_flatfee">Flat Fee</label><input type="text" maxlength="10" id="g102_flatfee" ></div>
+    <div><label for="g102_adjustment">Adjustment</label><input type="text" maxlength="10" id="g102_adjustment" ></div>
+</div>  
 
 <h3 group="group102_1" onClick="_grid102_1();">Add Time</h3>
 <div>
@@ -131,6 +120,7 @@ _grid102_1=function(){
 	<div id="grid102_1" class="tblGrid"></div>
 	<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:3});$("#isLoaded_group102_1").val(1);'>Add</a></div>
 </div>
+
 <h4 onClick='$("#isLoaded_group102_1").val(1);'>Time</h4>
 <div>
         <div><label for="g102_1_start">Start Time</label><input type="text" class="time" id="g102_1_start" ></div>
