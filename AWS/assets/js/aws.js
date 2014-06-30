@@ -10,17 +10,13 @@ Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(
 function(){window.location=d.redirUrl},d.redirAfter-d.warnAfter);break;case"stop":clearTimeout(redirTimer);break}}
 function e(b){switch(b){case"start":dialogTimer=setTimeout(
 function(){a("#sessionTimeout-dialog").dialog("open");f("start")},d.warnAfter);break;case"stop":clearTimeout(dialogTimer);break}}
+
 var c={message:"Your session is about to expire.",keepAliveUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm",redirUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm",logoutUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm",warnAfter:9e5,redirAfter:12e5};var d=c;if(b){var d=a.extend(c,b)}a("body").append('<div title="Session Timeout" id="sessionTimeout-dialog">'+d.message+"</div>");a("#sessionTimeout-dialog").dialog({autoOpen:false,width:400,modal:true,closeOnEscape:false,open:function(b,c){a(".ui-dialog-titlebar-close").hide()},buttons:{"Log Out Now":function(){window.location=d.logoutUrl},"Stay Connected":function(){a(this).dialog("close");a.ajax({type:"POST",url:d.keepAliveUrl});f("stop");e("start")}}});e("start")}})(jQuery)
 
 //Localisation 
 var debug=true;
 $(document).ready(function(){
-
-    $.sessionTimeout({
-        warnAfter: 400000,
-        redirAfter: 900000
-    });
-	
+$.sessionTimeout({ warnAfter: 900000, redirAfter: 1200000 });
 $.ajaxSetup({cache:false});//Stop ajax cacheing
 $.datepicker.setDefaults({showOn:"button",buttonImageOnly:true,buttonImage:"https://"+window.location.hostname+"/AWS/assets/img/datepicker.gif",showButtonPanel:true,constrainInput:true});
 $(".datetime").datetimepicker({timeFormat: 'hh:mmtt',dateFormat: 'm/d/yy'}).mask('00/00/0000 00:00:00');
@@ -441,7 +437,7 @@ if(debug){window.console.log('_duplicateCheck Check '+str);}
 
 $.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":JSON.stringify({"check":""+str+"","loadType":options['loadType']})}
 ,url: options['page']+'.cfc?method=f_duplicateCheck'
-,success:function(data){j=$.parseJSON(data);str=j.check;}
+,success:function(data){j=$.parseJSON(data);str=j.check; $.sessionTimeout({ warnAfter: 900000,redirAfter: 1200000 });}
 ,error:function(data){str=false;}
 });return str; if(debug){window.console.log('_duplicateCheck Return:'+str);}}; 
 
@@ -731,7 +727,8 @@ var i=$('#'+options["id"]).val();
 		}
 $.ajax({type:'GET',url:options["url"]+options["page"]+'.cfc?method=f_loadData',data:{"returnFormat":"json","argumentCollection":JSON.stringify({"id":i,"loadType":options["group"]})}
 ,success:function(json){
-	_loadDataCB($.parseJSON(json))
+	_loadDataCB($.parseJSON(json));
+	$.sessionTimeout({ warnAfter: 900000,redirAfter: 1200000 });
 	}
 ,error:function(data){errorHandle($.parseJSON(data))}})}
 catch(err){jqMessage({message: "Error in js._loadData: "+err+' id'+options['id']+' group'+options['group']+' page'+options['page']+' plugin'+options['plugin'],"type":"error",autoClose: false})}};
@@ -753,7 +750,7 @@ $.ajax({
   ,success:function(json){_saveDataCB($.parseJSON(json));  setTimeout(function(){
      $("#savedata").prop('disabled',false);
 	 $('#savedata').find('i').removeClass('fa fa-spinner fa-spin');
-    }, 5*1000); },   // successful request; do something with the data
+    }, 5*1000); $.sessionTimeout({ warnAfter: 900000,redirAfter: 1200000 });},   // successful request; do something with the data
   error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user
 });}else{_saveDataCB({"id":options["id"],"group":options["group"]});}}
 catch(err){
@@ -891,7 +888,9 @@ $.ajax({type:'GET',url:options['page']+'.cfc?method=f_loadSelect',data:{"returnF
  var j=$.parseJSON(json),items='';
 	for(var i=0;i<j.Records.length;i++){items+='<option value="'+ j.Records[i].optionvalue_id+'">'+j.Records[i].optionname+'</option>'}
 	  $("select#"+options['selectObject']).html(items).trigger("chosen:updated");
+	  $.sessionTimeout({ warnAfter: 900000,redirAfter: 1200000 });
 	if(debug){window.console.log('_loadSelect : complete');}
+	
 	  },
   error:function(data){errorHandle($.parseJSON(data))}})};
 

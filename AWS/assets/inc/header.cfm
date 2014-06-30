@@ -68,7 +68,7 @@ AND('#page.formid#'NOT IN(SELECT[id]FROM[CSVToTable](optionHide))OR[optionHide]I
 <script>
 var user = {"id":"","name":"","email":"","role":"","organization":"","g_delete":"0","g_payrolltaxes":"0","g_accountingservices":"0","g_taxation":"0","g_clientmanagement":"0","g_maintenance":"0"};
 var params={"id":"#Session.user.id#","name":"#Session.user.name#","email":"#Session.user.email#","role":"#Session.user.role#","organization":"#Session.user.organization#","g_delete":"#selectRoles.g_delete#","g_payrolltaxes":"#selectRoles.m_payrolltaxes#","g_accountingservices":"#selectRoles.m_accountingservices#","g_taxation":"#selectRoles.m_taxation#","g_clientmanagement":"#selectRoles.m_clientmanagement#","g_maintenance":"#selectRoles.m_maintenance#"};
-var page={"module":"#page.module#","location":"#page.location#","formid":"#page.formid#","title":"#page.title#","menuLeft":"#page.menuLeft#","trackers":"#page.trackers#","footer":"#page.footer#",}
+var page={"module":"#page.module#","location":"#page.location#","formid":"#page.formid#","title":"#page.title#","menuLeft":"#page.menuLeft#","trackers":"#page.trackers#"}
 
 $.extend(true, user, params);  
 </script>
