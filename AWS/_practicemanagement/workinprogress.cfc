@@ -36,19 +36,21 @@ WHERE[]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfargument name="ID" type="string" required="no">
 <cfargument name="formid" type="string" required="no">
 <cfargument name="loadType" type="string" required="no">
-<cfargument name="clientid" type="string" required="no" default="">
-<cfargument name="userid" type="string" required="no" default="">
+<cfargument name="clientid" type="string" required="no" default="0">
+<cfargument name="userid" type="string" required="no" default="0">
 <cfargument name="duedate" type="string" required="no" default="">
 <cfargument name="group" type="string" required="no" default="0">
+<cfif ListFindNoCase('null',ARGUMENTS.userid)><cfset ARGUMENTS.userid=0></cfif>
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- TOTAL TIME --->
 <cfcase value="group1">
 <cftry>
+
 <cfquery datasource="#Session.organization.name#" name="aquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date,@g varchar(8000)
 SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
 SET @g=<cfqueryparam value="#ARGUMENTS.group#">
-SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
+SET @u=<cfqueryparam value="#ARGUMENTS.userid#" >
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 
 SELECT'Accounting and Consulting'AS[name]
@@ -74,21 +76,21 @@ WHERE([mc_status]!='2'OR[mc_status]!='3'OR[mc_status]IS NULL)
 UNION
 SELECT'Administrative Tasks'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,SUM(DISTINCT CASE WHEN ISNULL( cas_assignedto ,0)=@u  THEN ISNULL([cas_esttime],0) ELSE NULL END)AS[total_time]
-,COUNT(DISTINCT CASE WHEN ISNULL( cas_assignedto ,0)=@u  THEN[cas_id]ELSE NULL END)AS[count_assigned]
-,ISNULL(SUM(0),0)AS[total_subtask_time]
+,SUM(DISTINCT CASE WHEN  cas_assignedto LIKE '%'+ @u +'%'    THEN ISNULL([cas_esttime],0) ELSE NULL END)AS[total_time]
+,COUNT(DISTINCT CASE WHEN  cas_assignedto LIKE '%'+ @u +'%'  THEN[cas_id]ELSE NULL END)AS[count_assigned]
+,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 <cfelse>
 ,ISNULL(SUM(ISNULL(cas_esttime,0)),0)AS[total_time]
 ,COUNT(DISTINCT[cas_id])AS[count_assigned]
-,ISNULL(SUM(0),0)AS[total_subtask_time]
+,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 </cfif>
 ,'B'AS[orderit]
 FROM [v_clientadministrativetasks]
 WHERE([cas_status]!='2'OR[cas_status]!='3'OR[cas_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]>=@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND(','+[cas_assignedto]+','LIKE'%,'+@u+',%')</cfif>
+<cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
@@ -115,21 +117,21 @@ WHERE([bf_status]!='2'OR[bf_status]!='3'OR[bf_status]IS NULL)
 UNION
 SELECT'Communication'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,ISNULL(SUM(0),0)AS[total_time]
-,COUNT(DISTINCT[co_id])AS[count_assigned]
-,ISNULL(SUM(0),0)AS[total_subtask_time]
+,(0)AS[total_time]
+,COUNT(DISTINCT CASE WHEN [co_for] LIKE'%'+ @u +'%' THEN[co_id]ELSE NULL END)AS[count_assigned]
+,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 <cfelse>
-,ISNULL(SUM(0),0)AS[total_time]
+,(0)AS[total_time]
 ,COUNT(DISTINCT[co_id])AS[count_assigned]
-,ISNULL(SUM(0),0)AS[total_subtask_time]
+,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 </cfif>
 
 ,'D'AS[orderit]
 FROM[v_communications]
 WHERE([co_status]!='2'OR[co_status]!='3'OR[co_status]IS NULL)
-<cfif ARGUMENTS.userid neq "0">AND([co_for]=@u)</cfif>
+<cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](co_for)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
@@ -138,12 +140,12 @@ SELECT'Financial & Tax Planning'AS[name]
 <cfif ARGUMENTS.userid neq "0">
 ,SUM(DISTINCT CASE WHEN ISNULL( ftp_assignedto ,0)=@u  THEN ISNULL([ftp_esttime],0) ELSE NULL END)AS[total_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL(ftp_assignedto,0)=@u THEN[ftp_id]ELSE NULL END)AS[count_assigned]
-,ISNULL(SUM(0),0)AS[total_subtask_time]
+,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 <cfelse>
 ,ISNULL(SUM(ISNULL(ftp_esttime,0)),0)AS[total_time]
 ,COUNT(DISTINCT[ftp_id])AS[count_assigned]
-,ISNULL(SUM(0),0)AS[total_subtask_time]
+,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 </cfif>
 
@@ -434,19 +436,19 @@ SELECT'Personal Property Tax Returns'AS[name]
 ,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 <cfelse>
-,SUM(DISTINCT CASE WHEN ISNULL( tr_4_required ,'TRUE')=@u THEN ISNULL([tr_4_pptresttime],0) ELSE 0 END)AS[total_time]
-,COUNT(DISTINCT CASE WHEN ISNULL(tr_4_required,'TRUE')=@u THEN[tr_id]ELSE NULL END)AS[count_assigned]
+,SUM(DISTINCT  ISNULL([tr_4_pptresttime],0) )AS[total_time]
+,COUNT(DISTINCT[tr_id])AS[count_assigned]
 ,(0)AS[total_subtask_time]
 ,(0)AS[count_subtask_assigned]
 </cfif>
 
 ,'K'AS[orderit]
-FROM[v_taxreturns_schedule]
+FROM[v_taxreturns]
 WHERE([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
 OR(([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
 AND [tr_3_delivered] IS NULL
 AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
-<cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
+<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -467,7 +469,7 @@ SELECT'Tax Returns'AS[name]
 </cfif>
 
 ,'L'AS[orderit]
-FROM[v_taxreturns_schedule]
+FROM[v_taxreturns]
 WHERE([tr_3_delivered]IS NULL )
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
@@ -649,7 +651,7 @@ FROM[v_clientadministrativetasks]
 WHERE([cas_status]!='2'OR[cas_status]!='3'OR[cas_status]IS NULL)
 
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]>=@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND(','+[cas_assignedto]+','LIKE'%,'+@u+',%')</cfif>
+<cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 </cfquery>
@@ -783,6 +785,10 @@ AND[BF_ID]=@id
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 DECLARE @c varchar(8000),@u varchar(8000),@d date,@g varchar(8000)
+SET @c=<cfqueryparam value="#ARGUMENTS.clientid#">
+SET @g=<cfqueryparam value="#ARGUMENTS.group#">
+SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
+SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[co_id]
 ,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
@@ -798,8 +804,8 @@ SELECT[co_id]
 
 FROM[v_communications]
 WHERE([co_status]!='2'OR[co_status]!='3'OR[co_status]IS NULL)
-<cfif ARGUMENTS.userid neq "0">AND([co_for]=@u )</cfif>
-<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+<cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](co_for)))</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 </cfquery>
 <cfset myResult="">
@@ -1480,7 +1486,7 @@ SELECT[tr_id]
 	,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#') 
 	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
 
-FROM[v_taxreturns_schedule]
+FROM[v_taxreturns]
 
 WHERE([tr_3_delivered]IS NULL )
 
