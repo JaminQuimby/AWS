@@ -1,12 +1,8 @@
 <cfcomponent output="true">
-
 <!--- LOAD DATA --->
 <cffunction name="f_loadData" access="remote" output="false">
 <cfargument name="ID" type="numeric" required="yes" default="0">
 <cfargument name="loadType" type="string" required="no">
-
-
-
 <cfswitch expression="#ARGUMENTS.loadType#">
 <!--- Load Group102--->
 <cfcase value="group102">
@@ -16,11 +12,10 @@ SELECT
 ,[tb_id]
 ,[user_id]
 ,[tb_adjustment]
-,[tb_billingtype]
 ,[tb_date]=FORMAT(tb_date,'d','#Session.localization.language#') 
 ,[tb_description]
 ,[tb_flatfee]
-,[tb_manualtime]=FORMAT(tb_manualtime,'d','#Session.localization.language#') 
+,[tb_manualtime]=FORMAT(tb_manualtime,'#Session.localization.formatdatetime#','#Session.localization.language#') 
 ,[tb_mileage]
 ,[tb_notes]
 ,[tb_paymentstatus]
@@ -33,7 +28,6 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 </cffunction>
-
 
 <!--- LOOKUP DATA --->
 <cffunction name="f_lookupData"  access="remote"  returntype="string" returnformat="plain">
@@ -53,7 +47,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[tb_id]
 ,[tb_date]=FORMAT(tb_date,'d','#Session.localization.language#') 
 ,[u_name]
-,[tb_description]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='g102_description'AND[tb_description]=[optionvalue_id])
+,[tb_descriptionTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='g102_description'AND[tb_description]=[optionvalue_id])
 FROM[v_timebilling]
 WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
 AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
@@ -67,7 +61,7 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 <cfset queryResult=queryResult&'{"TB_ID":"'&TB_ID&'"
 								,"TB_DATE":"'&TB_DATE&'"
 								,"U_NAME":"'&U_NAME&'"
-								,"TB_DESCRIPTION":"'&TB_DESCRIPTION&'"
+								,"TB_DESCRIPTIONTEXT":"'&TB_DESCRIPTIONTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -103,20 +97,15 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfswitch>
 </cffunction>
 
-
 <!--- SAVE DATA --->
 <cffunction name="f_saveData" access="remote" output="false" returntype="any">
 <cfargument name="group" type="string" required="true">
 <cfargument name="payload" type="string" required="true">
-
-
 <cfset j=DeserializeJSON("#ARGUMENTS.payload#")>
 <cfswitch expression="#ARGUMENTS.group#">
-
 <!---Group102--->
 <cfcase value="group102">
 <cfif j.DATA[1][1] eq "0">
-
 <cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[timebilling](
 [form_id]
@@ -124,7 +113,6 @@ INSERT INTO[timebilling](
 ,[client_id]
 ,[task_id]
 ,[tb_adjustment]
-,[tb_billingtype]
 ,[tb_date]
 ,[tb_description]
 ,[tb_flatfee]
@@ -149,13 +137,11 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[tb_id]
 </cfquery>
 <cfreturn '{"id":#fquery.tb_id#,"group":"plugins","subgroup":"102_1","result":"ok"}'>
 </cfif>
-
 
 <!--- if this is a not a new record, then insert it--->
 <cfif #j.DATA[1][1]# neq "0">
@@ -166,16 +152,15 @@ SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[client_id]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[task_id]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[tb_adjustment]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[tb_billingtype]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[tb_date]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[tb_description]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[tb_flatfee]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[tb_mileage]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[tb_notes]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[tb_date]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[tb_description]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[tb_flatfee]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[tb_mileage]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[tb_notes]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":"#j.DATA[1][1]#","group":"plugins","subgroup":"102_1","result":"ok"}'>
 </cfif>
@@ -184,7 +169,6 @@ WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!---Group102_1--->
 <cfcase value="group102_1">
 <cfif j.DATA[1][1] eq "0">
-
 <cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[time](
 [tb_id]
@@ -199,17 +183,6 @@ VALUES(
 SELECT SCOPE_IDENTITY()AS[t_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
-</cfif>
-
-<!--- if this is a not a new record, then insert it--->
-<cfif #j.DATA[1][1]# neq "0">
-<cfquery name="fquery" datasource="#Session.organization.name#">
-UPDATE[time]
-SET[tb_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
-,[t_start]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[t_stop]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-WHERE[T_ID]=<cfqueryparam value="#j.DATA[1][2]#"/>
-</cfquery><cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
 </cfif>
 </cfcase>
 </cfswitch>
