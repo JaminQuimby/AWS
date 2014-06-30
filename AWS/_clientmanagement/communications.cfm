@@ -41,7 +41,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="_run.new_group1();">Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick="_run.new_group1();">Add</a></cfif>
 </div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">

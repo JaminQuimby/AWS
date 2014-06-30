@@ -43,11 +43,13 @@ _grid101=function(){
 	<div>
 		<div><label for="g101_filter">Filter</label><input id="g101_filter" onBlur="_grid101();" onKeyPress="if(event.keyCode==13){_grid101();}"/></div>
 		<div id="grid101" class="tblGrid"></div>
-		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group101").accordion({active:1});$("#isLoaded_group101").val(1);$("#g101_commentdate").val( new Date().mmddyyyy() )'>Add</a></div>
+		<div class="buttonbox"><cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='$("#group101").accordion({active:1});$("#isLoaded_group101").val(1);$("#g101_commentdate").val( new Date().mmddyyyy() )'>Add</a></cfif></div>
 	</div>
-	<h4 onClick='_loadData({"id":"comment_id","group":"group101","page":"comment",plugin:"group101"});$("#isLoaded_group101").val(1);'>Add Comment</h4>
+ <cfoutput>
+<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_loadData({"id":"comment_id","group":"group101","page":"comment",plugin:"group101"});$("##isLoaded_group101").val(1);'>Add Comment</h4>
 	<div>
 		<div><label for="g101_commentdate">Date</label><input type="text" class="date" id="g101_commentdate"/></div>
 		<div><label for="g101_commenttext">Comment</label><textarea type="text" id="g101_commenttext" cols="4" rows="4"  maxlength="1000"></textarea></div>
 	</div>
 </div>
+</cfoutput>

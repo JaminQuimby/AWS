@@ -42,7 +42,7 @@ _group1();
 <!--- Entrace Grid --->
 <div class="tblGrid" id="grid0"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');">Add</a></div></div></div>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('group1,largeMenu');_hide('entrance,smallMenu');">Add</a></cfif></div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
 <!--- GROUP 1 SUB 1 PAYROLL CHECKS --->

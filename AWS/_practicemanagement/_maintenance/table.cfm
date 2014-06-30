@@ -31,7 +31,7 @@
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="_run.new_group1();">Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick="_run.new_group1();">Add</a></cfif>
 </div></div></div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
@@ -48,7 +48,7 @@
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_group2();"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_group2()'>Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='_run.new_group2()'>Add</a></cfif>
 </div>
 </div>
 <h4 onClick='$("#isLoaded_group2").val(1);'>Option</h4>

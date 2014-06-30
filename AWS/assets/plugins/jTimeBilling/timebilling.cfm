@@ -92,10 +92,11 @@ _grid102_1=function(){
 <div>
 		<div><label for="g102_filter">Filter</label><input id="g102_filter" onBlur="_grid102();" onKeyPress="if(event.keyCode==13){_grid102();}"/></div>
 		<div id="grid102" class="tblGrid"></div>
-		<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:1});$("#isLoaded_group102").val(1);'>Add</a></div>
+		<div class="buttonbox"><cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='$("#group102").accordion({active:1});$("#isLoaded_group102").val(1);'>Add</a></cfif></div>
 </div>
-    
-<h4 onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});$("#isLoaded_group102").val(1);'>Add Time Card</h4>
+<cfoutput>
+<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});$("##isLoaded_group102").val(1);'>Add Time Card</h4>
+</cfoutput>
 <div>
    	<div><label for="client_id">Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="user_id">Employee</label><select id="user_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -113,12 +114,13 @@ _grid102_1=function(){
     <div><label for="g102_flatfee">Flat Fee</label><input type="text" maxlength="10" id="g102_flatfee" ></div>
     <div><label for="g102_adjustment">Adjustment</label><input type="text" maxlength="10" id="g102_adjustment" ></div>
 </div>  
-
-<h3 group="group102_1" onClick="_grid102_1();">Add Time</h3>
+<cfoutput>
+<h3 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# group="group102_1" onClick="_grid102_1();">Add Time</h3>
+</cfoutput>
 <div>
 	<div><label for="g102_1_filter">Filter</label><input id="g102_1_filter" onBlur="_grid102_1();" onKeyPress="if(event.keyCode==13){_grid102_1();}"/></div>
 	<div id="grid102_1" class="tblGrid"></div>
-	<div class="buttonbox"><a href="#" class="button optional" onClick='$("#group102").accordion({active:3});$("#isLoaded_group102_1").val(1);'>Add</a></div>
+	<div class="buttonbox"><cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='$("#group102").accordion({active:3});$("#isLoaded_group102_1").val(1);'>Add</a></cfif></div>
 </div>
 
 <h4 onClick='$("#isLoaded_group102_1").val(1);'>Time</h4>

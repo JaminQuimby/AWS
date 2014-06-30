@@ -28,7 +28,7 @@
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick="document.getElementById('content').className='contentbig';_toggle('client,largeMenu');_hide('entrance,upload,contacts,services,maintenance,state,rclients');">Add</a></cfif>
 </div></div></div>
 <!--- FIELD DATA --->
 
@@ -257,7 +257,7 @@
 <div><label for="g5_filter">Filter</label><input id="g5_filter" onBlur="_grid5();"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='$("#group2").accordion({active:1});$("#comment_isLoaded").val(1);'>Add</a></cfif>
 </div>
 </div>
 <h4>Add Comment</h4>

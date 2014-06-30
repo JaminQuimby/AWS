@@ -69,6 +69,7 @@ e=$('.fa-lock');
 	target.find('input.hasDatepicker').datepicker("disable");
 	target.find('select').attr('disabled','disabled').trigger("chosen:updated");
 	e.click(function( event ) {target=$( event.target )
+		target.removeClass('fa-lock').addClass('fa-unlock');
 		target.parent().parent().find('input').removeAttr('disabled');
 		target.parent().parent().find('input.hasDatepicker').datepicker("enable");
 		target.parent().parent().find('select').removeAttr('disabled').trigger("chosen:updated"); })

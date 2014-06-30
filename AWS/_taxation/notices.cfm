@@ -45,7 +45,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='_run.new_group1()'>Add</a></cfif>
 </div></div></div>
 
 <!--- Group 1--->
@@ -65,7 +65,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_filter">Filter</label><input id="g2_filter" onBlur="_grid2();" onKeyPress="if(event.keyCode==13){_grid2();}"/></div>
 <div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_group2()'>Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='_run.new_group2()'>Add</a></cfif>
 </div>
 </div>
 

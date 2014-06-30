@@ -57,7 +57,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- Entrace Grid --->
 <div id="g1_searchOptions"></div><div id="g1_searchOptions"></div><div class="tblGrid" id="grid1"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_group1()'>Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='_run.new_group1()'>Add</a></cfif>
 </div></div></div>
 <!--- FIELD DATA --->
 
@@ -95,7 +95,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
         </div>
 <div id="g2_searchOptions"></div><div class="tblGrid" id="grid2"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='_run.new_group2();'>Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='_run.new_group2();'>Add</a></cfif>
 </div>
 </div>
 <h4 onClick='_run.load_group2();'>Add Subtask</h4>
