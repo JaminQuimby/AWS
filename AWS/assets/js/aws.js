@@ -68,12 +68,22 @@ e=$('.fa-lock');
 	target.find('input').attr('disabled','disabled');
 	target.find('input.hasDatepicker').datepicker("disable");
 	target.find('select').attr('disabled','disabled').trigger("chosen:updated");
+a=false
+switch(page.module){
+case'_payrolltaxes':if(user.g_payrolltaxes){a=true};break;
+case'_accountingservices':if(user.g_accountingservices){a=true};break;
+case'_taxation':if(user.g_taxation){a=true};break;
+case'_clientmanagement':if(user.g_clientmanagement){a=true};break;
+case'_maintenance':if(user._maintenance){a=true};break;
+}
+
+if(a==true){
 	e.click(function( event ) {target=$( event.target )
-		target.removeClass('fa-lock').addClass('fa-unlock');
+		target.parent().find('i').removeClass('fa-lock').addClass('fa-unlock');
 		target.parent().parent().find('input').removeAttr('disabled');
 		target.parent().parent().find('input.hasDatepicker').datepicker("enable");
-		target.parent().parent().find('select').removeAttr('disabled').trigger("chosen:updated"); })
-
+		target.parent().parent().find('select').removeAttr('disabled').trigger("chosen:updated")});
+}
 }
 
 
