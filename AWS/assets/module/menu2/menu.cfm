@@ -137,7 +137,7 @@
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
 	</li>
-
+<cfif session.user.initials neq "">
       <li><a href="##">#session.user.initials#</a>
         <div class="cbp-hrsub _practicemanagement">
 		<div class="cbp-hrsub-inner"> 
@@ -151,7 +151,9 @@
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
         </li>
-    
+<cfelse>
+        <li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="##" onclick="parentNode.submit()">Logout </a></form></li>
+</cfif>    
 </ul>
 </nav>
 </div>

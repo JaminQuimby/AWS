@@ -103,7 +103,7 @@ $img.click(function () {
 <div><label for="g100_filter">Filter</label><input id="g100_filter" onBlur="_grid100();" onKeyPress="if(event.keyCode==13){_grid100();}"/></div>
 <div id="grid100" class="tblGrid"></div>
 <div class="buttonbox">
-<a href="#" class="button optional" onClick='$("#group100").accordion({active:2});'>Add</a>
+<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='$("#group100").accordion({active:2});'>Add</a></cfif>
 </div>
 </div>
 <h4 onClick='_loadData({"id":"file_id","group":"group100","page":"upload",plugin:"group100"});$("#isLoaded_group100").val(1);'>File Meta Data</h4>
@@ -113,10 +113,11 @@ $img.click(function () {
 <div><label for="g100_year">Year</label><input type="text" id="g100_year" value="#Year(Now())#"></div>
 <div><label for="g100_month">Month</label><input type="text" id="g100_month" value="#Month(Now())#"></div>
 <div><label for="g100_day">Day</label><input type="text" id="g100_day" value="#Day(Now())#"></div>
-</cfoutput>
+
 </div>
-<h4>Upload Files</h4>
+<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))#>Upload Files</h4>
 <div>
-<div id="uploader"><p>Your browser doesn't have Flash or HTML5 support.</p></div>	
+<div id="uploader" ><p>Your browser doesn't have Flash or HTML5 support.</p></div>	
 </div>
 </div>
+</cfoutput>
