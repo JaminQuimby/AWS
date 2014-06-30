@@ -9,6 +9,7 @@ $(document).ready(function(){
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
+_pluginLoadData102=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
 _group102=function(){_grid102();}
 _group102_1=function(){_grid102_1();}
 

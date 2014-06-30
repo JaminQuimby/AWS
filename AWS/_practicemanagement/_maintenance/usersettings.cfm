@@ -51,7 +51,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 <!--- FIELD DATA --->
 <div id="group1" class="gf-checkbox">
-	<h3>General</h3>
+	<h4>General</h4>
 	<div>
 <div style="float:right; display:block;"><a href="#" class="accordianopen">Expand All</a><a class="accordianclose">Collapse All</a></div>
 

@@ -25,6 +25,22 @@ FROM[timebilling]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
+<!--- Load Group102_1--->
+<cfcase value="group102_1">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+SELECT 
+'GROUP102_1'AS[GROUP102_1]
+,[t_id]
+,[t_start]=FORMAT(t_start,'#Session.localization.formatdatetime#','#Session.localization.language#') 
+,[t_stop]=FORMAT(t_stop,'#Session.localization.formatdatetime#','#Session.localization.language#')
+FROM[timebilling]
+WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
+
+
+
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 </cffunction>
