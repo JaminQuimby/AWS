@@ -11,7 +11,23 @@ function(){window.location=d.redirUrl},d.redirAfter-d.warnAfter);break;case"stop
 function e(b){switch(b){case"start":dialogTimer=setTimeout(
 function(){a("#sessionTimeout-dialog").dialog("open");f("start")},d.warnAfter);break;case"stop":clearTimeout(dialogTimer);break}}
 
-var c={message:"Your session is about to expire.",keepAliveUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm",redirUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm",logoutUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm",warnAfter:9e5,redirAfter:12e5};var d=c;if(b){var d=a.extend(c,b)}a("body").append('<div title="Session Timeout" id="sessionTimeout-dialog">'+d.message+"</div>");a("#sessionTimeout-dialog").dialog({autoOpen:false,width:400,modal:true,closeOnEscape:false,open:function(b,c){a(".ui-dialog-titlebar-close").hide()},buttons:{"Log Out Now":function(){window.location=d.logoutUrl},"Stay Connected":function(){a(this).dialog("close");a.ajax({type:"POST",url:d.keepAliveUrl});f("stop");e("start")}}});e("start")}})(jQuery)
+var c={
+	message:"Your session is about to expire."
+	,keepAliveUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm"
+	,redirUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm"
+	,logoutUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm"
+	,warnAfter:900000,redirAfter:1200000};
+	var d=c;
+	  if(b){var d=a.extend(c,b)}
+	  if($('#sessionTimeout-dialog').length == 0) {
+ a("body").append('<div title="Session Timeout" id="sessionTimeout-dialog">'+d.message+"</div>");
+}
+	  
+	  
+	  a("#sessionTimeout-dialog").dialog({autoOpen:false,width:400,modal:true,closeOnEscape:false,open:function(b,c){a(".ui-dialog-titlebar-close").hide()}
+	  	,buttons:{"Log Out Now":function(){window.location=d.logoutUrl}
+			,"Stay Connected":function(){a(this).dialog("close");
+				a.ajax({type:"POST",url:d.keepAliveUrl});f("stop");e("start")}}});e("start")}})(jQuery)
 
 //Localisation 
 var debug=true;
@@ -59,6 +75,7 @@ $( "<div class='switch'></div>" ).insertAfter( ".ios-switch,.ios-switchb" );
 
 
 _lock=function(e){
+	window.console.log('_lock : Loading');
 e=$('.fa-lock');
 	target=e.parent().parent()
 	target.find('input').attr('disabled','disabled');
@@ -443,6 +460,7 @@ $.ajax({type:'GET',async:false,data:{"returnFormat":"json","argumentCollection":
 
  
 _addNewTask=function(params){
+		window.console.log('_addNewTask : Loading');
 var options={"new":"task_id"},str='';
 $.extend(true,options,params);
 	
@@ -450,11 +468,14 @@ $.extend(true,options,params);
 if($('#task_id').val()==0){
 	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
 	 $('label').siblings(':disabled').prop('disabled', false).trigger("chosen:updated");
-	 $('label').siblings(':disabled').prop('disabled', false);	 
+	 $('label').siblings('.hasDatepicker').datepicker("enable");
+	 $('label').siblings(':disabled').prop('disabled', false);
+	 		
 }
 else if($('.'+options['new']).val()==0){
 	 $('.'+options['new']+' label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');
 	 $('.'+options['new']+' label').siblings(':disabled').prop('disabled', false).trigger("chosen:updated");
+	 $('.'+options['new']+' label').siblings('.hasDatepicker').datepicker("enable");	 
 	 $('.'+options['new']+' label').siblings(':disabled').prop('disabled', false);	 
 	}
 
