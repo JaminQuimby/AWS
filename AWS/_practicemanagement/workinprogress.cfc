@@ -88,7 +88,7 @@ SELECT'Administrative Tasks'AS[name]
 </cfif>
 ,'B'AS[orderit]
 FROM [v_clientadministrativetasks]
-WHERE([cas_status]!='2'OR[cas_status]!='3'OR[cas_status]IS NULL)
+WHERE(([cas_status]!='2')OR([cas_status]!='3')OR([cas_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
