@@ -4,7 +4,7 @@
 <cfset page.formid=6>
 <cfset page.title="Tax Returns">
 <cfset page.menuLeft="General,States,Schedule">
-<cfset page.trackers="task_id,subtask1_id,subtask2_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group3_1">
+<cfset page.trackers="task_id,subtask1_id,subtask2_id,isLoaded_group1_1,isLoaded_group1_2,isLoaded_group1_3,isLoaded_group1_4,isLoaded_group1_5,isLoaded_group2,isLoaded_group2_1,isLoaded_group2_2,isLoaded_group2_3,isLoaded_group3,isLoaded_group3_1">
 <cfset page.footer="1">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -71,21 +71,20 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
     <div><label for="g1_taxyear"><i class="fa fa-lock link" ></i> Tax Year</label><select  id="g1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><cfif optionvalue_id neq year(now())><option value="#optionvalue_id#">#optionname#</option><cfelse><option value="#optionvalue_id#" selected="selected">#optionname#</option></cfif></cfoutput></select></div>
 	<div><label for="g1_taxform"><i class="fa fa-lock link" ></i> Tax Form</label><select  id="g1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+ 	<div><label for="g1_g3_multistatereturn"><input id="g1_g3_multistatereturn" type="checkbox" class="ios-switch">Multistate Return</label></div> 
     <div><label for="g1_notrequired"><input id="g1_notrequired" type="checkbox" class="ios-switch">Not Required</label></div>
 	<div><label for="g1_reason">Reason</label><input type="text" maxlength="100" id="g1_reason" ></div>
-	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
+	<div><label for="g1_currentfees">Current Fees</label><input type="text" maxlength="10" id="g1_currentfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+	<div><label for="g1_priorfees">Prior Fees</label><input type="text" maxlength="10" id="g1_priorfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
 	<div><label for="g1_filingdeadline">Filing Deadline</label><input type="text" class="date" id="g1_filingdeadline"></div>
+	<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
+	<div><label for="g1_extensiondone">Extension Completed</label><input type="text" class="date" id="g1_extensiondone" ></div>
 	<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" id="g1_priority" placeholder="0"   class="valid_off" onblur="jqValid({'type':'rationalNumbers','object':this,'message':'This field must be a whole number.'});"></div>
 	<div><label for="g1_esttime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_esttime" ></div>
 	<div><label for="g1_g2_informationreceived">Information Received</label><input type="text" class="date" id="g1_g2_informationreceived" ></div>
+	<div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 	<div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
-    <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
-	<div><label for="g1_extensionrequested">Extension Requested</label><input type="text" class="date" id="g1_extensionrequested" ></div>
-	<div><label for="g1_extensiondone">Extension Completed</label><input type="text" class="date" id="g1_extensiondone" ></div>
-	<div><label for="g1_currentfees">Current Fees</label><input type="text" maxlength="10" id="g1_currentfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_priorfees">Prior Fees</label><input type="text" maxlength="10" id="g1_priorfees" placeholder="0" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
-	<div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+    <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>    
 </div>
 <!--- GROUP1 SUBGROUP1 --->
 <h4 onClick='_run.load_group1_1()'>Appointment</h4>
@@ -102,16 +101,22 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <h4 onClick='_run.load_group1_2()'>Preparation</h4>
 <div>
 	<div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_g2_readyforreview">Ready for Review</label><input type="text" class="date" id="g1_g2_readyforreview" ></div>
 	<div><label for="g1_g2_preparedby">Prepared By</label><select id="g1_g2_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_g2_readyforreview">Ready for Review</label><input type="text" class="date" id="g1_g2_readyforreview" ></div>
+</div>
+
+<!--- GROUP1 SUBGROUP3 --->
+<h4 onClick='_run.load_group1_3()'>Review</h4>
+<div>
 	<div><label for="g1_g2_reviewassignedto">Review Assigned To</label><select id="g1_g2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g2_reviewed">Reviewed</label><input type="text" class="date" id="g1_g2_reviewed" ></div>
 	<div><label for="g1_g2_reviewedby">Reviewed By</label><select id="g1_g2_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g2_reviewedwithnotes">Reviewed With Notes</label><input type="text" class="date" id="g1_g2_reviewedwithnotes" ></div>
 	<div><label for="g1_g2_completed">Completed</label><input type="text" class="date" id="g1_g2_completed" ></div>
 </div>
-<!--- GROUP1 SUBGROUP3 --->
-<h4 onClick='_run.load_group1_3()'>Assembly &amp; Delivery</h4>
+
+<!--- GROUP1 SUBGROUP4 --->
+<h4 onClick='_run.load_group1_4()'>Assembly &amp; Delivery</h4>
 <div>
 	<div><label for="g1_g3_assemblereturn">Assemble Return</label><input type="text" class="date" id="g1_g3_assemblereturn" ></div>
 	<div><label for="g1_g3_contacted">Contacted</label><input type="text" class="date" id="g1_g3_contacted" ></div>
@@ -119,12 +124,12 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
    	<div><label for="g1_g3_emailed"><input id="g1_g3_emailed" type="checkbox" class="ios-switch">Emailed</label></div>
 	<div><label for="g1_g3_missingsignatures"><input id="g1_g3_missingsignatures" type="checkbox" class="ios-switch">Missing Signatures</label></div>
     <div><label for="g1_g3_delivered">Delivered</label><input type="text" class="date" id="g1_g3_delivered" ></div>
-	<div><label for="g1_g3_multistatereturn"><input id="g1_g3_multistatereturn" type="checkbox" class="ios-switch">Multistate Return</label></div>
-
-
+    <div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
-<!--- GROUP1 SUBGROUP4 --->
-<h4 onClick='_run.load_group1_4()'>Personal Property Tax</h4>
+
+<!--- GROUP1 SUBGROUP5 --->
+<h4 onClick='_run.load_group1_5()'>Personal Property Tax</h4>
 <div>
 	<div><label for="g1_g4_required"><input id="g1_g4_required" type="checkbox" class="ios-switch">PPTR Required</label></div>
     <div><label for="g1_g4_extended">PPTR Extension Completed</label><input type="text" class="date" id="g1_g4_extended" ></div>
