@@ -131,6 +131,7 @@ WHERE[FILE_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfargument name="CLIENTID" type="numeric" required="no" default="0">
 <cfargument name="TASKID" type="numeric" required="no" default="0">
 <cfargument name="USERID" type="numeric" required="no" default="0">
+<cfargument name="FILENAME" type="string" required="no">
 <cfargument name="DESCRIPTION" type="string" required="no">
 
 <cftry>
@@ -147,41 +148,7 @@ response.id = arguments.CHUNK;
 </cfscript>	
 <!--- save file data from multi-part form.FILE --->
 <cffile action="upload" result="result" filefield="FILE" destination="#uploadFile#" nameconflict="overwrite"/>
-<cfoutput>
-<cfquery datasource="#Session.organization.name#" name="fQuery">
-INSERT INTO[ctrl_files]
-(
-[file_name]
-,[file_savedname]
-,[file_type]
-,[file_subtype]
-,[file_size]
-,[file_ext]
-,[form_id]
-,[client_id]
-,[task_id]
-,[user_id]
-,[file_year]
-,[file_month]
-,[file_day]
-)
-VALUES(
-<cfqueryparam value="#result.clientFile#"/>
-,<cfqueryparam value="#result.serverFile#"/>
-,<cfqueryparam value="#result.contentType#"/>
-,<cfqueryparam value="#result.contentSubType#"/>
-,<cfqueryparam value="#result.fileSize#"/>
-,<cfqueryparam value="#result.clientFileExt#"/>
-,<cfqueryparam value="#arguments.FORMID#"/>
-,<cfqueryparam value="#arguments.CLIENTID#"/>
-,<cfqueryparam value="#arguments.TASKID#"/>
-,<cfqueryparam value="#arguments.USERID#"/>
-,<cfqueryparam value="#Year(Now())#"/>
-,<cfqueryparam value="#Month(Now())#"/>
-,<cfqueryparam value="#Day(Now())#"/>
-)
-</cfquery>
-</cfoutput>
+
 <cfscript>
 // Example: you can return uploaded file data to client
 response['size'] = result.fileSize;
@@ -202,6 +169,56 @@ fileDelete('#uploadDir#/#arguments.NAME#.#i#');
 fileWrite(tempFile, chunk);
 }
 fileClose(tempFile);
+q = new Query();
+q.setDatasource("#Session.organization.name#");
+q.setName("fQuery"); 
+
+q.addParam( name="name",value="#arguments.FILENAME#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="savedname",value="#arguments.NAME#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="type",value="#result.contentType#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="subtype",value="#result.contentSubType#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="size",value="#result.fileSize#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="ext",value="#result.clientFileExt#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="form_id",value="#arguments.FORMID#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="client_id",value="#arguments.CLIENTID#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="task_id",value="#arguments.TASKID#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="user_id",value="#arguments.USERID#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="year",value="#Year(Now())#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="month",value="#Month(Now())#",cfsqltype="cf_sql_varchar"); 
+q.addParam( name="day",value="#Day(Now())#",cfsqltype="cf_sql_varchar"); 
+q.execute(sql="
+INSERT INTO[ctrl_files]
+(
+[file_name]
+,[file_savedname]
+,[file_type]
+,[file_subtype]
+,[file_size]
+,[file_ext]
+,[form_id]
+,[client_id]
+,[task_id]
+,[user_id]
+,[file_year]
+,[file_month]
+,[file_day]
+)
+VALUES(
+:name
+,:savedname
+,:type
+,:subtype
+,:size
+,:ext
+,:form_id
+,:client_id
+,:task_id
+,:user_id
+,:year
+,:month
+,:day
+)
+");
 }
 catch(any err){
 // clean up chunks for incomplete upload
@@ -218,6 +235,8 @@ fileDelete('#uploadDir##d[i]#');
 response = {'error' = {'code' = 500, 'message' = 'Internal Server Error'}, 'id' = 0};
 }
 }
+
+
 return response;
 </cfscript>
 <cfcatch>
