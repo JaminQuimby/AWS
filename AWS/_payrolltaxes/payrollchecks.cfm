@@ -8,17 +8,15 @@
 <cfset page.footer="1">
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <cfinclude template="/assets/inc/header.cfm">
 <cfquery dbtype="query" name="global_delivery">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='global_delivery'</cfquery>
 <cfquery dbtype="query" name="global_years">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_years'</cfquery>
-
 <cfif URL.task_id gt 0>
 <cfoutput>
 <script>
 $(document).ready(function(){
 $('##task_id').val('#URL.task_id#');
-_toggle("group1");
+_toggle("group1,largeMenu");
 _hide("entrance");$("##content").removeClass();
 $("##content").addClass("contentbig");
 _loadData({"id":"task_id","group":"group1","page":"#page.location#"});

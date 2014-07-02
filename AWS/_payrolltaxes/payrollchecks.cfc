@@ -176,23 +176,23 @@ WHERE[PC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id]
-	,[pc_year]
-	,[pc_duedate]=FORMAT(pc_duedate,'d','#Session.localization.language#') 
-	,[pc_missinginfo]
-	,[pc_payenddate]=FORMAT(pc_payenddate,'d','#Session.localization.language#') 
-	,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
-	,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[pc_obtaininfo_assignedtoTEXT]
-	,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[pc_preparation_assignedtoTEXT]
-	,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[pc_review_assignedtoTEXT]
-	,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[pc_assembly_assignedtoTEXT]
-	,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[pc_delivery_assignedtoTEXT]
- 	,[client_name]
- 	,[client_id]
+,[pc_year]
+,[pc_duedate]=FORMAT(pc_duedate,'d','#Session.localization.language#') 
+,[pc_missinginfo]
+,[pc_payenddate]=FORMAT(pc_payenddate,'d','#Session.localization.language#') 
+,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
+,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_obtaininfo_assignedtoTEXT]
+,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_preparation_assignedtoTEXT]
+,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_review_assignedtoTEXT]
+,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_assembly_assignedtoTEXT]
+,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_delivery_assignedtoTEXT]
+,[client_name]
+,[client_id]
 FROM[v_payrollcheckstatus]
 WHERE[pc_delivery_datecompleted] IS NULL
 <cfif ARGUMENTS.search neq "">
