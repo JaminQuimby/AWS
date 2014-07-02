@@ -11,7 +11,7 @@ $("##uploader").pluploadQueue({
 preinit:_FileUploadedCB,
 runtimes:'html5',
 url:'#this.url#/AWS/assets/plugins/jUpload/upload.cfc?method=upload',
-max_file_size:'10mb',
+max_file_size:'30mb',
 chunk_size:'1mb',
 unique_names:true,
 multiple_queues:true,
@@ -22,7 +22,7 @@ flash_swf_url:"./assets/plupload/js/plupload.flash.swf",
 urlstream_upload:true,
 multipart:true,
 multipart_params:{ },
-resize:{width:320, height:240, quality:90},
+//resize:{width:320, height:240, quality:90},
 filters:[	{title:"Image files", extensions:"jpg,gif,png,bmp"},
 {title:"Audio", extensions:"wav,wma,m4a"},
 {title:"Zip files", extensions:"zip,rar,7z"},
@@ -40,6 +40,7 @@ up.settings.multipart_params = {
 'clientid':$('##client_id').val(),
 'userid':'#session.user.id#',
 'taskid':$('##task_id').val(),
+'filename':files.name,
 }
 }
 //ADD LINE
@@ -73,6 +74,9 @@ if($("##isLoaded_group100").val()!=0){
 _saveData({"group":"group100",payload:$.parseJSON(json),page:"upload",plugin:"group100"})}
 else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}
 }
+
+
+
 _group100=function(){_grid100()}
 _grid100=function(){
 _jGrid({
@@ -82,7 +86,7 @@ _jGrid({
 "fields":{FILE_ID:{key:true,list:false,edit:false},FILE_SAVEDNAME:{list:true,edit:false,title:'',width:'2%',display: function (data1) {
                          var $img = $('<i class="fa fa-cloud-download fa-2x" style="cursor:pointer"></i>');
 $img.click(function () {
-     window.open('//cj.qutera.com/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'','_filedownload');
+     window.open('//'+window.location.hostname+'/AWS/assets/plugins/jUpload/download.cfm?FILE_SAVEDNAME='+data1.record.FILE_SAVEDNAME+'&FILE_TYPE='+data1.record.FILE_TYPE+'&FILE_SUBTYPE='+data1.record.FILE_SUBTYPE+'&FILE_NAME='+data1.record.FILE_NAME+'','_filedownload');
 });return $img;}} ,FILE_NAME:{title:'File Name'},FILE_DESCRIPTION:{title:'Description'},FILE_YEAR:{title:'Year'},FILE_MONTH:{title:'Month'},FILE_DAY:{title:'Day'}},
 "method":"f_lookupData",
 "arguments":'{"search":"'+$("##g100_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","taskid":"'+$("##task_id").val()+'","loadType":"group100","clientid":'+$("##client_id").val()+'}',
