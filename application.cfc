@@ -4,7 +4,7 @@
      
     <!--- Set up the Application --->
     <cfset this.applicationtimeout=CreateTimeSpan( 0, 0, 30, 0 ) />	
-	<cfset this.sessiontimeout=createTimeSpan( 0, 0, 29, 59 ) />
+	<cfset this.sessiontimeout=createTimeSpan( 0, 0, 29, 0 ) />
     <cfset this.name="AWS" />
     <cfset this.sessionmanagement=true />
 	<cfset this.path=getDirectoryFromPath(getCurrentTemplatePath())/> 
@@ -16,7 +16,7 @@
     
     <!--- Define the page request properties. --->
     <cfsetting
-    requesttimeout="20"
+    requesttimeout="29"
     showdebugoutput="true"
 	 />
 
@@ -56,9 +56,22 @@
  <!--- Define Login Requirements--->
   <cfargument name="request" required="true"/>     
 
-<cfif IsDefined("Form.logout")> 
+<cfif IsDefined("Form.logout") or isDefined("URL.logout")> 
+<cflock timeout=29 scope="Session" type="Exclusive"> 
 <cfset StructClear(form)>
-<cfset StructClear(session.user)>
+<cfset StructClear(session)>
+<cfloop
+item="name"
+collection="CFID,CFTOKEN,JSESSIONID">
+ 
+<cfcookie
+name="#name#"
+value=""
+expires="now"
+/>
+ 
+</cfloop>
+</cflock>
 </cfif> 
 
 
@@ -79,6 +92,9 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 </cfquery>
 
 <cfif loginQuery.recordCount eq 1>
+
+<cflock timeout=29 scope="Session" type="Exclusive"> 
+<cfset Session.time=createTimeSpan( 0, 0, 29, 0 ) />
 <cfset Session.user.id=loginQuery.user_id>
 <cfset Session.user.name=loginQuery.si_name>
 <cfset Session.user.initials=loginQuery.si_initials>
@@ -90,6 +106,8 @@ AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="C
 <cfset Session.localization.language='en-US'>
 <cfset Session.localization.formatphone='(######) ######-########'>
 <cfset Session.localization.formatdatetime='M/d/yyyy h:mm:ss tt'>
+</cflock>
+
 </cfif>
 <cfif loginQuery.recordCount eq 0>
 

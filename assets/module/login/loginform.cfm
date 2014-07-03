@@ -3,9 +3,14 @@
 <cfif  Session.organization.name eq "AWS_sandbox">
 <cfset Session.organization.name=UCase("AWS_CJ")>
 </cfif>
-
 <cfparam name="URL.r" default="">
 <cfparam name="URL.e" default="">
+<cfparam name="URL.returnFormat" default="html">
+<cfparam name="URL.time" default="false">
+<cfparam name="URL.keepalive" default="false">
+<cfif URL.returnFormat eq 'json'>{Result:"ERROR","Message":"Not Logged In","group":"error"}<cfabort></cfif>
+<cfif URL.time eq true><cfoutput></cfoutput><cfabort></cfif>
+<cfif URL.keepalive eq true><cfoutput></cfoutput><cfabort></cfif>
 <!DOCTYPE html> 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -16,6 +21,7 @@
 </cfoutput>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css"/>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
 <script type="application/javascript">
 _run={
 	reset_password:function(params){

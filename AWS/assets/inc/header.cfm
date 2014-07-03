@@ -84,6 +84,7 @@ $.extend(true, user, params);
 <script type="text/javascript" src="#this.url#/AWS/assets/module/jqValid/jqValid.jquery.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/module/jquery-mask-plugin-master/jquery.mask.min.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/module/DYMO/DYMO.Label.Framework.latest.js" charset="UTF-8"></script>
+<script type="text/javascript" src="#this.url#/AWS/assets/module/knob/dist/jquery.knob.min.js"></script>
 <script language="javascript"  src="#this.url#/AWS/assets/plugins/pluginsjs.cfm?id=#createUuid()#"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/plupload.full.js"></script>
 <script type="text/javascript" src="#this.url#/AWS/assets/plugins/jUpload/assets/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
