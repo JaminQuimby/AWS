@@ -342,9 +342,7 @@ SELECT[tr_id]
 ,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#')
 ,[tr_4_required] 
 FROM[v_taxreturns]
-<cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
+WHERE[tr_notrequired] <> 1 AND [tr_3_delivered] IS NULL 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, tr_duedate, 101) ASC </cfif>
 </cfquery>
 <cfset myResult="">
