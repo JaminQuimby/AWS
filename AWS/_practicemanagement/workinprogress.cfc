@@ -479,9 +479,11 @@ SELECT'Personal Property Tax Returns'AS[name]
 
 ,'K'AS[orderit]
 FROM[v_taxreturns]
-WHERE([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-OR(([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-AND [tr_3_delivered] IS NULL
+
+WHERE
+([tr_4_required]=(1)AND[tr_4_delivered]IS NULL)
+
+OR(([tr_4_required]=(1)AND[tr_4_delivered]IS NULL)AND[tr_3_delivered]IS NULL
 AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
@@ -496,7 +498,12 @@ SELECT'Tax Returns'AS[name]
 ,COUNT(tr_id)AS[count_assigned]
 ,(0)AS[total_subtask_time]
 
-,COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u THEN[tr_id]ELSE 0 END)AS[count_subtask_assigned]
+,COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NULL THEN[tr_id]ELSE NULL END)
++COUNT(DISTINCT CASE WHEN ISNULL(tr_2_reviewassignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NULL THEN[tr_id]ELSE NULL END)
++COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NOT NULL THEN[tr_id]ELSE NULL END)
+AS[count_subtask_assigned]
+
+
 <cfelse>
 ,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
 ,COUNT(tr_id)AS[count_assigned]
@@ -507,10 +514,18 @@ SELECT'Tax Returns'AS[name]
 
 ,'L'AS[orderit]
 FROM[v_taxreturns]
-WHERE([tr_3_delivered]IS NULL )
-
+WHERE([tr_notrequired]!=(1)AND[tr_3_delivered]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND[tr_2_assignedto]=@u</cfif>
+<cfif ARGUMENTS.userid neq "0">
+
+AND(
+(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NULL)
+OR(ISNULL(tr_2_reviewassignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NULL AND  [tr_2_readyforreview] IS NOT NULL)
+OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NOT NULL)
+OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NOT NULL AND ISNULL(tr_2_reviewassignedto,0) =0 )
+)
+
+</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 </cfquery>
@@ -1527,7 +1542,16 @@ FROM[v_taxreturns]
 WHERE([tr_3_delivered]IS NULL )
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND[tr_2_assignedto]=@u</cfif>
+<cfif ARGUMENTS.userid neq "0">
+
+AND(
+(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NULL)
+OR(ISNULL(tr_2_reviewassignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NULL AND  [tr_2_readyforreview] IS NOT NULL)
+OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NOT NULL)
+OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NOT NULL AND ISNULL(tr_2_reviewassignedto,0) =0 )
+)
+
+</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
