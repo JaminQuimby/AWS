@@ -108,7 +108,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <!--- GROUP1 SUBGROUP3 --->
 <h4 onClick='_run.load_group1_3()'>Review</h4>
 <div>
-	<div><label for="g1_g2_reviewassignedto">Review Assigned To</label><select id="g1_g2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_g2_reviewassignedto">Assigned To</label><select id="g1_g2_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g2_reviewed">Reviewed</label><input type="text" class="date" id="g1_g2_reviewed" ></div>
 	<div><label for="g1_g2_reviewedby">Reviewed By</label><select id="g1_g2_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g2_reviewedwithnotes">Reviewed With Notes</label><input type="text" class="date" id="g1_g2_reviewedwithnotes" ></div>

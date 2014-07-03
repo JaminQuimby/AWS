@@ -132,8 +132,10 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group1_3">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#')
-,[tr_2_preparedby] 
-,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
+,[tr_2_reviewassignedto]
+,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#')
+,[tr_2_reviewedby] 
+,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#')
 FROM[v_taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
