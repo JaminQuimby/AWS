@@ -1,10 +1,10 @@
 #################
-## Dreamweaver
+## Dreamweaver or Sublime
 #################
 _notes
-dwsync.xml
-
-
+*dwsync.xml
+*sftp-config.json
+*.sublime-project
 #################
 ## Eclipse
 #################
