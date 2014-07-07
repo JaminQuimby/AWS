@@ -143,13 +143,16 @@ SELECT
 [mc_id]
 ,[mcs_id]
 ,[mcs_assignedtoTEXT]
-,[mcs_duedate]
+,[mcs_duedate]=FORMAT(mcs_duedate,'d','#Session.localization.language#') 
 ,[mcs_sequence]
 ,[mcs_completed]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
 ,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
 FROM[v_managementconsulting_subtask]
-WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND ([mcs_notes]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>OR[mcs_notes]IS NULL)
+WHERE [mcs_status]!=2 AND [mcs_status]!=3
+<cfif ARGUMENTS.search neq "">
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+</cfif> 
 ORDER BY [mcs_sequence]
 </cfquery>
 <cfset myResult="">
