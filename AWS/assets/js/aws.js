@@ -40,7 +40,7 @@ a("#sessionTimeout-dialog").dialog({autoOpen:false,width:400,modal:true,closeOnE
 
 
 //Localisation 
-var debug=true;
+var debug=false;
 $(document).ready(function(){
 
 
@@ -94,7 +94,7 @@ $( "<div class='switch'></div>" ).insertAfter( ".ios-switch,.ios-switchb" );
 
 
 _lock=function(e){
-	window.console.log('_lock : Loading');
+if(debug==true){window.console.log('_lock : Loading');}
 e=$('.fa-lock');
 	target=e.parent().parent()
 	target.find('input').attr('disabled','disabled');
@@ -120,7 +120,7 @@ if(a==true){
 
 
 _lock();
-
+/*
 _toCSV2=function($table, filename) {
 
         var $rows = $table.find('tr:has(td)'),
@@ -160,8 +160,11 @@ _toCSV2=function($table, filename) {
 
     // This must be a hyperlink
     $(".export").on('click', function (event) {
-        _toCSV.apply(this, [$('#'+$table+'>table'), 'export.csv']);
+        _toCSV.apply(this, [$('#'+$table+'>table'), 'export.xls']);
     });
+*/
+
+
 });
 
 
@@ -452,7 +455,7 @@ $.extend({
 })(jQuery, this);
 
 
-function _toCSV(table,filename){
+_toCSV=function(table,filename){
 $.fileDownload('https://'+window.location.hostname+'/AWS/assets/inc/export/excel.cfm',{data:'data='+encodeURIComponent( $('.jtable')[0].innerHTML),name:filename
 ,preparingMessageHtml: "We are preparing your report, please wait..."
 ,failMessageHtml: "There was a problem generating your report, please try again."});
@@ -682,7 +685,7 @@ $(grid).jtable({
         icon: ' ',
         text: 'Export to Excel',
         click: function () {
-         _toCSV($('#'+options['grid']+' table'), 'export.csv');
+         _toCSV($('#'+options['grid']+' table'), 'export.xls');
         }
     }]
 },

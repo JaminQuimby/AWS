@@ -12,10 +12,10 @@
 	"buffers":
 	[
 		{
-			"file": "aws.sublime-project",
+			"file": "test.cfm",
 			"settings":
 			{
-				"buffer_size": 395,
+				"buffer_size": 613,
 				"line_ending": "Windows"
 			}
 		},
@@ -28,13 +28,11 @@
 			}
 		},
 		{
-			"contents": "Package Control Messages\n========================\n\nSFTP:\n----\n\n  Thanks for installing Sublime SFTP! Below are some quick notes to get you\n  started with the plugin. Please see http://wbond.net/sublime_packages/sftp for\n  the full documentation.\n  \n  \n  There are two major modes of operation:\n  1. Mapping a local folder to a remote folder\n  2. Working off of a server\n  \n  \n  Mapping a Local Folder to a Remote Folder\n  ----\n  \n  To map a local folder to a remote folder, right-click on it in the side bar\n  and select the SFTP/SFTP > Map to Remote... You will enter your connection\n  parameters and a new file will be created named sftp-config.json.\n  \n  Once this file has been saved, all files in that folder and all subfolders\n  will have various operations available via the side bar context menu, editor\n  context menu and command palette.\n  \n  \n  Working off of a Server\n  ----\n  \n  To work off of a server, use the File menu and select SFTP/FTP > Setup Server...\n  You will enter your connection parameters and options then save the file with\n  the name you want to give the connection.\n  \n  Once the server config is saved, you will be automatically connected to the\n  server and you can browse and perform actions via the quick panel.\n  \n  Unfortunely due to limitations of the Sublime Text 2 API, it is not possible\n  to present the remote filesystem in the side bar. There are, however, key\n  bindings for connecting to servers to help reduce the amount of time remote\n  file operations take.\n  \n  \n  Support\n  ----\n  \n  To learn more about the features and settings, please visit\n  http://wbond.net/sublime_packages/sftp.\n  \n  If you are having trouble, please contact me at support@wbond.net. The Support\n  page, http://wbond.net/sublime_packages/sftp/support, includes instructions\n  for capturing a debug log that will be useful if you believe you are\n  experiencing a bug.\n  \n",
+			"file": "AWS/assets/js/aws.js",
 			"settings":
 			{
-				"buffer_size": 1895,
-				"line_ending": "Windows",
-				"name": "Package Control Messages",
-				"scratch": true
+				"buffer_size": 40026,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -99,18 +97,23 @@
 	},
 	"file_history":
 	[
-		"/C/Program Files/Sublime Text 3/Data/Packages/WebDavSync/README.md",
+		"/C/Users/Admin/Documents/GitHub/AWS/sftp-config.json",
+		"/C/Program Files/Sublime Text 3/Data/Packages/User/SFTP.sublime-settings",
+		"/C/Program Files/Sublime Text 3/Data/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Program Files/Sublime Text 3/Data/Packages/SFTP/SFTP.sublime-settings",
+		"/C/Program Files/Sublime Text 3/Data/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/aws.sublime-project",
+		"/C/Program Files/Sublime Text 3/Data/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Program Files/Sublime Text 3/Data/Packages/WebDavSync/README.md",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/otherfilings.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/payrollchecks.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/module/jqPlot/examples/kcp_pyramid_by_age.php",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/module/jquery-mask-plugin-master/package.json",
 		"/C/Program Files/Sublime Text 3/Data/Packages/User/Preferences.sublime-settings",
 		"/C/Program Files/Sublime Text 3/Data/Packages/User/Package Control.sublime-settings",
-		"/C/Program Files/Sublime Text 3/Data/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/otherfilings.js",
 		"/C/Users/Admin/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
-		"/C/Users/Admin/Documents/GitHub/AWS/aws.sublime-project",
 		"/C/Users/DEV/Desktop/Security Package Fix.js",
 		"/C/Users/DEV/Desktop/quickbooks_twain_fix.reg",
 		"/C/Users/DEV/Desktop/RDP CLIENTS/QBPro2012.rdp",
@@ -126,7 +129,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -140,6 +143,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".csv",
+			".xls",
+			".csvxsl"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -162,24 +168,27 @@
 			[
 				{
 					"buffer": 0,
-					"file": "aws.sublime-project",
+					"file": "test.cfm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 395,
+						"buffer_size": 613,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								196,
-								196
+								613,
+								613
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -191,7 +200,7 @@
 				{
 					"buffer": 1,
 					"file": "AWS/_practicemanagement/workinprogress.js",
-					"semi_transient": false,
+					"semi_transient": true,
 					"settings":
 					{
 						"buffer_size": 25783,
@@ -201,16 +210,19 @@
 						"selection":
 						[
 							[
-								21933,
-								21933
+								0,
+								0
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 6630.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -218,33 +230,42 @@
 				},
 				{
 					"buffer": 2,
+					"file": "AWS/assets/js/aws.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1895,
+						"buffer_size": 40026,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1895,
-								1895
+								7281,
+								7281
 							]
 						],
 						"settings":
 						{
 							"incomplete_sync": null,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"word_wrap": true
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1970.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -265,11 +286,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.899881516588,
 			1.0
 		],
 		"rows":
@@ -285,7 +313,7 @@
 	},
 	"output.sftp":
 	{
-		"height": 0.0
+		"height": 100.0
 	},
 	"project": "aws.sublime-project",
 	"replace":
