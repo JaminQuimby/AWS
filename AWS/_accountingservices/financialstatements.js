@@ -89,7 +89,7 @@ switch(query.COLUMNS[0]){
 /*Group1_9*/case "FDS_ASSEMBLY_ASSIGNEDTO":var list='g1_g9_assignedto,g1_g9_completedby,g1_g9_datecompleted,g1_g9_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_10*/case "FDS_DELIVERY_ASSIGNEDTO":var list='g1_g10_assignedto,g1_g10_completedby,g1_g10_datecompleted,g1_g10_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_11*/case "FDS_ACCTRPT_ASSIGNEDTO":var list='g1_g11_assignedto,g1_g11_completedby,g1_g11_datecompleted,g1_g11_estimatedtime';_loadit({"query":query,"list":list});break;
-/*Group2*/case "FDSS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask,g2_dependencies,g2_estimatedtime,g2_actualtime';_loadit({"query":query,"list":list});break;
+/*Group2*/case "FDSS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_duedate,g2_notes,g2_sequence,g2_status,g2_subtask,g2_subtaskcustom,g2_dependencies,g2_estimatedtime,g2_actualtime';_loadit({"query":query,"list":list});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 /*assetCompTask*/case "FDS_OBTAININFO_DATECOMPLETED":var list='g1_g1_head1,g1_g1_head2,g1_g2_head1,g1_g2_head2,g1_g3_head1,g1_g3_head2,g1_g4_head1,g1_g4_head2,g1_g5_head1,g1_g5_head2,g1_g6_head1,g1_g6_head2,g1_g7_head1,g1_g7_head2,g1_g8_head1,g1_g8_head2,g1_g9_head1,g1_g9_head2,g1_g10_head1,g1_g10_head2,g1_g11_head1,g1_g11_head2';_loadit({"query":query,"list":list});break;
 
@@ -363,6 +363,7 @@ $("#g2_notes").val()+'","'+
 $("#g2_sequence").val()+'","'+
 $("#g2_status").val()+'","'+
 $("#g2_subtask").val()+'","'+
+$("#g2_subtaskcustom").val()+'","'+
 $("#g2_dependencies").val()+'","'+
 $("#g2_estimatedtime").val()+'","'+
 $("#g2_actualtime").val()+'","'+

@@ -50,6 +50,7 @@ SELECT[mcs_id]
 ,[mcs_sequence]
 ,[mcs_status]
 ,[mcs_subtask] 
+,[mcs_subtaskcustom] 
 FROM[managementconsulting_subtask]
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 </cfcase>
@@ -294,6 +295,7 @@ INSERT INTO[managementconsulting_subtask](
 ,[mcs_sequence]
 ,[mcs_status]
 ,[mcs_subtask] 
+,[mcs_subtaskcustom] 
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -307,6 +309,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[mcs_id]
 </cfquery>
@@ -332,6 +335,7 @@ SET[mc_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[mcs_sequence]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[mcs_status]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,[mcs_subtask]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[mcs_subtaskcustom]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 WHERE[mcs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>

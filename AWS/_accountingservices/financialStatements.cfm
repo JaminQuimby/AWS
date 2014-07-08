@@ -187,10 +187,11 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 		<cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='_run.new_group2();'>Add</a></cfif>
 		</div>
 	</div>
-	<h4>Add Subtask</h4>
+	<h4>Subtask Detail</h4>
     <div>
     	<div><label for="g2_subtask"><i class="fa fa-lock link" ></i> SubTask</label><select id="g2_subtask" disabled="disabled" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-		<div><label for="g2_sequence"><i class="fa fa-lock link" ></i> Sequence</label><input type="text" disabled="disabled" maxlength="6" id="g2_sequence"  /></div>
+		<div><label for="g2_subtaskcustom"><i class="fa fa-lock link" ></i> Custom Subtask</label><input type="text" disabled="disabled" id="g2_subtaskcustom" /></div>
+		<div><label for="g2_sequence"><i class="fa fa-lock link" ></i> Sequence</label><input type="text" disabled="disabled" maxlength="6" id="g2_sequence" /></div>
 		<div><label for="g2_status"><i class="fa fa-lock link" ></i> Status</label><select id="g2_status" disabled="disabled"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     	<div><label for="g2_dependencies">Dependencies</label><select id="g2_dependencies" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_financialstatmentsubtask"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>		
         <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

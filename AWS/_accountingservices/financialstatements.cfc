@@ -221,6 +221,7 @@ SELECT[fdss_id]
 ,[fdss_sequence]
 ,[fdss_status]
 ,[fdss_subtask]
+,[fdss_subtaskcustom]
 ,[fdss_dependencies]
 ,[fdss_esttime]
 ,[fdss_actualtime]
@@ -303,40 +304,39 @@ ORDER BY [fds_Year] DESC ,[fds_periodend]
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fds_id]
- 	,[client_id]
- 	,[client_name]
- 	,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
-	,[fds_month]
-	,[fds_year]
-	,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
-	,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
-	,[fds_status]
-	,[fds_missinginfo]
- 	,[fds_compilemi]
-	,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
-	,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_obtaininfo_assignedtoTEXT]
-	,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_sort_assignedtoTEXT]
-	,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_checks_assignedtoTEXT]
-	,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_sales_assignedtoTEXT]
-	,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_entry_assignedtoTEXT]
-	,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_reconcile_assignedtoTEXT]
-	,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_compile_assignedtoTEXT]
-	,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_review_assignedtoTEXT]
-	,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_assembly_assignedtoTEXT]
-	,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_delivery_assignedtoTEXT]
-	,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
-	,[fds_acctrpt_assignedtoTEXT]
-
+,[client_id]
+,[client_name]
+,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+,[fds_month]
+,[fds_year]
+,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+,[fds_status]
+,[fds_missinginfo]
+,[fds_compilemi]
+,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
+,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_obtaininfo_assignedtoTEXT]
+,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sort_assignedtoTEXT]
+,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_checks_assignedtoTEXT]
+,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sales_assignedtoTEXT]
+,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_entry_assignedtoTEXT]
+,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_reconcile_assignedtoTEXT]
+,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_compile_assignedtoTEXT]
+,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_review_assignedtoTEXT]
+,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_assembly_assignedtoTEXT]
+,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_delivery_assignedtoTEXT]
+,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus]
 WHERE ISNULL([fds_status],0) != 2 
 AND ISNULL([fds_status],0) != 3
@@ -370,7 +370,6 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"FDS_ASSEMBLY":"'&fds_assembly_datecompleted&'<br/>'&fds_assembly_assignedtoTEXT&'"
 								,"FDS_DELIVERY":"'&fds_delivery_datecompleted&'<br/>'&fds_delivery_assignedtoTEXT&'"
 								,"FDS_ACCTRPT":"'&fds_acctrpt_datecompleted&'<br/>'&fds_acctrpt_assignedtoTEXT&'"
-
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -392,9 +391,6 @@ FROM[v_financialDataStatus_Subtask]
 WHERE ISNULL([fdss_status],0) != 2 
 AND ISNULL([fdss_status],0) != 3
 AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-
-
-
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -750,6 +746,7 @@ INSERT INTO[financialdatastatus_subtask]([fds_id]
 ,[fdss_sequence]
 ,[fdss_status]
 ,[fdss_subtask]
+,[fdss_subtaskcustom]
 ,[fdss_dependencies]
 ,[fdss_esttime]
 ,[fdss_actualtime]
@@ -766,6 +763,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
 ,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -788,9 +786,10 @@ SET[fds_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[fdss_sequence]=<cfqueryparam value="#j.DATA[1][7]#" NULL="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[fdss_status]=<cfqueryparam value="#j.DATA[1][8]#" NULL="#LEN(j.DATA[1][8]) eq 0 or j.DATA[1][8] eq "null"#"/>
 ,[fdss_subtask]=<cfqueryparam value="#j.DATA[1][9]#" NULL="#LEN(j.DATA[1][9]) eq 0  or j.DATA[1][8] eq "null"#"/>
-,[fdss_dependencies]=<cfqueryparam value="#j.DATA[1][10]#" NULL="#j.DATA[1][10] eq "null"#"/>
-,[fdss_esttime]=<cfqueryparam value="#j.DATA[1][11]#"  null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[fdss_actualtime]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[fdss_subtaskcustom]=<cfqueryparam value="#j.DATA[1][10]#"  null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[fdss_dependencies]=<cfqueryparam value="#j.DATA[1][11]#" NULL="#j.DATA[1][11] eq "null"#"/>
+,[fdss_esttime]=<cfqueryparam value="#j.DATA[1][12]#"  null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[fdss_actualtime]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>
@@ -805,7 +804,6 @@ WHERE[fdss_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!--- Group2_Clone1 --->
 <cfcase value="group2_clone1">
 <!--- if this is a new record, then insert it--->
-
 <cfquery name="aquery" datasource="#Session.organization.name#">
 SELECT TOP(1)[option_1]FROM[ctrl_selectOptions]WHERE[selectName_id]='3'AND[optionValue_id]=<cfqueryparam value="#j.DATA[1][3]#"/>
 </cfquery>
@@ -818,30 +816,24 @@ INSERT INTO[financialdatastatus_subtask]([fds_id],[fdss_sequence],[fdss_subtask]
 SELECT SCOPE_IDENTITY()AS[fds_id]
 </cfquery>
 <cfreturn '{"id":"#fquery.fds_id#","group":"saved","result":"ok"}'>
-
 </cfcase>
 
 <!--- Group2_Clone2 --->
 <cfcase value="group2_clone2">
 <!--- if this is a new record, then insert it--->
-
-
 <cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO [financialDataStatus_Subtask]([fds_id],[fdss_sequence],[fdss_subtask],[fdss_dependencies])
 SELECT <cfqueryparam value="#j.DATA[1][1]#">,[fdss_sequence],[fdss_subtask],[fdss_dependencies]
 FROM[financialDataStatus_Subtask]
 WHERE[fds_id]=<cfqueryparam value="#j.DATA[1][2]#" />
 AND[fdss_active]!=0
-
 </cfquery>
 <cfreturn '{"id":"#j.DATA[1][1]#","group":"saved","result":"ok"}'>
 </cfcase>
-
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"group":"#cfcatch.message# - #cfcatch.detail#","result":"error"}'>
-
 </cfcatch>
 </cftry>
 </cffunction>

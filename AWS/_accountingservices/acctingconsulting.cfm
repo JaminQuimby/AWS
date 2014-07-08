@@ -98,10 +98,11 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='_run.new_group2();'>Add</a></cfif>
 </div>
 </div>
-<h4 onClick='_run.load_group2();'>Add Subtask</h4>
+<h4 onClick='_run.load_group2();'>Subtask Detail</h4>
 <div>
 <div><label for="g2_sequence">Sequence</label><input maxlength="3" type="text" id="g2_sequence" ></div>
 <div><label for="g2_subtask">Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g2_subtaskcustom">Custom Subtask</label><input type="text" id="g2_subtaskcustom" /></div>
 <div><label for="g2_status">Status</label><select  id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_duedate">Due Date</label><input type="text" id="g2_duedate" class="date" ></div>
