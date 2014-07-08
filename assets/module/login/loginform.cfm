@@ -25,11 +25,17 @@
 <script type="application/javascript">
 _run={
 	reset_password:function(params){
-options={"r":"","e":""}		
+options={"e":"","u":""}
+if($("#a_password").val()==$("#b_password").val()){c_password=$("#a_password").val()}
+$.extend(true,options,params);
 $.ajax({
   type: 'GET',
   url:'/assets/module/login/mail.cfc?method=f_resetPassword',
-  data: {"returnFormat":"json","argumentCollection":JSON.stringify({"email":""+$("#j_username").val()+""})
+  data: {"returnFormat":"json","argumentCollection":JSON.stringify({
+    "email":""+options['e']+"",
+    "uid":""+options['u']+"",
+    "password":""+c_password+""
+        })
   },
   success:function(json){var d=$.parseJSON(json);$('.message').html('<br/>'+d.message);},   
   error:function(json){  var d=$.parseJSON(json);$('.message').html('<br/>'+d.message);}    
@@ -59,7 +65,7 @@ input { font-family: 'FontAwesome'; }
  <input type="password" id="a_password" placeholder="&##xf023;  Password" >
  <label for="b_password">Verify Password:</label>
  <input type="password" id="b_password" placeholder="&##xf023;  Password" >
- <div class="buttonbox"><input type="button" value="Save" onClick='_run.reset_password({"UID":"#URL.r#","e":"#URL.e#"})'></div>
+ <div class="buttonbox"><input type="button" value="Save" onClick='_run.reset_password({"u":"#URL.r#","e":"#URL.e#"})'></div>
 </div> 
 <cfelse>
 <H2>Please Log In</H2>
@@ -69,7 +75,7 @@ input { font-family: 'FontAwesome'; }
  <input name="j_username" type="email" id="j_username" placeholder="&##xf0e0;  Email Address" >
  <label for="j_password">Password:</label>
  <input type="password" name="j_password" id="j_password" placeholder="&##xf023;  Password" >
-<div class="buttonbox"><input type="submit" value="Log In"> | <a href="##" onClick="_run.reset_password()">Forgot Password</a></div>
+<div class="buttonbox"><input type="submit" value="Log In"> | <a href="##" onClick="_run.reset_password({"e":""+$("##j_username").val()+""})">Forgot Password</a></div>
 </form>
 </div>
 </cfif>
