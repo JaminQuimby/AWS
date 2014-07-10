@@ -185,6 +185,8 @@ SELECT[bf_id]
 FROM[v_businessformation]
 WHERE[bf_status] != 2 
 AND [bf_status] != 3
+AND [client_active]=(1)
+AND [bf_active]=(1)
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

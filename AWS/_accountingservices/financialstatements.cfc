@@ -340,6 +340,8 @@ SELECT[fds_id]
 FROM[v_financialDataStatus]
 WHERE ISNULL([fds_status],0) != 2 
 AND ISNULL([fds_status],0) != 3
+AND [client_active]=(1)
+AND [fds_active]=(1)
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

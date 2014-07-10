@@ -87,6 +87,9 @@ SELECT[ftp_id]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
 FROM[v_financialtaxplanning]
 WHERE [ftp_status]!=2 AND [ftp_status]!=3
+AND [client_active]=(1)
+AND [ftp_active]=(1)
+
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

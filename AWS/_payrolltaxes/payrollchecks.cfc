@@ -195,6 +195,8 @@ SELECT[pc_id]
 ,[client_id]
 FROM[v_payrollcheckstatus]
 WHERE[pc_delivery_datecompleted] IS NULL
+AND [client_active]=(1)
+AND [pc_active]=(1)
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

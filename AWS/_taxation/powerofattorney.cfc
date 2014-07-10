@@ -73,8 +73,10 @@ SELECT[pa_id]
 ,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
 
 FROM[v_powerofattorney]
+WHERE [client_active]=(1)
+AND [pa_active]=(1)
 <cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>

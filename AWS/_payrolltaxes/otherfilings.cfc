@@ -254,6 +254,8 @@ SELECT[of_id]
  FROM[v_otherfilings]
 WHERE[of_status] != 2 
 AND [of_status] != 3
+AND [client_active]=(1)
+AND [of_active]=(1)
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

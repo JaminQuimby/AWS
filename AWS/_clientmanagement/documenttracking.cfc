@@ -89,8 +89,10 @@ FOR XML PATH('')),1,1,'') AS 'dt_assignedtoTEXT'
 ,dt_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](dt_assignedto)))FOR XML PATH('')),3,1000)
 
 FROM[v_documenttracking]
+WHERE [client_active]=(1)
+AND [dt_active]=(1)
 <cfif ARGUMENTS.search neq "">
-WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
