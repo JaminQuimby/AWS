@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"va",
+				"value"
+			],
+			[
+				"has",
+				"hasCode"
+			],
+			[
 				"fun",
 				"function"
 			]
@@ -16,22 +24,6 @@
 			"settings":
 			{
 				"buffer_size": 613,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "AWS/_practicemanagement/workinprogress.js",
-			"settings":
-			{
-				"buffer_size": 25783,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "AWS/assets/js/aws.js",
-			"settings":
-			{
-				"buffer_size": 40026,
 				"line_ending": "Windows"
 			}
 		}
@@ -97,12 +89,16 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/assets/module/login/loginform.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/assets/module/login/mail.cfc",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/inc/export/excel.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/sftp-config.json",
 		"/C/Program Files/Sublime Text 3/Data/Packages/User/SFTP.sublime-settings",
 		"/C/Program Files/Sublime Text 3/Data/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Program Files/Sublime Text 3/Data/Packages/SFTP/SFTP.sublime-settings",
 		"/C/Program Files/Sublime Text 3/Data/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/aws.sublime-project",
 		"/C/Program Files/Sublime Text 3/Data/Packages/Package Control/Package Control.sublime-settings",
 		"/C/Program Files/Sublime Text 3/Data/Packages/WebDavSync/README.md",
@@ -129,7 +125,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -143,6 +139,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"1440",
+			"export",
+			"csv",
 			".csv",
 			".xls",
 			".csvxsl"
@@ -163,7 +162,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -194,70 +193,6 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "AWS/_practicemanagement/workinprogress.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 25783,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "AWS/assets/js/aws.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 40026,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7281,
-								7281
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1970.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 0,
 					"type": "text"
 				}
@@ -271,7 +206,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -297,7 +232,7 @@
 		"cols":
 		[
 			0.0,
-			0.899881516588,
+			0.73518957346,
 			1.0
 		],
 		"rows":
@@ -318,7 +253,7 @@
 	"project": "aws.sublime-project",
 	"replace":
 	{
-		"height": 0.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
