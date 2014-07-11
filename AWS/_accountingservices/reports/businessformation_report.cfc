@@ -67,7 +67,8 @@ SELECT[bf_id]
 ,[client_name]
 ,[client_id]
 FROM[v_businessformation]
-
+WHERE [client_active]=(1)
+AND [bf_active]=(1)
 <cfset sqllist = "bf_activity,bf_assignedto,bf_dateinitiated,bf_duedate,bf_esttime,bf_fees,bf_owners,bf_paid,bf_priority,bf_status,bf_articlesapproved,bf_articlessubmitted,bf_tradenamereceived,bf_tradenamesubmitted,bf_minutesbylawsdraft,bf_minutesbylawsfinal,bf_minutescompleted,bf_dissolutioncompleted,bf_dissolutionrequested,bf_dissolutionsubmitted,bf_businessreceived,bf_businesssubmitted,bf_otheractivity,bf_othercompleted,bf_otherstarted">
 <cfset key="bf_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>

@@ -594,7 +594,9 @@ SELECT Distinct [mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 FROM[v_managementconsulting_subtask]
-WHERE([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
+WHERE [client_active]=(1)
+AND [mc_active]=(1)
+AND ([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -700,7 +702,9 @@ SELECT [cas_id]
 ,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 
 FROM[v_clientadministrativetasks]
-WHERE([cas_status]NOT IN('2','3')OR([cas_status]IS NULL))
+WHERE [client_active]=(1)
+AND [cas_active]=(1)
+AND ([cas_status]NOT IN('2','3')OR([cas_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -755,7 +759,9 @@ SELECT DISTINCT[bf_id]
 ,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
 ,[bf_missinginfo]
 FROM[v_businessformation_subtask]
-WHERE([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
+WHERE [client_active]=(1)
+AND [bf_active]=(1)
+AND ([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -853,7 +859,9 @@ SELECT[co_id]
 ,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
 
 FROM[v_communications]
-WHERE([co_status]NOT IN('2','3')OR([co_status]IS NULL))
+WHERE [client_active]=(1)
+AND [co_active]=(1)
+AND ([co_status]NOT IN('2','3')OR([co_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](co_for)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -910,7 +918,9 @@ SELECT[ftp_id]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
 
 FROM[v_financialtaxplanning]
-WHERE([ftp_status]NOT IN('2','3')OR([ftp_status]IS NULL))
+WHERE [client_active]=(1)
+AND [ftp_active]=(1)
+AND ([ftp_status]NOT IN('2','3')OR([ftp_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([ftp_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -990,7 +1000,9 @@ SELECT DISTINCT [fds_id]
 ,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
 ,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus_subtask]
-WHERE([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
+WHERE [client_active]=(1)
+AND [fds_active]=(1)
+AND ([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND[fds_delivery_datecompleted] IS NULL
@@ -1111,7 +1123,9 @@ SELECT DISTINCT[n_id]
 ,[client_id]
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 FROM[v_notice_subtask]
-WHERE([n_status]NOT IN('2','3')OR([n_status]IS NULL))
+WHERE [client_active]=(1)
+AND [n_active]=(1)
+AND ([n_status]NOT IN('2','3')OR([n_status]IS NULL))
 AND([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u)</cfif>
@@ -1247,7 +1261,9 @@ SELECT[of_id]
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 
 FROM[v_otherfilings]
-WHERE([of_status]NOT IN('2','3')OR([of_status]IS NULL))
+WHERE [client_active]=(1)
+AND [of_active]=(1)
+AND ([of_status]NOT IN('2','3')OR([of_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([of_obtaininfo_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NULL)
@@ -1323,7 +1339,9 @@ SELECT[pc_id]
  	,[client_id]
 
 FROM[v_payrollcheckstatus]
-WHERE[pc_delivery_datecompleted]IS NULL 
+WHERE [client_active]=(1)
+AND [pc_active]=(1)
+AND [pc_delivery_datecompleted]IS NULL 
 <cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND
@@ -1401,7 +1419,9 @@ SELECT[pt_id]
 		,[client_name]
 	,[client_id]
 FROM[v_payrolltaxes]
-WHERE([pt_delivery_datecompleted]IS NULL)
+WHERE [client_active]=(1)
+AND [pt_active]=(1)
+AND ([pt_delivery_datecompleted]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([pt_obtaininfo_assignedto]=@u  AND[pt_obtaininfo_datecompleted]IS NULL)
@@ -1470,7 +1490,9 @@ SELECT[tr_id]
 ,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#') 
 ,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#') 
 FROM[v_taxreturns]
-WHERE([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
+WHERE [client_active]=(1)
+AND [tr_active]=(1)
+AND([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
 OR(([tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
 AND [tr_3_delivered] IS NULL
 AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))

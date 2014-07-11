@@ -89,7 +89,7 @@ else if ($("#g1_contactmethod").val()==null){
 	if(debug){window.console.log('Missing Contact method');}
 	}
 else if ($("#g1_briefmessage").val()==""){
-	jqMessage({"type":"destroy"});jqMessage({message: "Missing Breif Message",type: "error",autoClose: false});
+	jqMessage({"type":"destroy"});jqMessage({message: "Missing Brief Message",type: "error",autoClose: false});
 	if(debug){window.console.log('Missing Breif Message');}
 	}
 else{

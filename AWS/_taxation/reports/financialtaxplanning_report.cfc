@@ -55,6 +55,9 @@ SELECT[ftp_id]
 ,[client_name]
 ,[client_id]
 FROM[v_financialtaxplanning]
+WHERE [client_active]=(1)
+AND [ftp_active]=(1)
+
 <cfset sqllist = "ftp_category,ftp_status,ftp_assignedto,ftp_priority,ftp_requestservice,ftp_duedate,ftp_inforequested,ftp_inforeceived,ftp_infocompiled,ftp_missinginfo,ftp_missinginforeceived,ftp_reportcompleted,ftp_finalclientmeeting,ftp_esttime,ftp_fees,ftp_paid">
 <cfset key="ftp_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>

@@ -48,14 +48,12 @@ SELECT[pa_id]
 ,pa_taxformsTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxservices') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxforms)))FOR XML PATH('')),3,1000)
 ,pa_taxmattersTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxmatters') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxmatters)))FOR XML PATH('')),3,1000)
 ,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
-
 ,[pa_datesignedbyclient]=FORMAT(pa_datesignedbyclient,'d','#Session.localization.language#')
 ,[pa_datesenttoirs]=FORMAT(pa_datesenttoirs,'d','#Session.localization.language#')
 ,[pa_dateofrevocation]=FORMAT(pa_dateofrevocation,'d','#Session.localization.language#')
-
-
 FROM[v_powerofattorney]
-
+WHERE [client_active]=(1)
+AND [pa_active]=(1)
 
 <cfset sqllist = "pa_dateofrevocation,pa_datesenttoirs,pa_datesignedbyclient,pa_preparers,pa_status,pa_taxforms,pa_taxmatters,pa_taxyears">
 <cfset key="pa_">
@@ -97,7 +95,6 @@ WHERE(1)=(1)
 </cfloop>
 </cfif>
 </cfif>
-
 
 </cfquery>
 <cfset myResult="">

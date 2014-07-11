@@ -48,7 +48,8 @@ SELECT[cas_id]
 ,[client_name]
 ,[client_id]
 FROM[v_clientadministrativetasks]
-
+WHERE [client_active]=(1)
+AND [cas_active]=(1)
 <cfset sqllist = "cas_assignedto,cas_category,cas_completed,cas_datereqested,cas_datestarted,cas_duedate,cas_esttime,cas_instructions,cas_priority,cas_reqestby,cas_status,cas_taskdesc">
 <cfset key="cas_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>

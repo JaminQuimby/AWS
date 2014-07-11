@@ -22,7 +22,6 @@
 <cfquery datasource="#Session.organization.name#" name="fquery" >
 SELECT TOP(1)[client_name]FROM[client_listing]WHERE[client_name]=<cfqueryparam value="#item[1]#">
 </cfquery>
-
 </cfcase>
 </cfswitch>
 
@@ -242,7 +241,7 @@ SELECT[client_id]
 ,[client_type]
 ,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 FROM[v_client_listing]
-WHERE[client_active]=(1)AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">

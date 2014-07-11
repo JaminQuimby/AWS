@@ -10,7 +10,6 @@
 SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitials]WHERE[si_active]=1 ORDER BY[si_initials]
 </cfquery>
 
-
 <cfset myResult="">
 <cfset queryResult='{"optionvalue_id":"0","optionname":"&nbsp;"},'>
 <cfset queryIndex=0>
@@ -58,6 +57,8 @@ SELECT[n_id]
 ,[client_name]
 ,[client_id]
 FROM[v_notice_subtask]
+WHERE [client_active]=(1)
+AND [n_active]=(1)
     
 <cfset sqllist = "nst_assignedto,nst_deliverymethod,nst_esttime,nst_fees,nst_missinginfo,nst_missinginforeceived,nst_status,nst_paid,nst_priority,nst_1_datenoticerec,nst_1_methodreceived,nst_1_noticenumber,nst_1_noticedate,nst_1_taxform,nst_1_taxyear,nst_2_rescompleted,nst_2_rescompletedby,nst_1_resduedate,nst_2_irsstateresponse,nst_2_revassignedto,nst_2_revcompleted,nst_2_ressubmited,nst_2_revrequired">
 <cfset key="nst_">
@@ -99,7 +100,6 @@ WHERE(1)=(1)
 </cfloop>
 </cfif>
 </cfif>
-
 
 </cfquery>
 <cfset myResult="">

@@ -45,8 +45,7 @@ SELECT[client_id]
 ,[client_disregard]
 ,[client_personal_property]
 FROM[client_listing]
-
-
+ 
 <cfset sqllist = "client_active,client_credit_hold,client_group,client_name,client_notes,client_referred_by,client_salutation,client_since,client_spouse,client_trade_name,client_type,client_statelabel1,client_statelabel2,client_statelabel3,client_statelabel4,client_relations,client_schedule_c,client_schedule_e,client_disregard,client_personal_property,client_tax_services">
 <cfset key="client_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
@@ -138,7 +137,7 @@ SELECT[client_id]
 ,[contact_email1]
 ,[contact_email2]
 FROM[v_client_contact]
-
+WHERE [client_active]=(1)
 <cfset sqllist = "contact_type,contact_name,contact_address1,contact_address2,contact_city,contact_state,contact_zip,contact_phone1,contact_phone2,contact_phone3,contact_phone4,contact_phone5,contact_email1,contact_email2,contact_website,contact_effectivedate,contact_acctsoftwareupdate,contact_taxupdate,contact_customLabel,contact_customValue">
 <cfset key="contact_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
