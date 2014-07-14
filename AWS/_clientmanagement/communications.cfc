@@ -79,6 +79,7 @@ SELECT[co_id]
 ,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
 FROM[v_communications]
 WHERE [co_status]!=2 AND [co_status]!=3
+AND [deleted] IS NULL
 AND [client_active]=(1)
 AND [co_active]=(1)
 <cfif ARGUMENTS.search neq "">
@@ -226,7 +227,7 @@ WHERE[co_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[communications]
-SET[co_active]=0
+SET[deleted]=GETDATE()
 WHERE[co_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>

@@ -200,7 +200,7 @@ WHERE[dt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[documenttracking]
-SET[dt_active]=0
+SET[deleted]=GETDATE()
 WHERE[dt_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>

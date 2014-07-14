@@ -101,6 +101,7 @@ WHERE[cas_status] != 2
 AND [cas_status] != 3
 AND [client_active]=(1)
 AND [cas_active]=(1)
+AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
@@ -224,7 +225,7 @@ WHERE[cas_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[clientadministrativetasks]
-SET[cas_active]=0
+SET[deleted]=GETDATE()
 WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>

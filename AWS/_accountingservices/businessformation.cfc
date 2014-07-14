@@ -181,12 +181,12 @@ SELECT[bf_id]
 ,[bf_owners]
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_missinginfo]
-
 FROM[v_businessformation]
 WHERE[bf_status] != 2 
 AND [bf_status] != 3
 AND [client_active]=(1)
 AND [bf_active]=(1)
+AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
@@ -225,7 +225,9 @@ SELECT[bfs_id]
 ,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#')
 ,[bfs_estimatedtime]
 FROM[v_businessformation_subtask]
-WHERE [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+WHERE [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> 
+AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
+AND [deleted] IS NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[bfs_taskname]</cfif></cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -504,7 +506,7 @@ WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[businessformation]
-SET[bf_active]=0
+SET[deleted]=GETDATE()
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
@@ -512,7 +514,7 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfcase value="group2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[businessformation_subtask]
-SET[bfs_active]=0
+SET[deleted]=GETDATE()
 WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"subtask1_id":#ARGUMENTS.id#,"group":"group2","result":"ok"}'>

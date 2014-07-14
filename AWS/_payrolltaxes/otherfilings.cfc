@@ -254,6 +254,7 @@ SELECT[of_id]
  FROM[v_otherfilings]
 WHERE[of_status] != 2 
 AND [of_status] != 3
+AND [deleted] IS NULL
 AND [client_active]=(1)
 AND [of_active]=(1)
 <cfif ARGUMENTS.search neq "">
@@ -483,7 +484,7 @@ WHERE[of_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[otherfilings]
-SET[of_active]=0
+SET[deleted]=GETDATE()
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>

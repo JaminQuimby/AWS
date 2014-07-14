@@ -111,6 +111,7 @@ SELECT[mc_id]
 FROM[v_managementconsulting]
 WHERE[mc_status] != 2 
 AND [mc_status] != 3
+AND [deleted] IS NULL
 AND [client_active]=(1)
 AND [mc_active]=(1)
 
@@ -387,7 +388,7 @@ SELECT SCOPE_IDENTITY()AS[mcs_id]
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[managementconsulting]
-SET[mc_active]=0
+SET[deleted]=GETDATE()
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
@@ -395,7 +396,7 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfcase value="group2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[managementconsulting_subtask]
-SET[mcs_active]=0
+SET[deleted]=GETDATE()
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group2","result":"ok"}'>

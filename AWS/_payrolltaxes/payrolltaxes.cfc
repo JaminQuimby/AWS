@@ -215,6 +215,7 @@ SELECT[pt_id]
 	,[client_id]
 FROM[v_payrolltaxes]
 WHERE[pt_delivery_datecompleted] IS NULL
+AND [deleted] IS NULL
 AND [client_active]=(1)
 AND [pt_active]=(1)
 <cfif ARGUMENTS.search neq "">
@@ -463,7 +464,7 @@ WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[payrolltaxes]
-SET[pt_active]=0
+SET[deleted]=GETDATE()
 WHERE[pt_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>

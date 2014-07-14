@@ -242,6 +242,7 @@ SELECT[client_id]
 ,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 FROM[v_client_listing]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+AND [deleted] IS NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -268,7 +269,9 @@ SELECT[field_id]
 ,[field_value]
 ,[field_global]
 FROM[ctrl_customfields]
-WHERE[form_id]='1'AND[field_active]='1'
+WHERE[form_id]='1'
+AND[field_active]='1'
+AND [deleted] IS NULL
 AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/> OR [field_global]=1 )
 
 <cfif ARGUMENTS.ID neq "0">
@@ -300,10 +303,11 @@ SELECT[contact_id]
 ,[contact_phone1]=FORMAT(contact_phone1,'#Session.localization.formatphone#')
 ,[contact_email1]
 FROM[client_contact]
-WHERE[contact_active]=(1)AND
-<cfif ARGUMENTS.ID neq "0">[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND</cfif>
-[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>AND
-[contact_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[contact_active]=(1)
+AND [deleted] IS NULL
+<cfif ARGUMENTS.ID neq "0">AND[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfif>
+AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
+AND[contact_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[contact_name]</cfif>
 </cfquery>
@@ -1061,10 +1065,10 @@ SELECT[si_id]
 ,[si_misc4]
 ,[si_stateTEXT]
 FROM[v_client_state]
-WHERE(
-<cfif ARGUMENTS.ID neq "0">[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND</cfif>
+WHERE(<cfif ARGUMENTS.ID neq "0">[si_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>AND</cfif>
 [client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>AND
 ([si_reason]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>OR[si_reason] is null ) )
+AND [deleted] IS NULL
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1663,7 +1667,7 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[client_listing]
-SET[client_active]=0
+SET[deleted]=GETDATE()
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
@@ -1671,7 +1675,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfcase value="group1_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[ctrl_customfields]
-SET[field_active]=0
+SET[deleted]=GETDATE()
 WHERE[field_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
@@ -1679,7 +1683,7 @@ WHERE[field_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfcase value="group3">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[client_contact]
-SET[contact_active]=0
+SET[deleted]=GETDATE()
 WHERE[contact_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group3","result":"ok"}'>
@@ -1687,7 +1691,7 @@ WHERE[contact_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfcase value="group5">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[client_state]
-SET[si_active]=0
+SET[deleted]=GETDATE()
 WHERE[si_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group5","result":"ok"}'>

@@ -340,6 +340,7 @@ SELECT[fds_id]
 FROM[v_financialDataStatus]
 WHERE ISNULL([fds_status],0) != 2 
 AND ISNULL([fds_status],0) != 3
+AND [deleted] IS NULL
 AND [client_active]=(1)
 AND [fds_active]=(1)
 <cfif ARGUMENTS.search neq "">
@@ -849,7 +850,7 @@ AND[fdss_active]!=0
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[financialdatastatus]
-SET[fds_active]=0
+SET[deleted]=GETDATE()
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group1","result":"ok"}'>
@@ -857,7 +858,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfcase value="group2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 update[financialdatastatus_subtask]
-SET[fdss_active]=0
+SET[deleted]=GETDATE()
 WHERE[fdss_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group2","result":"ok"}'>
