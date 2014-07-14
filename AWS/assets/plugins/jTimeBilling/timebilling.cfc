@@ -90,8 +90,10 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[t_id]
 ,[tb_id]
-,[t_start]=FORMAT(t_start,'d','#Session.localization.language#') 
-,[t_stop]=FORMAT(t_stop,'d','#Session.localization.language#') 
+,[t_start]=FORMAT (CONVERT(datetime, t_start), 'hh:mm:ss tt')
+,[t_stop]=FORMAT (CONVERT(datetime, t_stop), 'hh:mm:ss tt')
+,CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF( minute, [t_start], [t_stop])))/60,2))AS[t_diff]
+
 FROM[v_time]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -104,6 +106,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 								,"TB_ID":"'&TB_ID&'"
 								,"T_START":"'&T_START&'"
 								,"T_STOP":"'&T_STOP&'"
+								,"T_DIFF":"'&T_DIFF&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -203,4 +206,36 @@ SELECT SCOPE_IDENTITY()AS[t_id]
 </cfcase>
 </cfswitch>
 </cffunction>
+
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group102">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+update[timebilling]
+SET[deleted]=GETDATE()
+WHERE[TB_ID]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group102","result":"ok"}'>
+</cfcase>
+<cfcase value="group102_1">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+update[time]
+SET[deleted]=GETDATE()
+WHERE[T_ID]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group102_1","result":"ok"}'>
+</cfcase>
+</cfswitch>
+<cfcatch>
+      <!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
+
 </cfcomponent>

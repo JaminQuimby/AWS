@@ -9,7 +9,7 @@ $(document).ready(function(){
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
-_pluginLoadData102=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
+_pluginLoadData102_1=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
 _group102=function(){_grid102();}
 _group102_1=function(){_grid102_1();}
 
@@ -56,6 +56,7 @@ _grid102=function(){
 	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time &amp; Billing",
 	"fields":{TB_ID:{key:true,list:false,edit:false}
+			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TB_ID+"',page:'timebilling',group:'group102',plugin:'102'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}	
 			,TB_DATE:{title:'Date',width:'2%'}
 			,U_NAME:{title:'Name'}
 			,TB_DESCRIPTIONTEXT:{title:'Description'}
@@ -71,8 +72,10 @@ _grid102_1=function(){
 	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time",
 	"fields":{T_ID:{key:true,list:false,edit:false}
+			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.T_ID+"',page:'timebilling',group:'group102_1',plugin:'102'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}	
 			,T_START:{title:'Start Time',width:'2%'}
 			,T_STOP:{title:'End Time',width:'2%'}
+			,T_DIFF:{title:'Time Diffrence'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g102_1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'","loadType":"group102_1"}',
@@ -116,7 +119,7 @@ _grid102_1=function(){
     <div><label for="g102_adjustment">Adjustment</label><input type="text" maxlength="10" id="g102_adjustment" ></div>
 </div>  
 <cfoutput>
-<h3 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# group="group102_1" onClick="_grid102_1();">Add Time</h3>
+<h3 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# group="group102_1" onClick="_grid102_1();">Time</h3>
 </cfoutput>
 <div>
 	<div><label for="g102_1_filter">Filter</label><input id="g102_1_filter" onBlur="_grid102_1();" onKeyPress="if(event.keyCode==13){_grid102_1();}"/></div>
@@ -124,7 +127,7 @@ _grid102_1=function(){
 	<div class="buttonbox"><cfif Session.user.role neq '3'><a href="#" class="button optional" onClick='$("#group102").accordion({active:3});$("#isLoaded_group102_1").val(1);'>Add</a></cfif></div>
 </div>
 
-<h4 onClick='$("#isLoaded_group102_1").val(1);'>Time</h4>
+<h4 onClick='$("#isLoaded_group102_1").val(1);'>Add Time</h4>
 <div>
         <div><label for="g102_1_start">Start Time</label><input type="text" class="time" id="g102_1_start" ></div>
         <div><label for="g102_1_stop">End Time</label><input type="text" class="time" id="g102_1_stop" ></div>

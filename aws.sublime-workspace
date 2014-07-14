@@ -20,10 +20,34 @@
 	"buffers":
 	[
 		{
-			"file": "test.cfm",
+			"file": "AWS/assets/plugins/jUpload/upload.cfm",
 			"settings":
 			{
-				"buffer_size": 613,
+				"buffer_size": 5911,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AWS/assets/plugins/jUpload/upload.cfc",
+			"settings":
+			{
+				"buffer_size": 8732,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfm",
+			"settings":
+			{
+				"buffer_size": 8048,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+			"settings":
+			{
+				"buffer_size": 7945,
 				"line_ending": "Windows"
 			}
 		}
@@ -89,10 +113,17 @@
 	},
 	"file_history":
 	[
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jComment/comment.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jComment/comment.cfc",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jTimeBilling/timebillingreport.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jTimeBilling/timebillingreport.cfc",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jTimeBilling/timebillingreport.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/assets/module/login/loginform.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/assets/module/login/mail.cfc",
+		"/C/Users/Admin/Documents/GitHub/AWS/application.cfc",
+		"/C/Users/Admin/Documents/GitHub/AWS/test.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/inc/export/excel.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/sftp-config.json",
 		"/C/Program Files/Sublime Text 3/Data/Packages/User/SFTP.sublime-settings",
@@ -125,7 +156,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 21.0
 	},
 	"find_in_files":
 	{
@@ -139,6 +170,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"remove",
+			"/*",
+			"_removeData",
 			"1440",
 			"export",
 			"csv",
@@ -162,24 +196,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "test.cfm",
+					"file": "AWS/assets/plugins/jUpload/upload.cfm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 613,
+						"buffer_size": 5911,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								613,
-								613
+								3230,
+								3698
 							]
 						],
 						"settings":
@@ -187,10 +221,105 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 663.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "AWS/assets/plugins/jUpload/upload.cfc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8732,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7803,
+								7803
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"tab_size": 6,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2691.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfm",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8048,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3285,
+								3285
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 156.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7945,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3365,
+								3365
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 663.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -206,7 +335,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 21.0
 	},
 	"input":
 	{
@@ -253,7 +382,7 @@
 	"project": "aws.sublime-project",
 	"replace":
 	{
-		"height": 42.0
+		"height": 38.0
 	},
 	"save_all_on_build": true,
 	"select_file":

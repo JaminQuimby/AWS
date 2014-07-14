@@ -236,4 +236,28 @@ return response;
 </cfcatch>
 </cftry>
 </cffunction>
+
+
+<cffunction name="f_removeData" access="remote" output="false">
+<cfargument name="id" type="numeric" required="yes" default="0">
+<cfargument name="group" type="string" required="no">
+<cftry>
+<cfswitch expression="#ARGUMENTS.group#">
+<!--- Load Group1--->
+<cfcase value="group100">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+update[ctrl_files]
+SET[deleted]=GETDATE()
+WHERE[FILE_ID]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group100","result":"ok"}'>
+</cfcase>
+
+</cfswitch>
+<cfcatch>
+      <!--- CACHE ERRORS DEBUG CODE --->
+<cfreturn '{"group":""#cfcatch.message#","#arguments.client_id#","#cfcatch.detail#"","result":"error"}'> 
+</cfcatch>
+</cftry>
+</cffunction>
 </cfcomponent>
