@@ -88,7 +88,7 @@ FROM[ctrl_users]
 LEFT OUTER JOIN[ctrl_organization]ON[ctrl_users].[org_id]=[ctrl_organization].[org_id]
 LEFT OUTER JOIN[v_staffinitials]ON[ctrl_users].[user_id]=[v_staffinitials].[user_id]
 WHERE([ctrl_users].[email]=<cfqueryparam value="#FORM.J_USERNAME#" CFSQLTYPE="CF_SQL_VARCHAR">)
-AND([ctrl_users].[password]=<cfqueryparam value="#FORM.J_PASSWORD#" CFSQLTYPE="CF_SQL_VARCHAR">)
+AND([ctrl_users].[password]=<cfqueryparam value="#HASH(FORM.J_PASSWORD,'SHA-256')#" CFSQLTYPE="CF_SQL_VARCHAR">)
 </cfquery>
 
 <cfif loginQuery.recordCount eq 1>

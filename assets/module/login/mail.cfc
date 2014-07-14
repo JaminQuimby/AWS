@@ -45,12 +45,12 @@ DECLARE
 @s numeric(4),
 @e varchar(500),
 @u nvarchar(36),
-@p varchar(20),
+@p varchar(256),
 @m bit,
 @uuid AS UNIQUEIDENTIFIER
 SET @e = <cfqueryparam cfsqltype="cf_sql_varchar" value="#e#">
 SET @u = <cfqueryparam cfsqltype="cf_sql_varchar" value="#u#">
-SET @p = <cfqueryparam cfsqltype="cf_sql_varchar" value="#p#">
+SET @p = <cfqueryparam cfsqltype="cf_sql_varchar" value="#HASH(p,'SHA-256')#">
 SET @m =(0)
 
 
