@@ -252,8 +252,8 @@ SELECT[of_id]
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
 
  FROM[v_otherfilings]
-WHERE[of_status] != 2 
-AND [of_status] != 3
+WHERE  ISNULL([of_status],0) != 2 
+AND  ISNULL([of_status],0) != 3
 AND [deleted] IS NULL
 AND [client_active]=(1)
 AND [of_active]=(1)

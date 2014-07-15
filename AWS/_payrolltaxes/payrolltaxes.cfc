@@ -27,10 +27,8 @@ AND[pt_month]=<cfqueryparam value="#item[3]#">
 AND[pt_lastpay]=<cfqueryparam value="#item[4]#">
 AND[pt_type]=<cfqueryparam value="#item[5]#">
 </cfquery>
-
 </cfcase>
 </cfswitch>
-
 <cfif fquery.recordcount gt 0>
 <cfset myResult='{"Result":"OK","check":"true"}'>
 <cfelse>

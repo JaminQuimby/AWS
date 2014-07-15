@@ -122,7 +122,7 @@ $("#g2_subtask").val()+'","'+
 $("#g2_subtaskcustom").val()+'","'+
 '"]]}'
 if($("#subtask_isLoaded").val()!=0){
-if( $("#g2_subtask").val()!=0){
+if( $("#g2_subtask").val()!=0 | $("#g2_subtaskcustom").val()!= ""){
 	_saveData({group:"group2",payload:$.parseJSON(json),page:"acctingconsulting"})}
 else{jqMessage({message: "You must select a subtask.",type: "info",autoClose: true})}}
 else{_saveDataCB({'group':'plugins'})}

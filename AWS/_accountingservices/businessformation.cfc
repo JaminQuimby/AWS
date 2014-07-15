@@ -182,8 +182,8 @@ SELECT[bf_id]
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_missinginfo]
 FROM[v_businessformation]
-WHERE[bf_status] != 2 
-AND [bf_status] != 3
+WHERE ISNULL([bf_status],0) != 2 
+AND ISNULL([bf_status],0) != 3
 AND [client_active]=(1)
 AND [bf_active]=(1)
 AND [deleted] IS NULL

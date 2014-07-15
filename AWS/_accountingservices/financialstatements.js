@@ -27,7 +27,7 @@ _grid1=function(){_jGrid({
 	"url":"financialstatements.cfc",
 	"title":"Financial Statements",
 	"fields":{FDS_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDS_ID+"',page:'financialstatements',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDS_ID+"',page:'financialstatements',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
  			,CLIENT_ID:{list:false,edit:false}
  			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
@@ -59,14 +59,14 @@ _grid2=function(){_jGrid({
 	"url":"financialstatements.cfc",
 	"title":"Subtasks",
 	"fields":{FDSS_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDSS_ID+"',page:'financialstatements',group:'group2'});_grid2();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img;}}
-		,FDSS_SEQUENCE:{title:'Sequence'}
-		,FDSS_SUBTASKTEXT:{title:'Subtask'}
-		,FDSS_DUEDATE:{title:'Due Date'}
-		,FDSS_STATUSTEXT:{title:'Status'}
-		,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}
-		,FDSS_COMPLETED:{title:'Completed'}
-		},
+			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FDSS_ID+"',page:'financialstatements',group:'group2'});_grid2();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img;}}
+			,FDSS_SEQUENCE:{title:'Sequence'}
+			,FDSS_SUBTASKTEXT:{title:'Subtask'}
+			,FDSS_DUEDATE:{title:'Due Date'}
+			,FDSS_STATUSTEXT:{title:'Status'}
+			,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,FDSS_COMPLETED:{title:'Completed'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"5"}',
 	"functions":'$("#subtask1_id").val(record.FDSS_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2","page":"financialstatements"});'
@@ -369,13 +369,13 @@ $("#g2_estimatedtime").val()+'","'+
 $("#g2_actualtime").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2").val()!=0){
-	_saveData({group:"group2","payload":$.parseJSON(json),page:"financialstatements"});
-	if(debug){window.console.log('Group2 - Saving Data');}
-	}else{
-	_saveDataCB({'group':'plugins'});
-	if(debug){window.console.log('Group2 - Skipped saving data');}
-	}
+if( $("#g2_subtask").val()!=0 || $("#g2_subtaskcustom").val()!= ""){
+	_saveData({group:"group2",payload:$.parseJSON(json),page:"financialstatements"})}
+else{jqMessage({message: "You must select a subtask.",type: "info",autoClose: true})}}
+else{_saveDataCB({'group':'plugins'})}
 break;
+
+
 
 /*group2_clone1*/
 case'group2_clone1':var json='{"DATA":[["'+

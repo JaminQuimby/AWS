@@ -26,10 +26,8 @@ AND[pc_year]=<cfqueryparam value="#item[2]#">
 AND[pc_payenddate]=<cfqueryparam value="#item[3]#">
 AND[pc_paydate]=<cfqueryparam value="#item[4]#">
 </cfquery>
-
 </cfcase>
 </cfswitch>
-
 <cfif fquery.recordcount gt 0>
 <cfset myResult='{"Result":"OK","check":"true"}'>
 <cfelse>

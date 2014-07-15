@@ -273,12 +273,8 @@ WHERE[form_id]='1'
 AND[field_active]='1'
 AND [deleted] IS NULL
 AND([client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/> OR [field_global]=1 )
-
 <cfif ARGUMENTS.ID neq "0">
-AND[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-</cfif>
-
-
+AND[field_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfif>
 AND[field_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[field_name]</cfif></cfquery>
 <cfset myResult="">
@@ -308,7 +304,6 @@ AND [deleted] IS NULL
 <cfif ARGUMENTS.ID neq "0">AND[contact_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfif>
 AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
 AND[contact_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[contact_name]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -347,7 +342,6 @@ SELECT[mc_id]
 ,[mc_category]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
-
 FROM[v_managementconsulting]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -534,8 +528,6 @@ SELECT[ftp_id]
 ,[client_id]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])AS[ftp_categoryTEXT]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
-
-
 FROM[v_financialtaxplanning]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>

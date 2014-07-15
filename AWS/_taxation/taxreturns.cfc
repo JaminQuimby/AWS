@@ -344,7 +344,8 @@ SELECT[tr_id]
 ,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#')
 ,[tr_4_required] 
 FROM[v_taxreturns]
-WHERE[tr_notrequired] != 1 AND [tr_3_delivered] IS NULL 
+WHERE  ISNULL([tr_notrequired],0) != 1
+AND [tr_3_delivered] IS NULL 
 AND [client_active]=(1)
 AND [tr_active]=(1)
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, tr_duedate, 101) ASC </cfif>
@@ -390,7 +391,9 @@ SELECT[tr_id]
 ,[trst_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_assignedto=user_id))
 ,[trst_1_reviewassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trst_1_reviewassignedto=user_id))
 FROM[v_taxreturns_state]
-WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND [trst_status]!=2 AND [trst_status]!=3
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> 
+AND  ISNULL([trst_status],0) !=2 
+AND  ISNULL([trst_status],0)!=3
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trst_status]</cfif>
 </cfquery>
 <cfset myResult="">
@@ -423,7 +426,8 @@ SELECT[tr_id]
 ,trsc_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[trsc_status]=[optionvalue_id])     
 ,trsc_reviewassignedtoTEXT=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trsc_reviewassignedto=user_id))
 FROM[v_taxreturns_schedule]
-WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> AND[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
+WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+AND[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trsc_status]</cfif>
 </cfquery>
 <cfset myResult="">
