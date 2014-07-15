@@ -1036,6 +1036,7 @@ OR([fdss_assignedto]=@u)
 								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
 								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
+								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
 								,"FDS_OBTAININFO":"'&fds_obtaininfo_datecompleted&'<br/>'&fds_obtaininfo_assignedtoTEXT&'"
 								,"FDS_SORT":"'&fds_sort_datecompleted&'<br/>'&fds_sort_assignedtoTEXT&'"
 								,"FDS_CHECKS":"'&fds_checks_datecompleted&'<br/>'&fds_checks_assignedtoTEXT&'"
@@ -1483,7 +1484,7 @@ SELECT[tr_id]
 ,[tr_4_extended]=FORMAT(tr_4_extended,'#Session.localization.formatdate#') 
 ,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#') 
 ,[tr_taxyear]
-,[tr_taxform]
+,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 ,[tr_priority]
 ,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[tr_4_pptresttime]
@@ -1513,7 +1514,7 @@ OR(
 								,"TR_4_EXTENDED":"'&TR_4_EXTENDED&'"
 								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-								,"TR_TAXFORM":"'&TR_TAXFORM&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
 								,"TR_PRIORITY":"'&TR_PRIORITY&'"
 								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
 								,"TR_4_PPTRESTTIME":"'&TR_4_PPTRESTTIME&'"

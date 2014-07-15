@@ -478,7 +478,7 @@ _grid12=function(){_jGrid({
 			,TR_4_EXTENDED:{title:'PPTR Extended',width:'2%'}
 			,TR_4_COMPLETED:{title:'Completed',width:'2%'}
 			,TR_TAXYEAR:{title:'Year',width:'2%'}
-			,TR_TAXFORM:{title:'Form'}
+			,TR_TAXFORMTEXT:{title:'Form'}
 			,TR_PRIORITY:{title:'Information Received',width:'2%'}
 			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
 			,TR_4_PPTRESTTIME:{title:'Estimated Time',width:'2%'}

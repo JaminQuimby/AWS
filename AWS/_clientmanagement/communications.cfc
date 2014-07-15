@@ -70,7 +70,7 @@ SELECT[co_id]
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
 ,[co_caller]
 ,[co_duedate]=FORMAT(co_duedate,'#Session.localization.formatdate#')
-,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
+,[co_date]=FORMAT(co_date,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[co_status]
 ,[co_responseneeded]
 ,[co_returncall]
@@ -161,7 +161,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][3]#"/>
 ,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,<cfqueryparam value="#dateFormat(j.DATA[1][6],'YYYY-MM-DD')# #timeFormat(j.DATA[1][6],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" />
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
@@ -193,7 +193,7 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[co_briefmessage]=<cfqueryparam value="#j.DATA[1][3]#"/>
 ,[co_caller]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[co_contactmethod]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[co_date]=<cfqueryparam value="#dateFormat(j.DATA[1][6],'YYYY-MM-DD')# #timeFormat(j.DATA[1][6],'hh:mm:ss tt')#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[co_date]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,[co_duedate]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,[co_emailaddress]=<cfqueryparam value="#j.DATA[1][8]#" />
 ,[co_ext]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
