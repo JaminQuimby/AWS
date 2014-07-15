@@ -43,30 +43,30 @@ SELECT[fds_id]
 ,[fds_esttime]
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
-,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+,[fds_periodend]=FORMAT(fds_periodend,'#Session.localization.formatdate#') 
+,[fds_duedate]=FORMAT(fds_duedate,'#Session.localization.formatdate#') 
 ,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
-,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_obtaininfo_assignedtoTEXT]
-,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_sort_assignedtoTEXT]
-,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_checks_assignedtoTEXT]
-,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_sales_assignedtoTEXT]
-,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_entry_assignedtoTEXT]
-,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_reconcile_assignedtoTEXT]
-,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_compile_assignedtoTEXT]
-,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_review_assignedtoTEXT]
-,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_assembly_assignedtoTEXT]
-,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_delivery_assignedtoTEXT]
-,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_acctrpt_assignedtoTEXT]
 ,FORMAT(fds_fees, 'C', 'en-us')AS[fds_fees]
 ,[fds_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[fds_paid]=[optionvalue_id])
@@ -172,17 +172,17 @@ SELECT[fdss_id]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
 ,[fds_missinginfo]
 ,[fds_compilemi]
-,COALESCE(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedtoTEXT) AS [fds_obtaininfo]
-,COALESCE(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedtoTEXT) AS [fds_sort]
-,COALESCE(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedtoTEXT) AS [fds_checks]
-,COALESCE(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedtoTEXT) AS [fds_sales]
-,COALESCE(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedtoTEXT) AS [fds_entry]
-,COALESCE(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedtoTEXT) AS [fds_reconcile]
-,COALESCE(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedtoTEXT) AS [fds_compile]
-,COALESCE(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedtoTEXT) AS [fds_review]
-,COALESCE(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedtoTEXT) AS [fds_assembly]
-,COALESCE(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedtoTEXT) AS [fds_delivery]
-,COALESCE(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedtoTEXT) AS [fds_acctrpt]
+,COALESCE(FORMAT(fds_sort_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_obtaininfo_assignedtoTEXT) AS [fds_obtaininfo]
+,COALESCE(FORMAT(fds_checks_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_sort_assignedtoTEXT) AS [fds_sort]
+,COALESCE(FORMAT(fds_checks_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_checks_assignedtoTEXT) AS [fds_checks]
+,COALESCE(FORMAT(fds_sales_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_sales_assignedtoTEXT) AS [fds_sales]
+,COALESCE(FORMAT(fds_entry_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_entry_assignedtoTEXT) AS [fds_entry]
+,COALESCE(FORMAT(fds_reconcile_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_reconcile_assignedtoTEXT) AS [fds_reconcile]
+,COALESCE(FORMAT(fds_compile_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_compile_assignedtoTEXT) AS [fds_compile]
+,COALESCE(FORMAT(fds_review_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_review_assignedtoTEXT) AS [fds_review]
+,COALESCE(FORMAT(fds_assembly_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_assembly_assignedtoTEXT) AS [fds_assembly]
+,COALESCE(FORMAT(fds_delivery_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_delivery_assignedtoTEXT) AS [fds_delivery]
+,COALESCE(FORMAT(fds_acctrpt_datecompleted,'#Session.localization.formatdate#'), '') + '<br />' + CONVERT(VARCHAR(5),fds_acctrpt_assignedtoTEXT) AS [fds_acctrpt]
 ,FORMAT(fds_fees, 'C', 'en-us')AS[fds_fees]
 ,[fds_paid]
 ,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])

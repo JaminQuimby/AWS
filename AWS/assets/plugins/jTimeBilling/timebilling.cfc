@@ -12,7 +12,7 @@ SELECT
 ,[tb_id]
 ,[user_id]
 ,[tb_adjustment]
-,[tb_date]=FORMAT(tb_date,'d','#Session.localization.language#') 
+,[tb_date]=FORMAT(tb_date,'#Session.localization.formatdate#') 
 ,[tb_description]
 ,[tb_flatfee]
 ,[tb_manualtime]=FORMAT(tb_manualtime,'#Session.localization.formatdatetime#','#Session.localization.language#') 
@@ -61,7 +61,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group102">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[tb_id]
-,[tb_date]=FORMAT(tb_date,'d','#Session.localization.language#') 
+,[tb_date]=FORMAT(tb_date,'#Session.localization.formatdate#') 
 ,[u_name]
 ,[tb_descriptionTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='g102_description'AND[tb_description]=[optionvalue_id])
 FROM[v_timebilling]

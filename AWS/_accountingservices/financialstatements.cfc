@@ -71,17 +71,17 @@ AND[fds_periodend]=<cfqueryparam value="#item[4]#">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_id]
 ,[client_id]
-,[fds_cmireceived]=FORMAT(fds_cmireceived,'d','#Session.localization.language#') 
+,[fds_cmireceived]=FORMAT(fds_cmireceived,'#Session.localization.formatdate#') 
 ,[fds_compilemi]
 ,[fds_deliverymethod]
-,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+,[fds_duedate]=FORMAT(fds_duedate,'#Session.localization.formatdate#') 
 ,[fds_esttime]
 ,[fds_fees]
-,[fds_missinginforeceived]=FORMAT(fds_missinginforeceived,'d','#Session.localization.language#') 
+,[fds_missinginforeceived]=FORMAT(fds_missinginforeceived,'#Session.localization.formatdate#') 
 ,[fds_missinginfo]
 ,[fds_month]
 ,[fds_paid]
-,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+,[fds_periodend]=FORMAT(fds_periodend,'#Session.localization.formatdate#') 
 ,[fds_priority]
 ,[fds_status]
 ,[fds_year]
@@ -94,7 +94,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_obtaininfo_assignedto]
 ,[fds_obtaininfo_completedby]
-,[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#') 
+,[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_obtaininfo_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -105,7 +105,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_sort_assignedto]
 ,[fds_sort_completedby]
-,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#') 
+,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_sort_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -116,7 +116,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_checks_assignedto]
 ,[fds_checks_completedby]
-,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#') 
+,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_checks_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -127,7 +127,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_sales_assignedto]
 ,[fds_sales_completedby]
-,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#') 
+,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_sales_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -138,7 +138,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_entry_assignedto]
 ,[fds_entry_completedby]
-,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#') 
+,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_entry_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -149,7 +149,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_reconcile_assignedto]
 ,[fds_reconcile_completedby]
-,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#') 
+,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_reconcile_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -160,7 +160,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_compile_assignedto]
 ,[fds_compile_completedby]
-,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#') 
+,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_compile_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -171,7 +171,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_review_assignedto]
 ,[fds_review_completedby]
-,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'d','#Session.localization.language#') 
+,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_review_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -182,7 +182,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_assembly_assignedto]
 ,[fds_assembly_completedby]
-,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#') 
+,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_assembly_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -193,7 +193,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_delivery_assignedto]
 ,[fds_delivery_completedby]
-,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#') 
+,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_delivery_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -204,7 +204,7 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fds_acctrpt_assignedto]
 ,[fds_acctrpt_completedby]
-,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#') 
+,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_acctrpt_esttime]
 FROM[financialdatastatus]
 WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -215,8 +215,8 @@ WHERE[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[fdss_id]
 ,[fdss_assignedto]
-,[fdss_completed]=FORMAT(fdss_completed,'d','#Session.localization.language#') 
-,[fdss_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#') 
+,[fdss_completed]=FORMAT(fdss_completed,'#Session.localization.formatdate#') 
+,[fdss_duedate]=FORMAT(fdss_duedate,'#Session.localization.formatdate#') 
 ,[fdss_notes]
 ,[fdss_sequence]
 ,[fdss_status]
@@ -243,27 +243,27 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="assetCompTask">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT
-[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#')
+[fds_obtaininfo_datecompleted]=FORMAT(fds_obtaininfo_datecompleted,'#Session.localization.formatdate#')
 ,[fds_obtaininfo_assignedtoTEXT]
-,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#') 
+,[fds_sort_datecompleted]=FORMAT(fds_sort_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_sort_assignedtoTEXT]
-,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#') 
+,[fds_checks_datecompleted]=FORMAT(fds_checks_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_checks_assignedtoTEXT]
-,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#') 
+,[fds_sales_datecompleted]=FORMAT(fds_sales_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_sales_assignedtoTEXT]
-,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#') 
+,[fds_entry_datecompleted]=FORMAT(fds_entry_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_entry_assignedtoTEXT]
-,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#') 
+,[fds_reconcile_datecompleted]=FORMAT(fds_reconcile_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_reconcile_assignedtoTEXT]
-,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#') 
+,[fds_compile_datecompleted]=FORMAT(fds_compile_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_compile_assignedtoTEXT]
-,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'d','#Session.localization.language#') 
+,[fds_review_datecompleted]=FORMAT(fds_review_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_review_assignedtoTEXT]
-,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#') 
+,[fds_assembly_datecompleted]=FORMAT(fds_assembly_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_assembly_assignedtoTEXT]
-,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#') 
+,[fds_delivery_datecompleted]=FORMAT(fds_delivery_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_delivery_assignedtoTEXT]
-,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#') 
+,[fds_acctrpt_datecompleted]=FORMAT(fds_acctrpt_datecompleted,'#Session.localization.formatdate#') 
 ,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialdatastatus]
 WHERE[FDS_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -272,7 +272,7 @@ WHERE[FDS_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 
 <cfcase value="assetClone2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT CONVERT(char(4),fds_year)+' | '+ISNULL(FORMAT(fds_periodend,'d','#Session.localization.language#'),'------N/A-----')+' | '+(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='0'OR[form_id]='#ARGUMENTS.formid#')AND([optionGroup]='0'OR[optionGroup]='#ARGUMENTS.formid#')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id]),[fds_id]AS[optionvalue_id]
+SELECT CONVERT(char(4),fds_year)+' | '+ISNULL(FORMAT(fds_periodend,'#Session.localization.formatdate#'),'------N/A-----')+' | '+(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='0'OR[form_id]='#ARGUMENTS.formid#')AND([optionGroup]='0'OR[optionGroup]='#ARGUMENTS.formid#')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id]),[fds_id]AS[optionvalue_id]
 FROM[financialdatastatus]
 ORDER BY [fds_Year] DESC ,[fds_periodend]
 </cfquery>
@@ -306,36 +306,36 @@ ORDER BY [fds_Year] DESC ,[fds_periodend]
 SELECT[fds_id]
 ,[client_id]
 ,[client_name]
-,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+,[fds_periodend]=FORMAT(fds_periodend,'#Session.localization.formatdate#') 
 ,[fds_month]
 ,[fds_year]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
-,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+,[fds_duedate]=FORMAT(fds_duedate,'#Session.localization.formatdate#') 
 ,[fds_status]
 ,[fds_missinginfo]
 ,[fds_compilemi]
 ,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
-,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_obtaininfo_assignedtoTEXT]
-,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_sort_assignedtoTEXT]
-,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_checks_assignedtoTEXT]
-,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_sales_assignedtoTEXT]
-,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_entry_assignedtoTEXT]
-,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_reconcile_assignedtoTEXT]
-,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_compile_assignedtoTEXT]
-,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_review_assignedtoTEXT]
-,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_assembly_assignedtoTEXT]
-,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_delivery_assignedtoTEXT]
-,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus]
 WHERE ISNULL([fds_status],0) != 2 
@@ -385,7 +385,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT[fdss_id]
 ,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
 ,[fdss_assignedtoTEXT]
-,[fdss_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#')
+,[fdss_duedate]=FORMAT(fdss_duedate,'#Session.localization.formatdate#')
 ,[fdss_sequence]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]

@@ -83,14 +83,14 @@ AND[option_1]='#ARGUMENTS.option1#'
 SELECT[OF_ID]
 ,[client_id]
 ,[of_deliverymethod]
-,[of_duedate]=FORMAT(of_duedate,'d','#Session.localization.language#') 
+,[of_duedate]=FORMAT(of_duedate,'#Session.localization.formatdate#') 
 ,[of_esttime]
-,[of_extensioncompleted]=FORMAT(of_extensioncompleted,'d','#Session.localization.language#') 
-,[of_extensiondeadline]=FORMAT(of_extensiondeadline,'d','#Session.localization.language#') 
+,[of_extensioncompleted]=FORMAT(of_extensioncompleted,'#Session.localization.formatdate#') 
+,[of_extensiondeadline]=FORMAT(of_extensiondeadline,'#Session.localization.formatdate#') 
 ,[of_fees]
-,[of_filingdeadline]=FORMAT(of_filingdeadline,'d','#Session.localization.language#') 
+,[of_filingdeadline]=FORMAT(of_filingdeadline,'#Session.localization.formatdate#') 
 ,[of_form]
-,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'d','#Session.localization.language#') 
+,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'#Session.localization.formatdate#') 
 ,[of_missinginfo]
 ,[of_paid]
 ,[of_period]
@@ -118,7 +118,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[of_obtaininfo_assignedto]
 ,[of_obtaininfo_completedby]
-,[of_obtaininfo_datecompleted]=FORMAT(of_obtaininfo_datecompleted,'d','#Session.localization.language#') 
+,[of_obtaininfo_datecompleted]=FORMAT(of_obtaininfo_datecompleted,'#Session.localization.formatdate#') 
 ,[of_obtaininfo_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -129,7 +129,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[of_preparation_assignedto]
 ,[of_preparation_completedby]
-,[of_preparation_datecompleted]=FORMAT(of_preparation_datecompleted,'d','#Session.localization.language#') 
+,[of_preparation_datecompleted]=FORMAT(of_preparation_datecompleted,'#Session.localization.formatdate#') 
 ,[of_preparation_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -140,7 +140,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[of_review_assignedto]
 ,[of_review_completedby]
-,[of_review_datecompleted]=FORMAT(of_review_datecompleted,'d','#Session.localization.language#') 
+,[of_review_datecompleted]=FORMAT(of_review_datecompleted,'#Session.localization.formatdate#') 
 ,[of_review_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -151,7 +151,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[of_assembly_assignedto]
 ,[of_assembly_completedby]
-,[of_assembly_datecompleted]=FORMAT(of_assembly_datecompleted,'d','#Session.localization.language#') 
+,[of_assembly_datecompleted]=FORMAT(of_assembly_datecompleted,'#Session.localization.formatdate#') 
 ,[of_assembly_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -162,7 +162,7 @@ WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[of_delivery_assignedto]
 ,[of_delivery_completedby]
-,[of_delivery_datecompleted]=FORMAT(of_delivery_datecompleted,'d','#Session.localization.language#') 
+,[of_delivery_datecompleted]=FORMAT(of_delivery_datecompleted,'#Session.localization.formatdate#') 
 ,[of_delivery_esttime]
 FROM[otherfilings]
 WHERE[of_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -179,15 +179,15 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Asset GUI Completed Tasks--->
 <cfcase value="assetCompTask">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT[of_obtaininfo_datecompleted]=FORMAT(of_obtaininfo_datecompleted,'d','#Session.localization.language#')
+SELECT[of_obtaininfo_datecompleted]=FORMAT(of_obtaininfo_datecompleted,'#Session.localization.formatdate#')
 ,[of_obtaininfo_completedbyTEXT]
-,[of_preparation_datecompleted]=FORMAT(of_preparation_datecompleted,'d','#Session.localization.language#')
+,[of_preparation_datecompleted]=FORMAT(of_preparation_datecompleted,'#Session.localization.formatdate#')
 ,[of_preparation_completedbyTEXT]
-,[of_review_datecompleted]=FORMAT(of_review_datecompleted,'d','#Session.localization.language#')
+,[of_review_datecompleted]=FORMAT(of_review_datecompleted,'#Session.localization.formatdate#')
 ,[of_review_completedbyTEXT]
-,[of_assembly_datecompleted]=FORMAT(of_assembly_datecompleted,'d','#Session.localization.language#')
+,[of_assembly_datecompleted]=FORMAT(of_assembly_datecompleted,'#Session.localization.formatdate#')
 ,[of_assembly_completedbyTEXT]
-,[of_delivery_datecompleted]=FORMAT(of_delivery_datecompleted,'d','#Session.localization.language#')
+,[of_delivery_datecompleted]=FORMAT(of_delivery_datecompleted,'#Session.localization.formatdate#')
 ,[of_delivery_completedbyTEXT]
 FROM[v_otherfilings]
 WHERE[OF_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -230,21 +230,21 @@ SELECT[of_id]
 ,[of_review_assignedto]
 ,[of_assembly_assignedto]
 ,[of_delivery_assignedto]
-,[of_duedate]=FORMAT(of_duedate,'d','#Session.localization.language#') 
+,[of_duedate]=FORMAT(of_duedate,'#Session.localization.formatdate#') 
 ,[of_missinginfo]
-,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'d','#Session.localization.language#') 
-,[of_filingdeadline]=FORMAT(of_filingdeadline,'d','#Session.localization.language#') 
+,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'#Session.localization.formatdate#') 
+,[of_filingdeadline]=FORMAT(of_filingdeadline,'#Session.localization.formatdate#') 
 ,[client_name]
 ,[client_id]
-,[of_obtaininfo_datecompleted]=ISNULL(FORMAT(of_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_obtaininfo_datecompleted]=ISNULL(FORMAT(of_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_obtaininfo_assignedtoTEXT]
-,[of_preparation_datecompleted]=ISNULL(FORMAT(of_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_preparation_datecompleted]=ISNULL(FORMAT(of_preparation_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_preparation_assignedtoTEXT]
-,[of_review_datecompleted]=ISNULL(FORMAT(of_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_review_datecompleted]=ISNULL(FORMAT(of_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_review_assignedtoTEXT]
-,[of_assembly_datecompleted]=ISNULL(FORMAT(of_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_assembly_datecompleted]=ISNULL(FORMAT(of_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_assembly_assignedtoTEXT]
-,[of_delivery_datecompleted]=ISNULL(FORMAT(of_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_delivery_datecompleted]=ISNULL(FORMAT(of_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_delivery_assignedtoTEXT] 
 ,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
 ,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])

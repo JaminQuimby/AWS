@@ -15,9 +15,9 @@
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pa_id]
  ,[client_id]
- ,[pa_dateofrevocation]=FORMAT(pa_dateofrevocation,'d','#Session.localization.language#')
- ,[pa_datesenttoirs]=FORMAT(pa_datesenttoirs,'d','#Session.localization.language#')
- ,[pa_datesignedbyclient]=FORMAT(pa_datesignedbyclient,'d','#Session.localization.language#')
+ ,[pa_dateofrevocation]=FORMAT(pa_dateofrevocation,'#Session.localization.formatdate#')
+ ,[pa_datesenttoirs]=FORMAT(pa_datesenttoirs,'#Session.localization.formatdate#')
+ ,[pa_datesignedbyclient]=FORMAT(pa_datesignedbyclient,'#Session.localization.formatdate#')
  ,[pa_preparers]
  ,[pa_status]
  ,[pa_taxforms]

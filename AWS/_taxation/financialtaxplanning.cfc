@@ -20,19 +20,19 @@ SELECT[FTP_ID]
  ,[ftp_assignedto]
  ,[ftp_category]
  ,[ftp_description]
- ,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
+ ,[ftp_duedate]=FORMAT(ftp_duedate,'#Session.localization.formatdate#')
  ,[ftp_esttime]
  ,[ftp_fees]
- ,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'d','#Session.localization.language#')
- ,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'d','#Session.localization.language#')
- ,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'d','#Session.localization.language#')
- ,[ftp_inforequested]=FORMAT(ftp_inforequested,'d','#Session.localization.language#')
+ ,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'#Session.localization.formatdate#')
+ ,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'#Session.localization.formatdate#')
+ ,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'#Session.localization.formatdate#')
+ ,[ftp_inforequested]=FORMAT(ftp_inforequested,'#Session.localization.formatdate#')
  ,[ftp_missinginfo]
- ,[ftp_missinginforeceived]=FORMAT(ftp_missinginforeceived,'d','#Session.localization.language#')
+ ,[ftp_missinginforeceived]=FORMAT(ftp_missinginforeceived,'#Session.localization.formatdate#')
  ,[ftp_paid]
  ,[ftp_priority]
- ,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'d','#Session.localization.language#')
- ,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
+ ,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'#Session.localization.formatdate#')
+ ,[ftp_requestservice]=FORMAT(ftp_requestservice,'#Session.localization.formatdate#')
  ,[ftp_status]
 FROM[financialtaxplanning]
 WHERE[ftp_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -78,8 +78,8 @@ SELECT[ftp_id]
 ,[ftp_category]
 ,[ftp_description]
 ,[ftp_assignedtoTEXT]
-,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
-,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
+,[ftp_duedate]=FORMAT(ftp_duedate,'#Session.localization.formatdate#')
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'#Session.localization.formatdate#')
 ,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]

@@ -37,19 +37,19 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 SELECT[ftp_id]
 ,[ftp_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])
 ,[ftp_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])
-,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
+,[ftp_duedate]=FORMAT(ftp_duedate,'#Session.localization.formatdate#')
 ,[ftp_assignedtoTEXT]
 ,[ftp_description]
-,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
-,[ftp_inforequested]=FORMAT(ftp_inforequested,'d','#Session.localization.language#')
-,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'d','#Session.localization.language#')
-,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'d','#Session.localization.language#')
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'#Session.localization.formatdate#')
+,[ftp_inforequested]=FORMAT(ftp_inforequested,'#Session.localization.formatdate#')
+,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'#Session.localization.formatdate#')
+,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'#Session.localization.formatdate#')
 ,[ftp_missinginfo]
 ,[ftp_priority]
 ,[ftp_esttime]
-,[ftp_missinginforeceived]=FORMAT(ftp_missinginforeceived,'d','#Session.localization.language#')
-,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'d','#Session.localization.language#')
-,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'d','#Session.localization.language#')
+,[ftp_missinginforeceived]=FORMAT(ftp_missinginforeceived,'#Session.localization.formatdate#')
+,[ftp_reportcompleted]=FORMAT(ftp_reportcompleted,'#Session.localization.formatdate#')
+,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'#Session.localization.formatdate#')
 ,FORMAT(ftp_fees, 'C', 'en-us')AS[ftp_fees]
 ,[ftp_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[ftp_paid]=[optionvalue_id])
 ,[client_name]

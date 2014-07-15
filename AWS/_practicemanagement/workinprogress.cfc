@@ -583,12 +583,12 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT Distinct [mc_id]
 ,[client_id]
 ,[client_name]
-,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
-,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'#Session.localization.formatdate#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'#Session.localization.formatdate#') 
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,[mc_priority]
 ,[mc_assignedtoTEXT]
-,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_duedate]=FORMAT(mc_duedate,'#Session.localization.formatdate#') 
 ,[mc_esttime]
 ,[mc_category]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
@@ -691,10 +691,10 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
-,[cas_duedate]=FORMAT(cas_duedate,'d','#Session.localization.language#') 
+,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
 ,[cas_assignedto]
 ,[cas_category]
-,[cas_datereqested]=FORMAT(cas_datereqested,'d','#Session.localization.language#') 
+,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,[cas_status]
 ,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
@@ -751,12 +751,12 @@ SELECT DISTINCT[bf_id]
 ,[client_name]
 ,[bf_owners]
 ,[bf_status]
-,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
+,[bf_duedate]=FORMAT(bf_duedate,'#Session.localization.formatdate#') 
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_assignedtoTEXT]=(SELECT TOP (1)[si_initials]FROM[v_staffinitials]WHERE(bf_assignedto = user_id)) 
 ,[bf_activity]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
-,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'#Session.localization.formatdate#') 
 ,[bf_missinginfo]
 FROM[v_businessformation_subtask]
 WHERE [client_active]=(1)
@@ -807,8 +807,8 @@ SET @id=<cfqueryparam value="#ARGUMENTS.id#">
 SELECT[bfs_id]
 ,[bfs_taskname]
 ,[bfs_assignedtoTEXT]
-,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'d','#Session.localization.language#')
-,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#')
+,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'#Session.localization.formatdate#')
+,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'#Session.localization.formatdate#')
 ,[bfs_estimatedtime]
 FROM[v_businessformation_subtask]
 WHERE([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
@@ -849,7 +849,7 @@ SELECT[co_id]
 ,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
 ,[co_caller]
-,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#')
+,[co_duedate]=FORMAT(co_duedate,'#Session.localization.formatdate#')
 ,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[co_status]
 ,[co_responseneeded]
@@ -908,8 +908,8 @@ SELECT[ftp_id]
 ,[ftp_status]
 ,[ftp_category]
 ,[ftp_assignedtoTEXT]
-,[ftp_duedate]=FORMAT(ftp_duedate,'d','#Session.localization.language#')
-,[ftp_requestservice]=FORMAT(ftp_requestservice,'d','#Session.localization.language#')
+,[ftp_duedate]=FORMAT(ftp_duedate,'#Session.localization.formatdate#')
+,[ftp_requestservice]=FORMAT(ftp_requestservice,'#Session.localization.formatdate#')
 ,[ftp_missinginfo]
 ,[client_name]
 ,[client_id]
@@ -968,36 +968,36 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT DISTINCT [fds_id]
 ,[client_id]
 ,[client_name]
-,[fds_periodend]=FORMAT(fds_periodend,'d','#Session.localization.language#') 
+,[fds_periodend]=FORMAT(fds_periodend,'#Session.localization.formatdate#') 
 ,[fds_month]
 ,[fds_year]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
-,[fds_duedate]=FORMAT(fds_duedate,'d','#Session.localization.language#') 
+,[fds_duedate]=FORMAT(fds_duedate,'#Session.localization.formatdate#') 
 ,[fds_status]
 ,[fds_missinginfo]
 ,[fds_compilemi]
 ,[fds_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fds_status]=[optionvalue_id])
-,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_obtaininfo_datecompleted]=ISNULL(FORMAT(fds_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_obtaininfo_assignedtoTEXT]
-,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sort_datecompleted]=ISNULL(FORMAT(fds_sort_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_sort_assignedtoTEXT]
-,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_checks_datecompleted]=ISNULL(FORMAT(fds_checks_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_checks_assignedtoTEXT]
-,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_sales_datecompleted]=ISNULL(FORMAT(fds_sales_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_sales_assignedtoTEXT]
-,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_entry_datecompleted]=ISNULL(FORMAT(fds_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_entry_assignedtoTEXT]
-,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_reconcile_datecompleted]=ISNULL(FORMAT(fds_reconcile_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_reconcile_assignedtoTEXT]
-,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_compile_datecompleted]=ISNULL(FORMAT(fds_compile_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_compile_assignedtoTEXT]
-,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_review_datecompleted]=ISNULL(FORMAT(fds_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_review_assignedtoTEXT]
-,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_assembly_datecompleted]=ISNULL(FORMAT(fds_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_assembly_assignedtoTEXT]
-,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_delivery_datecompleted]=ISNULL(FORMAT(fds_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_delivery_assignedtoTEXT]
-,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[fds_acctrpt_datecompleted]=ISNULL(FORMAT(fds_acctrpt_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[fds_acctrpt_assignedtoTEXT]
 FROM[v_financialDataStatus_subtask]
 WHERE [client_active]=(1)
@@ -1071,7 +1071,7 @@ SET @id=<cfqueryparam value="#ARGUMENTS.id#">
 SELECT[fdss_id]
 ,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
 ,[fdss_assignedtoTEXT]
-,[fdss_duedate]=FORMAT(fdss_duedate,'d','#Session.localization.language#')
+,[fdss_duedate]=FORMAT(fdss_duedate,'#Session.localization.formatdate#')
 ,[fdss_sequence]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]
@@ -1176,7 +1176,7 @@ SELECT[n_id],[nst_id]
 ,[nst_1_taxform]
 ,[nst_1_taxyear]
 ,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
-,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
+,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'#Session.localization.formatdate#')
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
 FROM[v_notice_subtask]
@@ -1239,21 +1239,21 @@ SELECT[of_id]
 ,[of_review_assignedto]
 ,[of_assembly_assignedto]
 ,[of_delivery_assignedto]
-,[of_duedate]=FORMAT(of_duedate,'d','#Session.localization.language#') 
+,[of_duedate]=FORMAT(of_duedate,'#Session.localization.formatdate#') 
 ,[of_missinginfo]
-,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'d','#Session.localization.language#') 
-,[of_filingdeadline]=FORMAT(of_filingdeadline,'d','#Session.localization.language#') 
+,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'#Session.localization.formatdate#') 
+,[of_filingdeadline]=FORMAT(of_filingdeadline,'#Session.localization.formatdate#') 
 ,[client_name]
 ,[client_id]
-,[of_obtaininfo_datecompleted]=ISNULL(FORMAT(of_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_obtaininfo_datecompleted]=ISNULL(FORMAT(of_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_obtaininfo_assignedtoTEXT]
-,[of_preparation_datecompleted]=ISNULL(FORMAT(of_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_preparation_datecompleted]=ISNULL(FORMAT(of_preparation_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_preparation_assignedtoTEXT]
-,[of_review_datecompleted]=ISNULL(FORMAT(of_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_review_datecompleted]=ISNULL(FORMAT(of_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_review_assignedtoTEXT]
-,[of_assembly_datecompleted]=ISNULL(FORMAT(of_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_assembly_datecompleted]=ISNULL(FORMAT(of_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_assembly_assignedtoTEXT]
-,[of_delivery_datecompleted]=ISNULL(FORMAT(of_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[of_delivery_datecompleted]=ISNULL(FORMAT(of_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[of_delivery_assignedtoTEXT] 
 ,[of_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[of_status]=[optionvalue_id])
 ,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
@@ -1321,19 +1321,19 @@ SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[pc_id]
 	,[pc_year]
-	,[pc_duedate]=FORMAT(pc_duedate,'d','#Session.localization.language#') 
+	,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
 	,[pc_missinginfo]
-	,[pc_payenddate]=FORMAT(pc_payenddate,'d','#Session.localization.language#') 
-	,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
-	,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
+	,[pc_paydate]=FORMAT(pc_paydate,'#Session.localization.formatdate#') 
+	,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 	,[pc_obtaininfo_assignedtoTEXT]
-	,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'#Session.localization.formatdate#'),'N/A')
 	,[pc_preparation_assignedtoTEXT]
-	,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 	,[pc_review_assignedtoTEXT]
-	,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 	,[pc_assembly_assignedtoTEXT]
-	,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+	,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 	,[pc_delivery_assignedtoTEXT]
  	,[client_name]
  	,[client_id]
@@ -1397,24 +1397,24 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[pt_id]
 		,[pt_year]
 		,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
-		,[pt_duedate]=FORMAT(pt_duedate,'d','#Session.localization.language#') 
+		,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#') 
 		,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
-		,[pt_lastpay]=FORMAT(pt_lastpay,'d','#Session.localization.language#') 
+		,[pt_lastpay]=FORMAT(pt_lastpay,'#Session.localization.formatdate#') 
 		,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
-		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#') 
-		,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#') 
+		,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 		,[pt_obtaininfo_assignedtoTEXT]
-		,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
 		,[pt_entry_assignedtoTEXT]
-		,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'#Session.localization.formatdate#'),'N/A')
 		,[pt_rec_assignedtoTEXT]
-		,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 		,[pt_review_assignedtoTEXT]
-		,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 		,[pt_assembly_assignedtoTEXT]
-		,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+		,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 		,[pt_delivery_assignedtoTEXT]
-		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'d','#Session.localization.language#')
+		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#')
 	 	,[pt_missinginfo]
 		,[client_name]
 	,[client_id]
@@ -1480,15 +1480,15 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[tr_id]
 ,[client_id]
 ,[client_name]
-,[tr_4_extended]=FORMAT(tr_4_extended,'d','#Session.localization.language#') 
-,[tr_4_completed]=FORMAT(tr_4_completed,'d','#Session.localization.language#') 
+,[tr_4_extended]=FORMAT(tr_4_extended,'#Session.localization.formatdate#') 
+,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#') 
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[tr_priority]
 ,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[tr_4_pptresttime]
-,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#') 
-,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#') 
+,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#') 
+,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#') 
 FROM[v_taxreturns]
 WHERE 
 ([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
@@ -1544,21 +1544,21 @@ SELECT[tr_id]
  	,[tr_taxyear]
  	,[tr_taxform]
 	,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
-  	,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
+  	,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
 	,[tr_missinginfo]
-	,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
+	,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
 	,[tr_2_assignedto]
   	,[tr_2_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_assignedto=user_id))
 	,[client_name]
 	,[client_id]
-	,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
-	,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
+	,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#') 
+	,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'#Session.localization.formatdate#') 
 	,[tr_2_reviewassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_reviewassignedto=user_id))
-	,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#') 
-	,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
-	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
-	,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#') 
-	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
+	,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'#Session.localization.formatdate#') 
+	,[tr_2_completed]=FORMAT(tr_2_completed,'#Session.localization.formatdate#') 
+	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'#Session.localization.formatdate#') 
+	,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#') 
+	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#') 
 
 FROM[v_taxreturns]
 

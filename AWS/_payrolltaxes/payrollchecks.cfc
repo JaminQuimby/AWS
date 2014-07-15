@@ -50,14 +50,14 @@ AND[pc_paydate]=<cfqueryparam value="#item[4]#">
 SELECT[PC_ID]
 ,[client_id]
 ,[pc_altfreq]
-,[pc_duedate]=FORMAT(pc_duedate,'d','#Session.localization.language#') 
+,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
 ,[pc_deliverymethod]
 ,[pc_esttime]
 ,[pc_fees]
 ,[pc_missinginfo]
-,[pc_missinginforeceived]=FORMAT(pc_missinginforeceived,'d','#Session.localization.language#') 
-,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
-,[pc_payenddate]=FORMAT(pc_payenddate,'d','#Session.localization.language#') 
+,[pc_missinginforeceived]=FORMAT(pc_missinginforeceived,'#Session.localization.formatdate#') 
+,[pc_paydate]=FORMAT(pc_paydate,'#Session.localization.formatdate#') 
+,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
 ,[pc_paid]
 ,[pc_year]
 FROM[payrollcheckstatus]
@@ -69,7 +69,7 @@ WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pc_obtaininfo_assignedto]
 ,[pc_obtaininfo_completedby]
-,[pc_obtaininfo_datecompleted]=FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#') 
+,[pc_obtaininfo_datecompleted]=FORMAT(pc_obtaininfo_datecompleted,'#Session.localization.formatdate#') 
 ,[pc_obtaininfo_esttime]
 FROM[payrollcheckstatus]
 WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -80,7 +80,7 @@ WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pc_preparation_assignedto]
 ,[pc_preparation_completedby]
-,[pc_preparation_datecompleted]=FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#') 
+,[pc_preparation_datecompleted]=FORMAT(pc_preparation_datecompleted,'#Session.localization.formatdate#') 
 ,[pc_preparation_esttime]
 FROM[payrollcheckstatus]
 WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -91,7 +91,7 @@ WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pc_review_assignedto]
 ,[pc_review_completedby]
-,[pc_review_datecompleted]=FORMAT(pc_review_datecompleted,'d','#Session.localization.language#') 
+,[pc_review_datecompleted]=FORMAT(pc_review_datecompleted,'#Session.localization.formatdate#') 
 ,[pc_review_esttime]
 FROM[payrollcheckstatus]
 WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -102,7 +102,7 @@ WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pc_assembly_assignedto]
 ,[pc_assembly_completedby]
-,[pc_assembly_datecompleted]=FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#') 
+,[pc_assembly_datecompleted]=FORMAT(pc_assembly_datecompleted,'#Session.localization.formatdate#') 
 ,[pc_assembly_esttime]
 FROM[payrollcheckstatus]
 WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -113,7 +113,7 @@ WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[pc_delivery_assignedto]
 ,[pc_delivery_completedby]
-,[pc_delivery_datecompleted]=FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#') 
+,[pc_delivery_datecompleted]=FORMAT(pc_delivery_datecompleted,'#Session.localization.formatdate#') 
 ,[pc_delivery_esttime]
 FROM[payrollcheckstatus]
 WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -133,15 +133,15 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Asset GUI Completed Tasks--->
 <cfcase value="assetCompTask">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT[pc_obtaininfo_datecompleted]=FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#')
+SELECT[pc_obtaininfo_datecompleted]=FORMAT(pc_obtaininfo_datecompleted,'#Session.localization.formatdate#')
 ,[pc_obtaininfo_completedbyTEXT]
-,[pc_preparation_datecompleted]=FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#')
+,[pc_preparation_datecompleted]=FORMAT(pc_preparation_datecompleted,'#Session.localization.formatdate#')
 ,[pc_preparation_completedbyTEXT]
-,[pc_review_datecompleted]=FORMAT(pc_review_datecompleted,'d','#Session.localization.language#')
+,[pc_review_datecompleted]=FORMAT(pc_review_datecompleted,'#Session.localization.formatdate#')
 ,[pc_review_completedbyTEXT]
-,[pc_assembly_datecompleted]=FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#')
+,[pc_assembly_datecompleted]=FORMAT(pc_assembly_datecompleted,'#Session.localization.formatdate#')
 ,[pc_assembly_completedbyTEXT]
-,[pc_delivery_datecompleted]=FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#')
+,[pc_delivery_datecompleted]=FORMAT(pc_delivery_datecompleted,'#Session.localization.formatdate#')
 ,[pc_delivery_completedbyTEXT]
 FROM[v_payrollcheckstatus]
 WHERE[PC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -175,19 +175,19 @@ WHERE[PC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
-,[pc_duedate]=FORMAT(pc_duedate,'d','#Session.localization.language#') 
+,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
 ,[pc_missinginfo]
-,[pc_payenddate]=FORMAT(pc_payenddate,'d','#Session.localization.language#') 
-,[pc_paydate]=FORMAT(pc_paydate,'d','#Session.localization.language#') 
-,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
+,[pc_paydate]=FORMAT(pc_paydate,'#Session.localization.formatdate#') 
+,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[pc_obtaininfo_assignedtoTEXT]
-,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[pc_preparation_assignedtoTEXT]
-,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[pc_review_assignedtoTEXT]
-,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[pc_assembly_assignedtoTEXT]
-,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'d','#Session.localization.language#'),'N/A')
+,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
 ,[pc_delivery_assignedtoTEXT]
 ,[client_name]
 ,[client_id]

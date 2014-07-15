@@ -20,18 +20,18 @@ SELECT[mc_id]
 ,[mc_assignedto]
 ,[mc_category]
 ,[mc_description]
-,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_duedate]=FORMAT(mc_duedate,'#Session.localization.formatdate#') 
 ,[mc_esttime]
 ,[mc_fees]
-,[mc_informationreceived]=FORMAT(mc_informationreceived,'d','#Session.localization.language#') 
+,[mc_informationreceived]=FORMAT(mc_informationreceived,'#Session.localization.formatdate#') 
 ,[mc_missinginfo]
-,[mc_missinginforeceived]=FORMAT(mc_missinginforeceived,'d','#Session.localization.language#') 
+,[mc_missinginforeceived]=FORMAT(mc_missinginforeceived,'#Session.localization.formatdate#') 
 ,[mc_paid]
 ,[mc_priority]
-,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
-,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'#Session.localization.formatdate#') 
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'#Session.localization.formatdate#') 
 ,[mc_status]
-,[mc_workinitiated]=FORMAT(mc_workinitiated,'d','#Session.localization.language#') 
+,[mc_workinitiated]=FORMAT(mc_workinitiated,'#Session.localization.formatdate#') 
 FROM[managementconsulting]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -42,9 +42,9 @@ WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[mcs_id]
 ,[mcs_actualtime]
 ,[mcs_assignedto]
-,[mcs_completed]=FORMAT(mcs_completed,'d','#Session.localization.language#') 
+,[mcs_completed]=FORMAT(mcs_completed,'#Session.localization.formatdate#') 
 ,[mcs_dependencies]
-,[mcs_duedate]=FORMAT(mcs_duedate,'d','#Session.localization.language#') 
+,[mcs_duedate]=FORMAT(mcs_duedate,'#Session.localization.formatdate#') 
 ,[mcs_esttime]
 ,[mcs_notes]
 ,[mcs_sequence]
@@ -98,12 +98,12 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[mc_id]
 ,[client_id]
 ,[client_name]
-,[mc_requestforservice]=FORMAT(mc_requestforservice,'d','#Session.localization.language#') 
-,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'d','#Session.localization.language#') 
+,[mc_requestforservice]=FORMAT(mc_requestforservice,'#Session.localization.formatdate#') 
+,[mc_projectcompleted]=FORMAT(mc_projectcompleted,'#Session.localization.formatdate#') 
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,[mc_priority]
 ,[mc_assignedtoTEXT]
-,[mc_duedate]=FORMAT(mc_duedate,'d','#Session.localization.language#') 
+,[mc_duedate]=FORMAT(mc_duedate,'#Session.localization.formatdate#') 
 ,[mc_esttime]
 ,[mc_category]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
@@ -147,7 +147,7 @@ SELECT
 [mc_id]
 ,[mcs_id]
 ,[mcs_assignedtoTEXT]
-,[mcs_duedate]=FORMAT(mcs_duedate,'d','#Session.localization.language#') 
+,[mcs_duedate]=FORMAT(mcs_duedate,'#Session.localization.formatdate#') 
 ,[mcs_sequence]
 ,[mcs_completed]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])

@@ -37,31 +37,31 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 SELECT[bf_id]
 ,[bf_assignedtoTEXT]
 ,[bf_activity]
-,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
+,[bf_duedate]=FORMAT(bf_duedate,'#Session.localization.formatdate#') 
 ,[bf_owners]
 ,[bf_priority]
 ,[bf_esttime]
-,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'#Session.localization.formatdate#') 
 ,[bf_missinginfo]
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
-,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'d','#Session.localization.language#') 
-,[bf_businessreceived]=FORMAT(bf_businessreceived,'d','#Session.localization.language#') 
-,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'d','#Session.localization.language#') 
-,[bf_articlessubmitted]=FORMAT(bf_articlessubmitted,'d','#Session.localization.language#') 
-,[bf_articlesapproved]=FORMAT(bf_articlesapproved,'d','#Session.localization.language#') 
-,[bf_tradenamesubmitted]=FORMAT(bf_tradenamesubmitted,'d','#Session.localization.language#') 
-,[bf_tradenamereceived]=FORMAT(bf_tradenamereceived,'d','#Session.localization.language#') 
-,[bf_minutesbylawsdraft]=FORMAT(bf_minutesbylawsdraft,'d','#Session.localization.language#') 
-,[bf_minutesbylawsfinal]=FORMAT(bf_minutesbylawsfinal,'d','#Session.localization.language#') 
-,[bf_minutescompleted]=FORMAT(bf_minutescompleted,'d','#Session.localization.language#') 
-,[bf_dissolutionrequested]=FORMAT(bf_dissolutionrequested,'d','#Session.localization.language#') 
-,[bf_dissolutionsubmitted]=FORMAT(bf_dissolutionsubmitted,'d','#Session.localization.language#') 
-,[bf_dissolutioncompleted]=FORMAT(bf_dissolutioncompleted,'d','#Session.localization.language#') 
-,[bf_otheractivity]=FORMAT(bf_otheractivity,'d','#Session.localization.language#') 
-,[bf_otherstarted]=FORMAT(bf_otherstarted,'d','#Session.localization.language#') 
-,[bf_othercompleted]=FORMAT(bf_othercompleted,'d','#Session.localization.language#') 
-,[bf_recordbookordered]=FORMAT(bf_recordbookordered,'d','#Session.localization.language#') 
+,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'#Session.localization.formatdate#') 
+,[bf_businessreceived]=FORMAT(bf_businessreceived,'#Session.localization.formatdate#') 
+,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'#Session.localization.formatdate#') 
+,[bf_articlessubmitted]=FORMAT(bf_articlessubmitted,'#Session.localization.formatdate#') 
+,[bf_articlesapproved]=FORMAT(bf_articlesapproved,'#Session.localization.formatdate#') 
+,[bf_tradenamesubmitted]=FORMAT(bf_tradenamesubmitted,'#Session.localization.formatdate#') 
+,[bf_tradenamereceived]=FORMAT(bf_tradenamereceived,'#Session.localization.formatdate#') 
+,[bf_minutesbylawsdraft]=FORMAT(bf_minutesbylawsdraft,'#Session.localization.formatdate#') 
+,[bf_minutesbylawsfinal]=FORMAT(bf_minutesbylawsfinal,'#Session.localization.formatdate#') 
+,[bf_minutescompleted]=FORMAT(bf_minutescompleted,'#Session.localization.formatdate#') 
+,[bf_dissolutionrequested]=FORMAT(bf_dissolutionrequested,'#Session.localization.formatdate#') 
+,[bf_dissolutionsubmitted]=FORMAT(bf_dissolutionsubmitted,'#Session.localization.formatdate#') 
+,[bf_dissolutioncompleted]=FORMAT(bf_dissolutioncompleted,'#Session.localization.formatdate#') 
+,[bf_otheractivity]=FORMAT(bf_otheractivity,'#Session.localization.formatdate#') 
+,[bf_otherstarted]=FORMAT(bf_otherstarted,'#Session.localization.formatdate#') 
+,[bf_othercompleted]=FORMAT(bf_othercompleted,'#Session.localization.formatdate#') 
+,[bf_recordbookordered]=FORMAT(bf_recordbookordered,'#Session.localization.formatdate#') 
 ,FORMAT(bf_fees, 'C', 'en-us')AS[bf_fees]
 ,[bf_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[bf_paid]=[optionvalue_id])
 ,[client_name]

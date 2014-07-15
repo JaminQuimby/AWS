@@ -36,10 +36,10 @@ SELECT[cas_id]
 ,[client_id]
 ,[cas_assignedto]
 ,[cas_category]
-,[cas_completed]=FORMAT(cas_completed,'d','#Session.localization.language#') 
-,[cas_datereqested]=FORMAT(cas_datereqested,'d','#Session.localization.language#') 
-,[cas_datestarted]=FORMAT(cas_datestarted,'d','#Session.localization.language#') 
-,[cas_duedate]=FORMAT(cas_duedate,'d','#Session.localization.language#') 
+,[cas_completed]=FORMAT(cas_completed,'#Session.localization.formatdate#') 
+,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
+,[cas_datestarted]=FORMAT(cas_datestarted,'#Session.localization.formatdate#') 
+,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
 ,[cas_esttime]
 ,[cas_instructions]
 ,[cas_priority]
@@ -86,10 +86,10 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
-,[cas_duedate]=FORMAT(cas_duedate,'d','#Session.localization.language#') 
+,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
 ,[cas_assignedto]
 ,[cas_category]
-,[cas_datereqested]=FORMAT(cas_datereqested,'d','#Session.localization.language#') 
+,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,[cas_status]
 ,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)

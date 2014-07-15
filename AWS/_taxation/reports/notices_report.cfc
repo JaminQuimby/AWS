@@ -45,9 +45,9 @@ SELECT[n_id]
 ,[nst_missinginfo]
 ,[nst_priority]
 ,[nst_esttime]
-,[nst_1_datenoticerec]=FORMAT(nst_1_datenoticerec,'d','#Session.localization.language#')
-,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'d','#Session.localization.language#')
-,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'d','#Session.localization.language#')
+,[nst_1_datenoticerec]=FORMAT(nst_1_datenoticerec,'#Session.localization.formatdate#')
+,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'#Session.localization.formatdate#')
+,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'#Session.localization.formatdate#')
 ,[nst_2_revrequired]   
 ,[nst_fees]=FORMAT(nst_fees, 'C', '#Session.localization.language#')
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])

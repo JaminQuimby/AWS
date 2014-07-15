@@ -17,7 +17,7 @@
 <cfcase value="group101">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[comment_id]
-,[c_date]=FORMAT(c_date,'d','#Session.localization.language#') 
+,[c_date]=FORMAT(c_date,'#Session.localization.formatdate#') 
 ,[u_name]
 ,[u_email]
 ,CASE WHEN LEN([c_notes]) >= 101 THEN SUBSTRING([c_notes],0,100) +  '...' ELSE [c_notes] END AS[c_notes]

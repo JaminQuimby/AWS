@@ -105,7 +105,8 @@ AND([ctrl_users].[password]=<cfqueryparam value="#HASH(FORM.J_PASSWORD,'SHA-256'
 <cfset Session.user.storage=LCase(loginQuery.orgStorage&"\"&loginQuery.orgName&"\") >
 <cfset Session.localization.language='en-US'>
 <cfset Session.localization.formatphone='(######) ######-########'>
-<cfset Session.localization.formatdatetime='M/d/yyyy h:mm:ss tt'>
+<cfset Session.localization.formatdatetime='MM/dd/yyyy h:mm:ss tt'>
+<cfset Session.localization.formatdate='MM/dd/yyyy'>
 </cflock>
 
 </cfif>

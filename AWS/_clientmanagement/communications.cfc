@@ -15,7 +15,7 @@ SELECT[co_id]
 ,[co_caller]
 ,[co_contactmethod]
 ,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
-,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#')
+,[co_duedate]=FORMAT(co_duedate,'#Session.localization.formatdate#')
 ,[co_emailaddress]
 ,[co_ext]
 ,[co_faxnumber]=FORMAT(co_faxnumber,'#Session.localization.formatphone#')
@@ -69,7 +69,7 @@ SELECT[co_id]
 ,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
 ,[co_caller]
-,[co_duedate]=FORMAT(co_duedate,'d','#Session.localization.language#')
+,[co_duedate]=FORMAT(co_duedate,'#Session.localization.formatdate#')
 ,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[co_status]
 ,[co_responseneeded]

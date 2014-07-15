@@ -39,40 +39,40 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
-,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
 ,[tr_2_assignedtoTEXT]
 ,FORMAT(tr_priorfees, 'C', 'en-us')AS[tr_priorfees]
 ,[tr_2_reviewassignedtoTEXT] 
-,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#') 
+,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'#Session.localization.formatdate#') 
 ,[tr_deliverymethodTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_delivery'AND[tr_deliverymethod]=[optionvalue_id])
 ,[tr_3_multistatereturn]
 ,[tr_missinginfo]
-,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
-,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
-,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
-,[tr_extensionrequested]=FORMAT(tr_extensionrequested,'d','#Session.localization.language#') 
-,[tr_extensiondone]=FORMAT(tr_extensiondone,'d','#Session.localization.language#') 
+,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#') 
+,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
+,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'#Session.localization.formatdate#') 
+,[tr_extensionrequested]=FORMAT(tr_extensionrequested,'#Session.localization.formatdate#') 
+,[tr_extensiondone]=FORMAT(tr_extensiondone,'#Session.localization.formatdate#') 
 ,[tr_3_missingsignatures]
-,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
-,[tr_3_contacted]=FORMAT(tr_3_contacted,'d','#Session.localization.language#') 
+,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'#Session.localization.formatdate#') 
+,[tr_3_contacted]=FORMAT(tr_3_contacted,'#Session.localization.formatdate#') 
 ,[tr_2_preparedby]
 ,[tr_2_preparedbyTEXT]
-,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
-,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
-,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#') 
-,[tr_filingdeadline]=FORMAT(tr_filingdeadline,'d','#Session.localization.language#') 
+,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#') 
+,[tr_2_completed]=FORMAT(tr_2_completed,'#Session.localization.formatdate#') 
+,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#') 
+,[tr_filingdeadline]=FORMAT(tr_filingdeadline,'#Session.localization.formatdate#') 
 ,[tr_4_required]
-,[tr_4_extended]=FORMAT(tr_4_extended,'d','#Session.localization.language#') 
-,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#') 
-,[tr_4_completed]=FORMAT(tr_4_completed,'d','#Session.localization.language#') 
-,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#') 
+,[tr_4_extended]=FORMAT(tr_4_extended,'#Session.localization.formatdate#') 
+,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#') 
+,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#') 
+,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#') 
 ,FORMAT(tr_4_currentfees, 'C', 'en-us')AS[tr_4_currentfees]
 ,FORMAT(tr_currentfees, 'C', 'en-us')AS[tr_currentfees]
 ,[tr_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[tr_paid]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
-,[tr_4_completed]=FORMAT(tr_4_completed,'d','#Session.localization.language#')
-,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#')
+,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#')
+,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#')
 ,[tr_priority]
 ,[tr_esttime]
 FROM[v_taxreturns]
@@ -174,30 +174,30 @@ SELECT[trst_id]
 ,[tr_id]
 ,[tr_taxyear]
 ,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
-,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
 ,[tr_2_assignedtoTEXT]
 ,FORMAT(tr_priorfees, 'C', 'en-us')AS[tr_priorfees]
-,[tr_1_dropoffappointment]=FORMAT(tr_1_dropoffappointment,'d','#Session.localization.language#') 
-,[tr_1_pickupappointment]=FORMAT(tr_1_pickupappointment,'d','#Session.localization.language#') 
+,[tr_1_dropoffappointment]=FORMAT(tr_1_dropoffappointment,'#Session.localization.formatdate#') 
+,[tr_1_pickupappointment]=FORMAT(tr_1_pickupappointment,'#Session.localization.formatdate#') 
 ,[tr_missinginfo]
-,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
-,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
-,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
-,[tr_extensionrequested]=FORMAT(tr_extensionrequested,'d','#Session.localization.language#') 
-,[tr_extensiondone]=FORMAT(tr_extensiondone,'d','#Session.localization.language#') 
+,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#') 
+,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
+,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'#Session.localization.formatdate#') 
+,[tr_extensionrequested]=FORMAT(tr_extensionrequested,'#Session.localization.formatdate#') 
+,[tr_extensiondone]=FORMAT(tr_extensiondone,'#Session.localization.formatdate#') 
 ,[tr_3_missingsignatures]
-,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
-,[tr_3_contacted]=FORMAT(tr_3_contacted,'d','#Session.localization.language#') 
+,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'#Session.localization.formatdate#') 
+,[tr_3_contacted]=FORMAT(tr_3_contacted,'#Session.localization.formatdate#') 
 ,[tr_2_preparedbyTEXT]
-,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
-,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
-,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#') 
-,[tr_filingdeadline]=FORMAT(tr_filingdeadline,'d','#Session.localization.language#') 
+,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#') 
+,[tr_2_completed]=FORMAT(tr_2_completed,'#Session.localization.formatdate#') 
+,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#') 
+,[tr_filingdeadline]=FORMAT(tr_filingdeadline,'#Session.localization.formatdate#') 
 ,[tr_4_required]
-,[tr_4_extended]=FORMAT(tr_4_extended,'d','#Session.localization.language#') 
-,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#') 
-,[tr_4_completed]=FORMAT(tr_4_completed,'d','#Session.localization.language#') 
-,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#') 
+,[tr_4_extended]=FORMAT(tr_4_extended,'#Session.localization.formatdate#') 
+,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#') 
+,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#') 
+,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#') 
 ,FORMAT(tr_4_currentfees, 'C', 'en-us')AS[tr_4_currentfees]
 ,trst_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[trst_state]=[optionvalue_id])
 ,[trst_primary]

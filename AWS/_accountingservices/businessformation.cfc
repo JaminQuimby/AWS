@@ -52,14 +52,14 @@ SELECT[bf_id]
 ,[client_id]
 ,[bf_activity]
 ,[bf_assignedto]
-,[bf_businessreceived]=FORMAT(bf_businessreceived,'d','#Session.localization.language#') 
-,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'d','#Session.localization.language#') 
+,[bf_businessreceived]=FORMAT(bf_businessreceived,'#Session.localization.formatdate#') 
+,[bf_businesssubmitted]=FORMAT(bf_businesssubmitted,'#Session.localization.formatdate#') 
 ,[bf_businesstype]
-,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'d','#Session.localization.language#') 
-,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
+,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'#Session.localization.formatdate#') 
+,[bf_duedate]=FORMAT(bf_duedate,'#Session.localization.formatdate#') 
 ,[bf_esttime]
 ,[bf_fees]
-,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'#Session.localization.formatdate#') 
 ,[bf_missinginfo]
 ,[bf_owners]
 ,[bf_paid]
@@ -73,8 +73,8 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_1--->
 <cfcase value="group1_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT [bf_articlesapproved]=FORMAT(bf_articlesapproved,'d','#Session.localization.language#') 
-,[bf_articlessubmitted]=FORMAT(bf_articlessubmitted,'d','#Session.localization.language#') 
+SELECT [bf_articlesapproved]=FORMAT(bf_articlesapproved,'#Session.localization.formatdate#') 
+,[bf_articlessubmitted]=FORMAT(bf_articlessubmitted,'#Session.localization.formatdate#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -83,8 +83,8 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_2--->
 <cfcase value="group1_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT [bf_tradenamereceived]=FORMAT(bf_tradenamereceived,'d','#Session.localization.language#') 
-,[bf_tradenamesubmitted]=FORMAT(bf_tradenamesubmitted,'d','#Session.localization.language#') 
+SELECT [bf_tradenamereceived]=FORMAT(bf_tradenamereceived,'#Session.localization.formatdate#') 
+,[bf_tradenamesubmitted]=FORMAT(bf_tradenamesubmitted,'#Session.localization.formatdate#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -93,9 +93,9 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_3--->
 <cfcase value="group1_3">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT [bf_minutesbylawsdraft]=FORMAT(bf_minutesbylawsdraft,'d','#Session.localization.language#') 
-,[bf_minutesbylawsfinal]=FORMAT(bf_minutesbylawsfinal,'d','#Session.localization.language#') 
-,[bf_minutescompleted]=FORMAT(bf_minutescompleted,'d','#Session.localization.language#') 
+SELECT [bf_minutesbylawsdraft]=FORMAT(bf_minutesbylawsdraft,'#Session.localization.formatdate#') 
+,[bf_minutesbylawsfinal]=FORMAT(bf_minutesbylawsfinal,'#Session.localization.formatdate#') 
+,[bf_minutescompleted]=FORMAT(bf_minutescompleted,'#Session.localization.formatdate#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -104,9 +104,9 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_4--->
 <cfcase value="group1_4">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT [bf_dissolutioncompleted]=FORMAT(bf_dissolutioncompleted,'d','#Session.localization.language#') 
-,[bf_dissolutionrequested]=FORMAT(bf_dissolutionrequested,'d','#Session.localization.language#') 
-,[bf_dissolutionsubmitted]=FORMAT(bf_dissolutionsubmitted,'d','#Session.localization.language#') 
+SELECT [bf_dissolutioncompleted]=FORMAT(bf_dissolutioncompleted,'#Session.localization.formatdate#') 
+,[bf_dissolutionrequested]=FORMAT(bf_dissolutionrequested,'#Session.localization.formatdate#') 
+,[bf_dissolutionsubmitted]=FORMAT(bf_dissolutionsubmitted,'#Session.localization.formatdate#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -115,9 +115,9 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1_5--->
 <cfcase value="group1_5">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT [bf_otheractivity]=FORMAT(bf_otheractivity,'d','#Session.localization.language#') 
-,[bf_othercompleted]=FORMAT(bf_othercompleted,'d','#Session.localization.language#') 
-,[bf_otherstarted]=FORMAT(bf_otherstarted,'d','#Session.localization.language#') 
+SELECT [bf_otheractivity]=FORMAT(bf_otheractivity,'#Session.localization.formatdate#') 
+,[bf_othercompleted]=FORMAT(bf_othercompleted,'#Session.localization.formatdate#') 
+,[bf_otherstarted]=FORMAT(bf_otherstarted,'#Session.localization.formatdate#') 
 FROM[businessformation]
 WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -128,8 +128,8 @@ WHERE[bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[bfs_id]
 ,[bfs_assignedto]
-,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#') 
-,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'d','#Session.localization.language#') 
+,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'#Session.localization.formatdate#') 
+,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'#Session.localization.formatdate#') 
 ,[bfs_estimatedtime]
 ,[bfs_taskname]
 FROM[businessformation_subtask]
@@ -173,10 +173,10 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[bf_id]
 ,[client_id]
 ,[client_name]
-,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'d','#Session.localization.language#') 
+,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'#Session.localization.formatdate#') 
 ,[bf_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bf_status]=[optionvalue_id])
 ,[bf_assignedtoTEXT]
-,[bf_duedate]=FORMAT(bf_duedate,'d','#Session.localization.language#') 
+,[bf_duedate]=FORMAT(bf_duedate,'#Session.localization.formatdate#') 
 ,[bf_activity]
 ,[bf_owners]
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
@@ -221,8 +221,8 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 SELECT[bfs_id]
 ,[bfs_taskname]
 ,[bfs_assignedtoTEXT]
-,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'d','#Session.localization.language#')
-,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'d','#Session.localization.language#')
+,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'#Session.localization.formatdate#')
+,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'#Session.localization.formatdate#')
 ,[bfs_estimatedtime]
 FROM[v_businessformation_subtask]
 WHERE [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> 

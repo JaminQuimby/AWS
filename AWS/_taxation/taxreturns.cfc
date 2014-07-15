@@ -83,14 +83,14 @@ AND[option_1]='#ARGUMENTS.option1#'
 SELECT[tr_id]
 ,[client_id]
 ,[tr_currentfees]
-,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#')
+,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#')
 ,[tr_esttime]
-,[tr_extensiondone]=FORMAT(tr_extensiondone,'d','#Session.localization.language#')
-,[tr_extensionrequested]=FORMAT(tr_extensionrequested,'d','#Session.localization.language#')
-,[tr_filingdeadline]=FORMAT(tr_filingdeadline,'d','#Session.localization.language#')
-,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#')
+,[tr_extensiondone]=FORMAT(tr_extensiondone,'#Session.localization.formatdate#')
+,[tr_extensionrequested]=FORMAT(tr_extensionrequested,'#Session.localization.formatdate#')
+,[tr_filingdeadline]=FORMAT(tr_filingdeadline,'#Session.localization.formatdate#')
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#')
 ,[tr_missinginfo]
-,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#')
+,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#')
 ,[tr_notrequired]
 ,[tr_priorfees]
 ,[tr_priority]
@@ -122,7 +122,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[tr_2_assignedto]
 ,[tr_2_preparedby] 
-,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#')
+,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'#Session.localization.formatdate#')
 FROM[v_taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -131,11 +131,11 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1 Subgroup3 --->
 <cfcase value="group1_3">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#')
+SELECT[tr_2_completed]=FORMAT(tr_2_completed,'#Session.localization.formatdate#')
 ,[tr_2_reviewassignedto]
-,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#')
+,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'#Session.localization.formatdate#')
 ,[tr_2_reviewedby] 
-,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#')
+,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#')
 FROM[v_taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -144,9 +144,9 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group1 Subgroup4 --->
 <cfcase value="group1_4">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT [tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#')
-,[tr_3_contacted]=FORMAT(tr_3_contacted,'d','#Session.localization.language#')
-,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#')
+SELECT [tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'#Session.localization.formatdate#')
+,[tr_3_contacted]=FORMAT(tr_3_contacted,'#Session.localization.formatdate#')
+,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#')
 ,[tr_3_emailed]
 ,[tr_3_messageleft] 
 ,[tr_3_missingsignatures] 
@@ -160,12 +160,12 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group1_5">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[tr_4_assignedto] 
-,[tr_4_completed]=FORMAT(tr_4_completed,'d','#Session.localization.language#')
+,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#')
 ,[tr_4_completedby] 
 ,[tr_4_currentfees]
-,[tr_4_delivered]=FORMAT(tr_4_delivered,'d','#Session.localization.language#')
-,[tr_4_extended]=FORMAT(tr_4_extended,'d','#Session.localization.language#')
-,[tr_4_extensionrequested]=FORMAT(tr_4_extensionrequested,'d','#Session.localization.language#')
+,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#')
+,[tr_4_extended]=FORMAT(tr_4_extended,'#Session.localization.formatdate#')
+,[tr_4_extensionrequested]=FORMAT(tr_4_extensionrequested,'#Session.localization.formatdate#')
 ,[tr_4_paid] 
 ,[tr_4_pptresttime] 
 ,[tr_4_priorfees] 
@@ -173,7 +173,7 @@ SELECT[tr_4_assignedto]
 ,[tr_4_reviewassigned]
 ,[tr_4_reviewed]
 ,[tr_4_reviewedby]
-,[tr_4_rfr]=FORMAT(tr_4_rfr,'d','#Session.localization.language#')
+,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#')
 FROM[v_taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -183,7 +183,7 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trst_id]
 ,[trst_assignedto]
-,[trst_completed]=FORMAT(trst_completed,'d','#Session.localization.language#') 
+,[trst_completed]=FORMAT(trst_completed,'#Session.localization.formatdate#') 
 ,[trst_primary]
 ,[trst_reviewassignedto]
 ,[trst_state]
@@ -207,17 +207,17 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT [trst_1_assignedto]
-,[trst_1_completed]=FORMAT(trst_1_completed,'d','#Session.localization.language#') 
-,[trst_1_duedate]=FORMAT(trst_1_duedate,'d','#Session.localization.language#') 
-,[trst_1_informationreceived]=FORMAT(trst_1_informationreceived,'d','#Session.localization.language#') 
-,[trst_1_missinginforeceived]=FORMAT(trst_1_missinginforeceived,'d','#Session.localization.language#') 
+,[trst_1_completed]=FORMAT(trst_1_completed,'#Session.localization.formatdate#') 
+,[trst_1_duedate]=FORMAT(trst_1_duedate,'#Session.localization.formatdate#') 
+,[trst_1_informationreceived]=FORMAT(trst_1_informationreceived,'#Session.localization.formatdate#') 
+,[trst_1_missinginforeceived]=FORMAT(trst_1_missinginforeceived,'#Session.localization.formatdate#') 
 ,[trst_1_missinginfo]
 ,[trst_1_preparedby]
-,[trst_1_readyforreview]=FORMAT(trst_1_readyforreview,'d','#Session.localization.language#') 
+,[trst_1_readyforreview]=FORMAT(trst_1_readyforreview,'#Session.localization.formatdate#') 
 ,[trst_1_reviewassignedto]
-,[trst_1_reviewed]=FORMAT(trst_1_reviewed,'d','#Session.localization.language#') 
+,[trst_1_reviewed]=FORMAT(trst_1_reviewed,'#Session.localization.formatdate#') 
 ,[trst_1_reviewedby]
-,[trst_1_reviewedwithnotes]=FORMAT(trst_1_reviewedwithnotes,'d','#Session.localization.language#') 
+,[trst_1_reviewedwithnotes]=FORMAT(trst_1_reviewedwithnotes,'#Session.localization.formatdate#') 
 FROM[v_taxreturns_state]
 WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -226,10 +226,10 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- Load Group2 Subgroup2 --->
 <cfcase value="group2_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT  [trst_2_assemblereturn]=FORMAT(trst_2_assemblereturn,'d','#Session.localization.language#') 
-,[trst_2_contacted]=FORMAT(trst_2_contacted,'d','#Session.localization.language#') 
+SELECT  [trst_2_assemblereturn]=FORMAT(trst_2_assemblereturn,'#Session.localization.formatdate#') 
+,[trst_2_contacted]=FORMAT(trst_2_contacted,'#Session.localization.formatdate#') 
 ,[trst_2_currentfees]
-,[trst_2_delivered]=FORMAT(trst_2_delivered,'d','#Session.localization.language#') 
+,[trst_2_delivered]=FORMAT(trst_2_delivered,'#Session.localization.formatdate#') 
 ,[trst_2_deliverymethod]
 ,[trst_2_emailed]
 ,[trst_2_messageleft]
@@ -245,14 +245,14 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group2_3">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trst_3_pptrassignedto]
-,[trst_3_pptrcompleted]=FORMAT(trst_3_pptrcompleted,'d','#Session.localization.language#') 
+,[trst_3_pptrcompleted]=FORMAT(trst_3_pptrcompleted,'#Session.localization.formatdate#') 
 ,[trst_3_pptrcurrentfees]
-,[trst_3_pptrdelivered]=FORMAT(trst_3_pptrdelivered,'d','#Session.localization.language#') 
-,[trst_3_pptrextended]=FORMAT(trst_3_pptrextended,'d','#Session.localization.language#') 
+,[trst_3_pptrdelivered]=FORMAT(trst_3_pptrdelivered,'#Session.localization.formatdate#') 
+,[trst_3_pptrextended]=FORMAT(trst_3_pptrextended,'#Session.localization.formatdate#') 
 ,[trst_3_paid]
 ,[trst_3_pptrpriorfees]
 ,[trst_3_pptrrequired]
-,[trst_3_pptrrfr]=FORMAT(trst_3_pptrrfr,'d','#Session.localization.language#') 
+,[trst_3_pptrrfr]=FORMAT(trst_3_pptrrfr,'#Session.localization.formatdate#') 
 FROM[v_taxreturns_state]
 WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -275,17 +275,17 @@ WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group3_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trsc_1_assignedto]
-,[trsc_1_completed]=FORMAT(trsc_1_completed,'d','#Session.localization.language#') 
-,[trsc_1_duedate]=FORMAT(trsc_1_duedate,'d','#Session.localization.language#') 
-,[trsc_1_informationreceived]=FORMAT(trsc_1_informationreceived,'d','#Session.localization.language#') 
-,[trsc_1_missinginforeceived]=FORMAT(trsc_1_missinginforeceived,'d','#Session.localization.language#') 
+,[trsc_1_completed]=FORMAT(trsc_1_completed,'#Session.localization.formatdate#') 
+,[trsc_1_duedate]=FORMAT(trsc_1_duedate,'#Session.localization.formatdate#') 
+,[trsc_1_informationreceived]=FORMAT(trsc_1_informationreceived,'#Session.localization.formatdate#') 
+,[trsc_1_missinginforeceived]=FORMAT(trsc_1_missinginforeceived,'#Session.localization.formatdate#') 
 ,[trsc_1_missinginfo]
 ,[trsc_1_preparedby]
-,[trsc_1_readyforreview]=FORMAT(trsc_1_readyforreview,'d','#Session.localization.language#') 
+,[trsc_1_readyforreview]=FORMAT(trsc_1_readyforreview,'#Session.localization.formatdate#') 
 ,[trsc_1_reviewassignedto]
-,[trsc_1_reviewed]=FORMAT(trsc_1_reviewed,'d','#Session.localization.language#') 
+,[trsc_1_reviewed]=FORMAT(trsc_1_reviewed,'#Session.localization.formatdate#') 
 ,[trsc_1_reviewedby]
-,[trsc_1_reviewedwithnotes]=FORMAT(trsc_1_reviewedwithnotes,'d','#Session.localization.language#') 
+,[trsc_1_reviewedwithnotes]=FORMAT(trsc_1_reviewedwithnotes,'#Session.localization.formatdate#') 
 FROM[v_taxreturns_schedule]
 WHERE[trsc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -327,21 +327,21 @@ SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
-,[tr_duedate]=FORMAT(tr_duedate,'d','#Session.localization.language#') 
+,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
 ,[tr_missinginfo]
-,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'d','#Session.localization.language#') 
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
 ,[tr_4_assignedto]
 ,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[client_name]
 ,[client_id]
-,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'d','#Session.localization.language#') 
-,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'d','#Session.localization.language#') 
+,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#') 
+,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'#Session.localization.formatdate#') 
 ,[tr_2_reviewassignedtoTEXT] 
-,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'d','#Session.localization.language#') 
-,[tr_2_completed]=FORMAT(tr_2_completed,'d','#Session.localization.language#') 
-,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'d','#Session.localization.language#') 
-,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'d','#Session.localization.language#') 
-,[tr_3_delivered]=FORMAT(tr_3_delivered,'d','#Session.localization.language#')
+,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'#Session.localization.formatdate#') 
+,[tr_2_completed]=FORMAT(tr_2_completed,'#Session.localization.formatdate#') 
+,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'#Session.localization.formatdate#') 
+,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#') 
+,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#')
 ,[tr_4_required] 
 FROM[v_taxreturns]
 WHERE  ISNULL([tr_notrequired],0) != 1

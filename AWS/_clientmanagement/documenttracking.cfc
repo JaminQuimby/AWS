@@ -33,7 +33,7 @@ SELECT
 SELECT[DT_ID]
 ,[client_id]
 ,[dt_assignedto]
-,[dt_date]=FORMAT(dt_date,'d','#Session.localization.language#') 
+,[dt_date]=FORMAT(dt_date,'#Session.localization.formatdate#') 
 ,[dt_description]
 ,[dt_routing]
 ,[dt_sender]
@@ -73,7 +73,7 @@ SELECT[dt_id]
 ,[dt_assignedto]
 ,[dt_staffTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(dt_staff=user_id))
 ,[dt_routing]
-,[dt_date]=FORMAT(dt_date,'d','#Session.localization.language#') 
+,[dt_date]=FORMAT(dt_date,'#Session.localization.formatdate#') 
 ,CASE WHEN LEN([dt_routing]) >= 101 THEN SUBSTRING([dt_routing],0,100) +  '...' ELSE [dt_routing] END AS[dt_routing]
 ,[client_name]
 ,[client_id]
