@@ -45,7 +45,6 @@ FROM[]
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"DTA_ID":"'&DTA_ID&'"
- 
 								}'>                              
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
