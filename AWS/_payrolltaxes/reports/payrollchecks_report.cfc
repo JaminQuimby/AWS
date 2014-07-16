@@ -36,8 +36,7 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <cfcase value="group0">
 
 <cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT
-[client_id]
+SELECT [client_id]
 ,[client_name]
 ,[pc_id]
 ,[pc_year]
@@ -61,16 +60,18 @@ SELECT
 ,[pc_fees]=FORMAT(pc_fees,'C','#Session.localization.language#')
 ,[pc_paid]
 ,[pc_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[pc_paid]=[optionvalue_id])
-
 FROM[v_payrollcheckstatus]
-WHERE [client_active]=(1)
+WHERE[client_active]=(1)
 AND [pc_active]=(1)
+AND [deleted] IS NULL 
+
 <cfset sqllist = "pc_year,pc_payenddate,pc_paydate,pc_duedate,pc_esttime,pt_altfreq,pc_missinginfo,pc_missinginforeceived,pc_fees,pc_paid,pc_deliverymethod,pc_obtaininfo_assignedto,pc_obtaininfo_datecompleted,pc_obtaininfo_completedby,pc_obtaininfo_esttime,pc_preparation_assignedto,pc_preparation_datecompleted,pc_preparation_completedby,pc_preparation_esttime,pc_review_assignedto,pc_review_datecompleted,pc_review_completedby,pc_review_esttime,pc_assembly_assignedto,pc_assembly_datecompleted,pc_assembly_completedby,pc_assembly_esttime,pc_delivery_assignedto,pc_delivery_datecompleted,pc_delivery_completedby,pc_delivery_esttime">
 <cfset key="pc_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
 <cfif ArrayLen(data.b) gt 0>
-WHERE(1)=(1)
+
+AND (1)=(1)
 <cfloop array="#data.b#" index="i">
 	<cfif #i.t# eq "NONE">AND((1)=(1)
 		<cfloop array="#i.g#" index="g">

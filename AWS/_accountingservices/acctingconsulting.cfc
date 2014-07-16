@@ -35,8 +35,8 @@ SELECT[mc_id]
 FROM[managementconsulting]
 WHERE[mc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
-
 </cfcase>
+
 <!--- Load Group2 --->
 <cfcase value="group2"><cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[mcs_id]
@@ -54,6 +54,7 @@ SELECT[mcs_id]
 FROM[managementconsulting_subtask]
 WHERE[mcs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/></cfquery>
 </cfcase>
+
 <!---Assest Cateogry --->
 <cfcase value="assetCategory">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
@@ -155,6 +156,8 @@ SELECT
 FROM[v_managementconsulting_subtask]
 WHERE ISNULL([mcs_status],0) !=2
 AND ISNULL([mcs_status],0) !=3
+AND [mcs_active]=(1)
+AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

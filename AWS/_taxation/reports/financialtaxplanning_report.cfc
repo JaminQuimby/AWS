@@ -57,13 +57,15 @@ SELECT[ftp_id]
 FROM[v_financialtaxplanning]
 WHERE [client_active]=(1)
 AND [ftp_active]=(1)
+AND [deleted] IS NULL
 
 <cfset sqllist = "ftp_category,ftp_status,ftp_assignedto,ftp_priority,ftp_requestservice,ftp_duedate,ftp_inforequested,ftp_inforeceived,ftp_infocompiled,ftp_missinginfo,ftp_missinginforeceived,ftp_reportcompleted,ftp_finalclientmeeting,ftp_esttime,ftp_fees,ftp_paid">
 <cfset key="ftp_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
 <cfif ArrayLen(data.b) gt 0>
-WHERE(1)=(1)
+
+AND(1)=(1)
 <cfloop array="#data.b#" index="i">
 	<cfif #i.t# eq "NONE">AND((1)=(1)
 		<cfloop array="#i.g#" index="g">

@@ -37,9 +37,6 @@ AND[nst_1_noticedate]=<cfqueryparam value="#item[3]#" null="#LEN(item[3]) eq 0#"
 AND[nst_1_taxyear]=<cfqueryparam value="#item[4]#" null="#LEN(item[4]) eq 0#"/>
 AND[nst_1_taxform]=<cfqueryparam value="#item[5]#" null="#LEN(item[5]) eq 0#"/>
 AND[nst_1_resduedate]=<cfqueryparam value="#item[6]#" null="#LEN(item[6]) eq 0#"/>
-
-
-
 </cfquery>
 </cfcase>
 </cfswitch>
@@ -164,6 +161,7 @@ WHERE  ISNULL([n_status],0) != 2
 AND  ISNULL([n_status],0) != 3
 AND [client_active]=(1)
 AND [n_active]=(1)
+AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
@@ -209,6 +207,9 @@ WHERE[n_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 AND ([nst_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR [nst_assignedtoTEXT]IS NULL)
 AND  ISNULL([nst_status],0) !=2 
 AND  ISNULL([nst_status],0) !=3
+AND [client_active]=(1)
+AND [nst_active]=(1)
+AND [deleted] IS NULL
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

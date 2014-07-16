@@ -55,15 +55,17 @@ SELECT[co_id]
 ,[client_name]
 ,[client_id]
 FROM[v_communications]
-WHERE [client_active]=(1)
+WHERE[client_active]=(1)
 AND [co_active]=(1)
+AND [deleted] IS NULL
 
 <cfset sqllist = "co_briefmessage,co_caller,co_status,co_contactmethod,co_credithold,co_date,co_duedate,co_emailaddress,co_ext,co_faxnumber,co_fees,co_for,co_paid,co_responseneeded,co_returncall,co_takenby,co_telephone">
 <cfset key="co_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
 <cfif ArrayLen(data.b) gt 0>
-WHERE(1)=(1)
+
+AND(1)=(1)
 <cfloop array="#data.b#" index="i">
 	<cfif #i.t# eq "NONE">AND((1)=(1)
 		<cfloop array="#i.g#" index="g">

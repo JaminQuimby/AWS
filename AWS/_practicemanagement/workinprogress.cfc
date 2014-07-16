@@ -596,6 +596,7 @@ SELECT Distinct [mc_id]
 FROM[v_managementconsulting_subtask]
 WHERE [client_active]=(1)
 AND [mc_active]=(1)
+AND [deleted] IS NULL
 AND ([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
@@ -645,7 +646,10 @@ SELECT DISTINCT[mc_id]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
 ,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
 FROM[v_managementconsulting_subtask]
-WHERE([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
+WHERE[client_active]=(1)
+AND [mcs_active]=(1)
+AND [deleted] IS NULL
+AND([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
@@ -700,10 +704,10 @@ SELECT [cas_id]
 ,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
 ,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
 ,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
-
 FROM[v_clientadministrativetasks]
 WHERE [client_active]=(1)
 AND [cas_active]=(1)
+AND [deleted] IS NULL
 AND ([cas_status]NOT IN('2','3')OR([cas_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
@@ -761,6 +765,7 @@ SELECT DISTINCT[bf_id]
 FROM[v_businessformation_subtask]
 WHERE [client_active]=(1)
 AND [bf_active]=(1)
+AND [deleted] IS NULL
 AND ([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -772,7 +777,7 @@ AND ([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'"
+<cfset queryResult=queryResult&'{"BF_ID":"'&BF_ID&'" 
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
 								,"BF_ACTIVITY":"'&BF_ACTIVITY&'"
@@ -782,8 +787,7 @@ AND ([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 								,"BF_STATUSTEXT":"'&BF_STATUSTEXT&'"
 								,"BF_ASSIGNEDTOTEXT":"'&BF_ASSIGNEDTOTEXT&'"
 								,"BF_MISSINGINFO":"'&BF_MISSINGINFO&'"
-								,"BF_MISSINGINFORECEIVED":"'&BF_MISSINGINFORECEIVED&'"
-			
+								,"BF_MISSINGINFORECEIVED":"'&BF_MISSINGINFORECEIVED&'"			
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -806,12 +810,15 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SET @id=<cfqueryparam value="#ARGUMENTS.id#">
 SELECT[bfs_id]
 ,[bfs_taskname]
-,[bfs_assignedtoTEXT]
+,[bfs_assignedtoTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](bfs_assignedto)))FOR XML PATH('')),3,1000)
 ,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'#Session.localization.formatdate#')
 ,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'#Session.localization.formatdate#')
 ,[bfs_estimatedtime]
 FROM[v_businessformation_subtask]
-WHERE([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
+WHERE[client_active]=(1)
+AND [bfs_active]=(1)
+AND [deleted] IS NULL
+AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND([bf_id]=@g)</cfif>
 AND[BF_ID]=@id
@@ -857,10 +864,10 @@ SELECT[co_id]
 ,[client_name]
 ,[client_id]
 ,[co_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[co_status]=[optionvalue_id])
-
 FROM[v_communications]
 WHERE [client_active]=(1)
 AND [co_active]=(1)
+AND [deleted] IS NULL
 AND ([co_status]NOT IN('2','3')OR([co_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](co_for)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -916,10 +923,10 @@ SELECT[ftp_id]
 ,[ftp_description]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialcategory'AND[ftp_category]=[optionvalue_id])AS[ftp_categoryTEXT]
 ,(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[ftp_status]=[optionvalue_id])AS[ftp_statusTEXT]
-
 FROM[v_financialtaxplanning]
 WHERE [client_active]=(1)
 AND [ftp_active]=(1)
+AND [deleted] IS NULL
 AND ([ftp_status]NOT IN('2','3')OR([ftp_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([ftp_assignedto]=@u )</cfif>
@@ -1002,6 +1009,7 @@ SELECT DISTINCT [fds_id]
 FROM[v_financialDataStatus_subtask]
 WHERE [client_active]=(1)
 AND [fds_active]=(1)
+AND [deleted] IS NULL
 AND ([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
@@ -1078,7 +1086,10 @@ SELECT[fdss_id]
 ,[fdss_subtask]
 ,[fdss_completed]
 FROM[v_financialDataStatus_Subtask]
-WHERE([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
+WHERE[client_active]=(1)
+AND [fdss_active]=(1)
+AND [deleted] IS NULL
+AND([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0"></cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -1126,6 +1137,7 @@ SELECT DISTINCT[n_id]
 FROM[v_notice_subtask]
 WHERE [client_active]=(1)
 AND [n_active]=(1)
+AND [deleted] IS NULL
 AND ([n_status]NOT IN('2','3')OR([n_status]IS NULL))
 AND([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]>=@d)</cfif>
@@ -1166,7 +1178,8 @@ SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SET @id=<cfqueryparam value="#ARGUMENTS.id#">
-SELECT[n_id],[nst_id]
+SELECT[n_id]
+,[nst_id]
 ,[nst_id]
 ,[client_name]
 ,[client_id]
@@ -1181,7 +1194,10 @@ SELECT[n_id],[nst_id]
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
 FROM[v_notice_subtask]
-WHERE([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
+WHERE[client_active]=(1)
+AND [nst_active]=(1)
+AND [deleted] IS NULL
+AND ([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">--AND([nst_assignedto]=@u  OR[nst_assignedto]=0)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -1260,10 +1276,10 @@ SELECT[of_id]
 ,[of_formTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[of_form]=[optionvalue_id])
 ,[of_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_otherfilingtype'AND[of_type]=[optionvalue_id])
 ,[of_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[of_state]=[optionvalue_id])
-
 FROM[v_otherfilings]
 WHERE [client_active]=(1)
 AND [of_active]=(1)
+AND [deleted] IS NULL
 AND ([of_status]NOT IN('2','3')OR([of_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
@@ -1321,27 +1337,27 @@ SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[pc_id]
-	,[pc_year]
-	,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
-	,[pc_missinginfo]
-	,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
-	,[pc_paydate]=FORMAT(pc_paydate,'#Session.localization.formatdate#') 
-	,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
-	,[pc_obtaininfo_assignedtoTEXT]
-	,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'#Session.localization.formatdate#'),'N/A')
-	,[pc_preparation_assignedtoTEXT]
-	,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
-	,[pc_review_assignedtoTEXT]
-	,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
-	,[pc_assembly_assignedtoTEXT]
-	,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
-	,[pc_delivery_assignedtoTEXT]
- 	,[client_name]
- 	,[client_id]
-
+,[pc_year]
+,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
+,[pc_missinginfo]
+,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
+,[pc_paydate]=FORMAT(pc_paydate,'#Session.localization.formatdate#') 
+,[pc_obtaininfo_datecompleted]=ISNULL(FORMAT(pc_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pc_obtaininfo_assignedtoTEXT]
+,[pc_preparation_datecompleted]=ISNULL(FORMAT(pc_preparation_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pc_preparation_assignedtoTEXT]
+,[pc_review_datecompleted]=ISNULL(FORMAT(pc_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pc_review_assignedtoTEXT]
+,[pc_assembly_datecompleted]=ISNULL(FORMAT(pc_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pc_assembly_assignedtoTEXT]
+,[pc_delivery_datecompleted]=ISNULL(FORMAT(pc_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pc_delivery_assignedtoTEXT]
+,[client_name]
+,[client_id]
 FROM[v_payrollcheckstatus]
 WHERE [client_active]=(1)
 AND [pc_active]=(1)
+AND [deleted] IS NULL
 AND [pc_delivery_datecompleted]IS NULL 
 <cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
@@ -1396,32 +1412,33 @@ SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[pt_id]
-		,[pt_year]
-		,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
-		,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#') 
-		,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
-		,[pt_lastpay]=FORMAT(pt_lastpay,'#Session.localization.formatdate#') 
-		,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
-		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#') 
-		,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_obtaininfo_assignedtoTEXT]
-		,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_entry_assignedtoTEXT]
-		,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_rec_assignedtoTEXT]
-		,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_review_assignedtoTEXT]
-		,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_assembly_assignedtoTEXT]
-		,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_delivery_assignedtoTEXT]
-		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#')
-	 	,[pt_missinginfo]
-		,[client_name]
-	,[client_id]
+,[pt_year]
+,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
+,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#') 
+,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
+,[pt_lastpay]=FORMAT(pt_lastpay,'#Session.localization.formatdate#') 
+,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#') 
+,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_obtaininfo_assignedtoTEXT]
+,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_entry_assignedtoTEXT]
+,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_rec_assignedtoTEXT]
+,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_review_assignedtoTEXT]
+,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_assembly_assignedtoTEXT]
+,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_delivery_assignedtoTEXT]
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#')
+,[pt_missinginfo]
+,[client_name]
+,[client_id]
 FROM[v_payrolltaxes]
 WHERE [client_active]=(1)
 AND [pt_active]=(1)
+AND [deleted] IS NULL
 AND ([pt_delivery_datecompleted]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
@@ -1491,12 +1508,12 @@ SELECT[tr_id]
 ,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#') 
 ,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#') 
 FROM[v_taxreturns]
-WHERE 
-([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-
-OR(
-([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-	AND[tr_3_delivered] IS NULL AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
+WHERE [client_active]=(1)
+AND [tr_active]=(1)
+AND [deleted] IS NULL
+AND (([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
+OR(([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
+	AND[tr_3_delivered] IS NULL AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate()))))
 
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
@@ -1542,28 +1559,29 @@ SET @g=<cfqueryparam value="#ARGUMENTS.group#">
 SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[tr_id]
- 	,[tr_taxyear]
- 	,[tr_taxform]
-	,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
-  	,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
-	,[tr_missinginfo]
-	,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
-	,[tr_2_assignedto]
-  	,[tr_2_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_assignedto=user_id))
-	,[client_name]
-	,[client_id]
-	,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#') 
-	,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'#Session.localization.formatdate#') 
-	,[tr_2_reviewassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_reviewassignedto=user_id))
-	,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'#Session.localization.formatdate#') 
-	,[tr_2_completed]=FORMAT(tr_2_completed,'#Session.localization.formatdate#') 
-	,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'#Session.localization.formatdate#') 
-	,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#') 
-	,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#') 
-
+,[tr_taxyear]
+,[tr_taxform]
+,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
+,[tr_missinginfo]
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
+,[tr_2_assignedto]
+,[tr_2_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_assignedto=user_id))
+,[client_name]
+,[client_id]
+,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#') 
+,[tr_2_readyforreview]=FORMAT(tr_2_readyforreview,'#Session.localization.formatdate#') 
+,[tr_2_reviewassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_reviewassignedto=user_id))
+,[tr_2_reviewed]=FORMAT(tr_2_reviewed,'#Session.localization.formatdate#') 
+,[tr_2_completed]=FORMAT(tr_2_completed,'#Session.localization.formatdate#') 
+,[tr_3_assemblereturn]=FORMAT(tr_3_assemblereturn,'#Session.localization.formatdate#') 
+,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#') 
+,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#') 
 FROM[v_taxreturns]
-
-WHERE([tr_3_delivered]IS NULL )
+WHERE[client_active]=(1)
+AND [tr_active]=(1)
+AND [deleted] IS NULL
+AND([tr_3_delivered]IS NULL )
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">

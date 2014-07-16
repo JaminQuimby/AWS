@@ -52,15 +52,17 @@ SELECT[pa_id]
 ,[pa_datesenttoirs]=FORMAT(pa_datesenttoirs,'#Session.localization.formatdate#')
 ,[pa_dateofrevocation]=FORMAT(pa_dateofrevocation,'#Session.localization.formatdate#')
 FROM[v_powerofattorney]
-WHERE [client_active]=(1)
+WHERE[client_active]=(1)
 AND [pa_active]=(1)
+AND [deleted] IS NULL
 
 <cfset sqllist = "pa_dateofrevocation,pa_datesenttoirs,pa_datesignedbyclient,pa_preparers,pa_status,pa_taxforms,pa_taxmatters,pa_taxyears">
 <cfset key="pa_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
 <cfif ArrayLen(data.b) gt 0>
-WHERE(1)=(1)
+
+AND(1)=(1)
 <cfloop array="#data.b#" index="i">
 	<cfif #i.t# eq "NONE">AND((1)=(1)
 		<cfloop array="#i.g#" index="g">
