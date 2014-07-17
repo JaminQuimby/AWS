@@ -383,7 +383,10 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- Grid 2 --->
 <cfcase value="group2"><cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[fdss_id]
-,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
+ ,[fdss_subtaskTEXT]=(CASE [fdss_subtask] WHEN 0 THEN [fdss_subtaskcustom]
+ELSE (SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[fdss_subtask]=[optionvalue_id])
+END)
+
 ,[fdss_assignedtoTEXT]
 ,[fdss_duedate]=FORMAT(fdss_duedate,'#Session.localization.formatdate#')
 ,[fdss_sequence]

@@ -133,7 +133,6 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"MC_STATUSTEXT":"'&MC_STATUSTEXT&'"
 								,"MC_DUEDATE":"'&MC_DUEDATE&'"
 								,"MC_ASSIGNEDTOTEXT":"'&MC_ASSIGNEDTOTEXT&'"
-								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -151,8 +150,13 @@ SELECT
 ,[mcs_duedate]=FORMAT(mcs_duedate,'#Session.localization.formatdate#') 
 ,[mcs_sequence]
 ,[mcs_completed]
+,[mcs_subtaskcustom]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
-,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
+,[mcs_subtaskTEXT]=(CASE [mcs_subtask] WHEN 0 THEN [mcs_subtaskcustom]
+ELSE (SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
+END)
+
+
 FROM[v_managementconsulting_subtask]
 WHERE ISNULL([mcs_status],0) !=2
 AND ISNULL([mcs_status],0) !=3
