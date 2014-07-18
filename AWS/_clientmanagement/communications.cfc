@@ -14,7 +14,7 @@ SELECT[co_id]
 ,[co_briefmessage]
 ,[co_caller]
 ,[co_contactmethod]
-,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
+,[co_date]=FORMAT(co_date,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[co_duedate]=FORMAT(co_duedate,'#Session.localization.formatdate#')
 ,[co_emailaddress]
 ,[co_ext]
