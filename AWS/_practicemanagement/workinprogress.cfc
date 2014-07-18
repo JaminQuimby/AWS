@@ -67,7 +67,7 @@ SELECT'Accounting and Consulting'AS[name]
 </cfif>
 ,'A'AS[orderit]
 FROM[v_managementconsulting_subtask]
-WHERE[deleted] IS NULL AND[client_active]=(1)AND[mc_active]=(1)AND[mcs_active]=(1) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)
+WHERE[deleted] IS NULL AND[client_active]=(1)AND[mc_active]=(1)AND([mcs_active]=(1)OR[mcs_active]IS NULL) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -109,7 +109,7 @@ SELECT'Business Formation'AS[name]
 </cfif>
 ,'C'AS[orderit]
 FROM[v_businessformation_subtask]
-WHERE[deleted] IS NULL AND[client_active]=(1)AND[bf_active]=(1)AND[bfs_active]=(1)AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
+WHERE[deleted] IS NULL AND[client_active]=(1)AND[bf_active]=(1)AND([bfs_active]=(1)OR[bfs_active]IS NULL)AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR([bfs_assignedto]=@u OR[bfs_assignedto]IS NULL))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -252,7 +252,7 @@ ISNULL([fds_obtaininfo_esttime],0)
 </cfif>
 ,'F'AS[orderit]
 FROM[v_financialdatastatus_subtask] 
-WHERE[deleted] IS NULL AND[client_active]=(1)AND[fds_active]=(1)AND[fdss_active]=(1)AND([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))AND([fdss_status]NOT IN('2','3')OR([fdss_status]IS NULL))
+WHERE[deleted] IS NULL AND[client_active]=(1)AND[fds_active]=(1)AND([fdss_active]=(1)OR[fdss_active]IS NULL)AND([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))AND([fdss_status]NOT IN('2','3')OR([fdss_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND[fds_delivery_datecompleted] IS NULL
@@ -653,7 +653,7 @@ SELECT DISTINCT[mc_id]
 ,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
 FROM[v_managementconsulting_subtask]
 WHERE[client_active]=(1)
-AND [mcs_active]=(1)
+AND ([mcs_active]=(1)OR[mcs_active]IS NULL)
 AND [deleted] IS NULL
 AND([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
@@ -820,7 +820,7 @@ SELECT[bfs_id]
 ,[bfs_estimatedtime]
 FROM[v_businessformation_subtask]
 WHERE[client_active]=(1)
-AND [bfs_active]=(1)
+AND ([bfs_active]=(1)OR[bfs_active]IS NULL)
 AND [deleted] IS NULL
 AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -1013,6 +1013,7 @@ SELECT DISTINCT [fds_id]
 FROM[v_financialDataStatus_subtask]
 WHERE [client_active]=(1)
 AND [fds_active]=(1)
+AND ([fdss_active]=(1)OR[fdss_active]IS NULL)
 AND [deleted] IS NULL
 AND ([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
@@ -1141,6 +1142,7 @@ SELECT DISTINCT[n_id]
 FROM[v_notice_subtask]
 WHERE [client_active]=(1)
 AND [n_active]=(1)
+AND ([nst_active]=(1)OR[nst_active]IS NULL)
 AND [deleted] IS NULL
 AND ([n_status]NOT IN('2','3')OR([n_status]IS NULL))
 AND([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
