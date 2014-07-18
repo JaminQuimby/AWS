@@ -769,7 +769,7 @@ SELECT DISTINCT[bf_id]
 ,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'#Session.localization.formatdate#') 
 ,[bf_missinginfo]
 FROM[v_businessformation_subtask]
-WHERE[deleted] IS NULL AND[client_active]=(1)AND[bf_active]=(1)AND[bfs_active]=(1)AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
+WHERE[deleted] IS NULL AND[client_active]=(1)AND[bf_active]=(1)AND([bfs_active]=(1)OR[bfs_active]IS NULL)AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
 
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
