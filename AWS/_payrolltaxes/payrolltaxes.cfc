@@ -52,7 +52,7 @@ SELECT[PT_ID]
 ,[pt_deliverymethod]
 ,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#')
 ,[pt_esttime]
-,[pt_fees]
+,[pt_fees]=FORMAT(pt_fees,'C','#Session.localization.language#')
 ,[pt_lastpay]=FORMAT(pt_lastpay,'#Session.localization.formatdate#')
 ,[pt_missinginfo]
 ,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#')

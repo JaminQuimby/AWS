@@ -22,7 +22,7 @@ SELECT[mc_id]
 ,[mc_description]
 ,[mc_duedate]=FORMAT(mc_duedate,'#Session.localization.formatdate#') 
 ,[mc_esttime]
-,[mc_fees]
+,[mc_fees]=FORMAT(mc_fees,'C','#Session.localization.language#')
 ,[mc_informationreceived]=FORMAT(mc_informationreceived,'#Session.localization.formatdate#') 
 ,[mc_missinginfo]
 ,[mc_missinginforeceived]=FORMAT(mc_missinginforeceived,'#Session.localization.formatdate#') 

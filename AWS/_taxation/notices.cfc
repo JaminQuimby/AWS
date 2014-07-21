@@ -77,7 +77,7 @@ SELECT[nst_id]
       ,[nst_assignedto]
       ,[nst_deliverymethod]
       ,[nst_esttime]
-      ,[nst_fees]
+      ,[nst_fees]=FORMAT(nst_fees,'C','#Session.localization.language#')
       ,[nst_missinginfo]
       ,[nst_missinginforeceived]=FORMAT(nst_missinginforeceived,'#Session.localization.formatdate#')
       ,[nst_status]

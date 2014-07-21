@@ -68,7 +68,7 @@ $("#g1_altfrequency").is(':checked')+',"'+
 $("#g1_duedate").val()+'","'+
 $("#g1_deliverymethod").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_fees").val()+'",'+
+$("#g1_fees").val().replace(/([$])/g, '')+'","'+
 $("#g1_missinginformation").is(':checked')+',"'+
 $("#g1_missinginforeceived").val()+'","'+
 $("#g1_paydate").val()+'","'+

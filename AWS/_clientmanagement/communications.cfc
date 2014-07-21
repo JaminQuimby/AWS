@@ -19,7 +19,7 @@ SELECT[co_id]
 ,[co_emailaddress]
 ,[co_ext]
 ,[co_faxnumber]=FORMAT(co_faxnumber,'#Session.localization.formatphone#')
-,[co_fees]
+,[co_fees]=FORMAT(co_fees,'C','#Session.localization.language#')
 ,[co_for]
 ,[co_paid]
 ,[co_status]

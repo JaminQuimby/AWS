@@ -53,7 +53,7 @@ SELECT[PC_ID]
 ,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
 ,[pc_deliverymethod]
 ,[pc_esttime]
-,[pc_fees]
+,[pc_fees]=FORMAT(pc_fees,'C','#Session.localization.language#')
 ,[pc_missinginfo]
 ,[pc_missinginforeceived]=FORMAT(pc_missinginforeceived,'#Session.localization.formatdate#') 
 ,[pc_paydate]=FORMAT(pc_paydate,'#Session.localization.formatdate#') 

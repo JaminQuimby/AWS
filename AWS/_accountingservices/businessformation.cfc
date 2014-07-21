@@ -58,7 +58,7 @@ SELECT[bf_id]
 ,[bf_dateinitiated]=FORMAT(bf_dateinitiated,'#Session.localization.formatdate#') 
 ,[bf_duedate]=FORMAT(bf_duedate,'#Session.localization.formatdate#') 
 ,[bf_esttime]
-,[bf_fees]
+,[bf_fees]=FORMAT(bf_fees,'C','#Session.localization.language#')
 ,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'#Session.localization.formatdate#') 
 ,[bf_missinginfo]
 ,[bf_owners]

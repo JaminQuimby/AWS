@@ -73,7 +73,7 @@ $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
 $("#g1_extensioncompleted").val()+'","'+
 $("#g1_extensiondeadline").val()+'","'+
-$("#g1_fees").val()+'","'+
+$("#g1_fees").val().replace(/([$])/g, '')+'","'+
 $("#g1_filingdeadline").val()+'","'+
 $("#g1_form").val()+'","'+
 $("#g1_missinginforeceived").val()+'",'+

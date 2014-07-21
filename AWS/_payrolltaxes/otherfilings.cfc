@@ -87,7 +87,7 @@ SELECT[OF_ID]
 ,[of_esttime]
 ,[of_extensioncompleted]=FORMAT(of_extensioncompleted,'#Session.localization.formatdate#') 
 ,[of_extensiondeadline]=FORMAT(of_extensiondeadline,'#Session.localization.formatdate#') 
-,[of_fees]
+,[of_fees]=FORMAT(of_fees,'C','#Session.localization.language#')
 ,[of_filingdeadline]=FORMAT(of_filingdeadline,'#Session.localization.formatdate#') 
 ,[of_form]
 ,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'#Session.localization.formatdate#') 

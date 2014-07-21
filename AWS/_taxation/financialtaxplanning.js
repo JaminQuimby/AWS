@@ -57,7 +57,7 @@ $("#g1_category").val()+'","'+
 $("#g1_description").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_fees").val()+'","'+
+$("#g1_fees").val().replace(/([$])/g, '')+'","'+
 $("#g1_finalclientmeeting").val()+'","'+
 $("#g1_informationcompiled").val()+'","'+
 $("#g1_informationreceived").val()+'","'+

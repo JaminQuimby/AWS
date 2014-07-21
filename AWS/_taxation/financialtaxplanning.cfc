@@ -22,7 +22,7 @@ SELECT[FTP_ID]
  ,[ftp_description]
  ,[ftp_duedate]=FORMAT(ftp_duedate,'#Session.localization.formatdate#')
  ,[ftp_esttime]
- ,[ftp_fees]
+ ,[ftp_fees]=FORMAT(ftp_fees,'C','#Session.localization.language#')
  ,[ftp_finalclientmeeting]=FORMAT(ftp_finalclientmeeting,'#Session.localization.formatdate#')
  ,[ftp_infocompiled]=FORMAT(ftp_infocompiled,'#Session.localization.formatdate#')
  ,[ftp_inforeceived]=FORMAT(ftp_inforeceived,'#Session.localization.formatdate#')

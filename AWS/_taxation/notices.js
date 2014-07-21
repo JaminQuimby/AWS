@@ -126,7 +126,7 @@ $("#g2_fees").val()+'",'+
 $("#g2_missinginformation").is(':checked')+',"'+
 $("#g2_missinginforeceived").val()+'","'+
 $("#g2_noticestatus").val()+'","'+
-$("#g2_paid").val()+'","'+
+$("#g2_paid").val().replace(/([$])/g, '')+'","'+
 $("#g2_priority").val()+'","'+
 '"]]}';
 if($("#isLoaded_group2").val()!=0){_saveData({group:"group2","payload":$.parseJSON(json),page:"notices"})}

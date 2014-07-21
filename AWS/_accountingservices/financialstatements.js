@@ -139,7 +139,7 @@ $("#g1_compilemi").is(':checked')+',"'+
 $("#g1_deliverymethod").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_esttime").val()+'","'+
-$("#g1_fees").val()+'","'+
+$("#g1_fees").val().replace(/([$])/g, '')+'","'+
 $("#g1_mireceived").val()+'",'+
 $("#g1_missinginfo").is(':checked')+',"'+
 $("#g1_month").val()+'","'+

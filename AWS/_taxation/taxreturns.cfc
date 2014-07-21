@@ -79,7 +79,7 @@ AND[option_1]='#ARGUMENTS.option1#'
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[tr_id]
 ,[client_id]
-,[tr_currentfees]
+,[tr_currentfees]=FORMAT(tr_currentfees,'C','#Session.localization.language#')
 ,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#')
 ,[tr_esttime]
 ,[tr_extensiondone]=FORMAT(tr_extensiondone,'#Session.localization.formatdate#')
@@ -89,7 +89,7 @@ SELECT[tr_id]
 ,[tr_missinginfo]
 ,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#')
 ,[tr_notrequired]
-,[tr_priorfees]
+,[tr_priorfees]=FORMAT(tr_priorfees,'C','#Session.localization.language#')
 ,[tr_priority]
 ,[tr_reason]
 ,[tr_taxform]
@@ -159,13 +159,13 @@ WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[tr_4_assignedto] 
 ,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#')
 ,[tr_4_completedby] 
-,[tr_4_currentfees]
+,[tr_4_currentfees]=FORMAT(tr_4_currentfees,'C','#Session.localization.language#')
 ,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#')
 ,[tr_4_extended]=FORMAT(tr_4_extended,'#Session.localization.formatdate#')
 ,[tr_4_extensionrequested]=FORMAT(tr_4_extensionrequested,'#Session.localization.formatdate#')
 ,[tr_4_paid] 
 ,[tr_4_pptresttime] 
-,[tr_4_priorfees] 
+,[tr_4_priorfees]=FORMAT(tr_4_priorfees,'C','#Session.localization.language#')
 ,[tr_4_required] 
 ,[tr_4_reviewassigned]
 ,[tr_4_reviewed]
@@ -225,14 +225,14 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT  [trst_2_assemblereturn]=FORMAT(trst_2_assemblereturn,'#Session.localization.formatdate#') 
 ,[trst_2_contacted]=FORMAT(trst_2_contacted,'#Session.localization.formatdate#') 
-,[trst_2_currentfees]
+,[trst_2_currentfees]=FORMAT(trst_2_currentfees,'C','#Session.localization.language#')
 ,[trst_2_delivered]=FORMAT(trst_2_delivered,'#Session.localization.formatdate#') 
 ,[trst_2_deliverymethod]
 ,[trst_2_emailed]
 ,[trst_2_messageleft]
 ,[trst_2_missingsignatures]
 ,[trst_2_paid]
-,[trst_2_priorfees]
+,[trst_2_priorfees]=FORMAT(trst_2_priorfees,'C','#Session.localization.language#')
 
 FROM[v_taxreturns_state]
 WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -243,11 +243,11 @@ WHERE[trst_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[trst_3_pptrassignedto]
 ,[trst_3_pptrcompleted]=FORMAT(trst_3_pptrcompleted,'#Session.localization.formatdate#') 
-,[trst_3_pptrcurrentfees]
+,[trst_3_pptrcurrentfees]=FORMAT(trst_3_pptrcurrentfees,'C','#Session.localization.language#')
 ,[trst_3_pptrdelivered]=FORMAT(trst_3_pptrdelivered,'#Session.localization.formatdate#') 
 ,[trst_3_pptrextended]=FORMAT(trst_3_pptrextended,'#Session.localization.formatdate#') 
 ,[trst_3_paid]
-,[trst_3_pptrpriorfees]
+,[trst_3_pptrpriorfees]=FORMAT(trst_3_pptrpriorfees,'C','#Session.localization.language#')
 ,[trst_3_pptrrequired]
 ,[trst_3_pptrrfr]=FORMAT(trst_3_pptrrfr,'#Session.localization.formatdate#') 
 FROM[v_taxreturns_state]

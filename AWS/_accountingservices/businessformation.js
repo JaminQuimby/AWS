@@ -90,7 +90,7 @@ $("#g1_g5_businesssubmitted").val()+'","'+
 $("#g1_dateinitiated").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_fees").val()+'","'+
+$("#g1_fees").val().replace(/([$])/g, '')+'","'+
 $("#g1_missinginforeceived").val()+'",'+
 $("#g1_missinginformation").is(':checked')+',"'+
 $("#g1_owners").val()+'","'+

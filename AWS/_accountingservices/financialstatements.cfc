@@ -76,7 +76,7 @@ SELECT[fds_id]
 ,[fds_deliverymethod]
 ,[fds_duedate]=FORMAT(fds_duedate,'#Session.localization.formatdate#') 
 ,[fds_esttime]
-,[fds_fees]
+,[fds_fees]=FORMAT(fds_fees,'C','#Session.localization.language#')
 ,[fds_missinginforeceived]=FORMAT(fds_missinginforeceived,'#Session.localization.formatdate#') 
 ,[fds_missinginfo]
 ,[fds_month]
