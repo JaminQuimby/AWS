@@ -574,7 +574,7 @@ ORDER BY[orderit]
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 
-   <cfcatch >
+   <cfcatch>
         <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","MESSAGE":"#cfcatch.detail#","QUERY":['&queryResult&']]}'> 
     </cfcatch>
 </cftry>
@@ -598,6 +598,7 @@ SELECT Distinct [mc_id]
 ,[mc_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mc_status]=[optionvalue_id])
 ,[mc_priority]
 ,[mc_assignedtoTEXT]
+,[mc_duedateORDERBY]=convert(datetime, mc_duedate, 101)
 ,[mc_duedate]=FORMAT(mc_duedate,'#Session.localization.formatdate#') 
 ,[mc_esttime]
 ,[mc_category]
@@ -612,7 +613,7 @@ AND ([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([mc_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([mc_duedateORDERBY])ASC
 </cfquery>
 
 <cfset myResult="">
@@ -651,7 +652,8 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT DISTINCT[mc_id]
 ,[mcs_id]
 ,[mcs_assignedtoTEXT]
-,[mcs_duedate]
+,[mcs_duedateORDERBY]=convert(datetime, mcs_duedate, 101)
+,[mcs_duedate]=FORMAT(mc_duedate,'#Session.localization.formatdate#') 
 ,[mcs_sequence]
 ,[mcs_completed]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
@@ -666,7 +668,7 @@ AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([mcs_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([mcs_duedateORDERBY])ASC
 </cfquery>
 
 <cfset myResult="">
@@ -707,15 +709,16 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT [cas_id]
 ,[client_id]
 ,[client_name]
+,[cas_duedateORDERBY]=convert(datetime, cas_duedate, 101)
 ,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
 ,[cas_assignedto]
 ,[cas_category]
 ,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
 ,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
 ,[cas_status]
-,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
-,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
-,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
+,[cas_assignedtoTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
+,[cas_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
+,[cas_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
 FROM[v_clientadministrativetasks]
 WHERE [client_active]=(1)
 AND [cas_active]=(1)
@@ -725,7 +728,7 @@ AND ([cas_status]NOT IN('2','3')OR([cas_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([cas_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([cas_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -768,6 +771,7 @@ SELECT DISTINCT[bf_id]
 ,[client_name]
 ,[bf_owners]
 ,[bf_status]
+,[bf_duedateORDERBY]=convert(datetime, bf_duedate, 101)
 ,[bf_duedate]=FORMAT(bf_duedate,'#Session.localization.formatdate#') 
 ,[bf_businesstypeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[bf_businesstype]=[optionvalue_id])
 ,[bf_assignedtoTEXT]=(SELECT TOP (1)[si_initials]FROM[v_staffinitials]WHERE(bf_assignedto = user_id)) 
@@ -781,7 +785,7 @@ WHERE[deleted] IS NULL AND[client_active]=(1)AND[bf_active]=(1)AND([bfs_active]=
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([bf_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([bf_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -867,8 +871,9 @@ SELECT[co_id]
 ,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
 ,[co_caller]
+,[co_duedateORDERBY]=convert(datetime, co_duedate, 101)
 ,[co_duedate]=FORMAT(co_duedate,'#Session.localization.formatdate#')
-,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
+,[co_date]=FORMAT(co_date,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[co_status]
 ,[co_responseneeded]
 ,[co_returncall]
@@ -884,7 +889,7 @@ AND ([co_status]NOT IN('2','3')OR([co_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](co_for)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([co_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([co_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -928,6 +933,7 @@ SELECT[ftp_id]
 ,[ftp_status]
 ,[ftp_category]
 ,[ftp_assignedtoTEXT]
+,[ftp_duedateORDERBY]=convert(datetime, ftp_duedate, 101)
 ,[ftp_duedate]=FORMAT(ftp_duedate,'#Session.localization.formatdate#')
 ,[ftp_requestservice]=FORMAT(ftp_requestservice,'#Session.localization.formatdate#')
 ,[ftp_missinginfo]
@@ -946,7 +952,7 @@ AND ([ftp_status]NOT IN('2','3')OR([ftp_status]IS NULL))
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
-ORDER BY(FORMAT([ftp_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([ftp_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -963,7 +969,7 @@ ORDER BY(FORMAT([ftp_duedate],'D','#Session.localization.language#'))DESC
 									,"FTP_ASSIGNEDTOTEXT":"'&FTP_ASSIGNEDTOTEXT&'"
  									,"FTP_REQUESTSERVICE":"'&FTP_REQUESTSERVICE&'"
  									,"FTP_MISSINGINFO":"'&FTP_MISSINGINFO&'"
-									}'>
+								}'>
                                     
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -992,6 +998,7 @@ SELECT DISTINCT [fds_id]
 ,[fds_month]
 ,[fds_year]
 ,[fds_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[fds_month]=[optionvalue_id])
+,[fds_duedateORDERBY]=convert(datetime, fds_duedate, 101)
 ,[fds_duedate]=FORMAT(fds_duedate,'#Session.localization.formatdate#') 
 ,[fds_status]
 ,[fds_missinginfo]
@@ -1044,7 +1051,7 @@ OR([fdss_assignedto]=@u))
 
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([fds_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([fds_duedateORDERBY]) ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1072,7 +1079,6 @@ ORDER BY(FORMAT([fds_duedate],'D','#Session.localization.language#'))DESC
 								,"FDS_ASSEMBLY":"'&fds_assembly_datecompleted&'<br/>'&fds_assembly_assignedtoTEXT&'"
 								,"FDS_DELIVERY":"'&fds_delivery_datecompleted&'<br/>'&fds_delivery_assignedtoTEXT&'"
 								,"FDS_ACCTRPT":"'&fds_acctrpt_datecompleted&'<br/>'&fds_acctrpt_assignedtoTEXT&'"
-
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -1096,6 +1102,7 @@ SET @id=<cfqueryparam value="#ARGUMENTS.id#">
 SELECT[fdss_id]
 ,[fdss_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_financialstatmentsubtask'AND[fdss_subtask]=[optionvalue_id])
 ,[fdss_assignedtoTEXT]
+,[fdss_duedateORDERBY]=convert(datetime, fdss_duedate, 101)
 ,[fdss_duedate]=FORMAT(fdss_duedate,'#Session.localization.formatdate#')
 ,[fdss_sequence]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
@@ -1111,8 +1118,7 @@ AND([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 AND[fds_id]=@id
-
-ORDER BY(FORMAT([fdss_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([fdss_duedateORDERBY]) ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1147,6 +1153,7 @@ SELECT DISTINCT[n_id]
 ,[n_status]
 ,[client_name]
 ,[client_id]
+,[nst_1_resduedateORDERBY]=convert(datetime, nst_1_resduedate, 101)
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 FROM[v_notice_subtask]
 WHERE [client_active]=(1)
@@ -1159,7 +1166,7 @@ AND([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
 <cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([nst_1_resduedate],'D','#Session.localization.language#'))DESC
+ORDER BY([nst_1_resduedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1169,7 +1176,7 @@ ORDER BY(FORMAT([nst_1_resduedate],'D','#Session.localization.language#'))DESC
 <cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"N_NAME":"'&n_NAME&'"
+								,"N_NAME":"'&N_NAME&'"
 								,"N_STATUSTEXT":"'&n_STATUSTEXT&'"						
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
@@ -1205,6 +1212,7 @@ SELECT[n_id]
 ,[nst_1_taxform]
 ,[nst_1_taxyear]
 ,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
+,[nst_1_resduedateORDERBY]=convert(datetime, nst_1_resduedate, 101)
 ,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'#Session.localization.formatdate#')
 ,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
 ,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
@@ -1218,7 +1226,7 @@ AND ([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 AND[n_id]=@id
-ORDER BY(FORMAT([nst_1_resduedate],'D','#Session.localization.language#'))DESC
+ORDER BY([nst_1_resduedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1271,6 +1279,7 @@ SELECT[of_id]
 ,[of_review_assignedto]
 ,[of_assembly_assignedto]
 ,[of_delivery_assignedto]
+,[of_duedateORDERBY]=convert(datetime, of_duedate, 101)
 ,[of_duedate]=FORMAT(of_duedate,'#Session.localization.formatdate#') 
 ,[of_missinginfo]
 ,[of_missinginforeceived]=FORMAT(of_missinginforeceived,'#Session.localization.formatdate#') 
@@ -1306,7 +1315,7 @@ OR([of_delivery_assignedto]=@u  AND[of_assembly_datecompleted]IS NOT NULL AND[of
 </cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([of_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([of_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1314,23 +1323,23 @@ ORDER BY(FORMAT([of_duedate],'D','#Session.localization.language#'))DESC
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"OF_ID":"'&OF_ID&'"
-									,"CLIENT_ID":"'&CLIENT_ID&'"
- 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
-									,"OF_TAXYEAR":"'&OF_TAXYEAR&'"								
-									,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
-									,"OF_STATETEXT":"'&OF_STATETEXT&'"
-									,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
- 									,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
-									,"OF_DUEDATE":"'&OF_DUEDATE&'"						
-									,"OF_FILINGDEADLINE":"'&OF_FILINGDEADLINE&'"
- 									,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
-	 								,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
-	 								,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"								
-									,"OF_OBTAININFO":"'&of_obtaininfo_datecompleted&'<br/>'&of_obtaininfo_assignedtoTEXT&'"
-									,"OF_PREPARATION":"'&of_preparation_datecompleted&'<br/>'&of_preparation_assignedtoTEXT&'"
-									,"OF_REVIEW":"'&of_review_datecompleted&'<br/>'&of_review_assignedtoTEXT&'"
-									,"OF_ASSEMBLY":"'&of_assembly_datecompleted&'<br/>'&of_assembly_assignedtoTEXT&'"
-									,"OF_DELIVERY":"'&of_delivery_datecompleted&'<br/>'&of_delivery_assignedtoTEXT&'"								
+								,"CLIENT_ID":"'&CLIENT_ID&'"
+ 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"OF_TAXYEAR":"'&OF_TAXYEAR&'"								
+								,"OF_PERIODTEXT":"'&OF_PERIODTEXT&'"
+								,"OF_STATETEXT":"'&OF_STATETEXT&'"
+								,"OF_TYPETEXT":"'&OF_TYPETEXT&'"
+ 								,"OF_FORMTEXT":"'&OF_FORMTEXT&'"
+								,"OF_DUEDATE":"'&OF_DUEDATE&'"						
+								,"OF_FILINGDEADLINE":"'&OF_FILINGDEADLINE&'"
+ 								,"OF_STATUSTEXT":"'&OF_STATUSTEXT&'"
+	 							,"OF_MISSINGINFO":"'&OF_MISSINGINFO&'"
+	 							,"OF_MISSINGINFORECEIVED":"'&OF_MISSINGINFORECEIVED&'"								
+								,"OF_OBTAININFO":"'&of_obtaininfo_datecompleted&'<br/>'&of_obtaininfo_assignedtoTEXT&'"
+								,"OF_PREPARATION":"'&of_preparation_datecompleted&'<br/>'&of_preparation_assignedtoTEXT&'"
+								,"OF_REVIEW":"'&of_review_datecompleted&'<br/>'&of_review_assignedtoTEXT&'"
+								,"OF_ASSEMBLY":"'&of_assembly_datecompleted&'<br/>'&of_assembly_assignedtoTEXT&'"
+								,"OF_DELIVERY":"'&of_delivery_datecompleted&'<br/>'&of_delivery_assignedtoTEXT&'"								
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -1354,6 +1363,7 @@ SET @u=<cfqueryparam value="#ARGUMENTS.userid#">
 SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[pc_id]
 ,[pc_year]
+,[pc_duedateORDERBY]=convert(datetime, pc_duedate, 101)
 ,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
 ,[pc_missinginfo]
 ,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
@@ -1386,7 +1396,7 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=@u))
 </cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([pc_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([pc_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1431,6 +1441,7 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT[pt_id]
 ,[pt_year]
 ,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
+,[pt_duedateORDERBY]=convert(datetime, pt_duedate, 101)
 ,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#') 
 ,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
 ,[pt_lastpay]=FORMAT(pt_lastpay,'#Session.localization.formatdate#') 
@@ -1468,7 +1479,7 @@ OR([pt_delivery_assignedto]=@u  AND[pt_assembly_datecompleted]IS NOT NULL)
 </cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([pt_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([pt_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1525,6 +1536,7 @@ SELECT[tr_id]
 ,[tr_4_pptresttime]
 ,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#') 
 ,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#') 
+,[tr_duedateORDERBY]=convert(datetime, tr_duedate, 101)
 FROM[v_taxreturns]
 WHERE [client_active]=(1)
 AND [tr_active]=(1)
@@ -1537,7 +1549,7 @@ OR(([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_deliv
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-ORDER BY(FORMAT([tr_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([tr_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1581,6 +1593,7 @@ SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
 ,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+,[tr_duedateORDERBY]=convert(datetime, tr_duedate, 101)
 ,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
 ,[tr_missinginfo]
 ,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
@@ -1616,7 +1629,7 @@ OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NOT NULL AND ISNULL
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
-ORDER BY(FORMAT([tr_duedate],'D','#Session.localization.language#'))DESC
+ORDER BY([tr_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1624,22 +1637,22 @@ ORDER BY(FORMAT([tr_duedate],'D','#Session.localization.language#'))DESC
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
- 									,"CLIENT_ID":"'&CLIENT_ID&'"
- 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
-									,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-									,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
-									,"TR_DUEDATE":"'&TR_DUEDATE&'"
-									,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
- 									,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
-									,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
-									,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
-									,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
-									,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
-									,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
-									,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
- 									,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
-									,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
-									,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"	
+ 								,"CLIENT_ID":"'&CLIENT_ID&'"
+ 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
+								,"TR_DUEDATE":"'&TR_DUEDATE&'"
+								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
+ 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
+								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
+								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
+								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
+								,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
+								,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
+								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
+ 								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
+								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
+								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
