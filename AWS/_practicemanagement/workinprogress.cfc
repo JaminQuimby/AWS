@@ -68,7 +68,8 @@ SELECT'Accounting and Consulting'AS[name]
 ,'A'AS[orderit]
 FROM[v_managementconsulting_subtask]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[mc_active]=(1)AND([mcs_active]=(1)OR[mcs_active]IS NULL) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)
-<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
+
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -89,7 +90,7 @@ SELECT'Administrative Tasks'AS[name]
 ,'B'AS[orderit]
 FROM [v_clientadministrativetasks]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[cas_active]=(1)AND([cas_status]NOT IN('2','3')OR([cas_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -110,6 +111,7 @@ SELECT'Business Formation'AS[name]
 ,'C'AS[orderit]
 FROM[v_businessformation_subtask]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[bf_active]=(1)AND([bfs_active]=(1)OR[bfs_active]IS NULL)AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
+<cfif ARGUMENTS.duedate neq "">AND([bf_duedate]IS NULL OR[bf_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR([bfs_assignedto]=@u OR[bfs_assignedto]IS NULL))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -156,7 +158,7 @@ SELECT'Financial & Tax Planning'AS[name]
 ,'E'AS[orderit]
 FROM[v_financialtaxplanning]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[ftp_active]=(1) AND([ftp_status]NOT IN('2','3')OR([ftp_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([ftp_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -253,7 +255,7 @@ ISNULL([fds_obtaininfo_esttime],0)
 ,'F'AS[orderit]
 FROM[v_financialdatastatus_subtask] 
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[fds_active]=(1)AND([fdss_active]=(1)OR[fdss_active]IS NULL)AND([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))AND([fdss_status]NOT IN('2','3')OR([fdss_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND[fds_delivery_datecompleted] IS NULL
 AND([fds_obtaininfo_assignedto] = @u AND[fds_obtaininfo_datecompleted]IS NULL)
@@ -276,12 +278,12 @@ SELECT'Notices'AS[name]
 
  <cfif ARGUMENTS.userid neq "0">
 ,(0)AS[total_time]
-,COUNT([nst_id])AS[count_assigned]
+,COUNT(DISTINCT [n_id])AS[count_assigned]
 ,SUM(DISTINCT CASE WHEN ISNULL( nst_assignedto ,0)=@u  THEN ISNULL([nst_esttime],0) ELSE NULL END)AS[total_subtask_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL( nst_assignedto ,0)=@u  THEN [nst_id] ELSE NULL END)AS[count_subtask_assigned]
 <cfelse>
 ,(0)AS[total_time]
-,COUNT([nst_id])AS[count_assigned]
+,COUNT(DISTINCT [n_id])AS[count_assigned]
 ,ISNULL(SUM(ISNULL(nst_esttime,0)),0)AS[total_subtask_time]
 ,COUNT(DISTINCT[nst_id])AS[count_subtask_assigned]
 </cfif>
@@ -290,7 +292,7 @@ SELECT'Notices'AS[name]
 FROM[v_notice_subtask]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[nst_active]=(1)AND[n_active]=(1) AND([n_status]NOT IN('2','3')OR([n_status]IS NULL))
 AND([nst_status]NOT IN('2','3')OR([nst_status]IS NULL)) 
-<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -334,7 +336,7 @@ AS[count_subtask_assigned]
 ,'H'AS[orderit]
 FROM[v_otherfilings]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[of_active]=(1)AND([of_status]NOT IN('2','3')OR([of_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([of_obtaininfo_assignedto]=@u AND[of_obtaininfo_datecompleted]IS NULL)
 OR([of_preparation_assignedto]=@u AND[of_obtaininfo_datecompleted]IS NOT NULL AND[of_preparation_datecompleted]IS NULL)
@@ -390,7 +392,7 @@ AS[total_subtask_time]
 ,'I'AS[orderit]
 FROM[v_payrollcheckstatus]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[pc_active]=(1)AND[pc_delivery_datecompleted]IS NULL 
-<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND
 ([pc_delivery_datecompleted]IS NULL AND([pc_obtaininfo_datecompleted]IS NULL AND[pc_obtaininfo_assignedto]=@u)
@@ -451,7 +453,7 @@ AS[count_subtask_assigned]
 ,'J'AS[orderit]
 FROM[v_payrolltaxes] 
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[pt_active]=(1)AND([pt_delivery_datecompleted]IS NULL)
-<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([pt_obtaininfo_assignedto]=@u  AND[pt_obtaininfo_datecompleted]IS NULL)
 OR([pt_entry_assignedto]=@u  AND[pt_obtaininfo_datecompleted]IS NOT NULL AND[pt_entry_datecompleted]IS NULL)
@@ -521,7 +523,7 @@ AS[count_subtask_assigned]
 ,'L'AS[orderit]
 FROM[v_taxreturns]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[tr_active]=(1)AND([tr_notrequired]!=(1)AND[tr_3_delivered]IS NULL)
-<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 
 AND(
@@ -534,6 +536,8 @@ OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NOT NULL AND ISNULL
 </cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+
+
 </cfquery>
 
 
@@ -604,10 +608,11 @@ WHERE [client_active]=(1)
 AND [mc_active]=(1)
 AND [deleted] IS NULL
 AND ([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([mc_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 
 <cfset myResult="">
@@ -657,10 +662,11 @@ AND ([mcs_active]=(1)OR[mcs_active]IS NULL)
 AND [deleted] IS NULL
 AND([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
-<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([mcs_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 
 <cfset myResult="">
@@ -715,10 +721,11 @@ WHERE [client_active]=(1)
 AND [cas_active]=(1)
 AND [deleted] IS NULL
 AND ([cas_status]NOT IN('2','3')OR([cas_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([cas_duedate]IS NULL OR[cas_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([cas_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -770,11 +777,11 @@ SELECT DISTINCT[bf_id]
 ,[bf_missinginfo]
 FROM[v_businessformation_subtask]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[bf_active]=(1)AND([bfs_active]=(1)OR[bfs_active]IS NULL)AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
-
+<cfif ARGUMENTS.duedate neq "">AND([bf_duedate]IS NULL OR[bf_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-
+ORDER BY(FORMAT([bf_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -873,9 +880,11 @@ WHERE [client_active]=(1)
 AND [co_active]=(1)
 AND [deleted] IS NULL
 AND ([co_status]NOT IN('2','3')OR([co_status]IS NULL))
+<cfif ARGUMENTS.duedate neq "">AND([co_duedate]IS NULL OR[co_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(@u IN(SELECT[id]FROM[CSVToTable](co_for)))</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([co_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -932,12 +941,12 @@ WHERE [client_active]=(1)
 AND [ftp_active]=(1)
 AND [deleted] IS NULL
 AND ([ftp_status]NOT IN('2','3')OR([ftp_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([ftp_duedate]IS NULL OR[ftp_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([ftp_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
-
+ORDER BY(FORMAT([ftp_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1016,10 +1025,11 @@ AND [fds_active]=(1)
 AND ([fdss_active]=(1)OR[fdss_active]IS NULL)
 AND [deleted] IS NULL
 AND ([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
+
+
 <cfif ARGUMENTS.userid neq "0">
-AND[fds_delivery_datecompleted] IS NULL
-AND([fds_obtaininfo_assignedto] = @u AND[fds_obtaininfo_datecompleted]IS NULL)
+AND[fds_delivery_datecompleted] IS NULL AND([fds_obtaininfo_assignedto] = @u AND[fds_obtaininfo_datecompleted]IS NULL)
 OR([fds_sort_assignedto] = @u AND[fds_obtaininfo_datecompleted]IS NOT NULL AND[fds_sort_datecompleted] IS NULL)
 OR([fds_checks_assignedto] = @u  AND [fds_sort_datecompleted] IS NOT NULL AND [fds_checks_datecompleted] IS NULL)
 OR([fds_sales_assignedto] = @u  AND [fds_checks_datecompleted] IS NOT NULL AND [fds_sales_datecompleted] IS NULL)
@@ -1029,11 +1039,12 @@ OR([fds_compile_assignedto]= @u  AND [fds_reconcile_datecompleted] IS NOT NULL A
 OR([fds_review_assignedto] = @u  AND [fds_compile_datecompleted] IS NOT NULL AND [fds_review_datecompleted] IS NULL)
 OR([fds_assembly_assignedto] = @u  AND [fds_review_datecompleted] IS NOT NULL AND [fds_assembly_datecompleted]  IS NULL)
 OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
-OR([fdss_assignedto]=@u)
+OR([fdss_assignedto]=@u))
 </cfif>
+
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-
+ORDER BY(FORMAT([fds_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1095,15 +1106,13 @@ WHERE[client_active]=(1)
 AND [fdss_active]=(1)
 AND [deleted] IS NULL
 AND([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0"></cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 AND[fds_id]=@id
 
-
-
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>
+ORDER BY(FORMAT([fdss_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1146,11 +1155,11 @@ AND ([nst_active]=(1)OR[nst_active]IS NULL)
 AND [deleted] IS NULL
 AND ([n_status]NOT IN('2','3')OR([n_status]IS NULL))
 AND([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
-
+ORDER BY(FORMAT([nst_1_resduedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1204,12 +1213,12 @@ WHERE[client_active]=(1)
 AND [nst_active]=(1)
 AND [deleted] IS NULL
 AND ([nst_status]NOT IN('2','3')OR([nst_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]>=@d)</cfif>
-<cfif ARGUMENTS.userid neq "0">--AND([nst_assignedto]=@u  OR[nst_assignedto]=0)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([nst_1_resduedate]IS NULL OR[nst_1_resduedate]BETWEEN '1/1/1900' AND @d)</cfif>
+<cfif ARGUMENTS.userid neq "0">AND([nst_assignedto]=@u  OR[nst_assignedto]=0)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 AND[n_id]=@id
-
+ORDER BY(FORMAT([nst_1_resduedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1287,7 +1296,7 @@ WHERE [client_active]=(1)
 AND [of_active]=(1)
 AND [deleted] IS NULL
 AND ([of_status]NOT IN('2','3')OR([of_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([of_obtaininfo_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NULL)
 OR([of_preparation_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NOT NULL AND[of_preparation_datecompleted]IS NULL)
@@ -1297,6 +1306,7 @@ OR([of_delivery_assignedto]=@u  AND[of_assembly_datecompleted]IS NOT NULL AND[of
 </cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([of_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1365,7 +1375,7 @@ WHERE [client_active]=(1)
 AND [pc_active]=(1)
 AND [deleted] IS NULL
 AND [pc_delivery_datecompleted]IS NULL 
-<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND
 ([pc_delivery_datecompleted]IS NULL AND([pc_obtaininfo_datecompleted]IS NULL AND[pc_obtaininfo_assignedto]=@u)
@@ -1376,6 +1386,7 @@ OR([pc_assembly_datecompleted]IS NOT NULL AND[pc_delivery_assignedto]=@u))
 </cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([pc_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1446,7 +1457,7 @@ WHERE [client_active]=(1)
 AND [pt_active]=(1)
 AND [deleted] IS NULL
 AND ([pt_delivery_datecompleted]IS NULL)
-<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND([pt_obtaininfo_assignedto]=@u  AND[pt_obtaininfo_datecompleted]IS NULL)
 OR([pt_entry_assignedto]=@u  AND[pt_obtaininfo_datecompleted]IS NOT NULL AND[pt_entry_datecompleted]IS NULL)
@@ -1457,6 +1468,7 @@ OR([pt_delivery_assignedto]=@u  AND[pt_assembly_datecompleted]IS NOT NULL)
 </cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([pt_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1492,7 +1504,7 @@ OR([pt_delivery_assignedto]=@u  AND[pt_assembly_datecompleted]IS NOT NULL)
 </cfcase>
 
 
-<!--- LOOKUP TAX RETURNS --->
+<!--- LOOKUP Personal Property TAX RETURNS --->
 <cfcase value="group12">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
@@ -1525,6 +1537,7 @@ OR(([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_deliv
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+ORDER BY(FORMAT([tr_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1589,7 +1602,7 @@ AND [tr_active]=(1)
 AND [deleted] IS NULL
 AND([tr_3_delivered]IS NULL )
 
-<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]>=@d)</cfif>
+<cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 
 AND(
@@ -1603,6 +1616,7 @@ OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NOT NULL AND ISNULL
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
+ORDER BY(FORMAT([tr_duedate],'D','#Session.localization.language#'))DESC
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

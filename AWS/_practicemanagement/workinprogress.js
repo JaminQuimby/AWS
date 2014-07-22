@@ -2,7 +2,9 @@ $(document).ready(function(){
 $('#g1_assignedto').val($('#user_id').val()).trigger('chosen:updated');
 _grid1();
 });
-
+$('td').filter(function() {
+  return this.innerHTML.match(/^[0-9\s\.,]+$/);
+}).css('text-align','right');
 var _run={
  	 load_group1:function(){_grid1();}
 	 ,load_group2:function(){_grid2();}

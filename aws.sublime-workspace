@@ -20,34 +20,29 @@
 	"buffers":
 	[
 		{
-			"file": "AWS/_practicemanagement/dailytaxaudit.cfc",
-			"settings":
-			{
-				"buffer_size": 2219,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "AWS/_practicemanagement/workinprogress.cfc",
 			"settings":
 			{
-				"buffer_size": 81751,
+				"buffer_size": 83739,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "AWS/_practicemanagement/dailytaxaudit.cfm",
+			"file": "AWS/_practicemanagement/workinprogress.cfm",
 			"settings":
 			{
-				"buffer_size": 1808,
+				"buffer_size": 4029,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "AWS/_practicemanagement/dailytaxaudit.js",
+			"contents": "$(document).ready(function(){\n$('#g1_assignedto').val($('#user_id').val()).trigger('chosen:updated');\n_grid1();\n});\n\nvar _run={\n 	 load_group1:function(){_grid1();}\n	 ,load_group2:function(){_grid2();}\n	 ,load_group3:function(){_grid3();}\n	 ,load_group4:function(){_grid4();}\n	 ,load_group5:function(){_grid5();}\n	 ,load_group6:function(){_grid6();}\n	 ,load_group7:function(){_grid7();}\n	 ,load_group8:function(){_grid8();}\n	 ,load_group9:function(){_grid9();}\n	 ,load_group10:function(){_grid10();}\n	 ,load_group11:function(){_grid11();}\n	 ,load_group12:function(){_grid12();}\n	 ,load_group13:function(){_grid13();}\n	 ,gotogrid:function(i){switch(i){\n		 case'A':_run.load_group2();$(\"#group1\").accordion(\"option\", \"active\", 1); break;\n		 case'B':_run.load_group3();$(\"#group1\").accordion(\"option\", \"active\", 2); break;\n		 case'C':_run.load_group4();$(\"#group1\").accordion(\"option\", \"active\", 3); break;\n		 case'D':_run.load_group5();$(\"#group1\").accordion(\"option\", \"active\", 4); break;\n		 case'E':_run.load_group6();$(\"#group1\").accordion(\"option\", \"active\", 5); break;\n		 case'F':_run.load_group7();$(\"#group1\").accordion(\"option\", \"active\", 6); break;\n		 case'G':_run.load_group8();$(\"#group1\").accordion(\"option\", \"active\", 7); break;\n		 case'H':_run.load_group9();$(\"#group1\").accordion(\"option\", \"active\", 8); break;\n		 case'I':_run.load_group10();$(\"#group1\").accordion(\"option\", \"active\", 9); break;\n		 case'J':_run.load_group11();$(\"#group1\").accordion(\"option\", \"active\", 10); break;\n		 case'K':_run.load_group12();$(\"#group1\").accordion(\"option\", \"active\", 11); break;\n		 case'L':_run.load_group13();$(\"#group1\").accordion(\"option\", \"active\", 12); break;\n		 }  }\n}\n\n_grid1=function(){_jGrid({\n	\"grid\":\"grid1\",\n	\"url\":\"workinprogress.cfc\",	\n	\"title\":\"Estimated Time\",\n	\"fields\":{\n		NAME:{title:'Module'}\n		,COUNT_ASSIGNED:{title:'Task Assigned'\n			,display:function(data){\n				\n			if($('#g1_assignedto').val()!=0){\n			switch(data.record.NAME){\n			\n		//	case'Notices': return'N/A'; break;\n		//	case'Financial Statements': return'N/A'; break;\n		//	case'Other Filings': return'N/A'; break;\n		//	case'Payroll Checks': return'N/A'; break;\n		//	case'Payroll Taxes': return'N/A'; break;\n		//	case'Tax Returns': return'N/A'; break;\n			\n			default: return 0+Number(data.record.COUNT_ASSIGNED);\n			\n				}}else{return 0+Number(data.record.COUNT_ASSIGNED);}\n				\n				}\n		}\n		\n		,COUNT_SUBTASK_ASSIGNED:{\n			title:'Subtasks Assigned'\n			\n			,display:function(data){\n				switch(data.record.NAME){\n				case'Administrative Tasks': return'N/A'; break;\n				case'Communication': return'N/A'; break;\n				case'Financial & Tax Planning': return'N/A'; break;\n				case'Personal Property Tax Returns': return'N/A'; break;\n				default: return 0+Number(data.record.COUNT_SUBTASK_ASSIGNED);\n		}}}\n				\n		,TOTAL_TIME:{title:'Estimated Time'\n		,display:function(data){\n				switch(data.record.NAME){\n				case'Communication': return'N/A'; break;\n				case'Notices': return'N/A'; break;\n				 default: return 0+Number(data.record.TOTAL_TIME);\n		}}}\n				\n		,TOTAL_SUBTASK_TIME:{title:'Subtasks Estimated Time'\n		,display:function(data){\n				switch(data.record.NAME){\n				 case'Administrative Tasks': return'N/A'; break;\n				 case'Communication': return'N/A'; break;\n				 case'Financial & Tax Planning': return'N/A'; break;\n				 case'Tax Returns': return'N/A'; break;\n				 case'Personal Property Tax Returns': return'N/A'; break;\n				 default: return 0+Number(data.record.TOTAL_SUBTASK_TIME);\n		}}}\n		\n		},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group1\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\"}',\n	\"functions\":'_run.gotogrid(record.ORDERIT)'\n})};\n\n_grid2=function(){_jGrid({\n	\"grid\":\"grid2\",\n	\"url\":\"workinprogress.cfc\",\n	\"title\":\"Accounting &amp; Consulting\",\n	\"fields\":{MC_ID:{key:true,list:false,edit:false}\n			,CLIENT_ID:{list:false,edit:false}\n			\n			\n			  //CHILD TABLE DEFINITION FOR SUBTAKS\n 			    ,Subtasks: {\n                    title: '',\n                    width: '2%',\n                    sorting: false,\n                    edit: false,\n                    create: false,\n                    display: function (subtasks) {\n                        var $img = $('<i class=\"fa fa-tasks \"></i>'+subtasks.record.MC_ID);\n                        $img.click(function () {\n                            $('#grid2').jtable('openChildTable',\n                                    $img.closest('tr'),\n                                    {\n                                        title: ' - Subtasks',\n                                        actions: {\n                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"'+subtasks.record.MC_ID+'\",\"loadType\":\"group2_subtask\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"2\"}',\n                                        },\n                                        fields: {\n                                            MCS_ID:{key: true,create: false,edit: false,list: false}\n                                           		,MCS_SEQUENCE:{title:'Sequence',width:'4%'}\n												,MCS_SUBTASKTEXT:{title:'Subtask'}\n												,MCS_DUEDATE:{title:'Due Date',width:'4%'}\n 												,MCS_STATUSTEXT:{title:'Status'}	\n												,MCS_ASSIGNEDTOTEXT:{title:'Assigned To'}\n												,MCS_COMPLETED:{title:'Completed'}\n                                        }\n                                    }, function(data){ //opened handler\n                                    	data.childTable.jtable('load');\n                                    });\n                        });\n                        //Return image to show on the person row\n                        return $img;\n                    }\n                }\n			\n			\n			\n			,CLIENT_NAME:{title:'Client Name'}\n			,MC_CATEGORYTEXT:{title:'Consulting Category'}\n			,MC_DESCRIPTION:{title:'Task Description'}	\n			,MC_DUEDATE:{title:'Due Date',width:'4%'}\n			,MC_STATUSTEXT:{title:'Status'}\n			,MC_ASSIGNEDTOTEXT:{title:'Assigned To'}									\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group2\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"2\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_accountingservices/acctingconsulting.cfm?task_id=\"+record.MC_ID,\\'WIPPOP\\')'\n})};	\n\n_grid3=function(){_jGrid({\n	\"grid\":\"grid3\",\n	\"url\":\"workinprogress.cfc\",	\n	\"title\":\"Administrative Tasks\",\n	\"fields\":{CAS_ID:{key:true,list:false,edit:false}\n			,CLIENT_ID:{list:false,edit:false}\n			,CLIENT_NAME:{title:'Client Name'}\n 			,CAS_CATEGORYTEXT:{title:'Category'}\n			,CAS_TASKDESC:{title:'Description'}\n			,CAS_DUEDATE:{title:'Due Date',width:'1%'}\n			,CAS_STATUSTEXT:{title:'Status'}\n			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						\n			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}							\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group3\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"4\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_clientmanagement/administrativetasks.cfm?task_id=\"+record.CAS_ID,\\'WIPPOP\\')'\n	\n	\n\n})};\n\n_grid4=function(){_jGrid({\n	\"grid\":\"grid4\",\n	\"url\":\"workinprogress.cfc\",\n	\"title\":\"Business Formation\",\n	\"fields\":{BF_ID:{key:true,list:false,edit:false}\n			,CLIENT_ID:{list:false,edit:false}\n			,Subtasks: {\n                    title: '',\n                    width: '2%',\n                    sorting: false,\n                    edit: false,\n                    create: false,\n                    display: function (subtasks) {\n                        var $img = $('<i class=\"fa fa-tasks \"></i>'+subtasks.record.MC_ID);\n                        $img.click(function () {\n                            $('#grid4').jtable('openChildTable',\n                                    $img.closest('tr'),\n                                    {\n                                        title: ' - Subtasks',\n                                        actions: {\n                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"'+subtasks.record.BF_ID+'\",\"loadType\":\"group4_subtask\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"2\"}',\n                                        },\n                                        fields: {\n                                            BFS_ID:{key: true,create: false,edit: false,list: false}\n											,BFS_TASKNAME:{title:'Task'}\n 											,BFS_ASSIGNEDTOTEXT:{title:'Assigned To'}\n											,BFS_DATEINITIATED:{title:'Date Initiated'}\n											,BFS_DATECOMPLETED:{title:'Date Completed'}\n											,BFS_ESTIMATEDTIME:{title:'Estimated Time'}\n\n                                        }\n                                    }, function(data){ //opened handler\n                                    	data.childTable.jtable('load');\n                                    });\n                        });\n                        //Return image to show on the person row\n                        return $img;\n                    }\n                }\n			,CLIENT_NAME:{title:'Client Name'}\n			,BF_ACTIVITY:{title:'Activity'}\n			,BF_OWNERS:{title:'Owners'}\n			,BF_BUSINESSTYPETEXT:{title:'Business Type'}\n			,BF_DUEDATE:{title:'Due Date',width:'1%'}\n 			,BF_STATUSTEXT:{title:'Status'}\n			,BF_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}\n		    ,BF_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}\n			,BF_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'2%'}\n						\n	},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group4\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"3\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_accountingservices/businessformation.cfm?task_id=\"+record.BF_ID,\\'WIPPOP\\')'\n})};\n\n_grid5=function(){_jGrid({\n	\"grid\":\"grid5\", \n	\"url\":\"workinprogress.cfc\",	\n	\"title\":\"Communications\",\n	\"fields\":{CO_ID:{key:true,list:false,edit:false}\n			,CLIENT_NAME:{title:'Client Name'}\n			,CO_CALLER:{title:'Caller'}\n			,CO_DATE:{title:'Date and Time'}\n			,CO_DUEDATE:{title:'Due Date',width:'2%'}\n			,CO_STATUSTEXT:{title:'Status',width:'2%'}\n			,CO_FORTEXT:{title:'For',width:'2%'}\n			,CO_RESPONSENEEDED:{title:'Response Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}\n			,CO_RETURNCALL:{title:'Returned Call',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}			\n			,CO_BRIEFMESSAGE:{title:'Brief Message'}\n	},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group5\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"12\"}',	\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_clientmanagement/communications.cfm?task_id=\"+record.CO_ID,\\'WIPPOP\\')'\n})};\n\n\n\n	\n_grid6=function(){_jGrid({\n	\"grid\":\"grid6\",\n	\"url\":\"workinprogress.cfc\",	\n	\"title\":\"Financial &amp; Tax Planning\", \n	\"fields\":{FTP_ID:{key:true,list:false,edit:false}\n  			 ,CLIENT_NAME:{title:'Client Name'}\n			 ,FTP_CATEGORYTEXT:{title:'Category'}\n			 ,FTP_DESCRIPTION:{title:'Description'}\n			 ,FTP_DUEDATE:{title:'Due Date',width:'1%'}\n			 ,FTP_STATUSTEXT:{title:'Status'}\n			 ,FTP_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}\n			 ,FTP_REQUESTSERVICE:{title:'Request for Services',width:'1%'}\n			 ,FTP_MISSINGINFO:{title:'Missing Information',width:'1%',type:\"checkbox\",values:{ '0' : 'No', '1' : 'Yes' }}\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group6\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"9\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_taxation/financialtaxplanning.cfm?task_id=\"+record.FTP_ID,\\'WIPPOP\\')'\n})};\n\n_grid7=function(){_jGrid({\n	\"grid\":\"grid7\",\n	\"url\":\"workinprogress.cfc\",\n	\"title\":\"Financial Statements\",\n	\"fields\":{FDS_ID:{key:true,list:false,edit:false}\n 			,CLIENT_ID:{list:false,edit:false}\n			,Subtasks: {\n                    title: '',\n                    width: '2%',\n                    sorting: false,\n                    edit: false,\n                    create: false,\n                    display: function (subtasks) {\n                        var $img = $('<i class=\"fa fa-tasks \"></i>'+subtasks.record.MC_ID);\n                        $img.click(function () {\n                            $('#grid7').jtable('openChildTable',\n                                    $img.closest('tr'),\n                                    {\n                                        title: ' - Subtasks',\n                                        actions: {\n                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"'+subtasks.record.FDS_ID+'\",\"loadType\":\"group7_subtask\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"2\"}',\n                                        },\n                                        fields: {\n                                            FDSS_ID:{key:true,list:false,edit:false}\n											,FDSS_SEQUENCE:{title:'Sequence'}\n											,FDSS_SUBTASKTEXT:{title:'Subtask'}\n											,FDSS_DUEDATE:{title:'Due Date'}\n											,FDSS_STATUSTEXT:{title:'Status'}\n											,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}\n											,FDSS_COMPLETED:{title:'Completed'}\n\n                                        }\n                                    }, function(data){ //opened handler\n                                    	data.childTable.jtable('load');\n                                    });\n                        });\n                        //Return image to show on the person row\n                        return $img;\n                    }\n                }\n 			,CLIENT_NAME:{title:'Client Name'}\n			,FDS_YEAR:{title:'Year',width:'1%'}\n			,FDS_MONTHTEXT:{title:'Period'}\n			,FDS_PERIODEND:{title:'Period End',width:'1%'}\n			,FDS_DUEDATE:{title:'Due Date',width:'1%'}\n			,FDS_STATUSTEXT:{title:'Status'}\n			,FDS_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}\n			,FDS_COMPILEMI:{title:'Compile Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}\n			,FDS_OBTAININFO:{title:'Info',width:'1%'}\n			,FDS_SORT:{title:'Sort',width:'1%'}\n			,FDS_CHECKS:{title:'Checks',width:'1%'}\n			,FDS_SALES:{title:'Sales',width:'1%'}\n			,FDS_ENTRY:{title:'Entry',width:'1%'}\n			,FDS_RECONCILE:{title:'Reconciliation',width:'1%'}\n			,FDS_COMPILE:{title:'Compiliation',width:'1%'}\n			,FDS_REVIEW:{title:'Review',width:'1%'}\n			,FDS_ASSEMBLY:{title:'Assembly ',width:'1%'}\n			,FDS_DELIVERY:{title:'Delivery',width:'1%'}\n			,FDS_ACCTRPT:{title:'Report',width:'1%'}\n\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group7\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"5\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_accountingservices/financialstatements.cfm?task_id=\"+record.FDS_ID,\\'WIPPOP\\')'\n})};\n\n\n\n_grid8=function(){_jGrid({\n	\"grid\":\"grid8\",\n	\"url\":\"workinprogress.cfc\",\n	\"title\":\"Notices\",\n	\"fields\":{N_ID:{key:true,list:false,edit:false}\n				,Subtasks: {\n                    title: '',\n                    width: '2%',\n                    sorting: false,\n                    edit: false,\n                    create: false,\n                    display: function (subtasks) {\n                        var $img = $('<i class=\"fa fa-tasks \"></i>'+subtasks.record.MC_ID);\n                        $img.click(function () {\n                            $('#grid8').jtable('openChildTable',\n                                    $img.closest('tr'),\n                                    {\n                                        title: ' - Subtasks',\n                                        actions: {\n                                        listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"'+subtasks.record.N_ID+'\",\"loadType\":\"group8_subtask\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"2\"}',\n                                        },\n                                        fields: {\n                                            NST_ID:{key: true,create: false,edit: false,list: false},\n                                          	N_NAME:{title:'Matter Name'}\n											,N_STATUSTEXT:{title:'Matter Status'}	\n											,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}\n											,NST_1_TAXFORMTEXT:{title:'Tax Form'}\n											,NST_1_NOTICENUMBERTEXT:{title:'Notice Number',width:'2%'}\n											,NST_1_RESDUEDATE:{title:'Due Date for Response',width:'2%'}	\n											,NST_STATUSTEXT:{title:'Notice Status'}\n											,NST_ASSIGNEDTOTEXT:{title:'Assigned To'}\n											\n                                        }\n                                    }, function(data){ //opened handler\n                                    	data.childTable.jtable('load');\n                                    });\n                        });\n                        //Return image to show on the person row\n                        return $img;\n                    }\n                }\n				,CLIENT_NAME:{title:'Client Name'}\n				,N_NAME:{title:'Matter Name'}\n				,N_STATUSTEXT:{title:'Matter Status'}	\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group8\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"8\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_taxation/notices.cfm?task_id=\"+record.N_ID,\\'WIPPOP\\')'\n\n})};	\n	\n_grid9=function(){_jGrid({\n	\"grid\":\"grid9\",\n	\"url\":\"workinprogress.cfc\",\n	\"title\":\"Other Fililngs\",\n	\"fields\":{OF_ID:{key:true,list:false,edit:false}\n  				,CLIENT_NAME:{title:'Client Name'}\n				,OF_TAXYEAR:{title:'Tax Year'}\n				,OF_PERIODTEXT:{title:'Period'}\n				,OF_STATETEXT:{title:'State'}\n				,OF_TYPETEXT:{title:'Type'}\n				,OF_FORMTEXT:{title:'Form',width:'1%'}\n				,OF_DUEDATE:{title:'Due Date',width:'1%'}\n				,OF_FILINGDEADLINE:{title:'Filing Deadline',width:'1%'}\n 				,OF_STATUSTEXT:{title:'Status'}\n				,OF_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}	\n				,OF_MISSINGINFORECEIVED:{title:'Missing Info Received',width:'1%'}									\n				,OF_OBTAININFO:{title:'Information',width:'1%'}\n				,OF_PREPARATION:{title:'Preparation',width:'1%'}\n				,OF_REVIEW:{title:'Review',width:'1%'}\n				,OF_ASSEMBLY:{title:'Assembly',width:'1%'}\n				,OF_DELIVERY:{title:'Delivery',width:'1%'}						\n				},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group9\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"11\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_payrolltaxes/otherfilings.cfm?task_id=\"+record.OF_ID,\\'WIPPOP\\')'\n})};\n	\n_grid10=function(){_jGrid({\n	\"grid\":\"grid10\",\n	\"url\":\"workinprogress.cfc\",\n	\"title\":\"Payroll Checks\",\n	\"fields\":{PC_ID:{key:true,list:false,edit:false}\n 			,CLIENT_NAME:{title:'Client Name'}\n			,PC_YEAR:{title:'Year',width:'1%'}\n			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}\n			,PC_PAYDATE:{title:'Pay Date',width:'1%'}\n			,PC_DUEDATE:{title:'Due Date',width:'1%'}\n 			,PC_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}\n 			,PC_PAYDATE:{title:'Pay Date',width:'1%'}\n			,PC_OBTAININFO:{title:'Information',width:'1%'}\n			,PC_PREPARATION:{title:'Preparation',width:'1%'}\n			,PC_REVIEW:{title:'Review',width:'1%'}\n			,PC_ASSEMBLY:{title:'Assembly',width:'1%'}\n			,PC_DELIVERY:{title:'Delivery',width:'1%'}\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group10\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"10\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_payrolltaxes/payrollchecks.cfm?task_id=\"+record.PC_ID,\\'WIPPOP\\')'\n})};\n	\n_grid11=function(){_jGrid({\n	\"grid\":\"grid11\",\n	\"url\":\"workinprogress.cfc\",\n	\"title\":\"Payroll Taxes\",\n	\"fields\":{PT_ID:{key:true,list:false,edit:false}\n 			,CLIENT_NAME:{title:'Client Name'}\n			,PT_YEAR:{title:'Year',width:'1%'}\n			,PT_MONTHTEXT:{title:'Period'}\n			,PT_STATETEXT:{title:'State'}\n			,PT_TYPETEXT:{title:'Return Type'}	\n			,PT_LASTPAY:{title:'Last Pay',width:'1%'}\n			,PT_DUEDATE:{title:'Due Date',width:'1%'}\n			,PT_MISSINGINFO:{title:'Missing Information',width:'1%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}\n			,PT_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}\n			,PT_OBTAININFO:{title:'Information',width:'1%'}\n			,PT_ENTRY:{title:'Entry',width:'1%'}\n			,PT_REC:{title:'Reconciliation',width:'1%'}\n			,PT_REVIEW:{title:'Review',width:'1%'}\n			,PT_ASSEMBLY:{title:'Assembly',width:'1%'}\n			,PT_DELIVERY:{title:'Delivery',width:'1%'}\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group11\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"13\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_payrolltaxes/payrolltaxes.cfm?task_id=\"+record.PT_ID,\\'WIPPOP\\')'\n})};\n	\n\n\n_grid12=function(){_jGrid({\n	\"grid\":\"grid12\",\n	\"url\":\"workinprogress.cfc\",	\n	\"title\":\"Personal Property Tax Returns\",\n	\"fields\":{TR_ID:{key:true,list:false,edit:false}\n			,CLIENT_NAME:{title:'Client Name'}\n			,TR_4_EXTENDED:{title:'PPTR Extended',width:'2%'}\n			,TR_4_COMPLETED:{title:'Completed',width:'2%'}\n			,TR_TAXYEAR:{title:'Year',width:'2%'}\n			,TR_TAXFORMTEXT:{title:'Form'}\n			,TR_PRIORITY:{title:'Information Received',width:'2%'}\n			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}\n			,TR_4_PPTRESTTIME:{title:'Estimated Time',width:'2%'}\n			,TR_4_RFR:{title:'Ready For Review',width:'2%'}\n			,TR_4_DELIVERED:{title:'Delivery',width:'2%'}\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group12\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"6\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_taxation/taxreturns.cfm?task_id=\"+record.TR_ID,\\'WIPPOP\\')'\n})};\n\n\n_grid13=function(){_jGrid({\n	\"grid\":\"grid13\",\n	\"url\":\"workinprogress.cfc\",	\n	\"title\":\"Tax Returns\",\n	\"fields\":{TR_ID:{key:true,list:false,edit:false}\n			,CLIENT_NAME:{title:'Client Name'}\n			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}\n			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}\n			,TR_DUEDATE:{title:'Due Date',width:'1%'}\n			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		\n			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		\n			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:\"checkbox\",values:{ '0' : 'No', '1' : 'Yes' }}\n			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		\n			,TR_2_READYFORREVIEW:{title:'Ready For Review',width:'1%'}		\n			,TR_2_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To',width:'1%'}		\n			,TR_2_REVIEWED:{title:'Reviewed',width:'1%'}			\n			,TR_2_REVIEWEDWITHNOTES:{title:'Reviewed With Notes',width:'1%'}		\n			,TR_2_COMPLETED:{title:'Completed',width:'1%'}		\n			,TR_3_ASSEMBLERETURN:{title:'Assembly',width:'1%'}\n			,TR_3_DELIVERED:{title:'Delivery',width:'1%'}	\n			},\n	\"method\":\"f_lookupData\",\n	\"arguments\":'{\"search\":\"\",\"orderBy\":\"0\",\"row\":\"0\",\"ID\":\"0\",\"loadType\":\"group13\",\"userid\":\"'+$(\"#g1_assignedto\").val()+'\",\"clientid\":\"'+$(\"#client_id\").val()+'\",\"group\":\"'+$(\"#g1_group\").val()+'\",\"duedate\":\"'+$(\"#g1_duedate\").val()+'\",\"formid\":\"6\"}',\n	\"functions\":'window.open(window.location.protocol+\"//\"+window.location.hostname+\"/AWS/_taxation/taxreturns.cfm?task_id=\"+record.TR_ID,\\'WIPPOP\\')'\n})};\n",
+			"file": "AWS/_practicemanagement/workinprogress.js",
+			"file_size": 26412,
+			"file_write_time": 130504241826536549,
 			"settings":
 			{
-				"buffer_size": 596,
+				"buffer_size": 25787,
 				"line_ending": "Windows"
 			}
 		}
@@ -114,6 +109,9 @@
 	"file_history":
 	[
 		"/C/Users/Admin/Documents/GitHub/AWS/application.cfc",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jTimeBilling/timebilling.cfm",
@@ -161,7 +159,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -175,6 +173,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"business",
+			"<cfif ARGUMENTS.duedate neq \"\">AND([bf_duedate]IS NULL OR[bf_duedate]BETWEEN '1/1/1900' AND @d)</cfif>",
+			"Business",
+			"fee",
+			"<=@d",
+			">=@d",
+			"]\n",
 			"business",
 			"Business",
 			"remove",
@@ -193,65 +198,36 @@
 		"regex": false,
 		"replace_history":
 		[
+			"BETWEEN '1/1/1900' AND @d",
+			"<=@d"
 		],
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "AWS/_practicemanagement/dailytaxaudit.cfc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2219,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								927,
-								927
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "AWS/_practicemanagement/workinprogress.cfc",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 81751,
+						"buffer_size": 83739,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5520,
-								5520
+								29180,
+								29180
 							]
 						],
 						"settings":
@@ -262,50 +238,19 @@
 							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 975.0,
+						"translation.y": 7892.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "AWS/_practicemanagement/dailytaxaudit.cfm",
+					"buffer": 1,
+					"file": "AWS/_practicemanagement/workinprogress.cfm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1808,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "AWS/_practicemanagement/dailytaxaudit.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 596,
+						"buffer_size": 4029,
 						"regions":
 						{
 						},
@@ -322,13 +267,45 @@
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "AWS/_practicemanagement/workinprogress.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 25787,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								116,
+								116
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -341,7 +318,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 21.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -388,7 +365,7 @@
 	"project": "aws.sublime-project",
 	"replace":
 	{
-		"height": 38.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
