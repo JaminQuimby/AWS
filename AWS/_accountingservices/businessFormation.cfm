@@ -61,7 +61,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_priority">Priority</label><input type="text" maxlength="2" placeholder="0" id="g1_priority" class="valid_off" onblur="jqValid({'type':'rationalNumbers','object':this,'message':'This field must be a whole number.'});" /></div>
 	<div><label for="g1_estimatedtime">Estimated Time</label><input type="text" placeholder="0" maxlength="6" id="g1_estimatedtime"/></div>
 	<div><label for="g1_dateinitiated" >Date Initiated</label><input type="text" id="g1_dateinitiated" class="date"/></div>
-    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" maxlength="10" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});" /></div>
+    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" maxlength="10" /></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid" ><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>
 <!---Subgroup 1--->

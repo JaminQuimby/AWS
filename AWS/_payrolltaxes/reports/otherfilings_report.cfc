@@ -134,7 +134,7 @@ AND (1)=(1)
 								,"OF_DELIVERY":"'&of_delivery_datecompleted&'<br/>'&of_delivery_assignedtoTEXT&'"
 								,"OF_FEES":"'&OF_FEES&'"
  								,"OF_PAIDTEXT":"'&OF_PAIDTEXT&'"
- 								,"OF_PIRORITY":"'&OF_PRIORITY&'"
+ 								,"OF_PRIORITY":"'&OF_PRIORITY&'"
  								,"OF_ESTTIME":"'&OF_ESTTIME&'"								
 								}'>                              
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>

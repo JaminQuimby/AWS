@@ -79,7 +79,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_estimatedtime">Estimated Time</label><input type="text" placeholder="0" id="g2_estimatedtime" ></div>
 <div><label for="g2_missinginformation"><input id="g2_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g2_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_missinginforeceived" ></div>
-<div><label for="g2_fees">Fees</label><input type="text" id="g2_fees" class="valid_off" placeholder="0" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g2_fees">Fees</label><input type="text" id="g2_fees" class="valid_off" placeholder="0"></div>
 <div><label for="g2_deliverymethod">Delivery Method</label><select id="g2_deliverymethod" ><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_paid">Payment Status</label><select id="g2_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>

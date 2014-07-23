@@ -872,7 +872,8 @@ _updateh3=function(msg){var e=document.getElementsByTagName("h3");for(var i=0;i<
 
 _isIt=function(it,is){
 switch(it){
-case"rationalNumbers":re=/^[1-9]\d*$/;if(is.match(re)){return true;}else{return false;};break;
+case"naturalNumbers":re=/^[1-9]\d*$/;if(is.match(re)){return true;}else{return false;};break;
+case"rationalNumbers":re=/^[0-9]\d*$/;if(is.match(re)){return true;}else{return false;};break;
 case"numeric":re=/^[-+]?\d*\.?\d+(?:[eE][-+]?\d+)?$/;if(is.match(re)){return true;}else{return false;};break;
 case"date":re=/^\d{1,2}\/\d{1,2}\/\d{4}$/;if(is.match(re)){return true;}else{return false;}break;
 case"time":re=/(?:0[0-9]|1[0-1]):[0-5][0-9]/;if(is.match(re)){return true;}else{return false;}break;

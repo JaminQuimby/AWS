@@ -63,11 +63,12 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_payenddate"><i class="fa fa-lock link"></i> Pay End Date</label><input type="text" class="date" id="g1_payenddate" disabled="disable" ></div>
 <div><label for="g1_paydate"><i class="fa fa-lock link" ></i> Pay Date</label><input type="text" class="date" id="g1_paydate" disabled="disable"></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
+<div><label for="g1_priority">Priority</label><input type="text" placeholder="0" maxlength="2" id="g1_priority" class="valid_off" onblur="jqValid({'type':'rationalNumbers','object':this,'message':'This field must be a whole number.'});"></div>
 <div><label for="g1_missinginformation"><input id="g1_missinginformation" type="checkbox" class="ios-switch">Missing Information</label></div>
 <div><label for="g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g1_missinginforeceived" ></div>
 <div><label for="g1_altfrequency"><input id="g1_altfrequency" type="checkbox" class="ios-switch">Alt Frequency</label></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_estimatedtime" ></div>
-<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" maxlength="10" class="valid_off" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+<div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" placeholder="0" maxlength="10"></div>
 <div><label for="g1_paymentstatus">Payment Status</label><select id="g1_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_deliverymethod">Delivery Method</label><select id="g1_deliverymethod"><option value="0">&nbsp;</option><cfoutput query="global_delivery"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 </div>

@@ -226,7 +226,7 @@ $("#g1_g4_extended").val()+'","'+
 $("#g1_g4_extensionrequested").val()+'","'+
 $("#g1_g4_paymentstatus").val()+'","'+
 $("#g1_g4_pptresttime").val()+'","'+
-$("#g1_g4_priorfees").val().replace(/([$])/g, '')+'","'+
+$("#g1_g4_priorfees").val().replace(/([$])/g, '')+'",'+
 $("#g1_g4_required").is(':checked')+',"'+
 $("#g1_g4_reviewassigned").val()+'",'+
 $("#g1_g4_reviewed").is(':checked')+',"'+
@@ -305,7 +305,7 @@ $("#g2_g3_currentfees").val().replace(/([$])/g, '')+'","'+
 $("#g2_g3_delivered").val()+'","'+
 $("#g2_g3_extended").val()+'","'+
 $("#g2_g3_paymentstatus").val()+'","'+
-$("#g2_g3_priorfees").val().replace(/([$])/g, '')+'","'+
+$("#g2_g3_priorfees").val().replace(/([$])/g, '')+'",'+
 $("#g2_g3_required").is(':checked')+',"'+
 $("#g2_g3_rfr").val()+'","'+
 '"]]}'

@@ -64,7 +64,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
     <div><label for="g1_for">For</label><select id="g1_for" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="g1_responseneeded"><input id="g1_responseneeded" type="checkbox" class="ios-switch">Response Needed</label></div>
     <div><label for="g1_returnedcall"><input id="g1_returnedcall" type="checkbox" class="ios-switch">Returned Call</label></div>
-    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" maxlength="10" class="valid_off" placeholder="0" onblur="jqValid({'type':'numeric','object':this,'message':'This field must be a number.'});"></div>
+    <div><label for="g1_fees">Fees</label><input type="text" id="g1_fees" maxlength="10" ></div>
 	<div><label for="g1_paid">Payment Status</label><select id="g1_paid"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	</div>
 </div>

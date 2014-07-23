@@ -91,10 +91,10 @@ var grid1_config = [
 		,TR_EXTENSIONDONE:{title:'Extension Completed',width:'2%'}
 		,TR_3_MULTISTATERETURN:{title:'Multi-State Return',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 		,TR_4_REQUIRED:{title:'PPTR Required',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-		,TR_4_COMPLETED:{title:'PPTR Completed',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-		,TR_4_DELIVERED:{title:'PPTR Delivered',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+		,TR_4_COMPLETED:{title:'PPTR Completed',width:'2%'}
+		,TR_4_DELIVERED:{title:'PPTR Delivery',width:'2%'}	
 		,TR_PRIORITY:{title:'Priority',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-		,TR_ESTTIME:{title:'Estimated Time',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+		,TR_ESTTIME:{title:'Estimated Time',width:'2%'}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"6"}',
@@ -110,7 +110,7 @@ _grid2=function(){_jGrid({
 		,CLIENT_TYPETEXT:{title:'Client Type'}
 		,TR_TAXYEAR:{title:'Year',width:'2%'}
 		,TR_TAXFORMTEXT:{title:'Form'}
-		,TR_INFORMATIONRECEIVED:{title:'Information Received',width:'2%'}
+		,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'2%'}
 		,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
 		,TR_PRIORFEES:{title:'Prior Fees'}
 		,TR_1_DROPOFFAPPOINTMENT:{title:'Drop Off Appointment',width:'2%'}
@@ -137,7 +137,7 @@ _grid2=function(){_jGrid({
 		,TRST_STATETEXT:{title:'State'}	
 		,TRST_PRIMARY:{title:'Primary State',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}	
 		,TRST_COMPLETED:{title:'State Return Completed',width:'2%'}	
-		,TR_3_CURRENTFEES:{title:'PPTR Current Fees'}
+		,TR_4_CURRENTFEES:{title:'PPTR Current Fees'}
 		,TR_CURRENTFEES:{title:'Current Fees'}
 		,TR_PAIDTEXT:{title:'Payment Status'}
 		},

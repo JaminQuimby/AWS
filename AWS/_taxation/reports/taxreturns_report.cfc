@@ -152,8 +152,8 @@ AND(1)=(1)
 								,"TR_EXTENSIONDONE":"'&TR_EXTENSIONDONE&'"
 								,"TR_3_MULTISTATERETURN":"'&TR_3_MULTISTATERETURN&'"
 								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"		
-								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"		
-								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"		
+								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
+								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"	
 								,"TR_PRIORITY":"'&TR_PRIORITY&'"		
 								,"TR_ESTTIME":"'&TR_ESTTIME&'"														
 								}'>
@@ -201,14 +201,14 @@ SELECT[trst_id]
 ,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#') 
 ,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#') 
 ,FORMAT(tr_4_currentfees, 'C', 'en-us')AS[tr_4_currentfees]
-,trst_stateTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[trst_state]=[optionvalue_id])
+,[trst_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[trst_state]=[optionvalue_id])
 ,[trst_primary]
 ,CONVERT(VARCHAR(8),[trst_completed], 1)AS[trst_completed]
 ,FORMAT(tr_4_currentfees, 'C', 'en-us')AS[tr_currentfees]
 ,[tr_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[tr_paid]=[optionvalue_id])
-,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_businesstype'AND[client_type]=[optionvalue_id])
 ,[client_name]
 ,[client_id]
+,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 FROM[V_TAXRETURNS_STATE]
 WHERE [client_active]=(1)
 AND [tr_active]=(1)
@@ -252,10 +252,10 @@ AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 								,"TR_4_RFR":"'&TR_4_RFR&'"
 								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
 								,"TR_4_DELIVERED":"'&TR_4_DELIVERED&'"
-								,"TR_4_CURRENTFEES":"'&TR_4_CURRENTFEES&'"
 								,"TRST_STATETEXT":"'&TRST_STATETEXT&'"
 								,"TRST_PRIMARY":"'&TRST_PRIMARY&'"
 								,"TRST_COMPLETED":"'&TRST_COMPLETED&'"
+								,"TR_4_CURRENTFEES":"'&TR_4_CURRENTFEES&'"
 								,"TR_CURRENTFEES":"'&TR_CURRENTFEES&'"
 								,"TR_PAIDTEXT":"'&TR_PAIDTEXT&'"
 								}'>

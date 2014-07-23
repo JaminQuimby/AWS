@@ -125,7 +125,7 @@ AND(1)=(1)
  								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
  								,"NST_FEES":"'&NST_FEES&'"
  								,"NST_PAIDTEXT":"'&NST_PAIDTEXT&'"
- 								,"NST_PIRORITY":"'&NST_PRIORITY&'"
+ 								,"NST_PRIORITY":"'&NST_PRIORITY&'"
  								,"NST_ESTTIME":"'&NST_ESTTIME&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
