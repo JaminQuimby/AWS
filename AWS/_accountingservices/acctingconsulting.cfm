@@ -99,7 +99,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </div>
 </div>
 <h4 onClick='_run.load_group2();'>Subtask Detail</h4>
-<div>
+<div class="subtask1_id">
 <div><label for="g2_subtask"><i class="fa fa-lock link" ></i> Subtask</label><select  id="g2_subtask"><option value="0">&nbsp;</option><cfoutput query="global_acctsubtasks"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_subtaskcustom"><i class="fa fa-lock link" ></i> Custom Subtask</label><input type="text" id="g2_subtaskcustom" /></div>
 <div><label for="g2_sequence"><i class="fa fa-lock link" ></i> Sequence</label><input maxlength="3" type="text" id="g2_sequence" ></div>

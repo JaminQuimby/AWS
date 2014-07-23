@@ -56,7 +56,7 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 SELECT'Accounting and Consulting'AS[name]
 <cfif ARGUMENTS.userid neq "0">
 
-,SUM(DISTINCT CASE WHEN ISNULL( mc_assignedto ,0)=@u  THEN ISNULL([mc_esttime],0) ELSE NULL END)AS[total_time]
+,(SELECT SUM(mc_esttime)FROM[managementconsulting]WHERE[mc_id]=[mc_id]AND ISNULL( mc_assignedto ,0)=@u)AS[total_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL( mc_assignedto ,0)=@u  THEN ISNULL([mc_id],0) ELSE NULL END)AS[count_assigned]
 ,SUM(DISTINCT CASE WHEN ISNULL( mcs_assignedto ,0)=@u  THEN ISNULL([mcs_esttime],0) ELSE NULL END)AS[total_subtask_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL( mcs_assignedto ,0)=@u  THEN ISNULL([mcs_id],0) ELSE NULL END)AS[count_subtask_assigned]
@@ -69,7 +69,15 @@ SELECT'Accounting and Consulting'AS[name]
 </cfif>
 ,'A'AS[orderit]
 FROM[v_managementconsulting_subtask]
-WHERE[deleted] IS NULL AND[client_active]=(1)AND[mc_active]=(1)AND([mcs_active]=(1)OR[mcs_active]IS NULL) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)
+WHERE
+
+([client_active]=(1)
+AND ([mcs_active]=(1)OR[mcs_active]IS NULL)
+AND [deleted] IS NULL
+AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
+AND([mcs_status]NOT IN('2','3')OR([mcs_status]IS NULL))
+AND[mcs_id]is not null)
+
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -661,8 +669,8 @@ WHERE
 ([client_active]=(1)
 AND ([mcs_active]=(1)OR[mcs_active]IS NULL)
 AND [deleted] IS NULL
-AND([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
+AND([mcs_status]NOT IN('2','3')OR([mcs_status]IS NULL))
 AND[mcs_id]is not null)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
