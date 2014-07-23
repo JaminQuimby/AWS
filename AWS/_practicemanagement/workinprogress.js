@@ -66,30 +66,30 @@ _grid1=function(){_jGrid({
 			
 			,display:function(data){
 				switch(data.record.NAME){
-				case'Administrative Tasks': return'N/A'; break;
-				case'Communication': return'N/A'; break;
-				case'Financial & Tax Planning': return'N/A'; break;
-				case'Personal Property Tax Returns': return'N/A'; break;
+				case'Administrative Tasks': return'0'; break;
+				case'Communication': return'0'; break;
+				case'Financial & Tax Planning': return'0'; break;
+				case'Personal Property Tax Returns': return'0'; break;
 				default: return 0+Number(data.record.COUNT_SUBTASK_ASSIGNED);
 		}}}
 				
 		,TOTAL_TIME:{title:'Estimated Time'
 		,display:function(data){
 				switch(data.record.NAME){
-				case'Communication': return'N/A'; break;
-				case'Notices': return'N/A'; break;
-				 default: return 0+Number(data.record.TOTAL_TIME);
+				case'Communication': return'0.00'; break;
+				case'Notices': return'0.00'; break;
+				 default: return parseFloat(0+Number(data.record.TOTAL_TIME)).toFixed(2);
 		}}}
 				
 		,TOTAL_SUBTASK_TIME:{title:'Subtasks Estimated Time'
 		,display:function(data){
 				switch(data.record.NAME){
-				 case'Administrative Tasks': return'N/A'; break;
-				 case'Communication': return'N/A'; break;
-				 case'Financial & Tax Planning': return'N/A'; break;
-				 case'Tax Returns': return'N/A'; break;
-				 case'Personal Property Tax Returns': return'N/A'; break;
-				 default: return 0+Number(data.record.TOTAL_SUBTASK_TIME);
+				 case'Administrative Tasks': return'0.00'; break;
+				 case'Communication': return'0.00'; break;
+				 case'Financial & Tax Planning': return'0.00'; break;
+				 case'Tax Returns': return'0.00'; break;
+				 case'Personal Property Tax Returns': return'0.00'; break;
+				 default: return parseFloat(0+Number(data.record.TOTAL_SUBTASK_TIME)).toFixed(2);
 		}}}
 		
 		},

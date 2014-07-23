@@ -10,6 +10,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!---Head & Supporting Documents--->
 <cfinclude template="/assets/inc/header.cfm">
+<style>
+div.jtable-main-container > table.jtable > tbody > tr > td:not(:first-child) {
+    text-align: right !important;
+}
+div.jtable-main-container > table.jtable > thead > tr > th {
+    text-align: center !important;
+}
+</style>
 <cfquery dbtype="query" name="global_paid">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_paid'</cfquery>
 <cfquery dbtype="query" name="global_clientgroup">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_clientgroup'</cfquery>
 <cfinclude template="/assets/inc/pagemenu.cfm">

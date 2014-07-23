@@ -162,9 +162,8 @@ WHERE ISNULL([mcs_status],0) !=2
 AND ISNULL([mcs_status],0) !=3
 AND [mcs_active]=(1)
 AND [deleted] IS NULL
-<cfif ARGUMENTS.search neq "">
-AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
-</cfif> 
+AND[mc_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
+
 ORDER BY [mcs_sequence]
 </cfquery>
 <cfset myResult="">

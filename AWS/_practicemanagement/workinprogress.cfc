@@ -55,21 +55,22 @@ SET @d=<cfqueryparam value="#ARGUMENTS.duedate#">
 
 SELECT'Accounting and Consulting'AS[name]
 <cfif ARGUMENTS.userid neq "0">
+
 ,SUM(DISTINCT CASE WHEN ISNULL( mc_assignedto ,0)=@u  THEN ISNULL([mc_esttime],0) ELSE NULL END)AS[total_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL( mc_assignedto ,0)=@u  THEN ISNULL([mc_id],0) ELSE NULL END)AS[count_assigned]
 ,SUM(DISTINCT CASE WHEN ISNULL( mcs_assignedto ,0)=@u  THEN ISNULL([mcs_esttime],0) ELSE NULL END)AS[total_subtask_time]
 ,COUNT(DISTINCT CASE WHEN ISNULL( mcs_assignedto ,0)=@u  THEN ISNULL([mcs_id],0) ELSE NULL END)AS[count_subtask_assigned]
+
 <cfelse>
-,ISNULL(SUM(ISNULL(mc_esttime,0)),0)AS[total_time]
-,COUNT(DISTINCT ISNULL([mc_id],0))AS[count_assigned]
-,ISNULL(SUM(ISNULL([mcs_esttime],0)),0)AS[total_subtask_time]
-,COUNT(DISTINCT ISNULL([mcs_id],0))AS[count_subtask_assigned]
+,(SELECT SUM(mc_esttime)FROM[managementconsulting]WHERE[mc_id]=[mc_id])AS[total_time]
+,COUNT(DISTINCT[mc_id])AS[count_assigned]
+,SUM(mcs_esttime)AS[total_subtask_time]
+,COUNT(mcs_id)AS[count_subtask_assigned]
 </cfif>
 ,'A'AS[orderit]
 FROM[v_managementconsulting_subtask]
 WHERE[deleted] IS NULL AND[client_active]=(1)AND[mc_active]=(1)AND([mcs_active]=(1)OR[mcs_active]IS NULL) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
-
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u)</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
@@ -492,7 +493,6 @@ OR(
 ([deleted] IS NULL AND[client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
 	AND[tr_3_delivered] IS NULL AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
 
-
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
@@ -605,14 +605,12 @@ SELECT Distinct [mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 FROM[v_managementconsulting_subtask]
-WHERE [client_active]=(1)
-AND [mc_active]=(1)
-AND [deleted] IS NULL
-AND ([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
+WHERE[deleted] IS NULL AND[client_active]=(1)AND[mc_active]=(1)AND([mcs_active]=(1)OR[mcs_active]IS NULL) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
-<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
+<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u)</cfif>
+<cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+
 ORDER BY([mc_duedateORDERBY])ASC
 </cfquery>
 
@@ -659,11 +657,13 @@ SELECT DISTINCT[mc_id]
 ,[mcs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[mcs_status]=[optionvalue_id])
 ,[mcs_subtaskTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_acctsubtasks'AND[mcs_subtask]=[optionvalue_id])
 FROM[v_managementconsulting_subtask]
-WHERE[client_active]=(1)
+WHERE
+([client_active]=(1)
 AND ([mcs_active]=(1)OR[mcs_active]IS NULL)
 AND [deleted] IS NULL
 AND([mc_status]NOT IN('2','3')OR([mc_status]IS NULL))
 AND[mc_id]=<cfqueryparam value="#ARGUMENTS.id#">
+AND[mcs_id]is not null)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -1538,17 +1538,13 @@ SELECT[tr_id]
 ,[tr_4_delivered]=FORMAT(tr_4_delivered,'#Session.localization.formatdate#') 
 ,[tr_duedateORDERBY]=convert(datetime, tr_duedate, 101)
 FROM[v_taxreturns]
-WHERE [client_active]=(1)
-AND [tr_active]=(1)
-AND [deleted] IS NULL
-AND (([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-OR(([client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-	AND[tr_3_delivered] IS NULL AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate()))))
-
+WHERE([deleted] IS NULL AND[client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
+OR(([deleted] IS NULL AND[client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)AND[tr_3_delivered] IS NULL AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
+
 ORDER BY([tr_duedateORDERBY])ASC
 </cfquery>
 <cfset myResult="">
