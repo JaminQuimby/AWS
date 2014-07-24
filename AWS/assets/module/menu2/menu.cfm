@@ -7,11 +7,7 @@
 <div class="container">
 <div class="main">
 <nav id="cbp-hrmenu" class="cbp-hrmenu">
-<ul>  
-
-      
-        
-        
+<ul>     
         <li><a href="##">Practice Management</a>
 		<div class="cbp-hrsub _practicemanagement">
 		<div class="cbp-hrsub-inner"> 
@@ -62,10 +58,7 @@
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
 		</li>
-        
-	
-        
-        
+
         
 	<li><a href="##">Payroll &amp; Taxes</a>
 		<div class="cbp-hrsub _payrolltaxes">
@@ -142,17 +135,16 @@
         <div class="cbp-hrsub _practicemanagement">
 		<div class="cbp-hrsub-inner"> 
 		<div>
-			
 			<ul>
             <li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm?task_id=#session.user.id#"><h4>About Me</h4></a></li>
-			<li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="##" onclick="parentNode.submit()">Logout </a></form></li>
+			<li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="#this.url#/assets/module/login/loginform.cfm" onclick="parentNode.submit()">Logout </a></form></li>
             </ul>
         </div>
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
         </li>
 <cfelse>
-        <li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="##" onclick="parentNode.submit()">Logout </a></form></li>
+        <li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="#this.url#/assets/module/login/loginform.cfm" onclick="parentNode.submit()">Logout </a></form></li>
 </cfif>    
 </ul>
 </nav>

@@ -327,8 +327,8 @@ SELECT[tr_id]
 ,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
 ,[tr_missinginfo]
 ,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#') 
-,[tr_4_assignedto]
-,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
+,[tr_2_assignedto]
+,[tr_2_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_2_assignedto=user_id))
 ,[client_name]
 ,[client_id]
 ,[tr_missinginforeceived]=FORMAT(tr_missinginforeceived,'#Session.localization.formatdate#') 
@@ -354,23 +354,23 @@ AND [deleted] IS NULL
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"TR_ID":"'&TR_ID&'"
- 									,"CLIENT_ID":"'&CLIENT_ID&'"
- 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
-									,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-									,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
-									,"TR_DUEDATE":"'&TR_DUEDATE&'"
-									,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
- 									,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
-									,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
-									,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
-									,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
-									,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
-									,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
-									,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
- 									,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
-									,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
-									,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"	
-									,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"	
+ 								,"CLIENT_ID":"'&CLIENT_ID&'"
+ 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
+								,"TR_DUEDATE":"'&TR_DUEDATE&'"
+								,"TR_2_ASSIGNEDTOTEXT":"'&TR_2_ASSIGNEDTOTEXT&'"
+ 								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
+								,"TR_MISSINGINFO":"'&TR_MISSINGINFO&'"
+								,"TR_MISSINGINFORECEIVED":"'&TR_MISSINGINFORECEIVED&'"
+								,"TR_2_READYFORREVIEW":"'&TR_2_READYFORREVIEW&'"
+								,"TR_2_REVIEWASSIGNEDTOTEXT":"'&TR_2_REVIEWASSIGNEDTOTEXT&'"
+								,"TR_2_REVIEWED":"'&TR_2_REVIEWED&'"
+								,"TR_2_REVIEWEDWITHNOTES":"'&TR_2_REVIEWEDWITHNOTES&'"
+ 								,"TR_2_COMPLETED":"'&TR_2_COMPLETED&'"
+								,"TR_3_ASSEMBLERETURN":"'&TR_3_ASSEMBLERETURN&'"	
+								,"TR_3_DELIVERED":"'&TR_3_DELIVERED&'"	
+								,"TR_4_REQUIRED":"'&TR_4_REQUIRED&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

@@ -98,7 +98,7 @@ $("#g1_assignedto").val()+'","'+
 $("#g1_consultingcategory").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+
-$("#g1_fees").val().replace(/([$])/g, '')+'","'+
+$("#g1_fees").val().replace(/([$,])/g, '')+'","'+
 $("#g1_informationreceived").val()+'","'+
 $("#g1_missinginfo").is(':checked')+'","'+
 $("#g1_missinginforeceived").val()+'","'+

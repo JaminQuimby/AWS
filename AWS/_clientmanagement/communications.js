@@ -56,8 +56,8 @@ $("#g1_date").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_emailaddress").val()+'","'+
 $("#g1_ext").val()+'","'+
-$("#g1_faxnumber").val().replace(/([$])/g, '')+'","'+
-$("#g1_fees").val().replace(/([$])/g, '')+'","'+
+$("#g1_faxnumber").val().replace(/([$,])/g, '')+'","'+
+$("#g1_fees").val().replace(/([$,])/g, '')+'","'+
 $("#g1_for").val()+'","'+
 $("#g1_paid").val()+'","'+
 $("#g1_status").val()+'",'+

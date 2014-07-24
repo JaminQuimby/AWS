@@ -35,7 +35,7 @@ _grid1=function(){_jGrid({
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}
 			,TR_DUEDATE:{title:'Due Date',width:'1%'}
-			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
+			,TR_2_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}		
 			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'1%'}		
 			,TR_MISSINGINFO:{title:'Missing Information',width:'1%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
 			,TR_MISSINGINFORECEIVED:{title:'Missing Information Received',width:'1%'}		
@@ -58,12 +58,13 @@ _grid2=function(){_jGrid({
 	"url":"taxreturns.cfc",
 	"title":"State",
 	"fields":{TRST_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRST_ID+"',page:'taxreturns',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-		,TRST_STATETEXT:{title:'State'}
-		,TRST_PRIMARY:{title:'Primary',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
-		,TRST_STATUSTEXT:{title:'Status'}
-		,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
-		,TRST_1_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}},
+			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRST_ID+"',page:'taxreturns',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,TRST_STATETEXT:{title:'State'}
+			,TRST_PRIMARY:{title:'Primary',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,TRST_STATUSTEXT:{title:'Status'}
+			,TRST_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,TRST_1_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"6"}',
 	"functions":'$("#subtask1_id").val(record.TRST_ID);$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);_loadData({"id":"subtask1_id","group":"group2_state","page":"taxreturns"});'
@@ -74,11 +75,12 @@ _grid3=function(){_jGrid({
 	"url":"taxreturns.cfc",
 	"title":"Schedule",
 	"fields":{TRSC_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRSC_ID+"',page:'taxreturns',group:'group3'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
-		,TRSC_SCHEDULETEXT:{title:'Schedule'}
-		,TRSC_STATUSTEXT:{title:'Status'}
-		,TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}
-		,TRSC_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}},	
+			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRSC_ID+"',page:'taxreturns',group:'group3'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
+			,TRSC_SCHEDULETEXT:{title:'Schedule'}
+			,TRSC_STATUSTEXT:{title:'Status'}
+			,TRSC_ASSIGNEDTOTEXT:{title:'Assigned To'}
+			,TRSC_REVIEWASSIGNEDTOTEXT:{title:'Review Assigned To'}
+			},	
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3","formid":"6"}',
 	"functions":'$("#subtask2_id").val(record.TRSC_ID);$("#group3").accordion({active:1});$("#isLoaded_group3").val(1);_loadSelect({"selectName":"global_taxreturnschedule","selectObject":"g3_schedule","option1":$("#g1_taxform").val(),"page":"taxreturns"});_loadData({"id":"subtask2_id","group":"group3","page":"taxreturns"});'
@@ -116,7 +118,7 @@ case'':_saveDataCB({'group':'group1'});break;
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
-$("#g1_currentfees").val().replace(/([$])/g, '')+'","'+
+$("#g1_currentfees").val().replace(/([$,])/g, '')+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_esttime").val()+'","'+
 $("#g1_extensiondone").val()+'","'+
@@ -126,7 +128,7 @@ $("#g1_g2_informationreceived").val()+'",'+
 $("#g1_missinginformation").is(':checked')+',"'+
 $("#g1_missinginforeceived").val()+'",'+
 $("#g1_notrequired").is(':checked')+',"'+
-$("#g1_priorfees").val().replace(/([$])/g, '')+'","'+
+$("#g1_priorfees").val().replace(/([$,])/g, '')+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_reason").val()+'","'+
 $("#g1_taxform").val()+'","'+
@@ -220,13 +222,13 @@ $("#task_id").val()+'","'+
 $("#g1_g4_assignedto").val()+'","'+
 $("#g1_g4_completed").val()+'","'+
 $("#g1_g4_completedby").val()+'","'+
-$("#g1_g4_currentfees").val().replace(/([$])/g, '')+'","'+
+$("#g1_g4_currentfees").val().replace(/([$,])/g, '')+'","'+
 $("#g1_g4_delivered").val()+'","'+
 $("#g1_g4_extended").val()+'","'+
 $("#g1_g4_extensionrequested").val()+'","'+
 $("#g1_g4_paymentstatus").val()+'","'+
 $("#g1_g4_pptresttime").val()+'","'+
-$("#g1_g4_priorfees").val().replace(/([$])/g, '')+'",'+
+$("#g1_g4_priorfees").val().replace(/([$,])/g, '')+'",'+
 $("#g1_g4_required").is(':checked')+',"'+
 $("#g1_g4_reviewassigned").val()+'",'+
 $("#g1_g4_reviewed").is(':checked')+',"'+
@@ -281,14 +283,14 @@ $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_g2_assemblereturn").val()+'","'+
 $("#g2_g2_contacted").val()+'","'+
-$("#g2_g2_currentfees").val().replace(/([$])/g, '')+'","'+
+$("#g2_g2_currentfees").val().replace(/([$,])/g, '')+'","'+
 $("#g2_g2_delivered").val()+'","'+
 $("#g2_g2_deliverymethod").val()+'",'+
 $("#g2_g2_emailed").is(':checked')+','+
 $("#g2_g2_messageleft").is(':checked')+','+
 $("#g2_g2_missingsignatures").is(':checked')+',"'+
 $("#g2_g2_paymentstatus").val()+'","'+
-$("#g2_g2_priorfees").val().replace(/([$])/g, '')+'","'+
+$("#g2_g2_priorfees").val().replace(/([$,])/g, '')+'","'+
 
 '"]]}'
 if($("#isLoaded_group2_2").val()!=0){_saveData({group:"group2_2","payload":$.parseJSON(json),page:"taxreturns"})}
@@ -301,11 +303,11 @@ $("#subtask1_id").val()+'","'+
 $("#task_id").val()+'","'+
 $("#g2_g3_assignedto").val()+'","'+
 $("#g2_g3_completed").val()+'","'+
-$("#g2_g3_currentfees").val().replace(/([$])/g, '')+'","'+
+$("#g2_g3_currentfees").val().replace(/([$,])/g, '')+'","'+
 $("#g2_g3_delivered").val()+'","'+
 $("#g2_g3_extended").val()+'","'+
 $("#g2_g3_paymentstatus").val()+'","'+
-$("#g2_g3_priorfees").val().replace(/([$])/g, '')+'",'+
+$("#g2_g3_priorfees").val().replace(/([$,])/g, '')+'",'+
 $("#g2_g3_required").is(':checked')+',"'+
 $("#g2_g3_rfr").val()+'","'+
 '"]]}'
