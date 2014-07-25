@@ -1,6 +1,5 @@
 <cfparam name="page.formid" default="0">
 <cfquery dbtype="query" name="g102_description">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_description'</cfquery>
-<cfquery dbtype="query" name="g102_billingtype">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_billingtype'</cfquery>
 <cfquery dbtype="query" name="g102_ratetype">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_ratetype'</cfquery>
 <cfoutput>
 <script type="text/javascript">
@@ -12,31 +11,29 @@ _pluginLoadData102=function(){return "tb_id,tb_id,user_id,g102_adjustment,g102_d
 _pluginLoadData102_1=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
 _group102=function(){_grid102();}
 _group102_1=function(){_grid102_1();}
-
 _pluginSaveData102=function(){
 
 	var json='{"DATA":[["'+
 		$("##tb_id").val()+'","'+
 		$("##form_id").val()+'","'+
-		$("##user_id").val()+'","'+
-		$("##client_id").val()+'","'+
 		$("##task_id").val()+'","'+
-        $("##g102_adjustment").val()+'","'+
+        $("##g102_adjustment").val().replace(/([$,])/g, '')+'","'+
     	$("##g102_date").val()+'","'+
     	$("##g102_description").val()+'","'+
-        $("##g102_flatfee").val()+'","'+
+        $("##g102_flatfee").val().replace(/([$,])/g, '')+'","'+
 		$("##g102_manualtime").val()+'","'+
         $("##g102_mileage").val()+'","'+
 		$("##g102_notes").val()+'","'+
     	$("##g102_paymentstatus").val()+'","'+
     	$("##g102_ratetype").val()+'","'+
-        $("##g102_reimbursement").val()+'","'+
+        $("##g102_reimbursement").val().replace(/([$,])/g, '')+'","'+
 		'"]]}'
 		if($("##isLoaded_group102").val()!=0){
 			_saveData({"group":"group102",payload:$.parseJSON(json),page:"timebilling",plugin:"group102"})}
 		else{
 			_pluginSaveDataCB({'subgroup':'102_1'})
-			}}
+			}
+		}
 
 _pluginSaveData102_1=function(){
 	var json='{"DATA":[["'+
@@ -47,7 +44,8 @@ _pluginSaveData102_1=function(){
 		'"]]}'
 		if($("##isLoaded_group102_1").val()!=0){
 			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"102_1"})}
-		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}}
+		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}
+		}
 
 
 _grid102=function(){
@@ -102,7 +100,6 @@ _grid102_1=function(){
 <h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});$("##isLoaded_group102").val(1);'>Add Time Card</h4>
 </cfoutput>
 <div>
-   	<div><label for="client_id">Client</label><select id="client_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectClients"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="user_id">Employee</label><select id="user_id" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g102_date">Date</label><input type="text" class="date" id="g102_date"/></div>
    	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="g102_description"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

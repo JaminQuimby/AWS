@@ -54,7 +54,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_caller"><i class="fa fa-lock link" ></i> Caller</label><input type="text" id="g1_caller" maxlength="40" ></div>
 	<div><label for="g1_takenby"><i class="fa fa-lock link" ></i> Taken By</label><select id="g1_takenby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_contactmethod"><i class="fa fa-lock link"></i> Contact Methods</label><select id="g1_contactmethod" multiple="multiple"><option value="0">&nbsp;</option><cfoutput query="global_comcontactmethods"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_briefmessage"><i class="fa fa-lock link"></i> Brief Message</label><textarea type="text" id="g1_briefmessage" cols="4" rows="4"  maxlength="200"></textarea></div>
+	<div><label for="g1_briefmessage"><i class="fa fa-lock link"></i> Brief Message</label><textarea type="text" id="g1_briefmessage" cols="4" rows="4"  maxlength="200" disabled="disabled"></textarea></div>
 	<div><label for="g1_status">Status</label><select id="g1_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_telephone">Telephone</label><input type="text" id="g1_telephone" maxlength="14" type="tel" class="phone"   onChange="jqValid({'type':'phone','object':this,'message':'Not a valid phone number.'});"></div>
 	<div><label for="g1_ext">Ext</label><input type="text" id="g1_ext" maxlength="5"></div>

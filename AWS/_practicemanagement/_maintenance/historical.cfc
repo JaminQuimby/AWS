@@ -363,7 +363,7 @@ SELECT[co_id]
 ,CASE WHEN LEN([co_briefmessage]) >= 101 THEN SUBSTRING([co_briefmessage],0,100) +  '...' ELSE [co_briefmessage] END AS[co_briefmessage]
 ,[co_caller]
 ,[co_duedate]=FORMAT(co_duedate,'#Session.localization.formatdate#')
-,[co_date]=FORMAT(co_duedate,'#Session.localization.formatdatetime#','#Session.localization.language#')
+,[co_date]=FORMAT(co_date,'#Session.localization.formatdatetime#','#Session.localization.language#')
 ,[co_status]
 ,[co_responseneeded]
 ,[co_returncall]

@@ -25,9 +25,11 @@ _grid101=function(){
 	"url":"#this.url#/AWS/assets/plugins/jComment/comment.cfc",
 	"title":"Comments",
 	"fields":{COMMENT_ID:{key:true,list:false,edit:false}
-,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.COMMENT_ID+"',page:'comment',group:'group101',plugin:'101'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}	
-
-	,C_DATE:{title:'Date',width:'2%'},U_NAME:{title:'Name'},C_NOTES:{title:'Comment'}},
+			,remove:{title:'',width:'1%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.COMMENT_ID+"',page:'comment',group:'group101',plugin:'101'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}	
+			,C_DATE:{title:'Date',width:'2%'}
+			,U_NAME:{title:'Name'}
+			,C_NOTES:{title:'Comment'}
+			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("##g101_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","clientid":"'+$("##client_id").val()+'","taskid":"'+$("##task_id").val()+'","loadType":"group101"}',
 	"functions":''
