@@ -11,10 +11,10 @@
 <!---Head & Supporting Documents--->
 <cfinclude template="/assets/inc/header.cfm">
 <style>
-div.jtable-main-container > table.jtable > tbody > tr > td:not(:first-child) {
+#grid1 > div.jtable-main-container > table.jtable > tbody > tr > td:not(:first-child) {
     text-align: right !important;
 }
-div.jtable-main-container > table.jtable > thead > tr > th {
+#grid1 > div.jtable-main-container > table.jtable > thead > tr > th {
     text-align: center !important;
 }
 </style>
