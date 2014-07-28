@@ -393,7 +393,7 @@ END)
 ,[fdss_sequence]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]
-,[fdss_completed]
+,[fdss_completed]=FORMAT(fdss_completed,'#Session.localization.formatdate#') 
 FROM[v_financialDataStatus_Subtask]
 WHERE ISNULL([fdss_status],0) != 2 
 AND ISNULL([fdss_status],0) != 3

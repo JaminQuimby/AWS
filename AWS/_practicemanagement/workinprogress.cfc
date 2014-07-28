@@ -1040,7 +1040,9 @@ AND [fds_active]=(1)
 AND ([fdss_active]=(1)OR[fdss_active]IS NULL)
 AND [deleted] IS NULL
 AND ([fds_status]NOT IN('2','3')OR([fds_status]IS NULL))
-<cfif ARGUMENTS.duedate neq "">AND([fds_duedate]IS NULL OR[fds_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
+<cfif ARGUMENTS.duedate neq "">
+AND([fds_duedate]IS NULL OR[fds_duedate]BETWEEN '1/1/1900' AND @d)
+</cfif>
 
 
 <cfif ARGUMENTS.userid neq "0">
@@ -1054,7 +1056,7 @@ OR([fds_compile_assignedto]= @u  AND [fds_reconcile_datecompleted] IS NOT NULL A
 OR([fds_review_assignedto] = @u  AND [fds_compile_datecompleted] IS NOT NULL AND [fds_review_datecompleted] IS NULL)
 OR([fds_assembly_assignedto] = @u  AND [fds_review_datecompleted] IS NOT NULL AND [fds_assembly_datecompleted]  IS NULL)
 OR([fds_delivery_assignedto] = @u  AND [fds_assembly_datecompleted] IS NOT NULL)
-OR([fdss_assignedto]=@u))
+OR([fdss_assignedto]=@u)
 </cfif>
 
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -1115,7 +1117,7 @@ SELECT[fdss_id]
 ,[fdss_sequence]
 ,[fdss_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[fdss_status]=[optionvalue_id])
 ,[fdss_subtask]
-,[fdss_completed]
+,[fdss_completed]=FORMAT(fdss_completed,'#Session.localization.formatdate#') 
 FROM[v_financialDataStatus_Subtask]
 WHERE[client_active]=(1)
 AND [fdss_active]=(1)
