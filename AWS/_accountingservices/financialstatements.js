@@ -17,7 +17,7 @@ var _run={
 	,load_group1_9:function(){if($("#isLoaded_group1_9").val()=="0"){_loadData({"id":"task_id","group":"group1_9","page":"financialstatements"});$("#isLoaded_group1_9").val(1);}}
 	,load_group1_10:function(){if($("#isLoaded_group1_10").val()=="0"){_loadData({"id":"task_id","group":"group1_10","page":"financialstatements"});$("#isLoaded_group1_10").val(1);}}
 	,load_group1_11:function(){if($("#isLoaded_group1_11").val()=="0"){_loadData({"id":"task_id","group":"group1_11","page":"financialstatements"});$("#isLoaded_group1_11").val(1);}}
-	,load_group2:function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence,g2_assignedto,g2_status,g2_subtask,g2_dependencies"});$('#subtask1_id').val('0');_run.load_select_clone2()}
+	,load_group2:function(){_grid2();_clearfields({"list":"g2_completed,g2_duedate,g2_notes,g2_sequence,g2_assignedto,g2_status,g2_subtask,g2_subtaskcustom,g2_dependencies"});$('#subtask1_id').val('0');_run.load_select_clone2()}
 	,load_select_clone2:function(){_loadSelect({'selectName':'g2_history','selectObject':'g2_history',"option1":""+$("#client_id").val()+"",'page':'financialstatements'});}
 	,load_assets:function(){_loadData({"id":"client_id","group":"assetCreditHold","page":"financialstatements"});_loadData({"id":"task_id","group":"assetCompTask","page":"financialstatements"});}
 }

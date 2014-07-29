@@ -6,7 +6,7 @@ var _run={
 	$("#group2").accordion({active:1});
 	$("#subtask1_id").val(0);
 	_addNewTask({"new":"subtask1_id"});
-	_clearfields({"list":"g2_sequence,g2_duedate,g2_completed,g2_estimatedtime,g2_actualtime,g2_note,g2_subtask,g2_assignedto,g2_status,g2_dependancy"});}
+	_clearfields({"list":"g2_sequence,g2_duedate,g2_completed,g2_estimatedtime,g2_actualtime,g2_note,g2_subtask,g2_subtaskcustom,g2_assignedto,g2_status,g2_dependancy"});}
 	,load_group1:function(params){var options={'open':false};$.extend(true,options,params);_grid1();if(options['open']==true){_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass().addClass("contentbig");$("#group1").accordion({active:0});}if(options['open']==false){_toggle("entrance,smallMenu");_hide("group1,largeMenu");$("#content").removeClass().addClass("contentsmall");$("#group1").accordion({active:0});}}
 	,load_group2:function(params){
 
