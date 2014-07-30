@@ -342,7 +342,6 @@ WHERE ISNULL([fds_status],0) != 2
 AND ISNULL([fds_status],0) != 3
 AND [deleted] IS NULL
 AND [client_active]=(1)
-AND [fds_active]=(1)
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
@@ -397,7 +396,6 @@ END)
 FROM[v_financialDataStatus_Subtask]
 WHERE ISNULL([fdss_status],0) != 2 
 AND ISNULL([fdss_status],0) != 3
-AND [fdss_active]=(1)
 AND [deleted] IS NULL
 AND[fds_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[fdss_subtaskTEXT]</cfif>

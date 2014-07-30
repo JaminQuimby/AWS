@@ -89,7 +89,6 @@ FROM[v_financialtaxplanning]
 WHERE  ISNULL([ftp_status],0) !=2
 AND  ISNULL([ftp_status],0) !=3
 AND [client_active]=(1)
-AND [ftp_active]=(1)
 AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>

@@ -73,7 +73,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
-
+ORDER BY[mc_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -164,6 +164,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[cas_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -414,6 +415,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[co_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -501,6 +503,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[ftp_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -609,6 +612,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[fds_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -654,17 +658,68 @@ WHERE(1)=(1)
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[n_id]
-,[client_name]
+,[nst_id]
 ,[n_name]
-,[nst_1_noticedate]=FORMAT(nst_1_noticedate,'#Session.localization.formatdate#') 
+,[n_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[n_status]=[optionvalue_id])
+,[nst_1_taxyear]
 ,[nst_missinginfo]
 ,[nst_priority]
-,[nst_assignedtoTEXT]
-,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'#Session.localization.formatdate#') 
 ,[nst_esttime]
-,[nst_2_revrequired]
-,[nst_2_revassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(nst_2_revassignedto=user_id))
+,[nst_1_datenoticerec]=FORMAT(nst_1_datenoticerec,'#Session.localization.formatdate#')
+,[nst_1_resduedate]=FORMAT(nst_1_resduedate,'#Session.localization.formatdate#')
+,[nst_2_ressubmited]=FORMAT(nst_2_ressubmited,'#Session.localization.formatdate#')
+,[nst_2_revrequired]   
+,[nst_fees]=FORMAT(nst_fees, 'C', '#Session.localization.language#')
+,[nst_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[nst_status]=[optionvalue_id])
+,[nst_1_noticenumberTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_noticenumber'AND[nst_1_noticenumber]=[optionvalue_id])
+,[nst_1_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[nst_1_taxform]=[optionvalue_id])
+,[nst_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[nst_paid]=[optionvalue_id])
+,[client_name]
+,[client_id]
 FROM[v_notice_subtask]
+
+<cfset sqllist = "nst_assignedto,nst_deliverymethod,nst_esttime,nst_fees,nst_missinginfo,nst_missinginforeceived,nst_status,nst_paid,nst_priority,nst_1_datenoticerec,nst_1_methodreceived,nst_1_noticenumber,nst_1_noticedate,nst_1_taxform,nst_1_taxyear,nst_2_rescompleted,nst_2_rescompletedby,nst_1_resduedate,nst_2_irsstateresponse,nst_2_revassignedto,nst_2_revcompleted,nst_2_ressubmited,nst_2_revrequired">
+<cfset key="nst_">
+<cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
+<cfset data=#ARGUMENTS.search#>
+<cfif ArrayLen(data.b) gt 0>
+
+AND(1)=(1)
+<cfloop array="#data.b#" index="i">
+	<cfif #i.t# eq "NONE">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "AND">AND((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+	<cfif #i.t# eq "OR">OR((1)=(1)
+		<cfloop array="#i.g#" index="g">
+			<cfloop list="#sqllist#" index="list">
+                	<cfif list eq key&g.n><cfif #g.v# neq "null">AND[#list#]='#g.v#'<cfelse>AND[#list#]IS NULL</cfif></cfif>
+                    <cfif list&'_less' eq key&g.n>AND[#list#]<='#g.v#'</cfif>
+					<cfif list&'_more' eq key&g.n>AND[#list#]>='#g.v#'</cfif>
+					<cfif list&'_not' eq key&g.n><cfif #g.v# neq "null">AND[#list#]<>'#g.v#'<cfelse>AND[#list#]IS NOT NULL</cfif></cfif>
+			</cfloop>
+		</cfloop>)
+	</cfif>
+</cfloop>
+</cfif>
+</cfif>
+
 
 </cfquery>
 <cfset myResult="">
@@ -673,16 +728,23 @@ FROM[v_notice_subtask]
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"N_ID":"'&N_ID&'"
+								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"N_NAME":"'&N_NAME&'"
-								,"NST_1_NOTICEDATE":"'&NST_1_NOTICEDATE&'"
-								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
-								,"NST_PRIORITY":"'&NST_PRIORITY&'"
-								,"NST_ASSIGNEDTOTEXT":"'&NST_ASSIGNEDTOTEXT&'"
-								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
-								,"NST_ESTTIME":"'&NST_ESTTIME&'"
-								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
-								,"NST_2_REVASSIGNEDTOTEXT":"'&NST_2_REVASSIGNEDTOTEXT&'"
+ 								,"N_NAME":"'&N_NAME&'"
+ 								,"N_STATUSTEXT":"'&N_STATUSTEXT&'"
+ 								,"NST_1_TAXYEAR":"'&NST_1_TAXYEAR&'"
+ 								,"NST_1_TAXFORMTEXT":"'&NST_1_TAXFORMTEXT&'"
+ 								,"NST_1_NOTICENUMBERTEXT":"'&NST_1_NOTICENUMBERTEXT&'"
+ 								,"NST_STATUSTEXT":"'&NST_STATUSTEXT&'"
+ 								,"NST_MISSINGINFO":"'&NST_MISSINGINFO&'"
+ 								,"NST_1_DATENOTICEREC":"'&NST_1_DATENOTICEREC&'"
+ 								,"NST_1_RESDUEDATE":"'&NST_1_RESDUEDATE&'"
+ 								,"NST_2_RESSUBMITED":"'&NST_2_RESSUBMITED&'"
+ 								,"NST_2_REVREQUIRED":"'&NST_2_REVREQUIRED&'"
+ 								,"NST_FEES":"'&NST_FEES&'"
+ 								,"NST_PAIDTEXT":"'&NST_PAIDTEXT&'"
+ 								,"NST_PRIORITY":"'&NST_PRIORITY&'"
+ 								,"NST_ESTTIME":"'&NST_ESTTIME&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -774,6 +836,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[of_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -874,6 +937,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[pc_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -972,6 +1036,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[pt_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
@@ -1067,6 +1132,7 @@ WHERE(1)=(1)
 </cfif>
 </cfif>
 
+ORDER BY[tr_duedate]
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">

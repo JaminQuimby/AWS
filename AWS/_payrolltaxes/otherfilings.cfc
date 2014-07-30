@@ -256,7 +256,6 @@ WHERE  ISNULL([of_status],0) != 2
 AND  ISNULL([of_status],0) != 3
 AND [deleted] IS NULL
 AND [client_active]=(1)
-AND [of_active]=(1)
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

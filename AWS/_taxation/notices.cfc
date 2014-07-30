@@ -160,7 +160,6 @@ FROM[v_notice]
 WHERE  ISNULL([n_status],0) != 2
 AND  ISNULL([n_status],0) != 3
 AND [client_active]=(1)
-AND [n_active]=(1)
 AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -208,7 +207,6 @@ AND ([nst_assignedtoTEXT]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> OR [ns
 AND  ISNULL([nst_status],0) !=2 
 AND  ISNULL([nst_status],0) !=3
 AND [client_active]=(1)
-AND [nst_active]=(1)
 AND [deleted] IS NULL
 </cfquery>
 <cfset myResult="">

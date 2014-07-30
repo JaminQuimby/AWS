@@ -215,7 +215,6 @@ FROM[v_payrolltaxes]
 WHERE[pt_delivery_datecompleted] IS NULL
 AND [deleted] IS NULL
 AND [client_active]=(1)
-AND [pt_active]=(1)
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 

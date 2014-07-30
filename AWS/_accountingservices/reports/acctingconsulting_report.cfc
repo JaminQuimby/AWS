@@ -54,7 +54,6 @@ SELECT[mc_id]
 ,[client_id]
 FROM[v_managementconsulting]
 WHERE [client_active]=(1)
-AND [mc_active]=(1)
 AND [deleted] IS NULL
 
 <cfset sqllist = "mc_assignedto,mc_category,mc_description,mc_duedate,mc_esttime,mc_fees,mc_paid,mc_priority,mc_projectcompleted,mc_requestforservice,mc_status,mc_workinitiated,mc_missinginfo">

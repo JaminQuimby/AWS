@@ -80,7 +80,6 @@ SELECT[dt_id]
 ,dt_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](dt_assignedto)))FOR XML PATH('')),3,1000)
 FROM[v_documenttracking]
 WHERE [client_active]=(1)
-AND [dt_active]=(1)
 AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>

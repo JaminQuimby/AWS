@@ -73,7 +73,6 @@ SELECT[pa_id]
 ,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
 FROM[v_powerofattorney]
 WHERE [client_active]=(1)
-AND [pa_active]=(1)
 AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>

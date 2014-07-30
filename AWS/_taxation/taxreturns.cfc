@@ -344,7 +344,6 @@ FROM[v_taxreturns]
 WHERE  ISNULL([tr_notrequired],0) != 1
 AND [tr_3_delivered] IS NULL 
 AND [client_active]=(1)
-AND [tr_active]=(1)
 AND [deleted] IS NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, tr_duedate, 101) ASC </cfif>
 </cfquery>
@@ -392,7 +391,6 @@ FROM[v_taxreturns_state]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> 
 AND  ISNULL([trst_status],0) !=2 
 AND  ISNULL([trst_status],0)!=3
-AND [trst_active]=(1)
 AND [deleted] IS NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trst_status]</cfif>
 </cfquery>
@@ -427,7 +425,6 @@ SELECT[tr_id]
 ,[trsc_reviewassignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(trsc_reviewassignedto=user_id))
 FROM[v_taxreturns_schedule]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
-AND [trsc_active]=(1)
 AND [deleted] IS NULL
 AND[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[trsc_status]</cfif>

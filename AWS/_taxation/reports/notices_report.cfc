@@ -57,8 +57,7 @@ SELECT[n_id]
 ,[client_name]
 ,[client_id]
 FROM[v_notice_subtask]
- WHERE[client_active]=(1)
-AND [nst_active]=(1)
+WHERE[client_active]=(1)
 AND [deleted] IS NULL
    
 <cfset sqllist = "nst_assignedto,nst_deliverymethod,nst_esttime,nst_fees,nst_missinginfo,nst_missinginforeceived,nst_status,nst_paid,nst_priority,nst_1_datenoticerec,nst_1_methodreceived,nst_1_noticenumber,nst_1_noticedate,nst_1_taxform,nst_1_taxyear,nst_2_rescompleted,nst_2_rescompletedby,nst_1_resduedate,nst_2_irsstateresponse,nst_2_revassignedto,nst_2_revcompleted,nst_2_ressubmited,nst_2_revrequired">

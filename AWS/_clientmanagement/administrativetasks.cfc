@@ -99,7 +99,6 @@ FROM[v_clientadministrativetasks]
 WHERE ISNULL([cas_status],0) != 2
 AND ISNULL([cas_status],0) != 3
 AND [client_active]=(1)
-AND [cas_active]=(1)
 AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>

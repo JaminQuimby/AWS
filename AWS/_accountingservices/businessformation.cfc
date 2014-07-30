@@ -185,7 +185,6 @@ FROM[v_businessformation]
 WHERE ISNULL([bf_status],0) != 2 
 AND ISNULL([bf_status],0) != 3
 AND [client_active]=(1)
-AND [bf_active]=(1)
 AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -227,7 +226,6 @@ SELECT[bfs_id]
 FROM[v_businessformation_subtask]
 WHERE [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> 
 AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
-AND [bfs_active]=(1)
 AND [deleted] IS NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy) >ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[bfs_taskname]</cfif></cfquery>
 <cfset myResult="">

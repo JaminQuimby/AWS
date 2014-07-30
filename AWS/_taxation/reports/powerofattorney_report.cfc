@@ -53,7 +53,6 @@ SELECT[pa_id]
 ,[pa_dateofrevocation]=FORMAT(pa_dateofrevocation,'#Session.localization.formatdate#')
 FROM[v_powerofattorney]
 WHERE[client_active]=(1)
-AND [pa_active]=(1)
 AND [deleted] IS NULL
 
 <cfset sqllist = "pa_dateofrevocation,pa_datesenttoirs,pa_datesignedbyclient,pa_preparers,pa_status,pa_taxforms,pa_taxmatters,pa_taxyears">

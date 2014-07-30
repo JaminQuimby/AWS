@@ -410,14 +410,20 @@ var grid8_config = [
 	"fields":{N_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
-			,NST_1_NOTICEDATE:{title:'Notice Date',width:"1%"}
-			,NST_MISSINGINFO:{title:'Missing Information',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
+			,N_STATUSTEXT:{title:'Matter Status'}
+			,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}
+			,NST_1_TAXFORMTEXT:{title:'Tax Form'}
+			,NST_1_NOTICENUMBERTEXT:{title:'Notice Number'}
+			,NST_STATUSTEXT:{title:'Notice Status'}
+			,NST_MISSINGINFO:{title:'Missing Information',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_1_DATENOTICEREC:{title:'Date Notice Received',width:'2%'}
+			,NST_1_RESDUEDATE:{title:'Response Due Date',width:'2%'}
+			,NST_2_RESSUBMITED:{title:'Response Submitted',width:'2%'}
+			,NST_2_REVREQUIRED:{title:'Review Required',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
+			,NST_FEES:{title:'Fees'}
+			,NST_PAIDTEXT:{title:'Payment Status'}
 			,NST_PRIORITY:{title:'Priority'}
-			,NST_ASSIGNEDTOTEXT:{title:'Assigned To'}
-			,NST_1_RESDUEDATE:{title:'Response Due'}
 			,NST_ESTTIME:{title:'Estimated Time'}
-			,NST_2_REVREQUIRED:{title:'Review Required',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
-			,NST_2_REVASSIGNEDTOTEXT:{title:'Review Assigned To'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g8_filter").val(),grid8_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group8","formid":"8"}',
