@@ -5,10 +5,11 @@ var _run={
 	,new_group2:function(){
 	$("#group2").accordion({active:1});
 	$("#subtask1_id").val(0);
-	_addNewTask({"new":"subtask1_id"});
+	_addNewTask({"new":"subtask1_id"});$("#subtask_isLoaded").val(1);
 	_clearfields({"list":"g2_sequence,g2_duedate,g2_completed,g2_estimatedtime,g2_actualtime,g2_note,g2_subtask,g2_subtaskcustom,g2_assignedto,g2_status,g2_dependancy"});}
 	,load_group1:function(params){var options={'open':false};$.extend(true,options,params);_grid1();if(options['open']==true){_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass().addClass("contentbig");$("#group1").accordion({active:0});}if(options['open']==false){_toggle("entrance,smallMenu");_hide("group1,largeMenu");$("#content").removeClass().addClass("contentsmall");$("#group1").accordion({active:0});}}
-	,load_group2:function(params){
+	,load_group2:function(params){$("#subtask_isLoaded").val(1);
+
 
 	
 
@@ -39,7 +40,7 @@ _grid1=function(){_jGrid({
 	"url":"acctingconsulting.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
 	"fields":{MC_ID:{key:true,list:false,edit:false}
-		,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
+			,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
