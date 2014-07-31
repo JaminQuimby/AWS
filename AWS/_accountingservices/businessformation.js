@@ -2,7 +2,7 @@ $(document).ready(function(){_grid1();});
 
 var _run={
 	  new_group1:function(){document.getElementById("content").className="contentbig";_loadit({"query":{"COLUMNS":["G1_STATUS"],"DATA":[[4]]},"list":"g1_status","page":"businessformation"});_toggle("group1,largeMenu");_hide("entrance");_addNewTask();}
-	 ,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_clearfields({"list":"g2_task,g2_dateinitiated,g2_completed,g2_esttime,g2_assignedto"});}
+	 ,new_group2:function(){$("#group2").accordion({active:1});$("#isLoaded_group2").val(1);$("#subtask1_id").val(0);_clearfields({"list":"g2_task,g2_status,g2_dateinitiated,g2_completed,g2_esttime,g2_assignedto"});}
 	 ,load_group1:function(){_grid1();}
 	 ,load_group1_1:function(){if($("#isLoaded_group1_1").val()=="0"){_loadData({"id":"task_id","group":"group1_1","page":"businessformation"});$("#isLoaded_group1_1").val(1);}}
 	 ,load_group1_2:function(){if($("#isLoaded_group1_2").val()=="0"){_loadData({"id":"task_id","group":"group1_2","page":"businessformation"});$("#isLoaded_group1_2").val(1);}}
@@ -46,6 +46,7 @@ _grid2=function(){_jGrid({
 		,BFS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
         ,BFS_DATEINITIATED:{title:'Date Initiated',width:'2%'}
 		,BFS_DATECOMPLETED:{title:'Date Completed',width:'2%'}
+ 		,BFS_STATUSTEXT:{title:'Status'}			
 		,BFS_ESTIMATEDTIME:{title:'Estimated Time'}
 		},
 	"method":"f_lookupData",
@@ -65,7 +66,7 @@ switch(query.COLUMNS[0]){
 /*Group1_3*/case "BF_MINUTESBYLAWSDRAFT":var list='g1_g3_minutesbylawsdraft,g1_g3_minutesbylawsfinal,g1_g3_minutescompleted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_4*/case "BF_DISSOLUTIONCOMPLETED":var list='g1_g4_disolutioncompleted,g1_g4_dissolutionrequested,g1_g4_dissolutionsubmitted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*Group1_5*/case "BF_OTHERACTIVITY":var list='g1_g5_otheractivity,g1_g5_othercompleted,g1_g5_otherstarted';_loadit({"query":query,"list":list,"page":"businessformation"});break;
-/*Group2*/case "BFS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_dateinitiated,g2_esttime,g2_task';_loadit({"query":query,"list":list,"page":"businessformation"});break;
+/*Group2*/case "BFS_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_dateinitiated,g2_esttime,g2_status,g2_task';_loadit({"query":query,"list":list,"page":"businessformation"});break;
 /*AssetCreditHold*/case "CLIENT_CREDIT_HOLD":var list='g1_credithold';_loadit({"query":query,"list":list});break;
 default:if(query!=""){var list=_pluginLoadData(query.COLUMNS[0]);_loadit({"query":query,"list":list})}
 else{jqMessage({message: "Error in js._loadDataCB, Query is empty",type: "error",autoClose: false})}}}}
@@ -214,6 +215,7 @@ $("#g2_assignedto").val()+'","'+
 $("#g2_completed").val()+'","'+
 $("#g2_dateinitiated").val()+'","'+
 $("#g2_esttime").val()+'","'+
+$("#g2_status").val()+'","'+
 $("#g2_task").val()+'","'+
 '"]]}'
 if($("#isLoaded_group2").val()!=0){

@@ -5,21 +5,21 @@
 <!--- f_loadSelect = get select data--->
 <!--- [LOAD FUNCTIONs] --->
 <!--- 
-SELECT TOP 1000 [cas_id]
+SELECT TOP 1000 [as_id]
       ,[client_id]
-      ,[cas_assignedto]
-      ,[cas_category]
-      ,[cas_completed]
-      ,[cas_datereqested]
-      ,[cas_datestarted]
-      ,[cas_duedate]
-      ,[cas_esttime]
-      ,[cas_instructions]
-      ,[cas_priority]
-      ,[cas_reqestby]
-      ,[cas_status]
-      ,[cas_taskdesc]
-  FROM [AWS].[dbo].[clientadministrativetasks]
+      ,[as_assignedto]
+      ,[as_category]
+      ,[as_completed]
+      ,[as_datereqested]
+      ,[as_datestarted]
+      ,[as_duedate]
+      ,[as_esttime]
+      ,[as_instructions]
+      ,[as_priority]
+      ,[as_reqestby]
+      ,[as_status]
+      ,[as_taskdesc]
+  FROM [AWS].[dbo].[administrativetasks]
   --->
 
 
@@ -32,23 +32,23 @@ SELECT TOP 1000 [cas_id]
 <!--- Load GROUP1--->
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-SELECT[cas_id]
+SELECT[as_id]
 ,[client_id]
-,[cas_assignedto]
-,[cas_category]
-,[cas_completed]=FORMAT(cas_completed,'#Session.localization.formatdate#') 
-,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
-,[cas_datestarted]=FORMAT(cas_datestarted,'#Session.localization.formatdate#') 
-,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
-,[cas_esttime]
-,[cas_instructions]
-,[cas_priority]
-,[cas_reqestby]
-,[cas_status]
-,[cas_taskdesc]
-,[cas_workinitiated]
-FROM[v_clientadministrativetasks]
-WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+,[as_assignedto]
+,[as_category]
+,[as_completed]=FORMAT(as_completed,'#Session.localization.formatdate#') 
+,[as_datereqested]=FORMAT(as_datereqested,'#Session.localization.formatdate#') 
+,[as_datestarted]=FORMAT(as_datestarted,'#Session.localization.formatdate#') 
+,[as_duedate]=FORMAT(as_duedate,'#Session.localization.formatdate#') 
+,[as_esttime]
+,[as_instructions]
+,[as_priority]
+,[as_reqestby]
+,[as_status]
+,[as_taskdesc]
+,[as_workinitiated]
+FROM[v_administrativetasks]
+WHERE[as_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
@@ -83,42 +83,42 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <!--- LOOKUP GROUP1 --->
 <cfcase value="group1">
 <cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT [cas_id]
+SELECT [as_id]
 ,[client_id]
 ,[client_name]
-,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
-,[cas_assignedto]
-,[cas_category]
-,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
-,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
-,[cas_status]
-,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
-,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
-,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
-FROM[v_clientadministrativetasks]
-WHERE ISNULL([cas_status],0) != 2
-AND ISNULL([cas_status],0) != 3
+,[as_duedate]=FORMAT(as_duedate,'#Session.localization.formatdate#') 
+,[as_assignedto]
+,[as_category]
+,[as_datereqested]=FORMAT(as_datereqested,'#Session.localization.formatdate#') 
+,CASE WHEN LEN([as_taskdesc]) >= 101 THEN SUBSTRING([as_taskdesc],0,100) +  '...' ELSE [as_taskdesc] END AS[as_taskdesc]
+,[as_status]
+,as_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](as_assignedto)))FOR XML PATH('')),3,1000)
+,as_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[as_category]=[optionvalue_id])
+,as_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[as_status]=[optionvalue_id])
+FROM[v_administrativetasks]
+WHERE ISNULL([as_status],0) != 2
+AND ISNULL([as_status],0) != 3
 AND [client_active]=(1)
 AND [deleted] IS NULL
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
-<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, cas_duedate, 101) ASC </cfif>
+<cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, as_duedate, 101) ASC </cfif>
 </cfquery>
 <cfset myResult="">
 <cfset queryResult="">
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
+<cfset queryResult=queryResult&'{"AS_ID":"'&AS_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
-								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
-								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
-								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
-								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"	
+								,"AS_CATEGORYTEXT":"'&AS_CATEGORYTEXT&'"
+								,"AS_TASKDESC":"'&AS_TASKDESC&'"
+								,"AS_DUEDATE":"'&AS_DUEDATE&'"
+								,"AS_STATUSTEXT":"'&AS_STATUSTEXT&'"
+								,"AS_ASSIGNEDTOTEXT":"'&AS_ASSIGNEDTOTEXT&'"
+								,"AS_DATEREQESTED":"'&AS_DATEREQESTED&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -147,21 +147,21 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 
 <cfif j.DATA[1][1] eq "0">
 <cfquery name="fquery" datasource="#Session.organization.name#">
-INSERT INTO[clientadministrativetasks](
+INSERT INTO[administrativetasks](
 [client_id]
-,[cas_assignedto]
-,[cas_category]
-,[cas_completed]
-,[cas_datereqested]
-,[cas_datestarted]
-,[cas_duedate]
-,[cas_esttime]
-,[cas_instructions]
-,[cas_priority]
-,[cas_reqestby]
-,[cas_status]
-,[cas_taskdesc]
-,[cas_workinitiated]
+,[as_assignedto]
+,[as_category]
+,[as_completed]
+,[as_datereqested]
+,[as_datestarted]
+,[as_duedate]
+,[as_esttime]
+,[as_instructions]
+,[as_priority]
+,[as_reqestby]
+,[as_status]
+,[as_taskdesc]
+,[as_workinitiated]
 )
 VALUES(
 <cfqueryparam value="#j.DATA[1][2]#"/>
@@ -179,29 +179,29 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 )
-SELECT SCOPE_IDENTITY()AS[cas_id]
+SELECT SCOPE_IDENTITY()AS[as_id]
 </cfquery>
-<cfreturn '{"id":#fquery.cas_id#,"group":"plugins","result":"ok"}'>
+<cfreturn '{"id":#fquery.as_id#,"group":"plugins","result":"ok"}'>
 </cfif>
 
 <cfif #j.DATA[1][1]# neq "0">
 <cfquery name="fquery" datasource="#Session.organization.name#">
-UPDATE[clientadministrativetasks]
+UPDATE[administrativetasks]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[cas_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq 'null'#"/>
-,[cas_category]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[cas_completed]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[cas_datereqested]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[cas_datestarted]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[cas_duedate]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[cas_esttime]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[cas_instructions]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[cas_priority]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[cas_reqestby]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[cas_status]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[cas_taskdesc]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[cas_workinitiated]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-WHERE[cas_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
+,[as_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0 or j.DATA[1][3] eq 'null'#"/>
+,[as_category]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[as_completed]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[as_datereqested]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[as_datestarted]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[as_duedate]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[as_esttime]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[as_instructions]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[as_priority]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[as_reqestby]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[as_status]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[as_taskdesc]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[as_workinitiated]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+WHERE[as_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"plugins","result":"ok"}'>
 </cfif>
@@ -222,9 +222,9 @@ WHERE[cas_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 <!--- Load Group1--->
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
-update[clientadministrativetasks]
+update[administrativetasks]
 SET[deleted]=GETDATE()
-WHERE[cas_id]=<cfqueryparam value="#ARGUMENTS.id#">
+WHERE[as_id]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group0","result":"ok"}'>
 </cfcase>

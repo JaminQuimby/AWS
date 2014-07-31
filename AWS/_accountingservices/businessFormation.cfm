@@ -112,6 +112,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
     <div>
     	<div><label for="g2_task">Task Name</label><input type="text" id="g2_task" maxlength="40"  /></div>
 		<div><label for="g2_assignedto">Assigned To</label><select id="g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+		<div><label for="g2_status"> Status</label><select  id="g2_status"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 		<div><label for="g2_dateinitiated">Date Initiated</label><input type="text" id="g2_dateinitiated" class="date"/></div>
 		<div><label for="g2_completed">Date Completed</label><input type="text" id="g2_completed"  class="date" /></div>
 		<div><label for="g2_esttime">Estimated Time</label><input type="text" maxlength="6"  placeholder="0" id="g2_esttime"  /></div>

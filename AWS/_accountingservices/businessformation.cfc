@@ -131,6 +131,7 @@ SELECT[bfs_id]
 ,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'#Session.localization.formatdate#') 
 ,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'#Session.localization.formatdate#') 
 ,[bfs_estimatedtime]
+,[bfs_status]
 ,[bfs_taskname]
 FROM[businessformation_subtask]
 WHERE[bfs_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -223,6 +224,7 @@ SELECT[bfs_id]
 ,[bfs_dateinitiated]=FORMAT(bfs_dateinitiated,'#Session.localization.formatdate#')
 ,[bfs_datecompleted]=FORMAT(bfs_datecompleted,'#Session.localization.formatdate#')
 ,[bfs_estimatedtime]
+,[bfs_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[bfs_status]=[optionvalue_id])
 FROM[v_businessformation_subtask]
 WHERE [bf_id]=<cfqueryparam value="#ARGUMENTS.ID#"/> 
 AND[bfs_taskname]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/> 
@@ -236,6 +238,7 @@ AND [deleted] IS NULL
 <cfset queryResult=queryResult&'{"BFS_ID":"'&BFS_ID&'"
 								,"BFS_TASKNAME":"'&BFS_TASKNAME&'"
 								,"BFS_ASSIGNEDTOTEXT":"'&BFS_ASSIGNEDTOTEXT&'"
+								,"BFS_STATUSTEXT":"'&BFS_STATUSTEXT&'"
 								,"BFS_DATEINITIATED":"'&BFS_DATEINITIATED&'"
 								,"BFS_DATECOMPLETED":"'&BFS_DATECOMPLETED&'"
 								,"BFS_ESTIMATEDTIME":"'&BFS_ESTIMATEDTIME&'"
@@ -448,6 +451,7 @@ INSERT INTO[businessformation_subtask]([bf_id]
 ,[bfs_datecompleted]
 ,[bfs_dateinitiated]
 ,[bfs_estimatedtime]
+,[bfs_status]
 ,[bfs_taskname]
 )
 VALUES(
@@ -457,6 +461,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#" />
 ,<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -476,7 +481,8 @@ SET[bf_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[bfs_datecompleted]=<cfqueryparam value="#j.DATA[1][4]#" NULL="#LEN(j.DATA[1][4]) eq 0#"/>
 ,[bfs_dateinitiated]=<cfqueryparam value="#j.DATA[1][5]#" NULL="#LEN(j.DATA[1][5]) eq 0#"/>
 ,[bfs_estimatedtime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[bfs_status]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[bfs_taskname]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 WHERE[bfs_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <cfreturn '{"subtask1_id":#j.DATA[1][2]#,"group":"plugins","result":"ok"}'>

@@ -134,19 +134,19 @@ _grid4_2=function(){_jGrid({
 	"grid":"grid4_2",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Administrative Tasks",
-	"fields":{CAS_ID:{key:true,list:false,edit:false}
+	"fields":{AS_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
- 			,CAS_CATEGORYTEXT:{title:'Category'}
-			,CAS_TASKDESC:{title:'Description'}
-			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
-			,CAS_STATUSTEXT:{title:'Status'}
-			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
-			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}					
+ 			,AS_CATEGORYTEXT:{title:'Category'}
+			,AS_TASKDESC:{title:'Description'}
+			,AS_DUEDATE:{title:'Due Date',width:'1%'}
+			,AS_STATUSTEXT:{title:'Status'}
+			,AS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
+			,AS_DATEREQESTED:{title:'Date Requested',width:'1%'}					
 		},			
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":'+$("#client_id").val()+',"loadType":"group4_2","formid":"4"}',
-	"functions":'$("#task_id").val(record.CAS_ID); window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.CAS_ID,\'WIPPOP\');'
+	"functions":'$("#task_id").val(record.AS_ID); window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.AS_ID,\'WIPPOP\');'
 })};
 
 _grid4_3=function(){_jGrid({
@@ -346,8 +346,8 @@ _grid4_11=function(){_jGrid({
 			,TR_4_EXTENDED:{title:'PPTR Extended',width:'2%'}
 			,TR_4_COMPLETED:{title:'Completed',width:'2%'}
 			,TR_TAXYEAR:{title:'Year',width:'2%'}
-			,TR_TAXFORM:{title:'Form'}
-			,TR_PRIORITY:{title:'Information Received',width:'2%'}
+			,TR_TAXFORMTEXT:{title:'Form'}
+			,TR_2_INFORMATIONRECEIVED:{title:'Information Received',width:'2%'}
 			,TR_4_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
 			,TR_4_PPTRESTTIME:{title:'Estimated Time',width:'2%'}
 			,TR_4_RFR:{title:'Ready For Review',width:'2%'}

@@ -374,20 +374,20 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfcase value="group4_2">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT [cas_id]
+SELECT [as_id]
 ,[client_id]
 ,[client_name]
-,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
-,[cas_assignedto]
-,[cas_category]
-,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
-,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
-,[cas_status]
-,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
-,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
-,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
+,[as_duedate]=FORMAT(as_duedate,'#Session.localization.formatdate#') 
+,[as_assignedto]
+,[as_category]
+,[as_datereqested]=FORMAT(as_datereqested,'#Session.localization.formatdate#') 
+,CASE WHEN LEN([as_taskdesc]) >= 101 THEN SUBSTRING([as_taskdesc],0,100) +  '...' ELSE [as_taskdesc] END AS[as_taskdesc]
+,[as_status]
+,[as_assignedtoTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](as_assignedto)))FOR XML PATH('')),3,1000)
+,[as_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[as_category]=[optionvalue_id])
+,[as_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[as_status]=[optionvalue_id])
 
-FROM[v_clientadministrativetasks]
+FROM[v_administrativetasks]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -396,15 +396,15 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
+<cfset queryResult=queryResult&'{"AS_ID":"'&AS_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
-								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
-								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
-								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
-								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"	
+								,"AS_CATEGORYTEXT":"'&AS_CATEGORYTEXT&'"
+								,"AS_TASKDESC":"'&AS_TASKDESC&'"
+								,"AS_DUEDATE":"'&AS_DUEDATE&'"
+								,"AS_STATUSTEXT":"'&AS_STATUSTEXT&'"
+								,"AS_ASSIGNEDTOTEXT":"'&AS_ASSIGNEDTOTEXT&'"
+								,"AS_DATEREQESTED":"'&AS_DATEREQESTED&'"	
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -614,6 +614,7 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 								,"FDS_PERIODEND":"'&FDS_PERIODEND&'"
 								,"FDS_DUEDATE":"'&FDS_DUEDATE&'"
 								,"FDS_STATUSTEXT":"'&FDS_STATUSTEXT&'"
+								,"FDS_COMPILEMI":"'&FDS_COMPILEMI&'"
 								,"FDS_MISSINGINFO":"'&FDS_MISSINGINFO&'"
 								,"FDS_OBTAININFO":"'&fds_obtaininfo_datecompleted&'<br/>'&fds_obtaininfo_assignedtoTEXT&'"
 								,"FDS_SORT":"'&fds_sort_datecompleted&'<br/>'&fds_sort_assignedtoTEXT&'"
@@ -896,8 +897,8 @@ SELECT[tr_id]
 ,[tr_4_extended]=FORMAT(tr_4_extended,'#Session.localization.formatdate#') 
 ,[tr_4_completed]=FORMAT(tr_4_completed,'#Session.localization.formatdate#') 
 ,[tr_taxyear]
-,[tr_taxform]
-,[tr_priority]
+,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
+,[tr_2_informationreceived]=FORMAT(tr_2_informationreceived,'#Session.localization.formatdate#')
 ,[tr_4_assignedtoTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(tr_4_assignedto=user_id))
 ,[tr_4_pptresttime]
 ,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#') 
@@ -917,8 +918,8 @@ WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 								,"TR_4_EXTENDED":"'&TR_4_EXTENDED&'"
 								,"TR_4_COMPLETED":"'&TR_4_COMPLETED&'"
 								,"TR_TAXYEAR":"'&TR_TAXYEAR&'"
-								,"TR_TAXFORM":"'&TR_TAXFORM&'"
-								,"TR_PRIORITY":"'&TR_PRIORITY&'"
+								,"TR_TAXFORMTEXT":"'&TR_TAXFORMTEXT&'"
+								,"TR_2_INFORMATIONRECEIVED":"'&TR_2_INFORMATIONRECEIVED&'"
 								,"TR_4_ASSIGNEDTOTEXT":"'&TR_4_ASSIGNEDTOTEXT&'"
 								,"TR_4_PPTRESTTIME":"'&TR_4_PPTRESTTIME&'"
 								,"TR_4_RFR":"'&TR_4_RFR&'"
@@ -946,10 +947,10 @@ SELECT[pa_id]
 ,[pa_taxmatters]
 ,[client_name]
 ,[client_id]
-,pa_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[pa_status]=[optionvalue_id])
-,pa_taxformsTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxservices') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxforms)))FOR XML PATH('')),3,1000)
-,pa_taxmattersTEXT=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxmatters') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxmatters)))FOR XML PATH('')),3,1000)
-,pa_preparersTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
+,[pa_statusTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[pa_status]=[optionvalue_id])
+,[pa_taxformsTEXT]=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxservices') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxforms)))FOR XML PATH('')),3,1000)
+,[pa_taxmattersTEXT]=SUBSTRING((SELECT', '+[optionName]FROM[v_selectOptions]WHERE(form_id='0'OR[form_id]='#ARGUMENTS.formid#')AND(optionGroup='1'OR[optionGroup]='0')AND(selectName='global_taxmatters') AND(CAST([optionValue_id]AS nvarchar(5))IN(SELECT[id]FROM[CSVToTable](pa_taxmatters)))FOR XML PATH('')),3,1000)
+,[pa_preparersTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](pa_preparers)))FOR XML PATH('')),3,1000)
 FROM[v_powerofattorney]
 WHERE[client_id]LIKE <cfqueryparam value="#ARGUMENTS.ID#%"/>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
@@ -1117,17 +1118,12 @@ AND NOT[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.loadType#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
 </cftry>
-
 </cfcase>
-
-
 </cfswitch>
 <cfcatch>
 	<!--- CACHE ERRORS DEBUG CODE --->
 <cfreturn '{"Result":"Error","Records":["ERROR":"#cfcatch.message#","id":"#arguments.client_id#","MESSAGE":"#cfcatch.detail#"]}'> 
 </cfcatch>
-
-
 </cftry>
 </cffunction>
 
@@ -1507,7 +1503,6 @@ WHERE[contact_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfif>
 </cfcase>
 
-
 <!--- State Information --->
 <cfcase value="group5">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
@@ -1623,7 +1618,6 @@ WHERE[client_id]=<cfqueryparam value="#j.DATA[1][1]#">
 </cfif>
 <cfreturn '{"id":#j.DATA[1][1]#,"group":"group6","result":"ok"}'>
 </cfcase>
-
 
 <!--- Client Relations --->
 <cfcase value="group6">

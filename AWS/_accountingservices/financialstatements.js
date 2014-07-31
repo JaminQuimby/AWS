@@ -77,7 +77,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year,g1_credithold';_loadit({"query":query,"list":list});_run.load_assets();break;
+/*Group1*/case "FDS_ID":var list='task_id,client_id,g1_assignedto,g1_cmireceived,g1_compilemi,g1_deliverymethod,g1_duedate,g1_esttime,g1_fees,g1_mireceived,g1_missinginfo,g1_month,g1_paymentstatus,g1_periodend,g1_priority,g1_status,g1_year,g1_credithold';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "FDS_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_datecompleted,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "FDS_SORT_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_datecompleted,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "FDS_CHECKS_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_datecompleted,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -134,6 +134,7 @@ break;
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
+$("#g1_assignedto").val()+'","'+
 $("#g1_cmireceived").val()+'",'+
 $("#g1_compilemi").is(':checked')+',"'+
 $("#g1_deliverymethod").val()+'","'+

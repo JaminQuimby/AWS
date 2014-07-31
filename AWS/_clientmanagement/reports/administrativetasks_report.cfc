@@ -33,26 +33,26 @@ SELECT[user_id]AS[optionvalue_id],[si_initials]AS[optionname]FROM[v_staffinitial
 <cfcase value="group0">
 <cftry>
 <cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[cas_id]
-,[cas_duedate]=FORMAT(cas_duedate,'#Session.localization.formatdate#') 
-,cas_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](cas_assignedto)))FOR XML PATH('')),3,1000)
-,cas_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[cas_category]=[optionvalue_id])
-,cas_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[cas_status]=[optionvalue_id])
-,[cas_datereqested]=FORMAT(cas_datereqested,'#Session.localization.formatdate#') 
-,[cas_datestarted]=FORMAT(cas_datestarted,'#Session.localization.formatdate#') 
-,[cas_completed]=FORMAT(cas_completed,'#Session.localization.formatdate#') 
-,CASE WHEN LEN([cas_taskdesc]) >= 101 THEN SUBSTRING([cas_taskdesc],0,100) +  '...' ELSE [cas_taskdesc] END AS[cas_taskdesc]
-,CASE WHEN LEN([cas_instructions]) >= 101 THEN SUBSTRING([cas_instructions],0,100) +  '...' ELSE [cas_instructions] END AS[cas_instructions]
-,[cas_priority]
-,[cas_esttime]
+SELECT[as_id]
+,[as_duedate]=FORMAT(as_duedate,'#Session.localization.formatdate#') 
+,as_assignedtoTEXT=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](as_assignedto)))FOR XML PATH('')),3,1000)
+,as_categoryTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_admintaskcategory'AND[as_category]=[optionvalue_id])
+,as_statusTEXT=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_status'AND[as_status]=[optionvalue_id])
+,[as_datereqested]=FORMAT(as_datereqested,'#Session.localization.formatdate#') 
+,[as_datestarted]=FORMAT(as_datestarted,'#Session.localization.formatdate#') 
+,[as_completed]=FORMAT(as_completed,'#Session.localization.formatdate#') 
+,CASE WHEN LEN([as_taskdesc]) >= 101 THEN SUBSTRING([as_taskdesc],0,100) +  '...' ELSE [as_taskdesc] END AS[as_taskdesc]
+,CASE WHEN LEN([as_instructions]) >= 101 THEN SUBSTRING([as_instructions],0,100) +  '...' ELSE [as_instructions] END AS[as_instructions]
+,[as_priority]
+,[as_esttime]
 ,[client_name]
 ,[client_id]
-FROM[v_clientadministrativetasks]
+FROM[v_administrativetasks]
 WHERE[client_active]=(1)
 AND [deleted] IS NULL
 
-<cfset sqllist = "cas_assignedto,cas_category,cas_completed,cas_datereqested,cas_datestarted,cas_duedate,cas_esttime,cas_instructions,cas_priority,cas_reqestby,cas_status,cas_taskdesc">
-<cfset key="cas_">
+<cfset sqllist = "as_assignedto,as_category,as_completed,as_datereqested,as_datestarted,as_duedate,as_esttime,as_instructions,as_priority,as_reqestby,as_status,as_taskdesc">
+<cfset key="as_">
 <cfif IsJSON(SerializeJSON(#ARGUMENTS.search#))>
 <cfset data=#ARGUMENTS.search#>
 <cfif ArrayLen(data.b) gt 0>
@@ -99,20 +99,20 @@ AND(1)=(1)
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CAS_ID":"'&CAS_ID&'"
+<cfset queryResult=queryResult&'{"AS_ID":"'&AS_ID&'"
 								,"CLIENT_ID":"'&CLIENT_ID&'"
 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
-								,"CAS_CATEGORYTEXT":"'&CAS_CATEGORYTEXT&'"
-								,"CAS_TASKDESC":"'&CAS_TASKDESC&'"
-								,"CAS_DUEDATE":"'&CAS_DUEDATE&'"
-								,"CAS_STATUSTEXT":"'&CAS_STATUSTEXT&'"
-								,"CAS_ASSIGNEDTOTEXT":"'&CAS_ASSIGNEDTOTEXT&'"
-								,"CAS_DATEREQESTED":"'&CAS_DATEREQESTED&'"
-								,"CAS_DATESTARTED":"'&CAS_DATESTARTED&'"
-								,"CAS_COMPLETED":"'&CAS_COMPLETED&'"	
-								,"CAS_INSTRUCTIONS":"'&CAS_INSTRUCTIONS&'"
-								,"CAS_PRIORITY":"'&CAS_PRIORITY&'"
-								,"CAS_ESTTIME":"'&CAS_ESTTIME&'"
+								,"AS_CATEGORYTEXT":"'&AS_CATEGORYTEXT&'"
+								,"AS_TASKDESC":"'&AS_TASKDESC&'"
+								,"AS_DUEDATE":"'&AS_DUEDATE&'"
+								,"AS_STATUSTEXT":"'&AS_STATUSTEXT&'"
+								,"AS_ASSIGNEDTOTEXT":"'&AS_ASSIGNEDTOTEXT&'"
+								,"AS_DATEREQESTED":"'&AS_DATEREQESTED&'"
+								,"AS_DATESTARTED":"'&AS_DATESTARTED&'"
+								,"AS_COMPLETED":"'&AS_COMPLETED&'"	
+								,"AS_INSTRUCTIONS":"'&AS_INSTRUCTIONS&'"
+								,"AS_PRIORITY":"'&AS_PRIORITY&'"
+								,"AS_ESTTIME":"'&AS_ESTTIME&'"
 
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>

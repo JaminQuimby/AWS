@@ -27,21 +27,21 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"administrativetasks_report.cfc",
 	"title":"Administrative Tasks Report",
-	"fields":{CAS_ID:{key:true,list:false,edit:false}
+	"fields":{AS_ID:{key:true,list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
-			,CAS_CATEGORYTEXT:{title:'Category'}
-			,CAS_TASKDESC:{title:'Description'}
-			,CAS_DUEDATE:{title:'Due Date',width:'2%'}
-			,CAS_STATUSTEXT:{title:'Status',width:'2%'}
-			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
-			,CAS_DATEREQESTED:{title:'Date Requested',width:'2%'}
-			,CAS_DATESTARTED:{title:'Date Started',width:'2%'}
- 			,CAS_COMPLETED:{title:'Completed',width:'2%'}
-			,CAS_INSTRUCTIONS:{title:'Instructions'}
-			,CAS_PRIORITY:{title:'Priority'}
-			,CAS_ESTTIME:{title:'Estimated Time'}
+			,AS_CATEGORYTEXT:{title:'Category'}
+			,AS_TASKDESC:{title:'Description'}
+			,AS_DUEDATE:{title:'Due Date',width:'2%'}
+			,AS_STATUSTEXT:{title:'Status',width:'2%'}
+			,AS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
+			,AS_DATEREQESTED:{title:'Date Requested',width:'2%'}
+			,AS_DATESTARTED:{title:'Date Started',width:'2%'}
+ 			,AS_COMPLETED:{title:'Completed',width:'2%'}
+			,AS_INSTRUCTIONS:{title:'Instructions'}
+			,AS_PRIORITY:{title:'Priority'}
+			,AS_ESTTIME:{title:'Estimated Time'}
 			},
  	"method":"f_lookupData",
 	"arguments":'{"search":'+_toReport($("#g0_filter").val(),grid1_config)+',"orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group0","formid":"4"}',
-	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.CAS_ID,\'WIPPOP\');'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.AS_ID,\'WIPPOP\');'
 	})};

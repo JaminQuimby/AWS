@@ -516,7 +516,7 @@ input { font-family: 'FontAwesome'; }
  <label for="j_password">Password:</label>
  <input type="password" name="j_password" id="j_password" placeholder="&##xf023;  Password" max="20" >
 
-<div class="buttonbox"><input type="submit" value="Log In"> | <a href="##" onClick="_run.reset_password()">Forgot Password</a></div>
+<div class="buttonbox"><input type="submit" value="Log In" onClick="#this.url#/AWS/_PracticeManagement/workinprogress.cfm"> | <a href="##" onClick="_run.reset_password()">Forgot Password</a></div>
 </form>
 </div>
 </cfif>
