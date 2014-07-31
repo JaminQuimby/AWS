@@ -110,11 +110,10 @@ SELECT[mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 FROM[v_managementconsulting]
-WHERE ISNULL([mc_status],0) != 2 
-AND ISNULL([mc_status],0) != 3
-AND [deleted] IS NULL
-AND [client_active]=(1)
-AND [mc_active]=(1)
+WHERE 
+([client_active]=(1)AND[deleted] IS NULL)AND
+ISNULL([mc_status],0)NOT IN('2','3') 
+
 <cfif ARGUMENTS.search neq "">
 AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfif> 
