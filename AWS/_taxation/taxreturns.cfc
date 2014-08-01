@@ -92,6 +92,7 @@ SELECT[tr_id]
 ,[tr_priorfees]=FORMAT(tr_priorfees,'C','#Session.localization.language#')
 ,[tr_priority]
 ,[tr_reason]
+,[tr_status]
 ,[tr_taxform]
 ,[tr_taxyear]
 ,[tr_3_multistatereturn]
@@ -323,6 +324,7 @@ WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[tr_id]
 ,[tr_taxyear]
 ,[tr_taxform]
+,[tr_status]
 ,[tr_taxformTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_taxservices'AND[tr_taxform]=[optionvalue_id])
 ,[tr_duedate]=FORMAT(tr_duedate,'#Session.localization.formatdate#') 
 ,[tr_missinginfo]
@@ -466,7 +468,7 @@ AND[trsc_status]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfcase value="group1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][10])><cfset j.DATA[1][10]=1><cfelse><cfset j.DATA[1][10]=0></cfif>
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][12])><cfset j.DATA[1][12]=1><cfelse><cfset j.DATA[1][12]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][18])><cfset j.DATA[1][18]=1><cfelse><cfset j.DATA[1][18]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][19])><cfset j.DATA[1][19]=1><cfelse><cfset j.DATA[1][19]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -486,6 +488,7 @@ INSERT INTO[taxreturns](
 ,[tr_priorfees]
 ,[tr_priority]
 ,[tr_reason]
+,[tr_status]
 ,[tr_taxform]
 ,[tr_taxyear]
 ,[tr_3_multistatereturn]
@@ -508,6 +511,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -537,9 +541,10 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tr_priorfees]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[tr_priority]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,[tr_reason]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[tr_taxform]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
-,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
-,[tr_3_multistatereturn]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+,[tr_status]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[tr_taxform]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
+,[tr_taxyear]=<cfqueryparam value="#j.DATA[1][18]#" null="#LEN(j.DATA[1][18]) eq 0#"/>
+,[tr_3_multistatereturn]=<cfqueryparam value="#j.DATA[1][19]#" null="#LEN(j.DATA[1][19]) eq 0#"/>
 WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

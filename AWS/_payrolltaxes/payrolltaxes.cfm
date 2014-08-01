@@ -73,6 +73,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_lastpay"><i class="fa fa-lock link" ></i> Last Pay</label><input type="text" class="date" id="g1_lastpay" disabled="disabled"></div>
 <div><label for="g1_state">State</label><select id="g1_state" ><option value="0">&nbsp;</option><cfoutput query="global_state"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_type"><i class="fa fa-lock link"></i> Return Type</label><select id="g1_type" disabled="disabled"></option><option value="0">&nbsp;</option><cfoutput query="global_returntypes"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g1_assignedto">Assigned To</label><select  id="g1_assignedto" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 <div><label for="g1_priority">Priority</label><input type="text" maxlength="2" placeholder="0" id="g1_priority"  class="valid_off" onblur="jqValid({'type':'rationalNumbers','object':this,'message':'This field must be a whole number.'});"></div>
 <div><label for="g1_estimatedtime">Estimated Time</label><input type="text" maxlength="6" placeholder="0" id="g1_estimatedtime" ></div>

@@ -92,7 +92,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "TR_ID":var list='task_id,client_id,g1_currentfees,g1_duedate,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_filingdeadline,g1_g2_informationreceived,g1_missinginformation,g1_missinginforeceived,g1_notrequired,g1_priorfees,g1_priority,g1_reason,g1_taxform,g1_taxyear,g1_g3_multistatereturn';_loadit({"query":query,"list":list});_run.load_assets();break; 
+/*Group1*/case "TR_ID":var list='task_id,client_id,g1_currentfees,g1_duedate,g1_esttime,g1_extensiondone,g1_extensionrequested,g1_filingdeadline,g1_g2_informationreceived,g1_missinginformation,g1_missinginforeceived,g1_notrequired,g1_priorfees,g1_priority,g1_reason,g1_status,g1_taxform,g1_taxyear,g1_g3_multistatereturn';_loadit({"query":query,"list":list});_run.load_assets();break; 
 /*Group1_1*/case "TR_1_DROPOFFAPPOINTMENT":var list='g1_g1_dropoffappointment,g1_g1_dropoffappointmentlength,g1_g1_dropoffappointmentwith,g1_g1_pickupappointment,g1_g1_pickupappointmentlength,g1_g1_pickupappointmentwith,g1_g1_whileyouwaitappt';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "TR_2_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_preparedby,g1_g2_readyforreview';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "TR_2_COMPLETED":var list='g1_g2_completed,g1_g2_reviewassignedto,g1_g2_reviewed,g1_g2_reviewedby,g1_g2_reviewedwithnotes';_loadit({"query":query,"list":list});break;
@@ -131,6 +131,7 @@ $("#g1_notrequired").is(':checked')+',"'+
 $("#g1_priorfees").val().replace(/([$,])/g, '')+'","'+
 $("#g1_priority").val()+'","'+
 $("#g1_reason").val()+'","'+
+$("#g1_status").val()+'","'+
 $("#g1_taxform").val()+'","'+
 $("#g1_taxyear").val()+'",'+
 $("#g1_g3_multistatereturn").is(':checked')+',"'+

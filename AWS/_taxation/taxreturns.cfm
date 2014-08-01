@@ -71,6 +71,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_credithold"><input id="g1_credithold" type="checkbox" class="ios-switchb" disabled="disabled">Credit Hold</label></div>
     <div><label for="g1_taxyear"><i class="fa fa-lock link" ></i> Tax Year</label><select  id="g1_taxyear"><option value="0">&nbsp;</option><cfoutput query="global_years"><cfif optionvalue_id neq year(now())><option value="#optionvalue_id#">#optionname#</option><cfelse><option value="#optionvalue_id#" selected="selected">#optionname#</option></cfif></cfoutput></select></div>
 	<div><label for="g1_taxform"><i class="fa fa-lock link" ></i> Tax Form</label><select  id="g1_taxform"><option value="0">&nbsp;</option><cfoutput query="global_taxservices"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	<div><label for="g1_status">Status</label><select id="g1_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
  	<div><label for="g1_g3_multistatereturn"><input id="g1_g3_multistatereturn" type="checkbox" class="ios-switch">Multistate Return</label></div> 
     <div><label for="g1_notrequired"><input id="g1_notrequired" type="checkbox" class="ios-switch">Not Required</label></div>
 	<div><label for="g1_reason">Reason</label><input type="text" maxlength="100" id="g1_reason" ></div>

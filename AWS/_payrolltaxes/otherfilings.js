@@ -46,7 +46,7 @@ if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request w
 else{
 switch(query.COLUMNS[0]){
 /*Group1_State*/case"OF_STATE":var list='g1_state'; _loadit({"query":query,"list":list});_loadSelect({'selectName':'global_otherfilingsforms','selectObject':'g1_form','option1':$('#g1_state').val(),'page':'otherfilings'});_loadData({"id":"task_id","group":"group1","page":"otherfilings"});break;
-/*Group1*/case "OF_ID":var list='task_id,client_id,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_type,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_run.load_assets();break;
+/*Group1*/case "OF_ID":var list='task_id,client_id,g1_assignedto,g1_deliverymethod,g1_duedate,g1_estimatedtime,g1_extensioncompleted,g1_extensiondeadline,g1_fees,g1_filingdeadline,g1_form,g1_missinginforeceived,g1_missinginformation,g1_paymentstatus,g1_period,g1_priority,g1_state,g1_status,g1_type,g1_taxyear,g1_credithold';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "OF_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "OF_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "OF_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -68,6 +68,7 @@ case'':_saveDataCB({'group':'group1'});break;
 case'group1':var json='{"DATA":[["'+
 $("#task_id").val()+'","'+
 $("#client_id").val()+'","'+
+$("#g1_assignedto").val()+'","'+
 $("#g1_deliverymethod").val()+'","'+
 $("#g1_duedate").val()+'","'+
 $("#g1_estimatedtime").val()+'","'+

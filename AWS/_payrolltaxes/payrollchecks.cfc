@@ -50,6 +50,7 @@ AND[pc_paydate]=<cfqueryparam value="#item[4]#">
 SELECT[PC_ID]
 ,[client_id]
 ,[pc_altfreq]
+,[pc_assignedto]
 ,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
 ,[pc_deliverymethod]
 ,[pc_esttime]
@@ -176,6 +177,7 @@ WHERE[PC_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pc_id]
 ,[pc_year]
+,[pc_assignedto]
 ,[pc_duedate]=FORMAT(pc_duedate,'#Session.localization.formatdate#') 
 ,[pc_missinginfo]
 ,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
@@ -246,7 +248,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <!--- Group1 --->
 <cfcase value="group1">
 <cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][3])><cfset j.DATA[1][3]=1><cfelse><cfset j.DATA[1][3]=0></cfif>
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
@@ -254,6 +256,7 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 INSERT INTO[payrollcheckstatus](
 [client_id]
 ,[pc_altfreq]
+,[pc_assignedto]
 ,[pc_duedate]
 ,[pc_deliverymethod]
 ,[pc_esttime]
@@ -280,6 +283,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -297,17 +301,18 @@ SELECT SCOPE_IDENTITY()AS[id]
 UPDATE[payrollcheckstatus]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_altfreq]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[pc_duedate]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pc_deliverymethod]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[pc_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[pc_fees]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[pc_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[pc_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[pc_paydate]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[pc_payenddate]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[pc_paid]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[pc_priority]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[pc_year]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[pc_assignedto]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[pc_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[pc_deliverymethod]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[pc_esttime]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[pc_fees]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[pc_missinginfo]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[pc_missinginforeceived]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[pc_paydate]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[pc_payenddate]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[pc_paid]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[pc_priority]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[pc_year]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

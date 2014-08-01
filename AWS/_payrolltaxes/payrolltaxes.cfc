@@ -49,6 +49,7 @@ AND[pt_type]=<cfqueryparam value="#item[5]#">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT[PT_ID]
 ,[client_id]
+,[pt_assignedto]
 ,[pt_deliverymethod]
 ,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#')
 ,[pt_esttime]
@@ -188,29 +189,30 @@ WHERE[PT_ID]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group0">
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[pt_id]
-		,[pt_year]
-		,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
-		,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#') 
-		,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
-		,[pt_lastpay]=FORMAT(pt_lastpay,'#Session.localization.formatdate#') 
-		,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
-		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#') 
-		,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_obtaininfo_assignedtoTEXT]
-		,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_entry_assignedtoTEXT]
-		,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_rec_assignedtoTEXT]
-		,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_review_assignedtoTEXT]
-		,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_assembly_assignedtoTEXT]
-		,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
-		,[pt_delivery_assignedtoTEXT]
-		,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#')
-	 	,[pt_missinginfo]
-		,[client_name]
-	,[client_id]
+,[pt_year]
+,[pt_assignedto]
+,[pt_stateTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_state'AND[pt_state]=[optionvalue_id])
+,[pt_duedate]=FORMAT(pt_duedate,'#Session.localization.formatdate#') 
+,[pt_monthTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_month'AND[pt_month]=[optionvalue_id])
+,[pt_lastpay]=FORMAT(pt_lastpay,'#Session.localization.formatdate#') 
+,[pt_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_returntypes'AND[pt_type]=[optionvalue_id])
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#') 
+,[pt_obtaininfo_datecompleted]=ISNULL(FORMAT(pt_obtaininfo_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_obtaininfo_assignedtoTEXT]
+,[pt_entry_datecompleted]=ISNULL(FORMAT(pt_entry_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_entry_assignedtoTEXT]
+,[pt_rec_datecompleted]=ISNULL(FORMAT(pt_rec_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_rec_assignedtoTEXT]
+,[pt_review_datecompleted]=ISNULL(FORMAT(pt_review_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_review_assignedtoTEXT]
+,[pt_assembly_datecompleted]=ISNULL(FORMAT(pt_assembly_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_assembly_assignedtoTEXT]
+,[pt_delivery_datecompleted]=ISNULL(FORMAT(pt_delivery_datecompleted,'#Session.localization.formatdate#'),'N/A')
+,[pt_delivery_assignedtoTEXT]
+,[pt_missinginforeceived]=FORMAT(pt_missinginforeceived,'#Session.localization.formatdate#')
+,[pt_missinginfo]
+,[client_name]
+,[client_id]
 FROM[v_payrolltaxes]
 WHERE[pt_delivery_datecompleted] IS NULL
 AND [deleted] IS NULL
@@ -226,21 +228,21 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
 <cfset queryResult=queryResult&'{"PT_ID":"'&PT_ID&'"
- 									,"CLIENT_NAME":"'&CLIENT_NAME&'"
-									,"PT_YEAR":"'&PT_YEAR&'"
-									,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
-									,"PT_STATETEXT":"'&PT_STATETEXT&'"
-									,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
- 									,"PT_LASTPAY":"'&PT_LASTPAY&'"
-  									,"PT_DUEDATE":"'&PT_DUEDATE&'"
-	 								,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
-	 								,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
-									,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"
-									,"PT_ENTRY":"'&pt_entry_datecompleted&'<br/>'&pt_entry_assignedtoTEXT&'"
-									,"PT_REC":"'&pt_rec_datecompleted&'<br/>'&pt_rec_assignedtoTEXT&'"
-									,"PT_REVIEW":"'&pt_review_datecompleted&'<br/>'&pt_review_assignedtoTEXT&'"
-									,"PT_ASSEMBLY":"'&pt_assembly_datecompleted&'<br/>'&pt_assembly_assignedtoTEXT&'"
-									,"PT_DELIVERY":"'&pt_delivery_datecompleted&'<br/>'&pt_delivery_assignedtoTEXT&'"
+ 								,"CLIENT_NAME":"'&CLIENT_NAME&'"
+								,"PT_YEAR":"'&PT_YEAR&'"
+								,"PT_MONTHTEXT":"'&PT_MONTHTEXT&'"
+								,"PT_STATETEXT":"'&PT_STATETEXT&'"
+								,"PT_TYPETEXT":"'&PT_TYPETEXT&'"
+ 								,"PT_LASTPAY":"'&PT_LASTPAY&'"
+  								,"PT_DUEDATE":"'&PT_DUEDATE&'"
+	 							,"PT_MISSINGINFO":"'&PT_MISSINGINFO&'"
+	 							,"PT_MISSINGINFORECEIVED":"'&PT_MISSINGINFORECEIVED&'"
+								,"PT_OBTAININFO":"'&pt_obtaininfo_datecompleted&'<br/>'&pt_obtaininfo_assignedtoTEXT&'"
+								,"PT_ENTRY":"'&pt_entry_datecompleted&'<br/>'&pt_entry_assignedtoTEXT&'"
+								,"PT_REC":"'&pt_rec_datecompleted&'<br/>'&pt_rec_assignedtoTEXT&'"
+								,"PT_REVIEW":"'&pt_review_datecompleted&'<br/>'&pt_review_assignedtoTEXT&'"
+								,"PT_ASSEMBLY":"'&pt_assembly_datecompleted&'<br/>'&pt_assembly_assignedtoTEXT&'"
+								,"PT_DELIVERY":"'&pt_delivery_datecompleted&'<br/>'&pt_delivery_assignedtoTEXT&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
@@ -267,13 +269,14 @@ AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 </cfcase>
 <!--- Group1 --->
 <cfcase value="group1">
-<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][8])><cfset j.DATA[1][8]=1><cfelse><cfset j.DATA[1][8]=0></cfif>
+<cfif ListFindNoCase('YES,TRUE,ON',j.DATA[1][9])><cfset j.DATA[1][9]=1><cfelse><cfset j.DATA[1][9]=0></cfif>
 <!--- if this is a new record, then insert it--->
 <cfif j.DATA[1][1] eq "0">
 <cftry>
 <cfquery name="fquery" datasource="#Session.organization.name#">
 INSERT INTO[payrolltaxes](
 [client_id]
+,[pt_assignedto]
 ,[pt_deliverymethod]
 ,[pt_duedate]
 ,[pt_esttime]
@@ -303,6 +306,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 ) 
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -319,19 +323,20 @@ SELECT SCOPE_IDENTITY()AS[id]
 <cfquery name="fquery" datasource="#Session.organization.name#">
 UPDATE[payrolltaxes]
 SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
-,[pt_deliverymethod]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[pt_duedate]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[pt_esttime]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[pt_fees]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[pt_lastpay]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[pt_missinginfo]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[pt_missinginforeceived]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[pt_month]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[pt_paid]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[pt_priority]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[pt_state]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
-,[pt_type]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[pt_year]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[pt_assignedto]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[pt_deliverymethod]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[pt_duedate]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[pt_esttime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[pt_fees]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[pt_lastpay]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[pt_missinginfo]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+,[pt_missinginforeceived]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
+,[pt_month]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
+,[pt_paid]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[pt_priority]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[pt_state]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
+,[pt_type]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[pt_year]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>
