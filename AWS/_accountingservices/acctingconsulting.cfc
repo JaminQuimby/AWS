@@ -158,7 +158,6 @@ END)
 FROM[v_managementconsulting_subtask]
 WHERE ISNULL([mcs_status],0) !=2
 AND ISNULL([mcs_status],0) !=3
-AND [mcs_active]=(1)
 AND [deleted] IS NULL
 AND[mc_id]= <cfqueryparam value="#ARGUMENTS.ID#"/>
 
