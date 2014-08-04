@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"cfi",
+				"cfif"
+			],
+			[
 				"c",
 				"cfif"
 			],
@@ -31,7 +35,7 @@
 			"file": "AWS/_practicemanagement/workinprogress.cfc",
 			"settings":
 			{
-				"buffer_size": 88059,
+				"buffer_size": 89438,
 				"line_ending": "Windows"
 			}
 		},
@@ -180,7 +184,7 @@
 	],
 	"find":
 	{
-		"height": 23.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -194,6 +198,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"]\n",
+			"active",
 			"mcs_active",
 			"<",
 			"_addNewTas",
@@ -244,15 +250,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 88059,
+						"buffer_size": 89438,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								25320,
-								25320
+								33557,
+								33557
 							]
 						],
 						"settings":
@@ -263,7 +269,7 @@
 							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 5790.0,
+						"translation.y": 7965.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

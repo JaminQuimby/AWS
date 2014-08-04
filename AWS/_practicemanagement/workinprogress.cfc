@@ -136,6 +136,26 @@ INNER JOIN [payrolltaxes]as[t]ON t.client_id = c.client_id and t.deleted is null
 WHERE([client_active]='1'and[c].[deleted]is null )
 and(pt_status not in ('2','3') or pt_status is null))
 
+,cte_taxreturns_personalproperty AS(
+SELECT[t].tr_id,c.client_id,tr_4_assignedto,tr_3_delivered,tr_duedate,client_group,count_tr_id=ROW_NUMBER()OVER(PARTITION BY t.tr_id ORDER BY t.tr_id),tr_4_pptresttime
+FROM[client_listing]AS[c]
+INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null
+WHERE([client_active]='1'and[c].[deleted]is null )
+and(tr_status not in ('2','3') or tr_status is null)
+and(tr_4_required='TRUE')
+and(tr_taxyear=Year(getdate())-1 OR Year(tr_2_informationreceived)=Year(getdate())))
+
+, cte_taxreturns AS(
+SELECT[t].tr_id,c.client_id,tr_notrequired,tr_2_reviewassignedto,tr_3_delivered,tr_2_readyforreview,tr_2_reviewedwithnotes,tr_2_assignedto,tr_duedate,client_group,count_tr_id=ROW_NUMBER()OVER(PARTITION BY t.tr_id ORDER BY t.tr_id),tr_esttime
+FROM[client_listing]AS[c]
+INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null
+WHERE([client_active]='1'and[c].[deleted]is null )
+and(tr_status not in ('2','3') or tr_status is null)
+and([tr_notrequired]!=(1)
+and(tr_3_delivered is Null)
+)
+)
+
 
 
 SELECT 'Accounting and Consulting'AS[name]
@@ -494,74 +514,58 @@ OR(pt_delivery_assignedto=@u AND[pt_assembly_datecompleted]IS NOT NULL))
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
-/*
+UNION 
 
-
-
-
-
-
-
-
-UNION
-SELECT'Personal Property Tax Returns'AS[name]
+SELECT 'Personal Property Tax Returns'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,SUM(DISTINCT CASE WHEN ISNULL( tr_4_assignedto ,0)=@u  THEN ISNULL([tr_4_pptresttime],0) ELSE 0 END)AS[total_time]
-,COUNT(DISTINCT CASE WHEN ISNULL(tr_4_assignedto,0)=@u THEN[tr_id]ELSE NULL END)AS[count_assigned]
-,(0)AS[total_subtask_time]
-,(0)AS[count_subtask_assigned]
+,total_time = sum (CASE WHEN tr_4_assignedto  = @u and count_tr_id = 1 THEN tr_4_pptresttime ELSE 0 END)
+,count_assigned = count( CASE WHEN tr_4_assignedto  = @u and count_tr_id = 1 THEN 1 ELSE NULL END) 
+,total_subtask_time = 0
+,count_subtask_assigned = 0
 <cfelse>
-,SUM(DISTINCT  ISNULL([tr_4_pptresttime],0) )AS[total_time]
-,COUNT(DISTINCT[tr_id])AS[count_assigned]
-,(0)AS[total_subtask_time]
-,(0)AS[count_subtask_assigned]
+,total_time = sum (CASE WHEN  count_tr_id = 1 THEN tr_4_pptresttime ELSE 0 END)
+,count_assigned = count( CASE WHEN  count_tr_id = 1 THEN 1 ELSE NULL END) 
+,total_subtask_time = 0
+,count_subtask_assigned = 0
 </cfif>
-
 ,'K'AS[orderit]
-FROM[v_taxreturns]
-
-WHERE
-([deleted] IS NULL AND[client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-OR(
-([deleted] IS NULL AND[client_active]=(1)AND[tr_active]=(1)AND[tr_4_required]='TRUE'AND[tr_4_delivered]IS NULL)
-	AND[tr_3_delivered] IS NULL AND([tr_taxyear]=Year(getdate())-1 OR Year([tr_2_informationreceived])=Year(getdate())))
-
+ FROM cte_taxreturns_personalproperty
+ WHERE (1)=(1)
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
-<cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]IS NULL OR[tr_4_assignedto]=@u</cfif>
+<cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]=@u</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
-UNION
-SELECT'Tax Returns'AS[name]
+UNION 
 
+SELECT 'Tax Returns'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
-,COUNT(tr_id)AS[count_assigned]
-,(0)AS[total_subtask_time]
+,total_time = sum (CASE WHEN tr_2_assignedto = @u and count_tr_id = 1 THEN tr_esttime ELSE NULL END)
 
-,COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NULL THEN[tr_id]ELSE NULL END)
-+COUNT(DISTINCT CASE WHEN ISNULL(tr_2_reviewassignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NULL THEN[tr_id]ELSE NULL END)
-+COUNT(DISTINCT CASE WHEN ISNULL(tr_2_assignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NOT NULL THEN[tr_id]ELSE NULL END)
-AS[count_subtask_assigned]
+,count_assigned = 
+COUNT(CASE WHEN count_tr_id = 1  AND tr_2_assignedto=@u AND [tr_2_readyforreview] IS NULL THEN 1 ELSE NULL END
++CASE WHEN count_tr_id = 1 AND tr_2_reviewassignedto=@u AND [tr_2_reviewedwithnotes] IS NULL THEN 1 ELSE NULL END
++CASE WHEN count_tr_id = 1 AND tr_2_assignedto=@u AND [tr_2_reviewedwithnotes] IS NOT NULL THEN 1 ELSE NULL END)
 
-
+,total_subtask_time = 0
+,count_subtask_assigned = 0
 <cfelse>
-,ISNULL(SUM(ISNULL(tr_esttime,0)),0)AS[total_time]
-,COUNT(tr_id)AS[count_assigned]
-,(0)AS[total_subtask_time]
 
-,COUNT(tr_2_assignedto)AS[count_subtask_assigned]
+
+,total_time = sum (CASE WHEN  count_tr_id = 1 THEN tr_esttime ELSE NULL END)
+,count_assigned = count( CASE WHEN  count_tr_id = 1 THEN 1 ELSE NULL END) 
+,total_subtask_time = 0
+,count_subtask_assigned = 0
 </cfif>
 
 ,'L'AS[orderit]
-FROM[v_taxreturns]
-WHERE[deleted] IS NULL AND[client_active]=(1)AND[tr_active]=(1)AND([tr_notrequired]!=(1)AND[tr_3_delivered]IS NULL)
+ FROM cte_taxreturns
+ WHERE (1)=(1)
+AND([tr_notrequired]!=(1)AND[tr_3_delivered]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
-<cfif ARGUMENTS.userid neq "0">
-
-AND(
+<cfif ARGUMENTS.userid neq "0">AND(
 (ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NULL)
-OR(ISNULL(tr_2_reviewassignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NULL AND  [tr_2_readyforreview] IS NOT NULL)
+OR(ISNULL(tr_2_reviewassignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NULL AND [tr_2_readyforreview] IS NOT NULL)
 OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_reviewedwithnotes] IS NOT NULL)
 OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NOT NULL AND ISNULL(tr_2_reviewassignedto,0) =0 )
 )
@@ -570,7 +574,6 @@ OR(ISNULL(tr_2_assignedto,0)=@u AND [tr_2_readyforreview] IS NOT NULL AND ISNULL
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
-*/
 </cfquery>
 
 
@@ -1642,9 +1645,9 @@ SELECT[tr_id]
 ,[tr_2_reviewedwithnotes]=FORMAT(tr_2_reviewedwithnotes,'#Session.localization.formatdate#') 
 FROM[v_taxreturns]
 WHERE[client_active]=(1)
-AND [tr_active]=(1)
+AND([tr_notrequired]!=(1)AND[tr_3_delivered]IS NULL)
 AND [deleted] IS NULL
-AND([tr_3_delivered]IS NULL )
+
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
