@@ -159,19 +159,19 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"workinprogress.cfc",	
 	"title":"Administrative Tasks",
-	"fields":{CAS_ID:{key:true,list:false,edit:false}
+	"fields":{AS_ID:{key:true,list:false,edit:false}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
- 			,CAS_CATEGORYTEXT:{title:'Category'}
-			,CAS_TASKDESC:{title:'Description'}
-			,CAS_DUEDATE:{title:'Due Date',width:'1%'}
-			,CAS_STATUSTEXT:{title:'Status'}
-			,CAS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
-			,CAS_DATEREQESTED:{title:'Date Requested',width:'1%'}							
+ 			,AS_CATEGORYTEXT:{title:'Category'}
+			,AS_TASKDESC:{title:'Description'}
+			,AS_DUEDATE:{title:'Due Date',width:'1%'}
+			,AS_STATUSTEXT:{title:'Status'}
+			,AS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'1%'}						
+			,AS_DATEREQESTED:{title:'Date Requested',width:'1%'}							
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"","orderBy":"0","row":"0","ID":"0","loadType":"group3","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"4"}',
-	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.CAS_ID,\'WIPPOP\')'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/administrativetasks.cfm?task_id="+record.AS_ID,\'WIPPOP\')'
 	
 	
 
