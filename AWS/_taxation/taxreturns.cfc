@@ -96,7 +96,6 @@ SELECT[tr_id]
 ,[tr_taxform]
 ,[tr_taxyear]
 ,[tr_3_multistatereturn]
-,[tr_credithold]
 FROM[v_taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>

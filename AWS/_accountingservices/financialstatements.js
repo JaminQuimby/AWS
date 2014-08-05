@@ -66,6 +66,7 @@ _grid2=function(){_jGrid({
 			,FDSS_STATUSTEXT:{title:'Status'}
 			,FDSS_ASSIGNEDTOTEXT:{title:'Assigned To'}
 			,FDSS_COMPLETED:{title:'Completed'}
+			,FDSS_ESTTIME:{title:'Estimated Time'}
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"5"}',
