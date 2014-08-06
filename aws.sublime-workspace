@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"acct_d",
+				"fds_acctrpt_datecompleted"
+			],
+			[
 				"cfi",
 				"cfif"
 			],
@@ -35,34 +39,7 @@
 			"file": "AWS/_practicemanagement/workinprogress.cfc",
 			"settings":
 			{
-				"buffer_size": 89438,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "/*Developer: Jamin Quimby*/\n//prototype \nString.prototype.replaceAll = function (find, replace){var str = this; return str.replace(new RegExp(find.replace(/[-\\/\\\\^$*+?.()|[\\]{}]/g, '\\\\$&'), 'g'), replace)};\nString.prototype.has = function(text) { return this.toLowerCase().indexOf(\"\" + text.toLowerCase() + \"\") != -1; };\nString.prototype.insert = function (index, string) {if (index > 0) return this.substring(0, index) + string + this.substring(index, this.length); else return string + this;};\nArray.prototype.removeValue = function(name, value){var array = $.map(this, function(v,i){return v[name] === value ? null : v;});this.length = 0;this.push.apply(this, array);}\nString.prototype.escapeIt = function(text) {return text.replace(/[-[\\]{}()*+?.,\\\\^$|#\"]/g, \"\\\\$&\")};\nDate.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(this.getMonth()+1).toString(),dd=this.getDate().toString();return(mm[1]?mm:\"0\"+mm[0])+'/'+(dd[1]?dd:\"0\"+dd[0])+'/'+yyyy};\n\n/**/\n(function(a){\n	jQuery.sessionTimeout=function(b){\n		function f(a){\n			switch(a){\n				case\"start\":redirTimer=setTimeout(function(){window.location=d.redirUrl},d.redirAfter-d.warnAfter);break;\n				case\"stop\":clearTimeout(redirTimer);break}}\n		function e(b){\n			switch(b){\n				case\"start\":dialogTimer=setTimeout(function(){a(\"#sessionTimeout-dialog\").dialog(\"open\");f(\"start\")},d.warnAfter);break;\n				case\"stop\":clearTimeout(dialogTimer);break}}\n\nvar c={\n	message:\"Your session is about to expire.\"\n	,keepAliveUrl:\"https://\"+window.location.hostname+\"/assets/module/login/loginform.cfm?time=true\"\n	,redirUrl:\"https://\"+window.location.hostname+\"/assets/module/login/loginform.cfm\"\n	,logoutUrl:\"https://\"+window.location.hostname+\"/assets/module/login/loginform.cfm\"\n	,warnAfter:1200000,redirAfter:1170000};\n	var d=c;\n\nif(b){var d=a.extend(c,b)}\nif($('#sessionTimeout-dialog').length == 0) {\na(\"body\").append('<div title=\"Session Timeout\" id=\"sessionTimeout-dialog\">'+d.message+\"</div>\");\n}\n\na(\"#sessionTimeout-dialog\").dialog({autoOpen:false,width:400,modal:true,closeOnEscape:false,open:function(b,c){a(\".ui-dialog-titlebar-close\").hide()}\n	  	,buttons:{\"Log Out Now\":function(){window.location=d.logoutUrl}\n			,\"Stay Connected\":function(){a(this).dialog(\"close\");\n				a.ajax({type:\"POST\",url:d.keepAliveUrl});f(\"stop\");e(\"start\")}}});e(\"start\")}})(jQuery)\n\n\n\n//Localisation \nvar debug=false;\n$(document).ready(function(){\n\n\n	\n$.sessionTimeout({\n    redirAfter:1170000,\n    warnAfter:1200000,\n\n});\n\n\n$.ajaxSetup({cache:false});//Stop ajax caching\n$.datepicker.setDefaults({showOn:\"button\",buttonImageOnly:true,buttonImage:\"https://\"+window.location.hostname+\"/AWS/assets/img/datepicker.gif\",showButtonPanel:true,constrainInput:true});\n$(\".datetime\").datetimepicker({timeFormat: 'hh:mmtt',dateFormat: 'mm/dd/yy'}).mask('00/00/0000 00:00:00');\n$(\".date\").datepicker({ dateFormat: \"mm/dd/yy\" }).mask('00/00/0000');\n$(\".time\").timepicker().mask('00:00:00');\n$('.phone').mask('(000) 000-0000');\n$('select').chosen();\n$('.gf-checkbox').hide();\n$('#entrance').show();\n$('.gf-checkbox').accordion({collapsible:true,heightStyle:\"content\",active:false,active:0});\n\n$('.accordianclose').hide();\nvar icons=$('.gf-checkbox').accordion( \"option\", \"icons\" );\n$('.accordianopen').click(function(){\n	$('.ui-accordion-header').removeClass('ui-corner-all').addClass('ui-accordion-header-active ui-state-active ui-corner-top').attr({'aria-selected': 'true','tabindex': '0'});\n	$('.ui-accordion-header-icon').removeClass(icons.header).addClass(icons.headerSelected);\n	$('.ui-accordion-content').addClass('ui-accordion-content-active').attr({'aria-expanded': 'true','aria-hidden': 'false'}).show();\n	$(this).attr(\"disabled\",\"disabled\");\n	$('.accordianclose').removeAttr(\"disabled\");\n	$('.accordianopen').hide();\n	$('.accordianclose').show();\n	});\n$('.accordianclose').click(function(){\n	$('.ui-accordion-header').removeClass('ui-accordion-header-active ui-state-active ui-corner-top').addClass('ui-corner-all').attr({'aria-selected': 'false','tabindex': '-1'});\n	$('.ui-accordion-header-icon').removeClass(icons.headerSelected).addClass(icons.header);\n	$('.ui-accordion-content').removeClass('ui-accordion-content-active').attr({'aria-expanded': 'false','aria-hidden': 'true'}).hide();\n	$(this).attr(\"disabled\",\"disabled\");\n	$('.accordianopen').removeAttr(\"disabled\");\n	$('.accordianopen').show();\n	$('.accordianclose').hide();\n	});\n$('.ui-accordion-header').click(function(){\n	$('.accordianopen').removeAttr(\"disabled\");\n	$('.accordianclose').removeAttr(\"disabled\");\n        \n	});\n$( \"<div class='switch'></div>\" ).insertAfter( \".ios-switch,.ios-switchb\" );\n	\n\n\n\n_lock=function(e){\nif(debug==true){window.console.log('_lock : Loading');}\ne=$('.fa-lock');\n	target=e.parent().parent()\n	target.find('input').attr('disabled','disabled');\n	target.find('input.hasDatepicker').datepicker(\"disable\");\n	target.find('select').attr('disabled','disabled').trigger(\"chosen:updated\");\na=false\nswitch(page.module){\ncase'_payrolltaxes':if(user.g_payrolltaxes){a=true};break;\ncase'_accountingservices':if(user.g_accountingservices){a=true};break;\ncase'_taxation':if(user.g_taxation){a=true};break;\ncase'_clientmanagement':if(user.g_clientmanagement){a=true};break;\ncase'_maintenance':if(user._maintenance){a=true};break;\n}\n\nif(a==true){\n	e.click(function( event ) {target=$( event.target )\n		target.parent().find('i').removeClass('fa-lock').addClass('fa-unlock');\n		target.parent().parent().find('input').removeAttr('disabled');\n		target.parent().parent().find('input.hasDatepicker').datepicker(\"enable\");\n		target.parent().parent().find('select').removeAttr('disabled').trigger(\"chosen:updated\")});\n}\n}\n\n\n_lock();\n/*\n_toCSV2=function($table, filename) {\n\n        var $rows = $table.find('tr:has(td)'),\n\n            tmpColDelim = String.fromCharCode(11), // vertical tab character\n            tmpRowDelim = String.fromCharCode(0), // null character\n            colDelim = '\",\"',\n            rowDelim = '\"\\r\\n\"',\n            csv = '\"' + $rows.map(function (i, row) {\n                var $row = $(row),\n                    $cols = $row.find('td');\n\n                return $cols.map(function (j, col) {\n                    var $col = $(col),\n                        text = $col.text();\n\n                    return text.replace('\"', '\"\"'); // escape double quotes\n\n                }).get().join(tmpColDelim);\n\n            }).get().join(tmpRowDelim)\n                .split(tmpRowDelim).join(rowDelim)\n                .split(tmpColDelim).join(colDelim) + '\"',\n\n            // Data URI\n            csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);\n			window.location=\"data:application/csv;charset=utf-8,\" + encodeURIComponent(csv)\n\n        $(this)\n            .attr({\n            'download': filename,\n                'href': csvData,\n                'target': '_blank'\n        });\n		\n    }\n\n    // This must be a hyperlink\n    $(\".export\").on('click', function (event) {\n        _toCSV.apply(this, [$('#'+$table+'>table'), 'export.xls']);\n    });\n*/\n\n\n});\n\n\n\n(function($, window){\n// i'll just put them here to get evaluated on script load\nvar htmlSpecialCharsRegEx = /[<>&\\r\\n\"']/gm;\nvar htmlSpecialCharsPlaceHolders = {\n'<': 'lt;',\n'>': 'gt;',\n'&': 'amp;',\n'\\r': \"#13;\",\n'\\n': \"#10;\",\n'\"': 'quot;',\n\"'\": 'apos;' /*single quotes just to be safe*/\n};\n\n$.extend({\n  fileDownload: function (fileUrl, options) {\n        var settings = $.extend({\n			preparingMessageHtml: null,\n            failMessageHtml: null,\n            androidPostUnsupportedMessageHtml: \"Unfortunately your Android browser doesn't support this type of file download. Please try again with a different browser.\",\n            dialogOptions: { modal: true },\n            prepareCallback: function (url) { },\n            successCallback: function (url) { },\n            failCallback: function (responseHtml, url) { },\n            httpMethod: \"POST\",\n            data: null,\n            checkInterval: 100,\n            cookieName: \"fileDownload\",\n            cookieValue: \"true\",\n            cookiePath: \"/\",\n            popupWindowTitle: \"Initiating file download...\",\n            encodeHTMLEntities: true\n        }, options)\n		,deferred=new $.Deferred()\n		,userAgent=(navigator.userAgent || navigator.vendor || window.opera).toLowerCase()\n		,isIos\n		,isAndroid\n		,isOtherMobileBrowser;\n\n        if (/ip(ad|hone|od)/.test(userAgent)){isIos = true;} \n		else if (userAgent.indexOf('android') !== -1) {isAndroid = true;} \n		else {isOtherMobileBrowser = /avantgo|bada\\/|blackberry|blazer|compal|elaine|fennec|hiptop|playbook|silk|iemobile|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\/|plucker|pocket|psp|symbian|treo|up\\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(userAgent) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\\-(n|u)|c55\\/|capi|ccwa|cdm\\-|cell|chtm|cldc|cmd\\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\\-s|devi|dica|dmob|do(c|p)o|ds(12|\\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\\-|_)|g1 u|g560|gene|gf\\-5|g\\-mo|go(\\.w|od)|gr(ad|un)|haie|hcit|hd\\-(m|p|t)|hei\\-|hi(pt|ta)|hp( i|ip)|hs\\-c|ht(c(\\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\\-(20|go|ma)|i230|iac( |\\-|\\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\\/)|klon|kpt |kwc\\-|kyo(c|k)|le(no|xi)|lg( g|\\/(k|l|u)|50|54|e\\-|e\\/|\\-[a-w])|libw|lynx|m1\\-w|m3ga|m50\\/|ma(te|ui|xo)|mc(01|21|ca)|m\\-cr|me(di|rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\\-2|po(ck|rt|se)|prox|psio|pt\\-g|qa\\-a|qc(07|12|21|32|60|\\-[2-7]|i\\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\\-|oo|p\\-)|sdk\\/|se(c(\\-|0|1)|47|mc|nd|ri)|sgh\\-|shar|sie(\\-|m)|sk\\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\\-|v\\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\\-|tdg\\-|tel(i|m)|tim\\-|t\\-mo|to(pl|sh)|ts(70|m\\-|m3|m5)|tx\\-9|up(\\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|xda(\\-|2|g)|yas\\-|your|zeto|zte\\-/i.test(userAgent.substr(0, 4));\n        }\n\n        var httpMethodUpper = settings.httpMethod.toUpperCase();\n\n        if (isAndroid && httpMethodUpper !== \"GET\") {\n            if ($().dialog) {$(\"<div>\").html(settings.androidPostUnsupportedMessageHtml).dialog(settings.dialogOptions);}\n			else {alert(settings.androidPostUnsupportedMessageHtml);}\n			return deferred.reject();\n        }\n\n        var $preparingDialog = null\n		   ,internalCallbacks = {\n				 onPrepare: function (url) {\n					if (settings.preparingMessageHtml) {\n					$preparingDialog = jqMessage({message:settings.preparingMessageHtml,\"type\":\"success\",autoClose: true});}\n					else if (settings.prepareCallback) {\n					settings.prepareCallback(url);\n					}},\n\n            onSuccess: function (url) {\n                if ($preparingDialog) {$preparingDialog.dialog('close');};\n                settings.successCallback(url);\n                deferred.resolve(url);\n            },\n\n            onFail: function (responseHtml, url) {\n                if ($preparingDialog) {$preparingDialog.dialog('close');};\n                if (settings.failMessageHtml) {\n					jqMessage({message:settings.failMessageHtml,\"type\":\"error\",autoClose: false});\n                }\n                settings.failCallback(responseHtml, url);  \n                deferred.reject(responseHtml, url);\n            }\n        };\n\n        internalCallbacks.onPrepare(fileUrl);\n        if (settings.data !== null && typeof settings.data !== \"string\") {settings.data = $.param(settings.data);}\n\n        var $iframe,\n            downloadWindow,\n            formDoc,\n            $form;\n\n        if (httpMethodUpper === \"GET\") {\n\n            if (settings.data !== null) {\n                var qsStart = fileUrl.indexOf('?');\n                if (qsStart !== -1) {\n                    if (fileUrl.substring(fileUrl.length - 1) !== \"&\") {\n                        fileUrl = fileUrl + \"&\";\n                    }\n                } else {\n\n                    fileUrl = fileUrl + \"?\";\n                }\n\n                fileUrl = fileUrl + settings.data;\n            }\n\n            if (isIos || isAndroid) {\n\n                downloadWindow = window.open(fileUrl);\n                downloadWindow.document.title = settings.popupWindowTitle;\n                window.focus();\n\n            } else if (isOtherMobileBrowser) {\n\n                window.location(fileUrl);\n\n            } else {\n\n                //create a temporary iframe that is used to request the fileUrl as a GET request\n                $iframe = $(\"<iframe>\")\n                    .hide()\n                    .prop(\"src\", fileUrl)\n                    .appendTo(\"body\");\n            }\n\n        } else {\n\n            var formInnerHtml = \"\";\n\n            if (settings.data !== null) {\n\n                $.each(settings.data.replace(/\\+/g, ' ').split(\"&\"), function () {\n\n                    var kvp = this.split(\"=\");\n\n                    var key = settings.encodeHTMLEntities ? htmlSpecialCharsEntityEncode(decodeURIComponent(kvp[0])) : decodeURIComponent(kvp[0]);\n                    if (key) {\n                        var value = settings.encodeHTMLEntities ? htmlSpecialCharsEntityEncode(decodeURIComponent(kvp[1])) : decodeURIComponent(kvp[1]);\n                    formInnerHtml += '<input type=\"hidden\" name=\"' + key + '\" value=\"' + value + '\" />';\n                    }\n                });\n            }\n\n            if (isOtherMobileBrowser) {\n\n                $form = $(\"<form>\").appendTo(\"body\");\n                $form.hide()\n                    .prop('method', settings.httpMethod)\n                    .prop('action', fileUrl)\n                    .html(formInnerHtml);\n\n            } else {\n\n                if (isIos) {\n\n                    downloadWindow = window.open(\"about:blank\");\n                    downloadWindow.document.title = settings.popupWindowTitle;\n                    formDoc = downloadWindow.document;\n                    window.focus();\n\n                } else {\n\n                    $iframe = $(\"<iframe style='display: none' src='about:blank'></iframe>\").appendTo(\"body\");\n                    formDoc = getiframeDocument($iframe);\n                }\n\n                formDoc.write(\"<html><head></head><body><form method='\" + settings.httpMethod + \"' action='\" + fileUrl + \"'>\" + formInnerHtml + \"</form>\" + settings.popupWindowTitle + \"</body></html>\");\n                $form = $(formDoc).find('form');\n            }\n\n            $form.submit();\n        }\n\n\n        //check if the file download has completed every checkInterval ms\n        setTimeout(checkFileDownloadComplete, settings.checkInterval);\n\n\n        function checkFileDownloadComplete() {\n\n            //has the cookie been written due to a file download occuring?\n            if (document.cookie.indexOf(settings.cookieName + \"=\" + settings.cookieValue) != -1) {\n\n                //execute specified callback\n                internalCallbacks.onSuccess(fileUrl);\n\n                //remove the cookie and iframe\n                document.cookie = settings.cookieName + \"=; expires=\" + new Date(1000).toUTCString() + \"; path=\" + settings.cookiePath;\n\n                cleanUp(false);\n\n                return;\n            }\n\n            //has an error occured?\n            //if neither containers exist below then the file download is occuring on the current window\n            if (downloadWindow || $iframe) {\n\n                //has an error occured?\n                try {\n\n                    var formDoc = downloadWindow ? downloadWindow.document : getiframeDocument($iframe);\n\n                    if (formDoc && formDoc.body != null && formDoc.body.innerHTML.length) {\n\n                        var isFailure = true;\n\n                        if ($form && $form.length) {\n                            var $contents = $(formDoc.body).contents().first();\n\n                            if ($contents.length && $contents[0] === $form[0]) {\n                                isFailure = false;\n                            }\n                        }\n\n                        if (isFailure) {\n                            internalCallbacks.onFail(formDoc.body.innerHTML, fileUrl);\n\n                            cleanUp(true);\n\n                            return;\n                        }\n                    }\n                }\n                catch (err) {\n\n                    //500 error less than IE9\n                    internalCallbacks.onFail('', fileUrl);\n\n                    cleanUp(true);\n\n                    return;\n                }\n            }\n\n\n            //keep checking...\n            setTimeout(checkFileDownloadComplete, settings.checkInterval);\n        }\n\n        //gets an iframes document in a cross browser compatible manner\n        function getiframeDocument($iframe) {\n            var iframeDoc = $iframe[0].contentWindow || $iframe[0].contentDocument;\n            if (iframeDoc.document) {\n                iframeDoc = iframeDoc.document;\n            }\n            return iframeDoc;\n        }\n\n        function cleanUp(isFailure) {\n\n            setTimeout(function() {\n\n                if (downloadWindow) {\n\n                    if (isAndroid) {\n                        downloadWindow.close();\n                    }\n\n                    if (isIos) {\n                        if (downloadWindow.focus) {\n                            downloadWindow.focus(); //ios safari bug doesn't allow a window to be closed unless it is focused\n                            if (isFailure) {\n                                downloadWindow.close();\n                            }\n                        }\n                    }\n                }\n                \n                //iframe cleanup appears to randomly cause the download to fail\n                //not doing it seems better than failure...\n                //if ($iframe) {\n                // $iframe.remove();\n                //}\n\n            }, 0);\n        }\n\n\n        function htmlSpecialCharsEntityEncode(str) {\n            return str.replace(htmlSpecialCharsRegEx, function(match) {\n                return '&' + htmlSpecialCharsPlaceHolders[match];\n         });\n        }\n\n        return deferred.promise();\n    }\n});\n\n})(jQuery, this);\n\n\n_toCSV=function(table,filename){\n$.fileDownload('https://'+window.location.hostname+'/AWS/assets/inc/export/excel.cfm',{data:'data='+encodeURIComponent( $('.jtable')[0].innerHTML),name:filename\n,preparingMessageHtml: \"We are preparing your report, please wait...\"\n,failMessageHtml: \"There was a problem generating your report, please try again.\"});\nreturn false;\n	  };\n	\n_duplicateCheck=function(params){\nif(debug){window.console.log('_duplicateCheck Start');}\nvar options={\"check\":\"\",\"loadType\":\"\",\"page\":\"\"},str='';\n$.extend(true,options,params);\n$.each(options['check'],function(idx,obj){\n	if($('#'+obj.item).is(':checkbox')){str=str+$('#'+obj.item).is(':checkbox')}\n	else if($('#'+obj.item).val().length == 0){str=str+\" \"}\n	else{str=str+$('#'+obj.item).val()}\n	\nif(idx!=options['check'].length -1 ){str=str+','}});\nif(debug){window.console.log('_duplicateCheck Check '+str);}\n\n$.ajax({type:'GET',async:false,data:{\"returnFormat\":\"json\",\"argumentCollection\":JSON.stringify({\"check\":\"\"+str+\"\",\"loadType\":options['loadType']})}\n,url: options['page']+'.cfc?method=f_duplicateCheck'\n,success:function(data){j=$.parseJSON(data);str=j.check;}\n,error:function(data){str=false;}\n});return str; if(debug){window.console.log('_duplicateCheck Return:'+str);}}; \n\n \n_addNewTask=function(params){\n		window.console.log('_addNewTask : Loading');\nvar options={\"new\":\"task_id\"},str='';\n$.extend(true,options,params);\n	\n	\nif($('#task_id').val()==0){\n	 $('label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');\n	 $('label').siblings(':disabled').prop('disabled', false).trigger(\"chosen:updated\");\n	 $('label').siblings('.hasDatepicker').datepicker(\"enable\");\n	 $('label').siblings(':disabled').prop('disabled', false);\n	 		\n}\nelse if($('.'+options['new']).val()==0){\n	 $('.'+options['new']+' label .fa-lock').removeClass('fa-lock').addClass('fa-unlock');\n	 $('.'+options['new']+' label').siblings(':disabled').prop('disabled', false).trigger(\"chosen:updated\");\n	 $('.'+options['new']+' label').siblings('.hasDatepicker').datepicker(\"enable\");	 \n	 $('.'+options['new']+' label').siblings(':disabled').prop('disabled', false);	 \n	}\n\n\n}\n\n\n\n\n_toReport=function(data,config){\n//Build Report Groups\n//Build a basic json object\n	var jgroup = $.parseJSON('{\"b\":[]}');\n//split human grouped input\n	group = data.split(')');\n$.each(group, function(i){	\n//FIRST GROUP\nif(group[i]!=''){\n	if(!group[i].match(/(and\\s*\\()|(or\\s*\\()/gi)){		\n	var a=group[i].replace(/^\\s\\s*/, '').replace(/\\s\\s*$/, '');\n	jgroup.b.push($.parseJSON('{\"t\":\"NONE\",\"g\":'+JSON.stringify(_toBuild(a.replace(/\\s*\\(\\s*/,''),config))+'}'))}			\n//AND GROUP\n	if(group[i].match(/\\band\\s*\\(/gi)){\n	//Remove AND and trim whitespace\n	var b=group[i].replace(/\\band\\s*\\(/gi, '').replace(/^\\s\\s*/, '').replace(/\\s\\s*$/, '')\n	jgroup.b.push($.parseJSON('{\"t\":\"AND\",\"g\":'+JSON.stringify(_toBuild(b.replace(/\\s*\\(\\s*/,''),config))+'}'))}	\n//OR GROUP\n	if(group[i].match(/\\bor\\s*\\(/gi)){\n	var c=group[i].replace(/\\bor\\s*\\(/gi, '').replace(/^\\s\\s*/, '').replace(/\\s\\s*$/, '')\n	jgroup.b.push($.parseJSON('{\"t\":\"OR\",\"g\":'+JSON.stringify(_toBuild(c.replace(/\\s*\\(\\s*/,''),config))+'}'))}\n}})\nreturn JSON.stringify(jgroup);\n\n	}\n\n\n_toBuild=function(data,config,options){\ntry{\n//Build Default Options if none provided	\nif( $.type( options ) === \"undefined\"){\nvar list='\"search\":\"\"';\n$.each(config, function(i){\nlist=list+',\"'+config[i].n+'\":\"\"';\nlist=list+',\"'+config[i].n+'_less\":\"\"';\nlist=list+',\"'+config[i].n+'_more\":\"\"';\nlist=list+',\"'+config[i].n+'_not\":\"\"';\noptions='{'+list+'}'})\n}\n\n\n//Build json data string\nvar json=data;\n$.each(config, function(i){\n	if(json.has('#EMPLOYEE')){\n		\nif($(\"#filter_username\").length == 0) {\nif(debug){window.console.log('_toBuild : Element filter_username does not exsist');}\nvar filename = window.location.pathname.substring(window.location.pathname.lastIndexOf('/')+1).split(\".\");\nvar sel = $('<select id=\\\"filter_username\\\">').appendTo('body');\nif(debug){window.console.log('_toBuild : Start Load Select '+filename[0]);}\n\n_loadSelect({\"selectName\":\"selectUsers\",\"option1\":\"\",\"selectObject\":\"filter_username\",\"page\":\"\"+filename[0]+\"\"});\n\nsel.hide().change(function() {\nif(debug){window.console.log('select onchange load _group1() ');}\n_run.load_group1();\n}).appendTo(\"#g1_searchOptions\").chosen();\nif(debug){window.console.log('_toBuild : append and chosen() ')}\nsel.wrap( \"<label for='filter_username'>Employee Name</label><div></div>\");\nif(debug){window.console.log('_toBuild : Load Select Complete ')}\n}}\njson=json.replaceAll('#EMPLOYEE', $('#filter_username').val());\njson=json.replaceAll('#TODAY', new Date().mmddyyyy());\n});\n\n//Escape unecessary chars\njson=json.escapeIt(json); //Escape\n\n//expand options search types\n\n\n$.each(config, function(i){\n\njson=json.replaceAll(config[i].n+':', '\",\"'+config[i].n+'\":\"');\njson=json.replaceAll(config[i].n+'<', '\",\"'+config[i].n+'_less\":\"').replaceAll(config[i].n+'>', '\",\"'+config[i].n+'_more\":\"');\njson=json.replaceAll(config[i].n+'!', '\",\"'+config[i].n+'_not\":\"');\n\n});\n\n\n//remove unecessary whitespace\njson=json.replaceAll(' \"', '\"').replaceAll('\" ', '\"'); //Trim\n\n//format json structure\njdata='{\"search\":\"' +  json  + '\"}';\nvar params = $.parseJSON(jdata);\noptions = $.parseJSON(options);\n$.extend(true, options, params);\nvar xgroup = $.parseJSON('[]');\n$.each(options, function (i) {\n    if (options[i] != \"\") {\n        $.each(config,function(c){\n		\n		if(config[c].n===i||config[c].n+'_less'===i||config[c].n+'_more'===i||config[c].n+'_not'===i){\n		\n		\n		 \n		  switch(config[c].t){\n                case'date':\n				\n					if(_isIt('date',options[i])){if(debug){window.console.log('_toBuild Date: i='+i+' t='+config[c].t+' v='+options[i]);}\n					xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"'+options[i] +'\"}'))\n					}else{\n						if(debug){window.console.log('_toBuild Date None: i='+i+' t='+config[c].t+' v='+options[i]);}\n						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"null\"}'))}\n						}\n					\n					break;\n					\n                case'numeric':\n				\n					if(_isIt('numeric',options[i])){if(debug){window.console.log('_toBuild Numeric: i='+i+' t='+config[c].t+' v='+options[i]);}\n					xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"'+options[i] +'\"}'))\n					}else{\n						if(debug){window.console.log('_toBuild numeric None: i='+i+' t='+config[c].t+' v='+options[i]);}						\n						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"null\"}'))}\n						}\n					break;\n					\n				case'boolean':\n			\n					if(_isIt('boolean',options[i])){if(debug){window.console.log('_toBuild Boolean: i='+i+' t='+config[c].t+' v='+options[i]);}\n						if(options[i].match(/^True|^False|^true|^yes|^1/)){\n					xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"1\"}'))\n					}else{	\n					xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"0\"}'))\n					}}\n					\n					else{\n						if(debug){window.console.log('_toBuild Boolean None: i='+i+' t='+config[c].t+' v='+options[i]);}\n						if(_isIt('none',options[i])){xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"null\"}'))}\n						}\n					break;\n					\n				default:\n				if(debug){window.console.log('_toBuild Default: i='+i+' t='+config[c].t+' v='+options[i]);}\n				xgroup.push($.parseJSON('{\"n\":\"'+i+'\",\"t\":\"'+config[c].t+'\",\"v\":\"'+options[i] +'\"}'))		\n					\n				\n}}})}});\n\n\nreturn xgroup;\n}\ncatch (err) {\n  return '{\"n\":\"search\",\"v\":'+data+'}';\n}}\n\n\n/*jtable Helper Object*/\n_jGrid=function(params){\n	var options={\n		\"grid\":\"\", // jtable grid id\n		\"title\":\"\",\n		\"fields\":\"\",\n		\"arguments\":\"\", //ajax json arguments\n		\"functions\":\"\", //on click function\n		\"url\":\"\",//&argumentCollection=\n		\"method\":\"\",//&method=\n		\"showfields\":\"\"\n	\n	}\n	$.extend(true,options,params);\n\nvar grid=$(\"#\"+options['grid']);\n$(grid).jtable({ajaxSettings:{ type:'GET', cache:false }});\n\n$(grid).jtable('destroy');\n\n$(grid).jtable({\n	ajaxSettings:{ type:'GET', cache:false },\n	title:options['title'],\n			toolbar: {\n    items: [{\n        icon: ' ',\n        text: 'Export to Excel',\n        click: function () {\n         _toCSV($('#'+options['grid']+' table'), 'export.xls');\n        }\n    }]\n},\n	selecting:true,\n	actions:{\n	listAction:options['url']+\"?returnFormat=json&method=\"+options['method']+\"&argumentCollection=\"+options['arguments'],\n	},\n	fields:options['fields'],\n		selectionChanged:function(){\n			var $selectedRows=$(grid).jtable('selectedRows');//Get all selected rows\n				$('#SelectedRowList').empty();\n                if($selectedRows.length > 0){//Show selected rows\n                   $selectedRows.each(function(){\n					var record=$(this).data('record');\n						eval(options['functions']);//Functions for onclick\n					});\n                }else{\n                    //No rows selected\n                 $('#SelectedRowList').append('No row selected! Select rows to see here...');\n				 }}});\n				 \n//var loadColumns =options['showfields'].split(\",\");\n//for(var i=0; i<loadColumns.length; i++){\n//$(grid).jtable('changeColumnVisibility',loadColumns[i],'visible')\n//}\nif(debug){window.console.log('_jGrid : load jtable');}\n$(grid).jtable('load')};\n\n_jGridReport=function(params){\n	var options={\n		\"grid\":\"\", // jtable grid id\n		\"title\":\"\",\n		\"fields\":\"\",\n		\"arguments\":\"\", //ajax json arguments\n		\"functions\":\"\", //on click function\n		\"url\":\"\",//&argumentCollection=\n		\"method\":\"\",//&method=\n		\"sort\":\"\"\n	}\n	$.extend(true, options, params);\n	var grid=$(\"#\"+options['grid']);\n$(grid).jtable({ajaxSettings:{ type:'GET', cache:false }});\n$(grid).jtable('destroy');\n$(grid).jtable({\n	ajaxSettings:{ type:'GET', cache:false },\n	title:options['title'],\n	selecting:true,\n	sorting: true, //Enable sorting\n	defaultSorting: options['sort'], //Set default sorting\n	columnResizable: true, //Actually, no need to set true since it's default\n	columnSelectable: true, //Actually, no need to set true since it's default\n	saveUserPreferences: true, //Actually, no need to set true since it's default\n	actions:{\n	listAction:options['url']+\"?returnFormat=json&method=\"+options['method']+\"&argumentCollection=\"+options['arguments'],\n	},\n	fields:options['fields'],\n		selectionChanged:function(){\n			var $selectedRows=$(grid).jtable('selectedRows');//Get all selected rows\n				$('#SelectedRowList').empty();\n                if($selectedRows.length > 0){//Show selected rows\n                   $selectedRows.each(function(){\n					var record=$(this).data('record');\n						eval(options['functions']);//Functions for onclick\n					});\n                }else{\n                    //No rows selected\n                 $('#SelectedRowList').append('No row selected! Select rows to see here...');\n				 }}});\n$(grid).jtable('load')};\n\n//Load Data\n_loadData=function(params){\nif(debug){window.console.log('_loadData - Starting');}\nvar options={\"id\":\"\",\"group\":\"\",\"page\":\"\",\"plugin\":\"\"}\ntry{$.extend(true, options, params);\nif(debug){window.console.log('_loadData - id:'+options['id']+' group:'+options['group']+' page:'+options['page']+' plugin:'+options['plugin']+'');}\nif(options[\"plugin\"]!=\"\"){options[\"url\"]= _pluginURL(options[\"plugin\"]);}else{options[\"url\"]=\"\"};\nif($('#'+options[\"id\"]).is(\"select\")){\nvar i=$('#'+options[\"id\"]+' option:selected').val();\n	}else{\nvar i=$('#'+options[\"id\"]).val();		\n		}\n$.ajax({type:'GET',url:options[\"url\"]+options[\"page\"]+'.cfc?method=f_loadData',data:{\"returnFormat\":\"json\",\"argumentCollection\":JSON.stringify({\"id\":i,\"loadType\":options[\"group\"]})}\n,success:function(json){\n	_loadDataCB($.parseJSON(json));\n	\n	}\n,error:function(data){errorHandle($.parseJSON(data))}})}\ncatch(err){jqMessage({message: \"Error in js._loadData: \"+err+' id'+options['id']+' group'+options['group']+' page'+options['page']+' plugin'+options['plugin'],\"type\":\"error\",autoClose: false})}};\n\n\n//Save Data\n_saveData=function(params){\nvar options={\"group\":\"\",\"payload\":\"\",\"page\":\"\",\"id\":\"\",\"plugin\":\"\"}\ntry{	\n$.extend(true, options, params);//turn options into array\nif(options[\"payload\"]!=\"\"||options[\"payload\"]==\"undefined\"){\nif(options[\"plugin\"]!=\"\"){options[\"url\"]= _pluginURL(options[\"plugin\"]);}else{options[\"url\"]=\"\"};\n$('#savedata').prop('disabled',true);\n$('#savedata').find('i').addClass('fa fa-spinner fa-spin');\n$.ajax({\n  type: 'GET',\n  url:options[\"url\"]+options[\"page\"]+'.cfc?method=f_saveData',\n  data: {\"returnFormat\":\"json\",\"argumentCollection\":JSON.stringify({\"group\":options[\"group\"],\"payload\":JSON.stringify(options[\"payload\"])})}\n  ,success:function(json){_saveDataCB($.parseJSON(json));  setTimeout(function(){\n     $(\"#savedata\").prop('disabled',false);\n	 $('#savedata').find('i').removeClass('fa fa-spinner fa-spin');\n    }, 5*1000);},   // successful request; do something with the data\n  error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user\n});}else{_saveDataCB({\"id\":options[\"id\"],\"group\":options[\"group\"]});}}\ncatch(err){\n	if(debug){window.console.log('_SaveData Error'+' group'+options['group']+' payload'+options['payload']+' page'+options['page']+' id'+options['id']+' plugin'+options['plugin']);}\n	jqMessage({message: \"Error in js._SaveData: \"+err,\"type\":\"error\",autoClose: false})}\n}\n//Load It\n_loadit=function(params){\n	var options={\"query\":\"\",\"list\":\"\"}\n	$.extend(true, options, params);//turn options into array\nif(debug){window.console.log('_loadit Start - query:'+options['query'].DATA[0]+' list:'+options['list']);}\n	var list=options['list'].split(',');//Split List\ntry{if(options['query'].DATA!=\"\"){\n	for(var i=0;i<list.length;i++){\n			switch(document.getElementById(list[i]).type){\n				case\"checkbox\":$(\"#\"+list[i]).prop('checked',options['query'].DATA[0][i]);break;\n				case\"select-one\":\n				$(\"#\"+list[i]+' option').each(function(index){\n					if(options['query'].DATA[0][i]==$(this).val()){\n						$(this).attr('selected', true).prop('selected', true);\n						//$(this).prop('selected', true);\n	}})\n	$('#'+list[i]).trigger(\"chosen:updated\");\n	break;\n				case\"select-multiple\":\n				var str=options['query'].DATA[0][i]+\",\";\n				if(str!=null){\n				var sstr=str.split(',');\n				$(\"#\"+list[i]+' option').each(function(index){\n					for(var i=0;i<sstr.length;i++){\n						if(sstr[i]==$(this).val()){\n							$(this).attr('selected', true).prop('selected', true);\n							//$(this).prop('selected', true);\n	}}})\n	$('#'+list[i]).trigger(\"chosen:updated\");\n	}\n	break;\n				case undefined:/*Detection for undefined objects such as <LABEL>*/\n				$(\"#\"+list[i]).html(options['query'].DATA[0][i]);break;\n				default:$(\"#\"+list[i]).val(options['query'].DATA[0][i])}\nif(document.getElementById(list[i]).getAttribute(\"onblur\")!=null){document.getElementById(list[i]).onblur()}}}}\ncatch(err){jqMessage({message: \"Error in js._loadit: \"+err,type: \"error\",autoClose: false})}};\n\n_removeData=function(params){\nvar options={\"group\":\"\",\"page\":\"\",\"id\":\"\",\"plugin\":\"\"}\ntry{	\n$.extend(true, options, params);//turn options into array\n\nif(options[\"plugin\"]!=\"\"){options[\"url\"]= _pluginURL(options[\"plugin\"])}else{options[\"url\"]=\"\"};\n$.ajax({\n  type: 'GET',\n  url:options[\"url\"]+options[\"page\"]+'.cfc?method=f_removeData',\n  data: {\"returnFormat\":\"json\",\"argumentCollection\":JSON.stringify({\"group\":options[\"group\"],\"id\":options[\"id\"]})\n  },\n  success:function(json){_removeDataCB($.parseJSON(json))},   // successful request; do something with the data\n  error:function(data){errorHandle($.parseJSON(data))}      // failed request; give feedback to user\n});\n\n}\ncatch(err){jqMessage({message: \"Error in js._loadIt: \"+err,\"type\":\"error\",autoClose: false})}\n}\n_removeDataCB=function(params){\nvar options={\"id\":\"\",\"group\":\"\",\"result\":\"fail\"}\n$.extend(true,options,params);\n\nif(options[\"result\"]==\"ok\"){\n	$('#'+options[\"group\"]).accordion( \"option\", \"active\", 0 );\n	jqMessage({\"type\":\"destroy\"});\n	jqMessage({message: \"The task has been removed.\",type: \"success\",autoClose: true,duration: 5});\n	}\n	}\n_toggle=function(list){var arr=list.split(\",\");for(var i=0;i<arr.length;i++){$('#'+arr[i]).toggle();}};\n_hide=function(list){var arr=list.split(\",\");for(var i=0;i<arr.length;i++){$('#'+arr[i]).hide();}};\n_highlight=function(on){var lis=on.parentNode.parentNode.getElementsByTagName(\"li\");for (var i=0;i<lis.length;++i){lis[i].firstChild.className=lis[i].firstChild.className.replace(/\\bhighlight\\b/g,\"\");if(on==lis[i].firstChild){lis[i].firstChild.className =\"highlight\"}}};\n_updateh3=function(msg){var e=document.getElementsByTagName(\"h3\");for(var i=0;i<e.length;i++){var arr=e[i].innerHTML.split(\" [ \");e[i].innerHTML=arr[0]+\" [ \"+msg+\" ]\";};}\n\n_isIt=function(it,is){\nswitch(it){\ncase\"rationalNumbers\":re=/^[1-9]\\d*$/;if(is.match(re)){return true;}else{return false;};break;\ncase\"numeric\":re=/^[-+]?\\d*\\.?\\d+(?:[eE][-+]?\\d+)?$/;if(is.match(re)){return true;}else{return false;};break;\ncase\"date\":re=/^\\d{1,2}\\/\\d{1,2}\\/\\d{4}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"time\":re=/(?:0[0-9]|1[0-1]):[0-5][0-9]/;if(is.match(re)){return true;}else{return false;}break;\ncase\"empty\":if((is.length!=0)&&(is!=null)){return true}else{return false};break;\ncase\"email\":re=/^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;if(is.match(re)){return true;}else{return false;};break;\ncase\"zip\":re=/^([0-9]{5})$/;if(is.match(re)){return true;}else{return false;};break;\ncase\"zip9\":re=/^([0-9]{5}-[0-9]{4})$/;if(is.match(re)){return true;}else{return false;};break;\ncase\"cc_visa\":re=/^4[0-9]{12}(?:[0-9]{3})?$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"cc_mastercard\":re=/^5[1-5][0-9]{14}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"cc_dinersclub\":re=/^3[47][0-9]{13}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"cc_discover\":re=/^6(?:011|5[0-9]{2})[0-9]{12}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"cc_dinersclub\":re=/^3[47][0-9]{13}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"cc_jcb\":re=/^(?:2131|1800|35\\d{3})\\d{11}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"socialsecurity\":re=/^[0-9]{3}[\\- ]?[0-9]{2}[\\- ]?[0-9]{4}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"ipaddress\":re=/^[\\d]{1,3}\\.[\\d]{1,3}\\.[\\d]{1,3}\\.[\\d]{1,3}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"macaddress\":re=/^[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}-[0-9A-F]{2}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"phone\":re=/^(\\+\\d)*\\s*(\\(\\d{3}\\)\\s*)*\\d{3}(-{0,1}|\\s{0,1})\\d{2}(-{0,1}|\\s{0,1})\\d{2}$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"url\":re=/^(ht|f)tps?:\\/\\/[a-z0-9-\\.]+\\.[a-z]{2,4}\\/?([^\\s<>\\#%\"\\,\\{\\}\\\\|\\\\\\^\\[\\]`]+)?$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"filename\":re=/^[^\\\\\\/\\:\\*\\?\\\"\\<\\>\\|\\.]+(\\.[^\\\\\\/\\:\\*\\?\\\"\\<\\>\\|\\.]+)+$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"ip6\":re=/^(?:(?:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9](?::|$)){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))$/i;if(is.match(re)){return true;}else{return false;}break;\ncase\"hex\":re=/^#?([a-f0-9]{6}|[a-f0-9]{3})$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"html\":re=/^<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\\/>)$/;if(is.match(re)){return true;}else{return false;}break;\ncase\"image\":re=/.*(\\.[Jj][Pp][Gg]|\\.[Gg][Ii][Ff]|\\.[Jj][Pp][Ee][Gg]|\\.[Pp][Nn][Gg])/;if(is.match(re)){return true;}else{return false;}break;\ncase\"boolean\":re=/^True|^False|^true|^false|^yes|^no|^1|^0/;if(is.match(re)){return true;}else{return false;}break;\ncase\"none\":re=/^none|^None|^null|^Null|^empty|^Empty|^0/;if(is.match(re)){return true;}else{return false;}break;\ndefault:return false;\n}}\n\n_clearfields=function(params){\nvar options={\"list\":\"\"}\n$.extend(true,options,params)\nvar \nlist=options['list'].split(',');\n\n		for(var i=0;i<list.length;i++){\n			listitem=$('#'+list[i])\n				 if(listitem.is(\":text\")){ 		listitem.val('');}\n			else if(listitem.is(\":checkbox\")){	listitem.removeAttr('checked');}\n			else if(listitem.is(\"select\")){\n				\n				 listitem.prop('selectedIndex', 0).children().each( function() {$(this).removeAttr('selected'); }).trigger(\"chosen:updated\");\n				\n			\n				}\n			else{ $('#'+list[i]).val(''); }\n			\n			}}\n	\n_loadSelect=function(params){\nif(debug){window.console.log('_loadSelect : Starting');}\nvar options={\"selectName\":\"\",\"selectObject\":\"\",\"option1\":\"\",\"page\":\"\"}\n$.extend(true,options,params);\nif(debug){window.console.log('_loadSelect : options '+options[\"selectName\"]+' '+options[\"selectObject\"]+' '+options[\"option1\"]+' '+options[\"page\"]+' ');}\n$.ajax({type:'GET',url:options['page']+'.cfc?method=f_loadSelect',data:{\"returnFormat\":\"json\",\"argumentCollection\":JSON.stringify({\"selectName\":options['selectName'],\"option1\":options['option1']})}\n,success:function(json){\n var j=$.parseJSON(json),items='';\n	for(var i=0;i<j.Records.length;i++){items+='<option value=\"'+ j.Records[i].optionvalue_id+'\">'+j.Records[i].optionname+'</option>'}\n	  $(\"select#\"+options['selectObject']).html(items).trigger(\"chosen:updated\");\n	if(debug){window.console.log('_loadSelect : complete');}\n	\n	  },\n  error:function(data){errorHandle($.parseJSON(data))}})};\n\n\n\nerrorHandle=function(code,msg){jqMessage({message: \"General error in from database: \"+code+\":\"+msg,type: \"error\",autoClose: false});};",
-			"file": "AWS/assets/js/aws.js",
-			"file_size": 41088,
-			"file_write_time": 130506241307303097,
-			"settings":
-			{
-				"buffer_size": 40053,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "AWS/_practicemanagement/workinprogress.cfm",
-			"settings":
-			{
-				"buffer_size": 4277,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "AWS/_practicemanagement/workinprogress.js",
-			"settings":
-			{
-				"buffer_size": 25937,
+				"buffer_size": 89206,
 				"line_ending": "Windows"
 			}
 		}
@@ -128,17 +105,19 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfc",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_accountingservices/acctingconsulting.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/notices.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_accountingservices/acctingconsulting.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_accountingservices/acctingconsulting.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/notices.cfm",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/application.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.cfc",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jTimeBilling/timebilling.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/plugins/jUpload/upload.cfc",
@@ -151,7 +130,6 @@
 		"/C/Users/Admin/Documents/GitHub/AWS/assets/module/login/loginform.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/assets/module/login/mail.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/test.cfm",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/inc/export/excel.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/sftp-config.json",
 		"/C/Program Files/Sublime Text 3/Data/Packages/User/SFTP.sublime-settings",
@@ -184,7 +162,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -241,6 +219,11 @@
 	"groups":
 	[
 		{
+			"sheets":
+			[
+			]
+		},
+		{
 			"selected": 0,
 			"sheets":
 			[
@@ -250,15 +233,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89438,
+						"buffer_size": 89206,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								33557,
-								33557
+								21523,
+								21523
 							]
 						],
 						"settings":
@@ -269,114 +252,12 @@
 							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 7965.0,
+						"translation.y": 4575.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "AWS/assets/js/aws.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 40053,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								19812,
-								19823
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6887.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "AWS/_practicemanagement/workinprogress.cfm",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4277,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								556,
-								556
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "AWS/_practicemanagement/workinprogress.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 25937,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2919,
-								2919
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -408,7 +289,7 @@
 		"cols":
 		[
 			0.0,
-			0.925248052992,
+			0.0365497076023,
 			1.0
 		],
 		"rows":
