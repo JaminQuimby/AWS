@@ -39,6 +39,9 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 </cfoutput>
 </cfif>
 
+<cfquery dbtype="query" name="global_status">SELECT[optionvalue_id],[optionname],[optionDescription]FROM[selectOptions]WHERE[selectName]='global_status'</cfquery>
+
+
 <body>
 <!--- Load Left Menus --->
 <cfinclude template="/assets/inc/pagemenu.cfm">
@@ -62,6 +65,8 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g1_year"><i class="fa fa-lock link" ></i> Year</label><select id="g1_year" disabled="disable"><option value="0">&nbsp;</option><cfoutput query="global_years"><cfif optionvalue_id neq year(now())><option value="#optionvalue_id#">#optionname#</option><cfelse><option value="#optionvalue_id#" selected="selected">#optionname#</option></cfif></cfoutput></select></div>
 <div><label for="g1_payenddate"><i class="fa fa-lock link"></i> Pay End Date</label><input type="text" class="date" id="g1_payenddate" disabled="disable" ></div>
 <div><label for="g1_paydate"><i class="fa fa-lock link" ></i> Pay Date</label><input type="text" class="date" id="g1_paydate" disabled="disable"></div>
+<div><label for="g1_status">Status</label><select id="g1_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+
 <div><label for="g1_assignedto">Assigned To</label><select id="g1_assignedto" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'});"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g1_duedate">Due Date</label><input type="text" class="date" id="g1_duedate"></div>
 <div><label for="g1_priority">Priority</label><input type="text" placeholder="0" maxlength="2" id="g1_priority" class="valid_off" onblur="jqValid({'type':'rationalNumbers','object':this,'message':'This field must be a whole number.'});"></div>

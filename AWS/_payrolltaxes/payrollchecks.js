@@ -42,7 +42,7 @@ try{
 if(query == null){jqMessage({message: "Error in js._loadDataCB, Record request was not found ",type: "error",autoClose: false})}
 else{
 switch(query.COLUMNS[0]){
-/*Group1*/case "PC_ID":var list='task_id,client_id,g1_altfrequency,g1_assignedto,g1_duedate,g1_deliverymethod,g1_estimatedtime,g1_fees,g1_missinginformation,g1_missinginforeceived,g1_paydate,g1_payenddate,g1_paymentstatus,g1_priority,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
+/*Group1*/case "PC_ID":var list='task_id,client_id,g1_altfrequency,g1_assignedto,g1_duedate,g1_deliverymethod,g1_estimatedtime,g1_fees,g1_missinginformation,g1_missinginforeceived,g1_paydate,g1_payenddate,g1_paymentstatus,g1_priority,g1_status,g1_year';_loadit({"query":query,"list":list});_run.load_assets();break;
 /*Group1_1*/case "PC_OBTAININFO_ASSIGNEDTO":var list='g1_g1_assignedto,g1_g1_completedby,g1_g1_completed,g1_g1_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "PC_PREPARATION_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_completedby,g1_g2_completed,g1_g2_estimatedtime';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "PC_REVIEW_ASSIGNEDTO":var list='g1_g3_assignedto,g1_g3_completedby,g1_g3_completed,g1_g3_estimatedtime';_loadit({"query":query,"list":list});break;
@@ -75,6 +75,7 @@ $("#g1_paydate").val()+'","'+
 $("#g1_payenddate").val()+'","'+
 $("#g1_paymentstatus").val()+'","'+
 $("#g1_priority").val()+'","'+
+$("#g1_status").val()+'","'+
 $("#g1_year").val()+'","'+
 '"]]}'
 

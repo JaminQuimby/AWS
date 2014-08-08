@@ -61,6 +61,7 @@ SELECT[PC_ID]
 ,[pc_payenddate]=FORMAT(pc_payenddate,'#Session.localization.formatdate#') 
 ,[pc_paid]
 ,[pc_priority]
+,[pc_status]
 ,[pc_year]
 FROM[payrollcheckstatus]
 WHERE[pc_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
@@ -195,7 +196,8 @@ SELECT[pc_id]
 ,[client_name]
 ,[client_id]
 FROM[v_payrollcheckstatus]
-WHERE[pc_delivery_datecompleted] IS NULL
+WHERE ISNULL([pc_status],0) != 2 
+AND  ISNULL([pc_status],0) != 3
 AND [deleted] IS NULL
 AND [client_active]=(1)
 <cfif ARGUMENTS.search neq "">
@@ -267,6 +269,7 @@ INSERT INTO[payrollcheckstatus](
 ,[pc_payenddate]
 ,[pc_paid]
 ,[pc_priority]
+,[pc_status]
 ,[pc_year]
 )
 VALUES(
@@ -284,6 +287,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 )
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -312,7 +316,8 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pc_payenddate]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[pc_paid]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[pc_priority]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[pc_year]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[pc_status]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[pc_year]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
 WHERE[PC_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

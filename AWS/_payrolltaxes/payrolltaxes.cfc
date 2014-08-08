@@ -61,6 +61,7 @@ SELECT[PT_ID]
 ,[pt_paid]
 ,[pt_priority]
 ,[pt_state]
+,[pt_status]
 ,[pt_type]
 ,[pt_year]
 FROM[payrolltaxes]
@@ -214,7 +215,8 @@ SELECT[pt_id]
 ,[client_name]
 ,[client_id]
 FROM[v_payrolltaxes]
-WHERE[pt_delivery_datecompleted] IS NULL
+WHERE ISNULL([pt_status],0) != 2 
+AND  ISNULL([pt_status],0) != 3
 AND [deleted] IS NULL
 AND [client_active]=(1)
 <cfif ARGUMENTS.search neq "">
@@ -288,6 +290,7 @@ INSERT INTO[payrolltaxes](
 ,[pt_paid]
 ,[pt_priority]
 ,[pt_state]
+,[pt_status]
 ,[pt_type]
 ,[pt_year]
 )
@@ -307,6 +310,7 @@ VALUES(
 ,<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 ) 
 SELECT SCOPE_IDENTITY()AS[id]
 </cfquery>
@@ -335,8 +339,9 @@ SET[client_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[pt_paid]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[pt_priority]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 ,[pt_state]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
-,[pt_type]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
-,[pt_year]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[pt_status]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
+,[pt_type]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[pt_year]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 WHERE[pt_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":#j.DATA[1][1]#,"group":"group1_1","result":"ok"}'>
 </cfif>

@@ -343,7 +343,8 @@ SELECT[tr_id]
 ,[tr_4_required] 
 FROM[v_taxreturns]
 WHERE  ISNULL([tr_notrequired],0) != 1
-AND [tr_3_delivered] IS NULL 
+AND ISNULL([tr_status],0) != 2 
+AND  ISNULL([tr_status],0) != 3
 AND [client_active]=(1)
 AND [deleted] IS NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, tr_duedate, 101) ASC </cfif>
