@@ -93,17 +93,21 @@ SELECT[t].fds_id,fdss_id,c.client_id,fds_assignedto,fdss_assignedto,fds_duedate,
 FROM[client_listing]AS[c]
 INNER JOIN [financialdatastatus]as[t]ON t.client_id = c.client_id and t.deleted is null and(fds_status not in ('2','3') or fds_status is null)
 and([fds_delivery_datecompleted]IS NULL)
-LEFT JOIN [financialdatastatus_subtask]as[s]ON t.fds_id = s.fds_id and s.deleted is null and(fdss_status not in ('2','3') or fdss_status is null) and([fdss_completed]IS NULL)
+LEFT JOIN [financialdatastatus_subtask]as[s]ON t.fds_id = s.fds_id and s.deleted is null and((fdss_status not in ('2','3') or fdss_status is null))
 WHERE([client_active]='1'and[c].[deleted]is null))
 
+
+--- v INCOMPLETE ---
+
 ,cte_notices AS(
-SELECT[t].n_id,nst_id,c.client_id,nst_assignedto,client_group,count_n_id=ROW_NUMBER()OVER(PARTITION BY t.n_id ORDER BY t.n_id),nst_esttime
+SELECT[t].n_id,nst_id,c.client_id,nst_assignedto,client_group,count_n_id=ROW_NUMBER()OVER(PARTITION BY t.n_id ORDER BY t.n_id),nst_esttime,nst_1_resduedate
+,count_t_id=ROW_NUMBER()OVER(PARTITION BY s.nst_assignedto,t.n_id ORDER BY t.n_id)
 FROM[client_listing]AS[c]
 INNER JOIN [notice]as[t]ON t.client_id = c.client_id and t.deleted is null and(n_status not in ('2','3') or n_status is null) 
 LEFT JOIN [notice_subtask]as[s]ON t.n_id = s.n_id and s.deleted is null and (nst_status not in ('2','3') or nst_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null ))
 
-
+--- ^ INCOMPLETE ---
 
 
 
@@ -115,6 +119,8 @@ SELECT[t].of_id,c.client_id,of_assignedto,of_duedate,client_group,count_of_id=RO
 FROM[client_listing]AS[c]
 INNER JOIN [otherfilings]as[t]ON t.client_id = c.client_id and t.deleted is null and(of_status not in ('2','3') or of_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null ))
+
+
 
 ,cte_payrollcheckstatus AS(
 SELECT[t].pc_id,c.client_id,pc_assignedto,pc_duedate,client_group,count_pc_id=ROW_NUMBER()OVER(PARTITION BY t.pc_id ORDER BY t.pc_id),pc_esttime
@@ -144,7 +150,7 @@ WHERE([client_active]='1'and[c].[deleted]is null ))
 , cte_taxreturns AS(
 SELECT[t].tr_id,c.client_id,tr_notrequired,tr_2_reviewassignedto,tr_3_delivered,tr_2_readyforreview,tr_2_reviewedwithnotes,tr_2_assignedto,tr_duedate,client_group,count_tr_id=ROW_NUMBER()OVER(PARTITION BY t.tr_id ORDER BY t.tr_id),tr_esttime
 FROM[client_listing]AS[c]
-INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null and(tr_status not in ('2','3') or tr_status is null)and([tr_notrequired]!=(1)and(tr_3_delivered is Null))
+INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null and(tr_status not in ('2','3') or tr_status is null)and([tr_notrequired]!=(1))
 WHERE([client_active]='1'and[c].[deleted]is null ))
 
 
@@ -219,7 +225,7 @@ UNION
 SELECT 'Communication'AS[name]
 <cfif ARGUMENTS.userid neq "0">
 ,total_time =0
-,count_assigned = count( CASE WHEN co_for = @u and count_co_id = 1 THEN 1 ELSE NULL END) 
+,count_assigned = count( CASE WHEN co_for LIKE '%'+ @u +'%' and count_co_id = 1 THEN 1 ELSE NULL END) 
 ,total_subtask_time = 0
 ,count_subtask_assigned = 0
 <cfelse>
@@ -264,7 +270,7 @@ SELECT 'Financial Statements'AS[name]
 ,total_time = sum (CASE WHEN fds_assignedto = @u and count_fds_id = 1 THEN fds_esttime ELSE 0 END)
 ,count_assigned = count( CASE WHEN fds_assignedto = @u and count_fds_id = 1 THEN 1 ELSE NULL END) 
 
-,total_subtask_time = sum(CASE WHEN fdss_assignedto = @u  AND[fdss_completed]IS NULL  and fdss_id is not null  THEN ISNULL(fdss_esttime,0) ELSE 0 END
+,total_subtask_time = sum(CASE WHEN fdss_assignedto = @u  and fdss_id is not null  THEN ISNULL(fdss_esttime,0) ELSE 0 END
 + CASE WHEN fds_obtaininfo_assignedto=@u and count_fds_id = 1 AND[fds_obtaininfo_datecompleted]IS NULL THEN ISNULL(fds_obtaininfo_esttime,0)ELSE 0 END
 + CASE WHEN fds_sort_assignedto=@u and count_fds_id = 1 AND[fds_sort_datecompleted]IS NULL THEN ISNULL(fds_sort_esttime,0)ELSE 0 END
 + CASE WHEN fds_checks_assignedto=@u and count_fds_id = 1 AND[fds_checks_datecompleted]IS NULL THEN ISNULL(fds_checks_esttime,0)ELSE 0 END
@@ -278,7 +284,7 @@ SELECT 'Financial Statements'AS[name]
 + CASE WHEN fds_acctrpt_assignedto=@u and count_fds_id = 1 AND[fds_acctrpt_datecompleted]IS NULL THEN ISNULL(fds_acctrpt_esttime,0)ELSE 0 END
 )
 ,count_subtask_assigned = 
-sum(CASE WHEN fdss_assignedto = @u  AND[fdss_completed]IS NULL  and fdss_id is not null  THEN 1 ELSE 0 END
+sum(CASE WHEN fdss_assignedto = @u  and fdss_id is not null  THEN 1 ELSE 0 END
 + CASE WHEN fds_obtaininfo_assignedto=@u and count_fds_id = 1 AND[fds_obtaininfo_datecompleted]IS NULL THEN 1 ELSE 0 END
 + CASE WHEN fds_sort_assignedto=@u and count_fds_id = 1 AND[fds_sort_datecompleted]IS NULL THEN 1 ELSE 0 END
 + CASE WHEN fds_checks_assignedto=@u and count_fds_id = 1 AND[fds_checks_datecompleted]IS NULL THEN 1 ELSE 0 END
@@ -298,7 +304,7 @@ sum(CASE WHEN fdss_assignedto = @u  AND[fdss_completed]IS NULL  and fdss_id is n
 ,total_time = sum (CASE WHEN  count_fds_id = 1 THEN fds_esttime ELSE 0 END)
 ,count_assigned = count( CASE WHEN count_fds_id = 1 THEN 1 ELSE NULL END) 
 
-,total_subtask_time = sum(CASE WHEN [fdss_completed]IS NULL and fdss_id is not null  THEN ISNULL(fdss_esttime,0) ELSE 0 END
+,total_subtask_time = sum(CASE WHEN fdss_id is not null  THEN ISNULL(fdss_esttime,0) ELSE 0 END
 + CASE WHEN count_fds_id = 1 AND[fds_obtaininfo_datecompleted]IS NULL THEN ISNULL(fds_obtaininfo_esttime,0)ELSE 0 END
 + CASE WHEN count_fds_id = 1 AND[fds_sort_datecompleted]IS NULL THEN ISNULL(fds_sort_esttime,0)ELSE 0 END
 + CASE WHEN count_fds_id = 1 AND[fds_checks_datecompleted]IS NULL THEN ISNULL(fds_checks_esttime,0)ELSE 0 END
@@ -312,7 +318,7 @@ sum(CASE WHEN fdss_assignedto = @u  AND[fdss_completed]IS NULL  and fdss_id is n
 + CASE WHEN count_fds_id = 1 AND[fds_acctrpt_datecompleted]IS NULL THEN ISNULL(fds_acctrpt_esttime,0)ELSE 0 END
 )
 ,count_subtask_assigned = 
-sum(CASE WHEN [fdss_completed]IS NULL and fdss_id is not null THEN 1 ELSE 0 END
+sum(CASE WHEN fdss_id is not null THEN 1 ELSE 0 END
 + CASE WHEN count_fds_id = 1 AND[fds_obtaininfo_datecompleted]IS NULL THEN 1 ELSE 0 END
 + CASE WHEN count_fds_id = 1 AND[fds_sort_datecompleted]IS NULL THEN 1 ELSE 0 END
 + CASE WHEN count_fds_id = 1 AND[fds_checks_datecompleted]IS NULL THEN 1 ELSE 0 END
@@ -353,7 +359,7 @@ UNION
 SELECT 'Notices'AS[name]
 <cfif ARGUMENTS.userid neq "0">
 ,total_time = 0
-,count_assigned = count( CASE WHEN nst_assignedto = @u and count_n_id = 1 THEN 1 ELSE NULL END) 
+,count_assigned = count( CASE WHEN nst_assignedto = @u and count_t_id = 1 THEN 1 ELSE NULL END) 
 ,total_subtask_time = sum(CASE WHEN nst_assignedto = @u THEN ISNULL(nst_esttime,0) ELSE 0 END)
 ,count_subtask_assigned = count( CASE WHEN nst_assignedto = @u THEN 1 ELSE NULL END)
 <cfelse>
@@ -383,11 +389,11 @@ SUM( CASE WHEN ISNULL(of_obtaininfo_assignedto,0)=@u AND[of_obtaininfo_datecompl
 +CASE WHEN ISNULL(of_assembly_assignedto,0)=@u AND[of_assembly_datecompleted]IS NULL THEN ISNULL([of_assembly_esttime],0)ELSE 0 END
 +CASE WHEN ISNULL(of_delivery_assignedto,0)=@u AND[of_delivery_datecompleted]IS NULL THEN ISNULL([of_delivery_esttime],0)ELSE 0 END)
 ,count_subtask_assigned = 
-COUNT( CASE WHEN ISNULL(of_obtaininfo_assignedto,0)=@u AND[of_obtaininfo_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(CASE WHEN ISNULL(of_preparation_assignedto,0)=@u AND[of_preparation_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(CASE WHEN ISNULL(of_review_assignedto,0)=@u AND[of_review_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(CASE WHEN ISNULL(of_assembly_assignedto,0)=@u AND[of_assembly_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(CASE WHEN ISNULL(of_delivery_assignedto,0)=@u AND[of_delivery_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
+COUNT( CASE WHEN ISNULL(of_obtaininfo_assignedto,0)=@u AND[of_obtaininfo_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN ISNULL(of_preparation_assignedto,0)=@u AND[of_preparation_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN ISNULL(of_review_assignedto,0)=@u AND[of_review_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN ISNULL(of_assembly_assignedto,0)=@u AND[of_assembly_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN ISNULL(of_delivery_assignedto,0)=@u AND[of_delivery_datecompleted]IS NULL THEN 1 ELSE NULL END)
 <cfelse>
 ,total_time = sum (CASE WHEN  count_of_id = 1 THEN of_esttime ELSE NULL END)
 ,count_assigned = count( CASE WHEN  count_of_id = 1 THEN 1 ELSE NULL END) 
@@ -397,11 +403,11 @@ COUNT( CASE WHEN ISNULL(of_obtaininfo_assignedto,0)=@u AND[of_obtaininfo_datecom
 +CASE WHEN[of_assembly_datecompleted]IS NULL THEN ISNULL([of_assembly_esttime],0)ELSE 0 END
 +CASE WHEN[of_delivery_datecompleted]IS NULL THEN ISNULL([of_delivery_esttime],0)ELSE 0 END)
 ,count_subtask_assigned = 
-COUNT(DISTINCT CASE WHEN[of_obtaininfo_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(DISTINCT CASE WHEN[of_preparation_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(DISTINCT CASE WHEN[of_review_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(DISTINCT CASE WHEN[of_assembly_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
-+COUNT(DISTINCT CASE WHEN[of_delivery_datecompleted]IS NULL THEN[of_id]ELSE NULL END)
+COUNT(CASE WHEN[of_obtaininfo_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN[of_preparation_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN[of_review_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN[of_assembly_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN[of_delivery_datecompleted]IS NULL THEN 1 ELSE NULL END)
 </cfif>
 ,'H'AS[orderit]
  FROM cte_otherfilings
@@ -421,31 +427,33 @@ UNION
 
 SELECT 'Payroll Checks'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,total_time = sum (CASE WHEN pc_assignedto = @u and count_pc_id = 1 THEN pc_esttime ELSE 0 END)
+,total_time = sum (CASE WHEN pc_assignedto = @u and count_pc_id = 1 THEN isnull(pc_esttime,0) ELSE 0 END)
 ,count_assigned = count( CASE WHEN pc_assignedto = @u and count_pc_id = 1 THEN 1 ELSE NULL END) 
-,total_subtask_time = SUM(CASE WHEN pc_delivery_assignedto=@u AND [pc_delivery_datecompleted]IS NULL THEN[pc_delivery_esttime]ELSE 0 END
-+CASE WHEN pc_obtaininfo_assignedto=@u AND[pc_obtaininfo_datecompleted]IS NULL THEN[pc_obtaininfo_esttime]ELSE 0 END
-+CASE WHEN pc_preparation_assignedto=@u AND[pc_obtaininfo_datecompleted]IS NULL THEN[pc_preparation_esttime]ELSE 0 END
-+CASE WHEN pc_review_assignedto=@u AND[pc_review_datecompleted]IS NULL THEN[pc_review_esttime]ELSE 0 END
-+CASE WHEN pc_assembly_assignedto=@u AND[pc_assembly_datecompleted]IS NULL THEN[pc_assembly_esttime]ELSE 0 END)
-,count_subtask_assigned = COUNT(CASE WHEN pc_delivery_assignedto=@u AND[pc_delivery_datecompleted]IS NULL THEN[pc_id]ELSE NULL END) 
-+COUNT(CASE WHEN pc_obtaininfo_assignedto=@u AND[pc_obtaininfo_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
-+COUNT(CASE WHEN pc_preparation_assignedto=@u AND[pc_preparation_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
-+COUNT(CASE WHEN pc_review_assignedto=@u AND[pc_review_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
-+COUNT(CASE WHEN pc_assembly_assignedto=@u AND[pc_assembly_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
+,total_subtask_time = SUM(CASE WHEN pc_delivery_assignedto=@u AND [pc_delivery_datecompleted]IS NULL THEN ISNULL(pc_delivery_esttime,0)ELSE 0 END
++CASE WHEN pc_obtaininfo_assignedto=@u AND[pc_obtaininfo_datecompleted]IS NULL THEN ISNULL(pc_obtaininfo_esttime,0)ELSE 0 END
++CASE WHEN pc_preparation_assignedto=@u AND[pc_obtaininfo_datecompleted]IS NULL THEN ISNULL(pc_preparation_esttime,0)ELSE 0 END
++CASE WHEN pc_review_assignedto=@u AND[pc_review_datecompleted]IS NULL THEN ISNULL(pc_review_esttime,0)ELSE 0 END
++CASE WHEN pc_assembly_assignedto=@u AND[pc_assembly_datecompleted]IS NULL THEN ISNULL(pc_assembly_esttime,0)ELSE 0 END)
+
+,count_subtask_assigned = COUNT(CASE WHEN pc_delivery_assignedto=@u AND[pc_delivery_datecompleted]IS NULL THEN 1 ELSE NULL END) 
++COUNT(CASE WHEN pc_obtaininfo_assignedto=@u AND[pc_obtaininfo_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN pc_preparation_assignedto=@u AND[pc_preparation_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN pc_review_assignedto=@u AND[pc_review_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN pc_assembly_assignedto=@u AND[pc_assembly_datecompleted]IS NULL THEN 1 ELSE NULL END)
 <cfelse>
-,total_time = sum (CASE WHEN  count_pc_id = 1 THEN pc_esttime ELSE 0 END)
+,total_time = sum (CASE WHEN  count_pc_id = 1 THEN isnull(pc_esttime,0) ELSE 0 END)
 ,count_assigned = count( CASE WHEN  count_pc_id = 1 THEN 1 ELSE NULL END) 
-,total_subtask_time = SUM(CASE WHEN [pc_delivery_datecompleted]IS NULL THEN[pc_delivery_esttime]ELSE 0 END
-+CASE WHEN [pc_obtaininfo_datecompleted]IS NULL THEN[pc_obtaininfo_esttime]ELSE 0 END
-+CASE WHEN [pc_preparation_datecompleted]IS NULL THEN[pc_preparation_esttime]ELSE 0 END
-+CASE WHEN [pc_review_datecompleted]IS NULL THEN[pc_review_esttime]ELSE 0 END
-+CASE WHEN [pc_assembly_datecompleted]IS NULL THEN[pc_assembly_esttime]ELSE 0 END)
-,count_subtask_assigned = COUNT( CASE WHEN [pc_delivery_datecompleted]IS NULL THEN[pc_id]ELSE NULL END) 
-+COUNT( CASE WHEN [pc_obtaininfo_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
-+COUNT( CASE WHEN [pc_preparation_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
-+COUNT( CASE WHEN [pc_review_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
-+COUNT( CASE WHEN [pc_assembly_datecompleted]IS NULL THEN[pc_id]ELSE NULL END)
+,total_subtask_time = SUM(CASE WHEN [pc_delivery_datecompleted]IS NULL THEN ISNULL(pc_delivery_esttime,0)ELSE 0 END
++CASE WHEN [pc_obtaininfo_datecompleted]IS NULL THEN ISNULL(pc_obtaininfo_esttime,0) ELSE 0 END
++CASE WHEN [pc_preparation_datecompleted]IS NULL THEN ISNULL(pc_preparation_esttime,0)ELSE 0 END
++CASE WHEN [pc_review_datecompleted]IS NULL THEN ISNULL(pc_review_esttime,0)ELSE 0 END
++CASE WHEN [pc_assembly_datecompleted]IS NULL THEN ISNULL(pc_assembly_esttime,0)ELSE 0 END)
+
+,count_subtask_assigned = COUNT( CASE WHEN [pc_delivery_datecompleted]IS NULL THEN 1 ELSE NULL END) 
++COUNT( CASE WHEN [pc_obtaininfo_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT( CASE WHEN [pc_preparation_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT( CASE WHEN [pc_review_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT( CASE WHEN [pc_assembly_datecompleted]IS NULL THEN 1 ELSE NULL END)
 </cfif>
 ,'I'AS[orderit]
  FROM cte_payrollcheckstatus
@@ -466,15 +474,15 @@ UNION
 
 SELECT 'Payroll Taxes'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,total_time = sum (CASE WHEN pt_assignedto = @u and count_pt_id = 1 THEN pt_esttime ELSE NULL END)
+,total_time = sum (CASE WHEN pt_assignedto = @u and count_pt_id = 1 THEN isnull(pt_esttime,0) ELSE NULL END)
 ,count_assigned = count( CASE WHEN pt_assignedto = @u and count_pt_id = 1 THEN 1 ELSE NULL END)
 ,total_subtask_time =
-SUM(CASE WHEN ISNULL(pt_obtaininfo_assignedto,0)=@u AND [pt_obtaininfo_datecompleted]IS NULL THEN[pt_obtaininfo_esttime]ELSE 0 END
-+CASE WHEN ISNULL(pt_entry_assignedto,0)=@u AND[pt_entry_datecompleted]IS NULL THEN[pt_entry_esttime]ELSE 0 END
-+CASE WHEN ISNULL(pt_rec_assignedto,0)=@u AND[pt_rec_datecompleted]IS NULL THEN[pt_rec_esttime]ELSE 0 END
-+CASE WHEN ISNULL(pt_review_assignedto,0)=@u AND[pt_review_datecompleted]IS NULL THEN[pt_review_esttime]ELSE 0 END
-+CASE WHEN ISNULL(pt_assembly_assignedto,0)=@u AND[pt_assembly_datecompleted]IS NULL THEN[pt_assembly_esttime]ELSE 0 END
-+CASE WHEN ISNULL(pt_delivery_assignedto,0)=@u AND[pt_delivery_datecompleted]IS NULL THEN[pt_delivery_esttime]ELSE 0 END)
+SUM(CASE WHEN ISNULL(pt_obtaininfo_assignedto,0)=@u AND [pt_obtaininfo_datecompleted]IS NULL THEN ISNULL(pt_obtaininfo_esttime,0)ELSE 0 END
++CASE WHEN ISNULL(pt_entry_assignedto,0)=@u AND[pt_entry_datecompleted]IS NULL THEN ISNULL(pt_entry_esttime,0)ELSE 0 END
++CASE WHEN ISNULL(pt_rec_assignedto,0)=@u AND[pt_rec_datecompleted]IS NULL THEN ISNULL(pt_rec_esttime,0)ELSE 0 END
++CASE WHEN ISNULL(pt_review_assignedto,0)=@u AND[pt_review_datecompleted]IS NULL THEN ISNULL(pt_review_esttime,0)ELSE 0 END
++CASE WHEN ISNULL(pt_assembly_assignedto,0)=@u AND[pt_assembly_datecompleted]IS NULL THEN ISNULL(pt_assembly_esttime,0)ELSE 0 END
++CASE WHEN ISNULL(pt_delivery_assignedto,0)=@u AND[pt_delivery_datecompleted]IS NULL THEN ISNULL(pt_delivery_esttime,0)ELSE 0 END)
 ,count_subtask_assigned =
 COUNT(CASE WHEN pt_obtaininfo_assignedto=@u AND[pt_obtaininfo_datecompleted]IS NULL THEN 1 ELSE NULL END) 
 +COUNT(CASE WHEN pt_entry_assignedto=@u AND[pt_entry_datecompleted]IS NULL THEN 1 ELSE NULL END)
@@ -483,25 +491,26 @@ COUNT(CASE WHEN pt_obtaininfo_assignedto=@u AND[pt_obtaininfo_datecompleted]IS N
 +COUNT(CASE WHEN pt_assembly_assignedto=@u AND[pt_assembly_datecompleted]IS NULL THEN 1 ELSE NULL END)
 +COUNT(CASE WHEN pt_delivery_assignedto=@u AND[pt_delivery_datecompleted]IS NULL THEN 1 ELSE NULL END)
 <cfelse>
-,total_time = sum (CASE WHEN  count_pt_id = 1 THEN pt_esttime ELSE NULL END)
+,total_time = sum (CASE WHEN  count_pt_id = 1 THEN isnull(pt_esttime,0) ELSE NULL END)
 ,count_assigned = count( CASE WHEN  count_pt_id = 1 THEN 1 ELSE NULL END)
 ,total_subtask_time =
-SUM(CASE WHEN [pt_obtaininfo_datecompleted]IS NULL THEN[pt_obtaininfo_esttime]ELSE 0 END
-+CASE WHEN [pt_entry_datecompleted]IS NULL THEN[pt_entry_esttime]ELSE 0 END
-+CASE WHEN [pt_rec_datecompleted]IS NULL THEN[pt_rec_esttime]ELSE 0 END
-+CASE WHEN [pt_review_datecompleted]IS NULL THEN[pt_review_esttime]ELSE 0 END
-+CASE WHEN [pt_assembly_datecompleted]IS NULL THEN[pt_assembly_esttime]ELSE 0 END
-+CASE WHEN [pt_delivery_datecompleted]IS NULL THEN[pt_delivery_esttime]ELSE 0 END)
+SUM(CASE WHEN [pt_obtaininfo_datecompleted]IS NULL THEN ISNULL(pt_obtaininfo_esttime,0)ELSE 0 END
++CASE WHEN [pt_entry_datecompleted]IS NULL THEN  ISNULL(pt_entry_esttime,0)ELSE 0 END
++CASE WHEN [pt_rec_datecompleted]IS NULL THEN  ISNULL(pt_rec_esttime,0)ELSE 0 END
++CASE WHEN [pt_review_datecompleted]IS NULL THEN  ISNULL(pt_review_esttime,0)ELSE 0 END
++CASE WHEN [pt_assembly_datecompleted]IS NULL THEN  ISNULL(pt_assembly_esttime,0)ELSE 0 END
++CASE WHEN [pt_delivery_datecompleted]IS NULL THEN  ISNULL(pt_delivery_esttime,0)ELSE 0 END)
 ,count_subtask_assigned = 
-COUNT(CASE WHEN [pt_obtaininfo_datecompleted]IS NULL THEN[pt_id]ELSE NULL END) 
-+COUNT(CASE WHEN [pt_rec_datecompleted]IS NULL THEN[pt_id]ELSE NULL END)
-+COUNT(CASE WHEN [pt_review_datecompleted]IS NULL THEN[pt_id]ELSE NULL END)
-+COUNT(CASE WHEN [pt_assembly_datecompleted]IS NULL THEN[pt_id]ELSE NULL END)
-+COUNT(CASE WHEN [pt_delivery_datecompleted]IS NULL THEN[pt_id]ELSE NULL END)
+COUNT(CASE WHEN [pt_obtaininfo_datecompleted]IS NULL THEN 1 ELSE NULL END) 
++COUNT(CASE WHEN [pt_entry_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN [pt_rec_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN [pt_review_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN [pt_assembly_datecompleted]IS NULL THEN 1 ELSE NULL END)
++COUNT(CASE WHEN [pt_delivery_datecompleted]IS NULL THEN 1 ELSE NULL END)
 </cfif>
 ,'J'AS[orderit]
  FROM cte_payrolltaxes
- WHERE([pt_delivery_datecompleted]IS NULL)
+ WHERE(1)=(1)
 <cfif ARGUMENTS.duedate neq "">AND([pt_duedate]IS NULL OR[pt_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND((pt_assignedto=@u)
@@ -519,12 +528,12 @@ UNION
 
 SELECT 'Personal Property Tax Returns'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,total_time = sum (CASE WHEN tr_4_assignedto  = @u and count_tr_id = 1 THEN tr_4_pptresttime ELSE 0 END)
+,total_time = sum (CASE WHEN tr_4_assignedto  = @u and count_tr_id = 1 THEN ISNULL(tr_4_pptresttime,0) ELSE 0 END)
 ,count_assigned = count( CASE WHEN tr_4_assignedto  = @u and count_tr_id = 1 THEN 1 ELSE NULL END) 
 ,total_subtask_time = 0
 ,count_subtask_assigned = 0
 <cfelse>
-,total_time = sum (CASE WHEN  count_tr_id = 1 THEN tr_4_pptresttime ELSE 0 END)
+,total_time = sum (CASE WHEN  count_tr_id = 1 THEN ISNULL(tr_4_pptresttime,0) ELSE 0 END)
 ,count_assigned = count( CASE WHEN  count_tr_id = 1 THEN 1 ELSE NULL END) 
 ,total_subtask_time = 0
 ,count_subtask_assigned = 0
@@ -541,7 +550,7 @@ UNION
 
 SELECT 'Tax Returns'AS[name]
 <cfif ARGUMENTS.userid neq "0">
-,total_time = sum (CASE WHEN tr_2_assignedto = @u and count_tr_id = 1 THEN tr_esttime ELSE NULL END)
+,total_time = sum (CASE WHEN tr_2_assignedto = @u and count_tr_id = 1 THEN ISNULL(tr_esttime,0) ELSE 0 END)
 
 ,count_assigned = 
 COUNT(CASE WHEN count_tr_id = 1  AND tr_2_assignedto=@u AND [tr_2_readyforreview] IS NULL THEN 1 ELSE NULL END)
@@ -553,7 +562,7 @@ COUNT(CASE WHEN count_tr_id = 1  AND tr_2_assignedto=@u AND [tr_2_readyforreview
 <cfelse>
 
 
-,total_time = sum (CASE WHEN  count_tr_id = 1 THEN tr_esttime ELSE NULL END)
+,total_time = sum (CASE WHEN  count_tr_id = 1 THEN ISNULL(tr_esttime,0) ELSE 0 END)
 ,count_assigned = count( CASE WHEN  count_tr_id = 1 THEN 1 ELSE NULL END) 
 ,total_subtask_time = 0
 ,count_subtask_assigned = 0
@@ -562,7 +571,7 @@ COUNT(CASE WHEN count_tr_id = 1  AND tr_2_assignedto=@u AND [tr_2_readyforreview
 ,'L'AS[orderit]
  FROM cte_taxreturns
  WHERE (1)=(1)
-AND([tr_notrequired]!=(1)AND[tr_3_delivered]IS NULL)
+AND([tr_notrequired]!=(1))
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND(ISNULL(tr_2_assignedto,0)=@u OR ISNULL(tr_2_reviewassignedto,0)=@u)
 
@@ -639,9 +648,9 @@ SELECT Distinct [mc_id]
 ,[mc_categoryTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='2'OR[form_id]='0')AND([optionGroup]='2'OR[optionGroup]='0')AND[selectName]='global_consultingcategory'AND[mc_category]=[optionvalue_id])
 ,CASE WHEN LEN([mc_description]) >= 101 THEN SUBSTRING([mc_description],0,100) +  '...' ELSE [mc_description] END AS[mc_description]
 FROM[v_managementconsulting_subtask]
-WHERE[deleted] IS NULL AND[client_active]=(1) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)
+WHERE[deleted] IS NULL AND[client_active]=(1) AND([mc_status]NOT IN('2','3')OR[mc_status]IS NULL)AND([mcs_status]NOT IN('2','3')OR[mcs_status]IS NULL)
 <cfif ARGUMENTS.duedate neq "">AND([mc_duedate]IS NULL OR[mc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u)</cfif>
+<cfif ARGUMENTS.userid neq "0">AND([mc_assignedto]=@u OR[mcs_assignedto]=@u  )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 

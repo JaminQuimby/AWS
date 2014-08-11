@@ -39,7 +39,7 @@
 			"file": "AWS/_practicemanagement/workinprogress.cfc",
 			"settings":
 			{
-				"buffer_size": 89206,
+				"buffer_size": 89421,
 				"line_ending": "Windows"
 			}
 		}
@@ -233,15 +233,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89206,
+						"buffer_size": 89421,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								21523,
-								21523
+								13320,
+								13320
 							]
 						],
 						"settings":
@@ -252,7 +252,7 @@
 							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 4575.0,
+						"translation.y": 3240.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
