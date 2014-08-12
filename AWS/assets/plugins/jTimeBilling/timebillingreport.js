@@ -37,7 +37,7 @@ _grid1=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group1","formid":"10"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollchecks.cfm?task_id="+record.PC_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrollchecks.cfm?task_id="+record.PC_ID,\'WIPPOP\')'
 })};
  
 _grid2=function(){_jGrid({
@@ -64,7 +64,7 @@ _grid2=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2","formid":"13"}',
-	"functions":'$("#pt_id").val(record.PT_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrolltaxes.cfm?task_id="+record.PT_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/payrolltaxes.cfm?task_id="+record.PT_ID,\'WIPPOP\')'
 })};
 
 _grid3=function(){_jGrid({
@@ -91,7 +91,7 @@ _grid3=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g3_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group3","formid":"11"}',
-	"functions":'$("#of_id").val(record.OF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/otherfilings.cfm?task_id="+record.OF_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_payrolltaxes/otherfilings.cfm?task_id="+record.OF_ID,\'WIPPOP\')'
 })};
 
 
@@ -127,7 +127,7 @@ _grid4=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g4_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group4","formid":"3"}',
-	"functions":'$("#bf_id").val(record.BF_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?task_id="+record.BF_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/businessFormation.cfm?task_id="?task_id="+record.BF_ID,\'WIPPOP\')'
 })};
 
 _grid5=function(){_jGrid({
@@ -150,7 +150,7 @@ _grid5=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g5_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group5","formid":"2"}',
-	"functions":'$("#mc_id").val(record.MC_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/acctingconsulting.cfm?task_id="+record.MC_ID,\'WIPPOP\')'
 })};	
 	
 _grid6=function(){_jGrid({
@@ -179,7 +179,7 @@ _grid6=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g6_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group6","formid":"5"}',
-	"functions":'$("#fds_id").val(record.FDS_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_accountingservices/financialStatements.cfm?task_id="+record.FDS_ID,\'WIPPOP\')'
 })};
 	
 		
@@ -206,7 +206,7 @@ _grid7=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g7_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group7","formid":"9"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/financialtaxplanning.cfm?task_id="+record.FTP_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/financialtaxplanning.cfm?task_id="+record.FTP_ID,\'WIPPOP\')'
 })};
 
 	
@@ -231,7 +231,7 @@ _grid8=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g8_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group8","formid":"8"}',
-	"functions":'$("#n_id").val(record.N_ID); window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/notices.cfm?task_id="+record.N_ID,\'WIPPOP\')'
 	})};
 
 
@@ -252,7 +252,8 @@ _grid9=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g9_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group9","formid":"6"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID,\'WIPPOP\')'
+	
 })};	
 
 _grid10=function(){_jGrid({
@@ -271,7 +272,7 @@ _grid10=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g10_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group10","formid":"6"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID,\'WIPPOP\')'
 })};	
 
 _grid11=function(){_jGrid({
@@ -291,14 +292,15 @@ _grid11=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g11_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group11","formid":"6"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID+"&subtask1_id="+record.TRST_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID,\'WIPPOP\')'
+	
 })};
 
 
 _grid12=function(){_jGrid({
 	"grid":"grid12",
 	"url":"timebillingreport.cfc",	
-	"title":"State Tax Returns",
+	"title":"State PPTR",
 	"fields":{TRST_ID:{key:true,list:false,edit:false},
 			TR_ID:{list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
@@ -312,7 +314,7 @@ _grid12=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g12_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group12","formid":"6"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID+"&subtask1_id="+record.TRST_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_taxation/taxreturns.cfm?task_id="+record.TR_ID,\'WIPPOP\')'
 })};
 
 
@@ -336,7 +338,7 @@ _grid13=function(){_jGrid({
 			},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g13_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group13","formid":"12"}',
-	"functions":'window.location=window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID'
+	"functions":'window.open(window.location.protocol+"//"+window.location.hostname+"/AWS/_clientmanagement/communications.cfm?task_id="+record.CO_ID,\'WIPPOP\')'
 })};
 
 

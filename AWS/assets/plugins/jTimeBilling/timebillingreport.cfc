@@ -34,6 +34,8 @@ SELECT[pc_id]
 FROM[v_payrollcheckstatus]
 WHERE ([pc_delivery_datecompleted] IS NULL)
 AND ([pc_paid] = '6' OR [pc_paid] IS NULL OR [pc_paid] = '0' )
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[pc_duedate]
 </cfquery>
@@ -93,6 +95,8 @@ SELECT[pt_id]
 FROM[v_payrolltaxes]
 WHERE ([pt_assembly_datecompleted] IS NULL)
 AND ([pt_paid] = '6' OR [pt_paid] IS NULL OR [pt_paid] = '0')
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[pt_duedate]
 </cfquery>
@@ -159,6 +163,8 @@ SELECT[of_id]
 FROM[v_otherfilings]
 WHERE ([of_status] = 2 OR [of_status] = 5)
 AND ([of_paid] = '6' OR [of_paid] IS NULL OR [of_paid] = '0')
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 ORDER BY[of_duedate]
 </cfquery>
@@ -230,6 +236,8 @@ SELECT[bf_id]
 FROM[v_businessformation]
 WHERE ([bf_status] = 2 OR [bf_status] = 5)
 AND ([bf_paid] = '6' OR [bf_paid] IS NULL OR [bf_paid] = '0')
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -298,6 +306,8 @@ SELECT[mc_id]
 FROM[v_managementconsulting]
 WHERE ([mc_status] = 2 OR [mc_status] = 5)
 AND ([mc_paid] = '6' OR [mc_paid] IS NULL OR [mc_paid] = '0')
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -360,6 +370,8 @@ SELECT[fds_id]
 FROM[v_financialdatastatus]
 WHERE ([fds_status] = '2' OR [fds_status] = '5')
 AND ([fds_paid] = '6' OR [fds_paid] IS NULL OR [fds_paid] = '0') 
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -429,6 +441,8 @@ SELECT[ftp_id]
 FROM[v_financialtaxplanning]
 WHERE ([ftp_status] = 2 OR [ftp_status] = 5)
 AND ([ftp_paid] = '6' OR [ftp_paid] IS NULL OR [ftp_paid] = '0')
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -489,6 +503,8 @@ SELECT[n_id]
 FROM[v_notice_subtask]
 WHERE[nst_2_ressubmited] IS NOT NULL
 AND ([nst_paid] = '6' OR [nst_paid] IS NULL OR [nst_paid] = '0') 
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -541,6 +557,8 @@ SELECT[tr_id]
 ,[client_id]
 FROM[v_taxreturns]
 WHERE([tr_paid]IS NULL OR [tr_paid] = '6' OR [tr_paid] = '0')
+AND [deleted] IS NULL
+
 <cfif ARGUMENTS.search neq "">AND [client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -590,6 +608,8 @@ FROM[v_taxreturns]
 <cfif ARGUMENTS.search neq "">
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 AND ([tr_4_paid]IS NULL OR[tr_4_paid] = '6' OR[tr_4_paid] = '0')
+AND [deleted] IS NULL
+
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -641,6 +661,8 @@ AND[trst_status] = '2'
 AND[trst_1_informationreceived] IS NOT NULL
 AND[trst_completed] IS NOT NULL
 AND ([trst_2_paid]IS NULL OR [trst_2_paid] = '6' OR [trst_2_paid] = '0')
+AND [deleted] IS NULL
+
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -691,6 +713,7 @@ FROM[v_taxreturns_state]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 AND[trst_1_completed] IS NOT NULL
 AND ([trst_3_paid] IS NULL OR [trst_3_paid] ='6' OR [trst_3_paid] ='0') 
+AND [deleted] IS NULL
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
 </cfquery>
@@ -727,7 +750,7 @@ AND ([trst_3_paid] IS NULL OR [trst_3_paid] ='6' OR [trst_3_paid] ='0')
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT[co_id]
 ,[co_caller]
-,[co_forTEXT]=(SELECT TOP(1)[si_initials]FROM[v_staffinitials]WHERE(co_for=user_id))
+,[co_forTEXT]=SUBSTRING((SELECT', '+[si_initials]FROM[v_staffinitials]WHERE(CAST([user_id]AS nvarchar(10))IN(SELECT[id]FROM[CSVToTable](co_for)))FOR XML PATH('')),3,1000)
 ,[co_fees]
 ,[co_paidTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_paid'AND[co_paid]=[optionvalue_id])            
 ,CONVERT(VARCHAR(10),[co_date], 101)AS[co_date]
@@ -744,6 +767,7 @@ FROM[v_communications]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
 AND[co_completed] = 1
 AND[co_fees] > 0
+AND [deleted] IS NULL
 AND ([co_paid] IS NULL OR [co_paid] = '6'  OR [co_paid] = '0')
 </cfif>
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY[client_name]</cfif>
