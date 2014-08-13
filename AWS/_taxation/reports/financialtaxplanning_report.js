@@ -31,7 +31,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"financialtaxplanning_report.cfc",
 	"title":"Financial & Tax Planning",
-	"fields":{FTP_ID:{key:true,list:false,edit:false}
+	"fields":{FTP_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FTP_CATEGORYTEXT:{title:'Category'}
 			,FTP_DESCRIPTION:{title:'Description'}		

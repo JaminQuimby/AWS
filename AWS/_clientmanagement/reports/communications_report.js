@@ -31,7 +31,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"Communications_report.cfc",
 	"title":"Communications Report",
-	"fields":{CO_ID:{key:true,list:false,edit:false}
+	"fields":{CO_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CO_CALLER:{title:'Caller'}
 			,CO_DATE:{title:'Date and Time',width:'2%'}
@@ -57,7 +57,7 @@ var grid1_config = [
 	"grid":"grid2",
 	"url":"Communications_report.cfc",
 	"title":"Communications Responses",
-	"fields":{COMMENT_ID:{key:true,list:false,edit:false}
+	"fields":{COMMENT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			 ,C_DATE:{title:'Date'}
 			 ,U_NAME:{title:'Name'}
 			 ,C_NOTES:{title:'Comment'}

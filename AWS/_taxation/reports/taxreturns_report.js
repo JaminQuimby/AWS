@@ -67,7 +67,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"taxreturns_report.cfc",
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,CLIENT_NAME:{title:'Client Name'}
 		,TR_TAXYEAR:{title:'Year',width:'2%'}
 		,TR_TAXFORMTEXT:{title:'Form'}
@@ -105,7 +105,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"taxreturns_report.cfc",
 	"title":"State Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,CLIENT_NAME:{title:'Client Name'}
 		,CLIENT_TYPETEXT:{title:'Client Type'}
 		,TR_TAXYEAR:{title:'Year',width:'2%'}

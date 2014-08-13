@@ -29,7 +29,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"taxreturns.cfc",
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TR_ID+"',page:'taxreturns',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
@@ -57,7 +57,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"taxreturns.cfc",
 	"title":"State",
-	"fields":{TRST_ID:{key:true,list:false,edit:false}
+	"fields":{TRST_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRST_ID+"',page:'taxreturns',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,TRST_STATETEXT:{title:'State'}
 			,TRST_PRIMARY:{title:'Primary',width:'2%',type:"checkbox",values:{ '0' : 'No', '1' : 'Yes' }}
@@ -74,7 +74,7 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"taxreturns.cfc",
 	"title":"Schedule",
-	"fields":{TRSC_ID:{key:true,list:false,edit:false}
+	"fields":{TRSC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TRSC_ID+"',page:'taxreturns',group:'group3'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,TRSC_SCHEDULETEXT:{title:'Schedule'}
 			,TRSC_STATUSTEXT:{title:'Status'}

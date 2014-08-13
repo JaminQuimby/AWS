@@ -17,7 +17,7 @@ _grid1=function(){
 	"grid":"grid1",
 	"url":"payrollchecks.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false}
+	"fields":{PC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.PC_ID+"',page:'payrollchecks',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
  			,CLIENT_NAME:{title:'Client Name'}
 			,PC_YEAR:{title:'Year',width:'1%'}

@@ -102,7 +102,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"workinprogress.cfc",
 	"title":"Accounting &amp; Consulting",
-	"fields":{MC_ID:{key:true,list:false,edit:false}
+	"fields":{MC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			
 			
@@ -159,7 +159,7 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"workinprogress.cfc",	
 	"title":"Administrative Tasks",
-	"fields":{AS_ID:{key:true,list:false,edit:false}
+	"fields":{AS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
  			,AS_CATEGORYTEXT:{title:'Category'}
@@ -181,7 +181,7 @@ _grid4=function(){_jGrid({
 	"grid":"grid4",
 	"url":"workinprogress.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false}
+	"fields":{BF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,Subtasks: {
                     title: '',
@@ -236,7 +236,7 @@ _grid5=function(){_jGrid({
 	"grid":"grid5", 
 	"url":"workinprogress.cfc",	
 	"title":"Communications",
-	"fields":{CO_ID:{key:true,list:false,edit:false}
+	"fields":{CO_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CO_CALLER:{title:'Caller'}
 			,CO_DATE:{title:'Date and Time'}
@@ -259,7 +259,7 @@ _grid6=function(){_jGrid({
 	"grid":"grid6",
 	"url":"workinprogress.cfc",	
 	"title":"Financial &amp; Tax Planning", 
-	"fields":{FTP_ID:{key:true,list:false,edit:false}
+	"fields":{FTP_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
   			 ,CLIENT_NAME:{title:'Client Name'}
 			 ,FTP_CATEGORYTEXT:{title:'Category'}
 			 ,FTP_DESCRIPTION:{title:'Description'}
@@ -278,7 +278,7 @@ _grid7=function(){_jGrid({
 	"grid":"grid7",
 	"url":"workinprogress.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false}
+	"fields":{FDS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_ID:{list:false,edit:false}
 			,Subtasks: {
                     title: '',
@@ -297,7 +297,7 @@ _grid7=function(){_jGrid({
                                         listAction: 'workinprogress.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.FDS_ID+'","loadType":"group7_subtask","userid":"'+$("#g1_assignedto").val()+'","clientid":"'+$("#client_id").val()+'","group":"'+$("#g1_group").val()+'","duedate":"'+$("#g1_duedate").val()+'","formid":"2"}',
                                         },
                                         fields: {
-                                            FDSS_ID:{key:true,list:false,edit:false}
+                                            FDSS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 											,FDSS_SEQUENCE:{title:'Sequence'}
 											,FDSS_SUBTASKTEXT:{title:'Subtask'}
 											,FDSS_DUEDATE:{title:'Due Date'}
@@ -346,7 +346,7 @@ _grid8=function(){_jGrid({
 	"grid":"grid8",
 	"url":"workinprogress.cfc",
 	"title":"Notices",
-	"fields":{N_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 				,Subtasks: {
                     title: '',
                     width: '2%',
@@ -397,7 +397,7 @@ _grid9=function(){_jGrid({
 	"grid":"grid9",
 	"url":"workinprogress.cfc",
 	"title":"Other Fililngs",
-	"fields":{OF_ID:{key:true,list:false,edit:false}
+	"fields":{OF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
   				,CLIENT_NAME:{title:'Client Name'}
 				,OF_TAXYEAR:{title:'Tax Year'}
 				,OF_PERIODTEXT:{title:'Period'}
@@ -424,7 +424,7 @@ _grid10=function(){_jGrid({
 	"grid":"grid10",
 	"url":"workinprogress.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false}
+	"fields":{PC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_NAME:{title:'Client Name'}
 			,PC_YEAR:{title:'Year',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
@@ -447,7 +447,7 @@ _grid11=function(){_jGrid({
 	"grid":"grid11",
 	"url":"workinprogress.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false}
+	"fields":{PT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_NAME:{title:'Client Name'}
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTHTEXT:{title:'Period'}
@@ -475,7 +475,7 @@ _grid12=function(){_jGrid({
 	"grid":"grid12",
 	"url":"workinprogress.cfc",	
 	"title":"Personal Property Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_4_EXTENDED:{title:'PPTR Extended',width:'2%'}
 			,TR_4_COMPLETED:{title:'Completed',width:'2%'}
@@ -497,7 +497,7 @@ _grid13=function(){_jGrid({
 	"grid":"grid13",
 	"url":"workinprogress.cfc",	
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}

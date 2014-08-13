@@ -9,7 +9,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"employeecontactinfo.cfc",
 	"title":"Employee Contact Information",
-	"fields":{SI_ID:{key:true,list:false,edit:false},NAME:{title:'Employee Name'}},
+	"fields":{SI_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},NAME:{title:'Employee Name'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0"}',
 	"functions":'$("#task_id").val(record.USER_ID);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"employeecontactinfo"});'

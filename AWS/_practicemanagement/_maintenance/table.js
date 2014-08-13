@@ -39,7 +39,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"table.cfc",
 	"title":"Table Maintenance",
-	"fields":{SELECTNAME_ID:{key:true,list:false,edit:false},SELECTLABEL:{title:'Select Name'},SELECTDESCRIPTION:{title:'Select Description'}},
+	"fields":{SELECTNAME_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},SELECTLABEL:{title:'Select Name'},SELECTDESCRIPTION:{title:'Select Description'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group1"}',
 	"functions":'$("#task_id").val(record.SELECTNAME_ID);_options(record.SELECTNAME_ID);_updateh3(record.SELECTLABEL);_toggle("group1,largeMenu");_hide("entrance");$("#content").removeClass();$("#content").addClass("contentbig");_loadData({"id":"task_id","group":"group1","page":"table"});'
@@ -49,7 +49,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"table.cfc",
 	"title":"Select Options",
-	"fields":{SELECT_ID:{key:true,list:false,edit:false},OPTIONNAME:{title:'Option Name'},OPTIONGROUPTEXT:{title:'Show On'},OPTIONHIDETEXT:{title:'Hide On'},OPTIONDESCRIPTION:{title:'Option Description'}},
+	"fields":{SELECT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},OPTIONNAME:{title:'Option Name'},OPTIONGROUPTEXT:{title:'Show On'},OPTIONHIDETEXT:{title:'Hide On'},OPTIONDESCRIPTION:{title:'Option Description'}},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g2_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("#task_id").val()+'","loadType":"group2"}',
 	"functions":'$(".trackers #subtask1_id").val(record.SELECT_ID);_loadData({"id":"subtask1_id","group":"group2","page":"table"});$("#group2").accordion({active:1});'

@@ -40,7 +40,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"notices_report.cfc",
 	"title":"Notices",
-	"fields":{N_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
 			,N_STATUSTEXT:{title:'Matter Status'}

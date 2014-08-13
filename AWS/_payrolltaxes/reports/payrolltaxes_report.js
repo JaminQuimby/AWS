@@ -50,7 +50,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"payrolltaxes_report.cfc",
 	"title":"Payroll Taxes Status",
-	"fields":{PT_ID:{key:true,list:false,edit:false}
+	"fields":{PT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,CLIENT_NAME:{title:'Client Name'}
 		,PT_YEAR:{title:'Year',width:'2%'}
 		,PT_MONTHTEXT:{title:'Period'}

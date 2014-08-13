@@ -28,7 +28,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"acctingconsulting_report.cfc",
 	"title":"Accounting &amp; Consulting",
-	"fields":{MC_ID:{key:true,list:false,edit:false}
+	"fields":{MC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
 			,MC_DESCRIPTION:{title:'Description'}

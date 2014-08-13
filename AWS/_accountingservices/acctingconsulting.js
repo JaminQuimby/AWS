@@ -39,7 +39,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"acctingconsulting.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
-	"fields":{MC_ID:{key:true,list:false,edit:false}
+	"fields":{MC_ID:{key:true,edit:false,title:'ID',visibility:'hidden'}
 			,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MC_ID+"',page:'acctingconsulting',group:'group1'});_run.load_group1();","class":"button"},{"name":"no","on_click":"_run.load_group1()","class":"button"}], autoClose: false})});return $img}}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
@@ -58,7 +58,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"acctingconsulting.cfc",
 	"title":"Subtasks",
-	"fields":{MCS_ID:{key:true,list:false,edit:false}
+	"fields":{MCS_ID:{key:true,edit:false,title:'ID',visibility:'hidden'}
 		,remove:{title:'',width:'4%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.MCS_ID+"',page:'acctingconsulting',group:'group2'});_run.load_group2()","class":"button"},{"name":"no","on_click":"_run.load_group2()","class":"button"}], autoClose: false})});return $img}}
 		,MCS_SEQUENCE:{title:'Sequence',width:'4%'}
 		,MCS_SUBTASKTEXT:{title:'Subtask'}

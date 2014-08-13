@@ -42,7 +42,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"historical.cfc",
 	"title":"Accounting &amp; Consulting",
-	"fields":{MC_ID:{key:true,list:false,edit:false}
+	"fields":{MC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_REQUESTFORSERVICE:{title:'Request For Service'}
@@ -82,7 +82,7 @@ var grid2_config = [
 	"grid":"grid2",
 	"url":"historical.cfc",	
 	"title":"Administrative Tasks",
-	"fields":{AS_ID:{key:true,list:false,edit:false}
+	"fields":{AS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
  			,AS_CATEGORYTEXT:{title:'Category'}
@@ -133,7 +133,7 @@ var grid3_config = [
 	"grid":"grid3",
 	"url":"historical.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false}
+	"fields":{BF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,BF_ACTIVITY:{title:'Activity'}
@@ -180,7 +180,7 @@ var grid4_config = [
 	"grid":"grid4",
 	"url":"historical.cfc",
 	"title":"Client Maintenance",	
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
+	"fields":{CLIENT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CLIENT_SALUTATION:{title:'Salutation'}
 			,CLIENT_TYPETEXT:{title:'Type'}
@@ -216,7 +216,7 @@ var grid5_config = [
 	"grid":"grid5",
 	"url":"historical.cfc",	
 	"title":"Communications",
-	"fields":{CO_ID:{key:true,list:false,edit:false}
+	"fields":{CO_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CO_CALLER:{title:'Caller'}
 			,CO_DATE:{title:'Date and Time'}
@@ -263,7 +263,7 @@ var grid6_config = [
 	"grid":"grid6",
 	"url":"historical.cfc",	
 	"title":"Financial &amp; Tax Planning", 
-	"fields":{FTP_ID:{key:true,list:false,edit:false}
+	"fields":{FTP_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
   			 ,CLIENT_NAME:{title:'Client Name'}
 			 ,FTP_CATEGORYTEXT:{title:'Category'}
 			 ,FTP_DUEDATE:{title:'Due Date',width:'1%'}
@@ -343,7 +343,7 @@ var grid7_config = [
 	"grid":"grid7",
 	"url":"historical.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false}
+	"fields":{FDS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_ID:{list:false,edit:false}
  			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
@@ -407,7 +407,7 @@ var grid8_config = [
 	"grid":"grid8",
 	"url":"historical.cfc",
 	"title":"Notices",
-	"fields":{N_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
 			,N_STATUSTEXT:{title:'Matter Status'}
@@ -478,7 +478,7 @@ var grid9_config = [
 	"grid":"grid9",
 	"url":"historical.cfc",
 	"title":"Other Fililngs",
-	"fields":{OF_ID:{key:true,list:false,edit:false}
+	"fields":{OF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year'}
 			,OF_PERIODTEXT:{title:'Period'}
@@ -545,7 +545,7 @@ var grid10_config = [
 	"grid":"grid10",
 	"url":"historical.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false}
+	"fields":{PC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_NAME:{title:'Client Name'}
 			,PC_YEAR:{title:'Year',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
@@ -611,7 +611,7 @@ var grid11_config = [
 	"grid":"grid11",
 	"url":"historical.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false}
+	"fields":{PT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTHTEXT:{title:'Period'}
 			,PT_STATETEXT:{title:'State'}
@@ -696,7 +696,7 @@ var grid12_config = [
 	"grid":"grid12",
 	"url":"historical.cfc",	
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
 			,TR_TAXFORMTEXT:{title:'Tax Form',width:'1%'}

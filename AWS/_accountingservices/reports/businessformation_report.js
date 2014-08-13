@@ -41,7 +41,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"businessformation_report.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false}
+	"fields":{BF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,BF_ACTIVITY:{title:'Activity'}
 			,BF_OWNERS:{title:'Owners',width:'2%'}

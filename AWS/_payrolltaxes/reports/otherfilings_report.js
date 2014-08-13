@@ -52,7 +52,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"otherfilings_report.cfc",
 	"title":"Other Filings Status",
-	"fields":{OF_ID:{key:true,list:false,edit:false}
+	"fields":{OF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Year',width:'2%'}
 			,OF_PERIODTEXT:{title:'Period'}

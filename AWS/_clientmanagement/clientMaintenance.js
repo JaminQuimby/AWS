@@ -68,7 +68,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"clientMaintenance.cfc",
 	"title":"Clients",
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
+	"fields":{CLIENT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CLIENT_ID+"',page:'clientmaintenance',group:'group0'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,CLIENT_NAME:{title:'Client Name'}
 		,CLIENT_SALUTATION:{title:'Salutation'}
@@ -84,7 +84,7 @@ _grid1_1=function(){_jGrid({
 	"grid":"grid1_1",
 	"url":"clientMaintenance.cfc",
 	"title":"Custom Fields",
-	"fields":{FIELD_ID:{key:true,list:false,edit:false}
+	"fields":{FIELD_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.FIELD_ID+"',page:'clientmaintenance',group:'group1_2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,FIELD_NAME:{title:'Name'}
 			,FIELD_VALUE:{title:'Value'}
@@ -99,7 +99,7 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Contacts",
-	"fields":{CONTACT_ID:{key:true,list:false,edit:false}
+	"fields":{CONTACT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.CONTACT_ID+"',page:'clientmaintenance',group:'group3'});_grid3();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,CONTACT_NAME:{title:'Contact'}
 			,CONTACT_TYPETEXT:{title:'Type'}
@@ -116,7 +116,7 @@ _grid4_1=function(){_jGrid({
 	"grid":"grid4_1",
 	"url":"clientMaintenance.cfc",
 	"title":"Accounting &amp; Consulting Tasks",
-	"fields":{MC_ID:{key:true,list:false,edit:false}
+	"fields":{MC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
@@ -134,7 +134,7 @@ _grid4_2=function(){_jGrid({
 	"grid":"grid4_2",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Administrative Tasks",
-	"fields":{AS_ID:{key:true,list:false,edit:false}
+	"fields":{AS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
  			,AS_CATEGORYTEXT:{title:'Category'}
@@ -153,7 +153,7 @@ _grid4_3=function(){_jGrid({
 	"grid":"grid4_3",
 	"url":"clientMaintenance.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false}
+	"fields":{BF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,CLIENT_ID:{list:false,edit:false}
 		,CLIENT_NAME:{title:'Client Name'}
 		,BF_ACTIVITY:{title:'Activity'}
@@ -174,7 +174,7 @@ _grid4_4=function(){_jGrid({
 	"grid":"grid4_4",
 	"url":"clientMaintenance.cfc",
 	"title":"Communications",
-	"fields":{CO_ID:{key:true,list:false,edit:false}
+	"fields":{CO_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,CLIENT_NAME:{title:'Client Name'}
 		,CO_CALLER:{title:'Caller'}
 		,CO_DATE:{title:'Date and Time'}
@@ -194,7 +194,7 @@ _grid4_5=function(){_jGrid({
 	"grid":"grid4_5",
 	"url":"clientMaintenance.cfc",
 	"title":"Financial & Tax Planning",
-	"fields":{FTP_ID:{key:true,list:false,edit:false}
+	"fields":{FTP_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
   			 ,CLIENT_NAME:{title:'Client Name'}
 			 ,FTP_CATEGORYTEXT:{title:'Category'}
 			 ,FTP_DESCRIPTION:{title:'Description'}
@@ -213,7 +213,7 @@ _grid4_6=function(){_jGrid({
 	"grid":"grid4_6",
 	"url":"clientMaintenance.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false}
+	"fields":{FDS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_ID:{list:false,edit:false}
  			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'1%'}
@@ -244,7 +244,7 @@ _grid4_7=function(){_jGrid({
 	"grid":"grid4_7",
 	"url":"clientMaintenance.cfc",
 	"title":"Notice Matters",
-	"fields":{N_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
 			,N_STATUSTEXT:{title:'Matter Status'}	
@@ -263,7 +263,7 @@ _grid4_8=function(){_jGrid({
 	"grid":"grid4_8",
 	"url":"clientMaintenance.cfc",
 	"title":"Other Filings",
-	"fields":{OF_ID:{key:true,list:false,edit:false}
+	"fields":{OF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
   			,CLIENT_NAME:{title:'Client Name'}
 			,OF_TAXYEAR:{title:'Tax Year'}
@@ -291,7 +291,7 @@ _grid4_9=function(){_jGrid({
 	"grid":"grid4_9",
 	"url":"clientMaintenance.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false}
+	"fields":{PC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_NAME:{title:'Client Name'}
 			,PC_YEAR:{title:'Year',width:'1%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'1%'}
@@ -314,7 +314,7 @@ _grid4_10=function(){_jGrid({
 	"grid":"grid4_10",
 	"url":"clientMaintenance.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false}
+	"fields":{PT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
  			,CLIENT_NAME:{title:'Client Name'}
 			,PT_YEAR:{title:'Year',width:'1%'}
 			,PT_MONTHTEXT:{title:'Period'}
@@ -340,7 +340,7 @@ _grid4_11=function(){_jGrid({
 	"grid":"grid4_11",
 	"url":"clientMaintenance.cfc",	
 	"title":"Personal Property Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_4_EXTENDED:{title:'PPTR Extended',width:'2%'}
@@ -363,7 +363,7 @@ _grid4_12=function(){_jGrid({
 	"grid":"grid4_12",
 	"url":"clientMaintenance.cfc",
 	"title":"Power of Attorney",
-	"fields":{PA_ID:{key:true,list:false,edit:false}
+	"fields":{PA_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PA_TAXYEARS:{title:'Tax Years'}
 			,PA_TAXFORMSTEXT:{title:'Tax Forms'}
@@ -380,7 +380,7 @@ _grid4_13=function(){_jGrid({
 	"grid":"grid4_13",
 	"url":"clientMaintenance.cfc",
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false}
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_ID:{list:false,edit:false}
 			,CLIENT_NAME:{title:'Client Name'}
 			,TR_TAXYEAR:{title:'Tax Year',width:'1%'}
@@ -407,7 +407,7 @@ _grid5=function(){_jGrid({
 	"grid":"grid5",
 	"url":"clientMaintenance.cfc",
 	"title":"State Information",
-	"fields":{SI_ID:{key:true,list:false,edit:false}
+	"fields":{SI_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.SI_ID+"',page:'clientmaintenance',group:'group5'});_grid5();","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 			,SI_STATETEXT:{title:'State'}
 			,SI_REVENUE:{title:'Revenue',width:'2%',type:'checkbox',values:{'0':'No','1':'Yes'}}
@@ -430,7 +430,7 @@ _grid6=function(){_jGrid({
 	"grid":"grid6",
 	"url":"clientMaintenance.cfc",
 	"title":"Client Relations",
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
+	"fields":{CLIENT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CLIENT_ACTIVE:{title:'Active',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 			,CLIENT_SINCE:{title:'Client Since'}

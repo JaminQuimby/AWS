@@ -22,7 +22,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"timebillingreport.cfc",
 	"title":"Payroll Checks",
-	"fields":{PC_ID:{key:true,list:false,edit:false}
+	"fields":{PC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PC_DUEDATE:{title:'Due Date',width:'2%'}
 			,PC_YEAR:{title:'Year',width:'2%'}
@@ -44,7 +44,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"timebillingreport.cfc",
 	"title":"Payroll Taxes",
-	"fields":{PT_ID:{key:true,list:false,edit:false}
+	"fields":{PT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PT_DUEDATE:{title:'Due Date',width:'2%'}
 			,PT_TYPETEXT:{title:'Type'}
@@ -71,7 +71,7 @@ _grid3=function(){_jGrid({
 	"grid":"grid3",
 	"url":"timebillingreport.cfc",
 	"title":"Other Fililngs",
-	"fields":{OF_ID:{key:true,list:false,edit:false}
+	"fields":{OF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,OF_DUEDATE:{title:'Due Date',width:'2%'}
 			,OF_TAXYEAR:{title:'Year',width:'2%'}
@@ -100,7 +100,7 @@ _grid4=function(){_jGrid({
 	"grid":"grid4",
 	"url":"timebillingreport.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false}
+	"fields":{BF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,BF_STATUSTEXT:{title:'Status',width:'2%'}
 			,BF_ASSIGNEDTOTEXT:{title:'Assignedto',width:'2%'}
@@ -134,7 +134,7 @@ _grid5=function(){_jGrid({
 	"grid":"grid5",
 	"url":"timebillingreport.cfc",
 	"title":"Accounting & Consulting",
-	"fields":{MC_ID:{key:true,list:false,edit:false}
+	"fields":{MC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,MC_CATEGORYTEXT:{title:'Consulting Category'}
 			,MC_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}
@@ -157,7 +157,7 @@ _grid6=function(){_jGrid({
 	"grid":"grid6",
 	"url":"timebillingreport.cfc",
 	"title":"Financial Statements",
-	"fields":{FDS_ID:{key:true,list:false,edit:false}
+	"fields":{FDS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'2%'}
 			,FDS_MONTHTEXT:{title:'Month'}
@@ -187,7 +187,7 @@ _grid7=function(){_jGrid({
 	"grid":"grid7",
 	"url":"timebillingreport.cfc",	
 	"title":"Financial &amp; Tax Planning", 
-	"fields":{FTP_ID:{key:true,list:false,edit:false}
+	"fields":{FTP_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FTP_CATEGORYTEXT:{title:'Category'}
 			,FTP_STATUSTEXT:{title:'Status'}
@@ -214,7 +214,7 @@ _grid8=function(){_jGrid({
 	"grid":"grid8",
 	"url":"timebillingreport.cfc",
 	"title":"Notices",
-	"fields":{N_ID:{key:true,list:false,edit:false}
+	"fields":{N_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,N_NAME:{title:'Matter Name'}
 			,NST_1_TAXYEAR:{title:'Tax Year',width:'2%'}
@@ -239,7 +239,7 @@ _grid9=function(){_jGrid({
 	"grid":"grid9",
 	"url":"timebillingreport.cfc",	
 	"title":"Tax Returns",
-	"fields":{TR_ID:{key:true,list:false,edit:false},
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Tax Year',width:'2%'},
 			TR_TAXFORMTEXT:{title:'Tax Form'},
@@ -260,7 +260,7 @@ _grid10=function(){_jGrid({
 	"grid":"grid10",
 	"url":"timebillingreport.cfc",	
 	"title":"PPTRs",
-	"fields":{TR_ID:{key:true,list:false,edit:false},
+	"fields":{TR_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Tax Year',width:'2%'},
 			TR_TAXFORMTEXT:{title:'Tax Form'},
@@ -279,7 +279,7 @@ _grid11=function(){_jGrid({
 	"grid":"grid11",
 	"url":"timebillingreport.cfc",	
 	"title":"State Tax Returns",
-	"fields":{TRST_ID:{key:true,list:false,edit:false},
+	"fields":{TRST_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},
 			TR_ID:{list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Year',width:'2%'},
@@ -301,7 +301,7 @@ _grid12=function(){_jGrid({
 	"grid":"grid12",
 	"url":"timebillingreport.cfc",	
 	"title":"State PPTR",
-	"fields":{TRST_ID:{key:true,list:false,edit:false},
+	"fields":{TRST_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},
 			TR_ID:{list:false,edit:false},
 			CLIENT_NAME:{title:'Client Name'},
 			TR_TAXYEAR:{title:'Year',width:'2%'},
@@ -322,7 +322,7 @@ _grid13=function(){_jGrid({
 	"grid":"grid13",
 	"url":"timebillingreport.cfc",	
 	"title":"Communications",
-	"fields":{CO_ID:{key:true,list:false,edit:false},
+	"fields":{CO_ID:{key:true,edit:false,visibility:'hidden',title:'ID'},
 			CLIENT_NAME:{title:'Client Name'},
 			CO_CALLER:{title:'Caller'},
 			CO_FORTEXT:{title:'For'},	

@@ -18,7 +18,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"businessformation.cfc",
 	"title":"Business Formation",
-	"fields":{BF_ID:{key:true,list:false,edit:false}
+	"fields":{BF_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.BF_ID+"',page:'businessformation',group:'group1'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,CLIENT_ID:{list:false,edit:false}
 		,CLIENT_NAME:{title:'Client Name'}
@@ -40,7 +40,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"businessformation.cfc",
 	"title":"Business Formation Subtask",
-	"fields":{BFS_ID:{key:true,list:false,edit:false}
+	"fields":{BFS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 		,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.BFS_ID+"',page:'businessformation',group:'group2'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}
 		,BFS_TASKNAME:{title:'Task'}
 		,BFS_ASSIGNEDTOTEXT:{title:'Assigned To',width:'2%'}

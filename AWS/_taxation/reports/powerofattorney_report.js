@@ -23,7 +23,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"powerofattorney_report.cfc",
 	"title":"Power of Attorney",
-	"fields":{PA_ID:{key:true,list:false,edit:false}
+	"fields":{PA_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PA_TAXYEARS:{title:'Tax Years'}
 			,PA_TAXFORMSTEXT:{title:'Tax Forms'}

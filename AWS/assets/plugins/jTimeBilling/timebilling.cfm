@@ -53,7 +53,7 @@ _grid102=function(){
 	"grid":"grid102",
 	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time &amp; Billing",
-	"fields":{TB_ID:{key:true,list:false,edit:false}
+	"fields":{TB_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.TB_ID+"',page:'timebilling',group:'group102',plugin:'102'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}	
 			,TB_DATE:{title:'Date',width:'2%'}
 			,U_NAME:{title:'Name'}
@@ -69,7 +69,7 @@ _grid102_1=function(){
 	"grid":"grid102_1",
 	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time",
-	"fields":{T_ID:{key:true,list:false,edit:false}
+	"fields":{T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.T_ID+"',page:'timebilling',group:'group102_1',plugin:'102'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}	
 			,T_START:{title:'Start Time',width:'2%'}
 			,T_STOP:{title:'End Time',width:'2%'}

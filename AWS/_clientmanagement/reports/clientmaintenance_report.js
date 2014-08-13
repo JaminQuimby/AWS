@@ -36,7 +36,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"clientmaintenance_report.cfc",
 	"title":"Client Maintenance Report",	
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
+	"fields":{CLIENT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CLIENT_SPOUSE:{title:'Spouse'}
 			,CLIENT_TYPETEXT:{title:'Client Type',width:"1%"}
@@ -83,7 +83,7 @@ var grid2_config = [
 	"grid":"grid2",
 	"url":"clientmaintenance_report.cfc",
 	"title":"Client Contacts Report",	
-	"fields":{CLIENT_ID:{key:true,list:false,edit:false}
+	"fields":{CLIENT_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,CONTACT_NAME:{title:'Contact'}
 			,CONTACT_TYPETEXT:{title:'Contact Type'}

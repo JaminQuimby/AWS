@@ -70,7 +70,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"financialstatements_report.cfc",
 	"title":"Financial Statement Status",
-	"fields":{FDS_ID:{key:true,list:false,edit:false}
+	"fields":{FDS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'2%'}
 			,FDS_MONTHTEXT:{title:'Period'}
@@ -107,7 +107,7 @@ _grid2=function(){_jGrid({
 	"grid":"grid2",
 	"url":"financialstatements_report.cfc",
 	"title":"Financial Data Status ",
-	"fields":{FDS_ID:{key:true,list:false,edit:false}
+	"fields":{FDS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,FDS_YEAR:{title:'Year',width:'2%'}
 			,FDS_MONTHTEXT:{title:'Month'}

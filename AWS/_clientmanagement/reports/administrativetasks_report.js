@@ -27,7 +27,7 @@ var grid1_config = [
 	"grid":"grid1",
 	"url":"administrativetasks_report.cfc",
 	"title":"Administrative Tasks Report",
-	"fields":{AS_ID:{key:true,list:false,edit:false}
+	"fields":{AS_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,AS_CATEGORYTEXT:{title:'Category'}
 			,AS_TASKDESC:{title:'Description'}

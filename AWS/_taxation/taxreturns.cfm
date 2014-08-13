@@ -135,6 +135,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 	<div><label for="g1_g4_required"><input id="g1_g4_required" type="checkbox" class="ios-switch">PPTR Required</label></div>
     <div><label for="g1_g4_extended">PPTR Extension Completed</label><input type="text" class="date" id="g1_g4_extended" ></div>
 	<div><label for="g1_g4_extensionrequested">PPTR Extension Requested</label><input type="text" class="date" id="g1_g4_extensionrequested" ></div>
+	<div><label for="g1_g4_status">PPTR Status</label><select id="g1_g4_status" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="global_status"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g4_assignedto">PPTR Assigned To</label><select id="g1_g4_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g4_rfr">PPTR Ready For Review</label><input type="text" class="date" id="g1_g4_rfr" ></div>
     <div><label for="g1_g4_completedby">PPTR Completed By</label><select id="g1_g4_completedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>

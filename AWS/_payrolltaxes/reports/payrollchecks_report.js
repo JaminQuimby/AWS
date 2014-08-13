@@ -47,7 +47,7 @@ _jGrid({
 	"grid":"grid1",
 	"url":"payrollchecks_report.cfc",
 	"title":"Payroll Check Status",
-	"fields":{PC_ID:{key:true,list:false,edit:false}
+	"fields":{PC_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,CLIENT_NAME:{title:'Client Name'}
 			,PC_YEAR:{title:'Year',width:'2%'}
 			,PC_PAYENDDATE:{title:'Pay End',width:'2%'}

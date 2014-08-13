@@ -10,7 +10,7 @@ _grid1=function(){_jGrid({
 	"grid":"grid1",
 	"url":"usersettings.cfc",
 	"title":"User History",
-	"fields":{USER_ID:{key:true,list:false,edit:false}
+	"fields":{USER_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,SI_NAME:{title:'User'}
 
 			},
