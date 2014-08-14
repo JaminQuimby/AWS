@@ -171,6 +171,7 @@ SELECT[tr_4_assignedto]
 ,[tr_4_reviewed]
 ,[tr_4_reviewedby]
 ,[tr_4_rfr]=FORMAT(tr_4_rfr,'#Session.localization.formatdate#')
+,[tr_4_status]
 FROM[v_taxreturns]
 WHERE[tr_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -342,9 +343,9 @@ SELECT[tr_id]
 ,[tr_3_delivered]=FORMAT(tr_3_delivered,'#Session.localization.formatdate#')
 ,[tr_4_required] 
 FROM[v_taxreturns]
-WHERE  ISNULL([tr_notrequired],0) != 1
-AND ISNULL([tr_status],0) != 2 
-AND  ISNULL([tr_status],0) != 3
+WHERE  ((ISNULL([tr_notrequired],0) != 1) OR (ISNULL([tr_4_required,0) != 0))
+AND (ISNULL([tr_status],0) != 2 AND ISNULL([tr_status],0) != 3)
+OR  (ISNULL([tr_4_status],0) != 2 AND ISNULL([tr_4_status],0) != 3)
 AND [client_active]=(1)
 AND [deleted] IS NULL
 <cfif !ListFindNoCase('false,0',ARGUMENTS.orderBy)>ORDER BY[<cfqueryparam value="#ARGUMENTS.orderBy#"/>]<cfelse>ORDER BY convert(datetime, tr_duedate, 101) ASC </cfif>
@@ -638,6 +639,7 @@ SET[tr_4_assignedto]=<cfqueryparam value="#j.DATA[1][2]#" null="#LEN(j.DATA[1][2
 ,[tr_4_reviewed]=<cfqueryparam value="#j.DATA[1][14]#" null="#LEN(j.DATA[1][14]) eq 0#"/>
 ,[tr_4_reviewedby]=<cfqueryparam value="#j.DATA[1][15]#" null="#LEN(j.DATA[1][15]) eq 0#"/>
 ,[tr_4_rfr]=<cfqueryparam value="#j.DATA[1][16]#" null="#LEN(j.DATA[1][16]) eq 0#"/>
+,[tr_4_status]=<cfqueryparam value="#j.DATA[1][17]#" null="#LEN(j.DATA[1][17]) eq 0#"/>
 WHERE[tr_id]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery>
 <!---Returns ID, Returns Group Next in List to be saved, Returns an OK Result--->

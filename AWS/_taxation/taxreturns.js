@@ -97,7 +97,7 @@ switch(query.COLUMNS[0]){
 /*Group1_2*/case "TR_2_ASSIGNEDTO":var list='g1_g2_assignedto,g1_g2_preparedby,g1_g2_readyforreview';_loadit({"query":query,"list":list});break;
 /*Group1_2*/case "TR_2_COMPLETED":var list='g1_g2_completed,g1_g2_reviewassignedto,g1_g2_reviewed,g1_g2_reviewedby,g1_g2_reviewedwithnotes';_loadit({"query":query,"list":list});break;
 /*Group1_3*/case "TR_3_ASSEMBLERETURN":var list='g1_g3_assemblereturn,g1_g3_contacted,g1_g3_delivered,g1_g3_emailed,g1_g3_messageleft,g1_g3_missingsignatures,g1_deliverymethod,g1_paymentstatus';_loadit({"query":query,"list":list});break;
-/*Group1_4*/case "TR_4_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completed,g1_g4_completedby,g1_g4_currentfees,g1_g4_delivered,g1_g4_extended,g1_g4_extensionrequested,g1_g4_paymentstatus,g1_g4_pptresttime,g1_g4_priorfees,g1_g4_required,g1_g4_reviewassigned,g1_g4_reviewed,g1_g4_reviewedby,g1_g4_rfr';_loadit({"query":query,"list":list});break;
+/*Group1_4*/case "TR_4_ASSIGNEDTO":var list='g1_g4_assignedto,g1_g4_completed,g1_g4_completedby,g1_g4_currentfees,g1_g4_delivered,g1_g4_extended,g1_g4_extensionrequested,g1_g4_paymentstatus,g1_g4_pptresttime,g1_g4_priorfees,g1_g4_required,g1_g4_reviewassigned,g1_g4_reviewed,g1_g4_reviewedby,g1_g4_rfr,g1_g4_status';_loadit({"query":query,"list":list});break;
 /*Group2*/case "TRST_ID":var list='subtask1_id,g2_assignedto,g2_completed,g2_primary,g2_reviewassignedto,g2_state,g2_status,g2_requiredforms';_loadit({"query":query,"list":list});break;
 /*Group2 State*/case"TRST_STATE":var list='g2_state'; _loadit({"query":query,"list":list});break;
 /*Group2_1*/case "TRST_1_ASSIGNEDTO":var list='g2_g1_assignedto,g2_g1_completed,g2_g1_duedate,g2_g1_informationreceived,g2_g1_missinginforeceived,g2_g1_missinginformation,g2_g1_preparedby,g2_g1_readyforreview,g2_g1_reviewassignedto,g2_g1_reviewed,g2_g1_reviewedby,g2_g1_reviewedwithnotes';_loadit({"query":query,"list":list});break;
@@ -235,6 +235,7 @@ $("#g1_g4_reviewassigned").val()+'",'+
 $("#g1_g4_reviewed").is(':checked')+',"'+
 $("#g1_g4_reviewedby").val()+'","'+
 $("#g1_g4_rfr").val()+'","'+
+$("#g1_g4_status").val()+'","'+
 '"]]}'
 if($("#isLoaded_group1_5").val()!=0){_saveData({group:"group1_5",payload:$.parseJSON(json),page:"taxreturns"})}
 else{_saveDataCB({'group':'group2'})};
