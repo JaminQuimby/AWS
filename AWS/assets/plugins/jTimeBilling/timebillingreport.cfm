@@ -6,13 +6,7 @@
 <cfset page.formid=102>
 <cfset page.title="Time &amp; Billing">
 <cfset page.type="report">
-<cfif Session.user.role eq 0>
 <cfset page.menuLeft="Payroll Checks,Payroll Taxes,Other Filings,Business Formation,Accounting &amp; Consulting,Financial Statements,Financial &amp; Tax Planning,Notices,Tax Returns,PPTR,State Tax Returns,State PPTR,Communications">
-</cfif>
-<cfif Session.user.role eq 1>
-<cfset page.menuLeft="Payroll Checks,Payroll Taxes,Other Filings,Business Formation,Accounting &amp; Consulting,Financial Statements,Financial &amp; Tax Planning,Notices,Tax Returns,PPTR,State Tax Returns,State PPTR,Communications,Lock Billing">
-</cfif>
-
 <cfset page.trackers="task_id">
 <cfset page.plugins.disable="ALL">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -131,13 +125,6 @@
 		<div class="tblGrid" id="grid13"></div>
     </div>
  </div>    
- 
-  <div id="group14" class="gf-checkbox">
-	<h3>Lock Billing</h3>
-	<div>
-		<div class="buttonbox"><input type="submit" value="Lock Billing" onClick=""></div>
-   </div>
- </div>  
  
 <!--- Start Plugins --->
 <cfinclude template="/assets/plugins/plugins.cfm">

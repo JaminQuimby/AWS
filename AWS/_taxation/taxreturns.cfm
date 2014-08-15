@@ -103,7 +103,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div>
 	<div><label for="g1_g2_assignedto">Assigned To</label><select id="g1_g2_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g1_g2_preparedby">Prepared By</label><select id="g1_g2_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-	<div><label for="g1_g2_readyforreview">Ready for Review</label><input type="text" class="date" id="g1_g2_readyforreview" ></div>
+	<div><label for="g1_g2_readyforreview">Ready For Review</label><input type="text" class="date" id="g1_g2_readyforreview" ></div>
 </div>
 
 <!--- GROUP1 SUBGROUP3 --->
@@ -177,7 +177,7 @@ _loadData({"id":"task_id","group":"group1","page":"#page.location#"});
 <div><label for="g2_g1_missinginforeceived">Missing Info Received</label><input type="text" class="date" id="g2_g1_missinginforeceived" ></div>
 <div><label for="g2_g1_assignedto">Assigned To</label><select id="g2_g1_assignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_g1_preparedby">Prepared By</label><select id="g2_g1_preparedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-<div><label for="g2_g1_readyforreview">Ready for Review</label><input type="text" class="date" id="g2_g1_readyforreview" ></div>
+<div><label for="g2_g1_readyforreview">Ready For Review</label><input type="text" class="date" id="g2_g1_readyforreview" ></div>
 <div><label for="g2_g1_reviewassignedto">Review Assigned To</label><select id="g2_g1_reviewassignedto"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g2_g1_reviewed">Reviewed</label><input type="text" class="date" id="g2_g1_reviewed" ></div>
 <div><label for="g2_g1_reviewedby">Reviewed By</label><select id="g2_g1_reviewedby"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
