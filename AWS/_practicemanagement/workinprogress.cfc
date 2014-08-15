@@ -70,7 +70,7 @@ WHERE([client_active]='1'and[c].[deleted]is null ))
 SELECT[t].bf_id,bfs_id,c.client_id,bf_assignedto,bfs_assignedto,bf_duedate,client_group,count_bf_id=ROW_NUMBER()OVER(PARTITION BY t.bf_id ORDER BY t.bf_id),bf_esttime,bfs_estimatedtime
 FROM[client_listing]AS[c]
 INNER JOIN [businessformation]as[t]ON t.client_id = c.client_id and t.deleted is null and(bf_status not in ('2','3') or bf_status is null)
-LEFT JOIN [businessformation_subtask]as[s]ON t.bf_id = s.bf_id and s.deleted is null and (bfs_status not in ('2','3') or bfs_status is null)
+LEFT JOIN [businessformation_subtask]as[s]ON t.bf_id = s.bf_id and s.deleted is null and(bfs_status not in ('2','3') or bfs_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null ))
 
 ,cte_communication AS(
@@ -93,7 +93,7 @@ SELECT[t].fds_id,fdss_id,c.client_id,fds_assignedto,fdss_assignedto,fds_duedate,
 FROM[client_listing]AS[c]
 INNER JOIN [financialdatastatus]as[t]ON t.client_id = c.client_id and t.deleted is null and(fds_status not in ('2','3') or fds_status is null)
 and([fds_delivery_datecompleted]IS NULL)
-LEFT JOIN [financialdatastatus_subtask]as[s]ON t.fds_id = s.fds_id and s.deleted is null and((fdss_status not in ('2','3') or fdss_status is null))
+LEFT JOIN [financialdatastatus_subtask]as[s]ON t.fds_id = s.fds_id and s.deleted is null and(fdss_status not in ('2','3') or fdss_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null))
 
 
@@ -104,7 +104,7 @@ SELECT[t].n_id,nst_id,c.client_id,nst_assignedto,client_group,count_n_id=ROW_NUM
 ,count_t_id=ROW_NUMBER()OVER(PARTITION BY s.nst_assignedto,t.n_id ORDER BY t.n_id)
 FROM[client_listing]AS[c]
 INNER JOIN [notice]as[t]ON t.client_id = c.client_id and t.deleted is null and(n_status not in ('2','3') or n_status is null) 
-LEFT JOIN [notice_subtask]as[s]ON t.n_id = s.n_id and s.deleted is null and (nst_status not in ('2','3') or nst_status is null)
+LEFT JOIN [notice_subtask]as[s]ON t.n_id = s.n_id and s.deleted is null and(nst_status not in ('2','3') or nst_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null ))
 
 --- ^ INCOMPLETE ---
@@ -144,7 +144,7 @@ WHERE([client_active]='1'and[c].[deleted]is null ))
 ,cte_taxreturns_personalproperty AS(
 SELECT[t].tr_id,c.client_id,tr_4_assignedto,tr_3_delivered,tr_duedate,client_group,count_tr_id=ROW_NUMBER()OVER(PARTITION BY t.tr_id ORDER BY t.tr_id),tr_4_pptresttime
 FROM[client_listing]AS[c]
-INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null and(tr_4_required='TRUE') and(tr_taxyear=Year(getdate())-1 OR Year(tr_2_informationreceived)=Year(getdate())) and(tr_status not in ('2','3') or tr_status is null)
+INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null and(tr_4_required='TRUE') and (tr_status not in ('2','3') or tr_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null ))
 
 , cte_taxreturns AS(
@@ -816,7 +816,7 @@ SELECT DISTINCT[bf_id]
 ,[bf_missinginforeceived]=FORMAT(bf_missinginforeceived,'#Session.localization.formatdate#') 
 ,[bf_missinginfo]
 FROM[v_businessformation_subtask]
-WHERE[deleted] IS NULL AND[client_active]=(1)AND([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))
+WHERE[client_active]=(1)AND(([bf_status]NOT IN('2','3')OR([bf_status]IS NULL))AND([bfs_status]NOT IN('2','3')OR([bfs_status]IS NULL)))
 <cfif ARGUMENTS.duedate neq "">AND([bf_duedate]IS NULL OR[bf_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">AND([bf_assignedto]=@u OR[bfs_assignedto]=@u )</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c )</cfif>
@@ -1646,7 +1646,11 @@ AND[tr_notrequired]!=(1)
 AND [deleted] IS NULL
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
-<cfif ARGUMENTS.userid neq "0">AND(ISNULL(tr_2_assignedto,0)=@u OR ISNULL(tr_2_reviewassignedto,0)=@u)</cfif>
+<cfif ARGUMENTS.userid neq "0">
+AND((ISNULL(tr_2_assignedto,0)=@u AND[tr_2_readyforreview]IS NULL)
+OR(ISNULL(tr_2_reviewassignedto,0)=@u AND[tr_2_reviewedwithnotes]IS NULL)
+OR(ISNULL(tr_2_assignedto,0)=@u AND[tr_2_reviewedwithnotes]IS NOT NULL ))
+</cfif>
 <cfif ARGUMENTS.clientid neq "0">AND([client_id]=@c)</cfif>
 <cfif ARGUMENTS.group neq "0">AND(@g IN([client_group]))</cfif>
 
