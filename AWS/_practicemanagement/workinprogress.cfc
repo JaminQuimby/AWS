@@ -97,8 +97,6 @@ LEFT JOIN [financialdatastatus_subtask]as[s]ON t.fds_id = s.fds_id and s.deleted
 WHERE([client_active]='1'and[c].[deleted]is null))
 
 
---- v INCOMPLETE ---
-
 ,cte_notices AS(
 SELECT[t].n_id,nst_id,c.client_id,nst_assignedto,client_group,count_n_id=ROW_NUMBER()OVER(PARTITION BY t.n_id ORDER BY t.n_id),nst_esttime,nst_1_resduedate
 ,count_t_id=ROW_NUMBER()OVER(PARTITION BY s.nst_assignedto,t.n_id ORDER BY t.n_id)
@@ -106,8 +104,6 @@ FROM[client_listing]AS[c]
 INNER JOIN [notice]as[t]ON t.client_id = c.client_id and t.deleted is null and(n_status not in ('2','3') or n_status is null) 
 LEFT JOIN [notice_subtask]as[s]ON t.n_id = s.n_id and s.deleted is null and(nst_status not in ('2','3') or nst_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null ))
-
---- ^ INCOMPLETE ---
 
 
 
@@ -1340,7 +1336,9 @@ AND [deleted] IS NULL
 AND ([of_status]NOT IN('2','3')OR([of_status]IS NULL))
 <cfif ARGUMENTS.duedate neq "">AND([of_duedate]IS NULL OR[of_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
-AND([of_obtaininfo_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NULL)
+
+AND[of_assignedto]=@u
+OR([of_obtaininfo_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NULL)
 OR([of_preparation_assignedto]=@u  AND[of_obtaininfo_datecompleted]IS NOT NULL AND[of_preparation_datecompleted]IS NULL)
 OR([of_review_assignedto]=@u  AND[of_preparation_datecompleted]IS NOT NULL AND[of_review_datecompleted]IS NULL)
 OR([of_assembly_assignedto]=@u  AND[of_review_datecompleted]IS NOT NULL AND[of_assembly_datecompleted]IS NULL)
@@ -1419,7 +1417,8 @@ FROM[v_payrollcheckstatus]
 <cfif ARGUMENTS.duedate neq "">AND([pc_duedate]IS NULL OR[pc_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
 AND
-([pc_delivery_datecompleted]IS NULL AND([pc_obtaininfo_datecompleted]IS NULL AND[pc_obtaininfo_assignedto]=@u)
+([pc_delivery_datecompleted]IS NULL AND[pc_assignedto]=@u
+OR([pc_obtaininfo_datecompleted]IS NULL AND[pc_obtaininfo_assignedto]=@u)
 OR([pc_obtaininfo_datecompleted]IS NOT NULL AND[pc_preparation_datecompleted]IS NULL AND[pc_preparation_assignedto]=@u)
 OR([pc_preparation_datecompleted]IS NOT NULL AND[pc_review_datecompleted]IS NULL AND[pc_review_assignedto]=@u)
 OR([pc_review_datecompleted]IS NOT NULL AND[pc_assembly_datecompleted]IS NULL AND[pc_assembly_assignedto]=@u)
