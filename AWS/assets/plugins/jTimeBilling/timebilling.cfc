@@ -19,25 +19,27 @@ SELECT
 ,[tb_mileage]
 ,[tb_notes]
 ,[tb_paymentstatus]
-,[tb_ratetype]
+,[tb_activitytype]
 ,[tb_reimbursment]=FORMAT(tb_reimbursment,'C','#Session.localization.language#')
 FROM[timebilling]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-<!--- Load Group102_1--->
-<cfcase value="group102_1">
+<cfcase value="group102_subtask">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
-'GROUP102_1'AS[GROUP102_1]
-,[t_id]
-,[t_start]=FORMAT(t_start,'#Session.localization.formatdatetime#','#Session.localization.language#') 
-,[t_stop]=FORMAT(t_stop,'#Session.localization.formatdatetime#','#Session.localization.language#')
+'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]
+,[t_id],[TB_ID]
+,[t_start]=CONVERT(VARCHAR(8),[t_start], 24)
+,[t_stop]=CONVERT(VARCHAR(8),[t_stop], 24)
+,[t_diff]=CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF(minute,[t_start],[t_stop])))/60,2))
 FROM[timebilling]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
+
+
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
 </cffunction>
@@ -82,16 +84,16 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 <cfreturn myResult>
 </cfcase>
 
-<!--- Grid 102_1  --->
-<cfcase value="group102_1">
-<cfquery datasource="#Session.organization.name#" name="fquery">
-SELECT[t_id]
-,[tb_id]
-,[t_start]=FORMAT (CONVERT(datetime, t_start), 'hh:mm:ss tt')
-,[t_stop]=FORMAT (CONVERT(datetime, t_stop), 'hh:mm:ss tt')
-,CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF( minute, [t_start], [t_stop])))/60,2))AS[t_diff]
-
-FROM[v_time]
+<!--- Grid 102_subtask  --->
+<cfcase value="group102_subtask">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+SELECT 
+'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]
+,[t_id],[TB_ID]
+,[t_start]=CONVERT(VARCHAR(8),[t_start], 24)
+,[t_stop]=CONVERT(VARCHAR(8),[t_stop], 24)
+,[t_diff]=CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF(minute,[t_start],[t_stop])))/60,2))
+FROM[time]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 <cfset myResult="">
@@ -110,6 +112,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
 <cfreturn myResult>
 </cfcase>
+
 </cfswitch>
 </cffunction>
 
@@ -135,7 +138,7 @@ INSERT INTO[timebilling](
 ,[tb_mileage]
 ,[tb_notes]
 ,[tb_paymentstatus]
-,[tb_ratetype]
+,[tb_activitytype]
 ,[tb_reimbursment]
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
@@ -172,7 +175,7 @@ SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[tb_mileage]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
 ,[tb_notes]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
 ,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[tb_ratetype]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
+,[tb_activitytype]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
 ,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
 WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":"#j.DATA[1][1]#","group":"plugins","subgroup":"102_1","result":"ok"}'>

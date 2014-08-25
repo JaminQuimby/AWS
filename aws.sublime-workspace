@@ -36,10 +36,18 @@
 	"buffers":
 	[
 		{
-			"file": "AWS/_practicemanagement/workinprogress.cfc",
+			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfm",
 			"settings":
 			{
-				"buffer_size": 89421,
+				"buffer_size": 10006,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+			"settings":
+			{
+				"buffer_size": 8903,
 				"line_ending": "Windows"
 			}
 		}
@@ -105,9 +113,9 @@
 	},
 	"file_history":
 	[
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_accountingservices/acctingconsulting.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/notices.js",
@@ -176,6 +184,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"rate",
+			"ratetype",
+			"tb_billingtype",
+			"tb_subtask",
+			"10001",
+			">\n",
+			"LIKE",
 			"]\n",
 			"active",
 			"mcs_active",
@@ -229,19 +244,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "AWS/_practicemanagement/workinprogress.cfc",
+					"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 89421,
+						"buffer_size": 10006,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13320,
-								13320
+								2632,
+								2632
 							]
 						],
 						"settings":
@@ -249,13 +264,45 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3240.0,
+						"translation.y": 615.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8903,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2338,
+								2338
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1845.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
