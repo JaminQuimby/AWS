@@ -17,7 +17,7 @@ SELECT [file_id]
       ,[client_id]
       ,[file_name]
       ,[file_savedname]
-      ,[file_descriptionTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='plugin_documents'AND[file_description]=[optionvalue_id]) 
+	  ,[optionName]
       ,[file_size]
       ,[file_type]
       ,[file_year]
@@ -45,7 +45,7 @@ ORDER BY[file_name]
 <cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'"
 								,"FILE_NAME":"'&FILE_NAME&'"
 								,"FORMNAME":"'&FORMNAME&'"
-								,"FILE_DESCRIPTIONTEXT":"'&FILE_DESCRIPTIONTEXT&'"
+								,"OPTIONNAME":"'&OPTIONNAME&'"
 								,"FILE_YEAR":"'&FILE_YEAR&'"
 								,"FILE_MONTH":"'&FILE_MONTH&'"
 								,"FILE_DAY":"'&FILE_DAY&'"
