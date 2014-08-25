@@ -484,7 +484,7 @@ input { font-family: 'FontAwesome'; }
 <div>
 <table >
 <tr>
-  <td style="padding:30px"><img src="#this.url#/assets/images/logo_aws.png" alt="Accountants' Workflow Solutions"></td>
+  <td style="padding:30px"><img src="#this.url#/assets/images/aws_logo_2.png" alt="Accountants' Workflow Solutions"></td>
   <td style="padding:30px"><div  style="display:inline-block;">
 <cfoutput>
 

@@ -13,10 +13,11 @@
 <cfquery datasource="#Session.organization.name#" name="fquery">
 SELECT [file_id]
       ,[form_id]
+      ,[formname]
       ,[client_id]
       ,[file_name]
       ,[file_savedname]
-      ,[file_description]
+      ,[file_descriptionTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='plugin_documents'AND[file_description]=[optionvalue_id]) 
       ,[file_size]
       ,[file_type]
       ,[file_year]
@@ -27,10 +28,13 @@ SELECT [file_id]
       ,[file_ext]
 FROM[v_ctrl_files]
 WHERE[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
+<cfif ARGUMENTS.formid is not 1>
 AND[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
 <cfif ARGUMENTS.taskid is not "">
 AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 </cfif>
+</cfif>
+
 ORDER BY[file_name]
 </cfquery>
 <cfset myResult="">
@@ -38,7 +42,17 @@ ORDER BY[file_name]
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'","FILE_NAME":"'&FILE_NAME&'","FILE_DESCRIPTION":"'&FILE_DESCRIPTION&'","FILE_YEAR":"'&FILE_YEAR&'","FILE_MONTH":"'&FILE_MONTH&'","FILE_DAY":"'&FILE_DAY&'","FILE_SAVEDNAME":"'&FILE_SAVEDNAME&'","FILE_TYPE":"'&FILE_TYPE&'","FILE_SUBTYPE":"'&FILE_SUBTYPE&'"}'>
+<cfset queryResult=queryResult&'{"FILE_ID":"'&FILE_ID&'"
+								,"FILE_NAME":"'&FILE_NAME&'"
+								,"FORMNAME":"'&FORMNAME&'"
+								,"FILE_DESCRIPTIONTEXT":"'&FILE_DESCRIPTIONTEXT&'"
+								,"FILE_YEAR":"'&FILE_YEAR&'"
+								,"FILE_MONTH":"'&FILE_MONTH&'"
+								,"FILE_DAY":"'&FILE_DAY&'"
+								,"FILE_SAVEDNAME":"'&FILE_SAVEDNAME&'"
+								,"FILE_TYPE":"'&FILE_TYPE&'"
+								,"FILE_SUBTYPE":"'&FILE_SUBTYPE&'"
+								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>

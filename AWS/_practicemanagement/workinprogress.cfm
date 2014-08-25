@@ -41,7 +41,7 @@
 	<div><label for="g1_group">Group</label><select id="g1_group" onchange="_grid1();"><option value="0">&nbsp;</option><cfoutput query="global_clientgroup"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	
 </td>
-  <td style="position:absolute; right:30px; "><cfoutput><img src="#this.url#/assets/images/logo_workflow4accountants.PNG" alt="Accountants' Workflow Solutions"></cfoutput></td>
+  <td style="position:absolute; right:30px;"><cfoutput><img src="#this.url#/assets/images/aws_logo_3.PNG" alt="Accountants' Workflow Solutions"></cfoutput></td>
 
 </tr>
 </table>    
