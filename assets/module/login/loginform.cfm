@@ -423,6 +423,11 @@ String.prototype.hashCode = function() {
       minimum: 8});
 
   });
+  
+function redirect()
+{
+   window.open('https://'+window.location.hostname+'/AWS/_accountingservices/acctingconsulting.cfm?task_id="+$("#task_id").val()','WIPPOP');
+}
 </script>
 <cfoutput>
 <script type="application/javascript">
@@ -489,6 +494,9 @@ input { font-family: 'FontAwesome'; }
 <cfoutput>
 
 
+
+
+
 <cfif Len(URL.r)gt 1 and Len(URL.e)gt 1>
 <H2>Please Enter a new Password</H2>
 <div class="message">
@@ -516,7 +524,7 @@ input { font-family: 'FontAwesome'; }
  <label for="j_password">Password:</label>
  <input type="password" name="j_password" id="j_password" placeholder="&##xf023;  Password" max="20" >
 
-<div class="buttonbox"><input type="submit" value="Log In" onClick="#this.url#/AWS/_PracticeManagement/workinprogress.cfm"> | <a href="##" onClick="_run.reset_password()">Forgot Password</a></div>
+<div class="buttonbox"><input type="submit" value="Log In" onClick="redirect()"> | <a href="##" onClick="_run.reset_password()">Forgot Password</a></div>
 </form>
 </div>
 </cfif>

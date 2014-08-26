@@ -140,7 +140,7 @@ WHERE([client_active]='1'and[c].[deleted]is null ))
 ,cte_taxreturns_personalproperty AS(
 SELECT[t].tr_id,c.client_id,tr_4_assignedto,tr_3_delivered,tr_duedate,client_group,count_tr_id=ROW_NUMBER()OVER(PARTITION BY t.tr_id ORDER BY t.tr_id),tr_4_pptresttime
 FROM[client_listing]AS[c]
-INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null and(tr_4_required='TRUE') and (tr_status not in ('2','3') or tr_status is null)
+INNER JOIN [taxreturns]as[t]ON t.client_id = c.client_id and t.deleted is null and(tr_4_required='TRUE') and (tr_4_status not in ('2','3') or tr_4_status is null)
 WHERE([client_active]='1'and[c].[deleted]is null ))
 
 , cte_taxreturns AS(
@@ -1572,7 +1572,7 @@ SELECT[tr_id]
 ,[tr_duedateORDERBY]=convert(datetime, tr_duedate, 101)
 FROM[v_taxreturns]
 WHERE
-  (tr_status not in ('2','3') or tr_status is null) and [client_active]=(1) AND[tr_4_required]='TRUE' AND [deleted] IS NULL
+  (tr_4_status not in ('2','3') or tr_4_status is null) and [client_active]=(1) AND[tr_4_required]='TRUE' AND [deleted] IS NULL
 
 <cfif ARGUMENTS.search neq "">AND[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/></cfif>
 <cfif ARGUMENTS.userid neq "0">AND[tr_4_assignedto]=@u</cfif>
@@ -1643,6 +1643,7 @@ FROM[v_taxreturns]
 WHERE[client_active]=(1)
 AND[tr_notrequired]!=(1)
 AND [deleted] IS NULL
+AND ([tr_status]NOT IN('2','3')OR([tr_status]IS NULL))
 
 <cfif ARGUMENTS.duedate neq "">AND([tr_duedate]IS NULL OR[tr_duedate]BETWEEN '1/1/1900' AND @d)</cfif>
 <cfif ARGUMENTS.userid neq "0">
