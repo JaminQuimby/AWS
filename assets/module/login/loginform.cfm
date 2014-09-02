@@ -18,7 +18,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Accountants' Workflow Solution - Login</title>
+<title>AWS Practice Management - Login</title>
 <cfoutput>
 <link rel="stylesheet" type="text/css" href="#this.url#/AWS/assets/css/aws.css"/>
 </cfoutput>
@@ -424,10 +424,7 @@ String.prototype.hashCode = function() {
 
   });
   
-function redirect()
-{
-   window.open('https://'+window.location.hostname+'/AWS/_accountingservices/acctingconsulting.cfm?task_id="+$("#task_id").val()','WIPPOP');
-}
+
 </script>
 <cfoutput>
 <script type="application/javascript">
@@ -518,13 +515,13 @@ input { font-family: 'FontAwesome'; }
 <cfelse>
 <H2>Please Log In</H2>
 <div class="message">
-<form action="#CGI.script_name#?#CGI.query_string#" method="Post">
+<form action="#this.url#/AWS/_PracticeManagement/workinprogress.cfm" method="Post">
  <label for="j_username">Email:</label>
  <input name="j_username" type="email" id="j_username" placeholder="&##xf0e0;  Email Address" >
  <label for="j_password">Password:</label>
  <input type="password" name="j_password" id="j_password" placeholder="&##xf023;  Password" max="20" >
 
-<div class="buttonbox"><input type="submit" value="Log In" onClick="redirect()"> | <a href="##" onClick="_run.reset_password()">Forgot Password</a></div>
+<div class="buttonbox"><input type="submit" value="Log In"> | <a href="##" onClick="_run.reset_password()">Forgot Password</a></div>
 </form>
 </div>
 </cfif>
