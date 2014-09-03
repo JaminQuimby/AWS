@@ -5,14 +5,184 @@
 <script type="text/javascript">
 $(document).ready(function(){
 //Start Normal Template Functions
+
+
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginLoadData102=function(){return "tb_id,tb_id,g102_employee,g102_adjustment,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
 _pluginLoadData102_1=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
 _group102=function(){_grid102();}
-_group102_1=function(){_grid102_1();}
-_pluginSaveData102=function(){
+_group102_addtime=function(){$("##isLoaded_group102_1").val(1); }
 
+
+
+_group102_addtimecard=function(){
+$("##isLoaded_group102_1").val(1);
+$("##g102_employee").val(10000).trigger("chosen:updated");
+$("##g102_date").val("#DateFormat(Now(),Session.localization.formatdate)#" )
+
+
+switch(#page.formid#){
+
+case 2: //Accounting and Consulting
+$("label[for='g102_field1']").text("Consulting Category");
+$("label[for='g102_field2']").text("Task Description");
+$("label[for='g102_field3']").hide();
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_consultingcategory :selected").text());
+$("##g102_field2").val($("##g1_taskdescription").val());
+$("##g102_field3").hide();
+$("##g102_field4").hide();
+break;
+
+case 4: // Administrative Tasks
+$("label[for='g102_field1']").text("Category");
+$("label[for='g102_field2']").text("Task Description");
+$("label[for='g102_field3']").text("Date Requested");
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_category :selected").text());
+$("##g102_field2").val($("##g1_taskdescription").val());
+$("##g102_field3").val($("##g1_daterequested").val());
+$("##g102_field4").hide();
+break;
+
+case 3: //Business Formation
+$("label[for='g102_field1']").text("Owners");
+$("label[for='g102_field2']").text("Activity");
+$("label[for='g102_field3']").text("Date Initiated");
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_owners").val());
+$("##g102_field2").val($("##g1_activity").val());
+$("##g102_field3").val($("##g1_dateinitiated").val());
+$("##g102_field4").hide();
+break;
+
+case 12: //Communication
+$("label[for='g102_field1']").text("Communication Date");
+$("label[for='g102_field2']").text("Caller");
+$("label[for='g102_field3']").hide();
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_date").val());
+$("##g102_field2").val($("##g1_caller").val());
+$("##g102_field3").hide();
+$("##g102_field4").hide();
+break;
+
+case 9: //Financial & Tax Planning
+$("label[for='g102_field1']").text("Category");
+$("label[for='g102_field2']").text("Task Description");
+$("label[for='g102_field3']").text("Request for Services");
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_category :selected").text());
+$("##g102_field2").val($("##g1_description").val());
+$("##g102_field3").val($("##g1_requestforservices").val());
+$("##g102_field4").hide();
+break;
+
+case 5: //Financial Statements
+$("label[for='g102_field1']").text("Year");
+$("label[for='g102_field2']").text("Month");
+$("label[for='g102_field3']").text("Period End");
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_year").val());
+$("##g102_field2").val($("##g1_month").val());
+$("##g102_field3").val($("##g1_periodend :selected").text());
+$("##g102_field4").hide();
+break;
+
+case 8: //Notices
+$("label[for='g102_field1']").text("Tax Year");
+$("label[for='g102_field2']").text("Tax Form");
+$("label[for='g102_field3']").text("Matter Name");
+$("label[for='g102_field4']").text("Notice Number");
+
+$("##g102_field1").val($("##g2_1_taxyear :selected").text());
+$("##g102_field2").val($("##g2_1_taxform :selected").text());
+$("##g102_field3").val($("##g1_mattername").val());
+$("##g102_field4").val($("##g2_1_noticenumber :selected").text());
+break;
+
+case 11: //Other Filings
+$("label[for='g102_field1']").text("Year");
+$("label[for='g102_field2']").text("Period");
+$("label[for='g102_field3']").text("State");
+$("label[for='g102_field4']").text("Form");
+
+$("##g102_field1").val($("##g1_taxyear :selected").text());
+$("##g102_field2").val($("##g1_period :selected").text());
+$("##g102_field3").val($("##g1_state :selected").text());
+$("##g102_field4").val($("##g1_form :selected").text());
+break;
+
+case 10: //Payroll Checks
+$("label[for='g102_field1']").text("Year");
+$("label[for='g102_field2']").text("Pay End Date");
+$("label[for='g102_field3']").text("Pay Date");
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_year :selected").text());
+$("##g102_field2").val($("##g1_payenddate").val());
+$("##g102_field3").val($("##g1_paydate").val());
+$("##g102_field4").hide();
+break;
+
+case 13: //Payroll Taxes
+$("label[for='g102_field1']").text("Year");
+$("label[for='g102_field2']").text("Month");
+$("label[for='g102_field3']").text("Type");
+$("label[for='g102_field4']").text("Last Pay");
+
+$("##g102_field1").val($("##g1_year :selected").text());
+$("##g102_field2").val($("##g1_month :selected").text());
+$("##g102_field3").val($("##g1_type :selected").text());
+$("##g102_field4").val($("##g1_lastpay").val());
+break;
+
+case 6: //Personal Property Tax Returns & Tax Returns
+$("label[for='g102_field1']").text("Tax Year");
+$("label[for='g102_field2']").text("Tax Form");
+$("label[for='g102_field3']").hide();
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_taxyear :selected").text());
+$("##g102_field2").val($("##g1_taxform :selected").text());
+$("##g102_field3").hide();
+$("##g102_field4").hide();
+break;
+
+case 7: //Power of Attorney
+$("label[for='g102_field1']").text("Tax Years");
+$("label[for='g102_field2']").text("Tax Forms");
+$("label[for='g102_field3']").text("Tax Matters");
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").val($("##g1_taxyears :selected").map(function() { return $(this).text()}).get() );
+$("##g102_field2").val($("##g1_taxforms :selected").map(function() { return $(this).text()}).get() );
+$("##g102_field3").val($("##g1_taxmatters :selected").map(function() { return $(this).text()}).get() );
+$("##g102_field4").hide();
+break;
+
+default:
+$("label[for='g102_field1']").hide();
+$("label[for='g102_field2']").hide();
+$("label[for='g102_field3']").hide();
+$("label[for='g102_field4']").hide();
+
+$("##g102_field1").hide();
+$("##g102_field2").hide();
+$("##g102_field3").hide();
+$("##g102_field4").hide();
+}
+
+  }
+
+_pluginSaveData102=function(){
 	var json='{"DATA":[["'+
 		$("##tb_id").val()+'","'+
 		$("##form_id").val()+'","'+
@@ -75,10 +245,11 @@ edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$
                                         listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
                                         },
                                         fields: {
-                                            T_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
+                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2}); });return $img}}	
+											,T_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
                                             ,T_START:{"title":"Start",width: '2%'}
                                             ,T_STOP:{"title":"Stop",width: '2%'}
-                                            ,T_DIFF:{"title":"Diffrence"}
+                                            ,T_DIFF:{"title":"Hours"}
                                         }
                                     }, function(data){ //opened handler
                                     	data.childTable.jtable('load');
@@ -102,13 +273,15 @@ edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$
 	"arguments":'{"search":"'+$("##g102_filter").val()+'","orderBy":"0","row":"0","formid":"#page.formid#","clientid":"'+$("##client_id").val()+'","taskid":"'+$("##task_id").val()+'","loadType":"group102"}',
 	"functions": '$("##tb_id").val(record.TB_ID);$("##isLoaded_group102").val(1); _loadData({"id":"tb_id","group":"group102","page":"timebilling","plugin":"group102"});'
 })};
-
+/*
 _grid102_1=function(){
 	_jGrid({
 	"grid":"grid102_1",
 	"url":"#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc",
 	"title":"Time",
-	"fields":{T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
+	"fields":{
+
+T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 			,remove:{title:'',width:'2%', list:user["g_delete"],display:function(d){var $img=$('<i class="fa fa-trash-o fa-2x" style="cursor:pointer"></i>');$img.click(function(){jqMessage({message:"Are you sure you want to delete this task?","type":"error",buttons:[{"name":"yes","on_click":"_removeData({id:'"+d.record.T_ID+"',page:'timebilling',group:'group102_1',plugin:'102'})","class":"button"},{"name":"no","on_click":"","class":"button"}], autoClose: false})});return $img}}	
 			,T_START:{title:'Start Time',width:'2%'}
 			,T_STOP:{title:'End Time',width:'2%'}
@@ -118,6 +291,7 @@ _grid102_1=function(){
 	"arguments":'{"search":"'+$("##g102_1_filter").val()+'","orderBy":"0","row":"0","ID":"'+$("##tb_id").val()+'","loadType":"group102_1"}',
 	"functions":''
 })};
+*/
 })
 
 </script>
@@ -136,12 +310,20 @@ _grid102_1=function(){
 
 </div>
 <cfoutput>
-<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});$("##isLoaded_group102").val(1);'>Add Time Card</h4>
+<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});_group102_addtimecard();'>Add Time Card</h4>
 </cfoutput>
 <div>
     <div><label for="g102_employee">Employee</label><select id="g102_employee" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g102_date">Date</label><input type="text" class="date" id="g102_date"/></div>
+   	
+ 	<div><label for="g102_field1">Field1</label><input type="text"id="g102_field1" readonly="readonly"></div>
+  	<div><label for="g102_field2">Field2</label><input type="text"id="g102_field2" readonly="readonly"></div>
+  	<div><label for="g102_field3">Field3</label><input type="text"id="g102_field3" readonly="readonly"></div>
+  	<div><label for="g102_field4">Field4</label><input type="text"id="g102_field4" readonly="readonly"></div>
+  
+
    	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="g102_description"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+	
 	<div><label for="g102_notes">Notes</label><textarea type="text" id="g102_notes" cols="4" rows="4"  maxlength="1000"></textarea></div>
 	<div><label for="g102_paymentstatus">Billing Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
     <div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div>
@@ -156,7 +338,7 @@ _grid102_1=function(){
 </div>  
 
 
-<h4 onClick='$("#isLoaded_group102_1").val(1);'>Add Time</h4>
+<h4 onClick='_group102_addtime();'>Add Time</h4>
 <div>
         <div><label for="g102_1_start">Start Time</label><input type="text" class="time" id="g102_1_start" ></div>
         <div><label for="g102_1_stop">End Time</label><input type="text" class="time" id="g102_1_stop" ></div>

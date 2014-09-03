@@ -39,7 +39,7 @@
 			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfm",
 			"settings":
 			{
-				"buffer_size": 10006,
+				"buffer_size": 10202,
 				"line_ending": "Windows"
 			}
 		},
@@ -113,6 +113,12 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/powerofattorney.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/powerofattorney.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/payrolltaxes.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/inc/header.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/payrolltaxes.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/otherfilings.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfc",
@@ -147,7 +153,6 @@
 		"/C/Users/Admin/Documents/GitHub/AWS/aws.sublime-project",
 		"/C/Program Files/Sublime Text 3/Data/Packages/Package Control/Package Control.sublime-settings",
 		"/C/Program Files/Sublime Text 3/Data/Packages/WebDavSync/README.md",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/otherfilings.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/payrollchecks.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/module/jqPlot/examples/kcp_pyramid_by_age.php",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/module/jquery-mask-plugin-master/package.json",
@@ -248,15 +253,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10006,
+						"buffer_size": 10202,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2632,
-								2632
+								4321,
+								4321
 							]
 						],
 						"settings":
@@ -267,7 +272,7 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 615.0,
+						"translation.y": 780.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -286,8 +291,8 @@
 						"selection":
 						[
 							[
-								2338,
-								2338
+								6113,
+								6113
 							]
 						],
 						"settings":
@@ -299,7 +304,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1845.0,
+						"translation.y": 855.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
