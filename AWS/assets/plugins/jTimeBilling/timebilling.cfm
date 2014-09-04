@@ -227,7 +227,7 @@ _grid102=function(){
 	"title":"Time &amp; Billing",
 	"fields":{
 
-edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:1}); });return $img}}	
+edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:1}); _group102_addtimecard(); });return $img}}	
 
 			  //CHILD TABLE DEFINITION FOR SUBTAKS
  			    ,Subtasks: {
@@ -350,10 +350,10 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
     <div><label for="g102_employee">Employee</label><select id="g102_employee" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 	<div><label for="g102_date">Date</label><input type="text" class="date" id="g102_date"/></div>
    	
- 	<div><label for="g102_field1">Field1</label><input type="text"id="g102_field1" readonly="readonly"></div>
-  	<div><label for="g102_field2">Field2</label><input type="text"id="g102_field2" readonly="readonly"></div>
-  	<div><label for="g102_field3">Field3</label><input type="text"id="g102_field3" readonly="readonly"></div>
-  	<div><label for="g102_field4">Field4</label><input type="text"id="g102_field4" readonly="readonly"></div>
+ 	<div><label for="g102_field1">Field1</label><input type="text"id="g102_field1" class="readonly" readonly="readonly"></div>
+  	<div><label for="g102_field2">Field2</label><input type="text"id="g102_field2" class="readonly" readonly="readonly"></div>
+  	<div><label for="g102_field3">Field3</label><input type="text"id="g102_field3" class="readonly" readonly="readonly"></div>
+  	<div><label for="g102_field4">Field4</label><input type="text"id="g102_field4" class="readonly" readonly="readonly"></div>
   
 
    	<div><label for="g102_description">Description</label><select id="g102_description" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="g102_description"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -379,8 +379,8 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 
 <h4 onClick='_group102_addtime();'>Add Time</h4>
 <div>
-        <div><label for="g102_1_start">Start Time</label><input type="text" class="time" id="g102_1_start" ></div>
-        <div><label for="g102_1_stop">End Time</label><input type="text" class="time" id="g102_1_stop" ></div>
+        <div><label for="g102_1_start">Start Time</label><input type="text" class="datetime" id="g102_1_start" ></div>
+        <div><label for="g102_1_stop">End Time</label><input type="text" class="datetime" id="g102_1_stop" ></div>
 </div>
 
 

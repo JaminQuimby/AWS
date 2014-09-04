@@ -13,7 +13,7 @@ SELECT
 ,[user_id]
 ,[tb_date]=FORMAT(tb_date,'#Session.localization.formatdate#') 
 ,[tb_description]
-,[tb_manualtime]=FORMAT(tb_manualtime,'#Session.localization.formatdatetime#','#Session.localization.language#')
+,[tb_manualtime]
 ,[tb_notes]
 ,[tb_paymentstatus]
 ,[tb_activitytype]
@@ -71,7 +71,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 SELECT[tb_id]
 ,[tb_date]=FORMAT(tb_date,'#Session.localization.formatdate#') 
 ,[u_name]
-,[tb_descriptionTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='g102_description'AND[tb_description]=[optionvalue_id])
+,[tb_descriptionTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND('#ARGUMENTS.formid#'IN(SELECT[id]FROM[CSVToTable](optionGroup))OR'0'IN(SELECT[id]FROM[CSVToTable](optionGroup)))AND('#ARGUMENTS.formid#'NOT IN(SELECT[id]FROM[CSVToTable](optionHide))OR[optionHide]IS NULL)AND[selectName]='g102_description'AND[tb_description]=[optionvalue_id])
 FROM[v_timebilling]
 WHERE[form_id]=<cfqueryparam value="#ARGUMENTS.formid#"/>
 AND[client_id]=<cfqueryparam value="#ARGUMENTS.clientid#"/>
