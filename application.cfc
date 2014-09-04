@@ -57,8 +57,7 @@
   <cfargument name="request" required="true"/>     
 
 <cfif IsDefined("Form.logout") or isDefined("URL.logout")> 
-<cflock timeout=29 scope="Session" type="Exclusive"> 
-<cfset StructClear(form)>
+ <cfset StructClear(form)>
 <cfset StructClear(session)>
 <cfloop
 item="name"
@@ -71,8 +70,7 @@ expires="now"
 />
  
 </cfloop>
-</cflock>
-</cfif> 
+ </cfif> 
 
 
 <cfif isDefined("FORM.J_USERNAME") and  isDefined("FORM.J_PASSWORD")>

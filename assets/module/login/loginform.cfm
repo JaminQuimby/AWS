@@ -473,7 +473,6 @@ _run.reset_password({"r":"#URL.r#","e":"#URL.e#","p":""+p1+""})
 }
 
 }
-
 </script>
 </cfoutput>
 </head>
@@ -489,9 +488,6 @@ input { font-family: 'FontAwesome'; }
   <td style="padding:30px"><img src="#this.url#/assets/images/aws_logo_2.png" alt="Accountants' Workflow Solutions"></td>
   <td style="padding:30px"><div  style="display:inline-block;">
 <cfoutput>
-
-
-
 
 
 <cfif Len(URL.r)gt 1 and Len(URL.e)gt 1>
@@ -515,7 +511,7 @@ input { font-family: 'FontAwesome'; }
 <cfelse>
 <H2>Please Log In</H2>
 <div class="message">
-<form action="#this.url#/AWS/_PracticeManagement/workinprogress.cfm" method="Post">
+<form action="#CGI.script_name#?#CGI.query_string#" method="Post">
  <label for="j_username">Email:</label>
  <input name="j_username" type="email" id="j_username" placeholder="&##xf0e0;  Email Address" >
  <label for="j_password">Password:</label>
