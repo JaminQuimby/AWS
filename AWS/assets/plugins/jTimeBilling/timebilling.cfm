@@ -1,6 +1,7 @@
 <cfparam name="page.formid" default="0">
 <cfquery dbtype="query" name="g102_description">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_description'</cfquery>
-<cfquery dbtype="query" name="g102_ratetype">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_ratetype'</cfquery>
+<cfquery dbtype="query" name="g102_expense">SELECT[optionvalue_id],[optionname]FROM[selectOptions]WHERE[selectName]='g102_expense'</cfquery>
+<cfquery dbtype="query" name="g102_ratetype">SELECT[optionvalue_id],[option_1],[optionname]FROM[selectOptions]WHERE[selectName]='g102_ratetype'</cfquery>
 <cfoutput>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -9,11 +10,12 @@ $(document).ready(function(){
 
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
-_pluginLoadData102=function(){return "tb_id,tb_id,g102_employee,g102_adjustment,g102_date,g102_description,g102_flatfee,g102_manualtime,g102_mileage,g102_notes,g102_paymentstatus,g102_ratetype,g102_reimbursement"}
+_pluginLoadData102=function(){return "tb_id,tb_id,g102_employee,g102_date,g102_description,g102_manualtime,g102_notes,g102_paymentstatus,g102_ratetype"}
 _pluginLoadData102_1=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
+_pluginLoadData102_2=function(){return "ta_id,ta_amount,ta_discription,ta_billable"}
 _group102=function(){_grid102();}
 _group102_addtime=function(){$("##isLoaded_group102_1").val(1); }
-
+_group102_addExpense=function(){$("##isLoaded_group102_2").val(1); }
 
 
 _group102_addtimecard=function(){
@@ -187,16 +189,16 @@ _pluginSaveData102=function(){
 		$("##tb_id").val()+'","'+
 		$("##form_id").val()+'","'+
 		$("##task_id").val()+'","'+
-        $("##g102_adjustment").val().replace(/([$,])/g, '')+'","'+
+        //$("##g102_adjustment").val().replace(/([$,])/g, '')+'","'+
     	$("##g102_date").val()+'","'+
     	$("##g102_description").val()+'","'+
-        $("##g102_flatfee").val().replace(/([$,])/g, '')+'","'+
+        //$("##g102_flatfee").val().replace(/([$,])/g, '')+'","'+
 		$("##g102_manualtime").val()+'","'+
-        $("##g102_mileage").val()+'","'+
+        //$("##g102_mileage").val()+'","'+
 		$("##g102_notes").val()+'","'+
     	$("##g102_paymentstatus").val()+'","'+
     	$("##g102_ratetype").val()+'","'+
-        $("##g102_reimbursement").val().replace(/([$,])/g, '')+'","'+
+        //$("##g102_reimbursement").val().replace(/([$,])/g, '')+'","'+
 		'"]]}'
 		if($("##isLoaded_group102").val()!=0){
 			_saveData({"group":"group102",payload:$.parseJSON(json),page:"timebilling",plugin:"group102"})}
@@ -229,7 +231,7 @@ edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$
 
 			  //CHILD TABLE DEFINITION FOR SUBTAKS
  			    ,Subtasks: {
-                    title: '',
+                    title: 'Time',
                     width: '1%',
                     sorting: false,
                     edit: false,
@@ -240,7 +242,7 @@ edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$
                             $('##grid102').jtable('openChildTable',
                                     $img.closest('tr'),
                                     {
-                                        title: ' - Subtasks',
+                                        title: 'Time Card',
                                         actions: {
                                         listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
                                         },
@@ -259,7 +261,38 @@ edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$
                         return $img;
                     }
                 }
-
+			  //CHILD TABLE DEFINITION FOR SUBTAKS
+ 			    ,Subtasks2: {
+                    title: 'Expense',
+                    width: '1%',
+                    sorting: false,
+                    edit: false,
+                    create: false,
+                    display: function (subtasks2) {
+                        var $img = $('<i class="fa fa-money "></i>'+subtasks2.record.TB_ID);
+                        $img.click(function () {
+                            $('##grid102').jtable('openChildTable',
+                                    $img.closest('tr'),
+                                    {
+                                        title: 'Expense Card',
+                                        actions: {
+                                        listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks2.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
+                                        },
+                                        fields: {
+                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2}); });return $img}}	
+											,TA_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
+                                            ,TA_AMOUNT:{"title":"Amount"}
+                                            ,TA_DESCRIPTION:{"title":"Description"}
+                                            ,TA_BILLCLIENT:{"title":"Bill Client"}
+                                        }
+                                    }, function(data){ //opened handler
+                                    	data.childTable.jtable('load');
+                                    });
+                        });
+                        //Return image to show on the person row
+                        return $img;
+                    }
+                }
 
                 ,TB_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 
@@ -301,6 +334,7 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 <input type="hidden" id="t_id" value="0" />
 <input type="hidden" id="isLoaded_group102" value="0" />
 <input type="hidden" id="isLoaded_group102_1" value="0" />
+<input type="hidden" id="isLoaded_group102_2" value="0" />
 </span>
 <div id="group102" class="gf-checkbox" >
 <h3 onClick="_group102();">Time Card</h3>
@@ -326,15 +360,20 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 	
 	<div><label for="g102_notes">Notes</label><textarea type="text" id="g102_notes" cols="4" rows="4"  maxlength="1000"></textarea></div>
 	<div><label for="g102_paymentstatus">Billing Status</label><select id="g102_paymentstatus"><option value="0">&nbsp;</option><cfoutput query="global_paid"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-    <div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div>
-    <div><label for="g102_reimbursement">Reimbursement</label><input type="text" maxlength="10" id="g102_reimbursement" ></div>
-    <div><label for="g102_manualtime">Manual Time</label><input type="text" class="time" id="g102_manualtime" ></div>
-  	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">&nbsp;</option><cfoutput query="g102_ratetype"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
-    <div><label for="g102_rate">Rate</label><input type="text" class="readonly" readonly id="g102_rate" ></div>
-    <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly time" readonly id="g102_totaltime" ></div>
-    <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>   
-    <div><label for="g102_flatfee">Flat Fee</label><input type="text" maxlength="10" id="g102_flatfee" ></div>
-    <div><label for="g102_adjustment">Adjustment</label><input type="text" maxlength="10" id="g102_adjustment" ></div>
+
+
+
+    <div><label for="g102_manualtime">Manual Time</label><input type="text" id="g102_manualtime" ></div>
+    <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly" readonly id="g102_totaltime" ></div>
+  	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">$0 - No Rate Selected</option><cfoutput query="g102_ratetype"><option value="#optionvalue_id#">$#option_1# - #optionname#</option></cfoutput></select></div>
+    <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>  
+    <div><label for="g102_totalexpense">Total Expenses</label><input type="text" class="readonly" readonly id="g102_totalexpense" ></div>
+    <div><label for="g102_total">Total</label><input type="text" class="readonly" readonly id="g102_total" ></div>
+     
+		<!---div><label for="g102_mileage">Mileage</label><input type="text" maxlength="10" id="g102_mileage" ></div--->
+    	<!---div><label for="g102_reimbursement">Reimbursement</label><input type="text" maxlength="10" id="g102_reimbursement" ></div--->
+   		<!---div><label for="g102_flatfee">Flat Fee</label><input type="text" maxlength="10" id="g102_flatfee" ></div--->
+    	<!---div><label for="g102_adjustment">Adjustment</label><input type="text" maxlength="10" id="g102_adjustment" ></div--->
 </div>  
 
 
@@ -342,5 +381,14 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 <div>
         <div><label for="g102_1_start">Start Time</label><input type="text" class="time" id="g102_1_start" ></div>
         <div><label for="g102_1_stop">End Time</label><input type="text" class="time" id="g102_1_stop" ></div>
+</div>
+
+
+<h4 onClick='_group102_addExpense();'>Add Expense</h4>
+<div>
+<div><label for="g102_2_description">Description</label><select id="g102_ratetype"><option value="0">&nbsp;</option><cfoutput query="g102_expense"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
+<div><label for="g102_2_amount">Amount</label><input type="text" id="g102_2_amount" ></div>
+<div><label for="g102_2_billable"><input id="g1_credithold" type="checkbox" class="ios-switchb" value="true">Bill Client</label></div>
+
 </div>
 </div>

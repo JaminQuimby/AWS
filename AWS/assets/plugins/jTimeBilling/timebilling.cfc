@@ -11,16 +11,12 @@ SELECT
 'GROUP102'AS[GROUP102]
 ,[tb_id]
 ,[user_id]
-,[tb_adjustment]=FORMAT(tb_adjustment,'C','#Session.localization.language#')
 ,[tb_date]=FORMAT(tb_date,'#Session.localization.formatdate#') 
 ,[tb_description]
-,[tb_flatfee]=FORMAT(tb_flatfee,'C','#Session.localization.language#')
 ,[tb_manualtime]=FORMAT(tb_manualtime,'#Session.localization.formatdatetime#','#Session.localization.language#')
-,[tb_mileage]
 ,[tb_notes]
 ,[tb_paymentstatus]
 ,[tb_activitytype]
-,[tb_reimbursment]=FORMAT(tb_reimbursment,'C','#Session.localization.language#')
 FROM[timebilling]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -39,6 +35,19 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
+<cfcase value="group102_subtask2">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+SELECT 
+'GROUP102_SUBTASK2'AS[GROUP102_SUBTASK2]
+,[ta_id]
+,[TB_ID]
+,[ta_amount]
+,[ta_discription]
+,[ta_billable]
+FROM[timeexpense]
+WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+</cfcase>
 
 </cfswitch>
 <cfreturn SerializeJSON(fQuery)>
@@ -113,6 +122,35 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfreturn myResult>
 </cfcase>
 
+<!--- Grid 102_subtask2  --->
+<cfcase value="group102_subtask2">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+SELECT 
+'GROUP102_SUBTASK2'AS[GROUP102_SUBTASK2]
+,[ta_id],[TB_ID]
+,[ta_amount]
+,[ta_discription]
+,[ta_billable]
+FROM[timeexpense]
+WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+</cfquery>
+<cfset myResult="">
+<cfset queryResult="">
+<cfset queryIndex=0>
+<cfloop query="fquery">
+<cfset queryIndex=queryIndex+1>
+<cfset queryResult=queryResult&'{"TA_ID":"'&TA_ID&'"
+								,"TB_ID":"'&TB_ID&'"
+								,"TA_AMOUNT":"'&TA_AMOUNT&'"
+								,"TA_DISCRIPTION":"'&TA_DISCRIPTION&'"
+								,"TA_BILLABLE":"'&TA_BILLABLE&'"
+								}'>
+<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
+</cfloop>
+<cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
+<cfreturn myResult>
+</cfcase>
+
 </cfswitch>
 </cffunction>
 
@@ -130,16 +168,12 @@ INSERT INTO[timebilling](
 [form_id]
 ,[u_name]
 ,[task_id]
-,[tb_adjustment]
 ,[tb_date]
 ,[tb_description]
-,[tb_flatfee]
 ,[tb_manualtime]
-,[tb_mileage]
 ,[tb_notes]
 ,[tb_paymentstatus]
 ,[tb_activitytype]
-,[tb_reimbursment]
 )
 VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#Session.user.id#"/>
@@ -150,10 +184,7 @@ VALUES(<cfqueryparam value="#j.DATA[1][2]#"/>
 ,<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
 ,<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+
 )
 SELECT SCOPE_IDENTITY()AS[tb_id]
 </cfquery>
@@ -167,16 +198,13 @@ UPDATE[timebilling]
 SET[form_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
 ,[user_id]=<cfqueryparam value="#Session.user.id#"/>
 ,[task_id]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
-,[tb_adjustment]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
-,[tb_date]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
-,[tb_description]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
-,[tb_flatfee]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
-,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
-,[tb_mileage]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
-,[tb_notes]=<cfqueryparam value="#j.DATA[1][10]#" null="#LEN(j.DATA[1][10]) eq 0#"/>
-,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][11]#" null="#LEN(j.DATA[1][11]) eq 0#"/>
-,[tb_activitytype]=<cfqueryparam value="#j.DATA[1][12]#" null="#LEN(j.DATA[1][12]) eq 0#"/>
-,[tb_reimbursment]=<cfqueryparam value="#j.DATA[1][13]#" null="#LEN(j.DATA[1][13]) eq 0#"/>
+,[tb_date]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,[tb_description]=<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+,[tb_manualtime]=<cfqueryparam value="#j.DATA[1][6]#" null="#LEN(j.DATA[1][6]) eq 0#"/>
+,[tb_notes]=<cfqueryparam value="#j.DATA[1][7]#" null="#LEN(j.DATA[1][7]) eq 0#"/>
+,[tb_paymentstatus]=<cfqueryparam value="#j.DATA[1][8]#" null="#LEN(j.DATA[1][8]) eq 0#"/>
+,[tb_activitytype]=<cfqueryparam value="#j.DATA[1][9]#" null="#LEN(j.DATA[1][9]) eq 0#"/>
+
 WHERE[TB_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
 </cfquery><cfreturn '{"id":"#j.DATA[1][1]#","group":"plugins","subgroup":"102_1","result":"ok"}'>
 </cfif>
@@ -201,6 +229,29 @@ SELECT SCOPE_IDENTITY()AS[t_id]
 <cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
 </cfif>
 </cfcase>
+
+<!---Group102_2--->
+<cfcase value="group102_2">
+<cfif j.DATA[1][1] eq "0">
+<cfquery name="fquery" datasource="#Session.organization.name#">
+INSERT INTO[timeexpense](
+[tb_id]
+,[ta_amount]
+,[ta_discription]
+,[ta_billable]
+)
+VALUES(
+<cfqueryparam value="#j.DATA[1][2]#"/>
+,<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+,<cfqueryparam value="#j.DATA[1][5]#" null="#LEN(j.DATA[1][5]) eq 0#"/>
+)
+SELECT SCOPE_IDENTITY()AS[t_id]
+</cfquery>
+<cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
+</cfif>
+</cfcase>
+
 </cfswitch>
 </cffunction>
 
@@ -226,6 +277,14 @@ SET[deleted]=GETDATE()
 WHERE[T_ID]=<cfqueryparam value="#ARGUMENTS.id#">
 </cfquery>
 <cfreturn '{"id":#ARGUMENTS.id#,"group":"group102_1","result":"ok"}'>
+</cfcase>
+<cfcase value="group102_2">
+<cfquery datasource="#Session.organization.name#" name="fQuery">
+update[time]
+SET[deleted]=GETDATE()
+WHERE[TA_ID]=<cfqueryparam value="#ARGUMENTS.id#">
+</cfquery>
+<cfreturn '{"id":#ARGUMENTS.id#,"group":"group102_2","result":"ok"}'>
 </cfcase>
 </cfswitch>
 <cfcatch>

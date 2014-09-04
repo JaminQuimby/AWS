@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"n",
+				"nbsp"
+			],
+			[
+				"read",
+				"readonly"
+			],
+			[
 				"acct_d",
 				"fds_acctrpt_datecompleted"
 			],
@@ -39,15 +47,34 @@
 			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfm",
 			"settings":
 			{
-				"buffer_size": 10202,
+				"buffer_size": 19428,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+			"file": "AWS/assets/inc/header.cfm",
 			"settings":
 			{
-				"buffer_size": 8903,
+				"buffer_size": 8077,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "<cfcomponent output=\"true\">\n<!--- LOAD DATA --->\n<cffunction name=\"f_loadData\" access=\"remote\" output=\"false\">\n<cfargument name=\"ID\" type=\"numeric\" required=\"yes\" default=\"0\">\n<cfargument name=\"loadType\" type=\"string\" required=\"no\">\n<cfswitch expression=\"#ARGUMENTS.loadType#\">\n<!--- Load Group102--->\n<cfcase value=\"group102\">\n<cfquery datasource=\"#Session.organization.name#\" name=\"fQuery\">\nSELECT \n'GROUP102'AS[GROUP102]\n,[tb_id]\n,[user_id]\n,[tb_date]=FORMAT(tb_date,'#Session.localization.formatdate#') \n,[tb_description]\n,[tb_manualtime]=FORMAT(tb_manualtime,'#Session.localization.formatdatetime#','#Session.localization.language#')\n,[tb_notes]\n,[tb_paymentstatus]\n,[tb_activitytype]\nFROM[timebilling]\nWHERE[tb_id]=<cfqueryparam value=\"#ARGUMENTS.ID#\"/>\n</cfquery>\n</cfcase>\n\n<cfcase value=\"group102_subtask\">\n<cfquery datasource=\"#Session.organization.name#\" name=\"fQuery\">\nSELECT \n'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]\n,[t_id],[TB_ID]\n,[t_start]=CONVERT(VARCHAR(8),[t_start], 24)\n,[t_stop]=CONVERT(VARCHAR(8),[t_stop], 24)\n,[t_diff]=CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF(minute,[t_start],[t_stop])))/60,2))\nFROM[timebilling]\nWHERE[tb_id]=<cfqueryparam value=\"#ARGUMENTS.ID#\"/>\n</cfquery>\n</cfcase>\n\n<cfcase value=\"group102_subtask2\">\n<cfquery datasource=\"#Session.organization.name#\" name=\"fQuery\">\nSELECT \n'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]\n,[ta_id]\n,[TB_ID]\n,[ta_amount]\n,[ta_discription]\n,[ta_billable]\nFROM[timeexpense]\nWHERE[tb_id]=<cfqueryparam value=\"#ARGUMENTS.ID#\"/>\n</cfquery>\n</cfcase>\n\n</cfswitch>\n<cfreturn SerializeJSON(fQuery)>\n</cffunction>\n\n<!--- LOOKUP DATA --->\n<cffunction name=\"f_lookupData\"  access=\"remote\"  returntype=\"string\" returnformat=\"plain\">\n<cfargument name=\"search\" type=\"any\" required=\"no\">\n<cfargument name=\"orderBy\" type=\"any\" required=\"no\">\n<cfargument name=\"row\" type=\"numeric\" required=\"no\">\n<cfargument name=\"ID\" type=\"string\" required=\"no\">\n<cfargument name=\"loadType\" type=\"string\" required=\"no\">\n<cfargument name=\"clientid\" type=\"string\" required=\"no\">\n<cfargument name=\"formid\" type=\"string\" required=\"no\">\n<cfargument name=\"taskid\" type=\"string\" required=\"no\">\n\n<cfswitch expression=\"#ARGUMENTS.loadType#\">\n<!--- Grid 102  --->\n<cfcase value=\"group102\">\n<cfquery datasource=\"#Session.organization.name#\" name=\"fquery\">\nSELECT[tb_id]\n,[tb_date]=FORMAT(tb_date,'#Session.localization.formatdate#') \n,[u_name]\n,[tb_descriptionTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='g102_description'AND[tb_description]=[optionvalue_id])\nFROM[v_timebilling]\nWHERE[form_id]=<cfqueryparam value=\"#ARGUMENTS.formid#\"/>\nAND[client_id]=<cfqueryparam value=\"#ARGUMENTS.clientid#\"/>\nAND[task_id]=<cfqueryparam value=\"#ARGUMENTS.taskid#\"/> \n</cfquery>\n<cfset myResult=\"\">\n<cfset queryResult=\"\">\n<cfset queryIndex=0>\n<cfloop query=\"fquery\">\n<cfset queryIndex=queryIndex+1>\n<cfset queryResult=queryResult&'{\"TB_ID\":\"'&TB_ID&'\"\n								,\"TB_DATE\":\"'&TB_DATE&'\"\n								,\"U_NAME\":\"'&U_NAME&'\"\n								,\"TB_DESCRIPTIONTEXT\":\"'&TB_DESCRIPTIONTEXT&'\"\n								}'>\n<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&\",\"></cfif>\n</cfloop>\n<cfset myResult='{\"Result\":\"OK\",\"Records\":['&queryResult&']}'>\n<cfreturn myResult>\n</cfcase>\n\n<!--- Grid 102_subtask  --->\n<cfcase value=\"group102_subtask\">\n<cfquery datasource=\"#Session.organization.name#\" name=\"fQuery\">\nSELECT \n'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]\n,[t_id],[TB_ID]\n,[t_start]=CONVERT(VARCHAR(8),[t_start], 24)\n,[t_stop]=CONVERT(VARCHAR(8),[t_stop], 24)\n,[t_diff]=CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF(minute,[t_start],[t_stop])))/60,2))\nFROM[time]\nWHERE[tb_id]=<cfqueryparam value=\"#ARGUMENTS.ID#\"/>\n</cfquery>\n<cfset myResult=\"\">\n<cfset queryResult=\"\">\n<cfset queryIndex=0>\n<cfloop query=\"fquery\">\n<cfset queryIndex=queryIndex+1>\n<cfset queryResult=queryResult&'{\"T_ID\":\"'&T_ID&'\"\n								,\"TB_ID\":\"'&TB_ID&'\"\n								,\"T_START\":\"'&T_START&'\"\n								,\"T_STOP\":\"'&T_STOP&'\"\n								,\"T_DIFF\":\"'&T_DIFF&'\"\n								}'>\n<cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&\",\"></cfif>\n</cfloop>\n<cfset myResult='{\"Result\":\"OK\",\"Records\":['&queryResult&']}'>\n<cfreturn myResult>\n</cfcase>\n\n</cfswitch>\n</cffunction>\n\n<!--- SAVE DATA --->\n<cffunction name=\"f_saveData\" access=\"remote\" output=\"false\" returntype=\"any\">\n<cfargument name=\"group\" type=\"string\" required=\"true\">\n<cfargument name=\"payload\" type=\"string\" required=\"true\">\n<cfset j=DeserializeJSON(\"#ARGUMENTS.payload#\")>\n<cfswitch expression=\"#ARGUMENTS.group#\">\n<!---Group102--->\n<cfcase value=\"group102\">\n<cfif j.DATA[1][1] eq \"0\">\n<cfquery name=\"fquery\" datasource=\"#Session.organization.name#\">\nINSERT INTO[timebilling](\n[form_id]\n,[u_name]\n,[task_id]\n,[tb_date]\n,[tb_description]\n,[tb_manualtime]\n,[tb_notes]\n,[tb_paymentstatus]\n,[tb_activitytype]\n)\nVALUES(<cfqueryparam value=\"#j.DATA[1][2]#\"/>\n,<cfqueryparam value=\"#Session.user.id#\"/>\n,<cfqueryparam value=\"#j.DATA[1][3]#\" null=\"#LEN(j.DATA[1][3]) eq 0#\"/>\n,<cfqueryparam value=\"#j.DATA[1][4]#\" null=\"#LEN(j.DATA[1][4]) eq 0#\"/>\n,<cfqueryparam value=\"#j.DATA[1][5]#\" null=\"#LEN(j.DATA[1][5]) eq 0#\"/>\n,<cfqueryparam value=\"#j.DATA[1][6]#\" null=\"#LEN(j.DATA[1][6]) eq 0#\"/>\n,<cfqueryparam value=\"#j.DATA[1][7]#\" null=\"#LEN(j.DATA[1][7]) eq 0#\"/>\n,<cfqueryparam value=\"#j.DATA[1][8]#\" null=\"#LEN(j.DATA[1][8]) eq 0#\"/>\n,<cfqueryparam value=\"#j.DATA[1][9]#\" null=\"#LEN(j.DATA[1][9]) eq 0#\"/>\n\n)\nSELECT SCOPE_IDENTITY()AS[tb_id]\n</cfquery>\n<cfreturn '{\"id\":#fquery.tb_id#,\"group\":\"plugins\",\"subgroup\":\"102_1\",\"result\":\"ok\"}'>\n</cfif>\n\n<!--- if this is a not a new record, then insert it--->\n<cfif #j.DATA[1][1]# neq \"0\">\n<cfquery name=\"fquery\" datasource=\"#Session.organization.name#\">\nUPDATE[timebilling]\nSET[form_id]=<cfqueryparam value=\"#j.DATA[1][2]#\"/>\n,[user_id]=<cfqueryparam value=\"#Session.user.id#\"/>\n,[task_id]=<cfqueryparam value=\"#j.DATA[1][3]#\" null=\"#LEN(j.DATA[1][3]) eq 0#\"/>\n,[tb_date]=<cfqueryparam value=\"#j.DATA[1][4]#\" null=\"#LEN(j.DATA[1][4]) eq 0#\"/>\n,[tb_description]=<cfqueryparam value=\"#j.DATA[1][5]#\" null=\"#LEN(j.DATA[1][5]) eq 0#\"/>\n,[tb_manualtime]=<cfqueryparam value=\"#j.DATA[1][6]#\" null=\"#LEN(j.DATA[1][6]) eq 0#\"/>\n,[tb_notes]=<cfqueryparam value=\"#j.DATA[1][7]#\" null=\"#LEN(j.DATA[1][7]) eq 0#\"/>\n,[tb_paymentstatus]=<cfqueryparam value=\"#j.DATA[1][8]#\" null=\"#LEN(j.DATA[1][8]) eq 0#\"/>\n,[tb_activitytype]=<cfqueryparam value=\"#j.DATA[1][9]#\" null=\"#LEN(j.DATA[1][9]) eq 0#\"/>\n\nWHERE[TB_ID]=<cfqueryparam value=\"#j.DATA[1][1]#\"/>\n</cfquery><cfreturn '{\"id\":\"#j.DATA[1][1]#\",\"group\":\"plugins\",\"subgroup\":\"102_1\",\"result\":\"ok\"}'>\n</cfif>\n</cfcase>\n\n<!---Group102_1--->\n<cfcase value=\"group102_1\">\n<cfif j.DATA[1][1] eq \"0\">\n<cfquery name=\"fquery\" datasource=\"#Session.organization.name#\">\nINSERT INTO[time](\n[tb_id]\n,[t_start]\n,[t_stop]\n)\nVALUES(\n<cfqueryparam value=\"#j.DATA[1][2]#\"/>\n,<cfqueryparam value=\"#j.DATA[1][3]#\" null=\"#LEN(j.DATA[1][3]) eq 0#\"/>\n,<cfqueryparam value=\"#j.DATA[1][4]#\" null=\"#LEN(j.DATA[1][4]) eq 0#\"/>\n)\nSELECT SCOPE_IDENTITY()AS[t_id]\n</cfquery>\n<cfreturn '{\"id\":#j.DATA[1][2]#,\"group\":\"saved\",\"result\":\"ok\"}'>\n</cfif>\n</cfcase>\n</cfswitch>\n</cffunction>\n\n\n<cffunction name=\"f_removeData\" access=\"remote\" output=\"false\">\n<cfargument name=\"id\" type=\"numeric\" required=\"yes\" default=\"0\">\n<cfargument name=\"group\" type=\"string\" required=\"no\">\n<cftry>\n<cfswitch expression=\"#ARGUMENTS.group#\">\n<!--- Load Group1--->\n<cfcase value=\"group102\">\n<cfquery datasource=\"#Session.organization.name#\" name=\"fQuery\">\nupdate[timebilling]\nSET[deleted]=GETDATE()\nWHERE[TB_ID]=<cfqueryparam value=\"#ARGUMENTS.id#\">\n</cfquery>\n<cfreturn '{\"id\":#ARGUMENTS.id#,\"group\":\"group102\",\"result\":\"ok\"}'>\n</cfcase>\n<cfcase value=\"group102_1\">\n<cfquery datasource=\"#Session.organization.name#\" name=\"fQuery\">\nupdate[time]\nSET[deleted]=GETDATE()\nWHERE[T_ID]=<cfqueryparam value=\"#ARGUMENTS.id#\">\n</cfquery>\n<cfreturn '{\"id\":#ARGUMENTS.id#,\"group\":\"group102_1\",\"result\":\"ok\"}'>\n</cfcase>\n</cfswitch>\n<cfcatch>\n      <!--- CACHE ERRORS DEBUG CODE --->\n<cfreturn '{\"group\":\"\"#cfcatch.message#\",\"#arguments.client_id#\",\"#cfcatch.detail#\"\",\"result\":\"error\"}'> \n</cfcatch>\n</cftry>\n</cffunction>\n\n</cfcomponent>",
+			"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+			"file_size": 8169,
+			"file_write_time": 130542338062847584,
+			"settings":
+			{
+				"buffer_size": 8248,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "AWS/_payrolltaxes/payrolltaxes.cfm",
+			"settings":
+			{
+				"buffer_size": 12437,
 				"line_ending": "Windows"
 			}
 		}
@@ -113,22 +140,22 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/inc/header.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
+		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/payrolltaxes.cfm",
+		"/C/Users/Admin/Documents/GitHub/AWS/application.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/powerofattorney.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/powerofattorney.cfm",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/payrolltaxes.cfm",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/inc/header.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/payrolltaxes.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_payrolltaxes/otherfilings.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/workinprogress.cfc",
-		"/C/Users/Admin/Documents/GitHub/AWS/AWS/assets/js/aws.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_accountingservices/acctingconsulting.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/notices.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_accountingservices/acctingconsulting.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_accountingservices/acctingconsulting.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_taxation/notices.cfm",
-		"/C/Users/Admin/Documents/GitHub/AWS/application.cfc",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.js",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.cfm",
 		"/C/Users/Admin/Documents/GitHub/AWS/AWS/_practicemanagement/dailytaxaudit.cfc",
@@ -189,6 +216,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"check",
+			"page.formid",
+			"g102_mileage",
+			"select",
+			"mm/dd/",
+			"user_id",
 			"rate",
 			"ratetype",
 			"tb_billingtype",
@@ -253,15 +286,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10202,
+						"buffer_size": 19428,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4321,
-								4321
+								19386,
+								19386
 							]
 						],
 						"settings":
@@ -272,7 +305,7 @@
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 780.0,
+						"translation.y": 5265.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -280,19 +313,50 @@
 				},
 				{
 					"buffer": 1,
-					"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
-					"semi_transient": false,
+					"file": "AWS/assets/inc/header.cfm",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 8903,
+						"buffer_size": 8077,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6113,
-								6113
+								719,
+								719
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScriptNext - ES6 Syntax/JavaScriptNext.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 1050.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "AWS/assets/plugins/jTimeBilling/timebilling.cfc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8248,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1438,
+								1393
 							]
 						],
 						"settings":
@@ -304,10 +368,41 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 855.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "AWS/_payrolltaxes/payrolltaxes.cfm",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12437,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3807,
+								3668
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 315.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
