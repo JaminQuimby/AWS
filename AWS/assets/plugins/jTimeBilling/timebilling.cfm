@@ -6,11 +6,26 @@
 <script type="text/javascript">
 $(document).ready(function(){
 //Start Normal Template Functions
+/*
+g102_manualtime 
+g102_totaltime
+g102_ratetype
+g102_subtotal
 
+*/
+$( document ).ajaxComplete(function(event, xhr, settings){
+
+var manualtime=Number($("##g102_manualtime").val());
+var totaltime=Number($("##g102_totaltime").val());
+var ratetype=Number($("##g102_ratetype :selected").text().match(/([0-9]+)(.*?)(?=\ -)/g));
+$("##g102_subtotal").val((manualtime+totaltime)*ratetype);
+alert(xhr.responseText.COLUMNS[0])
+
+});
 
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
-_pluginLoadData102=function(){return "tb_id,tb_id,g102_employee,g102_date,g102_description,g102_manualtime,g102_notes,g102_paymentstatus,g102_ratetype"}
+_pluginLoadData102=function(){return "tb_id,tb_id,g102_employee,g102_date,g102_description,g102_manualtime,g102_notes,g102_paymentstatus,g102_ratetype,g102_totaltime"}
 _pluginLoadData102_1=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
 _pluginLoadData102_2=function(){return "ta_id,ta_amount,ta_discription,ta_billable"}
 _group102=function(){_grid102();}
