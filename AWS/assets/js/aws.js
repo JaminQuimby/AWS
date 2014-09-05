@@ -21,9 +21,9 @@ Date.prototype.mmddyyyy = function(){var yyyy=this.getFullYear().toString(),mm=(
 
 var c={
 	message:"Your session is about to expire."
-	,keepAliveUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm?time=true"
-	,redirUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm"
-	,logoutUrl:"https://"+window.location.hostname+"/assets/module/login/loginform.cfm"
+	,keepAliveUrl:"https://"+window.location.hostname+"/AWS/_PracticeManagement/workinprogress.cfm?time=true"
+	,redirUrl:window.location.href+"?logout"
+	,logoutUrl:+window.location.href+"?logout"
 	,warnAfter:1200000,redirAfter:1170000};
 	var d=c;
 

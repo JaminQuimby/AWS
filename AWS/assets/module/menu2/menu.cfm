@@ -137,14 +137,14 @@
 		<div>
 			<ul>
             <li><a href="#this.url#/AWS/_PracticeManagement/employeecontactinfo.cfm?task_id=#session.user.id#"><h4>About Me</h4></a></li>
-			<li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="#this.url#/assets/module/login/logout.cfm" onclick="parentNode.submit()">Logout </a></form></li>
+			<li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="?logout" onclick="parentNode.submit()">Logout </a></form></li>
             </ul>
         </div>
 		</div><!-- /cbp-hrsub-inner -->
 		</div><!-- /cbp-hrsub -->
         </li>
 <cfelse>
-        <li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="#this.url#/assets/module/login/logout.cfm" onclick="parentNode.submit()">Logout </a></form></li>
+        <li><form action="#CGI.script_name#?#CGI.query_string#" method="post"><input type="hidden" name="logout" value="logout" /><a href="?logout" onclick="parentNode.submit()">Logout </a></form></li>
 </cfif>    
 </ul>
 </nav>
