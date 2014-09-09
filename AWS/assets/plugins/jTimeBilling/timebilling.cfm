@@ -14,14 +14,24 @@ g102_subtotal
 
 */
 $( document ).ajaxComplete(function(event, xhr, settings){
+var json=JSON.parse(xhr.responseText);
 
-var manualtime=Number($("##g102_manualtime").val());
+
+
+if (json.hasOwnProperty('COLUMNS')==='true') {
+
+if( json.COLUMNS[0]='GROUP102' ){_group102_calculatedfields();}
+
+}
+
+
+});
+
+_group102_calculatedfields=function(){var manualtime=Number($("##g102_manualtime").val());
 var totaltime=Number($("##g102_totaltime").val());
 var ratetype=Number($("##g102_ratetype :selected").text().match(/([0-9]+)(.*?)(?=\ -)/g));
 $("##g102_subtotal").val((manualtime+totaltime)*ratetype);
-alert(xhr.responseText.COLUMNS[0])
-
-});
+}
 
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
@@ -29,15 +39,17 @@ _pluginLoadData102=function(){return "tb_id,tb_id,g102_employee,g102_date,g102_d
 _pluginLoadData102_1=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
 _pluginLoadData102_2=function(){return "ta_id,ta_amount,ta_discription,ta_billable"}
 _group102=function(){_grid102();}
-_group102_addtime=function(){$("##isLoaded_group102_1").val(1); }
+_group102_addtime=function(){$("##isLoaded_group102_1").val(1);
+_loadData({"id":"t_id","group":"group102_subtask","page":"timebilling",plugin:"group102"});
+ }
 _group102_addExpense=function(){$("##isLoaded_group102_2").val(1); }
 
 
 _group102_addtimecard=function(){
-$("##isLoaded_group102_1").val(1);
+$("##isLoaded_group102").val(1);
 $("##g102_employee").val(10000).trigger("chosen:updated");
-$("##g102_date").val("#DateFormat(Now(),Session.localization.formatdate)#" )
-
+$("##g102_date").val("#DateFormat(Now(),Session.localization.formatdate)#" );
+_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});
 
 switch(#page.formid#){
 
@@ -262,7 +274,7 @@ edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $i
                                         listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
                                         },
                                         fields: {
-                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2}); });return $img}}	
+                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2});_group102_addtime(); });return $img}}	
 											,T_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
                                             ,T_START:{"title":"Start",width: '2%'}
                                             ,T_STOP:{"title":"Stop",width: '2%'}
@@ -294,7 +306,7 @@ edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $i
                                         listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks2.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
                                         },
                                         fields: {
-                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2}); });return $img}}	
+                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2}); _group102_addExpese();});return $img}}	
 											,TA_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
                                             ,TA_AMOUNT:{"title":"Amount"}
                                             ,TA_DESCRIPTION:{"title":"Description"}
@@ -346,6 +358,7 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 </cfoutput>
 <span class="trackers">
 <input type="hidden" id="tb_id" value="0" />
+<input type="hidden" id="ta_id" value="0" />
 <input type="hidden" id="t_id" value="0" />
 <input type="hidden" id="isLoaded_group102" value="0" />
 <input type="hidden" id="isLoaded_group102_1" value="0" />
@@ -359,7 +372,7 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 
 </div>
 <cfoutput>
-<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});_group102_addtimecard();'>Add Time Card</h4>
+<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_group102_addtimecard();'>Add Time Card</h4>
 </cfoutput>
 <div>
     <div><label for="g102_employee">Employee</label><select id="g102_employee" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -378,9 +391,9 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 
 
 
-    <div><label for="g102_manualtime">Manual Time</label><input type="text" id="g102_manualtime" ></div>
+    <div><label for="g102_manualtime">Manual Time</label><input type="text" id="g102_manualtime"  onchange="_group102_calculatedfields()" ></div>
     <div><label for="g102_totaltime">Total Time</label><input type="text" class="readonly" readonly id="g102_totaltime" ></div>
-  	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype"><option value="0">$0 - No Rate Selected</option><cfoutput query="g102_ratetype"><option value="#optionvalue_id#">$#option_1# - #optionname#</option></cfoutput></select></div>
+  	<div><label for="g102_ratetype">Rate Type</label><select id="g102_ratetype" onchange="_group102_calculatedfields()"><option value="0">$0 - No Rate Selected</option><cfoutput query="g102_ratetype"><option value="#optionvalue_id#">$#option_1# - #optionname#</option></cfoutput></select></div>
     <div><label for="g102_subtotal">Subtotal</label><input type="text" class="readonly" readonly id="g102_subtotal" ></div>  
     <div><label for="g102_totalexpense">Total Expenses</label><input type="text" class="readonly" readonly id="g102_totalexpense" ></div>
     <div><label for="g102_total">Total</label><input type="text" class="readonly" readonly id="g102_total" ></div>

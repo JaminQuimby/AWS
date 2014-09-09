@@ -18,6 +18,7 @@ SELECT
 ,[tb_paymentstatus]
 ,[tb_activitytype]
 ,[total_time]=(SELECT SUM(CAST(DATEDIFF(mi, t_start, t_stop) AS decimal) / 60) FROM[time]where[t].[tb_id]=[time].tb_id )
+
 FROM[timebilling]AS[t]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>

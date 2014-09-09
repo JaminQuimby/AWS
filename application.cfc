@@ -54,22 +54,13 @@
     output="true"
     hint="Fires at first part of page processing.">
  <!--- Define Login Requirements--->
-  <cfargument name="request" required="true"/>     
-
-<cfif IsDefined("Form.logout") or isDefined("URL.logout")> 
- <cfset StructClear(form)>
+<cfargument name="request" required="true"/> 
+<cfif StructKeyExists(Form,"logout") or StructKeyExists(URL,"logout")> 
+<cfset StructClear(form)>
 <cfset StructClear(session)>
-<cfloop
-item="name"
-collection="CFID,CFTOKEN,JSESSIONID">
- 
-<cfcookie
-name="#name#"
-value=""
-expires="now"
-/>
- 
-</cfloop>
+<cfset sessionInvalidate()/> 
+<cflocation url="#cgi.SCRIPT_NAME#" addToken ="no">
+
  </cfif> 
 
 
@@ -116,7 +107,7 @@ AND([ctrl_users].[password]=<cfqueryparam value="#HASH(FORM.J_PASSWORD,'SHA-256'
 
 
 <cfif NOT isDefined('Session.user.ID') AND ListLast(CGI.SCRIPT_NAME,'/') NEQ "mail.cfc"  >     
-<cfinclude template="/assets/module/login/loginform.cfm">
+<cfinclude template="/assets/module/login/loginform.cfm" >
 <cfabort>
 </cfif>
            

@@ -3,5 +3,4 @@
 <cfparam name="url.admin" default="0">
 <cfif url.admin neq 1 >
 <cflocation url="/AWS/_practicemanagement/workinprogress.cfm?user_id=#Session.user.id#">
-
 </cfif>
