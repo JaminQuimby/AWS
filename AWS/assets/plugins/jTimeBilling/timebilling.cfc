@@ -24,25 +24,24 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-<cfcase value="group102_subtask">
+<cfcase value="group102_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
-'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]
-,[t_id],[TB_ID]
-,[t_start]=CONVERT(VARCHAR(8),[t_start], 24)
-,[t_stop]=CONVERT(VARCHAR(8),[t_stop], 24)
-,[t_diff]=CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF(minute,[t_start],[t_stop])))/60,2))
-FROM[timebilling]
-WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
+'GROUP102_SUBTASK'AS[GROUP102_1]
+,[t_id]
+,[t_start]=FORMAT(t_start, '#Session.localization.formatdatetime#')
+,[t_stop]=FORMAT(t_stop, '#Session.localization.formatdatetime#')
+FROM[time]
+WHERE[t_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
 </cfcase>
 
-<cfcase value="group102_subtask2">
+<cfcase value="group102_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
-'GROUP102_SUBTASK2'AS[GROUP102_SUBTASK2]
+'GROUP102_SUBTASK2'AS[GROUP102_2]
 ,[ta_id]
-,[TB_ID]
+--,[tb_id]
 ,[ta_amount]
 ,[ta_discription]
 ,[ta_billable]
@@ -101,9 +100,9 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 SELECT 
 'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]
 ,[t_id],[TB_ID]
-,[t_start]=CONVERT(VARCHAR(8),[t_start], 24)
-,[t_stop]=CONVERT(VARCHAR(8),[t_stop], 24)
-,[t_diff]=CONVERT(numeric(5,2),ROUND(CONVERT(numeric(5,2),(DATEDIFF(minute,[t_start],[t_stop])))/60,2))
+,[t_start]= FORMAT(t_start,'#Session.localization.formatdatetime#') 
+,[t_stop]= FORMAT(t_stop,'#Session.localization.formatdatetime#') 
+,[t_diff]=(DATEDIFF(mi,[t_start],[t_stop])/60)
 FROM[time]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -128,7 +127,7 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfcase value="group102_subtask2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
-'GROUP102_SUBTASK2'AS[GROUP102_SUBTASK2]
+'GROUP102_SUBTASK2'AS[GROUP102]
 ,[ta_id],[TB_ID]
 ,[ta_amount]
 ,[ta_discription]
@@ -230,7 +229,25 @@ SELECT SCOPE_IDENTITY()AS[t_id]
 </cfquery>
 <cfreturn '{"id":#j.DATA[1][2]#,"group":"saved","result":"ok"}'>
 </cfif>
+
+<cfif #j.DATA[1][1]# neq "0">
+<cfquery name="fquery" datasource="#Session.organization.name#">
+
+UPDATE[time]
+SET[tb_id]=<cfqueryparam value="#j.DATA[1][2]#"/>
+,[t_start]=<cfqueryparam value="#j.DATA[1][3]#" null="#LEN(j.DATA[1][3]) eq 0#"/>
+,[t_stop]=<cfqueryparam value="#j.DATA[1][4]#" null="#LEN(j.DATA[1][4]) eq 0#"/>
+WHERE[T_ID]=<cfqueryparam value="#j.DATA[1][1]#"/>
+</cfquery>
+<cfreturn '{"id":"#j.DATA[1][1]#","group":"plugins","subgroup":"102_2","result":"ok"}'>
+</cfif>
+
 </cfcase>
+
+
+
+
+
 
 <!---Group102_2--->
 <cfcase value="group102_2">

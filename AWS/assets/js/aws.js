@@ -40,7 +40,7 @@ a("#sessionTimeout-dialog").dialog({autoOpen:false,width:400,modal:true,closeOnE
 
 
 //Localisation 
-var debug=false;
+var debug=true;
 $(document).ready(function(){
 
 

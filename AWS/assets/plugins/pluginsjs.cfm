@@ -6,7 +6,7 @@ switch(params){<cfloop index="i" list="#session.user.plugins#"><cfif !ListContai
 default:return eval('_pluginURL'+params+'()');break;}
 
 };
-_pluginLoadData=function(params){switch(params){<cfloop index="i" list="#session.user.plugins#"><cfif !ListContains(#page.plugins.disable#,#i#)>case"GROUP#i#":return _pluginLoadData#i#(); break;</cfif></cfloop>}};
+_pluginLoadData=function(params){window.console.log('pluginsjs - Load Plugin ' + params);switch(params){<cfloop index="i" list="#session.user.plugins#"><cfif !ListContains(#page.plugins.disable#,#i#)>case"GROUP#i#":return _pluginLoadData#i#(params); break; case"GROUP#i#_1":return _pluginLoadData#i#_1(params); break; case"GROUP#i#_2":return _pluginLoadData#i#_2(params); break;</cfif></cfloop>}};
 _pluginSaveData=function(params){
 var options={"group":"","subgroup":""};$.extend(true, options, params);
 if(options['subgroup']!=''){_pluginSaveDataCB({'group':'subgroup0','subgroup':''+options['subgroup']+''})};

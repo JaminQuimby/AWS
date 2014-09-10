@@ -35,18 +35,31 @@ $("##g102_subtotal").val((manualtime+totaltime)*ratetype);
 
 _pluginURL102=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
 _pluginURL102_1=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
-_pluginLoadData102=function(){return "tb_id,tb_id,g102_employee,g102_date,g102_description,g102_manualtime,g102_notes,g102_paymentstatus,g102_ratetype,g102_totaltime"}
+_pluginURL102_2=function(){return "#this.url#/AWS/assets/plugins/jTimeBilling/"}
+
+_pluginLoadData102=function(d){return "tb_id,tb_id,g102_employee,g102_date,g102_description,g102_manualtime,g102_notes,g102_paymentstatus,g102_ratetype,g102_totaltime"}
+
+
 _pluginLoadData102_1=function(){return "t_id,t_id,g102_1_start,g102_1_stop"}
-_pluginLoadData102_2=function(){return "ta_id,ta_amount,ta_discription,ta_billable"}
+_pluginLoadData102_2=function(){return "ta_id,ta_id,ta_amount,ta_discription,ta_billable"}
 _group102=function(){_grid102();}
-_group102_addtime=function(){$("##isLoaded_group102_1").val(1);
-_loadData({"id":"t_id","group":"group102_subtask","page":"timebilling",plugin:"group102"});
+_group102_2=function(tid){
+$("##t_id").val(tid);
+$("##isLoaded_group102_1").val(1);
+$("##group102").accordion({active:2});
+_loadData({"id":"t_id","group":"group102_1","page":"timebilling",plugin:"102_2"});
+
  }
-_group102_addExpense=function(){$("##isLoaded_group102_2").val(1); }
+_group102_3=function(){$("##isLoaded_group102_2").val(1); }
 
 
-_group102_addtimecard=function(){
+_group102_1=function(){
+
+
 $("##isLoaded_group102").val(1);
+
+
+
 $("##g102_employee").val(10000).trigger("chosen:updated");
 $("##g102_date").val("#DateFormat(Now(),Session.localization.formatdate)#" );
 _loadData({"id":"tb_id","group":"group102","page":"timebilling",plugin:"group102"});
@@ -245,7 +258,7 @@ _pluginSaveData102_1=function(){
 			_saveData({"group":"group102_1",payload:$.parseJSON(json),page:"timebilling",plugin:"102_1"})}
 		else{jqMessage({message: "Your data has been saved.",type: "success",autoClose: true})}
 		}
-
+_pluginSaveData102_2=function(){alert('Continue')}
 
 _grid102=function(){
 	_jGrid({
@@ -254,7 +267,7 @@ _grid102=function(){
 	"title":"Time &amp; Billing",
 	"fields":{
 
-edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:1}); _group102_addtimecard(); });return $img}}	
+edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:1}); _group102_1(); });return $img}}	
 
 			  //CHILD TABLE DEFINITION FOR SUBTAKS
  			    ,Subtasks: {
@@ -274,10 +287,10 @@ edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $i
                                         listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
                                         },
                                         fields: {
-                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2});_group102_addtime(); });return $img}}	
+                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ _group102_2(d.record.T_ID);});return $img}}	
 											,T_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
-                                            ,T_START:{"title":"Start",width: '2%'}
-                                            ,T_STOP:{"title":"Stop",width: '2%'}
+                                            ,T_START:{"title":"Start"}
+                                            ,T_STOP:{"title":"Stop"}
                                             ,T_DIFF:{"title":"Hours"}
                                         }
                                     }, function(data){ //opened handler
@@ -372,7 +385,7 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 
 </div>
 <cfoutput>
-<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_group102_addtimecard();'>Add Time Card</h4>
+<h4 #iif(Session.user.role neq '3',DE(''),DE('style="display:none;"'))# onClick='_group102_1();'>Add Time Card</h4>
 </cfoutput>
 <div>
     <div><label for="g102_employee">Employee</label><select id="g102_employee" onchange="jqValid({'type':'rationalNumbers','object':this,'message':'You must select an option.'})"><option value="0">&nbsp;</option><cfoutput query="selectUsers"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
@@ -405,14 +418,14 @@ T_ID:{key:true,edit:false,visibility:'hidden',title:'ID'}
 </div>  
 
 
-<h4 onClick='_group102_addtime();'>Add Time</h4>
+<h4 onClick='_group102_2();'>Add Time</h4>
 <div>
         <div><label for="g102_1_start">Start Time</label><input type="text" class="datetime" id="g102_1_start" ></div>
         <div><label for="g102_1_stop">End Time</label><input type="text" class="datetime" id="g102_1_stop" ></div>
 </div>
 
 
-<h4 onClick='_group102_addExpense();'>Add Expense</h4>
+<h4 onClick='_group102_3();'>Add Expense</h4>
 <div>
 <div><label for="g102_2_description">Description</label><select id="g102_ratetype"><option value="0">&nbsp;</option><cfoutput query="g102_expense"><option value="#optionvalue_id#">#optionname#</option></cfoutput></select></div>
 <div><label for="g102_2_amount">Amount</label><input type="text" id="g102_2_amount" ></div>
