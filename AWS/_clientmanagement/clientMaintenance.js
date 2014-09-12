@@ -74,6 +74,7 @@ _grid1=function(){_jGrid({
 		,CLIENT_SALUTATION:{title:'Salutation'}
 		,CLIENT_TYPETEXT:{title:'Type'}
 		,CLIENT_SINCE:{title:'Client Since',width:'2%'}
+		,CLIENT_ACTIVE:{title:'Active',visibility:'hidden',width:'2%',type:'checkbox',values:{ '0' : 'No', '1' : 'Yes' }}
 		},
 	"method":"f_lookupData",
 	"arguments":'{"search":"'+$("#g0_filter").val()+'","orderBy":"0","row":"0","ID":"0","loadType":"group0","formid":"1"}',

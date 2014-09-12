@@ -239,6 +239,7 @@ SELECT[client_id]
 ,[client_salutation]
 ,[client_since]=FORMAT(client_since,'#Session.localization.formatdate#') 
 ,[client_type]
+,[client_active]
 ,[client_typeTEXT]=(SELECT TOP(1)[optionname]FROM[v_selectOptions]WHERE([form_id]='#ARGUMENTS.formid#'OR[form_id]='0')AND([optionGroup]='#ARGUMENTS.formid#'OR[optionGroup]='0')AND[selectName]='global_clienttype'AND[client_type]=[optionvalue_id])
 FROM[v_client_listing]
 WHERE[client_name]LIKE <cfqueryparam value="#ARGUMENTS.search#%"/>
@@ -250,7 +251,7 @@ AND [deleted] IS NULL
 <cfset queryIndex=0>
 <cfloop query="fquery">
 <cfset queryIndex=queryIndex+1>
-<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'","CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'","CLIENT_SINCE":"'&CLIENT_SINCE&'"}'>
+<cfset queryResult=queryResult&'{"CLIENT_ID":"'&CLIENT_ID&'","CLIENT_NAME":"'&CLIENT_NAME&'","CLIENT_SALUTATION":"'&CLIENT_SALUTATION&'","CLIENT_TYPETEXT":"'&CLIENT_TYPETEXT&'","CLIENT_SINCE":"'&CLIENT_SINCE&'","CLIENT_ACTIVE":"'&CLIENT_ACTIVE&'"}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>
 <cfset myResult='{"Result":"OK","Records":['&queryResult&']}'>
