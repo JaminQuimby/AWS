@@ -95,7 +95,7 @@ AND[task_id]=<cfqueryparam value="#ARGUMENTS.taskid#"/>
 </cfcase>
 
 <!--- Grid 102_subtask  --->
-<cfcase value="group102_subtask">
+<cfcase value="group102_1">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
 'GROUP102_SUBTASK'AS[GROUP102_SUBTASK]
@@ -124,14 +124,14 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfcase>
 
 <!--- Grid 102_subtask2  --->
-<cfcase value="group102_subtask2">
+<cfcase value="group102_2">
 <cfquery datasource="#Session.organization.name#" name="fQuery">
 SELECT 
 'GROUP102_SUBTASK2'AS[GROUP102]
 ,[ta_id],[TB_ID]
 ,[ta_amount]
-,[ta_discription]
-,[ta_billable]
+,[ta_description]
+,[ta_billed]
 FROM[timeexpense]
 WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 </cfquery>
@@ -143,8 +143,8 @@ WHERE[tb_id]=<cfqueryparam value="#ARGUMENTS.ID#"/>
 <cfset queryResult=queryResult&'{"TA_ID":"'&TA_ID&'"
 								,"TB_ID":"'&TB_ID&'"
 								,"TA_AMOUNT":"'&TA_AMOUNT&'"
-								,"TA_DISCRIPTION":"'&TA_DISCRIPTION&'"
-								,"TA_BILLABLE":"'&TA_BILLABLE&'"
+								,"TA_DESCRIPTION":"'&TA_DESCRIPTION&'"
+								,"TA_BILLED":"'&TA_BILLED&'"
 								}'>
 <cfif  queryIndex lt fquery.recordcount><cfset queryResult=queryResult&","></cfif>
 </cfloop>

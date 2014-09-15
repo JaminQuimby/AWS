@@ -284,10 +284,10 @@ edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $i
                                     {
                                         title: 'Time Card',
                                         actions: {
-                                        listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
+                                        listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks.record.TB_ID+'","loadType":"group102_1","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
                                         },
                                         fields: {
-                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ _group102_2(d.record.T_ID);});return $img}}	
+                                        	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ _group102_1(d.record.T_ID);});return $img}}	
 											,T_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
                                             ,T_START:{"title":"Start"}
                                             ,T_STOP:{"title":"Stop"}
@@ -316,14 +316,14 @@ edit:{title:'Edit',width:'1%', list:user['g_delete'] ,display:function(d){var $i
                                     {
                                         title: 'Expense Card',
                                         actions: {
-                                        listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks2.record.TB_ID+'","loadType":"group102_subtask","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
+                                        listAction: '#this.url#/AWS/assets/plugins/jTimeBilling/timebilling.cfc?returnFormat=json&method=f_lookupData&argumentCollection={"search":"","orderBy":"0","row":"0","ID":"'+subtasks2.record.TB_ID+'","loadType":"group102_2","userid":"","clientid":"'+$("##client_id").val()+'","formid":"2"}',
                                         },
                                         fields: {
                                         	edit:{title:'',width:'1%', list:user['g_delete'] ,display:function(d){var $img=$('<i class="fa fa-pencil-square-o" style="cursor:pointer"></i>');$img.click(function(){ $("##group102").accordion({active:2}); _group102_addExpese();});return $img}}	
 											,TA_ID:{key:true,edit:false,visibility:'hidden',title:'ID',width: '1%'}
                                             ,TA_AMOUNT:{"title":"Amount"}
                                             ,TA_DESCRIPTION:{"title":"Description"}
-                                            ,TA_BILLCLIENT:{"title":"Bill Client"}
+                                            ,TA_BILLED:{"title":"Billed"}
                                         }
                                     }, function(data){ //opened handler
                                     	data.childTable.jtable('load');
